@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <VennDiagramProfessions class="mt-16"/>
+    <v-col cols="12" md="8">
+      <VennDiagramProfessions />
     </v-col>
   </v-row>
 </template>

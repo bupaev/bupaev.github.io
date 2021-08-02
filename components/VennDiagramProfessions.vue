@@ -1,6 +1,6 @@
 <template>
   <div class="venn-diagram-professions">
-    <div class="wrapper">
+    <div ref="wrapper" :style="`font-size:${basicFontSize}px`" class="wrapper">
       <div class="circle-left">
         <span class="circle-title">Back End</span>
       </div>
@@ -11,12 +11,12 @@
         <span class="circle-title">UI/UX Design</span>
       </div>
       <div class="center-area">
-        <div>Unicorn Area</div>
-        <div style="font-size: 28px;">🦄🦄🦄</div>
+        <span>Unicorn Area</span>
+        <span style="font-size: 2em;">🦄🦄🦄</span>
       </div>
       <div class="me-area">
-        <div class="pin">🤓</div>
-        <div class="speech-bubble">Hi! It's me!</div>
+        <span class="pin">🤓</span>
+        <span class="speech-bubble">Hi! It's me!</span>
       </div>
     </div>
   </div>
@@ -24,125 +24,162 @@
 
 <script>
 export default {
-  name: 'VennDiagramProfessions'
+  name: 'VennDiagramProfessions',
+  data () {
+    return {
+      basicFontSize: 16
+    }
+  },
+
+  mounted () {
+    const ro = new ResizeObserver((entries) => {
+      const cr = entries[0].contentRect
+      this.basicFontSize = cr.width / 20
+    })
+
+    ro.observe(this.$refs.wrapper)
+  }
+
 }
 </script>
 
 <style lang="scss" scoped>
 .venn-diagram-professions {
-  $h: 300px;
-  $w: $h;
-  $d: 0.7s;
+  $duration: 0.7s;
 
-  padding-top: calc(#{$h} * 0.25);
+  display: block;
+  position: relative;
+  margin: 20%;
+
+  &::after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
 
   .wrapper {
+    position: absolute;
     display: flex;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
     justify-content: center;
     align-items: center;
-    height: $h;
-    width: $w;
-    animation: rotation $d ease-in-out forwards;
+    animation: venn-rotation $duration ease-in-out forwards;
   }
 
   .circle-left,
   .circle-top,
   .circle-right {
     display: flex;
+    position: absolute;
+    height: 100%;
+    width: 100%;
     justify-content: center;
     align-items: flex-start;
-    position: absolute;
-    height: $h;
-    width: $w;
-    background-color: #0ff;
     border-radius: 50%;
+    background-color: #0ff;
     mix-blend-mode: screen;
   }
 
   .circle-top {
     background-color: rgba(245, 87, 59, 0.6);
-    animation: venn-up-shift $d ease-in-out forwards;
     align-items: flex-start;
-    padding-top: 30%;
+    padding-top: 25%;
+    animation: venn-up-shift $duration ease-in-out forwards;
   }
 
   .circle-left {
     background-color: rgba(67, 182, 195, 0.6);
-    animation: venn-left-shift $d ease-in-out forwards;
     justify-content: flex-start;
     padding-left: 12%;
     padding-top: 60%;
+    animation: venn-left-shift $duration ease-in-out forwards;
   }
 
   .circle-right {
     background-color: rgba(25, 75, 137, 0.6);
-    animation: venn-right-shift $d ease-in-out forwards;
     justify-content: flex-end;
     padding-top: 60%;
     padding-right: 10%;
+    animation: venn-right-shift $duration ease-in-out forwards;
   }
 
   .circle-title {
-    font-size: 18px;
+    font-size: 1.2em;
     font-weight: bold;
     color: #fff;
+
+    @media (max-width: 576px) {
+      font-size: 1.5em;
+    }
   }
 
   .center-area {
     padding-top: 45px;
-    font-size: 16px;
     text-align: center;
+    font-size: 1em;
     line-height: 1.3;
     color: white;
     z-index: 2;
+
+    span {
+      display: block;
+    }
   }
 
   .me-area {
     position: absolute;
-    display: block;
-    width: 200px;
-    height: 50px;
+    width: 9em;
+    height: 5em;
     top: 20%;
-    left: 60%;
+    left: 55%;
+    font-size: 1em;
     color: white;
 
+    @media (max-width: 576px) {
+      font-size: 1.5em;
+    }
+
+    $pin-duration: 1s;
+
     .pin {
+      display: block;
       position: absolute;
-      font-size: 32px;
-      animation: venn-expand-bounce 1.5s ease-in-out $d both;
+      font-size: 2em;
+      animation: venn-expand-bounce $pin-duration ease-in-out $duration both;
       will-change: auto;
     }
-  }
 
-  .speech-bubble {
-    position: absolute;
-    width: 120px;
-    padding: 10px;
-    left: 14%;
-    top: -92%;
-    border-radius: 40px;
-    text-align: center;
-    font-family: sans-serif;
-    font-size: 18px;
-    line-height: 24px;
-    background: #fff;
-    color: #000;
-    transform-origin: left 150%;
-    animation: venn-expand-bounce 0.5s ease-in-out #{$d+1.5} both;
-    will-change: auto;
-
-    &::before {
-      content: "";
-      width: 0;
-      height: 0;
-      left: 12px;
-      bottom: -22px;
+    .speech-bubble {
+      display: block;
       position: absolute;
-      border-left: 24px solid #fff;
-      border-right: 12px solid transparent;
-      border-top: 12px solid #fff;
-      border-bottom: 20px solid transparent;
-      transform: rotate(10deg);
+      padding: 0.5em 0.8em;
+      top: -1.6em;
+      left: 1.8em;
+      border-radius: 999px;
+      text-align: center;
+      font-size: 1em;
+      line-height: 1;
+      background: #fff;
+      color: #000;
+      transform-origin: left 150%;
+      animation: venn-expand-bounce 0.5s ease-in-out #{$duration+$pin-duration} both;
+      will-change: auto;
+
+      &::before {
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 0;
+        left: 0.6em;
+        bottom: -0.9em;
+        border-left: 1em solid #fff;
+        border-right: 0.5em solid transparent;
+        border-bottom: 1em solid transparent;
+        transform: rotate(10deg);
+      }
     }
   }
 
