@@ -15,10 +15,8 @@
         <div style="font-size: 28px;">🦄🦄🦄</div>
       </div>
       <div class="me-area">
-        <div class="me-pin">🤓</div>
-        <div class="bubble bubble-bottom-left">Hi! It's me!</div>
-<!--        <v-icon class="arrow" color="white">mdi-arrow-bottom-left</v-icon>
-        <div class="text">That's me</div>-->
+        <div class="pin">🤓</div>
+        <div class="speech-bubble">Hi! It's me!</div>
       </div>
     </div>
   </div>
@@ -30,7 +28,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .venn-diagram-professions {
   $h: 300px;
   $w: $h;
@@ -63,14 +61,14 @@ export default {
 
   .circle-top {
     background-color: rgba(245, 87, 59, 0.6);
-    animation: c2 $d ease-in-out forwards;
+    animation: venn-up-shift $d ease-in-out forwards;
     align-items: flex-start;
     padding-top: 30%;
   }
 
   .circle-left {
     background-color: rgba(67, 182, 195, 0.6);
-    animation: c1 $d ease-in-out forwards;
+    animation: venn-left-shift $d ease-in-out forwards;
     justify-content: flex-start;
     padding-left: 12%;
     padding-top: 60%;
@@ -78,7 +76,7 @@ export default {
 
   .circle-right {
     background-color: rgba(25, 75, 137, 0.6);
-    animation: c3 $d ease-in-out forwards;
+    animation: venn-right-shift $d ease-in-out forwards;
     justify-content: flex-end;
     padding-top: 60%;
     padding-right: 10%;
@@ -108,64 +106,47 @@ export default {
     left: 60%;
     color: white;
 
-    .me-pin {
+    .pin {
       position: absolute;
       font-size: 32px;
-      // filter: drop-shadow(5px 5px 5px rgba(black, 0.6));
-      animation: expand-bounce 0.5s ease-in-out $d both;
-    }
-
-    .arrow {
-      position: absolute;
-      left: 14%;
-      top: -40%;
-      font-size: 32px;
-      animation: appearing 1s ease-in-out $d both;
-    }
-
-    .text {
-      position: absolute;
-      left: 28%;
-      top: -40px;
-      font-size: 24px;
-      font-weight: 600;
-      animation: expand-bounce 1s ease-in-out 2.5s both;
+      animation: venn-expand-bounce 1.5s ease-in-out $d both;
+      will-change: auto;
     }
   }
 
-  .bubble {
+  .speech-bubble {
     position: absolute;
+    width: 120px;
+    padding: 10px;
     left: 14%;
     top: -92%;
+    border-radius: 40px;
+    text-align: center;
     font-family: sans-serif;
     font-size: 18px;
     line-height: 24px;
-    width: 120px;
     background: #fff;
-    border-radius: 40px;
-    padding: 10px;
-    text-align: center;
     color: #000;
     transform-origin: left 150%;
-    animation: expand-bounce 0.5s ease-in-out #{$d+0.3} both;
-    //filter: drop-shadow(5px 5px 5px rgba(black, 0.3));
+    animation: venn-expand-bounce 0.5s ease-in-out #{$d+1.5} both;
+    will-change: auto;
+
+    &::before {
+      content: "";
+      width: 0;
+      height: 0;
+      left: 12px;
+      bottom: -22px;
+      position: absolute;
+      border-left: 24px solid #fff;
+      border-right: 12px solid transparent;
+      border-top: 12px solid #fff;
+      border-bottom: 20px solid transparent;
+      transform: rotate(10deg);
+    }
   }
 
-  .bubble-bottom-left::before {
-    content: "";
-    width: 0;
-    height: 0;
-    position: absolute;
-    border-left: 24px solid #fff;
-    border-right: 12px solid transparent;
-    border-top: 12px solid #fff;
-    border-bottom: 20px solid transparent;
-    left: 12px;
-    bottom: -22px;
-    transform: rotate(10deg);
-  }
-
-  @keyframes c1 {
+  @keyframes venn-left-shift {
     from {
       transform: translate(0, 0);
     }
@@ -174,7 +155,7 @@ export default {
     }
   }
 
-  @keyframes c2 {
+  @keyframes venn-up-shift {
     from {
       transform: translate(0, 0);
     }
@@ -183,7 +164,7 @@ export default {
     }
   }
 
-  @keyframes c3 {
+  @keyframes venn-right-shift {
     from {
       transform: translate(0, 0);
     }
@@ -192,7 +173,7 @@ export default {
     }
   }
 
-  @keyframes rotation {
+  @keyframes venn-rotation {
     from {
       transform: rotate(220deg);
       opacity: 0;
@@ -203,20 +184,7 @@ export default {
     }
   }
 
-  @keyframes appearing {
-    from {
-      filter: drop-shadow(15px 15px 15px rgba(black, 0.1));
-      transform: translate(-25%, -25%) scale(1.5);
-      opacity: 0;
-    }
-    to {
-      filter: drop-shadow(5px 5px 5px rgba(black, 0.6));
-      transform: translate(0, 0) scale(1);
-      opacity: 1;
-    }
-  }
-
-  @keyframes expand-bounce {
+  @keyframes venn-expand-bounce {
     0% {
       transform: scale(0);
       filter: drop-shadow(2px 2px 2px rgba(black, 0.6));
