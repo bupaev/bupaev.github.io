@@ -5,7 +5,7 @@
         <span class="circle-title">Back End</span>
       </div>
       <div class="circle-top">
-        <span class="circle-title">Front End</span>
+        <span class="circle-title" style="font-size: 1.4em;">Front End</span>
       </div>
       <div class="circle-right">
         <span class="circle-title">UI/UX Design</span>
