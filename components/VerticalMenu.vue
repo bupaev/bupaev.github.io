@@ -1,11 +1,11 @@
 <template>
-  <div class="vertical-menu">
+  <nav class="vertical-menu">
     <scrollactive>
-      <div
+      <a
         v-for="item in items"
         :key="item.id"
         class="item scrollactive-item"
-        :data-section-selector="`#${item.id}`"
+        :href="`#${item.id}`"
       >
         <div class="item-icon">
           <v-icon color="#ff321c">
@@ -15,9 +15,9 @@
         <div class="item-text">
           {{ item.title }}
         </div>
-      </div>
+      </a>
     </scrollactive>
-  </div>
+  </nav>
 </template>
 
 <script>
@@ -43,15 +43,16 @@ export default {
   top: 10vh;
   left: 10px;
 
-  ul {
-    list-style-type: none;
-  }
-
   .item {
     display: flex;
     margin-bottom: 1em;
     cursor: pointer;
     color: #ff321c;
+    text-decoration: none;
+
+    &.is-active {
+      background: #8dc0ff;
+    }
 
     .item-icon {
       margin-right: 0.7em;
