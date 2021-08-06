@@ -81,21 +81,30 @@ export default {
     // to position the current position pointer correctly
     setCurrentPositionOffset () {
       // const contentHeight = document.body.scrollHeight
-      const currentScroll = window.scrollY
+      const currentStartScroll = window.scrollY
+      const currentEndScroll = currentStartScroll + window.innerHeight
       // const percent = currentScroll / contentHeight
 
-      // console.log('DEBUG: contentSectionsOffsetArray:', this.contentSectionsOffsetArray)
-      const currentSectionIndex = this.contentSectionsOffsetArray.findIndex((offset) => {
-        return currentScroll < offset
+      const currentStartSectionIndex = this.contentSectionsOffsetArray.findIndex((offset) => {
+        return currentStartScroll < offset
+      })
+      const currentEndSectionIndex = this.contentSectionsOffsetArray.findIndex((offset) => {
+        return currentEndScroll < offset
       })
 
-      const selectedMenuItem = Math.max(currentSectionIndex - 1, 0)
-      const curPos = selectedMenuItem * this.menuItemHeight +
-        (currentScroll - this.contentSectionsOffsetArray[selectedMenuItem]) * this.coefficients[selectedMenuItem]
+      const selectedStartMenuItem = Math.max(currentStartSectionIndex - 1, 0)
+      const selectedEndMenuItem = currentEndSectionIndex === -1
+        ? this.contentSectionsOffsetArray.length
+        : Math.max(currentEndSectionIndex - 1, 0)
 
-      console.log('DEBUG: selectedMenuItem, curPos:', selectedMenuItem, Math.round(curPos))
+      const startVisibleScreen = selectedStartMenuItem * this.menuItemHeight +
+        (currentStartScroll - this.contentSectionsOffsetArray[selectedStartMenuItem]) * this.coefficients[selectedStartMenuItem]
+      const endVisibleScreen = selectedEndMenuItem * this.menuItemHeight +
+        (currentEndScroll - this.contentSectionsOffsetArray[selectedEndMenuItem]) * this.coefficients[selectedEndMenuItem]
+      // console.log('DEBUG: selectedMenuItem, curPos:', selectedMenuItem, Math.round(curPos))
 
-      this.$refs.currentPosition.style.top = `${curPos}px`
+      this.$refs.currentPosition.style.transform = `translateY(${startVisibleScreen}px)`
+      this.$refs.currentPosition.style.height = `${endVisibleScreen - startVisibleScreen}px`
     }
   }
 }
@@ -109,13 +118,17 @@ export default {
 
   .item {
     display: flex;
-    margin-bottom: 2em;
+    height: 50px;
+    // padding-top: 15px;
     cursor: pointer;
     color: #ff321c;
     text-decoration: none;
+    border-top: 1px black solid;
 
     &.is-active {
-      background: #8dc0ff;
+      .item-text {
+        text-decoration: underline;
+      }
     }
 
     .item-icon {
@@ -128,7 +141,6 @@ export default {
     left: -4px;
     height: 2em;
     width: 2em;
-    border-radius: 999em;
     background-color: rgba(#ff321c, 0.3);
   }
 }
