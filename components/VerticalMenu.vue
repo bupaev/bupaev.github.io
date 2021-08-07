@@ -6,23 +6,23 @@
       :style="`transform: translateY(${markerOffset}px); height: ${markerHeight}px`"
       class="visible-area-marker"
     />
-    <scrollactive ref="menu">
-      <a
-        v-for="item in items"
+    <div ref="menu">
+      <div
+        v-for="(item, index) in items"
         :key="item.id"
-        :href="`#${item.id}`"
-        class="item scrollactive-item"
+        class="item"
+        @click="onMenuItemClick(index)"
       >
-        <div class="item-icon">
+        <span class="item-icon">
           <v-icon color="#ff321c">
             {{ item.icon }}
           </v-icon>
-        </div>
-        <div class="item-text">
+        </span>
+        <span class="item-text">
           {{ item.title }}
-        </div>
-      </a>
-    </scrollactive>
+        </span>
+      </div>
+    </div>
   </nav>
 </template>
 
@@ -48,7 +48,7 @@ export default {
   },
 
   mounted() {
-    this.menuItemHeight = this.$refs.menu.$el.getElementsByClassName('item')[0].clientHeight
+    this.menuItemHeight = this.$refs.menu.getElementsByClassName('item')[0].clientHeight
     this.contentSectionsHeightArray = this.getSectionsProp('clientHeight')
     this.contentSectionsOffsetArray = this.getSectionsProp('offsetTop')
 
@@ -65,6 +65,13 @@ export default {
   },
 
   methods: {
+    onMenuItemClick (targetIndex) {
+      window.scrollTo({
+        top: this.contentSectionsOffsetArray[targetIndex],
+        left: 0,
+        behavior: 'smooth'
+      })
+    },
     getSectionsProp(propName) {
       const sectionsHTMLCollection = document.getElementsByClassName('page-section')
       return [...sectionsHTMLCollection].map(section => section[propName])
