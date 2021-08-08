@@ -106,7 +106,15 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@mixin menu-transition {
+  @for $i from 1 through 5 {
+    &:nth-child(#{$i}) {
+      transition: width 0.3s #{$i * 0.1}s ease-in-out;
+    }
+  }
+}
+
 .vertical-menu {
   position: fixed;
   top: 10vh;
@@ -118,7 +126,11 @@ export default {
     cursor: pointer;
     color: #ff321c;
     text-decoration: none;
-    border-top: 1px black solid;
+    width: 2em;
+    overflow: hidden;
+    will-change: auto;
+
+    @include menu-transition;
 
     &.is-active {
       .item-text {
@@ -131,12 +143,19 @@ export default {
     }
   }
 
+  &:hover {
+    .item {
+      width: 10em;
+    }
+  }
+
   .visible-area-marker {
     position: absolute;
     left: -4px;
     height: 2em;
     width: 2em;
     background-color: rgba(#ff321c, 0.3);
+    border-radius: 0.5em;
   }
 }
 </style>
