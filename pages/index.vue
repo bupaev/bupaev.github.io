@@ -29,11 +29,11 @@
           <h1>Experience</h1>
         </section>
         <section
-          id="contacts"
+          id="education"
           class="page-section"
           style="height: 350px;"
         >
-          <h1>Contacts</h1>
+          <h1>Education</h1>
         </section>
       </v-col>
     </v-row>
@@ -56,5 +56,26 @@ export default {
 .page-section {
   height: 800px;
   border: 1px dodgerblue dotted;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.03;
+    background-size: 70%;
+  }
+
+  &#skills::after {
+    background: no-repeat url("~/assets/icons/tools-complex.svg");
+  }
+
+  &#education::after {
+    background: no-repeat url("~/assets/icons/academic-cap-complex.svg");
+  }
+
+  &#experience::after {
+    background: no-repeat url("~/assets/icons/moiuntain-icon-complex-4x-bw-ed.svg");
+  }
 }
 </style>
