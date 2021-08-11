@@ -14,9 +14,10 @@
         @click="onMenuItemClick(index)"
       >
         <span class="item-icon">
-          <v-icon color="#ff321c">
-            {{ item.icon }}
-          </v-icon>
+          <img
+            :src="require(`../assets/icons/${item.icon}`)"
+            style="width: 2em;"
+          />
         </span>
         <span class="item-text">
           {{ item.title }}
@@ -32,11 +33,11 @@ export default {
   data() {
     return {
       items: [
-        { title: 'Hello!', id: 'hero-area', icon: 'mdi-human-greeting' },
-        { title: 'Synopsis', id: 'synopsis', icon: 'mdi-account-box' },
-        { title: 'Skills', id: 'skills', icon: 'mdi-hammer-wrench' },
-        { title: 'Experience', id: 'experience', icon: 'mdi-history' },
-        { title: 'Contacts', id: 'contacts', icon: 'mdi-card-account-mail-outline' }
+        { title: 'Hello!', id: 'hero-area', icon: 'head-with-glasses-line_.svg' },
+        { title: 'Synopsis', id: 'synopsis', icon: 'venn-diagram-simple-.svg' },
+        { title: 'Skills', id: 'skills', icon: 'tools-thicker.svg' },
+        { title: 'Experience', id: 'experience', icon: 'moiuntain-icon-4x-bw-ed2.svg' },
+        { title: 'Education', id: 'education', icon: 'education-cap.svg' }
       ],
       menuItemHeight: 0,
       contentSectionsHeightArray: [],
@@ -116,13 +117,14 @@ export default {
 }
 
 .vertical-menu {
+  font-size: 20px;
   position: fixed;
   top: 10vh;
   left: 10px;
 
   .item {
     display: flex;
-    height: 50px;
+    height: 4em;
     cursor: pointer;
     color: #ff321c;
     text-decoration: none;
@@ -153,9 +155,10 @@ export default {
     position: absolute;
     left: -4px;
     height: 2em;
-    width: 2em;
-    background-color: rgba(#ff321c, 0.3);
+    width: 2.4em;
+    background-color: rgba(#ff321c, 0.1);
     border-radius: 0.5em;
+    border: 1px rgba(#ff321c, 0.8) dashed;
   }
 }
 </style>
