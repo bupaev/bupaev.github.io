@@ -33,11 +33,11 @@ export default {
   data() {
     return {
       items: [
-        { title: 'Hello!', id: 'hero-area', icon: 'head-with-glasses-line_.svg' },
-        { title: 'Synopsis', id: 'synopsis', icon: 'venn-diagram-simple-.svg' },
-        { title: 'Skills', id: 'skills', icon: 'tools-thicker.svg' },
-        { title: 'Experience', id: 'experience', icon: 'moiuntain-icon-4x-bw-ed2.svg' },
-        { title: 'Education', id: 'education', icon: 'education-cap.svg' }
+        { title: 'Hello!', id: 'hero-area', icon: 'head-with-glasses.svg' },
+        { title: 'Synopsis', id: 'synopsis', icon: 'venn-diagram.svg' },
+        { title: 'Skills', id: 'skills', icon: 'pen-and-wrench.svg' },
+        { title: 'Experience', id: 'experience', icon: 'mountain-with-flag.svg' },
+        { title: 'Education', id: 'education', icon: 'academic-cap.svg' }
       ],
       menuItemHeight: 0,
       contentSectionsHeightArray: [],

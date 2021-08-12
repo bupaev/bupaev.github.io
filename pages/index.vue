@@ -67,15 +67,15 @@ export default {
   }
 
   &#skills::after {
-    background: no-repeat url("~/assets/icons/tools-complex.svg");
+    background: no-repeat url("~/assets/icons/pen-and-wrench-detailed.svg");
   }
 
   &#education::after {
-    background: no-repeat url("~/assets/icons/academic-cap-complex.svg");
+    background: no-repeat url("~/assets/icons/academic-cap-detailed.svg");
   }
 
   &#experience::after {
-    background: no-repeat url("~/assets/icons/moiuntain-icon-complex-4x-bw-ed.svg");
+    background: no-repeat url("~/assets/icons/mountain-with-flag-detailed.svg");
   }
 }
 </style>
