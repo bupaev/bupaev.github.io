@@ -1,7 +1,5 @@
 <template>
-  <nav
-    class="vertical-menu"
-  >
+  <nav class="vertical-menu">
     <div
       :style="`transform: translateY(${markerOffset}px); height: ${markerHeight}px`"
       class="visible-area-marker"
@@ -14,10 +12,7 @@
         @click="onMenuItemClick(index)"
       >
         <span class="item-icon">
-          <img
-            :src="require(`../assets/icons/${item.icon}`)"
-            style="width: 2em;"
-          />
+          <img :src="require(`../assets/icons/${item.icon}`)" />
         </span>
         <span class="item-text">
           {{ item.title }}
@@ -142,6 +137,11 @@ export default {
 
     .item-icon {
       margin-right: 0.7em;
+
+      img {
+        width: 2em;
+        max-width: 2em; // override default styles of bulma
+      }
     }
   }
 

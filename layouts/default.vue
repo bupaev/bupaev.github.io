@@ -1,17 +1,18 @@
 <template>
-  <v-app light>
-    <v-main>
-      <v-container>
+  <div>
+    <section class="main-content columns">
+      <div class="container column">
         <Nuxt />
-      </v-container>
-    </v-main>
-    <v-footer
-      :absolute="!fixed"
-      app
-    >
-      <span>© {{ new Date().getFullYear() }} by Pavel Buramensky (unexpectedly!) </span>
-    </v-footer>
-  </v-app>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <span>© {{ new Date().getFullYear() }} by Pavel Buramensky (unexpectedly!) </span>
+        </p>
+      </div>
+    </footer>
+  </div>
 </template>
 
 <script>

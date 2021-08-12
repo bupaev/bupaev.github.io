@@ -1,8 +1,8 @@
 <template>
   <div>
     <VerticalMenu />
-    <v-row align="center" justify="center">
-      <v-col cols="12" md="8" class="pt-0">
+    <div class="columns">
+      <div class="column">
         <section
           id="hero-area"
           class="page-section"
@@ -35,8 +35,8 @@
         >
           <h1>Education</h1>
         </section>
-      </v-col>
-    </v-row>
+      </div>
+    </div>
   </div>
 </template>
 
