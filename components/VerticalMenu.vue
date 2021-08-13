@@ -53,11 +53,15 @@ export default {
       return this.menuItemHeight / SectionsHeight
     })
 
+    this.setAreaMarkerPosition()
+
     window.addEventListener('scroll', this.setAreaMarkerPosition)
+    window.addEventListener('resize', this.setAreaMarkerPosition)
   },
 
   destroyed() {
     window.removeEventListener('scroll', this.setAreaMarkerPosition)
+    window.removeEventListener('resize', this.setAreaMarkerPosition)
   },
 
   methods: {
