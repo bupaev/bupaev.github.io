@@ -1,9 +1,7 @@
 <template>
   <div>
-    <section class="main-content columns">
-      <div class="container column">
-        <Nuxt />
-      </div>
+    <section class="main-content">
+      <Nuxt />
     </section>
     <footer class="footer">
       <div class="content has-text-centered">

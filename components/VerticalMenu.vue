@@ -163,6 +163,7 @@ export default {
     background-color: rgba(#ff321c, 0.1);
     border-radius: 0.5em;
     border: 1px rgba(#ff321c, 0.8) dashed;
+    pointer-events: none;
   }
 }
 </style>
