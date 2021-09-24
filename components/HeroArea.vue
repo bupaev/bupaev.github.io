@@ -35,6 +35,8 @@ export default {
 
 .hero-area {
   opacity: 1;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.1) 2px, $info 2px);
+  background-size: 20px 20px;
 
   .parallelogram-image-container {
     $container-height: 500px;
@@ -42,34 +44,15 @@ export default {
     position: relative;
     height: $container-height;
     background-color: white;
-    margin: 0 -100px 0 -100px;
+    margin: 0 -50px 0 -50px;
     overflow: hidden;
+    transform: skew(-15deg);
+    filter: drop-shadow(2px 2px 10px rgba(255, 255, 255, 0.2));
 
     img {
       object-fit: cover;
       height: 100%;
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      width: 0;
-      height: 0;
-      border-right: 0;
-      border-left: $container-height/3 solid transparent;
-      border-bottom: $container-height solid $info;
-    }
-
-    &::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      width: 0;
-      height: 0;
-      border-left: 0;
-      border-right: $container-height/3 solid transparent;
-      border-top: $container-height solid $info;
+      transform: skew(15deg) scale(1.2);
     }
   }
 }
