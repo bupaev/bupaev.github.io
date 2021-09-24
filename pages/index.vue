@@ -3,27 +3,8 @@
     <VerticalMenu />
     <section
       id="hero-area"
-      class="hero is-primary"
     >
-      <div class="container">
-        <div class="hero-body">
-          <div class="columns is-mobile">
-            <div class="column is-two-thirds-mobile">
-              <h1 class="title">
-                Hi! I’m Pavel Buramensky. <br> I’m front-end developer who loves good UX-design and create things that make the world better
-              </h1>
-              <p class="subtitle">
-                Feel free to reach me by <a href="mailto:me@paulbu.com">email</a>
-                or <a href="https://t.me/bupaev">Telegram</a>
-                or <a href="https://www.linkedin.com/in/pavel-buramensky/">LinkedIn</a>
-              </p>
-            </div>
-            <div class="column">
-              <img src="../assets/heroarea-portrait.jpeg">
-            </div>
-          </div>
-        </div>
-      </div>
+      <HeroArea />
     </section>
     <section
       id="synopsis"
@@ -350,10 +331,10 @@
         </h2>
         <div class="content">
           <p dir="ltr">
-            <strong>Bachelor of Science, Computer science</strong>
+            <strong>Doctor of Philosophy (postgraduate student), Computer science (unfinished)</strong>
           </p>
           <p dir="ltr">
-            Omsk State Technical University, July 2009 - GPA 4.6/5.0
+            Omsk State Technical University, 2013 - 2015.
           </p>
           <p dir="ltr">
             <strong>Master of Science, Computer science</strong>
@@ -362,10 +343,10 @@
             Omsk State Technical University, July 2011 - GPA 4.9/5.0
           </p>
           <p dir="ltr">
-            <strong>Doctor of Philosophy (postgraduate student), Computer science (unfinished)</strong>
+            <strong>Bachelor of Science, Computer science</strong>
           </p>
           <p dir="ltr">
-            Omsk State Technical University, 2013 - 2015.
+            Omsk State Technical University, July 2009 - GPA 4.6/5.0
           </p>
         </div>
       </div>
@@ -376,9 +357,10 @@
 <script>
 import VennDiagramProfessions from '@/components/VennDiagramProfessions'
 import VerticalMenu from '@/components/VerticalMenu'
+import HeroArea from '@/components/HeroArea'
 
 export default {
-  components: { VerticalMenu, VennDiagramProfessions },
+  components: { VerticalMenu, VennDiagramProfessions, HeroArea },
   data () {
     return {}
   }
@@ -392,7 +374,7 @@ export default {
   &::after {
     content: "";
     position: absolute;
-    bottom: 0;
+    top: 0;
     width: 100%;
     height: 100%;
     opacity: 0.05;

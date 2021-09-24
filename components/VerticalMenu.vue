@@ -120,6 +120,7 @@ export default {
   position: fixed;
   top: 10vh;
   left: 10px;
+  z-index: 1;
 
   .item {
     display: flex;
