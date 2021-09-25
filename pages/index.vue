@@ -368,6 +368,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.title {
+  font-family: "Futura", serif;
+}
+
 .page-section {
   position: relative;
 

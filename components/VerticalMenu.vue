@@ -146,6 +146,7 @@ export default {
       img {
         width: 2em;
         max-width: 2em; // override default styles of bulma
+        filter: drop-shadow(1px 1px 0 rgba(255, 255, 255, 0.8));
       }
     }
   }
