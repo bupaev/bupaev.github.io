@@ -15,7 +15,7 @@
           Synopsis
         </h2>
         <div class="columns">
-          <div class="column is-one-third">
+          <div class="column is-one-third-desktop">
             <VennDiagramProfessions />
           </div>
           <div class="column">

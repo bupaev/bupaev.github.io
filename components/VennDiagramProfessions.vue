@@ -11,11 +11,10 @@
         <span class="circle-title">UI/UX Design</span>
       </div>
       <div class="center-area">
-        <span>Unicorn Area</span>
-        <span style="font-size: 2em;">🦄🦄🦄</span>
+        <span class="circle-title">Unicorn<br>Area</span>
       </div>
       <div class="me-area">
-        <span class="pin">🤓</span>
+        <span class="pin"><img src="../assets/icons/head-with-glasses-bg-black.svg" width="40px"></span>
         <span class="speech-bubble">Hi! It's me!</span>
       </div>
     </div>
@@ -79,19 +78,20 @@ export default {
     justify-content: center;
     align-items: flex-start;
     border-radius: 50%;
-    background-color: #0ff;
-    mix-blend-mode: screen;
+    border: 2px #000 solid
+    // background-color: #0ff;
+    // mix-blend-mode: screen;
   }
 
   .circle-top {
-    background-color: rgba(245, 87, 59, 0.6);
+    background-image: repeating-linear-gradient(90deg, #000 0, #000 1px, transparent 1px, transparent 20px);
     align-items: flex-start;
     padding-top: 25%;
     animation: venn-up-shift $duration ease-in-out forwards;
   }
 
   .circle-left {
-    background-color: rgba(67, 182, 195, 0.6);
+    background-image: repeating-linear-gradient(135deg, #000 0, #000 1px, transparent 1px, transparent 20px);
     justify-content: flex-start;
     padding-left: 12%;
     padding-top: 60%;
@@ -99,7 +99,7 @@ export default {
   }
 
   .circle-right {
-    background-color: rgba(25, 75, 137, 0.6);
+    background-image: repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 1px, transparent 20px);
     justify-content: flex-end;
     padding-top: 60%;
     padding-right: 10%;
@@ -107,9 +107,15 @@ export default {
   }
 
   .circle-title {
+    font-family: "Futura", sans-serif;
     font-size: 1.2em;
-    font-weight: bold;
-    color: #fff;
+    font-weight: 700;
+    color: #000;
+    text-shadow:
+      -0.1em -0.1em 0 #fff,
+      0.1em -0.1em 0 #fff,
+      -0.1em 0.1em 0 #fff,
+      0.1em 0.1em 0 #fff;
 
     @media (max-width: 576px) {
       font-size: 1.5em;
@@ -155,10 +161,10 @@ export default {
     .speech-bubble {
       display: block;
       position: absolute;
-      padding: 0.5em 0.8em;
+      padding: 0.5em 0.5em;
       top: -1.6em;
-      left: 1.8em;
-      border-radius: 999px;
+      left: 2em;
+      border-radius: 9999px;
       text-align: center;
       font-size: 1em;
       line-height: 1;
@@ -167,18 +173,16 @@ export default {
       transform-origin: left 150%;
       animation: venn-expand-bounce 0.5s ease-in-out #{$duration+$pin-duration} both;
       will-change: auto;
+      border: 0.12em solid #000;
+      box-shadow: 0 0 0 3px white;
 
-      &::before {
+      &::after {
         position: absolute;
-        content: "";
-        width: 0;
-        height: 0;
+        content: url('data:image/svg+xml; utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 353 267"> <path fill="white" stroke="black" stroke-width="18" stroke-miterlimit="10" d="M119-1 35 222 349-1"/> <path fill="none" stroke="white" stroke-width="20" stroke-miterlimit="10" d="M94 13-4 273 353 20"/> </svg>');
         left: 0.6em;
-        bottom: -0.9em;
-        border-left: 1em solid #fff;
-        border-right: 0.5em solid transparent;
-        border-bottom: 1em solid transparent;
-        transform: rotate(10deg);
+        bottom: -1em;
+        width: 1.5em;
+        height: 1em;
       }
     }
   }
@@ -224,15 +228,15 @@ export default {
   @keyframes venn-expand-bounce {
     0% {
       transform: scale(0);
-      filter: drop-shadow(2px 2px 2px rgba(black, 0.6));
+      // filter: drop-shadow(2px 2px 2px rgba(black, 0.6));
     }
     50% {
       transform: scale(1.25);
-      filter: drop-shadow(6px 6px 6px rgba(black, 0.1));
+      // filter: drop-shadow(6px 6px 6px rgba(black, 0.1));
     }
     100% {
       transform: scale(1);
-      filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.3));
+      // filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.3));
     }
   }
 }
