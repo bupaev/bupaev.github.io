@@ -5,6 +5,7 @@
         <div class="columns is-mobile">
           <div class="column is-two-thirds-mobile" style="z-index: 1;">
             <h1 class="title pt-6">
+              <div class="text-shape-limiter" />
               <span class="is-size-1">Hi! I’m Pavel Buramensky</span>
               <p class="is-size-2 pt-4">
                 I’m front-end developer who loves good UX-design and create things that make the world better
@@ -14,7 +15,7 @@
               <a class="pr-3" href="mailto:me@paulbu.com">
                 <span class="icon-text">
                   <span class="icon pr-1">
-                    <img src="../assets/icons/email.svg" style="filter: brightness(1000);">
+                    <img src="../assets/icons/mail.svg">
                   </span>
                   Email
                 </span>
@@ -75,6 +76,13 @@ export default {
     font-family: "Futura", serif;
     font-style: italic;
     font-weight: 500;
+  }
+
+  .text-shape-limiter {
+    float: right;
+    shape-outside: polygon(100% 0%, 100% 100%, 0 100%);
+    width: 120px;
+    height: 400px;
   }
 
   /* background-image:
