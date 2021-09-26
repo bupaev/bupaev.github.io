@@ -12,7 +12,7 @@
               </p>
             </h1>
             <p class="subtitle is-size-4 pt-5">
-              <a class="pr-3" href="mailto:me@paulbu.com">
+              <a class="mr-5" href="mailto:me@paulbu.com">
                 <span class="icon-text">
                   <span class="icon pr-1">
                     <img src="../assets/icons/mail.svg">
@@ -20,7 +20,7 @@
                   Email
                 </span>
               </a>
-              <a class="pr-3" href="https://t.me/bupaev">
+              <a class="mr-5" href="https://t.me/bupaev">
                 <span class="icon-text">
                   <span class="icon pr-1">
                     <img src="../assets/icons/telegram.svg">
@@ -44,7 +44,7 @@
                   </span>
                   Download my CV
                 </span>
-              </a>
+            </a>
             </p>
           </div>
           <div class="column">
@@ -70,6 +70,43 @@ export default {
 .hero-area {
   opacity: 1;
   background-image: repeating-linear-gradient(105deg, rgba(0, 0, 255, 0.03) 0, rgba(0, 0, 255, 0.03) 1px, transparent 3px, transparent 12px);
+
+  a {
+    position: relative;
+    color: #363636;
+
+    /* transition: background 250ms ease;
+    background-image: linear-gradient(105deg, transparent 0, transparent 10px, gold 10px, gold 93%, transparent 93%, transparent 100%);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position-y: 1.2em; */
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: -0.2em;
+      bottom: 0;
+      width: calc(100% + 0.4em);
+      height: 2px;
+      background: gold;
+      z-index: -1;
+      transition: height 250ms ease;
+      transform: scaleY(1) skew(-15deg);
+    }
+
+    &:hover {
+      &::after {
+        height: 100%;
+        // transform: scale(1);
+        // background-size: 100% 100%;
+      }
+    }
+    &:active {
+      &::after {
+        transform: scale(1.1) skew(-15deg);
+      }
+    }
+  }
 
   .title,
   .subtitle {
