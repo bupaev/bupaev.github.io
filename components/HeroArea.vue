@@ -51,7 +51,7 @@
           </div>
           <div class="column">
             <div class="parallelogram-image-container">
-              <img alt="" src="../assets/heroarea-portrait-2.jpeg">
+              <img alt="" src="../assets/heroarea-portrait-3.jpeg">
             </div>
           </div>
         </div>
@@ -130,7 +130,7 @@ export default {
     position: relative;
     height: $container-height;
     background-color: white;
-    margin: 0 -50px 0 -50px;
+    margin: 0 0 0 -50px;
     overflow: hidden;
     transform: skew(-15deg);
     filter: drop-shadow(2px 2px 10px rgba(255, 255, 255, 0.2));
@@ -138,7 +138,7 @@ export default {
     img {
       object-fit: cover;
       height: 100%;
-      transform: skew(15deg) scale(1.2);
+      transform: skew(15deg) scale(1.2) translateY(-32px);
     }
   }
 }
