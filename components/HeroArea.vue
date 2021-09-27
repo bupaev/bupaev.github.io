@@ -8,7 +8,7 @@
               <div class="text-shape-limiter" />
               <span class="is-size-1">Hi! I’m Pavel Buramensky</span>
               <p class="is-size-2 pt-4">
-                I’m front-end developer who loves good UX and create things which make the world better
+                I’m a front-end developer who loves good UX and create things which make the world a better place
               </p>
             </h1>
             <p class="subtitle is-size-4 pt-5">

@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg id="svg" version="1.1" width="400" height="511.9476268412439" viewBox="10.261 12.442 527.932 493.156" xmlns="http://www.w3.org/2000/svg">
-  <g id="svgg" transform="matrix(1, 0, 0, 1, 65.959167, -0.350846)"/>
-  <circle style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 15px;" cx="178.793" cy="333.844" r="138.464"/>
-  <circle style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 15px;" cx="269.162" cy="177.982" r="138.464"/>
-  <circle style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 15px;" cx="359.351" cy="333.632" r="138.464"/>
-  <line style="stroke: rgb(0, 0, 0); stroke-width: 15px;" x1="202.407" y1="201.371" x2="164.113" y2="264.839"/>
-  <line style="stroke: rgb(0, 0, 0); stroke-width: 15px;" x1="244.589" y1="215.941" x2="197.503" y2="293.84"/>
-  <line style="stroke: rgb(0, 0, 0); stroke-width: 15px;" x1="285.557" y1="248.679" x2="249.153" y2="315.314"/>
-  <line style="stroke: rgb(0, 0, 0); stroke-width: 15px;" x1="308.267" y1="383.484" x2="234.15" y2="383.484"/>
-  <line style="stroke: rgb(0, 0, 0); stroke-width: 15px;" x1="316.205" y1="336.481" x2="226.729" y2="336.481"/>
-  <line style="stroke: rgb(0, 0, 0); stroke-width: 15px;" x1="304.553" y1="283.634" x2="233.544" y2="284.541"/>
-  <line style="stroke: rgb(0, 0, 0); stroke-width: 15px;" x1="373.882" y1="265.243" x2="332.781" y2="199.382"/>
-  <line style="stroke: rgb(0, 0, 0); stroke-width: 15px;" x1="342.305" y1="288.917" x2="289.939" y2="213.168"/>
-  <line style="stroke: rgb(0, 0, 0); stroke-width: 15px;" x1="291.911" y1="315.586" x2="248.853" y2="247.691"/>
+<!-- Generator: Adobe Illustrator 25.4.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 400 356" style="enable-background:new 0 0 400 356;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#000000;stroke-width:11.3651;stroke-miterlimit:3.0307;}
+</style>
+<g id="svgg" transform="matrix(1, 0, 0, 1, 65.959167, -0.350846)">
+</g>
+<circle class="st0" cx="127.7" cy="238.7" r="104.9"/>
+<circle class="st0" cx="196.2" cy="120.6" r="104.9"/>
+<circle class="st0" cx="264.5" cy="238.5" r="104.9"/>
+<line class="st0" x1="145.6" y1="138.3" x2="116.6" y2="186.4"/>
+<line class="st0" x1="177.5" y1="149.3" x2="141.9" y2="208.4"/>
+<line class="st0" x1="208.6" y1="174.1" x2="181" y2="224.6"/>
+<line class="st0" x1="225.8" y1="276.3" x2="169.6" y2="276.3"/>
+<line class="st0" x1="231.8" y1="240.7" x2="164" y2="240.7"/>
+<line class="st0" x1="223" y1="200.6" x2="169.2" y2="201.3"/>
+<line class="st0" x1="275.5" y1="186.7" x2="244.4" y2="136.8"/>
+<line class="st0" x1="251.6" y1="204.6" x2="211.9" y2="147.2"/>
+<line class="st0" x1="213.4" y1="224.8" x2="180.8" y2="173.4"/>
 </svg>

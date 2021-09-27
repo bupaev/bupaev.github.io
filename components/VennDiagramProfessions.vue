@@ -14,7 +14,7 @@
         <span class="circle-title">Unicorn<br>Area</span>
       </div>
       <div class="me-area">
-        <span class="pin"><img src="../assets/icons/head-with-glasses-bg-black.svg" width="40px"></span>
+        <span class="pin"><img src="../assets/icons/head-with-glasses-bg-gold.svg" width="40px"></span>
         <span class="speech-bubble">Hi! It's me!</span>
       </div>
     </div>

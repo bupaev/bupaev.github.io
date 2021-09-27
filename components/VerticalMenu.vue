@@ -73,7 +73,7 @@ export default {
       })
     },
     getSectionsProp(propName) {
-      const sectionsHTMLCollection = document.getElementsByClassName('page-section')
+      const sectionsHTMLCollection = document.getElementsByClassName('anchor-for-navigation')
       return [...sectionsHTMLCollection].map(section => section[propName])
     },
     /**
@@ -100,7 +100,13 @@ export default {
       const windowBottomScrollY = windowTopScrollY + window.innerHeight
 
       this.markerOffset = this.getRescaledOffset(windowTopScrollY)
-      this.markerHeight = this.getRescaledOffset(windowBottomScrollY) - this.markerOffset
+
+      if (windowBottomScrollY === document.body.clientHeight) {
+        console.log('DEBUG: full height:')
+        this.markerHeight = this.menuItemHeight
+      } else {
+        this.markerHeight = this.getRescaledOffset(windowBottomScrollY) - this.markerOffset
+      }
     }
   }
 }
@@ -126,7 +132,7 @@ export default {
     display: flex;
     height: 4em;
     cursor: pointer;
-    color: #ff321c;
+    color: #000;
     text-decoration: none;
     width: 2em;
     overflow: hidden;
@@ -146,7 +152,6 @@ export default {
       img {
         width: 2em;
         max-width: 2em; // override default styles of bulma
-        filter: drop-shadow(1px 1px 0 rgba(255, 255, 255, 0.8));
       }
     }
   }
@@ -162,9 +167,9 @@ export default {
     left: -4px;
     height: 2em;
     width: 2.4em;
-    background-color: rgba(#ff321c, 0.1);
+    background-color: rgba(gold, 0.1);
     border-radius: 0.5em;
-    border: 1px rgba(#ff321c, 0.8) dashed;
+    border: 2px rgba(gold, 0.8) solid;
     pointer-events: none;
   }
 }

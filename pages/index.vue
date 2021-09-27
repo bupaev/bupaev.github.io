@@ -3,12 +3,13 @@
     <VerticalMenu />
     <section
       id="hero-area"
+      class="anchor-for-navigation"
     >
       <HeroArea />
     </section>
     <section
       id="synopsis"
-      class="section"
+      class="section anchor-for-navigation"
     >
       <div class="container">
         <h2 class="title is-2">
@@ -44,7 +45,7 @@
     </section>
     <section
       id="skills"
-      class="section page-section"
+      class="section anchor-for-navigation with-background-picture"
       style="height: 1100px;"
     >
       <div class="container">
@@ -143,7 +144,7 @@
         </div>
       </div>
     </section>
-    <section id="experience" class="section page-section">
+    <section id="experience" class="section anchor-for-navigation with-background-picture">
       <div class="container">
         <h2 class="title is-2">
           Experience
@@ -322,7 +323,7 @@
     </section>
     <section
       id="education"
-      class="section page-section"
+      class="section anchor-for-navigation with-background-picture"
       style="height: 350px;"
     >
       <div class="container">
@@ -372,7 +373,7 @@ export default {
   font-family: "Futura", serif;
 }
 
-.page-section {
+.with-background-picture {
   position: relative;
 
   &::after {
