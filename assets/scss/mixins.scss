@@ -1,0 +1,27 @@
+@mixin text-hover-effect {
+  &::after {
+    content: "";
+    position: absolute;
+    width: calc(100% + 0.4em);
+    height: 2px;
+    left: -0.2em;
+    bottom: 0;
+    background: gold;
+    transform: scaleY(1) skew(-15deg);
+    transition: height 250ms ease;
+    z-index: -1;
+  }
+
+  &:hover {
+    color: #000;
+
+    &::after {
+      height: 110%;
+    }
+  }
+  &:active {
+    &::after {
+      transform: scale(1.1) skew(-15deg);
+    }
+  }
+}

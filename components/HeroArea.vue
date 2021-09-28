@@ -68,6 +68,7 @@ export default {
 
 <style lang="scss">
 @import "~bulma/sass/utilities/_all.sass";
+@import "assets/scss/mixins.scss";
 
 .hero-area {
   opacity: 1;
@@ -77,31 +78,7 @@ export default {
     position: relative;
     color: inherit;
 
-    &::after {
-      content: "";
-      position: absolute;
-      left: -0.2em;
-      bottom: 0;
-      width: calc(100% + 0.4em);
-      height: 2px;
-      background: gold;
-      z-index: -1;
-      transition: height 250ms ease;
-      transform: scaleY(1) skew(-15deg);
-    }
-
-    &:hover {
-      color: #000;
-
-      &::after {
-        height: 110%;
-      }
-    }
-    &:active {
-      &::after {
-        transform: scale(1.1) skew(-15deg);
-      }
-    }
+    @include text-hover-effect();
   }
 
   .title,
@@ -119,9 +96,9 @@ export default {
 
   .text-shape-limiter {
     float: right;
-    shape-outside: polygon(100% 0%, 100% 100%, 0 100%);
     width: 120px;
     height: 400px;
+    shape-outside: polygon(100% 0%, 100% 100%, 0 100%);
   }
 
   .parallelogram-image-container {
@@ -129,7 +106,6 @@ export default {
 
     position: relative;
     height: $container-height;
-    background-color: white;
     margin: 0 0 0 -50px;
     overflow: hidden;
     transform: skew(-15deg);
