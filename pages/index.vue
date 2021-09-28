@@ -9,7 +9,7 @@
     </section>
     <section
       id="synopsis"
-      class="section anchor-for-navigation"
+      class="section anchor-for-navigation is-primary"
     >
       <Synopsis />
     </section>
@@ -134,7 +134,7 @@
             developing interactive multimedia content and complex animations.
           </p>
           <h2>
-            Front End developer | Bandlab (Sept. 2014 - Oct. 2016) |<a href="https://www.bandlab.com/">bandlab.</a> <a href="https://www.bandlab.com/">com</a>
+            Front End developer | Bandlab (Sept. 2014 - Oct. 2016) | <a href="https://www.bandlab.com/">bandlab.com</a>
           </h2>
           <p>
             <em>
@@ -340,7 +340,7 @@ export default {
 
 <style lang="scss" scoped>
 .title {
-  font-family: "Futura", serif;
+  // font-family: "Futura", serif;
 }
 
 .with-background-picture {

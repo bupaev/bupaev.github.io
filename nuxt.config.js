@@ -22,7 +22,6 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    'bulma',
     '@/assets/scss/main.scss'
   ],
 
@@ -37,7 +36,9 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/stylelint
-    '@nuxtjs/stylelint-module'
+    '@nuxtjs/stylelint-module',
+    // https://google-fonts.nuxtjs.org/
+    '@nuxtjs/google-fonts'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -56,5 +57,22 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  // Nuxt Google Fonts configuration: https://google-fonts.nuxtjs.org/options
+  googleFonts: {
+    families: {
+      Dosis: true,
+      Asap: true,
+      Jost: true,
+      Glory: true,
+      Roboto: true,
+      Lato: true,
+      Nunito: true,
+      Merriweather: true,
+      'Open+Sans': true,
+      'Open+Sans+Condensed': [300, 500, 700],
+      'Roboto+Condensed': true
+    }
   }
 }

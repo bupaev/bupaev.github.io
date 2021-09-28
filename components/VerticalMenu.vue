@@ -131,6 +131,7 @@ $menu-open-width: 10em;
   position: fixed;
   top: 10vh;
   left: 10px;
+  font-family: "Dosis", sans-serif;
   font-size: 20px;
   z-index: 1;
   user-select: none;
@@ -141,7 +142,6 @@ $menu-open-width: 10em;
     width: 2em;
     overflow: hidden;
     color: #000;
-    font-family: "Open Sans", sans-serif;
     font-weight: 400;
     text-decoration: none;
     cursor: pointer;
@@ -156,6 +156,7 @@ $menu-open-width: 10em;
     .item-text {
       position: relative;
       color: #555;
+      // letter-spacing: -0.02em;
 
       &::after {
         content: "";

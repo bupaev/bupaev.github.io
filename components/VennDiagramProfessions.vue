@@ -107,7 +107,7 @@ export default {
   }
 
   .circle-title {
-    font-family: "Futura", sans-serif;
+    // font-family: "Impact", sans-serif;
     font-size: 1.2em;
     font-weight: 700;
     color: #000;

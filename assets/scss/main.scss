@@ -1,2 +1,49 @@
+/* Import Bulma Utilities */
+@import '~bulma/sass/utilities/initial-variables';
+@import '~bulma/sass/utilities/functions';
+
+/* My stuff */
 @import "./mixins";
-@import "../fonts/stylesheet.css";
+// @import "../fonts/stylesheet.css";
+
+// Colours
+$secondary: #d0e0ee;
+$family-primary: "Nunito", serif;
+
+@import '~bulma';
+
+/*
+ For Hero Area/menu:
+ - Dosis [v]
+ - Asap
+ - Nunito
+ - Glory
+
+ For headers:
+ - Dosis
+ - Nunito
+ - Lato [v]
+
+ For text:
+ - Nunito
+ - Lato [v]
+ - Open Sans
+*/
+
+//Overrider styles
+.title,
+.subtitle,
+h2,
+.circle-title {
+  font-family: "Nunito", serif;
+  // font-style: italic;
+  // font-weight: 700;
+}
+
+.hero-area {
+  .title,
+  .subtitle {
+    font-family: "Dosis", serif;
+    font-style: italic;
+  }
+}

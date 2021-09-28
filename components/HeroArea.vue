@@ -38,7 +38,7 @@
               </a>
             </p>
             <p class="subtitle is-size-4">
-              <span class="vertical-align-hack">also you can</span>
+              <span class="vertical-align-hack mr-2">also you can</span>
               <a href="https://paulbu.com/pavel-buramensky-cv">
                 <span class="icon-text">
                   <span class="icon">
@@ -81,11 +81,14 @@ export default {
     @include text-hover-effect();
   }
 
-  .title,
-  .subtitle {
-    font-family: "Futura", serif;
+  .title {
+    // font-family: "Futura", serif;
     font-style: italic;
-    font-weight: 500;
+    font-weight: 600;
+  }
+  .subtitle {
+    font-style: italic;
+    font-weight: 600;
   }
 
   .vertical-align-hack {
