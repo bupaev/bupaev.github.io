@@ -31,7 +31,10 @@ $family-primary: "Nunito", serif;
 */
 
 //Overrider styles
-.title,
+.title {
+  font-family: "Dosis", serif;
+  font-size: 2rem;
+}
 .subtitle,
 h2,
 .circle-title {
@@ -46,4 +49,10 @@ h2,
     font-family: "Dosis", serif;
     font-style: italic;
   }
+}
+
+.content a {
+  color: initial;
+
+  @include multiline-text-hover-effect;
 }

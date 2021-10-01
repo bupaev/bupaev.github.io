@@ -1,3 +1,26 @@
+@mixin multiline-text-hover-effect {
+  background-image: linear-gradient(to top, #ffd700 50%, transparent 50%);
+  background-size: 100% 4px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 200ms ease;
+
+  &:hover {
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+    margin-left: -0.4em;
+    margin-right: -0.4em;
+    color: #000;
+    // There is a bug in Safari: animation isn't applied to the second linear gradient
+    background-image:
+      linear-gradient(105deg, transparent 0.45em, #ffd700 0.45em, #ffd700 95%, transparent 95%),
+      linear-gradient(285deg, transparent 0.4em, #ffd700 0.4em, #ffd700 10%, transparent 10%);
+    background-size: 100% 100%;
+  }
+}
+
+// This effect visually similar to the previous one but doesn't work properly with multiline links
+// Keep it for use in hero area due to Safari bug with animation
 @mixin text-hover-effect {
   &::after {
     content: "";
@@ -6,7 +29,7 @@
     height: 2px;
     left: -0.2em;
     bottom: 0;
-    background: gold;
+    background: #ffd700;
     transform: scaleY(1) skew(-15deg);
     transition: height 250ms ease;
     z-index: -1;
