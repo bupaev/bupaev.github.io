@@ -8,6 +8,7 @@
 
 // Colours
 $secondary: #d0e0ee;
+$text: $black-ter;
 $family-primary: "Nunito", serif;
 
 @import '~bulma';
@@ -39,8 +40,6 @@ $family-primary: "Nunito", serif;
 h2,
 .circle-title {
   font-family: "Nunito", serif;
-  // font-style: italic;
-  // font-weight: 700;
 }
 
 .hero-area {

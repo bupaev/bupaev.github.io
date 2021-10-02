@@ -8,10 +8,10 @@
       <HeroArea />
     </section>
     <section
-      id="synopsis"
+      id="overview"
       class="section anchor-for-navigation is-primary"
     >
-      <Synopsis />
+      <Overview />
     </section>
     <section
       id="skills"
@@ -328,10 +328,10 @@
 <script>
 import VerticalMenu from '@/components/VerticalMenu'
 import HeroArea from '@/components/HeroArea'
-import Synopsis from '@/components/Synopsis'
+import Overview from '@/components/Overview'
 
 export default {
-  components: { VerticalMenu, HeroArea, Synopsis },
+  components: { VerticalMenu, HeroArea, Overview },
   data () {
     return {}
   }

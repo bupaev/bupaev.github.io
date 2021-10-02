@@ -1,7 +1,7 @@
 <template>
   <div class="hero-area hero">
     <div class="container">
-      <div class="hero-body pa-0">
+      <div class="hero-body px-0">
         <div class="columns is-mobile">
           <div class="column is-two-thirds-mobile has-text-right" style="z-index: 1;">
             <h1 class="title pt-6">

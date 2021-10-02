@@ -29,7 +29,7 @@ export default {
     return {
       items: [
         { title: 'Hello!', id: 'hero-area', icon: 'head-with-glasses.svg' },
-        { title: 'Synopsis', id: 'synopsis', icon: 'venn-diagram.svg' },
+        { title: 'Overview', id: 'synopsis', icon: 'venn-diagram.svg' },
         { title: 'Skills', id: 'skills', icon: 'pen-and-wrench.svg' },
         { title: 'Experience', id: 'experience', icon: 'mountain-with-flag.svg' },
         { title: 'Education', id: 'education', icon: 'academic-cap.svg' }
@@ -133,7 +133,7 @@ $menu-open-width: 10em;
   left: 10px;
   font-family: "Dosis", sans-serif;
   font-size: 20px;
-  z-index: 1;
+  z-index: 2;
   user-select: none;
 
   .item {
