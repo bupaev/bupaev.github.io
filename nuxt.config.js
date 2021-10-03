@@ -63,16 +63,7 @@ export default {
   googleFonts: {
     families: {
       Dosis: true,
-      Asap: true,
-      Jost: true,
-      Glory: true,
-      Roboto: true,
-      Lato: true,
-      Nunito: true,
-      Merriweather: true,
-      'Open+Sans': true,
-      'Open+Sans+Condensed': [300, 500, 700],
-      'Roboto+Condensed': true
+      Nunito: true
     }
   }
 }
