@@ -16,103 +16,8 @@
     <section
       id="skills"
       class="section anchor-for-navigation with-background-picture"
-      style="height: 1100px;"
     >
-      <div class="container">
-        <h2 class="title is-2">
-          Skills summary
-        </h2>
-        <div class="content">
-          <p>
-            Most of my career has been in large-scale web projects which require well
-            thought out UI, flexible and reliable architecture, well-documented and
-            maintainable code. It has formed my development approach and <strong>the workflow:</strong>
-          </p>
-          <ul>
-            <li>
-              <strong>Apps: </strong>WebStorm, Atom, Photoshop
-            </li>
-            <li>
-              <strong>Code: </strong>HTML5, Vanilla JS, ES6, AngularJS 1.x,
-              ReactJS, Lodash, SASS, CSSComb, Airbnb style guide
-            </li>
-            <li>
-              <strong>Build</strong>: npm, Bower, Gulp, Browserify, Webpack, ESLint
-            </li>
-            <li>
-              <strong>Test &amp; errors tracking: </strong>Mocha/AVA, TrackJS
-            </li>
-            <li>
-              <strong>Deploy: </strong>Github, Travis, AWS
-            </li>
-            <li>
-              <strong>Documentation: </strong>Confluence, Github Wiki, JSDoc
-            </li>
-            <li>
-              <strong>Project tracking: </strong>JIRA, Trello
-            </li>
-            <li>
-              <strong>Development methodology: </strong>Agile SCRUM
-            </li>
-          </ul>
-          <p>
-            <strong>Key skills in detail</strong>
-            :
-          </p>
-          <ul>
-            <li>
-              <strong>Styling: </strong>CSS3 (prefer OOCSS/BEM approach),
-              SASS/LESS; Frameworks: Bootstrap, Foundation
-            </li>
-            <li>
-              <strong>Programming: </strong>JavaScript ES5/ES6, TypeScript;
-              Frameworks: AngularJS, ReactJS, BackboneJS
-            </li>
-            <li>
-              <strong>Web drawing</strong>: Canvas, SVG, d3.js
-            </li>
-            <li>
-              <strong>Web multimedia</strong>: Web Audio API, MIDI API, WebRTC
-            </li>
-            <li>
-              <strong>SPA essentials</strong>: IndexedDB, Local Storage, Web
-              Workers, Service Workers
-            </li>
-          </ul>
-          <p>
-            <strong>Additional skills:</strong>
-          </p>
-          <ul>
-            <li>
-              <strong>Programming</strong>: C#, PHP
-            </li>
-            <li>
-              <strong>Database</strong>: MS SQL Server, MySQL, SQLite
-            </li>
-            <li>
-              <strong>Data analysis</strong>: Matlab, Statistica, R
-            </li>
-            <li>
-              <strong>Multimedia</strong>: 3Ds Max, Sony Vegas, SoundForge,
-              Audacity
-            </li>
-          </ul>
-          <p>
-            <strong>Communication:</strong>
-          </p>
-          <ul>
-            <li>
-              English (upper-intermediate)
-            </li>
-            <li>
-              German (beginner)
-            </li>
-            <li>
-              Russian (native)
-            </li>
-          </ul>
-        </div>
-      </div>
+      <Skills />
     </section>
     <section id="experience" class="section anchor-for-navigation with-background-picture">
       <div class="container">
@@ -329,9 +234,10 @@
 import VerticalMenu from '@/components/VerticalMenu'
 import HeroArea from '@/components/HeroArea'
 import Overview from '@/components/Overview'
+import Skills from '@/components/Skills'
 
 export default {
-  components: { VerticalMenu, HeroArea, Overview },
+  components: { VerticalMenu, HeroArea, Overview, Skills },
   data () {
     return {}
   }
@@ -355,10 +261,11 @@ export default {
     opacity: 0.05;
     background-size: 70%;
     pointer-events: none;
+    z-index: -1;
   }
 
   &#skills::after {
-    background: no-repeat url("~/assets/icons/pen-and-wrench-detailed.svg");
+    // background: no-repeat url("~/assets/icons/pen-and-wrench-detailed.svg");
   }
 
   &#education::after {

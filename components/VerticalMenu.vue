@@ -155,8 +155,7 @@ $menu-open-width: 10em;
 
     .item-text {
       position: relative;
-      color: #555;
-      // letter-spacing: -0.02em;
+      color: rgba(0, 0, 0, 0.3);
 
       &::after {
         content: "";

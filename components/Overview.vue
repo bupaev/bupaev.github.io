@@ -10,17 +10,17 @@
             <VennDiagramProfessions />
           </figure>
           <p>
-            I've been doing front-end development for over a decade, mostly for complex web applications, like <a>multitrack audio workstation</a> or <a>electronic
-            health record system</a>. During this time, I have accumulated significant professional experience and knowledge:
+            I've been doing front-end development for over a decade, mostly for complex web applications, like <a>multitrack audio workstation</a> or
+            <a>electronic health record system</a>. During this time, I have accumulated significant professional experience in the following areas:
           </p>
           <div style="display: inline-block; width: 60%; float: left; margin-bottom: 0.1em;">
-            <p style="width: 52%; float: left;" class="paragraph-with-delimiter">
-              <strong>My key specialisation is front-end engineering</strong>: building scalable, maintainable front-end architectures, writing
+            <p class="paragraph-with-delimiter" style="width: 52%; float: left;">
+              <strong>Front-end engineering</strong> as my main specialization: building scalable, maintainable front-end architectures, writing
               clean, readable code and make robust interface layouts (reasonably pixel-perfect) using modern JavaScript frameworks, advanced web APIs, and everything else that you
               can find in trendy FE tech stack.
             </p>
             <p style="width: 46%; float: left;">
-              <strong>Another major area of my interest is a visual design and user experience.</strong> Since the beginning of my career, I have been pretty fascinated by creating
+              <strong>Visual design and user experience</strong> as an important addition. Since the beginning of my career, I have been pretty fascinated by creating
               clean, delightful, and intuitive interfaces. I believe that my innate grasp of visual language, honed by many years of practice, played a big role in this.
             </p>
           </div>
@@ -78,9 +78,9 @@ export default {
       right: 0;
       width: 11%;
       height: 100%;
-      opacity: 0.5;
+      opacity: 0.2;
       background-color: $text;
-      clip-path: polygon(97% 0%, 100% 0%, 3% 100%, 0 100%);
+      clip-path: polygon(96% 0%, 100% 0%, 4% 100%, 0 100%);
     }
   }
 }
