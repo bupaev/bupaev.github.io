@@ -12,115 +12,39 @@
         Successfully managed to implement code in complex areas like Web Audio API or FHIR.
         Most of my career has been in large-scale web projects which require well
         thought out UI, flexible and reliable architecture, well-documented and
-        maintainable code. My latest experience TypeScript + Vue + Vuetify + Vuevalidate with REST API FHIR Server.
+        maintainable code. My latest experience TypeScript + Vue + Vuetify + Vuelidate with REST API FHIR Server.
         It has formed my development approach and <strong>the workflow:</strong>
       </p>
-      <div class="is-flex is-flex-wrap-wrap pt-2">
+      <div
+        class="is-flex is-flex-wrap-wrap pt-2"
+        style="margin-left: -0.75rem;"
+      >
         <div
-          v-for="skillGroup in skills"
-          :key="skillGroup.category"
-          class="mb-6"
+          v-for="skillsGroup in skills"
+          :key="skillsGroup.category"
+          :class="['skill-group', 'mb-3', { 'expanded-area': hasInfoInGroup(skillsGroup) }]"
         >
-          <h4 class="is-size-5 mb-2">
-            {{ skillGroup.category }}
-          </h4>
-          <ul>
-            <li v-for="item in skillGroup.items" :key="item.title">
-              <span>
+          <div class="compensator-area p-3">
+            <h4 class="is-size-5 mb-2">
+              {{ skillsGroup.category }}
+            </h4>
+            <ul>
+              <li v-for="item in skillsGroup.items" :key="item.title" class="skill-item">
                 {{ item.title }}
-                <i class="info-icon">
-                  <img src="../assets/icons/info-icon.svg" alt="icon">
-                </i>
-              </span>
-              <div :class="`skill-bar skill-level-${item.level} mb-2`" />
-            </li>
-          </ul>
+                <span v-if="item.info">
+                  <i class="info-icon">
+                    <img alt="icon" src="../assets/icons/info-icon.svg">
+                  </i>
+                  <span class="info"><strong style="opacity: 0.6; font-size: 1.1em;">/</strong> {{ item.info }}</span>
+                </span>
+                <div :class="`skill-bar-segmented mb-4 mt-1`">
+                  <div v-for="i in 3" :key="i" :class="['segment', { filled: item.level >= i }]" />
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-      <!--
-            <ul>
-              <li>
-                <strong>Apps: </strong>WebStorm, Atom, Photoshop
-              </li>
-              <li>
-                <strong>Code: </strong>HTML5, Vanilla JS, ES6, AngularJS 1.x,
-                ReactJS, Lodash, SASS, CSSComb, Airbnb style guide
-              </li>
-              <li>
-                <strong>Build</strong>: npm, Bower, Gulp, Browserify, Webpack, ESLint
-              </li>
-              <li>
-                <strong>Test &amp; errors tracking: </strong>Mocha/AVA, TrackJS
-              </li>
-              <li>
-                <strong>Deploy: </strong>Github, Travis, AWS
-              </li>
-              <li>
-                <strong>Documentation: </strong>Confluence, Github Wiki, JSDoc
-              </li>
-              <li>
-                <strong>Project tracking: </strong>JIRA, Trello
-              </li>
-              <li>
-                <strong>Development methodology: </strong>Agile SCRUM
-              </li>
-            </ul>
-            <p>
-              <strong>Key skills in detail</strong>
-              :
-            </p>
-            <ul>
-              <li>
-                <strong>Styling: </strong>CSS3 (prefer OOCSS/BEM approach),
-                SASS/LESS; Frameworks: Bootstrap, Foundation
-              </li>
-              <li>
-                <strong>Programming: </strong>JavaScript ES5/ES6, TypeScript;
-                Frameworks: AngularJS, ReactJS, BackboneJS
-              </li>
-              <li>
-                <strong>Web drawing</strong>: Canvas, SVG, d3.js
-              </li>
-              <li>
-                <strong>Web multimedia</strong>: Web Audio API, MIDI API, WebRTC
-              </li>
-              <li>
-                <strong>SPA essentials</strong>: IndexedDB, Local Storage, Web
-                Workers, Service Workers
-              </li>
-            </ul>
-            <p>
-              <strong>Additional skills:</strong>
-            </p>
-            <ul>
-              <li>
-                <strong>Programming</strong>: C#, PHP
-              </li>
-              <li>
-                <strong>Database</strong>: MS SQL Server, MySQL, SQLite
-              </li>
-              <li>
-                <strong>Data analysis</strong>: Matlab, Statistica, R
-              </li>
-              <li>
-                <strong>Multimedia</strong>: 3Ds Max, Sony Vegas, SoundForge,
-                Audacity
-              </li>
-            </ul>
-            <p>
-              <strong>Communication:</strong>
-            </p>
-            <ul>
-              <li>
-                English (upper-intermediate)
-              </li>
-              <li>
-                German (beginner)
-              </li>
-              <li>
-                Russian (native)
-              </li>
-            </ul>-->
     </div>
   </div>
 </template>
@@ -144,11 +68,13 @@ export default {
               level: 2
             },
             {
-              title: 'CSS, SASS, JSS (+ Bootstrap, Bulma frameworks)',
+              title: 'CSS, SASS, JSS',
+              info: 'Bootstrap, Bulma frameworks, CSS Animation, Flexbox, MediaQuery',
               level: 3
             },
             {
-              title: 'HTML5 (building cross-platform and adaptive layouts)',
+              title: 'HTML5',
+              info: 'Building cross-platform and adaptive layouts',
               level: 3
             },
             {
@@ -161,15 +87,18 @@ export default {
           category: 'JavaScript Frameworks',
           items: [
             {
-              title: 'Vue (with Vuetify components library)',
+              title: 'Vue',
+              info: 'in stack with Vuetify and Vuelidate',
               level: 3
             },
             {
-              title: 'React (Redux-Saga)',
+              title: 'React',
+              info: 'with Redux-Saga and JSS, but it was long ago',
               level: 1
             },
             {
               title: 'Angular 1.x',
+              info: 'are you really interested in this old monster?',
               level: 1
             }
           ]
@@ -179,6 +108,7 @@ export default {
           items: [
             {
               title: 'Photoshop',
+              info: 'Use for creating and editing SVG icons mostly',
               level: 2
             },
             {
@@ -187,6 +117,7 @@ export default {
             },
             {
               title: 'Illustrator',
+              info: 'nothing serious, mostly creating/editing SVG icons',
               level: 1
             }
           ]
@@ -254,15 +185,15 @@ export default {
           category: 'Code quality',
           items: [
             {
-              title: 'Unit-testing (Jest, Vue Test Utils, Ava)',
+              title: 'Unit-testing: Jest, Vue Test Utils, Ava',
               level: 2
             },
             {
-              title: 'Linting/Formatting (ESLint, SyleLint, Prettier)',
+              title: 'Linting/Formatting: ESLint, StyleLint, Prettier',
               level: 3
             },
             {
-              title: 'Style guides (StandardJS, Airbnb)',
+              title: 'Style guides: StandardJS, Airbnb',
               level: 3
             },
             {
@@ -270,7 +201,8 @@ export default {
               level: 1
             },
             {
-              title: 'Documentation (JSDoc, Swagger, Changelog)',
+              title: 'Documentation',
+              info: 'JSDoc, Swagger, Changelog',
               level: 3
             },
             {
@@ -278,7 +210,8 @@ export default {
               level: 3
             },
             {
-              title: 'Performance (Lighthouse, Chrome Performance tools)',
+              title: 'Performance',
+              info: 'PageSpeed, Lighthouse, Chrome Performance tools',
               level: 2
             }
           ]
@@ -302,6 +235,12 @@ export default {
         }
       ]
     }
+  },
+
+  methods: {
+    hasInfoInGroup (skillsGroup) {
+      return skillsGroup.items.some(({ info }) => info)
+    }
   }
 }
 </script>
@@ -313,36 +252,67 @@ export default {
   display: inline-block;
   width: 1em;
   line-height: 1em;
-  vertical-align: -0.2em;
+  vertical-align: -0.1em;
   cursor: pointer;
 }
 
-.skill-bar {
-  width: 12em;
-  height: 0.5em;
-  transform: skew(-15deg);
-  border: 1px solid $text;
+.skill-group {
+  min-width: 33%;
+  width: 33%;
 
-  &.skill-level-1 {
-    background-image:
-      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0.5) 1px, transparent 1px, transparent 4em),
-      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.1) 0, rgba(0, 0, 0, 0.1) 1px, transparent 1px, transparent 1em),
-      linear-gradient(90deg, darkgray 0, darkgray 34%, transparent 34%);
+  .skill-item {
+    line-height: 1.1em;
+  }
+}
+
+.expanded-area {
+  transition: all 300ms ease;
+
+  .compensator-area {
+    transition: all 300ms ease;
+    background-color: white;
+    border-radius: 4px;
   }
 
-  &.skill-level-2 {
-    background-image:
-      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0.5) 1px, transparent 1px, transparent 4em),
-      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.1) 0, rgba(0, 0, 0, 0.1) 1px, transparent 1px, transparent 1em),
-      linear-gradient(90deg, darkgray 0, darkgray 68%, transparent 68%);
+  .info {
+    display: none;
+    font-size: 0.9em;
   }
 
-  &.skill-level-3 {
-    // background-color: darkgray;
-    background-image:
-      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0.5) 1px, transparent 1px, transparent 4em),
-      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.1) 0, rgba(0, 0, 0, 0.1) 1px, transparent 1px, transparent 1em),
-      linear-gradient(90deg, darkgray 0, darkgray 100%);
+  &:hover {
+    z-index: 3;
+    transform: scale(1.15);
+
+    .info-icon {
+      display: none;
+    }
+
+    .info {
+      display: inline;
+    }
+
+    .compensator-area {
+      transform: scale(0.9);
+      box-shadow: 2px 2px 5px rgb(0 0 0 / 30%);
+    }
+  }
+}
+
+.skill-bar-segmented {
+  display: flex;
+
+  .segment {
+    width: 3em;
+    height: 0.7em;
+    margin-right: 0.3em;
+    border: 1px solid $text;
+    transform: skew(-15deg);
+
+    @for $i from 1 through 3 {
+      &.filled:nth-of-type(#{$i}) {
+        background-color: rgba(gold, 0.25 + $i * 0.25);
+      }
+    }
   }
 }
 </style>
