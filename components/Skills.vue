@@ -78,10 +78,6 @@ export default {
               title: 'HTML5',
               info: 'Building cross-platform and adaptive layouts',
               level: 3
-            },
-            {
-              title: 'SVG',
-              level: 2
             }
           ]
         },
@@ -102,6 +98,31 @@ export default {
               title: 'Angular 1.x',
               info: 'are you really interested in this old monster?',
               level: 1
+            }
+          ]
+        },
+        {
+          category: 'Browser APIs',
+          items: [
+            {
+              title: 'Web Audio (Web Audio API, MIDI API)',
+              info: '',
+              level: 3
+            },
+            {
+              title: 'Web Graphics (SVG, Canvas)',
+              info: '',
+              level: 2
+            },
+            {
+              title: 'Data Storage (Local Storage, IndexedDB)',
+              info: '',
+              level: 3
+            },
+            {
+              title: 'Workers',
+              info: '',
+              level: 2
             }
           ]
         },
@@ -163,6 +184,39 @@ export default {
           ]
         },
         {
+          category: 'Code quality & optimisation',
+          items: [
+            {
+              title: 'Unit-testing (Jest, Vue Test Utils, Mocha/Ava)',
+              level: 2
+            },
+            {
+              title: 'Linting, Formatting, Style guides',
+              info: 'ESLint, StyleLint, Prettier (but it still hurts), StandardJS and Airbnb are favorite styles ',
+              level: 3
+            },
+            {
+              title: 'Documentation (JSDoc, Swagger)',
+              info: '',
+              level: 3
+            },
+            {
+              title: 'Code review',
+              level: 3
+            },
+            {
+              title: 'Web page performance',
+              info: 'PageSpeed, Lighthouse, Chrome Performance tools',
+              level: 2
+            }/* ,
+            {
+              title: 'Error tracking (TrackJS, Sentry)',
+              info: '',
+              level: 2
+            } */
+          ]
+        },
+        {
           category: 'Workflow & Methodology',
           items: [
             {
@@ -180,41 +234,6 @@ export default {
             {
               title: 'Trello',
               level: 1
-            }
-          ]
-        },
-        {
-          category: 'Code quality',
-          items: [
-            {
-              title: 'Unit-testing: Jest, Vue Test Utils, Ava',
-              level: 2
-            },
-            {
-              title: 'Linting/Formatting: ESLint, StyleLint, Prettier',
-              level: 3
-            },
-            {
-              title: 'Style guides: StandardJS, Airbnb',
-              level: 3
-            },
-            {
-              title: 'Error tracking (TrackJS, Sentry)',
-              level: 1
-            },
-            {
-              title: 'Documentation',
-              info: 'JSDoc, Swagger, Changelog',
-              level: 3
-            },
-            {
-              title: 'Code review',
-              level: 3
-            },
-            {
-              title: 'Performance',
-              info: 'PageSpeed, Lighthouse, Chrome Performance tools',
-              level: 2
             }
           ]
         },
@@ -251,16 +270,16 @@ export default {
 @import "~bulma/sass/base/_all.sass";
 
 .info-icon {
+  line-height: 1em;
   display: inline-block;
   width: 1em;
-  line-height: 1em;
-  vertical-align: -0.1em;
   cursor: pointer;
+  vertical-align: -0.1em;
 }
 
 .skill-group {
-  min-width: 33%;
   width: 33%;
+  min-width: 33%;
 
   .skill-item {
     line-height: 1.1em;
@@ -272,13 +291,13 @@ export default {
 
   .compensator-area {
     transition: all 300ms ease;
-    background-color: white;
     border-radius: 4px;
+    background-color: white;
   }
 
   .info {
-    display: none;
     font-size: 0.9em;
+    display: none;
   }
 
   &:hover {
