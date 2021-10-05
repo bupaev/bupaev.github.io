@@ -25,7 +25,7 @@
           :class="['skill-group', 'mb-3', { 'expanded-area': hasInfoInGroup(skillsGroup) }]"
         >
           <div class="compensator-area p-3">
-            <h4 class="is-size-5 mb-2">
+            <h4 class="is-size-5 mb-4">
               {{ skillsGroup.category }}
             </h4>
             <ul>
@@ -37,9 +37,7 @@
                   </i>
                   <span class="info"><strong style="opacity: 0.6; font-size: 1.1em;">/</strong> {{ item.info }}</span>
                 </span>
-                <div :class="`skill-bar-segmented mb-4 mt-1`">
-                  <div v-for="i in 3" :key="i" :class="['segment', { filled: item.level >= i }]" />
-                </div>
+                <SkillBar :level="item.level" />
               </li>
             </ul>
           </div>
@@ -50,8 +48,12 @@
 </template>
 
 <script>
+import SkillBar from '@/components/SkillBar'
+
 export default {
   name: 'Skills',
+
+  components: { SkillBar },
 
   data () {
     return {
@@ -294,24 +296,6 @@ export default {
     .compensator-area {
       transform: scale(0.9);
       box-shadow: 2px 2px 5px rgb(0 0 0 / 30%);
-    }
-  }
-}
-
-.skill-bar-segmented {
-  display: flex;
-
-  .segment {
-    width: 3em;
-    height: 0.7em;
-    margin-right: 0.3em;
-    border: 1px solid $text;
-    transform: skew(-15deg);
-
-    @for $i from 1 through 3 {
-      &.filled:nth-of-type(#{$i}) {
-        background-color: rgba(gold, 0.25 + $i * 0.25);
-      }
     }
   }
 }
