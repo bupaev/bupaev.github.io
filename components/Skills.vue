@@ -22,25 +22,21 @@
         <div
           v-for="skillsGroup in skills"
           :key="skillsGroup.category"
-          :class="['skill-group', 'mb-3', { 'expanded-area': hasInfoInGroup(skillsGroup) }]"
+          :class="['skill-group mb-3 p-3 mr-4', { 'interactive-area': hasInfoInGroup(skillsGroup) }]"
         >
-          <div class="compensator-area p-3">
-            <h4 class="is-size-5 mb-4">
-              {{ skillsGroup.category }}
-            </h4>
-            <ul>
-              <li v-for="item in skillsGroup.items" :key="item.title" class="skill-item">
-                {{ item.title }}
-                <span v-if="item.info">
-                  <i class="info-icon">
-                    <img alt="icon" src="../assets/icons/info-icon.svg">
-                  </i>
-                  <span class="info"><strong style="opacity: 0.6; font-size: 1.1em;">/</strong> {{ item.info }}</span>
-                </span>
-                <SkillBar :level="item.level" />
-              </li>
-            </ul>
-          </div>
+          <h4 class="is-size-5 mb-4">
+            {{ skillsGroup.category }}
+          </h4>
+          <ul>
+            <li v-for="item in skillsGroup.items" :key="item.title" class="skill-item">
+              {{ item.title }}
+              <span v-if="item.info">
+                <i class="info-icon"><img alt="icon" src="../assets/icons/info.svg"></i>
+                <span class="info">{{ item.info }}</span>
+              </span>
+              <SkillBar :level="item.level" />
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -82,7 +78,7 @@ export default {
           ]
         },
         {
-          category: 'JavaScript Frameworks',
+          category: 'JavaScript Frameworks and SSR',
           items: [
             {
               title: 'Vue',
@@ -279,14 +275,6 @@ export default {
 <style lang="scss" scoped>
 @import "~bulma/sass/base/_all.sass";
 
-.info-icon {
-  line-height: 1em;
-  display: inline-block;
-  width: 1em;
-  cursor: pointer;
-  vertical-align: -0.1em;
-}
-
 .skill-group {
   width: 33%;
   min-width: 33%;
@@ -296,35 +284,46 @@ export default {
   }
 }
 
-.expanded-area {
-  transition: all 300ms ease;
+.interactive-area {
+  cursor: pointer;
+  outline: 2px solid transparent;
 
-  .compensator-area {
-    transition: all 300ms ease;
-    border-radius: 4px;
-    background-color: white;
+  .info-icon {
+    display: inline-block;
+    overflow: hidden;
+    width: 1em;
+    height: 1em;
+    transition: opacity 400ms 100ms;
+    vertical-align: -0.18em;
+    opacity: 1;
+
+    img {
+      margin-bottom: 0;
+      transition: margin-bottom 500ms 100ms;
+    }
   }
 
   .info {
     font-size: 0.9em;
-    display: none;
+    display: block;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 500ms linear;
   }
 
   &:hover {
-    z-index: 3;
-    transform: scale(1.15);
+    outline-color: rgba(0, 0, 255, 0.03);
 
     .info-icon {
-      display: none;
+      opacity: 0;
+
+      img {
+        margin-bottom: -0.7em;
+      }
     }
 
     .info {
-      display: inline;
-    }
-
-    .compensator-area {
-      transform: scale(0.9);
-      box-shadow: 2px 2px 5px rgb(0 0 0 / 30%);
+      max-height: 2.5em; // space just for 2 lines
     }
   }
 }
