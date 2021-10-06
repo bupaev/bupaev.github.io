@@ -90,8 +90,18 @@ export default {
               level: 3
             },
             {
+              title: 'NuxtJS',
+              info: 'make this site with Nuxt',
+              level: 2
+            },
+            {
               title: 'React',
               info: 'with Redux-Saga and JSS, but it was long ago',
+              level: 1
+            },
+            {
+              title: 'Gatsby',
+              info: 'use it for company site',
               level: 1
             },
             {
