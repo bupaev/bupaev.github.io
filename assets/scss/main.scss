@@ -51,7 +51,11 @@ h2,
 }
 
 .content a {
-  color: initial;
+  color: $text;
 
   @include multiline-text-hover-effect;
+}
+
+.section {
+  font-size: 1.1em;
 }

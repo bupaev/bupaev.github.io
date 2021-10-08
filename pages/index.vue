@@ -20,186 +20,11 @@
       <Skills />
     </section>
     <section id="experience" class="section anchor-for-navigation with-background-picture">
-      <div class="container">
-        <h2 class="title is-2">
-          Experience
-        </h2>
-        <div class="content">
-          <h2>
-            Lead Front End developer | CODENETIX (Nov. 2016 - now) | <a href="http://www.codenetixcom/">codenetix.com</a>
-          </h2>
-          <p>
-            <strong>Skills used: </strong>
-            ES6, ReactJS, HTML5/CSS3, SASS, web animation and multimedia, UX expertise
-          </p>
-          <p>
-            <strong>Role overview: </strong>
-            Working on a wide range of tasks: team leading, prototyping and coding
-            web-interfaces, adaptive HTML5 business infographics, ReactJS SPA,
-            developing interactive multimedia content and complex animations.
-          </p>
-          <h2>
-            Front End developer | Bandlab (Sept. 2014 - Oct. 2016) | <a href="https://www.bandlab.com/">bandlab.com</a>
-          </h2>
-          <p>
-            <em>
-              BandLab is a Singapore based social music creation platform, the
-              combination of social network, multitrack audio workstation and
-              VCS-like music storage. It is available on Web, iOS and Android OS.
-            </em>
-          </p>
-          <p>
-            <strong>Skills used: </strong>
-            Whole my workflow stack and especially Vanilla JS ES5/ES6, AngularJS 1.x,
-            HTML5, SASS, Canvas, SVG, Web Audio API, WebWorkers, IndexedDB, Local
-            Storage, Emscripten, WebRTC.
-          </p>
-          <p>
-            <strong>Role overview: </strong>
-            Developing a browser-based multitrack digital audio workstation with
-            AngularJS 1.x.
-          </p>
-          <p>
-            <strong>Interesting challenges: </strong>
-            Making SPA with functionality of GarageBand is an ambiguous challenge that
-            requires strong JavaScript skills, profound knowledge of digital signal
-            processing and Web Audio API.
-          </p>
-          <p>
-            I’ve faced many nontrivial tasks on this way such as multitrack sound
-            mixing, audio effects, audio latency detection, sound pitch detection with
-            the use of Fourier analysis and autocorrelation, and so on. The solution of
-            these issues requires good math skills, rational usage of design patterns
-            and understanding of sound nature.
-          </p>
-          <p>
-            Eventually, I’m proud to take part in making one of the best web-based
-            audio workstation of today.
-          </p>
-          <p>
-            <strong>Team: </strong>
-            Working in strong and highly motivated front end team made up of 6 people
-            in close contact with back end, iOS, Android, Design, QA and Product teams
-            (up to 30 people in total, geographically distributed: Singapore,
-            Amsterdam, San Francisco).
-          </p>
-          <h2>
-            Senior Front End developer | Luxoft (Jul. 2012 - Sept.2014) | <a href="http://www.luxoft.com/">luxoft.com</a>
-          </h2>
-          <p>
-            <em>
-              Luxoft is an international custom software development company with
-              more than 11,000 employees and 36 offices in 19 countries.
-            </em>
-          </p>
-          <p>
-            <strong>Skills used: </strong>
-            HTML5 and CSS3, LESS , VanillaJS, jQuery, Backbone.JS, XSLT in conjunction
-            with .NET-driven CMS (Sitecore, Sharepoint), UI/UX expertise
-          </p>
-          <p>
-            <strong>Role overview: </strong>
-            Front end development for different long-term projects such as
-            PromSvyazBank, LikePR OneClick Yakutsk, M-Video. Management of small team
-            of front end developers (3 people). Optimizing front end for high load
-            sites, development of mobile/tablet versions.
-          </p>
-          <p>
-            <strong>Interesting challenges: </strong>
-            Development of complex client-side data validation and complex calculations
-            (loan calculators, credit wizards, etc.) with jQuery and BackboneJS,
-            creating interactive map with thousands pins with Leaflet.
-          </p>
-          <p>
-            <strong>Team: </strong>
-            Leading small front end team made up of 3 people (up to 15 people in total,
-            geographically distributed: Omsk, Moscow, Kiev, Odessa).
-          </p>
-          <h2>
-            Web developer | Mir IT (Jun. 2011 - Jul. 2012) | <a href="http://mir-it.info/">mir-it.info</a>
-          </h2>
-          <p>
-            <em>
-              Mir IT is a small software company focused on web development, design
-              and SEO services
-            </em>
-          </p>
-          <p>
-            <strong>Skills used: </strong>
-            PHP, HTML5, CSS, JavaScript, jQuery, C#, ADO.NET, MS SQL Server, MySQL
-          </p>
-          <p>
-            <strong>Role overview: </strong>
-            Building of websites based on our own framework. Development of desktop
-            electronic document management systems.
-          </p>
-          <p>
-            <strong>Team: </strong>
-            Up to 6 people, Omsk.
-          </p>
-          <h2>
-            Assistant | Omsk State Technical University (Sept. 2009 – Sept. 2014) | <a href="http://omgtu.ru/">omgtu.ru</a>
-          </h2>
-          <p>
-            <em>
-              Omsk State Technical University (OmSTU) is a scientific-technological
-              university which trains engineers, economists and classical scholars.
-              OmSTU offers over 40 Bachelor degree programmes and 32 Master of
-              Science degree programmes, 23 Doctoral programmes.
-            </em>
-          </p>
-          <p>
-            <strong>Skills used:</strong>
-            Public speech, explanation and communication skills, research.
-          </p>
-          <p>
-            <strong>Role overview: </strong>
-            Assistant at the Department of Automated systems for information processing
-            and management.
-          </p>
-          <p>
-            <strong>Responsibilities: </strong>
-            Development and conducting courses, setting up and conducting practical
-            classes, examining and knowledge grading.
-          </p>
-          <p>
-            <strong>Courses:</strong>
-            Artificial Intelligence, Decision Support Systems, Control theory
-          </p>
-          <h2>
-            Web developer, 3D modeller, Photographer | Freelance (2009 – 2012)
-          </h2>
-          <p>
-            <em>
-              Work on a wide range of projects has given me a better understanding of
-              what I like and what I would like to do in my life.
-            </em>
-          </p>
-          <p>
-            <strong>Skills used:</strong>
-            HTML5, CSS, JavaScript, PHP, C#/ASP.NET, MySQL, 3Ds Max, Sound Forge, Sony
-            Vegas, Adobe Photoshop, Adobe Lightroom
-          </p>
-          <p>
-            <strong>Role overview:</strong>
-          </p>
-          <p>
-            − Web design and programming using HTML5, CSS, JavaScript, PHP, C#/ASP.NET,
-            MySQL, etc.
-          </p>
-          <p>
-            − 3d modelling and animation, video editing
-          </p>
-          <p>
-            − Event and studio photography
-          </p>
-        </div>
-      </div>
+      <Experience />
     </section>
     <section
       id="education"
       class="section anchor-for-navigation with-background-picture"
-      style="height: 350px;"
     >
       <div class="container">
         <h2 class="title is-2">
@@ -235,9 +60,10 @@ import VerticalMenu from '@/components/VerticalMenu'
 import HeroArea from '@/components/HeroArea'
 import Overview from '@/components/Overview'
 import Skills from '@/components/Skills'
+import Experience from '@/components/Experience'
 
 export default {
-  components: { VerticalMenu, HeroArea, Overview, Skills },
+  components: { VerticalMenu, HeroArea, Overview, Skills, Experience },
   data () {
     return {}
   }
@@ -269,11 +95,11 @@ export default {
   }
 
   &#education::after {
-    background: no-repeat url("~/assets/icons/academic-cap-detailed.svg");
+    // background: no-repeat url("~/assets/icons/academic-cap-detailed.svg");
   }
 
   &#experience::after {
-    background: no-repeat url("~/assets/icons/mountain-with-flag-detailed.svg");
+    // background: no-repeat url("~/assets/icons/mountain-with-flag-detailed.svg");
   }
 }
 </style>

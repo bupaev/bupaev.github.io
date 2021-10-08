@@ -16,13 +16,13 @@
         It has formed my development approach and <strong>the workflow:</strong>
       </p>
       <div
-        class="is-flex is-flex-wrap-wrap pt-2"
+        class="is-flex is-flex-wrap-wrap is-justify-content-space-between pt-2"
         style="margin-left: -0.75rem;"
       >
         <div
           v-for="skillsGroup in skills"
           :key="skillsGroup.category"
-          :class="['skill-group mb-3 p-3 mr-4', { 'interactive-area': hasInfoInGroup(skillsGroup) }]"
+          :class="['skill-group mb-3 p-3', { 'interactive-area': hasInfoInGroup(skillsGroup) }]"
         >
           <h4 class="is-size-5 mb-4">
             {{ skillsGroup.category }}
@@ -273,11 +273,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~bulma/sass/base/_all.sass";
-
 .skill-group {
-  width: 33%;
-  min-width: 33%;
+  width: 32%;
+  min-width: 32%;
 
   .skill-item {
     line-height: 1.1em;
