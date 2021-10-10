@@ -27,6 +27,9 @@
           <h4 class="is-size-5 mb-4">
             {{ skillsGroup.category }}
           </h4>
+          <div>
+            {{ skillsGroup.info }}
+          </div>
           <ul>
             <li v-for="item in skillsGroup.items" :key="item.title" class="skill-item">
               {{ item.title }}
@@ -56,6 +59,8 @@ export default {
       skills: [
         {
           category: 'Programming/Markup languages',
+          info: 'I\'m trying to use the latest features of JavaScript to make my code robust and efficient. ' +
+            'My HTML/CSS skills are not ultimate but pretty well. Just few additional lines of code to check how looks 5 lines of text in the element.',
           items: [
             {
               title: 'Javascript ES6',
@@ -79,6 +84,8 @@ export default {
         },
         {
           category: 'JavaScript Frameworks and SSR',
+          info: 'During my career I have worked with all main frameworks: AngularJS, React, Vue. ' +
+            'Vue is my personal favorite cause it took the best from the React and AngularJS in many ways.',
           items: [
             {
               title: 'Vue',
@@ -109,6 +116,8 @@ export default {
         },
         {
           category: 'Browser APIs',
+          info: 'Modern WEB APIs are very powerful and help us to solve many problems. ' +
+            'My HTML/CSS skills are not ultimate but pretty well. Just few additional lines of code to check how looks 5 lines of text in the element.',
           items: [
             {
               title: 'Web Audio (Web Audio API, MIDI API)',
