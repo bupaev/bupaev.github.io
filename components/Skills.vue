@@ -277,6 +277,11 @@ export default {
   width: 32%;
   min-width: 32%;
 
+  ul {
+    margin-left: 0;
+    list-style: none;
+  }
+
   .skill-item {
     line-height: 1.1em;
   }
