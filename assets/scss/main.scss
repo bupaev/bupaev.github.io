@@ -1,6 +1,6 @@
 /* Import Bulma Utilities */
-@import '~bulma/sass/utilities/initial-variables';
-@import '~bulma/sass/utilities/functions';
+@import "~bulma/sass/utilities/initial-variables";
+@import "~bulma/sass/utilities/functions";
 
 /* My stuff */
 @import "./mixins";
@@ -11,7 +11,7 @@ $secondary: #d0e0ee;
 $text: $black-ter;
 $family-primary: "Nunito", serif;
 
-@import '~bulma';
+@import "~bulma";
 
 /*
  For Hero Area/menu:
@@ -33,27 +33,32 @@ $family-primary: "Nunito", serif;
 
 //Overrider styles
 .title {
-  font-family: "Dosis", serif;
+  font-family: "Dosis", sans-serif;
   font-size: 2rem;
 }
 .subtitle,
-h2,
 .circle-title {
-  font-family: "Nunito", serif;
+  font-family: "Nunito", sans-serif;
 }
 
 .hero-area {
   .title,
   .subtitle {
-    font-family: "Dosis", serif;
+    font-family: "Dosis", sans-serif;
     font-style: italic;
   }
 }
 
-.content a {
-  color: $text;
+.content {
+  h3 {
+    font-family: "Dosis", sans-serif;
+  }
 
-  @include multiline-text-hover-effect;
+  a {
+    color: $text;
+
+    @include multiline-text-hover-effect;
+  }
 }
 
 .section {
