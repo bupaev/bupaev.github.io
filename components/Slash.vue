@@ -12,7 +12,6 @@ export default {
 @import "~bulma/sass/base/_all.sass";
 
 .slash {
-  padding-left: 0.35em;
   padding-right: 0.5em;
   font-size: 1.3em;
   font-style: italic;
