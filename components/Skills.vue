@@ -253,19 +253,22 @@ export default {
           ]
         },
         {
-          category: 'Soft skills',
+          category: 'Languages',
           items: [
             {
-              title: 'Communication',
+              title: 'Russian',
+              info: 'My native language, great and powerful',
               level: 3
             },
             {
-              title: 'Team leading',
+              title: 'English',
+              info: 'For the last 7 years it\'s my main language at work, so I can talk freely on any professional topics',
               level: 2
             },
             {
-              title: 'Mentoring',
-              level: 2
+              title: 'German',
+              info: 'Just enough to survive for several days in german language-only environment :)',
+              level: 1
             }
           ]
         }
