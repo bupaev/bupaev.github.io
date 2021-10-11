@@ -32,7 +32,7 @@
           </div>
           <ul>
             <li v-for="item in skillsGroup.items" :key="item.title" class="skill-item">
-              {{ item.title }}
+              <span class="item-title">{{ item.title }}</span>
               <span v-if="item.info">
                 <i class="info-icon"><img alt="icon" src="../assets/icons/info.svg"></i>
                 <span class="info">{{ item.info }}</span>
@@ -282,17 +282,37 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~bulma/sass/utilities/mixins.sass";
+
 .skill-group {
-  width: 32%;
-  min-width: 32%;
+  width: 100%;
+  min-width: 100%;
+
+  @include desktop {
+    width: 49%;
+    min-width: 49%;
+  }
+
+  @include fullhd {
+    width: 32%;
+    min-width: 32%;
+  }
+
+  .skill-item {
+    line-height: 1em;
+  }
+
+  .item-title {
+    line-height: 1.4em;
+  }
 
   ul {
     margin-left: 0;
     list-style: none;
-  }
 
-  .skill-item {
-    line-height: 1.1em;
+    li {
+      margin-top: -0.2em;
+    }
   }
 }
 
@@ -317,6 +337,7 @@ export default {
 
   .info {
     font-size: 0.9em;
+    line-height: 1.2em;
     display: block;
     overflow: hidden;
     max-height: 0;
