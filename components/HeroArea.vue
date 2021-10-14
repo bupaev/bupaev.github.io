@@ -5,7 +5,10 @@
         <div class="columns">
           <div class="left-column column has-text-right is-three-fifths-touch">
             <div class="parallelogram-image-container is-hidden-tablet">
-              <img alt="" src="../assets/portrait-1.jpeg">
+              <v-lazy-image
+                src="pics/portrait-1-mobile-2x.jpg"
+                src-placeholder="pics/portrait-1-mobile-low.jpg"
+              />
             </div>
             <h1 class="title pt-6">
               <div class="text-shape-limiter is-hidden-mobile" />
@@ -60,7 +63,10 @@
           </div>
           <div class="column is-hidden-mobile">
             <div class="parallelogram-image-container">
-              <img alt="" src="../assets/portrait-1.jpeg">
+              <v-lazy-image
+                src="pics/portrait-1-desktop.jpg"
+                src-placeholder="pics/portrait-1-low-desktop.jpg"
+              />
             </div>
           </div>
         </div>
@@ -70,8 +76,11 @@
 </template>
 
 <script>
+import VLazyImage from 'v-lazy-image/v2/v-lazy-image.es'
+
 export default {
-  name: 'HeroArea'
+  name: 'HeroArea',
+  components: { VLazyImage }
 }
 </script>
 
@@ -98,6 +107,7 @@ export default {
 
     @include mobile {
       padding-bottom: 45px;
+      padding-right: 15px;
     }
   }
 
@@ -120,8 +130,8 @@ export default {
 
         img {
           position: absolute;
-          top: -100px;
-          left: 55%;
+          top: -28px;
+          left: 64%;
           transform: skew(15deg) scale(1);
         }
       }
@@ -176,13 +186,13 @@ export default {
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-end;
+      font-size: 1.4rem;
 
       & > span {
         margin-right: 0 !important;
 
         a {
-          margin-right: 1em;
-          margin-left: 0;
+          margin-left: 1em;
         }
       }
     }
@@ -232,6 +242,14 @@ export default {
         transform: skew(15deg) scale(1.3) translate(-24px, -30px);
       }
     }
+  }
+
+  .v-lazy-image {
+    filter: blur(5px);
+    transition: filter 0.7s;
+  }
+  .v-lazy-image-loaded {
+    filter: blur(0);
   }
 }
 
