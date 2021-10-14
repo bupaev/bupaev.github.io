@@ -43,6 +43,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "assets/scss/mixins.scss";
+
 .venn-diagram-professions {
   $duration: 0.7s;
 
@@ -111,11 +113,8 @@ export default {
     font-size: 1.2em;
     font-weight: 700;
     color: #000;
-    text-shadow:
-      -0.1em -0.1em 0 #fff,
-      0.1em -0.1em 0 #fff,
-      -0.1em 0.1em 0 #fff,
-      0.1em 0.1em 0 #fff;
+
+    @include text-contour();
 
     @media (max-width: 576px) {
       font-size: 1.5em;

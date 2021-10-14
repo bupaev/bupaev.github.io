@@ -48,3 +48,11 @@
     }
   }
 }
+
+@mixin text-contour($color: #fff, $distance: 0.1em, $blur-radius: 0) {
+  text-shadow:
+    -1*$distance -1*$distance $blur-radius $color,
+    $distance -1*$distance $blur-radius $color,
+    -1*$distance $distance $blur-radius $color,
+    $distance $distance $blur-radius $color;
+}

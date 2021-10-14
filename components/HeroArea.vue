@@ -3,10 +3,13 @@
     <div class="container">
       <div class="hero-body">
         <div class="columns">
-          <div class="text-column column has-text-right-tablet is-three-fifths-touch">
+          <div class="left-column column has-text-right is-three-fifths-touch">
+            <div class="parallelogram-image-container is-hidden-tablet">
+              <img alt="" src="../assets/portrait-1.jpeg">
+            </div>
             <h1 class="title pt-6">
               <div class="text-shape-limiter is-hidden-mobile" />
-              <span class="is-size-1 has-text-right">Hi! I’m Pavel Buramensky</span>
+              <span class="is-size-1 has-text-right pl-4">Hi! I’m Pavel Buramensky</span>
               <p class="is-size-2 pt-4">
                 I’m a front-end developer who loves good UX and create things which make the world a better place
               </p>
@@ -57,7 +60,7 @@
           </div>
           <div class="column is-hidden-mobile">
             <div class="parallelogram-image-container">
-              <img alt="" src="../assets/heroarea-portrait-3.jpeg">
+              <img alt="" src="../assets/portrait-1.jpeg">
             </div>
           </div>
         </div>
@@ -98,12 +101,30 @@ export default {
     }
   }
 
-  .text-column {
+  .left-column {
     z-index: 1;
 
     // can't just use ".is-full-mobile" cause ".is-three-fifths-touch" has higher priority
     @include mobile {
       width: 100%;
+
+      .parallelogram-image-container {
+        position: absolute;
+        left: -196px;
+        top: 0;
+        height: 600px;
+        width: 250px;
+        margin-right: 0;
+        margin-left: 0;
+        z-index: 0;
+
+        img {
+          position: absolute;
+          top: -100px;
+          left: 55%;
+          transform: skew(15deg) scale(1);
+        }
+      }
     }
   }
 
@@ -115,8 +136,10 @@ export default {
   }
 
   .title {
+    position: relative;
     font-weight: 600;
     font-style: italic;
+    z-index: 1;
 
     @include desktop-only {
       margin-right: -50px;
@@ -129,6 +152,8 @@ export default {
 
     @include mobile {
       margin-right: 0;
+
+      @include text-contour(rgba(#fff, 0.5), 0.05em);
     }
   }
 
@@ -147,12 +172,10 @@ export default {
       }
     }
 
-    // There is quite complex play with flex
-    // to make required behaviour for all screen sizes
     @include mobile {
       display: flex;
       flex-wrap: wrap;
-      // justify-content: space-around;
+      justify-content: flex-end;
 
       & > span {
         margin-right: 0 !important;
