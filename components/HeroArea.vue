@@ -3,7 +3,7 @@
     <div class="container">
       <div class="hero-body">
         <div class="columns">
-          <div class="column has-text-right-tablet" style="z-index: 1;">
+          <div class="text-column column has-text-right-tablet is-three-fifths-touch">
             <h1 class="title pt-6">
               <div class="text-shape-limiter is-hidden-mobile" />
               <span class="is-size-1 has-text-right">Hi! I’m Pavel Buramensky</span>
@@ -11,42 +11,48 @@
                 I’m a front-end developer who loves good UX and create things which make the world a better place
               </p>
             </h1>
-            <p class="subtitle is-size-4 pt-5">
-              <a class="mr-5" href="mailto:me@paulbu.com">
-                <span class="icon-text">
-                  <span class="icon">
-                    <img src="../assets/icons/mail.svg">
+            <p class="contacts pt-5">
+              <span class="mr-5">
+                <a href="mailto:me@paulbu.com">
+                  <span class="icon-text">
+                    <span class="icon">
+                      <img src="../assets/icons/mail.svg">
+                    </span>
+                    <span>Email</span>
                   </span>
-                  <span>Email</span>
-                </span>
-              </a>
-              <a class="mr-5" href="https://t.me/bupaev">
-                <span class="icon-text">
-                  <span class="icon">
-                    <img src="../assets/icons/telegram.svg">
+                </a>
+              </span>
+              <span class="mr-5">
+                <a href="https://t.me/bupaev">
+                  <span class="icon-text">
+                    <span class="icon">
+                      <img src="../assets/icons/telegram.svg">
+                    </span>
+                    <span>Telegram</span>
                   </span>
-                  <span>Telegram</span>
-                </span>
-              </a>
-              <a href="https://www.linkedin.com/in/pavel-buramensky/">
-                <span class="icon-text">
-                  <span class="icon">
-                    <img src="../assets/icons/linkedin.svg">
+                </a>
+              </span>
+              <span>
+                <a href="https://www.linkedin.com/in/pavel-buramensky/">
+                  <span class="icon-text">
+                    <span class="icon">
+                      <img src="../assets/icons/linkedin.svg">
+                    </span>
+                    <span>LinkedIn</span>
                   </span>
-                  <span>LinkedIn</span>
-                </span>
-              </a>
-            </p>
-            <p class="subtitle is-size-4">
-              <span class="vertical-align-hack mr-2">also you can</span>
-              <a href="https://paulbu.com/pavel-buramensky-cv">
-                <span class="icon-text">
-                  <span class="icon">
-                    <img src="../assets/icons/download.svg">
+                </a>
+              </span>
+              <span class="is-block-tablet">
+                <span class="vertical-align-hack mr-2 is-hidden-mobile">also you can</span>
+                <a href="https://paulbu.com/pavel-buramensky-cv">
+                  <span class="icon-text">
+                    <span class="icon">
+                      <img src="../assets/icons/download.svg">
+                    </span>
+                    <span>Download my CV</span>
                   </span>
-                  <span>Download my CV</span>
-                </span>
-              </a>
+                </a>
+              </span>
             </p>
           </div>
           <div class="column is-hidden-mobile">
@@ -71,18 +77,33 @@ export default {
 @import "assets/scss/mixins.scss";
 
 .hero-area {
+  overflow: hidden;
+  font-family: "Dosis", sans-serif;
   opacity: 1;
   background-image: repeating-linear-gradient(105deg, rgba(0, 0, 255, 0.03) 0, rgba(0, 0, 255, 0.03) 1px, transparent 3px, transparent 12px);
-
-  @include touch {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
 
   .hero-body {
     @include tablet {
       padding-right: 0;
       padding-left: 10px;
+    }
+
+    @include touch {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    @include mobile {
+      padding-bottom: 45px;
+    }
+  }
+
+  .text-column {
+    z-index: 1;
+
+    // can't just use ".is-full-mobile" cause ".is-three-fifths-touch" has higher priority
+    @include mobile {
+      width: 100%;
     }
   }
 
@@ -97,8 +118,13 @@ export default {
     font-weight: 600;
     font-style: italic;
 
+    @include desktop-only {
+      margin-right: -50px;
+    }
+
     @include touch {
       margin-right: -50px;
+      // padding-top: 0 !important;
     }
 
     @include mobile {
@@ -106,9 +132,37 @@ export default {
     }
   }
 
-  .subtitle {
+  .contacts {
     font-weight: 600;
+    font-size: $size-4;
     font-style: italic;
+
+    & > span {
+      display: inline-block;
+      padding-bottom: 15px;
+
+      a {
+        display: inline-block;
+        height: 1.3em;
+      }
+    }
+
+    // There is quite complex play with flex
+    // to make required behaviour for all screen sizes
+    @include mobile {
+      display: flex;
+      flex-wrap: wrap;
+      // justify-content: space-around;
+
+      & > span {
+        margin-right: 0 !important;
+
+        a {
+          margin-right: 1em;
+          margin-left: 0;
+        }
+      }
+    }
   }
 
   .vertical-align-hack {
@@ -125,14 +179,17 @@ export default {
   }
 
   .parallelogram-image-container {
-    $container-height: 500px;
-
     position: relative;
     overflow: hidden;
-    height: $container-height;
+    height: 100%;
     margin-left: -50px;
     transform: skew(-15deg);
     filter: drop-shadow(2px 2px 10px rgba(255, 255, 255, 0.2));
+
+    @include desktop-only {
+      margin-right: -180px;
+      margin-left: auto;
+    }
 
     @include touch {
       margin-right: -80px;
@@ -141,7 +198,7 @@ export default {
 
     img {
       height: 100%;
-      transform: skew(15deg) scale(1.22) translateY(-32px);
+      transform: skew(15deg) scale(1.2) translateY(-32px);
       object-fit: cover;
 
       @include desktop-only {
@@ -149,7 +206,7 @@ export default {
       }
 
       @include touch {
-        transform: skew(15deg) scale(1.3) translate(-12px, -30px);
+        transform: skew(15deg) scale(1.3) translate(-24px, -30px);
       }
     }
   }

@@ -31,7 +31,7 @@ $family-primary: "Nunito", serif;
  - Open Sans
 */
 
-//Overrider styles
+// Override styles
 .title {
   font-family: "Dosis", sans-serif;
   font-size: 2rem;
@@ -39,14 +39,6 @@ $family-primary: "Nunito", serif;
 .subtitle,
 .circle-title {
   font-family: "Nunito", sans-serif;
-}
-
-.hero-area {
-  .title,
-  .subtitle {
-    font-family: "Dosis", sans-serif;
-    font-style: italic;
-  }
 }
 
 .content {
