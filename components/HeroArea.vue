@@ -1,12 +1,12 @@
 <template>
   <div class="hero-area hero">
     <div class="container">
-      <div class="hero-body px-0">
-        <div class="columns is-mobile">
-          <div class="column is-two-thirds-mobile has-text-right" style="z-index: 1;">
+      <div class="hero-body">
+        <div class="columns">
+          <div class="column has-text-right-tablet" style="z-index: 1;">
             <h1 class="title pt-6">
-              <div class="text-shape-limiter" />
-              <span class="is-size-1">Hi! I’m Pavel Buramensky</span>
+              <div class="text-shape-limiter is-hidden-mobile" />
+              <span class="is-size-1 has-text-right">Hi! I’m Pavel Buramensky</span>
               <p class="is-size-2 pt-4">
                 I’m a front-end developer who loves good UX and create things which make the world a better place
               </p>
@@ -49,7 +49,7 @@
               </a>
             </p>
           </div>
-          <div class="column">
+          <div class="column is-hidden-mobile">
             <div class="parallelogram-image-container">
               <img alt="" src="../assets/heroarea-portrait-3.jpeg">
             </div>
@@ -74,6 +74,18 @@ export default {
   opacity: 1;
   background-image: repeating-linear-gradient(105deg, rgba(0, 0, 255, 0.03) 0, rgba(0, 0, 255, 0.03) 1px, transparent 3px, transparent 12px);
 
+  @include touch {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .hero-body {
+    @include tablet {
+      padding-right: 0;
+      padding-left: 10px;
+    }
+  }
+
   a {
     position: relative;
     color: inherit;
@@ -82,13 +94,21 @@ export default {
   }
 
   .title {
-    // font-family: "Futura", serif;
-    font-style: italic;
     font-weight: 600;
+    font-style: italic;
+
+    @include touch {
+      margin-right: -50px;
+    }
+
+    @include mobile {
+      margin-right: 0;
+    }
   }
+
   .subtitle {
-    font-style: italic;
     font-weight: 600;
+    font-style: italic;
   }
 
   .vertical-align-hack {
@@ -108,16 +128,29 @@ export default {
     $container-height: 500px;
 
     position: relative;
-    height: $container-height;
-    margin: 0 0 0 -50px;
     overflow: hidden;
+    height: $container-height;
+    margin-left: -50px;
     transform: skew(-15deg);
     filter: drop-shadow(2px 2px 10px rgba(255, 255, 255, 0.2));
 
+    @include touch {
+      margin-right: -80px;
+      margin-left: auto;
+    }
+
     img {
-      object-fit: cover;
       height: 100%;
-      transform: skew(15deg) scale(1.2) translateY(-32px);
+      transform: skew(15deg) scale(1.22) translateY(-32px);
+      object-fit: cover;
+
+      @include desktop-only {
+        transform: skew(15deg) scale(1.3) translateY(-25px);
+      }
+
+      @include touch {
+        transform: skew(15deg) scale(1.3) translate(-12px, -30px);
+      }
     }
   }
 }

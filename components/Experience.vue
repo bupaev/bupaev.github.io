@@ -12,10 +12,11 @@
         </h3>
         <p>
           <strong>Used Skills:</strong>
-          VueJS, Vuetify, TypeScript, Jest, FHIR API, HTML5/CSS3, SASS, UX expertise, Team leading
+          VueJS, Vuetify, TypeScript, Jest, Vue Test Utils, FHIR API, HTML5/CSS3, SASS, UX expertise, Team leading
         </p>
         <p>
           <strong>Role overview: </strong>
+          Analyze the product design complexity, plan workload, communicate risks; Ensure the technical feasibility of UI/UX designs;
           Working on a wide range of tasks: team leading, prototyping and coding
           web-interfaces, adaptive HTML5 business infographics, ReactJS SPA,
           developing interactive multimedia content and complex animations.
