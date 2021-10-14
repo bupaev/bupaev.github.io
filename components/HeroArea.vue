@@ -10,7 +10,7 @@
             <h1 class="title pt-6">
               <div class="text-shape-limiter is-hidden-mobile" />
               <span class="is-size-1 has-text-right pl-4">Hi! I’m Pavel Buramensky</span>
-              <p class="is-size-2 pt-4">
+              <p class="is-size-2 pt-4 pl-4">
                 I’m a front-end developer who loves good UX and create things which make the world a better place
               </p>
             </h1>
