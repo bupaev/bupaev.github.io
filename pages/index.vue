@@ -56,27 +56,35 @@ export default {
     // On mobile screen we scroll then fix vertical menu.
     // Sadly position sticky isn't suitable for VerticalMenu in this case so make it in old-fashioned way.
     this.heroAreaHeight = this.$refs.heroArea.clientHeight
-    this.setMenuPosition()
-    window.addEventListener('scroll', this.setMenuPosition)
-    window.addEventListener('resize', this.setMenuPosition)
+    if (window.innerWidth <= 768) { this.onScroll() }
+    this.onResize()
+
+    window.addEventListener('resize', this.onResize)
   },
 
   destroyed () {
-    window.addEventListener('scroll', this.setMenuPosition)
-    window.addEventListener('resize', this.setMenuPosition)
+    window.removeEventListener('scroll', this.onScroll)
+    window.removeEventListener('resize', this.onResize)
   },
 
   methods: {
-    setMenuPosition () {
-      // It's required only for mobile screens (less 768px)
-      if (window.innerWidth > 768) {
-        this.menuStyle = ''
-        return
-      }
+    // We have to manage Menu position only for mobile screens (less 768px)
+    onResize () {
+      this.heroAreaHeight = this.$refs.heroArea.clientHeight
+      this.onScroll()
 
+      if (window.innerWidth <= 768) {
+        window.addEventListener('scroll', this.onScroll)
+      } else {
+        window.removeEventListener('scroll', this.onScroll)
+        this.menuStyle = ''
+      }
+    },
+
+    onScroll () {
       this.menuStyle = window.scrollY < this.heroAreaHeight
-        ? `top: ${this.heroAreaHeight}px;`
-        : 'position: fixed;'
+        ? `top: ${this.heroAreaHeight}px; position: absolute`
+        : ''
     }
   }
 }

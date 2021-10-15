@@ -141,12 +141,9 @@ $mobile-background: #777;
     position: fixed;
   }
 
-  // position and top values also managed by JS in parent component
-  @include mobile {
-    position: absolute;
-  }
-
+  // position and top values also managed by JS in the parent component
   @include touch {
+    position: fixed;
     left: 6px;
     top: 0;
     width: 10%;
