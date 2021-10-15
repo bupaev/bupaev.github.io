@@ -220,6 +220,16 @@ export default {
     transform: skew(-15deg);
     filter: drop-shadow(2px 2px 10px rgba(255, 255, 255, 0.2));
 
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(#fff, 0.05);
+    }
+
     @include desktop-only {
       margin-right: -180px;
       margin-left: auto;
@@ -246,11 +256,11 @@ export default {
   }
 
   .v-lazy-image {
-    filter: blur(5px);
+    filter: blur(5px) opacity(50%);
     transition: filter 0.7s;
   }
   .v-lazy-image-loaded {
-    filter: blur(0);
+    filter: blur(0) opacity(100%);
   }
 }
 
