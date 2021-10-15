@@ -26,31 +26,7 @@
       id="education"
       class="section anchor-for-navigation with-background-picture"
     >
-      <div class="container">
-        <h2 class="title is-2">
-          Education
-        </h2>
-        <div class="content">
-          <p dir="ltr">
-            <strong>Doctor of Philosophy (postgraduate student), Computer science (unfinished)</strong>
-          </p>
-          <p dir="ltr">
-            Omsk State Technical University, 2013 - 2015.
-          </p>
-          <p dir="ltr">
-            <strong>Master of Science, Computer science</strong>
-          </p>
-          <p dir="ltr">
-            Omsk State Technical University, July 2011 - GPA 4.9/5.0
-          </p>
-          <p dir="ltr">
-            <strong>Bachelor of Science, Computer science</strong>
-          </p>
-          <p dir="ltr">
-            Omsk State Technical University, July 2009 - GPA 4.6/5.0
-          </p>
-        </div>
-      </div>
+      <Education />
     </section>
   </div>
 </template>
@@ -61,9 +37,10 @@ import HeroArea from '@/components/HeroArea'
 import Overview from '@/components/Overview'
 import Skills from '@/components/Skills'
 import Experience from '@/components/Experience'
+import Education from '~/components/Education'
 
 export default {
-  components: { VerticalMenu, HeroArea, Overview, Skills, Experience },
+  components: { VerticalMenu, HeroArea, Overview, Skills, Experience, Education },
   data () {
     return {}
   }
