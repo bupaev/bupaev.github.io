@@ -184,11 +184,14 @@ export default {
       }
     }
 
+    @include touch {
+      font-size: 1.3rem;
+    }
+
     @include mobile {
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-end;
-      font-size: 1.3rem;
 
       & > span {
         margin-right: 0 !important;
@@ -211,6 +214,11 @@ export default {
     width: 120px;
     height: 400px;
     shape-outside: polygon(100% 0%, 100% 100%, 0 100%);
+
+    @include tablet-only {
+      width: 135px;
+      height: 450px;
+    }
   }
 
   .parallelogram-image-container {
@@ -237,6 +245,7 @@ export default {
     }
 
     @include touch {
+      height: 500px;
       margin-right: -80px;
       margin-left: auto;
     }
@@ -260,6 +269,7 @@ export default {
     filter: blur(5px) opacity(50%);
     transition: filter 0.7s;
   }
+
   .v-lazy-image-loaded {
     filter: blur(0) opacity(100%);
   }
