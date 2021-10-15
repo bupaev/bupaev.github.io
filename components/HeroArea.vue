@@ -87,10 +87,11 @@ export default {
 <style lang="scss">
 @import "~bulma/sass/utilities/_all.sass";
 @import "assets/scss/mixins.scss";
+@import "assets/scss/variables.scss";
 
 .hero-area {
   overflow: hidden;
-  font-family: "Dosis", sans-serif;
+  font-family: $accent-font;
   opacity: 1;
   background-image: repeating-linear-gradient(105deg, rgba(0, 0, 255, 0.03) 0, rgba(0, 0, 255, 0.03) 1px, transparent 3px, transparent 12px);
 

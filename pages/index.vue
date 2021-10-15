@@ -1,31 +1,19 @@
 <template>
   <div>
     <VerticalMenu class="is-hidden-touch" />
-    <section
-      id="hero-area"
-      class="anchor-for-navigation"
-    >
+    <section id="hero-area" class="anchor-for-navigation">
       <HeroArea />
     </section>
-    <section
-      id="overview"
-      class="section anchor-for-navigation is-primary"
-    >
+    <section id="overview" class="section anchor-for-navigation is-primary">
       <Overview />
     </section>
-    <section
-      id="skills"
-      class="section anchor-for-navigation with-background-picture"
-    >
+    <section id="skills" class="section anchor-for-navigation with-background-picture">
       <Skills />
     </section>
     <section id="experience" class="section anchor-for-navigation with-background-picture">
       <Experience />
     </section>
-    <section
-      id="education"
-      class="section anchor-for-navigation with-background-picture"
-    >
+    <section id="education" class="section anchor-for-navigation with-background-picture">
       <Education />
     </section>
   </div>

@@ -1,15 +1,15 @@
 /* Import Bulma Utilities */
 @import "~bulma/sass/utilities/initial-variables";
 @import "~bulma/sass/utilities/functions";
+@import "./variables";
 
 /* My stuff */
 @import "./mixins";
-// @import "../fonts/stylesheet.css";
 
-// Colours
+// Override bulma SCSS variables
 $secondary: #d0e0ee;
 $text: $black-ter;
-$family-primary: "Nunito", serif;
+$family-primary: $main-font;
 
 @import "~bulma";
 
@@ -33,17 +33,17 @@ $family-primary: "Nunito", serif;
 
 // Override styles
 .title {
-  font-family: "Dosis", sans-serif;
+  font-family: $accent-font;
   font-size: 2rem;
 }
 .subtitle,
 .circle-title {
-  font-family: "Nunito", sans-serif;
+  font-family: $main-font;
 }
 
 .content {
   h3 {
-    font-family: "Dosis", sans-serif;
+    font-family: $accent-font;
   }
 
   a {
