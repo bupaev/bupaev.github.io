@@ -1,7 +1,7 @@
 <template>
   <nav class="vertical-menu">
     <div
-      :style="`transform: translateY(${markerOffset - 5}px); height: ${markerHeight}px`"
+      :style="`transform: translateY(${markerOffset}px); height: ${markerHeight}px`"
       class="visible-area-marker"
     />
     <div ref="menu">
@@ -118,6 +118,7 @@ export default {
 @import "~bulma/sass/utilities/_all.sass";
 
 $menu-open-width: 10em;
+$mobile-background: #777;
 
 @mixin menu-transition {
   @for $i from 1 through 5 {
@@ -130,11 +131,18 @@ $menu-open-width: 10em;
 .vertical-menu {
   position: fixed;
   top: 10vh;
-  left: 10px;
+  left: 9px;
   font-family: "Dosis", sans-serif;
   font-size: 20px;
   z-index: 2;
   user-select: none;
+
+  @include touch {
+    top: 12vh;
+    // left: auto;
+    // right: -26px;
+    background-image: linear-gradient(90deg, $mobile-background 0, $mobile-background 10px, transparent 10px);
+  }
 
   .item {
     display: flex;
@@ -149,6 +157,53 @@ $menu-open-width: 10em;
 
     @include fullhd {
       width: $menu-open-width;
+    }
+
+    @include touch {
+      position: relative;
+      overflow: visible;
+      height: 15vh;
+      // border-left: 1px solid red;
+
+      &::before {
+        content: "";
+        position: absolute;
+        height: calc(100% - 8px);
+        width: 10px;
+        left: 0;
+        margin-top: 8px;
+        background-image: linear-gradient(90deg, #fff 0, #fff 4px, transparent 4px, transparent 6px, #fff 6px, #fff 10px);
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        height: 8px;
+        width: 10px;
+        left: 0;
+        background-image: radial-gradient(circle, transparent 0, transparent 4px, #fff 4px, #fff 100%);
+        background-repeat: no-repeat;
+      }
+
+      &:first-child {
+        &::after {
+          height: 10px;
+          width: 10px;
+          top: -2px;
+          background-position-y: 1px;
+        }
+      }
+
+      &:last-child {
+        &::before {
+          height: calc(100% - 11px);
+        }
+      }
+
+      .item-icon,
+      .item-text {
+        display: none;
+      }
     }
 
     @include menu-transition;
@@ -205,6 +260,7 @@ $menu-open-width: 10em;
 
   .visible-area-marker {
     position: absolute;
+    top: -5px;
     left: -4px;
     height: 2em;
     width: 2.4em;
@@ -212,6 +268,16 @@ $menu-open-width: 10em;
     border-radius: 0.5em;
     border: 2px rgba(gold, 0.8) solid;
     pointer-events: none;
+
+    @include touch {
+      top: 0;
+      left: 0;
+      width: 10px;
+      background-color: rgba(255, 215, 0, 1);
+      border: 0;
+      border-radius: 0;
+      pointer-events: none;
+    }
   }
 }
 </style>

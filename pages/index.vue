@@ -1,6 +1,6 @@
 <template>
   <div>
-    <VerticalMenu class="is-hidden-touch" />
+    <VerticalMenu />
     <section id="hero-area" class="anchor-for-navigation">
       <HeroArea />
     </section>

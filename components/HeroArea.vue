@@ -108,7 +108,7 @@ export default {
 
     @include mobile {
       padding-bottom: 45px;
-      padding-right: 15px;
+      // padding-right: 15px;
     }
   }
 
@@ -202,8 +202,8 @@ export default {
 
   .vertical-align-hack {
     display: inline-block;
-    margin-top: -0.1em;
-    vertical-align: text-top;
+    vertical-align: top;
+    margin-top: -0.25em;
   }
 
   .text-shape-limiter {
