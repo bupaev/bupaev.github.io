@@ -163,8 +163,12 @@ $mobile-background: #777;
     cursor: pointer;
     will-change: auto;
 
-    @include fullhd {
+    @media screen and (min-width: 1700px) {
       width: $menu-open-width;
+
+      .item-text::before {
+        display: none;
+      }
     }
 
     @include touch {
@@ -220,6 +224,7 @@ $mobile-background: #777;
       position: relative;
       color: rgba(0, 0, 0, 0.3);
 
+      &::before,
       &::after {
         content: "";
         position: absolute;
@@ -231,6 +236,15 @@ $mobile-background: #777;
         transform: scaleY(1) skew(-15deg);
         transition: width 250ms ease;
         z-index: -1;
+      }
+
+      &::before {
+        background: #fff;
+        width: calc(100% + 0.4em);
+      }
+
+      &::after {
+        background: gold;
       }
     }
 
