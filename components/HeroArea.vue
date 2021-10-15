@@ -108,7 +108,7 @@ export default {
 
     @include mobile {
       padding-bottom: 45px;
-      // padding-right: 15px;
+      padding-right: 20px;
     }
   }
 
@@ -188,7 +188,7 @@ export default {
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-end;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
 
       & > span {
         margin-right: 0 !important;

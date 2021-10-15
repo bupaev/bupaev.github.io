@@ -1,19 +1,35 @@
 <template>
   <div>
-    <VerticalMenu />
-    <section id="hero-area" class="anchor-for-navigation">
+    <VerticalMenu :style="menuStyle" />
+    <section
+      id="hero-area"
+      ref="heroArea"
+      class="anchor-for-navigation"
+    >
       <HeroArea />
     </section>
-    <section id="overview" class="section anchor-for-navigation is-primary">
+    <section
+      id="overview"
+      class="section anchor-for-navigation is-primary"
+    >
       <Overview />
     </section>
-    <section id="skills" class="section anchor-for-navigation with-background-picture">
+    <section
+      id="skills"
+      class="section anchor-for-navigation with-background-picture"
+    >
       <Skills />
     </section>
-    <section id="experience" class="section anchor-for-navigation with-background-picture">
+    <section
+      id="experience"
+      class="section anchor-for-navigation with-background-picture"
+    >
       <Experience />
     </section>
-    <section id="education" class="section anchor-for-navigation with-background-picture">
+    <section
+      id="education"
+      class="section anchor-for-navigation with-background-picture"
+    >
       <Education />
     </section>
   </div>
@@ -30,14 +46,53 @@ import Education from '~/components/Education'
 export default {
   components: { VerticalMenu, HeroArea, Overview, Skills, Experience, Education },
   data () {
-    return {}
+    return {
+      heroAreaHeight: 0,
+      menuStyle: ''
+    }
+  },
+
+  mounted () {
+    // On mobile screen we scroll then fix vertical menu.
+    // Sadly position sticky isn't suitable for VerticalMenu in this case so make it in old-fashioned way.
+    this.heroAreaHeight = this.$refs.heroArea.clientHeight
+    this.setMenuPosition()
+    window.addEventListener('scroll', this.setMenuPosition)
+    window.addEventListener('resize', this.setMenuPosition)
+  },
+
+  destroyed () {
+    window.addEventListener('scroll', this.setMenuPosition)
+    window.addEventListener('resize', this.setMenuPosition)
+  },
+
+  methods: {
+    setMenuPosition () {
+      // It's required only for mobile screens (less 768px)
+      if (window.innerWidth > 768) {
+        this.menuStyle = ''
+        return
+      }
+
+      this.menuStyle = window.scrollY < this.heroAreaHeight
+        ? `top: ${this.heroAreaHeight}px;`
+        : 'position: fixed;'
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.title {
-  // font-family: "Futura", serif;
+@import "~bulma/sass/utilities/_all.sass";
+
+@include mobile {
+  // Hide menu under portrait cause when user scrolls up
+  // JS doesn't recalculate position fast enough and draw menu over Hero area
+  #hero-area {
+    position: relative;
+    background-color: #fff;
+    z-index: 5;
+  }
 }
 
 .with-background-picture {

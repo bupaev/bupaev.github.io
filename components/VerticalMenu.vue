@@ -131,16 +131,27 @@ $mobile-background: #777;
 .vertical-menu {
   position: fixed;
   top: 10vh;
-  left: 9px;
+  left: 8px;
   font-family: "Dosis", sans-serif;
   font-size: 20px;
   z-index: 2;
   user-select: none;
 
+  @include tablet-only {
+    position: fixed;
+  }
+
+  // position and top values also managed by JS in parent component
+  @include mobile {
+    position: absolute;
+  }
+
   @include touch {
-    top: 12vh;
-    // left: auto;
-    // right: -26px;
+    left: 6px;
+    top: 0;
+    width: 10%;
+    overflow: hidden;
+    margin-top: 56px;
     background-image: linear-gradient(90deg, $mobile-background 0, $mobile-background 10px, transparent 10px);
   }
 
