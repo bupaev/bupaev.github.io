@@ -12,8 +12,8 @@
             </div>
             <h1 class="title pt-6">
               <div class="text-shape-limiter is-hidden-mobile" />
-              <span class="is-size-1 has-text-right pl-4">Hi! I’m Pavel Buramensky</span>
-              <p class="is-size-2 pt-4 pl-4">
+              <span class="is-size-1 has-text-right pl-5">Hi! I’m Pavel Buramensky</span>
+              <p class="is-size-2 pt-4">
                 I’m a front-end developer who loves good UX and create things which make the world a better place
               </p>
             </h1>
@@ -65,7 +65,7 @@
             <div class="parallelogram-image-container">
               <v-lazy-image
                 src="pics/portrait-1-desktop.jpg"
-                src-placeholder="pics/portrait-1-low-desktop.jpg"
+                src-placeholder="pics/portrait-1-desktop-low.jpg"
               />
             </div>
           </div>
@@ -157,6 +157,7 @@ export default {
 
     @include touch {
       margin-right: -50px;
+      padding-left: 8%;
       // padding-top: 0 !important;
     }
 
@@ -214,7 +215,7 @@ export default {
   .parallelogram-image-container {
     position: relative;
     overflow: hidden;
-    height: 100%;
+    height: 472px;
     margin-left: -50px;
     transform: skew(-15deg);
     filter: drop-shadow(2px 2px 10px rgba(255, 255, 255, 0.2));
