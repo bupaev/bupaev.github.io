@@ -17,24 +17,21 @@
     </section>
     <section
       id="skills"
-      class="section anchor-for-navigation"
+      class="section anchor-for-navigation with-background"
     >
       <Skills />
-      <div class="sticky-pic-container" />
     </section>
     <section
       id="experience"
-      class="section anchor-for-navigation"
+      class="section anchor-for-navigation with-background"
     >
       <Experience />
-      <div class="sticky-pic-container" />
     </section>
     <section
       id="education"
-      class="section anchor-for-navigation"
+      class="section anchor-for-navigation with-background"
     >
       <Education />
-      <div class="sticky-pic-container" />
     </section>
   </div>
 </template>
@@ -96,6 +93,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~bulma/sass/utilities/_all.sass";
+@import "assets/scss/variables.scss";
 
 // Hide menu under portrait cause when user scrolls up
 // JS doesn't recalculate position fast enough and draw menu over Hero area
@@ -111,52 +109,63 @@ export default {
   position: relative;
 }
 
-.sticky-pic-container {
-  position: absolute;
-  top: 50px;
-  right: 0;
-  height: calc(100% - 50px);
-  width: 100%;
-  z-index: -1;
-  // outline: 1px dashed red;
+#education {
+  padding-bottom: 100px;
+}
 
-  &::before {
-    position: sticky;
-    display: block;
+.with-background {
+  position: relative;
+
+  &::after {
     content: "";
-    top: 38vh;
-    left: 48vw;
-    height: 60vh;
-    width: 50vw;
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: calc(100% - 15px);
     max-height: 100%;
-    opacity: 0.02;
+    background-size: 50%;
     background-repeat: no-repeat;
-    background-size: contain;
-    background-position: 100% 0;
-    // outline: 4px dotted black;
+    background-attachment: fixed;
+    background-position: 95% 90%;
+    opacity: 0.02;
+    z-index: -1;
+    // outline: 2px dashed black;
 
-    @include touch {
-      left: 35vw;
-      width: 65vw;
-      background-size: cover;
-      background-position: 0 0;
+    @include from(1500px) {
+      background-size: 750px;
+    }
+
+    @include tablet-only {
+      background-size: 65%;
+    }
+
+    @include mobile {
+      background-size: 500px;
+      background-position: right -150px bottom 15%;
+    }
+
+    @include until($small-mobile) {
+      background-position: right -230px bottom 15%;
     }
   }
 
-  #skills &::before {
+  &#skills::after {
     background-image: url("~/assets/icons/pen-and-wrench-detailed.svg");
   }
 
-  #experience &::before {
+  &#experience::after {
     background-image: url("~/assets/icons/mountain-with-flag-detailed.svg");
   }
 
-  #education &::before {
+  &#education::after {
     background-image: url("~/assets/icons/academic-cap-detailed.svg");
+    height: 100%;
 
-    // We can't just use overflow: hidden here cause it breaks position sticky
-    @include widescreen {
-      background-size: 700px;
+    @include from(1500px) {
+      background-size: 720px;
+      background-position-x: 92%;
     }
   }
 }

@@ -163,7 +163,7 @@ $mobile-background: #777;
     cursor: pointer;
     will-change: auto;
 
-    @media screen and (min-width: 1700px) {
+    @include from(1700px) {
       width: $menu-open-width;
 
       .item-text::before {
