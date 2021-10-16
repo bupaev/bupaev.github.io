@@ -5,6 +5,7 @@
       id="hero-area"
       ref="heroArea"
       class="anchor-for-navigation"
+      style="position: sticky !important;"
     >
       <HeroArea />
     </section>
@@ -16,21 +17,24 @@
     </section>
     <section
       id="skills"
-      class="section anchor-for-navigation with-background-picture"
+      class="section anchor-for-navigation"
     >
       <Skills />
+      <div class="sticky-pic-container" />
     </section>
     <section
       id="experience"
-      class="section anchor-for-navigation with-background-picture"
+      class="section anchor-for-navigation"
     >
       <Experience />
+      <div class="sticky-pic-container" />
     </section>
     <section
       id="education"
-      class="section anchor-for-navigation with-background-picture"
+      class="section anchor-for-navigation"
     >
       <Education />
+      <div class="sticky-pic-container" />
     </section>
   </div>
 </template>
@@ -93,41 +97,67 @@ export default {
 <style lang="scss" scoped>
 @import "~bulma/sass/utilities/_all.sass";
 
+// Hide menu under portrait cause when user scrolls up
+// JS doesn't recalculate position fast enough and draw menu over Hero area
 @include mobile {
-  // Hide menu under portrait cause when user scrolls up
-  // JS doesn't recalculate position fast enough and draw menu over Hero area
   #hero-area {
     position: relative;
     background-color: #fff;
-    z-index: 5;
+    z-index: 2;
   }
 }
 
-.with-background-picture {
+.section {
   position: relative;
+}
 
-  &::after {
+.sticky-pic-container {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  height: calc(100% - 50px);
+  width: 100%;
+  z-index: -1;
+  // outline: 1px dashed red;
+
+  &::before {
+    position: sticky;
+    display: block;
     content: "";
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.05;
-    background-size: 70%;
-    pointer-events: none;
-    z-index: -1;
+    top: 38vh;
+    left: 48vw;
+    height: 60vh;
+    width: 50vw;
+    max-height: 100%;
+    opacity: 0.02;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 100% 0;
+    // outline: 4px dotted black;
+
+    @include touch {
+      left: 35vw;
+      width: 65vw;
+      background-size: cover;
+      background-position: 0 0;
+    }
   }
 
-  &#skills::after {
-    // background: no-repeat url("~/assets/icons/pen-and-wrench-detailed.svg");
+  #skills &::before {
+    background-image: url("~/assets/icons/pen-and-wrench-detailed.svg");
   }
 
-  &#education::after {
-    // background: no-repeat url("~/assets/icons/academic-cap-detailed.svg");
+  #experience &::before {
+    background-image: url("~/assets/icons/mountain-with-flag-detailed.svg");
   }
 
-  &#experience::after {
-    // background: no-repeat url("~/assets/icons/mountain-with-flag-detailed.svg");
+  #education &::before {
+    background-image: url("~/assets/icons/academic-cap-detailed.svg");
+
+    // We can't just use overflow: hidden here cause it breaks position sticky
+    @include widescreen {
+      background-size: 700px;
+    }
   }
 }
 </style>

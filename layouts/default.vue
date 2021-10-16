@@ -1,5 +1,5 @@
 <template>
-  <div class="is-clipped">
+  <div>
     <section class="main-content">
       <Nuxt />
     </section>
