@@ -4,6 +4,10 @@
       Education
     </h2>
     <div class="content">
+      <h3>Endless professional self-development</h3>
+      <p>
+        Udemy, Coursera, Skillbox, JavaScript.Ninja, Refactoring.Guru and infinite number of articles, books and Youtube videos
+      </p>
       <h3>
         Doctor of Philosophy (postgraduate student), Computer science (unfinished)
       </h3>
@@ -17,10 +21,6 @@
       <h3>Bachelor of Science, Computer science</h3>
       <p>
         Omsk State Technical University, July 2009 - GPA 4.6/5.0
-      </p>
-      <h3>Udemy, Coursera, Javascript Ninja and endless number of articles and Youtube videos </h3>
-      <p>
-        Udemy, Coursera, Javascript Ninja, YouTube
       </p>
     </div>
   </div>
