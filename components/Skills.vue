@@ -24,7 +24,7 @@
           :key="skillsGroup.category"
           :class="['skill-group mb-3 p-3', { 'interactive-area': hasInfoInGroup(skillsGroup) }]"
         >
-          <h4 class="is-size-5 mb-4">
+          <h4 class="is-size-5 has-text-weight-bold mb-4">
             {{ skillsGroup.category }}
           </h4>
           <div>

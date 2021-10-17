@@ -4,15 +4,15 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - personal-site',
-    title: 'personal-site',
+    titleTemplate: 'Pavel Buramensky',
+    title: 'Personal page',
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'Personal website CV Resume Pavel Buramensky Buramenskii Павел Бураменский' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
@@ -56,14 +56,16 @@ export default {
   content: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  },
+  build: {},
 
   // Nuxt Google Fonts configuration: https://google-fonts.nuxtjs.org/options
   googleFonts: {
+    download: true,
+    fontsDir: 'fonts',
+    stylePath: 'fonts/index.css',
     families: {
-      Dosis: true,
-      Nunito: true
+      Dosis: [400, 600],
+      Nunito: [400, 700]
     }
   }
 }
