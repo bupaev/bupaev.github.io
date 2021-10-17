@@ -119,7 +119,7 @@ export default {
 @import "~bulma/sass/utilities/_all.sass";
 
 $menu-open-width: 10em;
-$mobile-background: #777;
+$mobile-background: #e6e6e6;
 
 @mixin menu-transition {
   @for $i from 1 through 5 {
@@ -132,7 +132,7 @@ $mobile-background: #777;
 .vertical-menu {
   position: fixed;
   top: 10vh;
-  left: 8px;
+  left: 6px;
   font-family: "Dosis", sans-serif;
   font-size: 20px;
   z-index: 2;
@@ -145,7 +145,6 @@ $mobile-background: #777;
   // position and top values also managed by JS in the parent component
   @include touch {
     position: fixed;
-    left: 6px;
     top: 0;
     width: 10%;
     overflow: hidden;
@@ -284,12 +283,11 @@ $mobile-background: #777;
   .visible-area-marker {
     position: absolute;
     top: -5px;
-    left: -4px;
+    left: -0.1em;
     height: 2em;
-    width: 2.4em;
-    background-color: rgba($accent-color, 0.1);
-    border-radius: 0.5em;
-    border: 2px rgba($accent-color, 0.8) solid;
+    width: 2.2em;
+    background-color: rgba($accent-color, 0.2);
+    border-left: 2px rgba($accent-color, 1) solid;
     pointer-events: none;
 
     @include touch {
