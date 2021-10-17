@@ -14,7 +14,7 @@
               <div class="text-shape-limiter is-hidden-mobile" />
               <span class="is-size-1 has-text-right pl-5">Hi! I’m Pavel Buramensky</span>
               <p class="is-size-2 pt-4">
-                I’m a front-end developer who loves good UX and create things which make the world a better place
+                I’m a front-end perfectionist who cares about user experience and tries to make the world a better place
               </p>
             </h1>
             <p class="contacts pt-5">

@@ -202,18 +202,18 @@ export default {
           category: 'Code quality & optimisation',
           items: [
             {
-              title: 'Unit-testing (Jest, Vue Test Utils, Mocha/Ava)',
-              level: 2
-            },
-            {
               title: 'Linting, Formatting, Style guides',
               info: 'ESLint, StyleLint, Prettier (but it still hurts), StandardJS and Airbnb are favorite styles ',
               level: 3
             },
             {
+              title: 'Unit-testing (Jest, Vue Test Utils, Mocha/Ava)',
+              level: 2
+            },
+            {
               title: 'Documentation (JSDoc, Swagger)',
               info: '',
-              level: 3
+              level: 2
             },
             {
               title: 'Code review',
