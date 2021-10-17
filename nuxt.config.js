@@ -22,7 +22,8 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '@/assets/scss/main.scss'
+    '@/assets/scss/main.scss',
+    '@/assets/fonts/index.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -36,9 +37,7 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/stylelint
-    '@nuxtjs/stylelint-module',
-    // https://google-fonts.nuxtjs.org/
-    '@nuxtjs/google-fonts'
+    '@nuxtjs/stylelint-module'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -56,16 +55,5 @@ export default {
   content: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
-
-  // Nuxt Google Fonts configuration: https://google-fonts.nuxtjs.org/options
-  googleFonts: {
-    download: true,
-    fontsDir: 'fonts',
-    stylePath: 'fonts/index.css',
-    families: {
-      Dosis: [400, 600],
-      Nunito: [400, 700]
-    }
-  }
+  build: {}
 }
