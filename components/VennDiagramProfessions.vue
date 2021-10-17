@@ -1,11 +1,11 @@
 <template>
-  <div class="venn-diagram-professions">
-    <div ref="wrapper" :style="`font-size:${basicFontSize}px`" class="wrapper">
+  <div :style="fontSizeCss" class="venn-diagram-professions">
+    <div ref="wrapper" class="wrapper">
       <div class="circle-left">
         <span class="circle-title">Back End</span>
       </div>
       <div class="circle-top">
-        <span class="circle-title" style="font-size: 1.4em;">Front End</span>
+        <span class="circle-title" style="font-size: 1.45em;">Front End</span>
       </div>
       <div class="circle-right">
         <span class="circle-title">UI/UX Design</span>
@@ -26,7 +26,13 @@ export default {
   name: 'VennDiagramProfessions',
   data () {
     return {
-      basicFontSize: 16
+      basicFontSize: null
+    }
+  },
+
+  computed: {
+    fontSizeCss () {
+      return this.basicFontSize ? `font-size:${this.basicFontSize}px` : ''
     }
   },
 
@@ -38,11 +44,12 @@ export default {
 
     ro.observe(this.$refs.wrapper)
   }
-
 }
 </script>
 
 <style lang="scss" scoped>
+@import "~bulma/sass/utilities/_all.sass";
+@import "assets/scss/variables.scss";
 @import "assets/scss/mixins.scss";
 
 .venn-diagram-professions {
@@ -51,6 +58,14 @@ export default {
   display: block;
   position: relative;
   margin: 20%;
+  font-size: 13.3px;
+
+  @include until($small-mobile) {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 25%;
+    font-size: 10px;
+  }
 
   &::after {
     content: "";
@@ -68,6 +83,7 @@ export default {
     justify-content: center;
     align-items: center;
     animation: venn-rotation $duration ease-in-out forwards;
+    transition: font-size 1s linear;
   }
 
   .circle-left,
@@ -177,7 +193,7 @@ export default {
 
       &::after {
         position: absolute;
-        content: url('data:image/svg+xml; utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 353 267"> <path fill="white" stroke="black" stroke-width="18" stroke-miterlimit="10" d="M119-1 35 222 349-1"/> <path fill="none" stroke="white" stroke-width="20" stroke-miterlimit="10" d="M94 13-4 273 353 20"/> </svg>');
+        content: url("data:image/svg+xml; utf8, <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 353 267\"> <path fill=\"white\" stroke=\"black\" stroke-width=\"18\" stroke-miterlimit=\"10\" d=\"M119-1 35 222 349-1\"/> <path fill=\"none\" stroke=\"white\" stroke-width=\"20\" stroke-miterlimit=\"10\" d=\"M94 13-4 273 353 20\"/> </svg>");
         left: 0.6em;
         bottom: -1em;
         width: 1.5em;
