@@ -19,6 +19,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~bulma/sass/base/_all.sass";
+@import "assets/scss/variables.scss";
 
 .skill-bar {
   display: flex;
@@ -34,7 +35,7 @@ export default {
 
     @for $i from 1 through 3 {
       &.filled:nth-of-type(#{$i}) {
-        background-color: rgba(gold, 0.25 + $i * 0.25);
+        background-color: rgba($accent-color, 0.25 + $i * 0.25);
       }
     }
   }

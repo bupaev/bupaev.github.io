@@ -114,6 +114,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "assets/scss/variables.scss";
 @import "assets/scss/mixins.scss";
 @import "~bulma/sass/utilities/_all.sass";
 
@@ -232,7 +233,7 @@ $mobile-background: #777;
         height: 1.6em;
         left: -0.2em;
         top: 0;
-        background: gold;
+        background: $accent-color;
         transform: scaleY(1) skew(-15deg);
         transition: width 250ms ease;
         z-index: -1;
@@ -244,7 +245,7 @@ $mobile-background: #777;
       }
 
       &::after {
-        background: gold;
+        background: $accent-color;
       }
     }
 
@@ -286,9 +287,9 @@ $mobile-background: #777;
     left: -4px;
     height: 2em;
     width: 2.4em;
-    background-color: rgba(gold, 0.1);
+    background-color: rgba($accent-color, 0.1);
     border-radius: 0.5em;
-    border: 2px rgba(gold, 0.8) solid;
+    border: 2px rgba($accent-color, 0.8) solid;
     pointer-events: none;
 
     @include touch {
