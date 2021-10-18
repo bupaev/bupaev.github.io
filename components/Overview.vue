@@ -49,6 +49,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~bulma/sass/utilities/mixins.sass";
+@import "assets/scss/mixins.scss";
 
 .overview {
   // background-image: repeating-linear-gradient(105deg, rgba(0, 0, 255, 0.03) 0, rgba(0, 0, 255, 0.03) 1px, transparent 3px, transparent 12px);
@@ -72,14 +73,7 @@ export default {
     padding-right: 0.8em;
 
     &::after {
-      position: absolute;
-      display: block;
-      content: "";
-      height: 0.4em;
-      width: 0.4em;
-      bottom: 0.1em;
-      background-color: $text;
-      transform: rotate(45deg);
+      @include rhomb($text);
     }
   }
 

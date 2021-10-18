@@ -16,11 +16,11 @@
       </p>
       <h3>Master of Science, Computer science</h3>
       <p>
-        Omsk State Technical University, July 2011 - GPA 4.9/5.0
+        Omsk State Technical University, 2009-2011 - GPA 4.9/5.0
       </p>
       <h3>Bachelor of Science, Computer science</h3>
       <p>
-        Omsk State Technical University, July 2009 - GPA 4.6/5.0
+        Omsk State Technical University, 2005-2009 - GPA 4.6/5.0
       </p>
     </div>
   </div>

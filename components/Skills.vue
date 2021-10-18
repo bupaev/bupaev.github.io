@@ -179,14 +179,15 @@ export default {
         },
         {
           category: 'Infrastructure',
+          info: '',
           items: [
             {
-              title: 'Webpack',
+              title: 'Git (GitHub, Gitlab, Bitbucket)',
               level: 2
             },
             {
-              title: 'Git (GitHub, Gitlab, Bitbucket)',
-              level: 3
+              title: 'Webpack',
+              level: 2
             },
             {
               title: 'Docker',
@@ -199,7 +200,8 @@ export default {
           ]
         },
         {
-          category: 'Code quality & optimisation',
+          category: 'Code quality and performance',
+          info: '',
           items: [
             {
               title: 'Linting, Formatting, Style guides',
@@ -257,17 +259,17 @@ export default {
           items: [
             {
               title: 'Russian',
-              info: 'My native language, great and powerful',
+              info: 'My native language',
               level: 3
             },
             {
               title: 'English',
-              info: 'For the last 7 years it\'s my main language at work, so I can talk freely on any professional topics',
+              info: 'For the last 7 years it\'s my main language at work, so I can talk freely on any professional topics (~B2)',
               level: 2
             },
             {
               title: 'German',
-              info: 'Just enough to survive for several days in german language-only environment :)',
+              info: 'Just enough to survive for several days in german language-only environment ☺︎ (~A1)',
               level: 1
             }
           ]
