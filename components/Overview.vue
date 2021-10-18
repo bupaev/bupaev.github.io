@@ -107,7 +107,7 @@ export default {
           height: 100%;
           opacity: 0.2;
           background-color: $text;
-          clip-path: polygon(96% 0%, 100% 0%, 4% 100%, 0 100%);
+          clip-path: polygon(94% 0%, 100% 0%, 6% 100%, 0 100%);
         }
       }
 

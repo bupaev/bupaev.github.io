@@ -37,12 +37,12 @@ export default {
   },
 
   mounted () {
-    const ro = new ResizeObserver((entries) => {
+    const resizeObserver = new ResizeObserver((entries) => {
       const cr = entries[0].contentRect
       this.basicFontSize = cr.width / 20
     })
 
-    ro.observe(this.$refs.wrapper)
+    resizeObserver.observe(this.$refs.wrapper)
   }
 }
 </script>

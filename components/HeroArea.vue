@@ -93,7 +93,7 @@ export default {
   overflow: hidden;
   font-family: $accent-font;
   opacity: 1;
-  background-image: repeating-linear-gradient(105deg, rgba(0, 0, 255, 0.03) 0, rgba(0, 0, 255, 0.03) 1px, transparent 3px, transparent 12px);
+  background-image: repeating-linear-gradient(105deg, rgba($second-color, 0.03) 0, rgba($second-color, 0.03) 1px, transparent 3px, transparent 12px);
 
   .hero-body {
     @include tablet {

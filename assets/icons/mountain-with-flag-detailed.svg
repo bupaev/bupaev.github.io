@@ -6,7 +6,6 @@
 	.st0{fill-rule:evenodd;clip-rule:evenodd;}
 	.st1{fill:#D8D8D8;stroke:#000000;stroke-width:1.0173;stroke-miterlimit:4.0693;}
 	.st2{fill:none;stroke:#000000;stroke-width:7.1212;stroke-linecap:round;stroke-miterlimit:4.0693;}
-	.st3{fill:none;stroke:#000000;stroke-width:8.1386;stroke-linecap:round;stroke-miterlimit:4.0693;}
 </style>
 <g id="svgg">
 	<path id="path0" class="st0" d="M199.1,2.7c-2.3,1.4-2.2-1.1-2.2,42.5l0,40.1L195,89c-1.1,2-46.6,93.8-53.3,102.9
@@ -79,6 +78,6 @@
 </g>
 <line class="st2" x1="351.5" y1="68.5" x2="379.9" y2="68.5"/>
 <line class="st2" x1="358.1" y1="111.6" x2="382" y2="111.6"/>
-<line class="st3" x1="294" y1="208.2" x2="317.9" y2="208.2"/>
-<line class="st3" x1="321.4" y1="245.7" x2="367" y2="245.7"/>
+<line class="st2" x1="294" y1="208.2" x2="317.9" y2="208.2"/>
+<line class="st2" x1="321.4" y1="245.7" x2="367" y2="245.7"/>
 </svg>

@@ -38,7 +38,7 @@ export default {
     width: 100%;
     display: flex;
     justify-content: center;
-    padding: 2rem 1.5rem;
+    padding: 3rem 1.5rem;
     cursor: pointer;
     user-select: none;
   }
