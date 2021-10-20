@@ -152,15 +152,15 @@ export default {
   }
 
   &#skills::after {
-    background-image: url("~/assets/icons/pen-and-wrench-detailed.svg");
+    background-image: url("assets/icons/pen-and-wrench-detailed.svg");
   }
 
   &#experience::after {
-    background-image: url("~/assets/icons/mountain-with-flag-detailed.svg");
+    background-image: url("assets/icons/mountain-with-flag-detailed.svg");
   }
 
   &#education::after {
-    background-image: url("~/assets/icons/academic-cap-detailed.svg");
+    background-image: url("assets/icons/academic-cap-detailed.svg");
     height: 100%;
 
     @include from(1500px) {

@@ -2,7 +2,9 @@
   <footer class="footer">
     <div class="go-to-top" @click="goToTop">
       <div class="arrow" />
-      <div class="px-6 is-size-5">Back to the Top</div>
+      <div class="px-6 is-size-5">
+        Back to the Top
+      </div>
       <div class="arrow" />
     </div>
   </footer>
