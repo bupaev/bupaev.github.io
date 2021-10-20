@@ -11,22 +11,30 @@
           </figure>
           <p>
             I've been doing front-end development for over a decade, mostly for complex web applications, like <a>multitrack audio workstation</a> or
-            <a>electronic health record system</a>. During this time, I have accumulated significant professional experience in the following areas:
+            <a>electronic health record system</a>, but there has always been a place in my heart for creating nice landing pages or interactive data
+            visualization because what really drives me is crafting an enjoyable and fulfilling user experience.
+          </p>
+          <p>
+            My professional experience has been accumulated in two following areas:
           </p>
           <div class="section-with-delimiter">
             <p>
-              <span class="bullet is-hidden-widescreen" /><strong>Front-end engineering</strong> as my main specialization: building scalable, maintainable front-end architectures, writing
-              clean, readable code and make robust interface layouts (reasonably pixel-perfect) using modern JavaScript frameworks, advanced web APIs, and everything else that you
-              can find in trendy FE tech stack.
+              <span class="bullet is-hidden-widescreen" /><strong>Front-end engineering</strong> as my main specialization: building scalable,
+              maintainable front-end architectures, writing clean, readable code and make robust interface layouts (reasonably pixel-perfect)
+              using modern JavaScript frameworks, advanced web APIs, and everything else that you can find in trendy FE tech stack.
             </p>
             <p class="mb-4">
-              <span class="bullet is-hidden-widescreen" /><strong>Visual design and user experience</strong> as an important addition. Since the beginning of my career, I have been pretty fascinated by creating
-              clean, delightful, and intuitive interfaces. I believe that my innate grasp of visual language, honed by many years of practice, played a big role in this.
+              <span class="bullet is-hidden-widescreen" /><strong>Visual design and user experience</strong> as an important addition. Since the
+              beginning of my career, I have been
+              pretty fascinated by creating
+              clean, delightful, and intuitive interfaces. I believe that my innate grasp of visual language, honed by many years of practice, played
+              a big role in this.
             </p>
           </div>
           <p>
-            This combination of programming skills with an understanding of visual design helps me effectively cooperate with UX/UI designers and business analysts in seeking the
-            perfect balance between efficiency, aesthetics and efforts. In some cases, I even developed good UX designs myself.
+            This combination of programming skills with an understanding of visual design helps me effectively cooperate with UX/UI designers and
+            business analysts in seeking the perfect balance between efficiency, aesthetics and efforts. In some cases, I even developed good UX
+            designs myself.
           </p>
           <p>
             Practically, it means that I understand SOLID software design principles as well as Gestalt visual design principles.
