@@ -12,7 +12,7 @@
             </div>
             <h1 class="title pt-6">
               <div class="text-shape-limiter is-hidden-mobile" />
-              <span class="is-size-1 has-text-right pl-5">Hi! I’m Pavel Buramensky</span>
+              <span class="is-size-1 has-text-right">Hi! I’m Pavel Buramensky</span>
               <p class="is-size-2 pt-4">
                 I’m a front-end perfectionist who cares about user experience and tries to make the world a better place
               </p>
@@ -102,6 +102,7 @@ export default {
     }
 
     @include touch {
+      min-height: 500px;
       padding-top: 0;
       padding-bottom: 0;
     }
@@ -115,9 +116,13 @@ export default {
   .left-column {
     z-index: 1;
 
-    // can't just use ".is-full-mobile" cause ".is-three-fifths-touch" has higher priority
     @include mobile {
+      // can't just use ".is-full-mobile" cause ".is-three-fifths-touch" has higher priority
       width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 478px;
 
       .parallelogram-image-container {
         position: absolute;
@@ -156,10 +161,15 @@ export default {
       margin-right: -50px;
     }
 
-    @include touch {
+    @include mobile {
       margin-right: -50px;
       padding-left: 8%;
       // padding-top: 0 !important;
+    }
+
+    @include tablet-only {
+      margin-right: -50px;
+      padding-left: 20px;
     }
 
     @include mobile {
@@ -241,6 +251,7 @@ export default {
 
     @include desktop-only {
       margin-right: -180px;
+      height: 550px;
       margin-left: auto;
     }
 
@@ -250,16 +261,25 @@ export default {
       margin-left: auto;
     }
 
+    // has to be placed after touch
+    @include tablet-only {
+      height: 100%;
+    }
+
     img {
       height: 100%;
-      transform: skew(15deg) scale(1.2) translateY(-32px);
+      transform: skew(15deg) scale(1.22) translateY(-32px);
       object-fit: cover;
 
       @include desktop-only {
         transform: skew(15deg) scale(1.3) translateY(-25px);
       }
 
-      @include touch {
+      @include tablet-only {
+        transform: skew(15deg) scale(1.3) translate(-14px, -30px);
+      }
+
+      @include mobile {
         transform: skew(15deg) scale(1.3) translate(-24px, -30px);
       }
     }
