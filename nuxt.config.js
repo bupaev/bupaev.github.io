@@ -12,14 +12,21 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Creative front-end developer who cares about user experience and tries to make the world a better place' },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Creative front-end developer who cares about user experience and tries to make the world a better place'
+      },
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'robots', content: 'all' },
       { property: 'og:type', content: 'website' },
       { property: 'og:site_name', content: 'My personal page' },
       { property: 'og:url', content: 'https://paulbu.com' },
       { property: 'og:title', content: 'Hi! I\'m Pavel Buramensky and that\'s my page' },
-      { property: 'og:description', content: 'I\'m front-end perfectionist who cares about user experience and tries to make the world a better place' },
+      {
+        property: 'og:description',
+        content: 'I\'m front-end perfectionist who cares about user experience and tries to make the world a better place'
+      },
       { property: 'og:image', content: 'https://paulbu.com/pics/portrait-1-og.jpg' },
       { property: 'og:image:width', content: '968' },
       { property: 'og:image:height', content: '504' },
@@ -65,5 +72,25 @@ export default {
   content: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {
+    extractCSS: true
+    // https://github.com/nuxt/nuxt.js/tree/dev/packages/babel-preset-app#options
+    // Sadly this config leads to Nuxt build error, so just use --modern flag for generate
+    /* babel: {
+      presets ({ envName }) {
+        const envTargets = {
+          client: { browsers: ['last 2 versions'] },
+          server: { node: 'current' }
+        }
+        return [
+          [
+            '@nuxt/babel-preset-app',
+            {
+              targets: envTargets[envName]
+            }
+          ]
+        ]
+      }
+    } */
+  }
 }
