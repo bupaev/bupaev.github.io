@@ -4,26 +4,32 @@
       Skills
     </h2>
     <div class="content">
-      <p>Key points:</p>
+      <h3>Key points:</h3>
       <ul>
-        <li>Last 5 years manage small team developers as lead-developer (up to 5 people).</li>
-        <li>Have 10 years overall experience in front-end.</li>
-        <li>Did some UX-design works.</li>
         <li>
-          Most of my career has been in large-scale web projects which require well thought out UI, flexible and reliable architecture,
-          well-documented and maintainable code.
+          I have worked with most of the main modern frameworks: React, Vue, AngularJS.
+          My personal favorite is Vue because for me it finds some good balance between React and AngularJS.
+          But undoubtedly each framework has its strong sides and optimal field of application.
         </li>
-        <li>My latest experience TypeScript + Vue + Vuetify + Vuelidate with REST API FHIR Server.</li>
+        <li>
+          I can create a feature from idea to final result: draw a wireframe and user flow based on business requirements,
+          make an interactive prototype (usually directly in HTML / CSS), design an optimal API with the backend,
+          implement the necessary business logic and client data model, cover with tests and documentation
+        </li>
+        <li>
+          Managed small team developers for last five years in Agile process. In general, I like to develop software and create design more than to manage people.
+        </li>
       </ul>
+      <h3>Detailed list:</h3>
       <div
-        class="is-flex is-flex-wrap-wrap is-justify-content-space-between pt-2"
+        class="is-flex is-flex-wrap-wrap is-justify-content-space-between"
         style="margin-left: -0.75rem;"
       >
         <SkillsSection
           v-for="skillsSection in skills"
           :key="skillsSection.title"
-          v-bind="skillsSection"
           class="mb-3 p-3"
+          v-bind="skillsSection"
         />
       </div>
     </div>
@@ -43,8 +49,6 @@ export default {
       skills: [
         {
           title: 'Programming/Markup languages',
-          info: 'Javascript is my main language for most of my career. I\'m trying to use the latest features of JavaScript to make my code robust and efficient. ' +
-            'My HTML/CSS skills are not ultimate but pretty well. Just few additional lines of code to check how looks 5 lines of text in the element.',
           items: [
             {
               title: 'Javascript',
@@ -53,57 +57,53 @@ export default {
             },
             {
               title: 'TypeScript',
-              info: 'Have been using TypeScript for the last two years. Useful but sometimes painful thing',
+              info: 'Have been using TypeScript in production for the last year. Useful but sometimes troublesome thing',
               level: 2
             },
             {
-              title: 'CSS, SCSS, JSS',
-              info: 'Bootstrap, Bulma frameworks, BEM, CSS Animation, Flexbox, MediaQuery',
+              title: 'CSS, SCSS, LESS, JSS',
+              info: 'Key points: Bootstrap and Bulma, Atomic and BEM, Flexbox, CSS Animation',
               level: 3
             },
             {
               title: 'HTML5',
-              info: 'Building cross-platform and adaptive layouts',
+              info: 'Key points: Semantic markup, accessibility, native controls',
               level: 3
             }
           ]
         },
         {
           title: 'JavaScript Frameworks and SSR',
-          info: 'I have worked with most of main modern frameworks: React, Vue, AngularJS.' +
-            'My personal favorite is Vue, because for me it finds some good balance between React and AngularJS.',
           items: [
             {
               title: 'Vue',
-              info: 'in stack with Vuetify and Vuelidate',
+              info: 'Standard stack (Vuex and Vue Router) plus TypeScript, Vuetify and Vuelidate',
               level: 3
             },
             {
               title: 'React',
-              info: 'with Redux-Saga and JSS, but it was long ago',
+              info: 'With Redux-Saga and JSS, but it was long ago',
               level: 1
             },
             {
               title: 'Angular 1.x',
-              info: 'are you really interested in this old monster?',
+              info: 'Are you really interested in this old monster?',
               level: 1
             },
             {
               title: 'NuxtJS',
-              info: 'make this site with Nuxt',
+              info: 'Make this site with Nuxt',
               level: 2
             },
             {
               title: 'Gatsby',
-              info: 'use to create my former company site',
+              info: 'Use to create my former company site',
               level: 1
             }
           ]
         },
         {
           title: 'Browser APIs',
-          info: 'Modern WEB APIs are very powerful and help us to solve many problems. ' +
-            'My HTML/CSS skills are not ultimate but pretty well. Just few additional lines of code to check how looks 5 lines of text in the element.',
           items: [
             {
               title: 'Web Audio (Web Audio API, MIDI API)',
@@ -121,7 +121,7 @@ export default {
               level: 2
             },
             {
-              title: 'Workers',
+              title: 'WebWorkers',
               info: '',
               level: 2
             }
@@ -132,7 +132,6 @@ export default {
           items: [
             {
               title: 'Photoshop',
-              info: 'Use for creating and editing SVG icons mostly',
               level: 2
             },
             {
@@ -141,7 +140,6 @@ export default {
             },
             {
               title: 'Illustrator',
-              info: 'nothing serious, mostly creating/editing SVG icons',
               level: 1
             },
             {
@@ -180,15 +178,15 @@ export default {
               level: 2
             },
             {
-              title: 'Webpack',
+              title: 'Bundling/Automation (Webpack, gulp)',
               level: 2
             },
             {
-              title: 'Docker',
+              title: 'CI/CD (Azure, AWS, Travis, CircleCI, Gitlab Pipeline)',
               level: 1
             },
             {
-              title: 'CI/CD (Azure, AWS, Travis, CircleCI, Gitlab Pipeline)',
+              title: 'Virtualization (Docker, VMware Workstation)',
               level: 1
             }
           ]
@@ -199,7 +197,7 @@ export default {
           items: [
             {
               title: 'Linting, Formatting, Style guides',
-              info: 'ESLint, StyleLint, Prettier (but it still hurts), StandardJS and Airbnb are favorite styles ',
+              info: 'Usually use ESLint, StyleLint, Prettier (it hurts), StandardJS and Airbnb styles ',
               level: 3
             },
             {
