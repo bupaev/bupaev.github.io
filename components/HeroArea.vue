@@ -6,15 +6,15 @@
           <div class="left-column column has-text-right is-three-fifths-touch">
             <div class="parallelogram-image-container is-hidden-tablet">
               <v-lazy-image
-                src="pics/portrait-1-mobile-2x.jpg"
-                src-placeholder="pics/portrait-1-mobile-low.jpg"
+                src="../pics/portrait-1-mobile-2x.jpg"
+                src-placeholder="../pics/portrait-1-mobile-placeholder.jpg"
               />
             </div>
             <h1 class="title pt-6">
               <div class="text-shape-limiter is-hidden-mobile" />
               <span class="is-size-1 has-text-right">Hi! I’m Pavel Buramensky</span>
               <p class="is-size-2 pt-4">
-                I’m a front-end perfectionist who cares about user experience and tries to make the world a better place
+                I’m a front-end developer who cares about user experience and tries to make the world a better place
               </p>
             </h1>
             <p class="contacts pt-5">
@@ -50,7 +50,7 @@
               </span>
               <span class="is-block-tablet">
                 <span class="vertical-align-hack mr-2 is-hidden-mobile">also you can</span>
-                <a href="https://paulbu.com/pavel-buramensky-cv">
+                <a href="https://paulbu.com/pavel-buramensky-cv.pdf">
                   <span class="icon-text">
                     <span class="icon">
                       <img src="../assets/icons/download.svg">
@@ -64,8 +64,8 @@
           <div class="column is-hidden-mobile">
             <div class="parallelogram-image-container">
               <v-lazy-image
-                src="pics/portrait-1-desktop.jpg"
-                src-placeholder="pics/portrait-1-desktop-low.jpg"
+                src="../pics/portrait-1-desktop.jpg"
+                src-placeholder="../pics/portrait-1-desktop-placeholder.jpg"
               />
             </div>
           </div>
@@ -91,6 +91,7 @@ export default {
 
 .hero-area {
   overflow: hidden;
+  margin-bottom: 3rem;
   font-family: $accent-font;
   opacity: 1;
   background-image: repeating-linear-gradient(105deg, rgba($second-color, 0.03) 0, rgba($second-color, 0.03) 1px, transparent 3px, transparent 12px);
@@ -108,6 +109,7 @@ export default {
     }
 
     @include mobile {
+      margin-bottom: 0;
       padding-bottom: 45px;
       padding-right: 20px;
     }

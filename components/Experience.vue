@@ -64,7 +64,7 @@
         This position gave me a lot of new professional experience. I joined the team at an early stage of its formation
         and took an active part in its growth and development, forming a great front-end team from scratch.
         It was an exceptional experience working in many roles and quickly switching between roles and tasks,
-        often outside the front-end of development; felt the company as your own.
+        often outside the front-end of development.
       </p>
       <h3>
         <span class="job-title">Front-end developer</span>
@@ -136,7 +136,7 @@
       </p>
       <h4>Responsibilities</h4>
       <ul>
-        <li>Developed and tested web sites with PHP and HTML/CSS/jQuery based on custom CMS</li>
+        <li>Developed and tested web sites with LAMP stack and HTML/CSS/jQuery</li>
         <li>Developed electronic document management systems with C# and MS SQL/SQLite</li>
       </ul>
       <h3>

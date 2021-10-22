@@ -132,7 +132,7 @@ export default {
             {
               title: 'Data Storage (Local Storage, IndexedDB)',
               info: '',
-              level: 3
+              level: 2
             },
             {
               title: 'Workers',
