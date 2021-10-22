@@ -4,17 +4,17 @@
       Skills summary
     </h2>
     <div class="content">
-      <p>
-        Worked with all frameworks: Angular, React, Vue.
-        Last 5 years manage small team developers as lead-developer (up to 5 people).
-        Have 10 years overall experience in front-end.
-        Did some UX-design works.
-        Successfully managed to implement code in complex areas like Web Audio API or FHIR.
-        Most of my career has been in large-scale web projects which require well
-        thought out UI, flexible and reliable architecture, well-documented and
-        maintainable code. My latest experience TypeScript + Vue + Vuetify + Vuelidate with REST API FHIR Server.
-        It has formed my development approach and <strong>the workflow:</strong>
-      </p>
+      <ul>
+        <li>I have worked with all key frameworks: AngularJS, React, Vue.</li>
+        <li>Last 5 years manage small team developers as lead-developer (up to 5 people).</li>
+        <li>Have 10 years overall experience in front-end.</li>
+        <li>Did some UX-design works.</li>
+        <li>Most of my career has been in large-scale web projects which require well thought out UI, flexible and reliable architecture,
+          well-documented and
+          maintainable code.
+        </li>
+        <li>My latest experience TypeScript + Vue + Vuetify + Vuelidate with REST API FHIR Server.</li>
+      </ul>
       <div
         class="is-flex is-flex-wrap-wrap is-justify-content-space-between pt-2"
         style="margin-left: -0.75rem;"
@@ -27,19 +27,19 @@
           <h4 class="is-size-5 has-text-weight-bold mb-4">
             {{ skillsGroup.category }}
           </h4>
-          <div>
+          <div class="is-hidden">
             {{ skillsGroup.info }}
           </div>
-          <ul>
-            <li v-for="item in skillsGroup.items" :key="item.title" class="skill-item">
+          <div>
+            <div v-for="item in skillsGroup.items" :key="item.title" class="skill-item">
               <span class="item-title">{{ item.title }}</span>
               <span v-if="item.info">
                 <i class="info-icon"><img alt="icon" src="../assets/icons/info.svg"></i>
                 <span class="info">{{ item.info }}</span>
               </span>
               <SkillBar :level="item.level" />
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -157,11 +157,15 @@ export default {
               title: 'Illustrator',
               info: 'nothing serious, mostly creating/editing SVG icons',
               level: 1
+            },
+            {
+              title: 'Balsamiq',
+              level: 1
             }
           ]
         },
         {
-          category: 'Back-end communication',
+          category: 'Server, p2p communication',
           items: [
             {
               title: 'REST API',
@@ -173,6 +177,10 @@ export default {
             },
             {
               title: 'WebSockets',
+              level: 1
+            },
+            {
+              title: 'WebRTC',
               level: 1
             }
           ]

@@ -35,13 +35,6 @@
             implement complex functionality from an idea to a real product, find an optimal balance between aesthetics, efforts and performance,
             effectively communicate with design team and even carry out tasks of UX-design if needed.
           </p>
-          <p class="is-hidden">
-            <i>In some cases, I even developed good UX designs myself. Created wireframes and prototypes, occasionally took up UX/UI-design tasks.</i>
-            Practically, it means that I understand SOLID software design principles as well as Gestalt visual design principles.
-            My experience allows me to implement a complex feature from wireframe to a full-featured client application.
-            <span style="text-decoration: line-through;">Since the beginning of my career, I have been pretty fascinated by creating clean, delightful, and intuitive interfaces.
-              I believe that my innate grasp of visual language, honed by many years of practice, played a big role in this.</span>
-          </p>
         </div>
       </div>
     </div>
@@ -80,10 +73,13 @@ export default {
     position: relative;
     display: inline-block;
     width: 0.5em;
+    height: 0.5em;
     padding-right: 0.8em;
 
     &::after {
-      @include rhomb($text);
+      content: "";
+
+      @include rhombus($text);
     }
   }
 

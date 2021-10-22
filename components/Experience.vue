@@ -48,7 +48,7 @@
       </p>
       <h4>Used Skills</h4>
       <p>
-        ES6, React (with React Router, Redux, SAGA), Gatsby, HTML5/SCSS, CSS and Canvas animation, UX/UI expertise, Agile
+        ES6, React (with React Router, Redux, SAGA), Gatsby, HTML5/SCSS, CSS and Canvas animation, Docker, UX/UI expertise, Agile
       </p>
       <h4>Responsibilities</h4>
       <ul>
@@ -103,7 +103,7 @@
       </p>
       <h4>Used Skills</h4>
       <p>
-        HTML5, CSS3, LESS, VanillaJS, jQuery, XSLT in conjunction with .NET-driven CMS (Sitecore, Sharepoint), UI/UX expertise, Agile
+        HTML5, CSS3, LESS, VanillaJS, jQuery, XSLT with .NET-driven CMS (Sitecore, Sharepoint), UI/UX expertise, Agile
       </p>
       <h4>Responsibilities</h4>
       <ul>
@@ -217,22 +217,6 @@ export default {
 
     h4 + ul {
       margin-top: 0.5em;
-      margin-left: 0;
-    }
-
-    ul > li {
-      position: relative;
-      list-style: none;
-      padding-left: 1em;
-
-      &::after {
-        font-size: 0.8em;
-
-        @include rhomb($text);
-
-        left: 0.15em;
-        top: 0.7em;
-      }
     }
 
     .job-title {

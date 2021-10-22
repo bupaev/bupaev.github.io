@@ -13,29 +13,12 @@ $family-primary: $main-font;
 
 @import "~bulma";
 
-/*
- For Hero Area/menu:
- - Dosis [v]
- - Asap
- - Nunito
- - Glory
-
- For headers:
- - Dosis
- - Nunito
- - Lato [v]
-
- For text:
- - Nunito
- - Lato [v]
- - Open Sans
-*/
-
 // Override styles
 .title {
   font-family: $accent-font;
   font-size: 2rem;
 }
+
 .subtitle,
 .circle-title {
   font-family: $main-font;
@@ -50,6 +33,26 @@ $family-primary: $main-font;
     color: $text;
 
     @include multiline-text-hover-effect;
+  }
+
+  ul {
+    margin-left: 0;
+
+    & > li {
+      position: relative;
+      list-style: none;
+      padding-left: 1em;
+
+      &::after {
+        content: "";
+        font-size: 0.8em;
+
+        @include rhombus($text);
+
+        left: 0.15em;
+        top: 0.7em;
+      }
+    }
   }
 }
 

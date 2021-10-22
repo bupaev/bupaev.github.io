@@ -59,13 +59,11 @@
     $distance $distance $blur-radius $color;
 }
 
-@mixin rhomb($color: #000) {
+@mixin rhombus($color: #000) {
   position: absolute;
   display: block;
-  content: "";
   height: 0.4em;
   width: 0.4em;
-  bottom: 0.1em;
-  background-color: $color;
+  border: 1px solid $color;
   transform: rotate(45deg);
 }
