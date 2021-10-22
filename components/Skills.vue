@@ -1,17 +1,17 @@
 <template>
   <div class="skills container">
     <h2 class="title is-2 has-text-weight-bold">
-      Skills summary
+      Skills
     </h2>
     <div class="content">
+      <p>Key points:</p>
       <ul>
-        <li>I have worked with all key frameworks: AngularJS, React, Vue.</li>
         <li>Last 5 years manage small team developers as lead-developer (up to 5 people).</li>
         <li>Have 10 years overall experience in front-end.</li>
         <li>Did some UX-design works.</li>
-        <li>Most of my career has been in large-scale web projects which require well thought out UI, flexible and reliable architecture,
-          well-documented and
-          maintainable code.
+        <li>
+          Most of my career has been in large-scale web projects which require well thought out UI, flexible and reliable architecture,
+          well-documented and maintainable code.
         </li>
         <li>My latest experience TypeScript + Vue + Vuetify + Vuelidate with REST API FHIR Server.</li>
       </ul>
@@ -19,60 +19,46 @@
         class="is-flex is-flex-wrap-wrap is-justify-content-space-between pt-2"
         style="margin-left: -0.75rem;"
       >
-        <div
-          v-for="skillsGroup in skills"
-          :key="skillsGroup.category"
-          :class="['skill-group mb-3 p-3', { 'interactive-area': hasInfoInGroup(skillsGroup) }]"
-        >
-          <h4 class="is-size-5 has-text-weight-bold mb-4">
-            {{ skillsGroup.category }}
-          </h4>
-          <div class="is-hidden">
-            {{ skillsGroup.info }}
-          </div>
-          <div>
-            <div v-for="item in skillsGroup.items" :key="item.title" class="skill-item">
-              <span class="item-title">{{ item.title }}</span>
-              <span v-if="item.info">
-                <i class="info-icon"><img alt="icon" src="../assets/icons/info.svg"></i>
-                <span class="info">{{ item.info }}</span>
-              </span>
-              <SkillBar :level="item.level" />
-            </div>
-          </div>
-        </div>
+        <SkillsSection
+          v-for="skillsSection in skills"
+          :key="skillsSection.title"
+          v-bind="skillsSection"
+          class="mb-3 p-3"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import SkillBar from '@/components/SkillBar'
+import SkillsSection from '~/components/SkillsSection'
 
 export default {
   name: 'Skills',
 
-  components: { SkillBar },
+  components: { SkillsSection },
 
   data () {
     return {
       skills: [
         {
-          category: 'Programming/Markup languages',
-          info: 'I\'m trying to use the latest features of JavaScript to make my code robust and efficient. ' +
+          title: 'Programming/Markup languages',
+          info: 'Javascript is my main language for most of my career. I\'m trying to use the latest features of JavaScript to make my code robust and efficient. ' +
             'My HTML/CSS skills are not ultimate but pretty well. Just few additional lines of code to check how looks 5 lines of text in the element.',
           items: [
             {
-              title: 'Javascript ES6',
+              title: 'Javascript',
+              info: 'The main language for most of my career',
               level: 3
             },
             {
               title: 'TypeScript',
+              info: 'Have been using TypeScript for the last two years. Useful but sometimes painful thing',
               level: 2
             },
             {
-              title: 'CSS, SASS, JSS',
-              info: 'Bootstrap, Bulma frameworks, CSS Animation, Flexbox, MediaQuery',
+              title: 'CSS, SCSS, JSS',
+              info: 'Bootstrap, Bulma frameworks, BEM, CSS Animation, Flexbox, MediaQuery',
               level: 3
             },
             {
@@ -83,9 +69,9 @@ export default {
           ]
         },
         {
-          category: 'JavaScript Frameworks and SSR',
-          info: 'During my career I have worked with all main frameworks: AngularJS, React, Vue. ' +
-            'Vue is my personal favorite cause it took the best from the React and AngularJS in many ways.',
+          title: 'JavaScript Frameworks and SSR',
+          info: 'I have worked with most of main modern frameworks: React, Vue, AngularJS.' +
+            'My personal favorite is Vue, because for me it finds some good balance between React and AngularJS.',
           items: [
             {
               title: 'Vue',
@@ -115,7 +101,7 @@ export default {
           ]
         },
         {
-          category: 'Browser APIs',
+          title: 'Browser APIs',
           info: 'Modern WEB APIs are very powerful and help us to solve many problems. ' +
             'My HTML/CSS skills are not ultimate but pretty well. Just few additional lines of code to check how looks 5 lines of text in the element.',
           items: [
@@ -142,7 +128,7 @@ export default {
           ]
         },
         {
-          category: 'UX/UI design tools',
+          title: 'UX/UI design tools',
           items: [
             {
               title: 'Photoshop',
@@ -165,7 +151,7 @@ export default {
           ]
         },
         {
-          category: 'Server, p2p communication',
+          title: 'Server, p2p communication',
           items: [
             {
               title: 'REST API',
@@ -186,7 +172,7 @@ export default {
           ]
         },
         {
-          category: 'Infrastructure',
+          title: 'Infrastructure',
           info: '',
           items: [
             {
@@ -208,7 +194,7 @@ export default {
           ]
         },
         {
-          category: 'Code quality and performance',
+          title: 'Code quality and performance',
           info: '',
           items: [
             {
@@ -242,7 +228,7 @@ export default {
           ]
         },
         {
-          category: 'Workflow & Methodology',
+          title: 'Workflow & Methodology',
           items: [
             {
               title: 'Agile SCRUM/KANBAN',
@@ -263,7 +249,7 @@ export default {
           ]
         },
         {
-          category: 'Languages',
+          title: 'Languages',
           items: [
             {
               title: 'Russian',
@@ -284,93 +270,6 @@ export default {
         }
       ]
     }
-  },
-
-  methods: {
-    hasInfoInGroup (skillsGroup) {
-      return skillsGroup.items.some(({ info }) => info)
-    }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import "~bulma/sass/utilities/mixins.sass";
-
-.skill-group {
-  width: 100%;
-  min-width: 100%;
-
-  @include desktop {
-    width: 49%;
-    min-width: 49%;
-  }
-
-  @include fullhd {
-    width: 32%;
-    min-width: 32%;
-  }
-
-  .skill-item {
-    line-height: 1em;
-  }
-
-  .item-title {
-    line-height: 1.4em;
-  }
-
-  ul {
-    margin-left: 0;
-    list-style: none;
-
-    li {
-      margin-top: -0.2em;
-    }
-  }
-}
-
-.interactive-area {
-  cursor: pointer;
-  outline: 2px solid transparent;
-
-  .info-icon {
-    display: inline-block;
-    overflow: hidden;
-    width: 1em;
-    height: 1em;
-    transition: opacity 400ms 100ms;
-    vertical-align: -0.18em;
-    opacity: 1;
-
-    img {
-      margin-bottom: 0;
-      transition: margin-bottom 500ms 100ms;
-    }
-  }
-
-  .info {
-    font-size: 0.9em;
-    line-height: 1.2em;
-    display: block;
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 500ms linear;
-  }
-
-  &:hover {
-    outline-color: rgba(0, 0, 255, 0.03);
-
-    .info-icon {
-      opacity: 0;
-
-      img {
-        margin-bottom: -0.7em;
-      }
-    }
-
-    .info {
-      max-height: 2.5em; // space just for 2 lines
-    }
-  }
-}
-</style>

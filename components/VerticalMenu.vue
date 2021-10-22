@@ -12,7 +12,7 @@
         @click="onMenuItemClick(index)"
       >
         <span class="item-icon">
-          <img :src="require(`../assets/icons/${item.icon}`)" draggable="false" />
+          <img :src="require(`../assets/icons/${item.icon}`)" draggable="false">
         </span>
         <span class="item-text">
           {{ item.title }}

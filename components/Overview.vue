@@ -15,6 +15,7 @@
             <a href="https://www.holmusk.com/solutions" target="_blank">electronic health record system</a>. Besides, I really enjoy creating
             stylish web-sites, funny animations and data visualization.
             In general, no matter what I do, my ultimate goal is to deliver a most delightful and fulfilling user experience.
+          </p>
           <p>
             I achieve this goal through expertise in the following areas:
           </p>
