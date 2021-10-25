@@ -22,7 +22,7 @@
 import SkillBar from '@/components/SkillBar'
 
 export default {
-  name: 'SkillsSection',
+  name: 'SkillsGroup',
 
   components: { SkillBar },
 

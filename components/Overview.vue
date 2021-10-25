@@ -13,8 +13,7 @@
             I've been doing front-end development for over a decade, mostly for complex web applications, like
             <a href="https://www.bandlab.com/creation-features" target="_blank">multitrack audio workstation</a> or
             <a href="https://www.holmusk.com/solutions" target="_blank">electronic health record system</a>. Besides, I really enjoy creating
-            stylish web-sites, funny animations and data visualization.
-            In general, no matter what I do, my ultimate goal is to deliver a most delightful and fulfilling user experience.
+            stylish web-sites, funny animations and data visualization. No matter what I do, my ultimate goal is to deliver a first-class user experience.
           </p>
           <p>
             I achieve this goal through expertise in the following areas:
@@ -34,7 +33,7 @@
           <p>
             This combination of skills and knowledge, that isn't only technical but also creative, helps me a lot in my work: it gives me the ability to
             implement complex functionality from an idea to a real product, find an optimal balance between aesthetics, efforts and performance,
-            effectively communicate with design team and even carry out tasks of UX-design if needed.
+            effectively communicate with design team and even carry out tasks of UX design if needed.
           </p>
         </div>
       </div>

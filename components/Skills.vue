@@ -4,20 +4,31 @@
       Skills
     </h2>
     <div class="content">
-      <h3>Key points:</h3>
+      <h3>What I can do:</h3>
       <ul>
         <li>
-          I have worked with most of the main modern frameworks: React, Vue, AngularJS.
-          My personal favorite is Vue because for me it finds some good balance between React and AngularJS.
-          But undoubtedly each framework has its strong sides and optimal field of application.
+          develop and maintain complex web apps with modern JS frameworks (preferably Vue, but I have worked with React and AngularJS too)
+        </li>
+        <li class="is-hidden">
+          I have worked with a number of JS frameworks and for the last three years Vue has been my favorite one.
+          At the same time it's obvious there is no silver bullet and each framework has its pros and cons as well as optimal use cases.
         </li>
         <li>
-          I can create a feature from idea to final result: draw a wireframe and user flow based on business requirements,
-          make an interactive prototype (usually directly in HTML / CSS), design an optimal API with the backend,
-          implement the necessary business logic and client data model, cover with tests and documentation
+          create reasonably pixel-perfect, adaptive, rich-media web interfaces with a nontrivial design
+        </li>
+        <li class="is-hidden">
+          create impressive complex adaptive media-rich HTML-layouts with animations and other stuff
         </li>
         <li>
-          Managed small team developers for last five years in Agile process. In general, I like to develop software and create design more than to manage people.
+          make wireframes and user flows based on business requirements, create interactive HTML prototypes
+        </li>
+        <li class="is-hidden">
+          develop complex apps from concept to production: make wireframes and user flows based on business requirements,
+          create interactive HTML-prototypes, design API together with the backend-developers,
+          implement business logic and client-side data model, write tests and documentation
+        </li>
+        <li>
+          manage a small team of developers in Agile process. However, I prefer coding and UX design more
         </li>
       </ul>
       <h3>Detailed list:</h3>
@@ -25,11 +36,11 @@
         class="is-flex is-flex-wrap-wrap is-justify-content-space-between"
         style="margin-left: -0.75rem;"
       >
-        <SkillsSection
-          v-for="skillsSection in skills"
-          :key="skillsSection.title"
+        <SkillsGroup
+          v-for="SkillsGroup in skills"
+          :key="SkillsGroup.title"
           class="mb-3 p-3"
-          v-bind="skillsSection"
+          v-bind="SkillsGroup"
         />
       </div>
     </div>
@@ -37,12 +48,12 @@
 </template>
 
 <script>
-import SkillsSection from '~/components/SkillsSection'
+import SkillsGroup from '@/components/SkillsGroup'
 
 export default {
   name: 'Skills',
 
-  components: { SkillsSection },
+  components: { SkillsGroup },
 
   data () {
     return {
@@ -52,12 +63,12 @@ export default {
           items: [
             {
               title: 'Javascript',
-              info: 'The main language for most of my career',
+              info: 'The main language I work with ⭐︎',
               level: 3
             },
             {
               title: 'TypeScript',
-              info: 'Have been using TypeScript in production for the last year. Useful but sometimes troublesome thing',
+              info: 'Have been using TypeScript in production for a year',
               level: 2
             },
             {
@@ -82,22 +93,22 @@ export default {
             },
             {
               title: 'React',
-              info: 'With Redux-Saga and JSS, but it was long ago',
+              info: 'With Redux-Saga and JSS, but the last React version I used was 16.3',
               level: 1
             },
             {
-              title: 'Angular 1.x',
-              info: 'Are you really interested in this old monster?',
+              title: 'AngularJS 1.x',
+              info: '',
               level: 1
             },
             {
               title: 'NuxtJS',
-              info: 'Make this site with Nuxt',
+              info: '',
               level: 2
             },
             {
               title: 'Gatsby',
-              info: 'Use to create my former company site',
+              info: '',
               level: 1
             }
           ]
@@ -149,27 +160,6 @@ export default {
           ]
         },
         {
-          title: 'Server, p2p communication',
-          items: [
-            {
-              title: 'REST API',
-              level: 3
-            },
-            {
-              title: 'GraphQL',
-              level: 1
-            },
-            {
-              title: 'WebSockets',
-              level: 1
-            },
-            {
-              title: 'WebRTC',
-              level: 1
-            }
-          ]
-        },
-        {
           title: 'Infrastructure',
           info: '',
           items: [
@@ -192,12 +182,33 @@ export default {
           ]
         },
         {
+          title: 'Server communication',
+          items: [
+            {
+              title: 'REST API',
+              level: 3
+            },
+            {
+              title: 'GraphQL',
+              level: 1
+            },
+            {
+              title: 'WebSockets',
+              level: 1
+            }/* ,
+            {
+              title: 'WebRTC',
+              level: 1
+            } */
+          ]
+        },
+        {
           title: 'Code quality and performance',
           info: '',
           items: [
             {
               title: 'Linting, Formatting, Style guides',
-              info: 'Usually use ESLint, StyleLint, Prettier (it hurts), StandardJS and Airbnb styles ',
+              info: 'I usually use ESLint, StyleLint, Prettier (it hurts), StandardJS and Airbnb styles ',
               level: 3
             },
             {
@@ -256,12 +267,12 @@ export default {
             },
             {
               title: 'English',
-              info: 'For the last 7 years it\'s my main language at work, so I can talk freely on any professional topics (~B2)',
+              info: 'It\'s been my working language for the last seven years (~B2)',
               level: 2
             },
             {
               title: 'German',
-              info: 'Just enough to survive for several days in german language-only environment ☺︎ (~A1)',
+              info: 'Just enough to survive for several days in the German language-only environment ☺︎ (~A1)',
               level: 1
             }
           ]
