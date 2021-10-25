@@ -25,7 +25,7 @@ export default {
       { property: 'og:title', content: 'Hi! I\'m Pavel Buramensky and that\'s my page' },
       {
         property: 'og:description',
-        content: 'I\'m front-end perfectionist who cares about user experience and tries to make the world a better place'
+        content: 'I\'m front-end developer who cares about user experience and tries to make the world a better place'
       },
       { property: 'og:image', content: 'https://paulbu.com/pics/portrait-1-og.jpg' },
       { property: 'og:image:width', content: '968' },
