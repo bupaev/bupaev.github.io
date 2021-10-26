@@ -3,6 +3,7 @@
     <h2 class="title is-2">
       Experience
     </h2>
+    <Timeline />
     <div class="content">
       <section class="job-record">
         <h3>
@@ -184,11 +185,12 @@
 
 <script>
 import Slash from '@/components/Slash'
+import Timeline from '@/components/Timeline'
 
 export default {
   name: 'Experience',
 
-  components: { Slash }
+  components: { Slash, Timeline }
 }
 </script>
 
