@@ -133,7 +133,7 @@ export default {
     z-index: -1;
     // outline: 2px dashed black;
 
-    @include from(1500px) {
+    @include from($big-screen) {
       background-size: 750px;
     }
 
@@ -163,7 +163,7 @@ export default {
     background-image: url("assets/icons/academic-cap-detailed.svg");
     height: 100%;
 
-    @include from(1500px) {
+    @include from($big-screen) {
       background-size: 720px;
       background-position-x: 92%;
     }
