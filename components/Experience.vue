@@ -22,7 +22,7 @@
         <ul>
           <li>Delivered a complex front-end application (electronic health record system) with Vue and RESTful FHIR API</li>
           <li>Communicated with product managers and co-ordinated with BA, QA and back-end developer to deliver the quality product</li>
-          <li>Analyzed the product design complexity, plan workload, communicate risks; Ensure the technical feasibility of UI/UX designs</li>
+          <li>Analyzed the product design complexity, plan workload, communicated risks; Ensured the technical feasibility of UI/UX designs</li>
           <li>Performed unit, integration, performance testing</li>
           <li>Team leading, establishing and maintaining code quality standards</li>
           <li>Fine-tuned middle-fidelity wireframes, creating interfaces based on wireframes and UI library</li>
@@ -95,7 +95,7 @@
       <h3>
         <span class="job-title">Front-end developer</span>
         <span class="company"><Slash /><a href="http://www.luxoft.com/" target="_blank">DXC Luxoft</a></span>
-        <span class="interval"><Slash />2014 - 2016</span>
+        <span class="interval"><Slash />2012 - 2014</span>
       </h3>
       <p>
         <em>Luxoft is a DXC Technology Company, is a digital strategy and software engineering firm, with about 13k employees within its 41 offices in
