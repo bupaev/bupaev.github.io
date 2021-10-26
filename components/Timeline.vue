@@ -215,8 +215,9 @@ export default {
       flex: 1 0 auto;
       height: $year-height;
       border-top: 1px solid black;
+      padding-top: 2px;
       text-align: center;
-      font-size: 12px;
+      font-size: 14px;
 
       &::after {
         font-size: 16px;
