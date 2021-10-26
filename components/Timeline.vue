@@ -6,12 +6,10 @@
         :key="job.company"
         :style="getJobPositionStyle(job)"
         class="job"
+        @click="goToJob(job.id)"
       >
-        <span>{{ job.position }}</span>
-        /
-        <span>{{ job.company }}</span>
-        <div class="has-text-weight-normal is-hidden">
-          {{ job.skills }}
+        <div class="text-wrapper">
+          {{ job.position }} / {{ job.company }}
         </div>
       </div>
     </div>
@@ -71,7 +69,7 @@ const jobs = [
     id: 'mirIt'
   },
   {
-    position: 'Assistant Teacher',
+    position: 'Teaching Assistant',
     company: 'Omsk State Technical University',
     skills: 'React, Angular, VueJS',
     startDate: '2009-09',
@@ -144,6 +142,16 @@ export default {
       const width = this.getDatePosition(job.endDate) - starPosition
 
       return `left: ${starPosition + this.halfYearShift}px; width: ${width - 1}px; height: ${(job.height || 1) * 60}%; z-index: ${job.zIndex || 0}`
+    },
+
+    goToJob(id) {
+      const jobToppOffset = document.getElementById('experience').offsetTop + document.getElementById(id).offsetTop
+
+      window.scrollTo({
+        top: jobToppOffset,
+        left: 0,
+        behavior: 'smooth'
+      })
     }
   }
 }
@@ -163,7 +171,10 @@ export default {
   .jobs-wrapper {
     position: absolute;
     bottom: $year-height;
+    left: 1%;
     height: calc(100% - #{$year-height});
+    width: 100%;
+    transform: skew(-15deg);
   }
 
   .job {
@@ -174,9 +185,19 @@ export default {
     font-size: min(1vw, 13px);
     line-height: min(1.3vw, 16px);
     font-weight: 700;
-    background-color: rgba(gold, 0.5);
+    background-color: rgba($accent-color, 0.5);
     padding: 5px 5px 5px 10px;
+    cursor: pointer;
     overflow: hidden;
+
+    &:hover {
+      background-color: $accent-color;
+      z-index: 3 !important;
+    }
+
+    .text-wrapper {
+      transform: skew(15deg);
+    }
 
     // @include text-contour(#fff, 1px);
   }
@@ -187,7 +208,7 @@ export default {
     width: 100%;
     display: flex;
     flex-wrap: nowrap;
-    z-index: 3;
+    z-index: 5;
 
     .year {
       position: relative;

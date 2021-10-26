@@ -3,9 +3,9 @@
     <h2 class="title is-2">
       Experience
     </h2>
-    <Timeline class="mt-6 mb-5 is-hidden-touch" />
+    <Timeline class="mt-5 mb-4 is-hidden-touch" />
     <div class="content">
-      <section class="job-record">
+      <section id="holmusk" class="job-record">
         <h3>
           <span class="job-title">Lead Front-end developer</span>
           <span class="company"><Slash /><a href="https://www.holmusk.com/" target="_blank">Holmusk</a></span>
@@ -39,7 +39,7 @@
           Singapore (UTC+8)
         </p>
       </section>
-      <section class="job-record">
+      <section id="codenetix" class="job-record">
         <h3>
           <span class="job-title">Lead UI/Front-end developer</span>
           <span class="company"><Slash /><a href="https://cdntx.paulbu.com" target="_blank">Codenetix</a></span>
@@ -69,7 +69,7 @@
           often outside the front-end of development.
         </p>
       </section>
-      <section class="job-record">
+      <section id="bandlab" class="job-record">
         <h3>
           <span class="job-title">Front-end developer</span>
           <span class="company"><Slash /><a href="https://www.bandlab.com/" target="_blank">Bandlab</a></span>
@@ -98,7 +98,7 @@
           the best web-based audio workstation of today.
         </p>
       </section>
-      <section class="job-record">
+      <section id="luxoft" class="job-record">
         <h3>
           <span class="job-title">Front-end developer</span>
           <span class="company"><Slash /><a href="http://www.luxoft.com/" target="_blank">DXC Luxoft</a></span>
@@ -129,7 +129,7 @@
           (loan calculators, credit wizards, etc.)
         </p>
       </section>
-      <section class="job-record">
+      <section id="mirIt" class="job-record">
         <h3>
           <span class="job-title">Web developer</span>
           <span class="company"><Slash /><a href="http://mir-it.info/" target="_blank">Mir IT</a></span>
@@ -150,9 +150,9 @@
           <li>Developed electronic document management systems with C# and MS SQL/SQLite</li>
         </ul>
       </section>
-      <section class="job-record">
+      <section id="omstu" class="job-record">
         <h3>
-          <span class="job-title">Assistant</span>
+          <span class="job-title">Teaching Assistant</span>
           <span class="company"><Slash /><a href="http://omgtu.ru/" target="_blank">Omsk State Technical University</a></span>
           <span class="interval"><Slash />2009 – 2014</span>
         </h3>
@@ -174,9 +174,9 @@
           <li>Conducted exams and assessed students` knowledge</li>
         </ul>
       </section>
-      <section class="job-record">
+      <section id="freelance" class="job-record">
         <h3>
-          <span class="job-title">Web developer, 3D modeller, Photographer</span>
+          <span class="job-title">Software developer, 3D modeller, Photographer</span>
           <span class="company"><Slash />Freelance</span>
           <span class="interval"><Slash />2008 – 2011</span>
         </h3>
@@ -233,6 +233,10 @@ export default {
 
     h4 + ul {
       margin-top: 0.5em;
+    }
+
+    .job-record {
+      margin-bottom: 1.5em;
     }
 
     .job-title {
