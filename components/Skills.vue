@@ -22,7 +22,7 @@
       <h3>Detailed list:</h3>
       <div
         class="is-flex is-flex-wrap-wrap is-justify-content-space-between"
-        style="margin-left: -0.75rem;"
+        style="margin-left: -0.75rem; margin-bottom: -1.5rem;"
       >
         <SkillsGroup
           v-for="SkillsGroup in skills"

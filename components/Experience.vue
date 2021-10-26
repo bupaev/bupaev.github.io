@@ -237,6 +237,10 @@ export default {
 
     .job-record {
       margin-bottom: 1.5em;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
     }
 
     .job-title {
