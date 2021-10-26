@@ -19,7 +19,7 @@
             </h1>
             <p class="contacts pt-5">
               <span class="mr-5">
-                <a href="mailto:me@paulbu.com">
+                <a href="mailto:mail@paulbu.com">
                   <span class="icon-text">
                     <span class="icon">
                       <img src="../assets/icons/mail.svg">
@@ -226,6 +226,7 @@ export default {
     width: 120px;
     height: 400px;
     shape-outside: polygon(100% 0%, 100% 100%, 0 100%);
+    pointer-events: none;
 
     @include tablet-only {
       width: 135px;
@@ -238,6 +239,7 @@ export default {
     overflow: hidden;
     height: 472px;
     margin-left: -50px;
+    margin-right: 32px;
     transform: skew(-15deg);
     filter: drop-shadow(2px 2px 10px rgba(255, 255, 255, 0.2));
 
@@ -252,7 +254,7 @@ export default {
     }
 
     @include desktop-only {
-      margin-right: -180px;
+      margin-right: -200px;
       height: 550px;
       margin-left: auto;
     }
