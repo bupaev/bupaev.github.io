@@ -3,7 +3,7 @@
     <h2 class="title is-2">
       Experience
     </h2>
-    <Timeline />
+    <Timeline class="mb-5" />
     <div class="content">
       <section class="job-record">
         <h3>
@@ -164,7 +164,7 @@
       <h3>
         <span class="job-title">Web developer, 3D modeller, Photographer</span>
         <span class="company"><Slash />Freelance</span>
-        <span class="interval"><Slash />2009 – 2012</span>
+        <span class="interval"><Slash />2008 – 2011</span>
       </h3>
       <p>
         <em>Working on a wide range of projects has given me a better understanding of what I would like to do in my life</em>
