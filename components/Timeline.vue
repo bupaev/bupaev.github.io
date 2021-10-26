@@ -26,9 +26,80 @@
 <script>
 const startYear = 2009
 const endYear = 2022
+const years = Array(endYear - startYear).fill(1).map((_, i) => startYear + i)
+const jobs = [
+  {
+    position: 'Lead Front-end developer',
+    company: 'Holmusk',
+    skills: 'VueJS, Vuetify, TypeScript',
+    startDate: '2018-07',
+    endDate: '2021-05',
+    id: 'holmusk'
+  },
+  {
+    position: 'Lead UI/Front-end developer',
+    company: 'Codenetix',
+    skills: 'ES6, React, Gatsby',
+    startDate: '2016-11',
+    endDate: '2018-07',
+    id: 'codenetix'
+  },
+  {
+    position: 'Front-end developer',
+    company: 'Bandlab',
+    skills: 'React, Angular, VueJS',
+    startDate: '2014-09',
+    endDate: '2016-10',
+    id: 'bandlab'
+  },
+  {
+    position: 'Front-end developer',
+    company: 'DXC Luxoft',
+    skills: 'React, Angular, VueJS',
+    startDate: '2012-07',
+    endDate: '2014-09',
+    zIndex: 2,
+    id: 'luxoft'
+  },
+  {
+    position: 'Web developer',
+    company: 'Mir IT',
+    skills: 'React, Angular, VueJS',
+    startDate: '2011-06',
+    endDate: '2012-07',
+    zIndex: 2,
+    id: 'mirIt'
+  },
+  {
+    position: 'Assistant Teacher',
+    company: 'Omsk State Technical University',
+    skills: 'React, Angular, VueJS',
+    startDate: '2009-09',
+    endDate: '2014-09',
+    height: 1.6,
+    id: 'omstu'
+  },
+  {
+    position: 'Software developer',
+    company: 'Freelance',
+    skills: 'React, Angular, VueJS',
+    startDate: '2008-08',
+    endDate: '2011-06',
+    id: 'freelance',
+    zIndex: 1
+  }
+]
 
 export default {
   name: 'Timeline',
+
+  data () {
+    return {
+      jobs,
+      years,
+      componentWidth: 0
+    }
+  },
 
   /***
    * Algorithm is simple:
@@ -38,88 +109,27 @@ export default {
    * 4. Set position of job in pixels
    */
 
-  data () {
-    return {
-      years: Array(endYear - startYear).fill(1).map((_, i) => startYear + i),
-      jobs: [
-        {
-          position: 'Lead Front-end developer',
-          company: 'Holmusk',
-          skills: 'VueJS, Vuetify, TypeScript',
-          startDate: '2018-07',
-          endDate: '2021-05',
-          id: 'holmusk'
-        },
-        {
-          position: 'Lead UI/Front-end developer',
-          company: 'Codenetix',
-          skills: 'ES6, React, Gatsby',
-          startDate: '2016-11',
-          endDate: '2018-07',
-          id: 'codenetix'
-        },
-        {
-          position: 'Front-end developer',
-          company: 'Bandlab',
-          skills: 'React, Angular, VueJS',
-          startDate: '2014-09',
-          endDate: '2016-10',
-          id: 'bandlab'
-        },
-        {
-          position: 'Front-end developer',
-          company: 'DXC Luxoft',
-          skills: 'React, Angular, VueJS',
-          startDate: '2012-07',
-          endDate: '2014-09',
-          zIndex: 2,
-          id: 'luxoft'
-        },
-        {
-          position: 'Web developer',
-          company: 'Mir IT',
-          skills: 'React, Angular, VueJS',
-          startDate: '2011-06',
-          endDate: '2012-07',
-          zIndex: 2,
-          id: 'mirIt'
-        },
-        {
-          position: 'Assistant Teacher',
-          company: 'Omsk State Technical University',
-          skills: 'React, Angular, VueJS',
-          startDate: '2009-09',
-          endDate: '2014-09',
-          height: 1.6,
-          id: 'omstu'
-        },
-        {
-          position: 'Software developer',
-          company: 'Freelance',
-          skills: 'React, Angular, VueJS',
-          startDate: '2008-08',
-          endDate: '2011-06',
-          id: 'freelance',
-          zIndex: 1
-        }
-      ]
-    }
-  },
-
   computed: {
     millisecondWidth () {
       const timelineDurationInMs = new Date(endYear, 0, 1).getTime() - new Date(startYear, 0, 1).getTime()
 
-      if (this.$el) {
-        return this.$el.clientWidth / timelineDurationInMs
-      } else {
-        return 1
-      }
+      return this.componentWidth / timelineDurationInMs
+    },
+
+    // Need this shift for jobs cause we show year marker in the center of year DOM-element
+    halfYearShift () {
+      return this.componentWidth / ((endYear - startYear) * 2)
     }
+
   },
 
   mounted () {
-    // this.getDatePosition(this.jobs[0].startDate)
+    const resizeObserver = new ResizeObserver((entries) => {
+      const cr = entries[0].contentRect
+      this.componentWidth = cr.width
+    })
+
+    resizeObserver.observe(this.$el)
   },
 
   methods: {
@@ -133,10 +143,7 @@ export default {
       const starPosition = this.getDatePosition(job.startDate)
       const width = this.getDatePosition(job.endDate) - starPosition
 
-      // Need shift cause we show year marker in the center of year DOM-element
-      const halfYearShift = this.millisecondWidth * 1000 * 3600 * 24 * 365 / 2
-
-      return `left: ${starPosition + halfYearShift}px; width: ${width}px; height: ${(job.height || 1) * 50}px; z-index: ${job.zIndex || 0}`
+      return `left: ${starPosition + this.halfYearShift}px; width: ${width - 1}px; height: ${(job.height || 1) * 60}%; z-index: ${job.zIndex || 0}`
     }
   }
 }
@@ -151,24 +158,24 @@ export default {
 
   position: relative;
   width: 100%;
-  height: 130px;
-  font-size: 12px;
+  height: 120px;
 
   .jobs-wrapper {
     position: absolute;
     bottom: $year-height;
+    height: calc(100% - #{$year-height});
   }
 
   .job {
     position: absolute;
     bottom: 0;
-    height: 100px;
-    border: 1px solid black;
-    border-bottom-width: 0;
+    height: 100%;
+    outline: 1px solid black;
+    font-size: min(1vw, 13px);
+    line-height: min(1.3vw, 16px);
     font-weight: 700;
-    background-color: rgba(gold, 0.4);
-    // background-image: repeating-linear-gradient(135deg, rgba(#000, 0.2) 0, rgba(#000, 0.2) 1px, transparent 1px, transparent 10px);
-    padding: 5px 10px;
+    background-color: rgba(gold, 0.5);
+    padding: 5px 5px 5px 10px;
     overflow: hidden;
 
     // @include text-contour(#fff, 1px);
@@ -180,6 +187,7 @@ export default {
     width: 100%;
     display: flex;
     flex-wrap: nowrap;
+    z-index: 3;
 
     .year {
       position: relative;
@@ -187,8 +195,11 @@ export default {
       height: $year-height;
       border-top: 1px solid black;
       text-align: center;
+      font-size: 12px;
 
       &::after {
+        font-size: 16px;
+
         @include rhombus;
 
         content: "";
@@ -204,8 +215,8 @@ export default {
           content: "";
           border-width: 1px !important;
           transform: rotate(-135deg);
-          right: 0;
-          top: 2px;
+          right: 1px;
+          top: 1px;
           border-radius: 0;
         }
       }
