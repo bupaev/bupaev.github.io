@@ -50,7 +50,7 @@
               </span>
               <span class="is-block-tablet">
                 <span class="vertical-align-hack mr-2 is-hidden-mobile">also you can</span>
-                <a href="https://paulbu.com/pavel-buramensky-cv.pdf" target="_blank">
+                <a href="/pavel-buramensky-cv.pdf" target="_blank">
                   <span class="icon-text">
                     <span class="icon">
                       <img src="../assets/icons/download.svg">
