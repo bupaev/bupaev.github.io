@@ -42,7 +42,7 @@
       <section id="codenetix" class="job-record">
         <h3>
           <span class="job-title">Lead UI/Front-end developer</span>
-          <span class="company"><Slash /><a href="https://cdntx.paulbu.com" target="_blank">Codenetix</a></span>
+          <span class="company"><Slash /><a href="http://cdntx.paulbu.com" target="_blank">Codenetix</a></span>
           <span class="interval"><Slash />2016 - 2018</span>
         </h3>
         <p>
