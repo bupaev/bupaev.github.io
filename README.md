@@ -2,7 +2,7 @@
 
 The extremely simple web-site based on [NuxtJS](https://nuxtjs.org/)
 
-You can see it live here [paulbu.com](https://paulbu.com/)
+You can see it live on [paulbu.com](https://paulbu.com/)
 
 ## Standard build setup
 

@@ -70,10 +70,6 @@ export default {
     fallback: '404.html'
   },
 
-  serverMiddleware: [
-    '~/middleware/redirects.js'
-  ],
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     extractCSS: true
