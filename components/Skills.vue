@@ -9,23 +9,11 @@
         <li>
           develop and maintain complex web apps with modern JS frameworks (preferably Vue, but I have worked with React and AngularJS too)
         </li>
-        <li class="is-hidden">
-          I have worked with a number of JS frameworks and for the last three years Vue has been my favorite one.
-          At the same time it's obvious there is no silver bullet and each framework has its pros and cons as well as optimal use cases.
-        </li>
         <li>
           create reasonably pixel-perfect, adaptive, rich-media web interfaces with a nontrivial design
         </li>
-        <li class="is-hidden">
-          create impressive complex adaptive media-rich HTML-layouts with animations and other stuff
-        </li>
         <li>
           make wireframes and user flows based on business requirements, create interactive HTML prototypes
-        </li>
-        <li class="is-hidden">
-          develop complex apps from concept to production: make wireframes and user flows based on business requirements,
-          create interactive HTML-prototypes, design API together with the backend-developers,
-          implement business logic and client-side data model, write tests and documentation
         </li>
         <li>
           manage a small team of developers in Agile process. However, I prefer coding and UX design more
@@ -34,7 +22,7 @@
       <h3>Detailed list:</h3>
       <div
         class="is-flex is-flex-wrap-wrap is-justify-content-space-between"
-        style="margin-left: -0.75rem;"
+        style="margin-left: -0.75rem; margin-bottom: -1.5rem;"
       >
         <SkillsGroup
           v-for="SkillsGroup in skills"
