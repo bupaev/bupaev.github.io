@@ -29,7 +29,7 @@
     position: absolute;
     width: calc(100% + 0.4em);
     height: 2px;
-    left: -0.2em;
+    left: 0;
     bottom: 0;
     background: $color;
     transform: scaleY(1) skew(-15deg);
@@ -42,6 +42,7 @@
 
     &::after {
       height: 110%;
+      left: -0.2em;
     }
   }
   &:active {

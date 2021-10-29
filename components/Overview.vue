@@ -13,7 +13,7 @@
             I've been doing front-end development for over a decade, mostly for complex web applications, like
             <a href="https://www.bandlab.com/creation-features" target="_blank">multitrack audio workstation</a> or
             <a href="https://www.holmusk.com/solutions" target="_blank">electronic health record system</a>. Besides, I really enjoy creating
-            stylish web-sites, funny animations and data visualization. No matter what I do, my ultimate goal is to deliver a first-class user experience.
+            stylish web-sites, fancy CSS/SVG animations and data visualization. No matter what I do, my ultimate goal is to deliver a first-class user experience.
           </p>
           <p>
             I achieve this goal through expertise in the following areas:
