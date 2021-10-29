@@ -13,7 +13,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "~bulma/sass/utilities/mixins.sass";
 @import "assets/scss/variables";
 
@@ -52,9 +52,5 @@ export default {
   @include desktop {
     font-size: 8vw;
   }
-}
-
-footer.footer {
-  display: none;
 }
 </style>

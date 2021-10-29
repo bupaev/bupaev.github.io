@@ -9,6 +9,10 @@
 
 <script>
 export default {
-  layout: 'servicePage'
+  layout: 'servicePage',
+
+  middleware ({ redirect }) {
+    return redirect('/cv')
+  }
 }
 </script>

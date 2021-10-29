@@ -10,6 +10,7 @@
 $secondary: #d0e0ee;
 $text: $black-ter;
 $family-primary: $main-font;
+$section-padding-desktop: 3rem 3rem 3rem 5rem;
 
 @import "~bulma";
 
@@ -58,4 +59,8 @@ $family-primary: $main-font;
 
 .section {
   font-size: 1.1em;
+
+  @include from($big-screen) {
+    padding-left: 3rem;
+  }
 }
