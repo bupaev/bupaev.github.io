@@ -23,9 +23,7 @@
         <ul>
           <li>Delivered a complex front-end application (electronic health record system) with Vue and RESTful FHIR API</li>
           <li>Communicated with product managers and coordinated with BA, QA and back-end developers to deliver the quality product</li>
-          <li>Analyzed the product design complexity, planned the workload, communicated the risks; ensured the technical feasibility of UI/UX
-            designs
-          </li>
+          <li>Analyzed the product design complexity, planned the workload, communicated the risks; ensured the technical feasibility of UI/UX designs</li>
           <li>Performed unit, integration, and performance testing</li>
           <li>Led the team, established and maintained code quality standards</li>
           <li>Fine-tuned middle-fidelity wireframes, creating interfaces based on wireframes and UI library</li>
