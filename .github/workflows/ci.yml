@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   ci:
@@ -51,9 +48,12 @@ jobs:
           publish_dir: ./dist
 
       - name: Deploy to my web-server
-        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+        uses: kevinpainchaud/simple-ftp-deploy-action@v1.2.1
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist/
+          ftp_host: ${{ secrets.FTP_SERVER }}
+          ftp_username: ${{ secrets.FTP_USERNAME }}
+          ftp_password: ${{ secrets.FTP_PASSWORD }}
+          local_source_dir: "dist"
+          dist_target_dir: "/"
+          delete: "true"
+          exclude: "'^cdntx/' '^external/' '^projects/'"
