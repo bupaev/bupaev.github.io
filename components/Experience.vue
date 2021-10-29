@@ -22,10 +22,12 @@
         <h4>Responsibilities</h4>
         <ul>
           <li>Delivered a complex front-end application (electronic health record system) with Vue and RESTful FHIR API</li>
-          <li>Communicated with product managers and co-ordinated with BA, QA and back-end developer to deliver the quality product</li>
-          <li>Analyzed the product design complexity, plan workload, communicated risks; Ensured the technical feasibility of UI/UX designs</li>
-          <li>Performed unit, integration, performance testing</li>
-          <li>Team leading, establishing and maintaining code quality standards</li>
+          <li>Communicated with product managers and coordinated with BA, QA and back-end developers to deliver the quality product</li>
+          <li>Analyzed the product design complexity, planned the workload, communicated the risks; ensured the technical feasibility of UI/UX
+            designs
+          </li>
+          <li>Performed unit, integration, and performance testing</li>
+          <li>Led the team, established and maintained code quality standards</li>
           <li>Fine-tuned middle-fidelity wireframes, creating interfaces based on wireframes and UI library</li>
           <li>Documented code and design of the product</li>
         </ul>
@@ -33,10 +35,10 @@
         <p>
           Working with <a href="http://hl7.org/fhir/" target="_blank">FHIR API</a> requires a deep dive into the extremely sophisticated domain of
           Healthcare data management.
-          However that was worth it because FHIR is a great architectural example of a good organization of complex real data structures.
+          However, that was worth it because FHIR is a great architectural example of a good organization of complex real data structures.
           <br>
           Also, it was my first serious experience of fully remote work with a team distributed in six different time zones from West Coast (UTC-8) to
-          Singapore (UTC+8)
+          Singapore (UTC+8).
         </p>
       </section>
       <section id="codenetix" class="job-record">
@@ -57,7 +59,7 @@
           <li>Developed and managed robust codebases with appealing interfaces for a variety of applications, from design to production</li>
           <li>Made interactive multimedia content and complex animations with Canvas and HTML/CSS</li>
           <li>Defined overall technology direction for the company projects</li>
-          <li>Team leading and mentoring, establishing and maintaining high code standards and best practices</li>
+          <li>Led and mentored the team, established and maintained high code quality standards and best practices</li>
           <li>Assisted in the collection and documentation of user's requirements, development of user stories, estimates and work plans</li>
           <li>Created wireframes and prototypes, occasionally took up UX/UI-design tasks</li>
         </ul>
@@ -65,7 +67,7 @@
         <p>
           This position gave me a lot of new professional experience. I joined the team at an early stage of its formation
           and took an active part in its growth and development, forming a great front-end team from scratch.
-          It was an exceptional experience working in many roles and quickly switching between roles and tasks,
+          It was an exceptional experience performing many roles and quickly switching between them and tasks,
           often outside the front-end of development.
         </p>
       </section>
@@ -90,12 +92,12 @@
         </ul>
         <h4>Challenges</h4>
         <p>
-          Making SPA with functionality of GarageBand is an ambiguous challenge that required strong JavaScript skills,
-          profound knowledge of digital signal processing and Web Audio API. I faced many nontrivial tasks on the way
-          such as multitrack sound mixing, adding audio effects, audio latency detection, sound pitch detection
-          with the use of Fourier analysis and autocorrelation, and so on. The solution of these issues required good math skills,
-          rational usage of design patterns and understanding of sound nature. Eventually, I’m proud to take part in making one of
-          the best web-based audio workstation of today.
+          Making SPA with functionality of GarageBand was an ambiguous challenge that required strong JavaScript skills, profound knowledge of digital
+          signal processing and Web Audio API.
+          I faced many nontrivial tasks on the way such as multitrack sound mixing, adding audio effects, audio latency detection, sound pitch
+          detection with the use of Fourier analysis and autocorrelation, and so on. The solution of these issues required good math skills, rational
+          usage of design patterns and understanding of sound nature.
+          Eventually, I am proud of having taken part in creating one of the best web-based audio workstations of today.
         </p>
       </section>
       <section id="luxoft" class="job-record">
