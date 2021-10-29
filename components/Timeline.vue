@@ -9,7 +9,7 @@
         @click="goToJob(job.id)"
       >
         <div class="text-wrapper">
-          {{ job.position }} / {{ job.company }}
+          {{ job.position }}, <span class="has-text-weight-normal">{{ job.company }}</span>
         </div>
       </div>
     </div>
@@ -145,10 +145,10 @@ export default {
     },
 
     goToJob(id) {
-      const jobToppOffset = document.getElementById('experience').offsetTop + document.getElementById(id).offsetTop
+      const jobTopOffset = document.getElementById('experience').offsetTop + document.getElementById(id).offsetTop
 
       window.scrollTo({
-        top: jobToppOffset,
+        top: jobTopOffset,
         left: 0,
         behavior: 'smooth'
       })
@@ -189,6 +189,7 @@ export default {
     padding: 5px 5px 5px 10px;
     cursor: pointer;
     overflow: hidden;
+    transition: background-color 200ms;
 
     &:hover {
       background-color: $accent-color;
