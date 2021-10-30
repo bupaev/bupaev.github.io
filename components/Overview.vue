@@ -55,8 +55,6 @@ export default {
 @import "assets/scss/mixins.scss";
 
 .overview {
-  // background-image: repeating-linear-gradient(105deg, rgba(0, 0, 255, 0.03) 0, rgba(0, 0, 255, 0.03) 1px, transparent 3px, transparent 12px);
-
   .diagram-container {
     @include desktop {
       width: calc(40% - 4em);
@@ -77,9 +75,9 @@ export default {
     padding-right: 0.8em;
 
     &::after {
-      content: "";
+      @include rhombus(var(--text-color));
 
-      @include rhombus($text);
+      content: "";
     }
   }
 
@@ -106,7 +104,7 @@ export default {
           width: 11%;
           height: 100%;
           opacity: 0.2;
-          background-color: $text;
+          background-color: var(--text-color);
           clip-path: polygon(94% 0%, 100% 0%, 6% 100%, 0 100%);
         }
       }

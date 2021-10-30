@@ -1,9 +1,9 @@
 /* Import Bulma Utilities */
 @import "~bulma/sass/utilities/initial-variables";
 @import "~bulma/sass/utilities/functions";
-@import "./variables";
 
 /* My stuff */
+@import "./variables";
 @import "./mixins";
 
 // Override bulma SCSS variables
@@ -13,6 +13,35 @@ $family-primary: $main-font;
 $section-padding-desktop: 3rem 3rem 3rem 5rem;
 
 @import "~bulma";
+
+:root {
+  --text-color: hsl(0, 0%, 14%);
+  --background-color: #fff;
+  --graphics-color: #000;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: hsl(0, 0%, 98%);
+    --background-color: hsl(0, 0%, 14%);
+    --graphics-color: #fff;
+  }
+
+  img {
+    filter: invert(1);
+  }
+}
+
+body {
+  background-color: var(--background-color);
+}
+
+body,
+a,
+strong,
+.title {
+  color: var(--text-color);
+}
 
 // Override styles
 .title {
@@ -30,9 +59,16 @@ $section-padding-desktop: 3rem 3rem 3rem 5rem;
     font-family: $accent-font;
   }
 
-  a {
-    color: $text;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--text-color);
+  }
 
+  a {
     @include multiline-text-hover-effect;
   }
 
@@ -45,11 +81,11 @@ $section-padding-desktop: 3rem 3rem 3rem 5rem;
       padding-left: 1em;
 
       &::after {
-        content: "";
         font-size: 0.8em;
 
-        @include rhombus($text);
+        @include rhombus(var(--text-color));
 
+        content: "";
         left: 0.15em;
         top: 0.7em;
       }

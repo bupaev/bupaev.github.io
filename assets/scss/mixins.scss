@@ -5,7 +5,7 @@
   background-size: 100% 4px;
   background-position: 0 100%;
   background-repeat: no-repeat;
-  transition: background-size 200ms ease;
+  transition: background-size 200ms ease, color 200ms ease;
 
   &:hover {
     padding-left: 0.45em;
@@ -24,6 +24,8 @@
 // This effect visually similar to the previous one but doesn't work properly with multiline links
 // Keep it for use in Hero Area due to Safari bug with animation
 @mixin text-hover-effect($color: $accent-color) {
+  transition: color 350ms;
+
   &::after {
     content: "";
     position: absolute;
@@ -54,10 +56,10 @@
 
 @mixin text-contour($color: #fff, $distance: 0.1em, $blur-radius: 0) {
   text-shadow:
-    -1*$distance -1*$distance $blur-radius $color,
-    $distance -1*$distance $blur-radius $color,
-    -1*$distance $distance $blur-radius $color,
-    $distance $distance $blur-radius $color;
+    -1*$distance -1*$distance $blur-radius #{$color},
+    $distance -1*$distance $blur-radius #{$color},
+    -1*$distance $distance $blur-radius #{$color},
+    $distance $distance $blur-radius #{$color};
 }
 
 @mixin rhombus($color: #000) {
@@ -65,6 +67,6 @@
   display: block;
   height: 0.4em;
   width: 0.4em;
-  border: 1px solid $color;
+  border: 1px solid #{$color};
   transform: rotate(45deg);
 }

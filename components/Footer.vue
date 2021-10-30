@@ -34,6 +34,13 @@ export default {
   position: relative;
   padding: 0;
   font-family: $accent-font;
+  background-color: transparent;
+  // background-image: repeating-linear-gradient(105deg, rgba(#000, 0.03) 0, rgba(#000, 0.03) 1px, transparent 3px, transparent 12px);
+
+  @media (prefers-color-scheme: dark) {
+    background-color: transparent;
+    background-image: repeating-linear-gradient(105deg, rgba(#fff, 0.03) 0, rgba(#fff, 0.03) 1px, transparent 3px, transparent 12px);
+  }
 
   .go-to-top {
     position: relative;
@@ -46,8 +53,9 @@ export default {
   }
 
   .arrow {
-    @include arrow($text);
+    @include arrow();
 
+    border-color: var(--text-color);
     position: relative;
     margin-top: 15px;
     border-width: 2px !important;

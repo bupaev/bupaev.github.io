@@ -181,7 +181,7 @@ export default {
     position: absolute;
     bottom: 0;
     height: 100%;
-    outline: 1px solid black;
+    outline: 1px solid var(--text-color);
     font-size: min(1vw, 13px);
     line-height: min(1.3vw, 16px);
     font-weight: 700;
@@ -193,6 +193,7 @@ export default {
 
     &:hover {
       background-color: $accent-color;
+      color: #000;
       z-index: 3 !important;
     }
 
@@ -215,7 +216,7 @@ export default {
       position: relative;
       flex: 1 0 auto;
       height: $year-height;
-      border-top: 1px solid black;
+      border-top: 1px solid var(--text-color);
       padding-top: 2px;
       text-align: center;
       font-size: 14px;
@@ -223,17 +224,17 @@ export default {
       &::after {
         font-size: 16px;
 
-        @include rhombus;
+        @include rhombus(var(--text-color));
 
         content: "";
         top: -4px;
         left: calc(50% - 2px);
-        background-color: #fff;
+        background-color: var(--background-color);
       }
 
       &:last-of-type {
         &::before {
-          @include arrow(black);
+          @include arrow(var(--text-color));
 
           content: "";
           border-width: 1px !important;

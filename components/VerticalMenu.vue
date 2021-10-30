@@ -119,7 +119,7 @@ export default {
 @import "~bulma/sass/utilities/_all.sass";
 
 $menu-open-width: 10em;
-$mobile-background: #e6e6e6;
+$mobile-background: #525252;
 
 @mixin menu-transition {
   @for $i from 1 through 5 {
@@ -157,7 +157,6 @@ $mobile-background: #e6e6e6;
     height: 4em;
     width: 2em;
     overflow: hidden;
-    color: #000;
     font-weight: 400;
     text-decoration: none;
     cursor: pointer;
@@ -184,7 +183,7 @@ $mobile-background: #e6e6e6;
         width: 10px;
         left: 0;
         margin-top: 8px;
-        background-image: linear-gradient(90deg, #fff 0, #fff 4px, transparent 4px, transparent 6px, #fff 6px, #fff 10px);
+        background-image: linear-gradient(90deg, var(--background-color) 0, var(--background-color) 4px, transparent 4px, transparent 6px, var(--background-color) 6px, var(--background-color) 10px);
       }
 
       &::after {
@@ -193,7 +192,7 @@ $mobile-background: #e6e6e6;
         height: 8px;
         width: 10px;
         left: 0;
-        background-image: radial-gradient(circle, transparent 0, transparent 4px, #fff 4px, #fff 100%);
+        background-image: radial-gradient(circle, transparent 0, transparent 4px, var(--background-color) 4px, var(--background-color) 100%);
         background-repeat: no-repeat;
       }
 
@@ -222,7 +221,9 @@ $mobile-background: #e6e6e6;
 
     .item-text {
       position: relative;
-      color: rgba(0, 0, 0, 0.3);
+      color: var(--text-color);
+      opacity: 0.5;
+      transition: opacity 200ms, color 200ms;
 
       &::before,
       &::after {
@@ -254,12 +255,17 @@ $mobile-background: #e6e6e6;
       img {
         width: 2em;
         max-width: 2em; // override default styles of bulma
+        // filter: invert(1);
       }
     }
 
     &:hover {
-      .item-text::after {
-        width: calc(100% + 0.4em);
+      .item-text {
+        color: #000;
+
+        &::after {
+          width: calc(100% + 0.4em);
+        }
       }
     }
 
@@ -275,7 +281,7 @@ $mobile-background: #e6e6e6;
       width: $menu-open-width;
 
       .item-text {
-        color: #000;
+        opacity: 1;
       }
     }
   }
@@ -287,14 +293,14 @@ $mobile-background: #e6e6e6;
     height: 2em;
     width: 2.2em;
     background-color: rgba($accent-color, 0.2);
-    border-left: 2px rgba($accent-color, 1) solid;
+    border-left: 2px $accent-color solid;
     pointer-events: none;
 
     @include touch {
       top: 0;
       left: 0;
       width: 10px;
-      background-color: rgba(255, 215, 0, 1);
+      background-color: $accent-color;
       border: 0;
       border-radius: 0;
       pointer-events: none;

@@ -17,6 +17,6 @@ export default {
   font-style: italic;
   line-height: 0.8em;
   vertical-align: -0.1em;
-  color: rgba($text, 0.3);
+  color: rgba(var(--text-color), 0.3);
 }
 </style>

@@ -94,7 +94,11 @@ export default {
   margin-bottom: 3rem;
   font-family: $accent-font;
   opacity: 1;
-  background-image: repeating-linear-gradient(105deg, rgba($second-color, 0.03) 0, rgba($second-color, 0.03) 1px, transparent 3px, transparent 12px);
+  background-image: repeating-linear-gradient(105deg, rgba(#000, 0.03) 0, rgba(#000, 0.03) 1px, transparent 3px, transparent 12px);
+
+  @media (prefers-color-scheme: dark) {
+    background-image: repeating-linear-gradient(105deg, rgba(#fff, 0.03) 0, rgba(#fff, 0.03) 1px, transparent 3px, transparent 12px);
+  }
 
   .hero-body {
     @include tablet {
@@ -148,7 +152,6 @@ export default {
 
   a {
     position: relative;
-    color: inherit;
 
     @include text-hover-effect();
   }
@@ -241,7 +244,7 @@ export default {
     margin-left: -50px;
     margin-right: 32px;
     transform: skew(-15deg);
-    filter: drop-shadow(2px 2px 10px rgba(255, 255, 255, 0.2));
+    // filter: drop-shadow(2px 2px 10px rgba(255, 255, 255, 0.2));
 
     &::after {
       content: "";

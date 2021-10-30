@@ -53,6 +53,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~bulma/sass/utilities/mixins.sass";
+@import "assets/scss/variables.scss";
 
 .skills-section {
   width: 100%;
@@ -114,7 +115,7 @@ export default {
     }
 
     &:hover {
-      outline-color: rgba(0, 0, 255, 0.03);
+      outline-color: rgba($second-color, 0.03);
 
       .info-icon {
         opacity: 0;

@@ -96,20 +96,18 @@ export default {
     justify-content: center;
     align-items: flex-start;
     border-radius: 50%;
-    border: 2px #000 solid
-    // background-color: #0ff;
-    // mix-blend-mode: screen;
+    border: 2px var(--graphics-color) solid;
   }
 
   .circle-top {
-    background-image: repeating-linear-gradient(90deg, #000 0, #000 1px, transparent 1px, transparent 20px);
+    background-image: repeating-linear-gradient(90deg, var(--graphics-color) 0, var(--graphics-color) 1px, transparent 1px, transparent 20px);
     align-items: flex-start;
     padding-top: 25%;
     animation: venn-up-shift $duration ease-in-out forwards;
   }
 
   .circle-left {
-    background-image: repeating-linear-gradient(135deg, #000 0, #000 1px, transparent 1px, transparent 20px);
+    background-image: repeating-linear-gradient(135deg, var(--graphics-color) 0, var(--graphics-color) 1px, transparent 1px, transparent 20px);
     justify-content: flex-start;
     padding-left: 12%;
     padding-top: 60%;
@@ -117,7 +115,7 @@ export default {
   }
 
   .circle-right {
-    background-image: repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 1px, transparent 20px);
+    background-image: repeating-linear-gradient(45deg, var(--graphics-color) 0, var(--graphics-color) 1px, transparent 1px, transparent 20px);
     justify-content: flex-end;
     padding-top: 60%;
     padding-right: 10%;
@@ -125,12 +123,11 @@ export default {
   }
 
   .circle-title {
-    // font-family: "Impact", sans-serif;
     font-size: 1.2em;
     font-weight: 700;
-    color: #000;
+    color: var(--text-color);
 
-    @include text-contour();
+    @include text-contour(var(--background-color));
 
     @media (max-width: 576px) {
       font-size: 1.5em;
@@ -142,7 +139,7 @@ export default {
     text-align: center;
     font-size: 1em;
     line-height: 1.3;
-    color: white;
+    color: var(--background-color);
     z-index: 2;
 
     span {
@@ -157,7 +154,7 @@ export default {
     top: 20%;
     left: 55%;
     font-size: 1em;
-    color: white;
+    color: var(--background-color);
 
     @media (max-width: 576px) {
       font-size: 1.5em;
@@ -171,6 +168,10 @@ export default {
       font-size: 2em;
       animation: venn-expand-bounce $pin-duration ease-in-out $duration both;
       will-change: auto;
+
+      img {
+        filter: none;
+      }
     }
 
     .speech-bubble {
@@ -183,13 +184,13 @@ export default {
       text-align: center;
       font-size: 1em;
       line-height: 1;
-      background: #fff;
-      color: #000;
+      background: var(--background-color);
+      color: var(--text-color);
       transform-origin: left 150%;
       animation: venn-expand-bounce 0.5s ease-in-out #{$duration+$pin-duration} both;
       will-change: auto;
-      border: 0.12em solid #000;
-      box-shadow: 0 0 0 3px white;
+      border: 0.12em solid var(--graphics-color);
+      box-shadow: 0 0 0 3px var(--background-color);
 
       &::after {
         position: absolute;
@@ -198,6 +199,7 @@ export default {
         bottom: -1em;
         width: 1.5em;
         height: 1em;
+        // filter: invert(0.85);
       }
     }
   }
