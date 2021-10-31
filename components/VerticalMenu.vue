@@ -119,7 +119,6 @@ export default {
 @import "~bulma/sass/utilities/_all.sass";
 
 $menu-open-width: 10em;
-$mobile-background: #525252;
 
 @mixin menu-transition {
   @for $i from 1 through 5 {
@@ -174,7 +173,6 @@ $mobile-background: #525252;
       position: relative;
       overflow: visible;
       height: 15vh;
-      // border-left: 1px solid red;
 
       &::before {
         content: "";
@@ -240,7 +238,7 @@ $mobile-background: #525252;
       }
 
       &::before {
-        background: #fff;
+        background: var(--background-color);
         width: calc(100% + 0.4em);
       }
 

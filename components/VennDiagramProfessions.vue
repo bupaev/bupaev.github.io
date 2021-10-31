@@ -101,18 +101,18 @@ export default {
     justify-content: center;
     align-items: flex-start;
     border-radius: 50%;
-    border: 2px var(--graphics-color) solid;
+    border: 2px var(--contrasty-color) solid;
   }
 
   .circle-top {
-    background-image: repeating-linear-gradient(90deg, var(--graphics-color) 0, var(--graphics-color) 1px, transparent 1px, transparent 20px);
+    background-image: repeating-linear-gradient(90deg, var(--contrasty-color) 0, var(--contrasty-color) 1px, transparent 1px, transparent 20px);
     align-items: flex-start;
     padding-top: 25%;
     animation: venn-up-shift $duration ease-in-out forwards;
   }
 
   .circle-left {
-    background-image: repeating-linear-gradient(135deg, var(--graphics-color) 0, var(--graphics-color) 1px, transparent 1px, transparent 20px);
+    background-image: repeating-linear-gradient(135deg, var(--contrasty-color) 0, var(--contrasty-color) 1px, transparent 1px, transparent 20px);
     justify-content: flex-start;
     padding-left: 12%;
     padding-top: 60%;
@@ -120,7 +120,7 @@ export default {
   }
 
   .circle-right {
-    background-image: repeating-linear-gradient(45deg, var(--graphics-color) 0, var(--graphics-color) 1px, transparent 1px, transparent 20px);
+    background-image: repeating-linear-gradient(45deg, var(--contrasty-color) 0, var(--contrasty-color) 1px, transparent 1px, transparent 20px);
     justify-content: flex-end;
     padding-top: 60%;
     padding-right: 10%;
@@ -205,7 +205,7 @@ export default {
       top: -1.6em;
       left: 2em;
       padding: 0.5em 0.5em 0.4em;
-      border: 1px solid var(--graphics-color);
+      border: 1px solid var(--contrasty-color);
       border-radius: 9999px;
       text-align: center;
       font-size: 1em;
@@ -234,7 +234,7 @@ export default {
       }
 
       &::after {
-        border: 2px solid var(--graphics-color);
+        border: 2px solid var(--contrasty-color);
         border-bottom-width: 1px;
         margin-left: 0.15em;
         width: 1.5em;

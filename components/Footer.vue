@@ -34,11 +34,7 @@ export default {
   position: relative;
   padding: 0;
   font-family: $accent-font;
-  background-image: repeating-linear-gradient(105deg, rgba(#000, 0.03) 0, rgba(#000, 0.03) 10px, transparent 10px, transparent 13px);
-
-  @media (prefers-color-scheme: dark) {
-    background-image: repeating-linear-gradient(105deg, rgba(#fff, 0.03) 0, rgba(#fff, 0.03) 10px, transparent 10px, transparent 13px);
-  }
+  background-image: repeating-linear-gradient(105deg, var(--contrasty-transparent-color) 0, var(--contrasty-transparent-color) 10px, transparent 10px, transparent 13px);
 
   .go-to-top {
     position: relative;

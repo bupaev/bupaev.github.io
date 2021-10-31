@@ -100,11 +100,7 @@ export default {
   margin-bottom: 3rem;
   font-family: $accent-font;
   opacity: 1;
-  background-image: repeating-linear-gradient(105deg, rgba(#000, 0.03) 0, rgba(#000, 0.03) 1px, transparent 3px, transparent 12px);
-
-  @media (prefers-color-scheme: dark) {
-    background-image: repeating-linear-gradient(105deg, rgba(#fff, 0.03) 0, rgba(#fff, 0.03) 1px, transparent 3px, transparent 12px);
-  }
+  background-image: repeating-linear-gradient(105deg, var(--contrasty-transparent-color) 0, var(--contrasty-transparent-color) 1px, transparent 3px, transparent 12px);
 
   // We hide vertical menu under Hero area on mobile cause when user scrolls up
   // JS doesn't recalculate position fast enough and draw menu over Hero area

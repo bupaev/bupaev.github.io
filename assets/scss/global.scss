@@ -1,14 +1,16 @@
 :root {
-  --text-color: hsl(0, 0%, 14%);
+  --text-color: #363636;
   --background-color: #fff;
-  --graphics-color: #000;
+  --contrasty-color: #000;
+  --contrasty-transparent-color: rgba(0, 0, 0, 0.03);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text-color: hsl(0, 0%, 98%);
-    --background-color: hsl(212, 42%, 12%);
-    --graphics-color: #fff;
+    --text-color: #fafafa;
+    --background-color: #121e2b;
+    --contrasty-color: #fff;
+    --contrasty-transparent-color: rgba(255, 255, 255, 0.03);
   }
 
   // quick and dirty
@@ -19,6 +21,8 @@
 
 body {
   background-color: var(--background-color);
+  transition: background-color 500ms;
+  will-change: background-color;
 }
 
 .v-lazy-image {

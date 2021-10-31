@@ -115,7 +115,7 @@ export default {
     }
 
     &:hover {
-      outline-color: rgba($second-color, 0.03);
+      outline-color: var(--contrasty-transparent-color);
 
       .info-icon {
         opacity: 0;
