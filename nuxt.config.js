@@ -54,7 +54,9 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/stylelint
-    '@nuxtjs/stylelint-module'
+    '@nuxtjs/stylelint-module',
+    // https://github.com/nuxt-community/svg-module
+    '@nuxtjs/svg'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -72,32 +74,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    extractCSS: true,
-
-    extend: (config) => {
-      const svgRule = config.module.rules.find(rule => rule.test.test('.svg'))
-
-      svgRule.test = /\.(png|jpe?g|gif|webp)$/
-
-      config.module.rules.push({
-        test: /\.svg$/,
-        oneOf: [
-          {
-            resourceQuery: /inline/,
-            use: [
-              'babel-loader',
-              'vue-svg-loader'
-            ]
-          },
-          {
-            loader: 'file-loader',
-            query: {
-              name: 'assets/[name].[hash:8].[ext]'
-            }
-          }
-        ]
-      })
-    }
+    extractCSS: true
     // https://github.com/nuxt/nuxt.js/tree/dev/packages/babel-preset-app#options
     // Sadly this config leads to Nuxt build error, so just use --modern flag for generate
     /* babel: {
