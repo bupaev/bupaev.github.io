@@ -34,12 +34,10 @@ export default {
   position: relative;
   padding: 0;
   font-family: $accent-font;
-  background-color: transparent;
-  // background-image: repeating-linear-gradient(105deg, rgba(#000, 0.03) 0, rgba(#000, 0.03) 1px, transparent 3px, transparent 12px);
+  background-image: repeating-linear-gradient(105deg, rgba(#000, 0.03) 0, rgba(#000, 0.03) 10px, transparent 10px, transparent 13px);
 
   @media (prefers-color-scheme: dark) {
-    background-color: transparent;
-    background-image: repeating-linear-gradient(105deg, rgba(#fff, 0.03) 0, rgba(#fff, 0.03) 1px, transparent 3px, transparent 12px);
+    background-image: repeating-linear-gradient(105deg, rgba(#fff, 0.03) 0, rgba(#fff, 0.03) 10px, transparent 10px, transparent 13px);
   }
 
   .go-to-top {

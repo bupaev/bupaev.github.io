@@ -8,9 +8,11 @@
 
 // Override bulma SCSS variables
 $secondary: #d0e0ee;
-$text: $black-ter;
+$text: #{var(--text-color)};
 $family-primary: $main-font;
+
 $section-padding-desktop: 3rem 3rem 3rem 5rem;
+$footer-background-color: transparent;
 
 @import "~bulma";
 
@@ -23,10 +25,11 @@ $section-padding-desktop: 3rem 3rem 3rem 5rem;
 @media (prefers-color-scheme: dark) {
   :root {
     --text-color: hsl(0, 0%, 98%);
-    --background-color: hsl(0, 0%, 14%);
+    --background-color: hsl(212, 42%, 12%);
     --graphics-color: #fff;
   }
 
+  // quick and dirty
   img {
     filter: invert(1);
   }
@@ -36,7 +39,6 @@ body {
   background-color: var(--background-color);
 }
 
-body,
 a,
 strong,
 .title {
