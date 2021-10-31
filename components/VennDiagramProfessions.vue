@@ -14,7 +14,7 @@
         <span class="circle-title">Unicorn<br>Area</span>
       </div>
       <div class="me-area">
-        <span class="pin"><img src="~assets/icons/head-with-glasses-bg-gold.svg" width="40px"></span>
+        <span class="pin"><HeadIcon width="40px" /></span>
         <span class="speech-bubble">Hi! It's me!</span>
       </div>
     </div>
@@ -22,10 +22,13 @@
 </template>
 
 <script>
-import ExternalSVG from '@/assets/icons/head-with-glasses-bg-gold.svg'
+import HeadIcon from '@/assets/icons/head-with-glasses-bg-gold.svg?inline'
 
 export default {
   name: 'VennDiagramProfessions',
+
+  components: { HeadIcon },
+
   data () {
     return {
       basicFontSize: null
@@ -35,9 +38,6 @@ export default {
   computed: {
     fontSizeCss () {
       return this.basicFontSize ? `font-size:${this.basicFontSize}px` : ''
-    },
-    headIcon () {
-      return ExternalSVG
     }
   },
 
@@ -174,8 +174,16 @@ export default {
       animation: venn-expand-bounce $pin-duration ease-in-out $duration both;
       will-change: auto;
 
-      img {
-        filter: none;
+      svg {
+        @media (prefers-color-scheme: dark) {
+          .contour {
+            display: none;
+          }
+
+          path {
+            stroke: var(--background-color);
+          }
+        }
       }
     }
 

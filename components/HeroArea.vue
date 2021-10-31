@@ -22,7 +22,7 @@
                 <a href="mailto:mail@paulbu.com">
                   <span class="icon-text">
                     <span class="icon">
-                      <MailIcon />
+                      <MailIcon class="svg-icon" />
                     </span>
                     <span>Email</span>
                   </span>
@@ -32,7 +32,7 @@
                 <a href="https://t.me/bupaev">
                   <span class="icon-text">
                     <span class="icon">
-                      <TelegramIcon />
+                      <TelegramIcon class="svg-icon" />
                     </span>
                     <span>Telegram</span>
                   </span>
@@ -42,7 +42,7 @@
                 <a href="https://www.linkedin.com/in/pavel-buramensky/">
                   <span class="icon-text">
                     <span class="icon">
-                      <LinkedinIcon />
+                      <LinkedinIcon class="svg-icon" />
                     </span>
                     <span>LinkedIn</span>
                   </span>
@@ -53,7 +53,7 @@
                 <a href="/pavel-buramensky-cv.pdf" target="_blank">
                   <span class="icon-text">
                     <span class="icon">
-                      <DownloadIcon />
+                      <DownloadIcon class="svg-icon" />
                     </span>
                     <span>Download my CV</span>
                   </span>
@@ -297,13 +297,8 @@ export default {
     }
   }
 
-  .v-lazy-image {
-    filter: blur(5px) opacity(50%);
-    transition: filter 0.7s;
-  }
-
-  .v-lazy-image-loaded {
-    filter: blur(0) opacity(100%);
+  .svg-icon {
+    fill: var(--text-color) !important;
   }
 }
 
