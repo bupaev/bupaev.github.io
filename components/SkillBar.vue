@@ -18,6 +18,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "sass:color";
+
 @import "~bulma/sass/base/_all.sass";
 @import "assets/scss/variables.scss";
 
@@ -31,11 +33,12 @@ export default {
     height: 100%;
     margin-right: 3%;
     transform: skew(-15deg);
-    border: 1px solid $text;
+    border: 1px solid #868686;
+    background-color: var(--background-color);
 
     @for $i from 1 through 3 {
       &.filled:nth-of-type(#{$i}) {
-        background-color: rgba($accent-color, 0.25 + $i * 0.25);
+        background-color: color.scale($accent-color, $whiteness: 75% - $i * 25%);
       }
     }
   }

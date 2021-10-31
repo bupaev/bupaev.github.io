@@ -12,6 +12,7 @@ module.exports = {
     'at-rule-no-unknown': null,
     'scss/at-rule-no-unknown': true,
     'function-comma-space-after': null,
-    'function-name-case': null
+    'function-name-case': null,
+    'no-invalid-position-at-import-rule': null
   }
 }
