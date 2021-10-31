@@ -14,7 +14,7 @@
         <span class="circle-title">Unicorn<br>Area</span>
       </div>
       <div class="me-area">
-        <span class="pin"><img src="../assets/icons/head-with-glasses-bg-gold.svg" width="40px"></span>
+        <span class="pin"><img :src="require('../assets/icons/head-with-glasses-bg-gold.svg')" width="40px"></span>
         <span class="speech-bubble">Hi! It's me!</span>
       </div>
     </div>
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import ExternalSVG from '@/assets/icons/head-with-glasses-bg-gold.svg'
+
 export default {
   name: 'VennDiagramProfessions',
   data () {
@@ -33,6 +35,9 @@ export default {
   computed: {
     fontSizeCss () {
       return this.basicFontSize ? `font-size:${this.basicFontSize}px` : ''
+    },
+    headIcon () {
+      return ExternalSVG
     }
   },
 

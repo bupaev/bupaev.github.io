@@ -22,7 +22,7 @@
                 <a href="mailto:mail@paulbu.com">
                   <span class="icon-text">
                     <span class="icon">
-                      <img src="../assets/icons/mail.svg">
+                      <MailIcon />
                     </span>
                     <span>Email</span>
                   </span>
@@ -32,7 +32,7 @@
                 <a href="https://t.me/bupaev">
                   <span class="icon-text">
                     <span class="icon">
-                      <img src="../assets/icons/telegram.svg">
+                      <TelegramIcon />
                     </span>
                     <span>Telegram</span>
                   </span>
@@ -42,7 +42,7 @@
                 <a href="https://www.linkedin.com/in/pavel-buramensky/">
                   <span class="icon-text">
                     <span class="icon">
-                      <img src="../assets/icons/linkedin.svg">
+                      <LinkedinIcon />
                     </span>
                     <span>LinkedIn</span>
                   </span>
@@ -53,7 +53,7 @@
                 <a href="/pavel-buramensky-cv.pdf" target="_blank">
                   <span class="icon-text">
                     <span class="icon">
-                      <img src="../assets/icons/download.svg">
+                      <DownloadIcon />
                     </span>
                     <span>Download my CV</span>
                   </span>
@@ -78,9 +78,14 @@
 <script>
 import VLazyImage from 'v-lazy-image/v2/v-lazy-image.es'
 
+import LinkedinIcon from '@/assets/icons/linkedin.svg?inline'
+import TelegramIcon from '@/assets/icons/telegram.svg?inline'
+import MailIcon from '@/assets/icons/mail.svg?inline'
+import DownloadIcon from '@/assets/icons/download.svg?inline'
+
 export default {
   name: 'HeroArea',
-  components: { VLazyImage }
+  components: { VLazyImage, DownloadIcon, MailIcon, LinkedinIcon, TelegramIcon }
 }
 </script>
 
