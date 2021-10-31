@@ -14,7 +14,7 @@
         <span class="circle-title">Unicorn<br>Area</span>
       </div>
       <div class="me-area">
-        <span class="pin"><HeadIcon width="40px" /></span>
+        <span class="pin"><HeadIcon/></span>
         <span class="speech-bubble">Hi! It's me!</span>
       </div>
     </div>
@@ -137,10 +137,14 @@ export default {
     @media (max-width: 576px) {
       font-size: 1.5em;
     }
+
+    @include desktop-only {
+      font-size: 1.6em;
+    }
   }
 
   .center-area {
-    padding-top: 45px;
+    padding-top: 15%;
     text-align: center;
     font-size: 1em;
     line-height: 1.3;
@@ -155,14 +159,21 @@ export default {
   .me-area {
     position: absolute;
     width: 9em;
-    height: 5em;
-    top: 20%;
-    left: 55%;
-    font-size: 1em;
+    top: 18%;
+    left: 56%;
+    font-size: 1.2em;
     color: var(--background-color);
 
     @media (max-width: 576px) {
       font-size: 1.5em;
+      top: 18%;
+      left: 58%;
+    }
+
+    @include desktop-only {
+      font-size: 1.5em;
+      top: 18%;
+      left: 58%;
     }
 
     $pin-duration: 1s;
@@ -170,11 +181,12 @@ export default {
     .pin {
       display: block;
       position: absolute;
-      font-size: 2em;
       animation: venn-expand-bounce $pin-duration ease-in-out $duration both;
       will-change: auto;
 
       svg {
+        width: 2.6em;
+
         @media (prefers-color-scheme: dark) {
           .contour {
             display: none;
@@ -192,8 +204,8 @@ export default {
       position: absolute;
       top: -1.6em;
       left: 2em;
-      padding: 0.5em 0.5em;
-      border: 0.12em solid var(--graphics-color);
+      padding: 0.5em 0.5em 0.4em;
+      border: 1px solid var(--graphics-color);
       border-radius: 9999px;
       text-align: center;
       font-size: 1em;
@@ -213,7 +225,7 @@ export default {
         transform: rotate(316deg) skew(-60deg, 10deg);
         clip-path: polygon(0 70%, 100% 100%, 0 100%);
         left: 0.8em;
-        bottom: 6%;
+        top: 4%;
       }
 
       &::before {
@@ -222,10 +234,9 @@ export default {
       }
 
       &::after {
-        border: 0.2em solid var(--graphics-color);
-        border-bottom-width: 0.1em;
+        border: 2px solid var(--graphics-color);
+        border-bottom-width: 1px;
         margin-left: 0.15em;
-        margin-bottom: 0.15em;
         width: 1.5em;
         height: 1.5em;
       }
