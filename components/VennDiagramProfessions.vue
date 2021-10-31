@@ -190,29 +190,44 @@ export default {
     .speech-bubble {
       display: block;
       position: absolute;
-      padding: 0.5em 0.5em;
       top: -1.6em;
       left: 2em;
+      padding: 0.5em 0.5em;
+      border: 0.12em solid var(--graphics-color);
       border-radius: 9999px;
       text-align: center;
       font-size: 1em;
       line-height: 1;
       background: var(--background-color);
       color: var(--text-color);
+      box-shadow: 0 0 0 3px var(--background-color);
       transform-origin: left 150%;
       animation: venn-expand-bounce 0.5s ease-in-out #{$duration+$pin-duration} both;
       will-change: auto;
-      border: 0.12em solid var(--graphics-color);
-      box-shadow: 0 0 0 3px var(--background-color);
 
+      &::before,
       &::after {
         position: absolute;
-        content: url("data:image/svg+xml; utf8, <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 353 267\"> <path fill=\"white\" stroke=\"black\" stroke-width=\"18\" stroke-miterlimit=\"10\" d=\"M119-1 35 222 349-1\"/> <path fill=\"none\" stroke=\"white\" stroke-width=\"20\" stroke-miterlimit=\"10\" d=\"M94 13-4 273 353 20\"/> </svg>");
-        left: 0.6em;
-        bottom: -1em;
+        content: "";
+        background-color: var(--background-color);
+        transform: rotate(316deg) skew(-60deg, 10deg);
+        clip-path: polygon(0 70%, 100% 100%, 0 100%);
+        left: 0.8em;
+        bottom: 6%;
+      }
+
+      &::before {
+        width: 1.7em;
+        height: 1.7em;
+      }
+
+      &::after {
+        border: 0.2em solid var(--graphics-color);
+        border-bottom-width: 0.1em;
+        margin-left: 0.15em;
+        margin-bottom: 0.15em;
         width: 1.5em;
-        height: 1em;
-        // filter: invert(0.85);
+        height: 1.5em;
       }
     }
   }
