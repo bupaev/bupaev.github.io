@@ -95,6 +95,7 @@ export default {
 @import "assets/scss/variables.scss";
 
 .hero-area {
+  position: relative;
   overflow: hidden;
   margin-bottom: 3rem;
   font-family: $accent-font;
@@ -104,6 +105,11 @@ export default {
   @media (prefers-color-scheme: dark) {
     background-image: repeating-linear-gradient(105deg, rgba(#fff, 0.03) 0, rgba(#fff, 0.03) 1px, transparent 3px, transparent 12px);
   }
+
+  // We hide vertical menu under Hero area on mobile cause when user scrolls up
+  // JS doesn't recalculate position fast enough and draw menu over Hero area
+  background-color: var(--background-color);
+  z-index: 2;
 
   .hero-body {
     @include tablet {
@@ -185,7 +191,7 @@ export default {
     @include mobile {
       margin-right: 0;
 
-      @include text-contour(rgba(#fff, 0.5), 0.05em);
+      @include text-contour(var(--background-color), 0.05em);
     }
   }
 

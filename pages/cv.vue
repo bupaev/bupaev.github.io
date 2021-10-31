@@ -95,16 +95,6 @@ export default {
 @import "~bulma/sass/utilities/_all.sass";
 @import "assets/scss/variables.scss";
 
-// Hide menu under portrait cause when user scrolls up
-// JS doesn't recalculate position fast enough and draw menu over Hero area
-@include mobile {
-  #hero-area {
-    position: relative;
-    background-color: #fff;
-    z-index: 2;
-  }
-}
-
 .section {
   position: relative;
 }
