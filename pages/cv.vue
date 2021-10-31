@@ -116,6 +116,10 @@ export default {
 .with-background {
   position: relative;
 
+  & > .container {
+    z-index: 1;
+  }
+
   &::after {
     content: "";
     position: absolute;
@@ -130,8 +134,10 @@ export default {
     background-attachment: fixed;
     background-position: 95% 90%;
     opacity: 0.02;
-    z-index: -1;
-    // outline: 2px dashed black;
+
+    @media (prefers-color-scheme: dark) {
+      filter: invert(1);
+    }
 
     @include from($big-screen) {
       background-size: 750px;
