@@ -7,6 +7,10 @@
   background-repeat: no-repeat;
   transition: background-size 200ms ease, color 200ms ease;
 
+  svg {
+    transition: fill 200ms;
+  }
+
   &:hover {
     padding-left: 0.45em;
     padding-right: 0.45em;
@@ -18,13 +22,21 @@
       linear-gradient(105deg, transparent 0.45em, $color 0.45em, $color 55%, transparent 55%),
       linear-gradient(285deg, transparent 0.38em, $color 0.38em, $color 55%, transparent 55%);
     background-size: 100% 100%;
+
+    svg {
+      fill: #000 !important;
+    }
   }
 }
 
 // This effect visually similar to the previous one but doesn't work properly with multiline links
 // Keep it for use in Hero Area due to Safari bug with animation
 @mixin text-hover-effect($color: $accent-color) {
-  transition: color 350ms;
+  transition: color 250ms, fill 250ms;
+
+  svg {
+    transition: fill 250ms;
+  }
 
   &::after {
     content: "";
@@ -41,6 +53,10 @@
 
   &:hover {
     color: #000;
+
+    svg {
+      fill: #000 !important;
+    }
 
     &::after {
       height: 110%;

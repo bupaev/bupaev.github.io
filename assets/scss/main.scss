@@ -5,6 +5,7 @@
 /* My stuff */
 @import "./variables";
 @import "./mixins";
+@import "./global";
 
 // Override bulma SCSS variables
 $secondary: #d0e0ee;
@@ -15,90 +16,4 @@ $section-padding-desktop: 3rem 3rem 3rem 5rem;
 $footer-background-color: transparent;
 
 @import "~bulma";
-
-:root {
-  --text-color: hsl(0, 0%, 14%);
-  --background-color: #fff;
-  --graphics-color: #000;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text-color: hsl(0, 0%, 98%);
-    --background-color: hsl(212, 42%, 12%);
-    --graphics-color: #fff;
-  }
-
-  // quick and dirty
-  img {
-    filter: invert(1);
-  }
-}
-
-body {
-  background-color: var(--background-color);
-}
-
-a,
-strong,
-.title {
-  color: var(--text-color);
-}
-
-// Override styles
-.title {
-  font-family: $accent-font;
-  font-size: 2rem;
-}
-
-.subtitle,
-.circle-title {
-  font-family: $main-font;
-}
-
-.content {
-  h3 {
-    font-family: $accent-font;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: var(--text-color);
-  }
-
-  a {
-    @include multiline-text-hover-effect;
-  }
-
-  ul {
-    margin-left: 0;
-
-    & > li {
-      position: relative;
-      list-style: none;
-      padding-left: 1em;
-
-      &::after {
-        font-size: 0.8em;
-
-        @include rhombus(var(--text-color));
-
-        content: "";
-        left: 0.15em;
-        top: 0.7em;
-      }
-    }
-  }
-}
-
-.section {
-  font-size: 1.1em;
-
-  @include from($big-screen) {
-    padding-left: 3rem;
-  }
-}
+@import "./override-bulma";

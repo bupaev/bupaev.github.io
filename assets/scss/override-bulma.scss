@@ -1,0 +1,62 @@
+a,
+strong,
+.title {
+  color: var(--text-color);
+}
+
+.title {
+  font-family: $accent-font;
+  font-size: 2rem;
+}
+
+.subtitle,
+.circle-title {
+  font-family: $main-font;
+}
+
+.content {
+  h3 {
+    font-family: $accent-font;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--text-color);
+  }
+
+  a {
+    @include multiline-text-hover-effect;
+  }
+
+  ul {
+    margin-left: 0;
+
+    & > li {
+      position: relative;
+      list-style: none;
+      padding-left: 1em;
+
+      &::after {
+        font-size: 0.8em;
+
+        @include rhombus(var(--text-color));
+
+        content: "";
+        left: 0.15em;
+        top: 0.7em;
+      }
+    }
+  }
+}
+
+.section {
+  font-size: 1.1em;
+
+  @include from($big-screen) {
+    padding-left: 3rem;
+  }
+}

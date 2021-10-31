@@ -1,0 +1,31 @@
+:root {
+  --text-color: hsl(0, 0%, 14%);
+  --background-color: #fff;
+  --graphics-color: #000;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: hsl(0, 0%, 98%);
+    --background-color: hsl(212, 42%, 12%);
+    --graphics-color: #fff;
+  }
+
+  // quick and dirty
+  img {
+    filter: invert(1);
+  }
+}
+
+body {
+  background-color: var(--background-color);
+}
+
+.v-lazy-image {
+  filter: blur(5px) opacity(50%);
+  transition: filter 0.7s;
+}
+
+.v-lazy-image-loaded {
+  filter: blur(0) opacity(100%);
+}
