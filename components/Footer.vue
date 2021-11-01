@@ -1,59 +1,69 @@
 <template>
-  <footer class="footer">
-    <div class="go-to-top" @click="goToTop">
-      <div class="arrow" />
-      <div class="px-6 is-size-5">
-        Back to the Top
-      </div>
-      <div class="arrow" />
+  <footer class="footer is-size-5">
+    <GoToTop class="go-to-top-left" />
+    <GoToTop class="go-to-top-right" />
+    <div class="text">
+      <span>
+        Made with <a href="https://github.com/bupaev/bupaev.github.io" target="_blank">love and NuxtJS</a>
+      </span>
     </div>
   </footer>
 </template>
 
 <script>
+import GoToTop from '@/components/GoToTop'
+
 export default {
   name: 'Footer',
 
-  methods: {
-    goToTop() {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      })
-    }
-  }
+  components: { GoToTop }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "~bulma/sass/base/_all.sass";
-@import "assets/scss/variables.scss";
+@import "assets/scss/mixins.scss";
 
 .footer {
   position: relative;
+  height: 110px;
+  display: flex;
+  flex-flow: row nowrap;
   padding: 0;
   font-family: $accent-font;
   background-image: repeating-linear-gradient(105deg, var(--contrasty-transparent-color) 0, var(--contrasty-transparent-color) 10px, transparent 10px, transparent 13px);
 
-  .go-to-top {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 3rem 1.5rem;
-    cursor: pointer;
-    user-select: none;
+  a {
+    color: var(--text-color);
+
+    @include multiline-text-hover-effect;
   }
 
-  .arrow {
-    @include arrow();
+  .text {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+  }
 
-    border-color: var(--text-color);
-    position: relative;
-    margin-top: 15px;
-    border-width: 2px !important;
-    transform: rotate(135deg);
+  // @TODO: add prop to GoToTop component for proper right/left aligning
+  .go-to-top-left {
+    position: absolute;
+    left: 0;
+    padding-right: 30px;
+
+    &::before {
+      left: 12px;
+    }
+  }
+
+  .go-to-top-right {
+    position: absolute;
+    right: 0;
+    padding-left: 30px;
+
+    &::before {
+      right: 12px;
+    }
   }
 }
 </style>

@@ -1,5 +1,8 @@
+@import "./variables";
+
 :root {
   --text-color: #363636;
+  --accent-color: #{$accent-color};
   --background-color: #fff;
   --contrasty-color: #000;
   --contrasty-transparent-color: rgba(0, 0, 0, 0.03);
