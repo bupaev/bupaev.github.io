@@ -19,6 +19,7 @@
   "dependencies": {
     "core-js": "^3.19.0",
     "nuxt": "^2.15.7",
+    "smoothscroll-polyfill": "^0.4.4",
     "v-lazy-image": "^2.0.1"
   },
   "devDependencies": {
