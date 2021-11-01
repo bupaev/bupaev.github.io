@@ -136,7 +136,7 @@ export default {
     background-position: 95% 90%;
     opacity: 0.02;
 
-    [data-theme="dark"] & {
+    [data-color-scheme="dark"] & {
       filter: invert(1);
     }
 

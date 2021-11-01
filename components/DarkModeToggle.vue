@@ -29,13 +29,23 @@ export default {
   },
 
   mounted () {
-    this.setCompactState()
-    window.addEventListener('scroll', this.setCompactState)
+    const savedSchemeValue = this.getCookie('color-scheme')
+    if (savedSchemeValue === undefined) {
+      this.setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches)
+    } else {
+      this.setDarkMode(savedSchemeValue === 'dark')
+    }
 
-    this.setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches)
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (this.getCookie('color-scheme')) {
+        return
+      }
+
       this.setDarkMode(e.matches)
     })
+
+    this.setCompactState()
+    window.addEventListener('scroll', this.setCompactState)
   },
 
   destroyed () {
@@ -46,9 +56,19 @@ export default {
     setCompactState () {
       this.isCompact = window.scrollY > 5
     },
+
     setDarkMode (isDark) {
       this.isDark = isDark
-      document.documentElement.setAttribute('data-theme', `${isDark ? 'dark' : 'light'}`)
+      const theme = isDark ? 'dark' : 'light'
+      document.documentElement.setAttribute('data-color-scheme', theme)
+
+      // remember user's choice for next six hours
+      document.cookie = `color-scheme=${theme}; max-age=21600`
+    },
+
+    getCookie (name) {
+      const matches = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'))
+      return matches ? matches[1] : undefined
     }
   }
 }
