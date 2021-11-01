@@ -22,7 +22,7 @@
                 <a href="mailto:mail@paulbu.com">
                   <span class="icon-text">
                     <span class="icon">
-                      <MailIcon class="svg-icon" />
+                      <MailIcon />
                     </span>
                     <span>Email</span>
                   </span>
@@ -32,7 +32,7 @@
                 <a href="https://t.me/bupaev">
                   <span class="icon-text">
                     <span class="icon">
-                      <TelegramIcon class="svg-icon" />
+                      <TelegramIcon />
                     </span>
                     <span>Telegram</span>
                   </span>
@@ -42,7 +42,7 @@
                 <a href="https://www.linkedin.com/in/pavel-buramensky/">
                   <span class="icon-text">
                     <span class="icon">
-                      <LinkedinIcon class="svg-icon" />
+                      <LinkedinIcon />
                     </span>
                     <span>LinkedIn</span>
                   </span>
@@ -53,7 +53,7 @@
                 <a href="/pavel-buramensky-cv.pdf" target="_blank">
                   <span class="icon-text">
                     <span class="icon">
-                      <DownloadIcon class="svg-icon" />
+                      <DownloadIcon />
                     </span>
                     <span>Download my CV</span>
                   </span>
@@ -102,9 +102,11 @@ export default {
   opacity: 1;
   background-image: repeating-linear-gradient(105deg, var(--contrasty-transparent-color) 0, var(--contrasty-transparent-color) 1px, transparent 3px, transparent 12px);
 
-  // We hide vertical menu under Hero area on mobile cause when user scrolls up
-  // JS doesn't recalculate position fast enough and draw menu over Hero area
+  // We need background-color to hide vertical menu under Hero area on mobile
+  // cause when user scrolls up JS doesn't recalculate position fast enough and draw menu over Hero area
   background-color: var(--background-color);
+  transition: background-color 500ms;
+  will-change: background-color;
   z-index: 2;
 
   .hero-body {
@@ -161,6 +163,12 @@ export default {
     position: relative;
 
     @include text-hover-effect();
+  }
+
+  .icon svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--text-color) !important;
   }
 
   .title {
@@ -297,10 +305,6 @@ export default {
         transform: skew(15deg) scale(1.3) translate(-24px, -30px);
       }
     }
-  }
-
-  .svg-icon {
-    fill: var(--text-color) !important;
   }
 }
 
