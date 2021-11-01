@@ -21,7 +21,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @import "~bulma/sass/utilities/mixins.sass";
 
 .go-to-top {
@@ -36,6 +36,18 @@ export default {
   user-select: none;
   overflow: hidden;
 
+  .arrow {
+    @include arrow();
+
+    position: relative;
+    top: auto;
+    margin-top: 3px;
+    border-color: var(--contrasty-color);
+    border-width: 2px !important;
+    transform: rotate(135deg);
+    transition: border-color 400ms;
+  }
+
   &::before {
     content: "";
     position: absolute;
@@ -47,23 +59,25 @@ export default {
     transition: bottom 250ms;
   }
 
-  &:hover::before {
-    bottom: 20%;
+  &:hover {
+    .arrow {
+      border-color: #000;
+    }
+
+    &::before {
+      bottom: 20%;
+    }
   }
 
-  &:active::before {
-    bottom: 200%;
+  &:active {
+    .arrow {
+      border-color: var(--contrasty-color);
+      transition: border-color 100ms;
+    }
+
+    &::before {
+      bottom: 200%;
+    }
   }
-}
-
-.arrow {
-  @include arrow();
-
-  position: relative;
-  top: auto;
-  margin-top: 3px;
-  border-color: var(--text-color);
-  border-width: 2px !important;
-  transform: rotate(135deg);
 }
 </style>

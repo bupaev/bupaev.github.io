@@ -1,5 +1,6 @@
 <template>
   <div>
+    <DarkModeToggle />
     <VerticalMenu :style="menuStyle" />
     <section
       id="hero-area"
@@ -37,15 +38,25 @@
 </template>
 
 <script>
-import VerticalMenu from '@/components/VerticalMenu'
+import DarkModeToggle from '@/components/DarkModeToggle'
+import Education from '@/components/Education'
+import Experience from '@/components/Experience'
 import HeroArea from '@/components/HeroArea'
 import Overview from '@/components/Overview'
 import Skills from '@/components/Skills'
-import Experience from '@/components/Experience'
-import Education from '~/components/Education'
+import VerticalMenu from '@/components/VerticalMenu'
 
 export default {
-  components: { VerticalMenu, HeroArea, Overview, Skills, Experience, Education },
+  components: {
+    DarkModeToggle,
+    Education,
+    Experience,
+    HeroArea,
+    Overview,
+    Skills,
+    VerticalMenu
+  },
+
   data () {
     return {
       heroAreaHeight: 0,

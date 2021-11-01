@@ -43,7 +43,7 @@ export default {
 }
 
 .service-page-text {
-  font-size: 12vw;
+  font-size: max(12vw, 2rem);
   font-family: $accent-font;
   font-weight: 600;
   line-height: 1.1;

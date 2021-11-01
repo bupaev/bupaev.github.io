@@ -130,7 +130,7 @@ $menu-open-width: 10em;
 
 .vertical-menu {
   position: fixed;
-  top: 10vh;
+  top: max(10vh, 110px);
   left: 6px;
   font-family: "Dosis", sans-serif;
   font-size: 20px;

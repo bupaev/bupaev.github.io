@@ -1,14 +1,15 @@
+@import "~bulma/sass/utilities/initial-variables";
 @import "./variables";
 
 :root {
-  --text-color: #363636;
+  --text-color: #{$black-ter};
   --accent-color: #{$accent-color};
   --background-color: #fff;
   --contrasty-color: #000;
   --contrasty-transparent-color: rgba(0, 0, 0, 0.03);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --text-color: #fafafa;
     --background-color: #121e2b;
@@ -17,6 +18,17 @@
   }
 
   // quick and dirty
+  img {
+    filter: invert(1);
+  }
+} */
+
+[data-theme="dark"] {
+  --text-color: #fafafa;
+  --background-color: #121e2b;
+  --contrasty-color: #fff;
+  --contrasty-transparent-color: rgba(255, 255, 255, 0.03);
+
   img {
     filter: invert(1);
   }
@@ -29,10 +41,10 @@ body {
 }
 
 .v-lazy-image {
-  filter: blur(5px) opacity(50%);
+  filter: blur(5px) opacity(50%) !important;
   transition: filter 0.7s;
 }
 
 .v-lazy-image-loaded {
-  filter: blur(0) opacity(100%);
+  filter: blur(0) opacity(100%) !important;
 }
