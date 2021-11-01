@@ -19,6 +19,7 @@ export default {
       },
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'robots', content: 'all' },
+      { name: 'color-scheme', content: 'light dark' },
       { property: 'og:type', content: 'website' },
       { property: 'og:site_name', content: 'My personal page' },
       { property: 'og:url', content: 'https://paulbu.com' },

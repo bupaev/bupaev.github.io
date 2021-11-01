@@ -136,7 +136,7 @@ export default {
     background-position: 95% 90%;
     opacity: 0.02;
 
-    @media (prefers-color-scheme: dark) {
+    [data-theme="dark"] & {
       filter: invert(1);
     }
 

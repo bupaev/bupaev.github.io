@@ -1,9 +1,9 @@
 <template>
   <div>
     <div
-      :class="{ 'dark-mode-enabled': mode === 'dark', 'compact' : isCompact }"
+      :class="{ 'dark-mode-enabled': isDark, 'compact' : isCompact }"
       class="dark-mode-toggle is-hidden-touch"
-      @click="toggleMode"
+      @click="setDarkMode(!isDark)"
     >
       <div class="slider">
         <span class="label-dark">Dark</span>
@@ -23,16 +23,18 @@ export default {
 
   data () {
     return {
-      mode: 'light',
+      isDark: false,
       isCompact: false
     }
   },
 
   mounted () {
+    this.setCompactState()
     window.addEventListener('scroll', this.setCompactState)
 
+    this.setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches)
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      this.mode = e.matches
+      this.setDarkMode(e.matches)
     })
   },
 
@@ -41,17 +43,12 @@ export default {
   },
 
   methods: {
-    toggleMode () {
-      if (this.mode === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'light')
-        this.mode = 'light'
-      } else {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        this.mode = 'dark'
-      }
-    },
     setCompactState () {
       this.isCompact = window.scrollY > 5
+    },
+    setDarkMode (isDark) {
+      this.isDark = isDark
+      document.documentElement.setAttribute('data-theme', `${isDark ? 'dark' : 'light'}`)
     }
   }
 }

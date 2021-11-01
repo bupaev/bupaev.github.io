@@ -150,7 +150,7 @@ $menu-open-width: 10em;
     margin-top: 56px;
     background-image: linear-gradient(90deg, #e6e6e6 0, #e6e6e6 10px, transparent 10px);
 
-    @media (prefers-color-scheme: dark) {
+    [data-theme="dark"] & {
       background-image: linear-gradient(90deg, #080812 0, #080812 10px, transparent 10px);
     }
   }

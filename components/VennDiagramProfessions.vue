@@ -187,7 +187,7 @@ export default {
       svg {
         width: 2.6em;
 
-        @media (prefers-color-scheme: dark) {
+        [data-theme="dark"] & {
           .contour {
             display: none;
           }
