@@ -103,7 +103,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~bulma/sass/utilities/_all.sass";
+@import "assets/scss/bulma-init.scss";
 @import "assets/scss/variables.scss";
 
 .section {
