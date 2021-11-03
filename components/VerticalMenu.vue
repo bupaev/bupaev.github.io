@@ -114,9 +114,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "assets/scss/variables.scss";
 @import "assets/scss/mixins.scss";
-@import "~bulma/sass/utilities/_all.sass";
 
 $menu-open-width: 10em;
 

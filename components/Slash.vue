@@ -9,8 +9,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "~bulma/sass/base/_all.sass";
-
 .slash {
   padding-right: 0.5em;
   font-size: 1.3em;

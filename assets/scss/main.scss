@@ -1,6 +1,6 @@
 /* Import Bulma Utilities */
-@import "./bulma-init";
-@import "./variables";
-@import "./mixins";
-@import "./override-bulma";
-@import "./global";
+@import "init-bulma";
+@import "override-bulma";
+@import "variables";
+@import "mixins";
+@import "global";

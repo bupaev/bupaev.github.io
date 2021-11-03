@@ -90,9 +90,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~bulma/sass/utilities/_all.sass";
 @import "assets/scss/mixins.scss";
-@import "assets/scss/variables.scss";
 
 .hero-area {
   position: relative;

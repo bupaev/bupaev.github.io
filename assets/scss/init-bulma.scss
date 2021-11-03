@@ -1,14 +1,12 @@
-/* Import Bulma Utilities */
 @import "~bulma/sass/utilities/initial-variables";
 @import "./variables";
 
-// Override bulma SCSS variables
+// Override internal bulma variables
 $secondary: #d0e0ee;
 $text: #{var(--text-color)};
 $family-primary: $main-font;
 
 $section-padding-desktop: 3rem 3rem 3rem 5rem;
 $footer-background-color: transparent;
-$desktop: 1000px;
 
 @import "~bulma";

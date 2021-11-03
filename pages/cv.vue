@@ -103,8 +103,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/bulma-init.scss";
-@import "assets/scss/variables.scss";
+@import "assets/scss/mixins";
 
 .section {
   position: relative;

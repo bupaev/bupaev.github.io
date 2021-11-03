@@ -14,8 +14,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~bulma/sass/utilities/mixins.sass";
-@import "assets/scss/variables";
+@import "assets/scss/mixins";
 
 .service-page-wrapper {
   position: relative;

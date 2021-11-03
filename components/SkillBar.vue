@@ -20,7 +20,6 @@ export default {
 <style lang="scss" scoped>
 @use "sass:color";
 
-@import "~bulma/sass/base/_all.sass";
 @import "assets/scss/variables.scss";
 
 .skill-bar {

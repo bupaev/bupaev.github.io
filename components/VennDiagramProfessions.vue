@@ -53,8 +53,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~bulma/sass/utilities/_all.sass";
-@import "assets/scss/variables.scss";
 @import "assets/scss/mixins.scss";
 
 .venn-diagram-professions {

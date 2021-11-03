@@ -158,7 +158,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~bulma/sass/utilities/mixins.sass";
 @import "assets/scss/mixins.scss";
 
 .timeline {
