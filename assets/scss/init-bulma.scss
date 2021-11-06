@@ -8,5 +8,6 @@ $family-primary: $main-font;
 
 $section-padding-desktop: 3rem 3rem 3rem 5rem;
 $footer-background-color: transparent;
+$desktop: $desktop-custom + (2 * $gap);
 
 @import "~bulma";

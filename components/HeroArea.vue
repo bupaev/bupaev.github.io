@@ -107,6 +107,12 @@ export default {
   will-change: background-color;
   z-index: 2;
 
+  @include desktop-only {
+    .container {
+      max-width: 960px;
+    }
+  }
+
   .hero-body {
     @include tablet {
       padding-right: 0;
@@ -128,6 +134,12 @@ export default {
 
   .left-column {
     z-index: 1;
+
+    // On less than 1050px Hero Area texts are too close to VerticalMenu
+    @media screen and (min-width: $desktop) and (max-width: 1050px) {
+      flex-grow: 1.25;
+      padding-left: 40px;
+    }
 
     @include mobile {
       // can't just use ".is-full-mobile" cause ".is-three-fifths-touch" has higher priority

@@ -2,6 +2,10 @@
 $accent-font: "Dosis", "Lucida Console", sans-serif;
 $main-font: "Nunito", "Trebuchet MS", sans-serif;
 
+// Redefine standard desktop bulma breakpoint
+// for better user experience on small tablets in album mode
+$desktop-custom: 896px; // 2*gap will ba added, 960 is default
+
 // Additional breakpoints
 $small-mobile: 576px;
 $big-screen: 1500px;
