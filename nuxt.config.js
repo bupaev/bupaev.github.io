@@ -50,7 +50,10 @@ export default {
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  // I prefer to see explicit dependencies
+  components: false,
+
+  preset: '@nuxt/test-utils',
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -62,15 +65,6 @@ export default {
     '@nuxtjs/svg'
   ],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
-
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
-
-  // Content module configuration: https://go.nuxtjs.dev/config-content
-  content: {},
-
   generate: {
     fallback: '404.html'
   },
@@ -78,23 +72,5 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     extractCSS: true
-    // https://github.com/nuxt/nuxt.js/tree/dev/packages/babel-preset-app#options
-    // Sadly this config leads to Nuxt build error, so just use --modern flag for generate
-    /* babel: {
-      presets ({ envName }) {
-        const envTargets = {
-          client: { browsers: ['last 2 versions'] },
-          server: { node: 'current' }
-        }
-        return [
-          [
-            '@nuxt/babel-preset-app',
-            {
-              targets: envTargets[envName]
-            }
-          ]
-        ]
-      }
-    } */
   }
 }
