@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Footer from '@/components/Footer'
+import Footer from '@/components/TheFooter'
 
 export default {
   components: { Footer }

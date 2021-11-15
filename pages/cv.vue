@@ -1,60 +1,60 @@
 <template>
   <div>
     <DarkModeToggle />
-    <VerticalMenu :style="menuStyle" />
+    <CvVerticalMenu :style="menuStyle" />
     <section
       id="hero-area"
       ref="heroArea"
       class="anchor-for-navigation"
       style="position: sticky !important;"
     >
-      <HeroArea />
+      <CvHeroArea />
     </section>
     <section
       id="overview"
       class="section anchor-for-navigation is-primary"
     >
-      <Overview />
+      <CvOverview />
     </section>
     <section
       id="skills"
       class="section anchor-for-navigation with-background"
     >
-      <Skills />
+      <CvSkills />
     </section>
     <section
       id="experience"
       class="section anchor-for-navigation with-background"
     >
-      <Experience />
+      <CvExperience />
     </section>
     <section
       id="education"
       class="section anchor-for-navigation with-background"
     >
-      <Education />
+      <CvEducation />
     </section>
   </div>
 </template>
 
 <script>
-import DarkModeToggle from '@/components/DarkModeToggle'
-import Education from '@/components/Education'
-import Experience from '@/components/Experience'
-import HeroArea from '@/components/HeroArea'
-import Overview from '@/components/Overview'
-import Skills from '@/components/Skills'
-import VerticalMenu from '@/components/VerticalMenu'
+import DarkModeToggle from '@/components/DarkModeToggle/DarkModeToggle'
+import CvEducation from '@/components/CvEducation'
+import CvExperience from '@/components/CvExperience/TheExperience'
+import CvHeroArea from '@/components/CvHeroArea'
+import CvOverview from '@/components/CvOverview/TheOverview'
+import CvSkills from '@/components/CvSkills/TheSkills'
+import CvVerticalMenu from '@/components/CvVerticalMenu/TheVerticalMenu'
 
 export default {
   components: {
     DarkModeToggle,
-    Education,
-    Experience,
-    HeroArea,
-    Overview,
-    Skills,
-    VerticalMenu
+    CvEducation,
+    CvExperience,
+    CvHeroArea,
+    CvOverview,
+    CvSkills,
+    CvVerticalMenu
   },
 
   data () {

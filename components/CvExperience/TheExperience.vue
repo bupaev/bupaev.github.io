@@ -200,7 +200,7 @@
 
 <script>
 import Slash from '@/components/Slash'
-import Timeline from '@/components/Timeline'
+import Timeline from '@/components/CvExperience/Timeline'
 
 export default {
   name: 'Experience',

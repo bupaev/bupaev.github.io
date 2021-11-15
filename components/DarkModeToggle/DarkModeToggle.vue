@@ -8,8 +8,8 @@
       <div class="slider">
         <span class="label-dark">Dark</span>
         <div class="handler">
-          <img class="icon-light" src="../assets/icons/sun.svg">
-          <img class="icon-dark" src="../assets/icons/moon.svg">
+          <img class="icon-light" src="icons/sun.svg">
+          <img class="icon-dark" src="icons/moon.svg">
         </div>
         <span class="label-light">Light</span>
       </div>
@@ -76,7 +76,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~bulma/sass/utilities/initial-variables";
-@import "assets/scss/variables.scss";
+@import "assets/scss/variables";
 
 // @TODO: Rework styles to make it more robust
 // Now it's extremely fragile. E.g. depends on width of labels

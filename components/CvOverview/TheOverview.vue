@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import VennDiagramProfessions from '@/components/VennDiagramProfessions'
+import VennDiagramProfessions from '@/components/CvOverview/VennDiagramProfessions'
 
 export default {
   name: 'Overview',
@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/mixins.scss";
+@import "assets/scss/mixins";
 
 .overview {
   .diagram-container {

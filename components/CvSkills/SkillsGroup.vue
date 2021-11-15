@@ -10,7 +10,7 @@
       <div v-for="item in items" :key="item.title" class="skill-item">
         <span class="item-title">{{ item.title }}</span>
         <span v-if="item.info">
-          <i class="info-icon"><img alt="icon" src="../assets/icons/info.svg"></i>
+          <i class="info-icon"><img alt="icon" src="../../assets/icons/info.svg"></i>
           <span class="info">{{ item.info }}</span>
         </span>
         <SkillBar :level="item.level" />
@@ -19,7 +19,7 @@
   </div>
 </template>
 <script>
-import SkillBar from '@/components/SkillBar'
+import SkillBar from '@/components/CvSkills/SkillBar'
 
 export default {
   name: 'SkillsGroup',
@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/mixins";
+@import "../../assets/scss/mixins";
 
 .skills-section {
   width: 100%;

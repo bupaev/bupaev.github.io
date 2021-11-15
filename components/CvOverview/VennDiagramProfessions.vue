@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import HeadIcon from '@/assets/icons/head-with-glasses-bg-gold.svg?inline'
+import HeadIcon from './icons/head-with-glasses-bg-gold.svg?inline'
 
 export default {
   name: 'VennDiagramProfessions',
@@ -53,7 +53,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/mixins.scss";
+@import "assets/scss/mixins";
 
 .venn-diagram-professions {
   $duration: 0.7s;

@@ -20,7 +20,7 @@ export default {
 <style lang="scss" scoped>
 @use "sass:color";
 
-@import "assets/scss/variables.scss";
+@import "assets/scss/variables";
 
 .skill-bar {
   display: flex;

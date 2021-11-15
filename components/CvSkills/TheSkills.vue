@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import SkillsGroup from '@/components/SkillsGroup'
+import SkillsGroup from '@/components/CvSkills/SkillsGroup'
 
 export default {
   name: 'Skills',

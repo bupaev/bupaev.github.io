@@ -12,7 +12,7 @@
         @click="onMenuItemClick(index)"
       >
         <span class="item-icon">
-          <img :src="require(`../assets/icons/${item.icon}`)" draggable="false">
+          <img :src="require(`./icons/${item.icon}`)" draggable="false">
         </span>
         <span class="item-text">
           {{ item.title }}
@@ -114,7 +114,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "assets/scss/mixins.scss";
+@import "../../assets/scss/mixins";
 
 $menu-open-width: 10em;
 
