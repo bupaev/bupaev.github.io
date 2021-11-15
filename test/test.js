@@ -1,7 +1,7 @@
 import { setupTest, createPage } from '@nuxt/test-utils'
 import { mount } from '@vue/test-utils'
-import CV from '@/pages/cv.vue'
 import 'core-js'
+import CV from '@/pages/cv.vue'
 
 describe.skip('browser', () => {
   setupTest({
