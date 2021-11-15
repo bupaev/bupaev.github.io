@@ -8,8 +8,8 @@
       <div class="slider">
         <span class="label-dark">Dark</span>
         <div class="handler">
-          <img class="icon-light" src="icons/sun.svg">
-          <img class="icon-dark" src="icons/moon.svg">
+          <img class="icon-light" src="./icons/sun.svg">
+          <img class="icon-dark" src="./icons/moon.svg">
         </div>
         <span class="label-light">Light</span>
       </div>
