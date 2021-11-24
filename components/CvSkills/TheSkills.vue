@@ -120,7 +120,7 @@ export default {
               level: 2
             },
             {
-              title: 'WebWorkers',
+              title: 'Web Worker',
               info: '',
               level: 2
             }
@@ -181,7 +181,7 @@ export default {
               level: 1
             },
             {
-              title: 'WebSockets',
+              title: 'WebSocket',
               level: 1
             }/* ,
             {
