@@ -30,6 +30,7 @@ export default {
 
   mounted () {
     const savedSchemeValue = this.getCookie('color-scheme')
+
     if (savedSchemeValue === undefined) {
       this.setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches)
     } else {
@@ -87,7 +88,8 @@ export default {
   left: 6px;
   width: 100px;
   height: 40px;
-  border: solid 2px var(--text-color);
+  // border: solid 2px var(--text-color);
+  box-shadow: 1px 1px 4px -2px var(--text-color);
   background-color: var(--accent-color);
   border-radius: 9999px;
   cursor: pointer;
@@ -99,7 +101,7 @@ export default {
     display: flex;
     height: 100%;
     width: 135px;
-    left: 8px;
+    left: 10px;
     align-items: center;
     justify-content: space-between;
     font-weight: 700;
@@ -130,9 +132,11 @@ export default {
 
   &.dark-mode-enabled {
     background-color: $second-color;
+    box-shadow: 0 0 8px -2px rgb(255 255 255 / 50%);
+    width: 96px;
 
     .slider {
-      transform: translateX(0);
+      transform: translateX(-2px);
     }
 
     .icon-dark {

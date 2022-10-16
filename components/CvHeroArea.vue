@@ -97,7 +97,6 @@ export default {
   overflow: hidden;
   margin-bottom: 3rem;
   font-family: $accent-font;
-  opacity: 1;
   z-index: 2;
 
   &::before {
