@@ -7,6 +7,7 @@
   --background-color: #fff;
   --contrasty-color: #000;
   --contrasty-transparent-color: rgba(0, 0, 0, 0.03);
+  --wave-gradient: linear-gradient(90deg, rgba(0, 91, 188, 0.1) 0%, rgba(255, 214, 3, 0.05) 40%, rgba(0, 91, 188, 0.1) 100%);
 }
 
 [data-color-scheme="dark"] {
@@ -14,6 +15,7 @@
   --background-color: #121e2b;
   --contrasty-color: #fff;
   --contrasty-transparent-color: rgba(255, 255, 255, 0.03);
+  --wave-gradient: linear-gradient(90deg, rgba(0, 91, 188, 0.3) 0%, rgba(255, 214, 3, 0.2) 40%, rgba(0, 91, 188, 0.3) 100%);
 
   img {
     filter: invert(1);

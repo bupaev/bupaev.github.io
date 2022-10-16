@@ -98,14 +98,45 @@ export default {
   margin-bottom: 3rem;
   font-family: $accent-font;
   opacity: 1;
-  background-image: repeating-linear-gradient(105deg, var(--contrasty-transparent-color) 0, var(--contrasty-transparent-color) 1px, transparent 3px, transparent 12px);
-
-  // We need background-color to hide vertical menu under Hero area on mobile
-  // cause when user scrolls up JS doesn't recalculate position fast enough and draw menu over Hero area
-  background-color: var(--background-color);
-  transition: background-color 500ms;
-  will-change: background-color;
   z-index: 2;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    bottom: -50%;
+    left: -50%;
+    right: -50%;
+    background: var(--wave-gradient);
+    background-size: 50% 100%;
+    animation: gradient 15s linear infinite;
+    will-change: background-color;
+    transform: rotate(15deg);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: repeating-linear-gradient(105deg, var(--background-color) 0, var(--background-color) 3px, transparent 4px, transparent 13px);
+    transition: background 500ms;
+  }
+
+  .container {
+    z-index: 1;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
 
   @include desktop-only {
     .container {
