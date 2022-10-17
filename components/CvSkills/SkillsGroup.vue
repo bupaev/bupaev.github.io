@@ -100,7 +100,7 @@ export default {
 
       img {
         margin-bottom: 0;
-        transition: margin-bottom 500ms 100ms;
+        transition: margin-bottom var(--dark-light-transition) 100ms;
       }
     }
 
@@ -110,7 +110,7 @@ export default {
       display: block;
       overflow: hidden;
       max-height: 0;
-      transition: max-height 500ms linear;
+      transition: max-height var(--dark-light-transition) linear;
     }
 
     &:hover {

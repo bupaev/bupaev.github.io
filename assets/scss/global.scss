@@ -8,6 +8,7 @@
   --contrasty-color: #000;
   --contrasty-transparent-color: rgba(0, 0, 0, 0.03);
   --wave-gradient: linear-gradient(90deg, rgba(0, 91, 188, 0.1) 0%, rgba(255, 214, 3, 0.05) 40%, rgba(0, 91, 188, 0.1) 100%);
+  --dark-light-transition: 500ms;
 }
 
 [data-color-scheme="dark"] {
@@ -24,7 +25,7 @@
 
 body {
   background-color: var(--background-color);
-  transition: background-color 500ms;
+  transition: background-color var(--dark-light-transition);
   will-change: background-color;
 }
 

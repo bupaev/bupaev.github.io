@@ -102,15 +102,24 @@ export default {
   &::before {
     content: "";
     position: absolute;
-    top: -50%;
-    bottom: -50%;
+    top: -100%;
+    bottom: -100%;
     left: -50%;
     right: -50%;
     background: var(--wave-gradient);
     background-size: 50% 100%;
-    animation: gradient 15s linear infinite;
+    animation: moving-gradient 15s linear infinite;
     will-change: background-color;
     transform: rotate(15deg);
+  }
+
+  @keyframes moving-gradient {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
   }
 
   &::after {
@@ -121,20 +130,41 @@ export default {
     left: 0;
     right: 0;
     background: repeating-linear-gradient(105deg, var(--background-color) 0, var(--background-color) 3px, transparent 4px, transparent 13px);
-    transition: background 500ms;
+  }
+
+  // This transition through 0 opacity is needed because browser can't animate colors in linear gradient above
+  // So we just smoothly appear the gradient with changed colors
+  [data-color-scheme="light"] &::after {
+    animation: transition-to-light calc(var(--dark-light-transition) * 1.2) ease-in;
+  }
+
+  [data-color-scheme="dark"] &::after {
+    animation: transition-to-dark calc(var(--dark-light-transition) * 1.2) ease-in;
+  }
+
+  // We have to use two fully identical keyframes here because if we use only one
+  // browser triggers animation only when we change color scheme to 'light', but not to 'dark'
+  // and vice versa if style for 'dark' is defined before than 'light' style
+  @keyframes transition-to-light {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes transition-to-dark {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
   .container {
     z-index: 1;
-  }
-
-  @keyframes gradient {
-    0% {
-      background-position: 0 0;
-    }
-    100% {
-      background-position: 200% 0;
-    }
   }
 
   @include desktop-only {
