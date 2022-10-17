@@ -94,54 +94,37 @@ export default {
   data () {
     return {
       jobs,
-      years,
-      componentWidth: 0
+      years
     }
   },
 
   /***
    * Algorithm is simple:
-   * 1. Get width of one millisecond on timeline in pixels
+   * 1. Get width of one millisecond on timeline in %
    * 2. Get start/end date in millisecond
-   * 3. Get start/end date in pixels
-   * 4. Set position of job in pixels
+   * 3. Get start/end date in %
+   * 4. Set position of job in %
    */
-
-  computed: {
-    millisecondWidth () {
-      const timelineDurationInMs = new Date(endYear, 0, 1).getTime() - new Date(startYear, 0, 1).getTime()
-
-      return this.componentWidth / timelineDurationInMs
-    },
-
-    // Need this shift for jobs cause we show year marker in the center of year DOM-element
-    halfYearShift () {
-      return this.componentWidth / ((endYear - startYear) * 2)
-    }
-
-  },
-
-  mounted () {
-    const resizeObserver = new ResizeObserver((entries) => {
-      const cr = entries[0].contentRect
-      this.componentWidth = cr.width
-    })
-
-    resizeObserver.observe(this.$el)
-  },
-
   methods: {
+    /**
+     * @param isoStringDate i.e. 2021-10-23
+     * @returns {number} %
+     */
     getDatePosition (isoStringDate) {
+      const timelineDurationInMs = new Date(endYear, 0, 1).getTime() - new Date(startYear, 0, 1).getTime()
       const timeFromStartInMs = new Date(isoStringDate).getTime() - new Date(startYear, 0, 1).getTime()
+      const millisecondWidth = 100 / timelineDurationInMs
 
-      return timeFromStartInMs * this.millisecondWidth
+      return timeFromStartInMs * millisecondWidth
     },
 
     getJobPositionStyle (job) {
       const starPosition = this.getDatePosition(job.startDate)
       const width = this.getDatePosition(job.endDate) - starPosition
+      // Need this shift for jobs because we show year marker in the center of year DOM-element
+      const halfYearShift = 100 / ((endYear - startYear) * 2)
 
-      return `left: ${starPosition + this.halfYearShift}px; width: ${width - 1}px; height: ${(job.height || 1) * 60}%; z-index: ${job.zIndex || 0}`
+      return `left: ${starPosition + halfYearShift}%; width: calc(${width}% - 1px); height: ${(job.height || 1) * 60}%; z-index: ${job.zIndex || 0}`
     },
 
     goToJob(id) {
