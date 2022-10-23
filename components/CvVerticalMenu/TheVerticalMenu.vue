@@ -102,7 +102,8 @@ export default {
       this.markerOffset = this.getRescaledOffset(windowTopScrollY)
 
       // when user reaches end of the page make visible area marker equals size of menu item for better look
-      if (windowBottomScrollY === document.body.clientHeight) {
+      // P.S. by some reason windowBottomScrollY can be half pixel more thant clientHeight
+      if (windowBottomScrollY >= document.body.clientHeight) {
         this.markerHeight = this.menuItemHeight
         return
       }
