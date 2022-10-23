@@ -329,7 +329,7 @@ export default {
     margin-left: -50px;
     margin-right: 32px;
     transform: skew(-15deg);
-    // filter: drop-shadow(2px 2px 10px rgba(255, 255, 255, 0.2));
+    border-radius: 12px;
 
     &::after {
       content: "";
