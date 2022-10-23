@@ -88,9 +88,7 @@ export default {
   left: 6px;
   width: 100px;
   height: 40px;
-  // border: solid 2px var(--text-color);
-  box-shadow: 1px 1px 4px -2px var(--text-color);
-  background-color: var(--accent-color);
+  border: 2px solid var(--accent-color);
   border-radius: 9999px;
   cursor: pointer;
   overflow: hidden;
@@ -101,7 +99,7 @@ export default {
     display: flex;
     height: 100%;
     width: 135px;
-    left: 10px;
+    left: 7px;
     align-items: center;
     justify-content: space-between;
     font-weight: 700;
@@ -120,27 +118,24 @@ export default {
     }
   }
 
-  .label-light {
-    padding-top: 1px;
-    color: $black-ter;
-  }
-
+  .label-light,
   .label-dark {
     padding-top: 1px;
-    color: $white-ter;
+    color: var(--accent-color);
   }
 
   &.dark-mode-enabled {
-    background-color: $second-color;
+    // border: 2px solid $white-ter;
     box-shadow: 0 0 8px -2px rgb(255 255 255 / 50%);
     width: 96px;
 
     .slider {
-      transform: translateX(-2px);
+      transform: translateX(0);
     }
 
     .icon-dark {
       display: block;
+      filter: none; // disable global invert
     }
 
     .icon-light {
