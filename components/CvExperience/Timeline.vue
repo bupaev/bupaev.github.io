@@ -9,13 +9,13 @@
         @click="goToJob(job.id)"
       >
         <div class="text-wrapper">
-          {{ job.position }}, <span class="has-text-weight-normal">{{ job.company }}</span>
+          {{ job.position }}{{ job.company ? ',' : '' }} <span class="has-text-weight-normal">{{ job.company }}</span>
         </div>
       </div>
     </div>
     <div class="years-wrapper">
-      <div v-for="i in years" :key="i" class="year">
-        {{ i }}
+      <div v-for="(year, index) in years" :key="year" class="year" :style="getYearPositionStyle(index)">
+        {{ year - 2000 }}
       </div>
     </div>
   </div>
@@ -23,9 +23,23 @@
 
 <script>
 const startYear = 2009
-const endYear = 2022
+const endYear = 2024
 const years = Array(endYear - startYear).fill(1).map((_, i) => startYear + i)
 const jobs = [
+  {
+    position: 'Lead Front-end Engineer',
+    company: 'EPAM',
+    startDate: '2022-01',
+    endDate: '2022-12',
+    id: 'holmusk'
+  },
+  {
+    position: '🤓',
+    skills: 'Rest and peace',
+    startDate: '2021-05',
+    endDate: '2022-01',
+    id: 'holmusk'
+  },
   {
     position: 'Lead Front-end developer',
     company: 'Holmusk',
@@ -111,11 +125,12 @@ export default {
      * @returns {number} %
      */
     getDatePosition (isoStringDate) {
-      const timelineDurationInMs = new Date(endYear, 0, 1).getTime() - new Date(startYear, 0, 1).getTime()
-      const timeFromStartInMs = new Date(isoStringDate).getTime() - new Date(startYear, 0, 1).getTime()
-      const millisecondWidth = 100 / timelineDurationInMs
+      const timelineDurationInSec = (new Date(endYear, 0, 1).getTime() - new Date(startYear, 0, 1).getTime()) / 1000
+      const timeFromStartInSec = (new Date(isoStringDate).getTime() - new Date(startYear, 0, 1).getTime()) / 1000
+      const shiftedPosition = timeFromStartInSec * Math.sqrt(timeFromStartInSec)
+      const normalizer = 100 / (timelineDurationInSec * Math.sqrt(timelineDurationInSec))
 
-      return timeFromStartInMs * millisecondWidth
+      return shiftedPosition * normalizer
     },
 
     getJobPositionStyle (job) {
@@ -125,6 +140,13 @@ export default {
       const halfYearShift = 100 / ((endYear - startYear) * 2)
 
       return `left: ${starPosition + halfYearShift}%; width: calc(${width}% - 1px); height: ${(job.height || 1) * 60}%; z-index: ${job.zIndex || 0}`
+    },
+
+    getYearPositionStyle (index) {
+      const starPosition = this.getDatePosition(`${startYear + index}-01-01`)
+      const width = this.getDatePosition(`${startYear + index + 1}-01-01`) - starPosition
+
+      return `left: ${starPosition}%; width: ${width}%`
     },
 
     goToJob(id) {
@@ -163,7 +185,7 @@ export default {
     position: absolute;
     bottom: 0;
     height: 100%;
-    outline: 1px solid var(--text-color);
+    border: 1px solid var(--text-color);
     font-size: min(1vw, 13px);
     line-height: min(1.3vw, 16px);
     font-weight: 700;
@@ -172,6 +194,10 @@ export default {
     cursor: pointer;
     overflow: hidden;
     transition: background-color 200ms;
+
+    &:first-of-type {
+      border-right-width: 0;
+    }
 
     &:hover {
       background-color: $accent-color;
@@ -188,15 +214,15 @@ export default {
 
   .years-wrapper {
     position: absolute;
-    bottom: 0;
+    bottom: 30px;
     width: 100%;
-    display: flex;
-    flex-wrap: nowrap;
+    // display: flex;
+    // flex-wrap: nowrap;
     z-index: 5;
 
     .year {
-      position: relative;
-      flex: 1 0 auto;
+      top: 0;
+      position: absolute;
       height: $year-height;
       border-top: 1px solid var(--text-color);
       padding-top: 2px;
