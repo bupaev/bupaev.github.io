@@ -4,6 +4,7 @@
       <div
         v-for="job in jobs"
         :key="job.company"
+        :title="job.skills"
         :style="getJobPositionStyle(job)"
         class="job"
         @click="goToJob(job.id)"
@@ -29,21 +30,22 @@ const jobs = [
   {
     position: 'Lead Front-end Engineer',
     company: 'EPAM',
+    skills: 'HTML, SCSS, Vanilla JS, TS, team leading, UX/UI-design',
     startDate: '2022-01',
-    endDate: '2022-12',
-    id: 'holmusk'
+    endDate: '2023-06',
+    id: 'epam'
   },
   {
-    position: '🤓',
-    skills: 'Rest and peace',
+    position: 'Sabbatical',
+    skills: 'Take a break and some NuxtJS',
     startDate: '2021-05',
     endDate: '2022-01',
-    id: 'holmusk'
+    id: 'sabbatical'
   },
   {
     position: 'Lead Front-end developer',
     company: 'Holmusk',
-    skills: 'VueJS, Vuetify, TypeScript',
+    skills: 'VueJS, Vuetify, TypeScript, UX-design',
     startDate: '2018-07',
     endDate: '2021-05',
     id: 'holmusk'
@@ -51,7 +53,7 @@ const jobs = [
   {
     position: 'Lead UI/Front-end developer',
     company: 'Codenetix',
-    skills: 'ES6, React, Gatsby',
+    skills: 'ES6, React, Gatsby, UX/UI-design',
     startDate: '2016-11',
     endDate: '2018-07',
     id: 'codenetix'
@@ -59,7 +61,7 @@ const jobs = [
   {
     position: 'Front-end developer',
     company: 'Bandlab',
-    skills: 'React, Angular, VueJS',
+    skills: 'Angular 1.x, Web Audio API',
     startDate: '2014-09',
     endDate: '2016-10',
     id: 'bandlab'
@@ -76,7 +78,7 @@ const jobs = [
   {
     position: 'Web developer',
     company: 'Mir IT',
-    skills: 'React, Angular, VueJS',
+    skills: 'C#, .NET, HTML, CSS, jQuery',
     startDate: '2011-06',
     endDate: '2012-07',
     zIndex: 2,
@@ -85,7 +87,7 @@ const jobs = [
   {
     position: 'Teaching Assistant',
     company: 'Omsk State Technical University',
-    skills: 'React, Angular, VueJS',
+    skills: 'AI',
     startDate: '2009-09',
     endDate: '2014-09',
     height: 1.6,
@@ -94,7 +96,7 @@ const jobs = [
   {
     position: 'Software developer',
     company: 'Freelance',
-    skills: 'React, Angular, VueJS',
+    skills: 'C#, .NET, HTML, CSS, jQuery',
     startDate: '2008-08',
     endDate: '2011-06',
     id: 'freelance',
