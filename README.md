@@ -20,3 +20,10 @@ $ npm run start
 # generate static project
 $ npm run generate
 ```
+
+There is known issue with Node 17+ related to OpenSSL. It can be fixed by the following command
+```bash
+export NODE_OPTIONS=--openssl-legacy-provider
+```
+## Semantic Commit Messages
+For commit naming is [Semantic commit types](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716) are used.
