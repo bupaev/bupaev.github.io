@@ -1,88 +1,52 @@
 <template>
-  <div class="timeline">
-    <div class="jobs-wrapper">
-      <div
-        v-for="job in jobs"
-        :key="job.company"
-        :title="job.skills"
-        :style="getJobPositionStyle(job)"
-        class="job"
-        @click="goToJob(job.id)"
-      >
-        <div class="text-wrapper">
-          {{ job.position }}{{ job.company ? ',' : '' }} <span class="has-text-weight-normal">{{ job.company }}</span>
+  <div
+    ref="timeline"
+    class="timeline"
+  >
+    <div
+      v-for="(jobRow, index) in jobRows"
+      :key="index"
+      class="job-row"
+    >
+      <div class="jobs-wrapper">
+        <div
+          v-for="job in jobRow"
+          :key="job.company"
+          :title="job.skills"
+          :style="getJobPositionStyle(job, jobRow)"
+          class="job"
+          @click="goToJob(job.id)"
+        >
+          <div class="job-text">
+            {{ job.position }}{{ job.company ? ',' : '' }}
+            <span class="has-text-weight-normal">{{ job.company }}</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="years-wrapper">
-      <div v-for="(year, index) in years" :key="year" class="year" :style="getYearPositionStyle(index)">
-        {{ year - 2000 }}
+      <div class="years-wrapper">
+        <div
+          v-for="(year, yearIndex) in yearsMarks(jobRow)"
+          :key="year"
+          class="year"
+          :style="getYearPositionStyle(yearIndex, jobRow)"
+        >
+          {{ year }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-const startYear = 2009
-const endYear = 2024
-const years = Array(endYear - startYear).fill(1).map((_, i) => startYear + i)
 const jobs = [
   {
-    position: 'Lead Front-end Engineer',
-    company: 'EPAM',
-    skills: 'HTML, SCSS, Vanilla JS, TS, team leading, UX/UI-design',
-    startDate: '2022-01',
-    endDate: '2023-06',
-    id: 'epam'
-  },
-  {
-    position: 'Sabbatical',
-    skills: 'Take a break and some NuxtJS',
-    startDate: '2021-05',
-    endDate: '2022-01',
-    id: 'sabbatical'
-  },
-  {
-    position: 'Lead Front-end developer',
-    company: 'Holmusk',
-    skills: 'VueJS, Vuetify, TypeScript, UX-design',
-    startDate: '2018-07',
-    endDate: '2021-05',
-    id: 'holmusk'
-  },
-  {
-    position: 'Lead UI/Front-end developer',
-    company: 'Codenetix',
-    skills: 'ES6, React, Gatsby, UX/UI-design',
-    startDate: '2016-11',
-    endDate: '2018-07',
-    id: 'codenetix'
-  },
-  {
-    position: 'Front-end developer',
-    company: 'Bandlab',
-    skills: 'Angular 1.x, Web Audio API',
-    startDate: '2014-09',
-    endDate: '2016-10',
-    id: 'bandlab'
-  },
-  {
-    position: 'Front-end developer',
-    company: 'DXC Luxoft',
-    skills: 'React, Angular, VueJS',
-    startDate: '2012-07',
-    endDate: '2014-09',
-    zIndex: 2,
-    id: 'luxoft'
-  },
-  {
-    position: 'Web developer',
-    company: 'Mir IT',
+    position: 'Software developer',
+    company: 'Freelance',
     skills: 'C#, .NET, HTML, CSS, jQuery',
-    startDate: '2011-06',
-    endDate: '2012-07',
-    zIndex: 2,
-    id: 'mirIt'
+    startDate: '2008-08',
+    endDate: '2011-06',
+    id: 'freelance',
+    zIndex: 1
   },
   {
     position: 'Teaching Assistant',
@@ -94,13 +58,61 @@ const jobs = [
     id: 'omstu'
   },
   {
-    position: 'Software developer',
-    company: 'Freelance',
+    position: 'Web developer',
+    company: 'Mir IT',
     skills: 'C#, .NET, HTML, CSS, jQuery',
-    startDate: '2008-08',
-    endDate: '2011-06',
-    id: 'freelance',
-    zIndex: 1
+    startDate: '2011-06',
+    endDate: '2012-07',
+    zIndex: 2,
+    id: 'mirIt'
+  },
+  {
+    position: 'Front-end developer',
+    company: 'DXC Luxoft',
+    skills: 'React, Angular, VueJS',
+    startDate: '2012-07',
+    endDate: '2014-09',
+    zIndex: 2,
+    id: 'luxoft'
+  },
+  {
+    position: 'Front-end developer',
+    company: 'Bandlab',
+    skills: 'Angular 1.x, Web Audio API',
+    startDate: '2014-09',
+    endDate: '2016-10',
+    id: 'bandlab'
+  },
+  {
+    position: 'Lead UI/Front-end developer',
+    company: 'Codenetix',
+    skills: 'ES6, React, Gatsby, UX/UI-design',
+    startDate: '2016-11',
+    endDate: '2018-07',
+    id: 'codenetix'
+  },
+  {
+    position: 'Lead Front-end developer',
+    company: 'Holmusk',
+    skills: 'VueJS, Vuetify, TypeScript, UX-design',
+    startDate: '2018-07',
+    endDate: '2021-05',
+    id: 'holmusk'
+  },
+  {
+    position: 'Sabbatical ⛱️',
+    skills: 'Take a break and some NuxtJS',
+    startDate: '2021-05',
+    endDate: '2022-01',
+    id: 'sabbatical'
+  },
+  {
+    position: 'Lead Front-end Engineer',
+    company: 'EPAM',
+    skills: 'HTML, SCSS, Vanilla JS, TS, team leading, UX/UI-design',
+    startDate: '2022-01',
+    endDate: '2023-06',
+    id: 'epam'
   }
 ]
 
@@ -110,8 +122,17 @@ export default {
   data () {
     return {
       jobs,
-      years
+      jobRows: [],
+      yearWidth: 0
     }
+  },
+
+  mounted () {
+    window.addEventListener('resize', () => {
+      this.updateJobRows()
+    })
+
+    this.updateJobRows()
   },
 
   /***
@@ -122,36 +143,124 @@ export default {
    * 4. Set position of job in %
    */
   methods: {
+    getJobRowTimelineWidth (jobRow) {
+      const wrapperWidth = this.$refs.timeline?.offsetWidth
+      const firstRowLength = this.jobRows[0].length
+
+      this.yearWidth = wrapperWidth / firstRowLength
+    },
+
+    updateJobRows () {
+      this.jobRows = this.getJobRows()
+    },
     /**
+     * Split timeline to several lines if needed, based on minimal allowed year's size in px (e.g. one year has to be minimum 150px)
+     *
+     * Algorithm #1 - Timeline length in years depends only on max number of years that can fit in container width.
+     *
+     * 1. Find integer amount of years that can fit in available space (e.g. we have 1000px container,
+     * if one year has to be minimum 150px, we can fit 1000/150 = 6 years to the container)
+     * 2. Split jobs array to array of arrays where each subarray contains jobs inside time interval that calculated in (1),
+     * by adding to first row maximum jobs that fit to the calculated time interval (e.g. find all jobs that fit to the first 6 years
+     * and add them to the first line, then repeat the process for the next 6 years and so on)
+     *
+     * Algorithm #2 - The whole timeline has to be split to equally long lines of years,
+     * that based on max number of years that can fit in container width.
+     *
+     * @returns {[[job]]}
+     */
+    getJobRows (algorithm = 1) {
+      const yearMinSize = 120
+      const wrapperWidth = this.$refs.timeline?.offsetWidth || 1000
+      const yearsPerLineMaxCount = Math.floor(wrapperWidth / yearMinSize)
+
+      if (algorithm === 1) {
+        const firstJobStartYear = new Date(jobs[0].startDate).getFullYear()
+        const lastJobEndYear = new Date(jobs[jobs.length - 1].endDate).getFullYear()
+        const totalYearsCount = lastJobEndYear - firstJobStartYear + 1
+        const linesCount = Math.ceil(totalYearsCount / yearsPerLineMaxCount)
+        const yearsToShow = Math.ceil(totalYearsCount / linesCount) * linesCount
+        const yearToShowPerLineCount = yearsToShow / linesCount
+
+        console.log('DEBUG: totalYearsCount:', totalYearsCount)
+        console.log('DEBUG: yearsPerLineMaxCount:', yearsPerLineMaxCount)
+        console.log('DEBUG: linesCount:', linesCount)
+        console.log('DEBUG: yearsToShowCount:', yearsToShow)
+        console.log('DEBUG: yearToShowPerLineCount:', yearToShowPerLineCount)
+
+        const lineBoundaries = [
+          firstJobStartYear,
+          ...Array(linesCount - 1).fill(firstJobStartYear).map((_, index) => firstJobStartYear + (index + 1) * yearToShowPerLineCount),
+          lastJobEndYear
+        ]
+
+        const jobRows = Array(linesCount).fill([]).map((_, index) => {
+          return jobs.filter(
+            job => new Date(job.startDate).getFullYear() >= lineBoundaries[index] &&
+              new Date(job.startDate).getFullYear() <= lineBoundaries[index + 1]
+          )
+        })
+
+        console.log('DEBUG: jobRows:', jobRows, lineBoundaries)
+
+        // Algorithm #1
+        return jobs.reduce((acc, currJob) => {
+          const lastArray = acc[acc.length - 1]
+          const lastArrayFirstJobStartYear = lastArray ? new Date(lastArray[0].startDate).getFullYear() : 2008
+          const currJobEndYear = new Date(currJob.endDate).getFullYear()
+
+          if (!lastArray || currJobEndYear - lastArrayFirstJobStartYear > yearToShowPerLineCount) {
+            acc.push([currJob])
+          } else {
+            lastArray.push(currJob)
+          }
+          return acc
+        }, [])
+      } else {
+        // Algorithm #2
+      }
+    },
+
+    /**
+     * Calculate position of specific date on timeline in % based on value of iso date strings.
+     * Can be linear or non-linear (non-linear scale compresses past timeline, to give more space for the latest jobs)
+     *
      * @param isoStringDate i.e. 2021-10-23
+     * @param timelineRange {Object}
      * @returns {number} %
      */
-    getDatePosition (isoStringDate) {
-      const timelineDurationInSec = (new Date(endYear, 0, 1).getTime() - new Date(startYear, 0, 1).getTime()) / 1000
-      const timeFromStartInSec = (new Date(isoStringDate).getTime() - new Date(startYear, 0, 1).getTime()) / 1000
-      const shiftedPosition = timeFromStartInSec * Math.sqrt(timeFromStartInSec)
-      const normalizer = 100 / (timelineDurationInSec * Math.sqrt(timelineDurationInSec))
+    getDatePosition (isoStringDate, timelineRange) {
+      const nonLinearCoefficient = 1 // 1 is for linear, to make it non-linear use value Math.sqrt(timeFromStartInSec)
+      const timelineDurationInSec = (new Date(timelineRange.endYear, 0, 1).getTime() - new Date(timelineRange.startYear, 0, 1).getTime()) / 1000
+      const timeFromStartInSec = (new Date(isoStringDate).getTime() - new Date(timelineRange.startYear, 0, 1).getTime()) / 1000
+      const transformedPosition = timeFromStartInSec * nonLinearCoefficient
+      const secondWidthInPercent = 100 / (timelineDurationInSec * nonLinearCoefficient)
 
-      return shiftedPosition * normalizer
+      return transformedPosition * secondWidthInPercent
     },
 
-    getJobPositionStyle (job) {
-      const starPosition = this.getDatePosition(job.startDate)
-      const width = this.getDatePosition(job.endDate) - starPosition
+    getJobPositionStyle (job, jobRow) {
+      const timelineRange = this.getTimelineRange(jobRow)
+      const starPosition = this.getDatePosition(job.startDate, timelineRange)
+      const width = this.getDatePosition(job.endDate, timelineRange) - starPosition
       // Need this shift for jobs because we show year marker in the center of year DOM-element
-      const halfYearShift = 100 / ((endYear - startYear) * 2)
+      const halfYearShift = 100 / ((timelineRange.endYear - timelineRange.startYear) * 2)
 
-      return `left: ${starPosition + halfYearShift}%; width: calc(${width}% - 1px); height: ${(job.height || 1) * 60}%; z-index: ${job.zIndex || 0}`
+      return `left: ${starPosition + halfYearShift}%;
+              width: calc(${width}% - 1px);
+              height: ${(job.height || 1) * 60}%;
+              z-index: ${job.zIndex || 0}`
     },
 
-    getYearPositionStyle (index) {
-      const starPosition = this.getDatePosition(`${startYear + index}-01-01`)
-      const width = this.getDatePosition(`${startYear + index + 1}-01-01`) - starPosition
+    getYearPositionStyle (index, jobRow) {
+      const timelineRange = this.getTimelineRange(jobRow)
+      const starPosition = this.getDatePosition(`${timelineRange.startYear + index}-01-01`, timelineRange)
+      const width = this.getDatePosition(`${timelineRange.startYear + index + 1}-01-01`, timelineRange) - starPosition
 
       return `left: ${starPosition}%; width: ${width}%`
     },
 
-    goToJob(id) {
+    goToJob (id) {
       const jobTopOffset = document.getElementById('experience').offsetTop + document.getElementById(id).offsetTop
 
       window.scrollTo({
@@ -159,6 +268,25 @@ export default {
         left: 0,
         behavior: 'smooth'
       })
+    },
+
+    /**
+     * Return list of year numbers for time arrow based on job years
+     *
+     * @param jobRow
+     * @returns {[number]} - i.e. [2008, 2009, 2011, 2012]
+     */
+    yearsMarks (jobRow) {
+      const timelineRange = this.getTimelineRange(jobRow)
+      const marks = Array(timelineRange.endYear - timelineRange.startYear + 1).fill(1).map((_, i) => timelineRange.startYear + i)
+      return marks
+    },
+
+    getTimelineRange (jobRow) {
+      return {
+        startYear: new Date(jobRow[0].startDate).getFullYear(),
+        endYear: new Date(jobRow[jobRow.length - 1].endDate).getFullYear()
+      }
     }
   }
 }
@@ -172,7 +300,12 @@ export default {
 
   position: relative;
   width: 100%;
-  height: 120px;
+
+  .job-row {
+    position: relative;
+    height: 120px;
+    width: 100%;
+  }
 
   .jobs-wrapper {
     position: absolute;
@@ -207,7 +340,7 @@ export default {
       z-index: 3 !important;
     }
 
-    .text-wrapper {
+    .job-text {
       transform: skew(15deg);
     }
 

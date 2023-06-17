@@ -108,7 +108,7 @@ export default {
     right: -50%;
     background: var(--wave-gradient);
     background-size: 50% 100%;
-    animation: moving-gradient 15s linear infinite;
+    // animation: moving-gradient 15s linear infinite;
     will-change: background-color;
     transform: rotate(15deg);
   }
