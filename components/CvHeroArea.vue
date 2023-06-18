@@ -328,8 +328,8 @@ export default {
     height: 472px;
     margin-left: -50px;
     margin-right: 32px;
-    transform: skew(-15deg);
     border-radius: 12px;
+    transform: skew(-15deg);
 
     &::after {
       content: "";
@@ -342,20 +342,22 @@ export default {
     }
 
     @include desktop-only {
-      margin-right: -200px;
       height: 550px;
       margin-left: auto;
+      margin-right: -200px;
     }
 
     @include touch {
       height: 500px;
-      margin-right: -80px;
       margin-left: auto;
+      margin-right: -80px;
+      border-radius: 0;
     }
 
     // has to be placed after touch
     @include tablet-only {
       height: 100%;
+      border-radius: 0;
     }
 
     img {
