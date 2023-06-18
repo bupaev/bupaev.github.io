@@ -25,6 +25,11 @@
       </div>
       <div class="years-wrapper">
         <div
+          v-if="jobRowIndex === jobRows.length - 1"
+          class="now-marker"
+          :style="getNowMarkPositionStyle()"
+        />
+        <div
           v-for="(year, yearIndex) in yearsMarks(jobRowIndex)"
           :key="year"
           class="year"
@@ -32,11 +37,6 @@
         >
           {{ year }}
         </div>
-        <div
-          v-if="jobRowIndex === jobRows.length - 1"
-          class="now-marker"
-          :style="getNowMarkPositionStyle()"
-        />
       </div>
     </div>
   </div>
@@ -383,8 +383,6 @@ export default {
     position: absolute;
     bottom: 30px;
     width: 100%;
-    // display: flex;
-    // flex-wrap: nowrap;
     z-index: 5;
 
     .year {
@@ -407,17 +405,15 @@ export default {
         background-color: var(--background-color);
       }
 
-      &:last-of-type {
-        &::before {
-          @include arrow(var(--text-color));
+      &:last-child::before {
+        @include arrow(var(--text-color));
 
-          content: "";
-          border-width: 1px !important;
-          transform: rotate(-135deg);
-          right: 2px;
-          top: 1px;
-          border-radius: 0;
-        }
+        content: "";
+        border-width: 1px !important;
+        transform: rotate(-135deg);
+        right: 2px;
+        top: 1px;
+        border-radius: 0;
       }
     }
   }
@@ -436,8 +432,8 @@ export default {
     &::after {
       content: "NOW";
       position: absolute;
-      top: -30px;
-      left: 0;
+      top: -32px;
+      left: 2px;
       transform: rotate(-75deg);
       font-size: 0.7em;
       font-weight: 700;
