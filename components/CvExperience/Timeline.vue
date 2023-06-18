@@ -14,7 +14,7 @@
           :key="job.company"
           :title="job.skills"
           :style="getJobPositionStyle(job, jobRowIndex)"
-          class="job"
+          :class="['job', {'is-sabbatical' : job.isSabbatical}]"
           @click="goToJob(job.id)"
         >
           <div class="job-text">
@@ -32,6 +32,11 @@
         >
           {{ year }}
         </div>
+        <div
+          v-if="jobRowIndex === jobRows.length - 1"
+          class="now-marker"
+          :style="getNowMarkPositionStyle()"
+        />
       </div>
     </div>
   </div>
@@ -103,19 +108,19 @@ const jobs = [
     position: 'Sabbatical ⛱️',
     skills: 'Take a break and some NuxtJS',
     startDate: '2021-05',
-    endDate: '2022-01',
-    id: 'sabbatical'
+    endDate: '2021-12',
+    isSabbatical: true
   },
   {
-    position: 'Lead Front-end Engineer',
+    position: 'Lead Front-end engineer',
     company: 'EPAM',
-    skills: 'HTML, SCSS, Vanilla JS, TS, team leading, UX/UI-design',
-    startDate: '2022-01',
-    endDate: '2023-06',
+    skills: 'HTML, SCSS, Vanilla JS, TS, Team leading, UX/UI-design',
+    startDate: '2021-12',
+    endDate: new Date().toISOString(),
     id: 'epam'
   }
 ]
-const optimalYearWidth = [150, 70]
+const optimalYearWidth = [110, 80]
 
 export default {
   name: 'Timeline',
@@ -150,7 +155,7 @@ export default {
     },
 
     /**
-     * Return boundary years for each line of time
+     * Return year intervals for each row of timeline
      *
      * @returns {{startYear: number, endYear: number}[]} e.g. [[2008, 2015], [2016, 2023]] or [[2008, 2011], [2012, 2015], [2016, 2019], [2020, 2023]]
      */
@@ -158,9 +163,11 @@ export default {
       // Add 1 year to real date 2008-08 because otherwise we'll draw timeline from 2007-06, that creates a lot of empty space.
       // With + 1 year we draw from 2008-06
       const firstJobStartYear = new Date(jobs[0].startDate).getFullYear() + 1
-      const lastJobEndYear = new Date(jobs[jobs.length - 1].endDate).getFullYear()
+      const lastJobEndDate = new Date(jobs[jobs.length - 1].endDate)
+      // If last job reach end of the timeline (current year + half year) we add additional space to the right side of timeline
+      const lastJobEndYear = lastJobEndDate.getFullYear() + (lastJobEndDate.getMonth() >= 5) ?? 1
       const wrapperWidth = this.$refs.timeline?.offsetWidth || 1000
-      const yearMinWidth = this.$refs.timeline?.offsetWidth > 800 ? optimalYearWidth[0] : optimalYearWidth[1]
+      const yearMinWidth = this.$refs.timeline?.offsetWidth > 580 ? optimalYearWidth[0] : optimalYearWidth[1]
       const yearsPerLineMaxCount = Math.floor(wrapperWidth / yearMinWidth)
       const totalYearsCount = lastJobEndYear - firstJobStartYear + 1
       const linesCount = Math.ceil(totalYearsCount / yearsPerLineMaxCount)
@@ -198,10 +205,10 @@ export default {
             const rowEndYear = this.rowsRanges[index].endYear
 
             return (jobStartYear >= rowStartYear && jobEndYear <= rowEndYear) ||
-              // Add JOB that started in the previous intervals and ended it in this one.
+              // Add a job that started in the previous intervals and ended it in this one.
               // Subtract one year because on a screen timeline extended by half year to both sides
               (jobStartYear <= rowStartYear - 1 && jobEndYear >= rowStartYear - 1) ||
-              // Add JOB that started in this interval and ended in the next ones
+              // Add a job that started in this interval and ended in the next ones
               (jobStartYear <= rowEndYear + 1 && jobEndYear >= rowEndYear + 1)
           })
         }
@@ -248,11 +255,21 @@ export default {
       return `left: ${starPosition}%; width: ${width}%`
     },
 
+    getNowMarkPositionStyle () {
+      const rowRange = this.rowsRanges[this.rowsRanges.length - 1]
+      const starPosition = this.getDatePosition(new Date().toISOString(), rowRange)
+      const halfYearShift = 100 / ((rowRange.endYear - rowRange.startYear) * 2)
+
+      return `left: calc(${starPosition + halfYearShift}% - 18px);`
+    },
+
     goToJob (id) {
-      const jobTopOffset = document.getElementById('experience').offsetTop + document.getElementById(id).offsetTop
+      if (!id) {
+        return
+      }
 
       window.scrollTo({
-        top: jobTopOffset,
+        top: document.getElementById('experience').offsetTop + document.getElementById(id).offsetTop,
         left: 0,
         behavior: 'smooth'
       })
@@ -283,7 +300,7 @@ export default {
   width: 100%;
   overflow: hidden;
 
-  // On less than 1050px Hero Area texts are too close to VerticalMenu
+  // Use more space on tablet and mobile
   @media (max-width: $desktop) {
     margin-left: -0.5rem;
     margin-right: -1rem;
@@ -299,8 +316,13 @@ export default {
     &:first-child {
       mask-image: linear-gradient(105deg, #000 calc(100% - 50px), transparent calc(100% - 20px));
     }
+
     &:last-child {
       mask-image: linear-gradient(105deg, transparent 20px, #000 50px);
+
+      .job:last-child {
+        border-right-width: 0;
+      }
     }
   }
 
@@ -313,12 +335,13 @@ export default {
     transform: skew(-15deg);
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   .job {
     position: absolute;
     bottom: -1px;
     height: 100%;
     border: 1px solid var(--text-color);
-    font-size: clamp(11px, 1vw, 13px);
+    font-size: 13px;
     line-height: 1.2;
     word-break: break-word;
     font-weight: 700;
@@ -328,6 +351,23 @@ export default {
     overflow: hidden;
     transition: background-color 200ms;
 
+    @media (max-width: $desktop) {
+      font-size: 12px;
+    }
+
+    @media (max-width: $small-mobile) {
+      font-size: 11px;
+    }
+
+    &.is-sabbatical {
+      background-color: rgba($secondary-light-color, 0.5);
+
+      &:hover {
+        background-color: $secondary-light-color;
+      }
+    }
+
+    /* stylelint-disable-next-line no-descending-specificity */
     &:hover {
       background-color: $accent-color;
       color: #000;
@@ -337,8 +377,6 @@ export default {
     .job-text {
       transform: skew(15deg);
     }
-
-    // @include text-contour(#fff, 1px);
   }
 
   .years-wrapper {
@@ -365,7 +403,7 @@ export default {
 
         content: "";
         top: -4px;
-        left: calc(50% - 2px);
+        left: calc(50% - 4px);
         background-color: var(--background-color);
       }
 
@@ -381,6 +419,29 @@ export default {
           border-radius: 0;
         }
       }
+    }
+  }
+
+  .now-marker {
+    top: -4px;
+    margin-left: min(1vw, 14px); /* @TODO: Replace this hack with proper fix of Marker position */
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 2px var(--accent-color) solid;
+    border-radius: 100%;
+    background-color: var(--background-color);
+    z-index: 1;
+
+    &::after {
+      content: "NOW";
+      position: absolute;
+      top: -30px;
+      left: 0;
+      transform: rotate(-75deg);
+      font-size: 0.7em;
+      font-weight: 700;
+      color: var(--accent-color);
     }
   }
 }

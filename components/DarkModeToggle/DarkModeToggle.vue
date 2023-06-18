@@ -131,7 +131,7 @@ export default {
   }
 
   &.dark-mode-enabled {
-    background-color: $second-color;
+    background-color: $secondary-color;
     box-shadow: 0 0 8px -2px rgb(255 255 255 / 50%);
     width: 96px;
 
