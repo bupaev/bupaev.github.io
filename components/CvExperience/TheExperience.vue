@@ -3,7 +3,7 @@
     <h2 class="title is-2">
       Experience
     </h2>
-    <Timeline class="mt-5 mb-4 is-hidden-touch" />
+    <Timeline class="mt-5 mb-4" />
     <div class="content">
       <section id="holmusk" class="job-record">
         <h3>

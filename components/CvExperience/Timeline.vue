@@ -4,8 +4,8 @@
     class="timeline"
   >
     <div
-      v-for="(jobRow, index) in jobRows"
-      :key="index"
+      v-for="(jobRow, jobRowIndex) in jobRows"
+      :key="jobRowIndex"
       class="job-row"
     >
       <div class="jobs-wrapper">
@@ -13,7 +13,7 @@
           v-for="job in jobRow"
           :key="job.company"
           :title="job.skills"
-          :style="getJobPositionStyle(job, jobRow)"
+          :style="getJobPositionStyle(job, jobRowIndex)"
           class="job"
           @click="goToJob(job.id)"
         >
@@ -25,10 +25,10 @@
       </div>
       <div class="years-wrapper">
         <div
-          v-for="(year, yearIndex) in yearsMarks(jobRow)"
+          v-for="(year, yearIndex) in yearsMarks(jobRowIndex)"
           :key="year"
           class="year"
-          :style="getYearPositionStyle(yearIndex, jobRow)"
+          :style="getYearPositionStyle(yearIndex, jobRowIndex)"
         >
           {{ year }}
         </div>
@@ -122,6 +122,7 @@ export default {
   data () {
     return {
       jobs,
+      rowIntervals: [],
       jobRows: [],
       yearWidth: 0
     }
@@ -143,15 +144,42 @@ export default {
    * 4. Set position of job in %
    */
   methods: {
-    getJobRowTimelineWidth (jobRow) {
-      const wrapperWidth = this.$refs.timeline?.offsetWidth
-      const firstRowLength = this.jobRows[0].length
+    updateJobRows () {
+      this.rowIntervals = this.getRowIntervals()
+      this.jobRows = this.getJobRows()
 
-      this.yearWidth = wrapperWidth / firstRowLength
+      console.log('DEBUG: this.rowIntervals:', this.rowIntervals)
+      console.log('DEBUG: this.jobRows:', this.jobRows)
     },
 
-    updateJobRows () {
-      this.jobRows = this.getJobRows()
+    /**
+     * Return boundary years for each line of time
+     *
+     * @returns {{startYear: number, endYear: number}[]} e.g. [[2008, 2015], [2016, 2023]] or [[2008, 2011], [2012, 2015], [2016, 2019], [2020, 2023]]
+     */
+    getRowIntervals () {
+      const firstJobStartYear = new Date(jobs[0].startDate).getFullYear() + 1
+      const lastJobEndYear = new Date(jobs[jobs.length - 1].endDate).getFullYear()
+      const yearMinSize = 120
+      const wrapperWidth = this.$refs.timeline?.offsetWidth || 1000
+      const yearsPerLineMaxCount = Math.floor(wrapperWidth / yearMinSize)
+      const totalYearsCount = lastJobEndYear - firstJobStartYear + 1
+      const linesCount = Math.ceil(totalYearsCount / yearsPerLineMaxCount)
+      const yearsToShow = Math.ceil(totalYearsCount / linesCount) * linesCount
+      const yearsToShowPerLineCount = yearsToShow / linesCount
+
+      return Array.from(
+        { length: linesCount },
+        (_, index) => {
+          const lineYearStart = firstJobStartYear + index * yearsToShowPerLineCount
+          const lineYearEnd = lineYearStart + yearsToShowPerLineCount - 1
+
+          return {
+            startYear: lineYearStart,
+            endYear: lineYearEnd
+          }
+        }
+      )
     },
     /**
      * Split timeline to several lines if needed, based on minimal allowed year's size in px (e.g. one year has to be minimum 150px)
@@ -169,56 +197,27 @@ export default {
      *
      * @returns {[[job]]}
      */
-    getJobRows (algorithm = 1) {
-      const yearMinSize = 120
-      const wrapperWidth = this.$refs.timeline?.offsetWidth || 1000
-      const yearsPerLineMaxCount = Math.floor(wrapperWidth / yearMinSize)
+    getJobRows () {
+      const rowIntervals = this.rowIntervals
 
-      if (algorithm === 1) {
-        const firstJobStartYear = new Date(jobs[0].startDate).getFullYear()
-        const lastJobEndYear = new Date(jobs[jobs.length - 1].endDate).getFullYear()
-        const totalYearsCount = lastJobEndYear - firstJobStartYear + 1
-        const linesCount = Math.ceil(totalYearsCount / yearsPerLineMaxCount)
-        const yearsToShow = Math.ceil(totalYearsCount / linesCount) * linesCount
-        const yearToShowPerLineCount = yearsToShow / linesCount
+      return Array.from(
+        { length: rowIntervals.length },
+        (_, index) => {
+          return jobs.filter((job) => {
+            const jobStartYear = new Date(job.startDate).getFullYear()
+            const jobEndYear = new Date(job.endDate).getFullYear()
+            const rowStartYear = rowIntervals[index].startYear
+            const rowEndYear = rowIntervals[index].endYear
 
-        console.log('DEBUG: totalYearsCount:', totalYearsCount)
-        console.log('DEBUG: yearsPerLineMaxCount:', yearsPerLineMaxCount)
-        console.log('DEBUG: linesCount:', linesCount)
-        console.log('DEBUG: yearsToShowCount:', yearsToShow)
-        console.log('DEBUG: yearToShowPerLineCount:', yearToShowPerLineCount)
-
-        const lineBoundaries = [
-          firstJobStartYear,
-          ...Array(linesCount - 1).fill(firstJobStartYear).map((_, index) => firstJobStartYear + (index + 1) * yearToShowPerLineCount),
-          lastJobEndYear
-        ]
-
-        const jobRows = Array(linesCount).fill([]).map((_, index) => {
-          return jobs.filter(
-            job => new Date(job.startDate).getFullYear() >= lineBoundaries[index] &&
-              new Date(job.startDate).getFullYear() <= lineBoundaries[index + 1]
-          )
-        })
-
-        console.log('DEBUG: jobRows:', jobRows, lineBoundaries)
-
-        // Algorithm #1
-        return jobs.reduce((acc, currJob) => {
-          const lastArray = acc[acc.length - 1]
-          const lastArrayFirstJobStartYear = lastArray ? new Date(lastArray[0].startDate).getFullYear() : 2008
-          const currJobEndYear = new Date(currJob.endDate).getFullYear()
-
-          if (!lastArray || currJobEndYear - lastArrayFirstJobStartYear > yearToShowPerLineCount) {
-            acc.push([currJob])
-          } else {
-            lastArray.push(currJob)
-          }
-          return acc
-        }, [])
-      } else {
-        // Algorithm #2
-      }
+            return (jobStartYear >= rowStartYear && jobEndYear <= rowEndYear) ||
+              // Add JOB that started in the previous intervals and ended it in this one.
+              // Subtract one year because on a screen timeline extended by half year to both sides
+              (jobStartYear <= rowStartYear - 1 && jobEndYear >= rowStartYear - 1) ||
+              // Add JOB that started in this interval and ended in the next ones
+              (jobStartYear <= rowEndYear && jobEndYear >= rowEndYear)
+          })
+        }
+      )
     },
 
     /**
@@ -239,8 +238,8 @@ export default {
       return transformedPosition * secondWidthInPercent
     },
 
-    getJobPositionStyle (job, jobRow) {
-      const timelineRange = this.getTimelineRange(jobRow)
+    getJobPositionStyle (job, jobRowIndex) {
+      const timelineRange = this.rowIntervals[jobRowIndex]
       const starPosition = this.getDatePosition(job.startDate, timelineRange)
       const width = this.getDatePosition(job.endDate, timelineRange) - starPosition
       // Need this shift for jobs because we show year marker in the center of year DOM-element
@@ -252,8 +251,8 @@ export default {
               z-index: ${job.zIndex || 0}`
     },
 
-    getYearPositionStyle (index, jobRow) {
-      const timelineRange = this.getTimelineRange(jobRow)
+    getYearPositionStyle (index, jobRowIndex) {
+      const timelineRange = this.rowIntervals[jobRowIndex]
       const starPosition = this.getDatePosition(`${timelineRange.startYear + index}-01-01`, timelineRange)
       const width = this.getDatePosition(`${timelineRange.startYear + index + 1}-01-01`, timelineRange) - starPosition
 
@@ -273,20 +272,13 @@ export default {
     /**
      * Return list of year numbers for time arrow based on job years
      *
-     * @param jobRow
+     * @param jobRowIndex {number}
      * @returns {[number]} - i.e. [2008, 2009, 2011, 2012]
      */
-    yearsMarks (jobRow) {
-      const timelineRange = this.getTimelineRange(jobRow)
+    yearsMarks (jobRowIndex) {
+      const timelineRange = this.rowIntervals[jobRowIndex]
       const marks = Array(timelineRange.endYear - timelineRange.startYear + 1).fill(1).map((_, i) => timelineRange.startYear + i)
       return marks
-    },
-
-    getTimelineRange (jobRow) {
-      return {
-        startYear: new Date(jobRow[0].startDate).getFullYear(),
-        endYear: new Date(jobRow[jobRow.length - 1].endDate).getFullYear()
-      }
     }
   }
 }
@@ -299,6 +291,7 @@ export default {
   $year-height: 30px;
 
   position: relative;
+  background: rgba(red, 0.05);
   width: 100%;
 
   .job-row {
@@ -318,7 +311,7 @@ export default {
 
   .job {
     position: absolute;
-    bottom: 0;
+    bottom: -1px;
     height: 100%;
     border: 1px solid var(--text-color);
     font-size: min(1vw, 13px);
@@ -329,10 +322,6 @@ export default {
     cursor: pointer;
     overflow: hidden;
     transition: background-color 200ms;
-
-    &:first-of-type {
-      border-right-width: 0;
-    }
 
     &:hover {
       background-color: $accent-color;
