@@ -115,6 +115,7 @@ const jobs = [
     id: 'epam'
   }
 ]
+const optimalYearWidth = [150, 70]
 
 export default {
   name: 'Timeline',
@@ -122,18 +123,17 @@ export default {
   data () {
     return {
       jobs,
-      rowIntervals: [],
-      jobRows: [],
-      yearWidth: 0
+      rowsRanges: [],
+      jobRows: []
     }
   },
 
   mounted () {
     window.addEventListener('resize', () => {
-      this.updateJobRows()
+      this.updateTimeline()
     })
 
-    this.updateJobRows()
+    this.updateTimeline()
   },
 
   /***
@@ -144,12 +144,9 @@ export default {
    * 4. Set position of job in %
    */
   methods: {
-    updateJobRows () {
-      this.rowIntervals = this.getRowIntervals()
+    updateTimeline () {
+      this.rowsRanges = this.getRowIntervals()
       this.jobRows = this.getJobRows()
-
-      console.log('DEBUG: this.rowIntervals:', this.rowIntervals)
-      console.log('DEBUG: this.jobRows:', this.jobRows)
     },
 
     /**
@@ -158,11 +155,13 @@ export default {
      * @returns {{startYear: number, endYear: number}[]} e.g. [[2008, 2015], [2016, 2023]] or [[2008, 2011], [2012, 2015], [2016, 2019], [2020, 2023]]
      */
     getRowIntervals () {
+      // Add 1 year to real date 2008-08 because otherwise we'll draw timeline from 2007-06, that creates a lot of empty space.
+      // With + 1 year we draw from 2008-06
       const firstJobStartYear = new Date(jobs[0].startDate).getFullYear() + 1
       const lastJobEndYear = new Date(jobs[jobs.length - 1].endDate).getFullYear()
-      const yearMinSize = 120
       const wrapperWidth = this.$refs.timeline?.offsetWidth || 1000
-      const yearsPerLineMaxCount = Math.floor(wrapperWidth / yearMinSize)
+      const yearMinWidth = this.$refs.timeline?.offsetWidth > 800 ? optimalYearWidth[0] : optimalYearWidth[1]
+      const yearsPerLineMaxCount = Math.floor(wrapperWidth / yearMinWidth)
       const totalYearsCount = lastJobEndYear - firstJobStartYear + 1
       const linesCount = Math.ceil(totalYearsCount / yearsPerLineMaxCount)
       const yearsToShow = Math.ceil(totalYearsCount / linesCount) * linesCount
@@ -183,38 +182,27 @@ export default {
     },
     /**
      * Split timeline to several lines if needed, based on minimal allowed year's size in px (e.g. one year has to be minimum 150px)
-     *
-     * Algorithm #1 - Timeline length in years depends only on max number of years that can fit in container width.
-     *
-     * 1. Find integer amount of years that can fit in available space (e.g. we have 1000px container,
-     * if one year has to be minimum 150px, we can fit 1000/150 = 6 years to the container)
-     * 2. Split jobs array to array of arrays where each subarray contains jobs inside time interval that calculated in (1),
-     * by adding to first row maximum jobs that fit to the calculated time interval (e.g. find all jobs that fit to the first 6 years
-     * and add them to the first line, then repeat the process for the next 6 years and so on)
-     *
-     * Algorithm #2 - The whole timeline has to be split to equally long lines of years,
-     * that based on max number of years that can fit in container width.
+     * The timeline has to be split to equally long (in years) rows.
+     * Number of rows depends on max number of years that can fit in the container width.
      *
      * @returns {[[job]]}
      */
     getJobRows () {
-      const rowIntervals = this.rowIntervals
-
       return Array.from(
-        { length: rowIntervals.length },
+        { length: this.rowsRanges.length },
         (_, index) => {
           return jobs.filter((job) => {
             const jobStartYear = new Date(job.startDate).getFullYear()
             const jobEndYear = new Date(job.endDate).getFullYear()
-            const rowStartYear = rowIntervals[index].startYear
-            const rowEndYear = rowIntervals[index].endYear
+            const rowStartYear = this.rowsRanges[index].startYear
+            const rowEndYear = this.rowsRanges[index].endYear
 
             return (jobStartYear >= rowStartYear && jobEndYear <= rowEndYear) ||
               // Add JOB that started in the previous intervals and ended it in this one.
               // Subtract one year because on a screen timeline extended by half year to both sides
               (jobStartYear <= rowStartYear - 1 && jobEndYear >= rowStartYear - 1) ||
               // Add JOB that started in this interval and ended in the next ones
-              (jobStartYear <= rowEndYear && jobEndYear >= rowEndYear)
+              (jobStartYear <= rowEndYear + 1 && jobEndYear >= rowEndYear + 1)
           })
         }
       )
@@ -225,13 +213,14 @@ export default {
      * Can be linear or non-linear (non-linear scale compresses past timeline, to give more space for the latest jobs)
      *
      * @param isoStringDate i.e. 2021-10-23
-     * @param timelineRange {Object}
+     * @param rowRange {Object}
      * @returns {number} %
      */
-    getDatePosition (isoStringDate, timelineRange) {
+    getDatePosition (isoStringDate, rowRange) {
+      const startYearTimeInMs = new Date(rowRange.startYear, 0, 1).getTime()
+      const timelineDurationInSec = (new Date(rowRange.endYear + 1, 0, 1).getTime() - startYearTimeInMs) / 1000
+      const timeFromStartInSec = (new Date(isoStringDate).getTime() - startYearTimeInMs) / 1000
       const nonLinearCoefficient = 1 // 1 is for linear, to make it non-linear use value Math.sqrt(timeFromStartInSec)
-      const timelineDurationInSec = (new Date(timelineRange.endYear, 0, 1).getTime() - new Date(timelineRange.startYear, 0, 1).getTime()) / 1000
-      const timeFromStartInSec = (new Date(isoStringDate).getTime() - new Date(timelineRange.startYear, 0, 1).getTime()) / 1000
       const transformedPosition = timeFromStartInSec * nonLinearCoefficient
       const secondWidthInPercent = 100 / (timelineDurationInSec * nonLinearCoefficient)
 
@@ -239,11 +228,11 @@ export default {
     },
 
     getJobPositionStyle (job, jobRowIndex) {
-      const timelineRange = this.rowIntervals[jobRowIndex]
-      const starPosition = this.getDatePosition(job.startDate, timelineRange)
-      const width = this.getDatePosition(job.endDate, timelineRange) - starPosition
+      const rowRange = this.rowsRanges[jobRowIndex]
+      const starPosition = this.getDatePosition(job.startDate, rowRange)
+      const width = this.getDatePosition(job.endDate, rowRange) - starPosition
       // Need this shift for jobs because we show year marker in the center of year DOM-element
-      const halfYearShift = 100 / ((timelineRange.endYear - timelineRange.startYear) * 2)
+      const halfYearShift = 100 / ((rowRange.endYear - rowRange.startYear) * 2)
 
       return `left: ${starPosition + halfYearShift}%;
               width: calc(${width}% - 1px);
@@ -252,9 +241,9 @@ export default {
     },
 
     getYearPositionStyle (index, jobRowIndex) {
-      const timelineRange = this.rowIntervals[jobRowIndex]
-      const starPosition = this.getDatePosition(`${timelineRange.startYear + index}-01-01`, timelineRange)
-      const width = this.getDatePosition(`${timelineRange.startYear + index + 1}-01-01`, timelineRange) - starPosition
+      const rowRange = this.rowsRanges[jobRowIndex]
+      const starPosition = this.getDatePosition(`${rowRange.startYear + index}-01-01`, rowRange)
+      const width = this.getDatePosition(`${rowRange.startYear + index + 1}-01-01`, rowRange) - starPosition
 
       return `left: ${starPosition}%; width: ${width}%`
     },
@@ -276,9 +265,9 @@ export default {
      * @returns {[number]} - i.e. [2008, 2009, 2011, 2012]
      */
     yearsMarks (jobRowIndex) {
-      const timelineRange = this.rowIntervals[jobRowIndex]
-      const marks = Array(timelineRange.endYear - timelineRange.startYear + 1).fill(1).map((_, i) => timelineRange.startYear + i)
-      return marks
+      const rowsRange = this.rowsRanges[jobRowIndex]
+
+      return Array(rowsRange.endYear - rowsRange.startYear + 1).fill(1).map((_, i) => rowsRange.startYear + i)
     }
   }
 }
@@ -291,13 +280,28 @@ export default {
   $year-height: 30px;
 
   position: relative;
-  background: rgba(red, 0.05);
   width: 100%;
+  overflow: hidden;
+
+  // On less than 1050px Hero Area texts are too close to VerticalMenu
+  @media (max-width: $desktop) {
+    margin-left: -0.5rem;
+    margin-right: -1rem;
+    width: calc(100% + 1.5rem);
+  }
 
   .job-row {
     position: relative;
     height: 120px;
     width: 100%;
+    mask-image: linear-gradient(105deg, transparent 20px, #000 50px, #000 calc(100% - 50px), transparent calc(100% - 20px));
+
+    &:first-child {
+      mask-image: linear-gradient(105deg, #000 calc(100% - 50px), transparent calc(100% - 20px));
+    }
+    &:last-child {
+      mask-image: linear-gradient(105deg, transparent 20px, #000 50px);
+    }
   }
 
   .jobs-wrapper {
@@ -314,8 +318,9 @@ export default {
     bottom: -1px;
     height: 100%;
     border: 1px solid var(--text-color);
-    font-size: min(1vw, 13px);
-    line-height: min(1.3vw, 16px);
+    font-size: clamp(11px, 1vw, 13px);
+    line-height: 1.2;
+    word-break: break-word;
     font-weight: 700;
     background-color: rgba($accent-color, 0.5);
     padding: 5px 5px 5px 10px;
@@ -371,7 +376,7 @@ export default {
           content: "";
           border-width: 1px !important;
           transform: rotate(-135deg);
-          right: 1px;
+          right: 2px;
           top: 1px;
           border-radius: 0;
         }
