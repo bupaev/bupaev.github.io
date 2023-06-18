@@ -301,7 +301,7 @@ export default {
   overflow: hidden;
 
   // Use more space on tablet and mobile
-  @media (max-width: $desktop) {
+  @include until($desktop) {
     margin-left: -0.5rem;
     margin-right: -1rem;
     width: calc(100% + 1.5rem);
@@ -351,11 +351,11 @@ export default {
     overflow: hidden;
     transition: background-color 200ms;
 
-    @media (max-width: $desktop) {
+    @include tablet-only {
       font-size: 12px;
     }
 
-    @media (max-width: $small-mobile) {
+    @include mobile {
       font-size: 11px;
     }
 

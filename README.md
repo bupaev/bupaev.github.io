@@ -1,6 +1,6 @@
 # My minimum viable personal page 👽
 
-The extremely simple web-site based on [NuxtJS](https://nuxtjs.org/)
+The extremely simple web-site created with [NuxtJS](https://nuxtjs.org/) and [Bulma](https://bulma.io/)
 
 You can see it live on [paulbu.com](https://paulbu.com/)
 
