@@ -90,6 +90,7 @@ export default {
   height: 40px;
   border: 2px solid var(--accent-color);
   border-radius: 9999px;
+  background-color: var(--background-color);
   cursor: pointer;
   overflow: hidden;
   transition: background-color 400ms, width 400ms;

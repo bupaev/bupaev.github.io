@@ -3,8 +3,18 @@
     <h2 class="title is-2">
       Experience
     </h2>
-    <Timeline class="mt-5 mb-4 is-hidden-touch" />
+    <Timeline class="mt-5 mb-5" />
     <div class="content">
+      <section id="holmusk" class="job-record">
+        <h3>
+          <span class="job-title">Lead Front-end engineer</span>
+          <span class="company"><Slash /><a href="https://www.epam.com/" target="_blank">EPAM</a></span>
+          <span class="interval"><Slash />2022 - Now</span>
+        </h3>
+        <p>
+          <em>EPAM Systems, Inc. is an American company that specializes in software engineering services, digital platform engineering, and digital product design.</em>
+        </p>
+      </section>
       <section id="holmusk" class="job-record">
         <h3>
           <span class="job-title">Lead Front-end developer</span>
