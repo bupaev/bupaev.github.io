@@ -56,7 +56,7 @@ const jobs = [
   {
     position: 'Teaching Assistant',
     company: 'Omsk State Technical University',
-    skills: 'AI',
+    skills: 'Developing and conducting courses, conducting exams, Artificial Intelligence Systems, Control theory',
     startDate: '2009-09',
     endDate: '2014-09',
     height: 1.6,
