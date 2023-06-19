@@ -5,7 +5,7 @@
     </h2>
     <Timeline class="mt-5 mb-5" />
     <div class="content">
-      <section id="holmusk" class="job-record">
+      <section id="epam" class="job-record">
         <h3>
           <span class="job-title">Lead Front-end engineer</span>
           <span class="company"><Slash /><a href="https://www.epam.com/" target="_blank">EPAM</a></span>

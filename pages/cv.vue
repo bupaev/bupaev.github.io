@@ -133,10 +133,12 @@ export default {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: 95% 90%;
-    opacity: 0.02;
+    opacity: 0.04;
+    filter: invert(15%) sepia(32%) saturate(10000%) hue-rotate(185deg) brightness(96%) contrast(86%);
 
     [data-color-scheme="dark"] & {
-      filter: invert(1);
+      opacity: 0.05;
+      filter: invert(48%) sepia(51%) saturate(585%) hue-rotate(161deg) brightness(92%) contrast(86%);
     }
 
     @include from($big-screen) {
