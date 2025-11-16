@@ -1,0 +1,64 @@
+@import "../../styles/mixins";
+
+.overview {
+  .diagram-container {
+    @include desktop {
+      width: calc(40% - 4em);
+      float: left;
+    }
+
+    @include tablet-only {
+      float: left;
+      width: 50%;
+    }
+  }
+
+  .bullet {
+    position: relative;
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    padding-right: 0.8em;
+
+    &::after {
+      @include rhombus(var(--text-color));
+
+      content: "";
+    }
+  }
+
+  @include widescreen {
+    .section-with-delimiter {
+      display: inline-block;
+      width: 60%;
+      float: left;
+      margin-bottom: 0.1em;
+
+      p:nth-child(1) {
+        position: relative;
+        float: left;
+        width: 52%;
+        padding-right: 6%;
+        margin-right: 2%;
+
+        &::after {
+          content: "";
+          position: absolute;
+          float: left;
+          top: 0;
+          right: 0;
+          width: 11%;
+          height: 100%;
+          opacity: 0.2;
+          background-color: var(--text-color);
+          clip-path: polygon(94% 0%, 100% 0%, 6% 100%, 0 100%);
+        }
+      }
+
+      p:nth-child(2) {
+        width: 46%;
+        float: left;
+      }
+    }
+  }
+}

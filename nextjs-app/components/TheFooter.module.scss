@@ -1,0 +1,45 @@
+@import "@/styles/mixins.scss";
+
+.footer {
+  position: relative;
+  height: 110px;
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 0;
+  font-family: $accent-font;
+  background-image: repeating-linear-gradient(105deg, var(--contrasty-transparent-color) 0, var(--contrasty-transparent-color) 10px, transparent 10px, transparent 13px);
+
+  a {
+    color: var(--text-color);
+
+    @include multiline-text-hover-effect;
+  }
+
+  .text {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // @TODO: add prop to GoToTop component for proper right/left aligning
+  .goToTopLeft {
+    position: absolute;
+    left: 0;
+    padding-right: 30px;
+
+    &::before {
+      left: 12px;
+    }
+  }
+
+  .goToTopRight {
+    position: absolute;
+    right: 0;
+    padding-left: 30px;
+
+    &::before {
+      right: 12px;
+    }
+  }
+}

@@ -1,0 +1,94 @@
+@import "@/styles/mixins.scss";
+
+.heroArea {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  font-family: $accent-font;
+  z-index: 2;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    bottom: -100%;
+    left: -50%;
+    right: -50%;
+    background: var(--wave-gradient);
+    background-size: 50% 100%;
+    animation: moving-gradient 15s linear infinite;
+    will-change: background-color;
+    transform: rotate(15deg);
+  }
+
+  @keyframes moving-gradient {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: repeating-linear-gradient(105deg, var(--background-color) 0, var(--background-color) 3px, transparent 4px, transparent 13px);
+  }
+
+  .leftColumn {
+    z-index: 1;
+  }
+
+  a {
+    position: relative;
+    @include text-hover-effect();
+  }
+
+  .title {
+    position: relative;
+    font-weight: 600;
+    font-style: italic;
+    z-index: 1;
+  }
+
+  .contacts {
+    font-weight: 600;
+    font-size: $size-4;
+    font-style: italic;
+  }
+
+  .verticalAlignHack {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: -0.25em;
+  }
+
+  .textShapeLimiter {
+    float: right;
+    width: 120px;
+    height: 400px;
+    shape-outside: polygon(100% 0%, 100% 100%, 0 100%);
+    pointer-events: none;
+  }
+
+  .parallelogramImageContainer {
+    position: relative;
+    overflow: hidden;
+    height: 472px;
+    margin-left: -50px;
+    margin-right: 32px;
+    border-radius: 12px;
+    transform: skew(-15deg);
+
+    img {
+      height: 100%;
+      transform: skew(15deg) scale(1.22) translateY(-32px);
+      object-fit: cover;
+    }
+  }
+}

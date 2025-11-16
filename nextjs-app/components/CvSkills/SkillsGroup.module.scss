@@ -1,0 +1,78 @@
+@import "../../styles/mixins";
+
+.skills-section {
+  width: 100%;
+  min-width: 100%;
+
+  @include desktop {
+    width: 49%;
+    min-width: 49%;
+  }
+
+  @include fullhd {
+    width: 32%;
+    min-width: 32%;
+  }
+
+  .skill-item {
+    line-height: 1em;
+  }
+
+  .item-title {
+    line-height: 1.4em;
+  }
+
+  ul {
+    margin-left: 0;
+    list-style: none;
+
+    li {
+      margin-top: -0.2em;
+    }
+  }
+
+  &.interactive-area {
+    cursor: pointer;
+    outline: 2px solid transparent;
+
+    .info-icon {
+      display: inline-block;
+      overflow: hidden;
+      width: 1em;
+      height: 1em;
+      transition: opacity 400ms 100ms;
+      vertical-align: -0.18em;
+      opacity: 1;
+
+      img {
+        margin-bottom: 0;
+        transition: margin-bottom var(--dark-light-transition) 100ms;
+      }
+    }
+
+    .info {
+      font-size: 0.9em;
+      line-height: 1.2em;
+      display: block;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height var(--dark-light-transition) linear;
+    }
+
+    &:hover {
+      outline-color: var(--contrasty-transparent-color);
+
+      .info-icon {
+        opacity: 0;
+
+        img {
+          margin-bottom: -0.7em;
+        }
+      }
+
+      .info {
+        max-height: 2.5em; // space just for 2 lines
+      }
+    }
+  }
+}

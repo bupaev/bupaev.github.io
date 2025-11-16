@@ -1,0 +1,76 @@
+@import "bulma/sass/utilities/initial-variables";
+@import "@/styles/variables";
+
+// @TODO: Rework styles to make it more robust
+// Now it's extremely fragile. E.g. depends on width of labels
+.darkModeToggle {
+  position: fixed;
+  z-index: 3;
+  top: 36px;
+  left: 6px;
+  width: 100px;
+  height: 40px;
+  border: 2px solid var(--accent-color);
+  border-radius: 9999px;
+  background-color: var(--background-color);
+  cursor: pointer;
+  overflow: hidden;
+  transition: background-color 400ms, width 400ms;
+
+  .slider {
+    position: absolute;
+    display: flex;
+    height: 100%;
+    width: 135px;
+    left: 7px;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 700;
+    text-transform: uppercase;
+    transform: translateX(-40%);
+    transition: transform 400ms;
+  }
+
+  .handler {
+    position: relative;
+    width: 30px;
+    height: 30px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .labelLight,
+  .labelDark {
+    padding-top: 1px;
+    color: var(--accent-color);
+  }
+
+  &.darkModeEnabled {
+    // border: 2px solid $white-ter;
+    box-shadow: 0 0 8px -2px rgb(255 255 255 / 50%);
+    width: 96px;
+
+    .slider {
+      transform: translateX(0);
+    }
+
+    .iconDark {
+      display: block;
+      filter: none; // disable global invert
+    }
+
+    .iconLight {
+      display: none;
+    }
+  }
+
+  &.compact {
+    width: 40px;
+
+    .slider {
+      transform: translateX(-56px);
+    }
+  }
+}
