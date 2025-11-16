@@ -1,0 +1,13 @@
+nextjs-app/
+coverage/
+playwright-report/
+test-results/
+node_modules/
+**/node_modules/
+**/.next/
+**/.nuxt/
+**/dist/
+**/out/
+**/.output/
+**/.vercel/
+**/.cache/

@@ -1,0 +1,12 @@
+.next/
+out/
+dist/
+build/
+.output/
+.vercel/
+coverage/
+playwright-report/
+test-results/
+.cache/
+node_modules/
+**/node_modules/

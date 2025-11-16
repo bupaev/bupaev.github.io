@@ -4,6 +4,10 @@ module.exports = {
     browser: true,
     node: true
   },
+  // Explicitly ignore the Next.js subproject when linting from the repo root
+  ignorePatterns: [
+    'nextjs-app/**'
+  ],
   parserOptions: {
     parser: '@babel/eslint-parser',
     requireConfigFile: false
