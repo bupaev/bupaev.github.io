@@ -22,6 +22,10 @@ coverage
 # nyc test coverage
 .nyc_output
 
+# Playwright test results and reports
+playwright-report/
+test-results/
+
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
