@@ -4,7 +4,8 @@ module.exports = {
     '^~/(.*)$': '<rootDir>/$1',
     '^vue$': 'vue/dist/vue.common.js',
     '\\.(css|less|scss|sass)$': '<rootDir>/test/__mocks__/styleMock.js',
-    '\\.(svg)$': '<rootDir>/test/__mocks__/fileMock.js'
+    '\\.svg\\?inline$': '<rootDir>/test/__mocks__/svgMock.js',
+    '\\.(svg|jpg|jpeg|png|gif|webp|ico)$': '<rootDir>/test/__mocks__/fileMock.js'
   },
   moduleFileExtensions: [
     'js',
