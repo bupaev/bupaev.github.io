@@ -25,12 +25,12 @@ describe('CvHeroArea', () => {
 
   test('displays main heading with name', () => {
     const wrapper = mount(CvHeroArea)
-    expect(wrapper.text()).toContain("Hi! I'm Pavel Buramensky")
+    expect(wrapper.text()).toContain('Pavel Buramensky')
   })
 
   test('displays tagline', () => {
     const wrapper = mount(CvHeroArea)
-    expect(wrapper.text()).toContain("I'm a front-end developer who cares about user experience")
+    expect(wrapper.text()).toContain('front-end developer who cares about user experience')
     expect(wrapper.text()).toContain('make the world a better place')
   })
 

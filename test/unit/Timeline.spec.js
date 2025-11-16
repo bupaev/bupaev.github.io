@@ -139,6 +139,7 @@ describe('Timeline', () => {
   test('getJobPositionStyle returns valid CSS style string', async () => {
     wrapper = mount(Timeline)
     wrapper.vm.rowsRanges = [{ startYear: 2020, endYear: 2024 }]
+    wrapper.vm.jobRows = [[]]
     await wrapper.vm.$nextTick()
 
     const job = {
@@ -160,6 +161,7 @@ describe('Timeline', () => {
   test('getJobPositionStyle uses default height and zIndex when not provided', async () => {
     wrapper = mount(Timeline)
     wrapper.vm.rowsRanges = [{ startYear: 2020, endYear: 2024 }]
+    wrapper.vm.jobRows = [[]]
     await wrapper.vm.$nextTick()
 
     const job = {
@@ -176,6 +178,7 @@ describe('Timeline', () => {
   test('getYearPositionStyle returns valid CSS style string', async () => {
     wrapper = mount(Timeline)
     wrapper.vm.rowsRanges = [{ startYear: 2020, endYear: 2024 }]
+    wrapper.vm.jobRows = [[]]
     await wrapper.vm.$nextTick()
 
     const style = wrapper.vm.getYearPositionStyle(0, 0)
@@ -188,6 +191,7 @@ describe('Timeline', () => {
   test('getNowMarkPositionStyle returns valid CSS style string', async () => {
     wrapper = mount(Timeline)
     wrapper.vm.rowsRanges = [{ startYear: 2020, endYear: 2024 }]
+    wrapper.vm.jobRows = [[]]
     await wrapper.vm.$nextTick()
 
     const style = wrapper.vm.getNowMarkPositionStyle()
@@ -237,6 +241,7 @@ describe('Timeline', () => {
       { startYear: 2020, endYear: 2024 },
       { startYear: 2025, endYear: 2027 }
     ]
+    wrapper.vm.jobRows = [[], []]
 
     const years0 = wrapper.vm.yearsMarks(0)
     const years1 = wrapper.vm.yearsMarks(1)

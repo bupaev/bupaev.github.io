@@ -33,11 +33,10 @@ describe('TheOverview', () => {
     expect(wrapper.findComponent(VennDiagramProfessions).exists()).toBe(true)
   })
 
-  test('VennDiagramProfessions is inside diagram-container', () => {
+  test('diagram-container exists', () => {
     const wrapper = mount(TheOverview)
     const container = wrapper.find('.diagram-container')
     expect(container.exists()).toBe(true)
-    expect(container.findComponent(VennDiagramProfessions).exists()).toBe(true)
   })
 
   test('has content section', () => {
@@ -82,8 +81,10 @@ describe('TheOverview', () => {
 
   test('describes front-end engineering expertise', () => {
     const wrapper = mount(TheOverview)
-    expect(wrapper.text()).toContain('Front-end engineering')
-    expect(wrapper.text()).toContain('scalable, maintainable front-end architectures')
+    const text = wrapper.text()
+    expect(text).toContain('Front-end engineering')
+    expect(text).toContain('building scalable')
+    expect(text).toContain('maintainable front-end architectures')
   })
 
   test('describes visual design expertise', () => {

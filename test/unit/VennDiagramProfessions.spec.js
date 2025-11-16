@@ -1,25 +1,7 @@
 import { mount } from '@vue/test-utils'
 import VennDiagramProfessions from '@/components/CvOverview/VennDiagramProfessions.vue'
 
-// Mock ResizeObserver
-global.ResizeObserver = class ResizeObserver {
-  constructor (callback) {
-    this.callback = callback
-  }
-
-  observe (target) {
-    // Immediately trigger callback with mock data
-    this.callback([{
-      contentRect: {
-        width: 400,
-        height: 400
-      }
-    }])
-  }
-
-  unobserve () {}
-  disconnect () {}
-}
+// ResizeObserver is mocked globally in test/setup.js
 
 describe('VennDiagramProfessions', () => {
   let wrapper
@@ -83,12 +65,13 @@ describe('VennDiagramProfessions', () => {
     expect(speechBubble.text()).toBe("Hi! It's me!")
   })
 
-  test('initializes with basicFontSize as null', () => {
+  test('initializes and ResizeObserver sets basicFontSize', () => {
     wrapper = mount(VennDiagramProfessions)
-    expect(wrapper.vm.basicFontSize).toBeNull()
+    // ResizeObserver mock sets width to 400, so basicFontSize = 400/20 = 20
+    expect(wrapper.vm.basicFontSize).toBe(20)
   })
 
-  test('fontSizeCss computed returns empty string when basicFontSize is null', () => {
+  test('fontSizeCss computed returns empty string when basicFontSize is manually set to null', () => {
     wrapper = mount(VennDiagramProfessions)
     wrapper.vm.basicFontSize = null
     expect(wrapper.vm.fontSizeCss).toBe('')

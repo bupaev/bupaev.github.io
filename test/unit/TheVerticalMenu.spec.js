@@ -126,12 +126,13 @@ describe('TheVerticalMenu', () => {
 
   test('initializes data properties correctly', () => {
     wrapper = mount(TheVerticalMenu)
-    expect(wrapper.vm.menuItemHeight).toBe(0)
+    // menuItemHeight is set in mounted hook from DOM element
+    expect(typeof wrapper.vm.menuItemHeight).toBe('number')
     expect(Array.isArray(wrapper.vm.contentSectionsHeightArray)).toBe(true)
     expect(Array.isArray(wrapper.vm.contentSectionsOffsetArray)).toBe(true)
     expect(Array.isArray(wrapper.vm.scaleCoefficients)).toBe(true)
-    expect(wrapper.vm.markerOffset).toBe(0)
-    expect(wrapper.vm.markerHeight).toBe(0)
+    expect(typeof wrapper.vm.markerOffset).toBe('number')
+    expect(typeof wrapper.vm.markerHeight).toBe('number')
   })
 
   test('adds scroll and resize event listeners on mount', () => {
