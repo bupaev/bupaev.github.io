@@ -31,20 +31,16 @@ $menu-open-width: 10em;
     width: 10%;
     overflow: hidden;
     margin-top: 56px;
-    background-image: linear-gradient(
-      90deg,
-      #e6e6e6 0,
-      #e6e6e6 10px,
-      transparent 10px
-    );
+    background-image: linear-gradient(90deg,
+        #e6e6e6 0,
+        #e6e6e6 10px,
+        transparent 10px);
 
     :global([data-color-scheme="dark"]) & {
-      background-image: linear-gradient(
-        90deg,
-        #080812 0,
-        #080812 10px,
-        transparent 10px
-      );
+      background-image: linear-gradient(90deg,
+          #080812 0,
+          #080812 10px,
+          transparent 10px);
     }
   }
 
@@ -78,15 +74,13 @@ $menu-open-width: 10em;
         width: 10px;
         left: 0;
         margin-top: 8px;
-        background-image: linear-gradient(
-          90deg,
-          var(--background-color) 0,
-          var(--background-color) 4px,
-          transparent 4px,
-          transparent 6px,
-          var(--background-color) 6px,
-          var(--background-color) 10px
-        );
+        background-image: linear-gradient(90deg,
+            var(--background-color) 0,
+            var(--background-color) 4px,
+            transparent 4px,
+            transparent 6px,
+            var(--background-color) 6px,
+            var(--background-color) 10px);
       }
 
       &::after {
@@ -95,13 +89,11 @@ $menu-open-width: 10em;
         height: 8px;
         width: 10px;
         left: 0;
-        background-image: radial-gradient(
-          circle,
-          transparent 0,
-          transparent 4px,
-          var(--background-color) 4px,
-          var(--background-color) 100%
-        );
+        background-image: radial-gradient(circle,
+            transparent 0,
+            transparent 4px,
+            var(--background-color) 4px,
+            var(--background-color) 100%);
         background-repeat: no-repeat;
       }
 
@@ -144,7 +136,7 @@ $menu-open-width: 10em;
         height: 1.6em;
         left: -0.2em;
         top: 0;
-        background: $accent-color;
+        background: var(--color-accent);
         transform: scaleY(1) skew(-15deg);
         transition: width 250ms ease;
         z-index: -1;
@@ -156,7 +148,7 @@ $menu-open-width: 10em;
       }
 
       &::after {
-        background: $accent-color;
+        background: var(--color-accent);
       }
     }
 
@@ -210,7 +202,7 @@ $menu-open-width: 10em;
       top: 0;
       left: 0;
       width: 10px;
-      background-color: $accent-color;
+      background-color: var(--color-accent);
       border: 0;
       border-radius: 0;
       pointer-events: none;

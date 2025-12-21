@@ -1,28 +1,22 @@
-// Bulma color variables (for use before bulma is loaded)
-$black-ter: hsl(0, 0%, 14%);
+// ============================================
+// SCSS Variables
+// These remain as SCSS vars because:
+// 1. Breakpoints: CSS vars cannot be used in @media queries
+// 2. Colors: Some SCSS files use color functions like rgba(), color.scale()
+// ============================================
 
-// Bulma size variables
-$size-4: 1.5rem;
-
-// Bulma responsive breakpoints (import from Bulma for use in components)
+// Breakpoints (matching Tailwind theme values)
 $tablet: 769px;
 $desktop: 1024px;
 $widescreen: 1216px;
 $fullhd: 1408px;
-
-// Fonts
-$accent-font: "Dosis", "Lucida Console", sans-serif;
-$main-font: "Nunito", "Trebuchet MS", sans-serif;
-
-// Redefine standard desktop bulma breakpoint
-// for better user experience on small tablets in album mode
-$desktop-custom: 896px; // 2*gap will ba added, 960 is default
-
-// Additional breakpoints
 $small-mobile: 576px;
 $big-screen: 1500px;
 
-// My colors
-$accent-color: #ffd700; // gold
-$secondary-color: #193b5e; // Prussian blue, #3e8bbf - Green Blue Crayola, #25301f - Pine Tree
+// Custom breakpoint for layout calculation
+$desktop-custom: 896px; // 2*gap will be added in mixins.scss
+
+// Colors (needed for SCSS functions like rgba(), color.scale())
+// CSS var versions are in tailwind.css @theme
+$accent-color: #ffd700;
 $secondary-light-color: #3e8bbf;

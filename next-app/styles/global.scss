@@ -3,12 +3,23 @@
 
 // ============================================
 // CSS Custom Properties (Design Tokens)
+// Values match tailwind.css @theme for consistency
 // ============================================
 :root {
-  --text-color: #{$black-ter};
-  --accent-color: #{$accent-color};
-  --secondary-color: #{$secondary-color};
-  --secondary-light-color: #{$secondary-light-color};
+  // Base tokens (source values)
+  --color-accent: #ffd700;
+  --color-secondary: #193b5e;
+  --color-secondary-light: #3e8bbf;
+  --color-text-dark: hsl(0, 0%, 14%);
+  --font-accent: "Dosis", "Lucida Console", sans-serif;
+  --font-main: "Nunito", "Trebuchet MS", sans-serif;
+  --size-4: 1.5rem;
+
+  // Semantic tokens (used throughout the app)
+  --text-color: var(--color-text-dark);
+  --accent-color: var(--color-accent);
+  --secondary-color: var(--color-secondary);
+  --secondary-light-color: var(--color-secondary-light);
   --background-color: #fff;
   --contrasty-color: #000;
   --contrasty-transparent-color: rgba(0, 0, 0, 0.03);
@@ -32,7 +43,7 @@
 // Base Element Styles
 // ============================================
 body {
-  font-family: $main-font;
+  font-family: var(--font-main);
   color: var(--text-color);
   background-color: var(--background-color);
   transition: background-color var(--dark-light-transition), color var(--dark-light-transition);
@@ -101,7 +112,7 @@ strong {
   }
 
   .title {
-    font-family: $accent-font;
+    font-family: var(--font-accent);
     font-weight: 600;
     color: var(--text-color);
   }
@@ -116,7 +127,7 @@ strong {
     h4,
     h5,
     h6 {
-      font-family: $accent-font;
+      font-family: var(--font-accent);
       font-weight: 600;
       color: var(--text-color);
     }

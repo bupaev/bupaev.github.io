@@ -3,15 +3,13 @@
 /*
  * Tailwind Theme Configuration
  * 
- * This file contains only Tailwind theme tokens (design system values).
- * Semantic layout classes are defined in global.scss.
+ * Colors, fonts, and sizes are defined in global.scss :root
+ * for proper CSS var access in SCSS modules.
+ * 
+ * Breakpoints must be defined here for Tailwind responsive prefixes to work.
  */
 
 @theme {
-  /* Fonts */
-  --font-accent: "Dosis", "Lucida Console", sans-serif;
-  --font-main: "Nunito", "Trebuchet MS", sans-serif;
-
   /* Breakpoints (matching legacy Bulma values) */
   --breakpoint-sm: 576px;
   --breakpoint-md: 769px;

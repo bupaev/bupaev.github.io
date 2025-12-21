@@ -5,7 +5,7 @@
   position: relative;
   overflow: hidden;
   margin-bottom: 3rem;
-  font-family: $accent-font;
+  font-family: var(--font-accent);
   z-index: 2;
 
   &::before {
@@ -26,6 +26,7 @@
     0% {
       background-position: 0 0;
     }
+
     100% {
       background-position: 200% 0;
     }
@@ -38,30 +39,27 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: repeating-linear-gradient(
-      105deg,
-      var(--background-color) 0,
-      var(--background-color) 3px,
-      transparent 4px,
-      transparent 13px
-    );
+    background: repeating-linear-gradient(105deg,
+        var(--background-color) 0,
+        var(--background-color) 3px,
+        transparent 4px,
+        transparent 13px);
   }
 
   // This transition through 0 opacity is needed because browser can't animate colors in linear gradient above
   :global([data-color-scheme="light"]) &::after {
-    animation: transition-to-light calc(var(--dark-light-transition) * 1.2)
-      ease-in;
+    animation: transition-to-light calc(var(--dark-light-transition) * 1.2) ease-in;
   }
 
   :global([data-color-scheme="dark"]) &::after {
-    animation: transition-to-dark calc(var(--dark-light-transition) * 1.2)
-      ease-in;
+    animation: transition-to-dark calc(var(--dark-light-transition) * 1.2) ease-in;
   }
 
   @keyframes transition-to-light {
     0% {
       opacity: 0;
     }
+
     100% {
       opacity: 1;
     }
@@ -71,6 +69,7 @@
     0% {
       opacity: 0;
     }
+
     100% {
       opacity: 1;
     }
@@ -183,10 +182,10 @@
 
   .contacts {
     font-weight: 600;
-    font-size: $size-4;
+    font-size: var(--size-4);
     font-style: italic;
 
-    & > span {
+    &>span {
       display: inline-block;
       padding-bottom: 15px;
 
@@ -205,7 +204,7 @@
       flex-wrap: wrap;
       justify-content: flex-end;
 
-      & > span {
+      &>span {
         margin-right: 0 !important;
 
         a {

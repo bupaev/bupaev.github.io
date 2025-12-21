@@ -19,20 +19,16 @@
     position: relative;
     height: 120px;
     width: 100%;
-    mask-image: linear-gradient(
-      105deg,
-      transparent 20px,
-      #000 50px,
-      #000 calc(100% - 50px),
-      transparent calc(100% - 20px)
-    );
+    mask-image: linear-gradient(105deg,
+        transparent 20px,
+        #000 50px,
+        #000 calc(100% - 50px),
+        transparent calc(100% - 20px));
 
     &:first-child {
-      mask-image: linear-gradient(
-        105deg,
-        #000 calc(100% - 50px),
-        transparent calc(100% - 20px)
-      );
+      mask-image: linear-gradient(105deg,
+          #000 calc(100% - 50px),
+          transparent calc(100% - 20px));
     }
 
     &:last-child {
@@ -80,12 +76,12 @@
       background-color: rgba($secondary-light-color, 0.5);
 
       &:hover {
-        background-color: $secondary-light-color;
+        background-color: var(--color-secondary-light);
       }
     }
 
     &:hover {
-      background-color: $accent-color;
+      background-color: var(--color-accent);
       color: #000;
       z-index: 3 !important;
     }
@@ -136,7 +132,8 @@
 
   .nowMarker {
     top: -4px;
-    margin-left: min(1vw, 14px); /* @TODO: Replace this hack with proper fix of Marker position */
+    margin-left: min(1vw, 14px);
+    /* @TODO: Replace this hack with proper fix of Marker position */
     position: absolute;
     width: 8px;
     height: 8px;
