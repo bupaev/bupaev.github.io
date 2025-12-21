@@ -1,4 +1,3 @@
-/* Import Bulma with variable overrides */
-@import "init-bulma";
-@import "override-bulma";
+/* Import Tailwind and custom styles */
+@import "tailwind.css";
 @import "global";

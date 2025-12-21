@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import "@/styles/main.scss";
+import "@/styles/tailwind.css";
+import "@/styles/global.scss";
 
 export const metadata: Metadata = {
   title: "Pavel Buramensky",

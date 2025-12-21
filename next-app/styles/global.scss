@@ -26,9 +26,36 @@
 }
 
 body {
+  font-family: $main-font;
+  color: var(--text-color);
   background-color: var(--background-color);
-  transition: background-color var(--dark-light-transition);
-  will-change: background-color;
+  transition: background-color var(--dark-light-transition), color var(--dark-light-transition);
+  will-change: background-color, color;
+}
+
+a,
+strong {
+  color: var(--text-color);
+}
+
+.title {
+  font-family: $accent-font;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.content {
+  h3 {
+    font-family: $accent-font;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
+  }
+}
+
+.section {
+  font-size: 1.1em;
 }
 
 .v-lazy-image {

@@ -1,6 +1,7 @@
 @import "./variables";
-@import "bulma/sass/utilities/initial-variables";
 
+// Define gap locally (previously from Bulma)
+$gap: 32px;
 $desktop: $desktop-custom + (2 * $gap);
 
 // Re-export Bulma mixins for component usage

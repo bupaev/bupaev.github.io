@@ -5,6 +5,10 @@ module.exports = {
   plugins: [
     'stylelint-scss'
   ],
+  // Ignore Tailwind CSS file (uses non-standard at-rules)
+  ignoreFiles: [
+    'next-app/styles/tailwind.css'
+  ],
   // add your custom config here
   // https://stylelint.io/user-guide/configuration
   rules: {
