@@ -106,7 +106,7 @@ export function CvHeroArea() {
                   className={`${styles.textShapeLimiter} is-hidden-mobile`}
                 />
                 <span className="is-size-1 has-text-right">
-                  Hi! I&apos;m Paul Buramensky
+                  Hi! I&apos;m Pavel Buramensky
                 </span>
                 <p className="is-size-2 pt-4">
                   I&apos;m a front-end developer who cares about user experience
@@ -178,8 +178,8 @@ export function CvHeroArea() {
                 <Image
                   src="/pics/portrait-1-desktop.jpg"
                   alt="Pavel Buramensky portrait"
-                  width={400}
-                  height={472}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   priority
                   className={desktopImageLoaded ? styles.loaded : ""}
                   onLoad={() => setDesktopImageLoaded(true)}

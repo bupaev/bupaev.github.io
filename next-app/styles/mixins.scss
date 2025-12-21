@@ -1,8 +1,68 @@
 @import "./variables";
-@import "bulma/sass/utilities/mixins";
+@import "bulma/sass/utilities/initial-variables";
 
-$gap: 32px;
 $desktop: $desktop-custom + (2 * $gap);
+
+// Re-export Bulma mixins for component usage
+@mixin mobile {
+  @media screen and (max-width: ($tablet - 1px)) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: $tablet), print {
+    @content;
+  }
+}
+
+@mixin tablet-only {
+  @media screen and (min-width: $tablet) and (max-width: ($desktop - 1px)) {
+    @content;
+  }
+}
+
+@mixin touch {
+  @media screen and (max-width: ($desktop - 1px)) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: $desktop) {
+    @content;
+  }
+}
+
+@mixin desktop-only {
+  @media screen and (min-width: $desktop) and (max-width: ($widescreen - 1px)) {
+    @content;
+  }
+}
+
+@mixin widescreen {
+  @media screen and (min-width: $widescreen) {
+    @content;
+  }
+}
+
+@mixin fullhd {
+  @media screen and (min-width: $fullhd) {
+    @content;
+  }
+}
+
+@mixin until($breakpoint) {
+  @media screen and (max-width: ($breakpoint - 1px)) {
+    @content;
+  }
+}
+
+@mixin from($breakpoint) {
+  @media screen and (min-width: $breakpoint) {
+    @content;
+  }
+}
 
 @mixin multiline-text-hover-effect($color: $accent-color) {
   background-image: linear-gradient(to top, $color 50%, transparent 50%);
@@ -89,4 +149,13 @@ $desktop: $desktop-custom + (2 * $gap);
   width: 0.4em;
   border: 1px solid #{$color};
   transform: rotate(45deg);
+}
+
+@mixin arrow($color: #000) {
+  position: absolute;
+  display: block;
+  height: 0.5em;
+  width: 0.5em;
+  border-top: 2px solid #{$color};
+  border-left: 2px solid #{$color};
 }
