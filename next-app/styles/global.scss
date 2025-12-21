@@ -1,5 +1,9 @@
 @import "./variables";
+@import "./mixins";
 
+// ============================================
+// CSS Custom Properties (Design Tokens)
+// ============================================
 :root {
   --text-color: #{$black-ter};
   --accent-color: #{$accent-color};
@@ -19,12 +23,14 @@
   --contrasty-transparent-color: rgba(255, 255, 255, 0.03);
   --wave-gradient: linear-gradient(90deg, rgba(0, 91, 188, 0.3) 0%, rgba(255, 214, 3, 0.2) 40%, rgba(0, 91, 188, 0.3) 100%);
 
-  // Only invert SVG icons, not photos
   img[src$=".svg"] {
     filter: invert(1);
   }
 }
 
+// ============================================
+// Base Element Styles
+// ============================================
 body {
   font-family: $main-font;
   color: var(--text-color);
@@ -38,26 +44,179 @@ strong {
   color: var(--text-color);
 }
 
-.title {
-  font-family: $accent-font;
-  font-weight: 600;
-  color: var(--text-color);
-}
+// ============================================
+// Semantic Layout & Typography Classes
+// Wrapped in @layer base so Tailwind utilities can override
+// ============================================
+@layer base {
+  .container {
+    width: 100%;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
 
-.content {
-  h3 {
-    font-family: $accent-font;
+    @include from($widescreen) {
+      max-width: 1152px;
+    }
+
+    @include from($fullhd) {
+      max-width: 1344px;
+    }
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  .hero {
+    position: relative;
+  }
+
+  .hero-body {
+    position: relative;
+    z-index: 1;
+    padding: 3rem 1.5rem;
+  }
+
+  .columns {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+  }
+
+  .column {
+    display: block;
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding: 0.75rem;
+  }
+
+  .section {
+    padding: 3rem 1.5rem;
+    font-size: 1.1em;
+  }
+
+  .footer {
+    padding: 3rem 1.5rem;
+  }
+
+  .title {
+    font-family: $accent-font;
+    font-weight: 600;
     color: var(--text-color);
   }
+
+  // Prose styling for rich text content
+  .content {
+    line-height: 1.6;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: $accent-font;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 0.5em;
+    }
+
+    h2 {
+      font-size: 1.75em;
+      margin-bottom: 0.5714em;
+    }
+
+    h3 {
+      font-size: 1.5em;
+      margin-bottom: 0.6666em;
+    }
+
+    h4 {
+      font-size: 1.25em;
+      margin-bottom: 0.8em;
+    }
+
+    h5 {
+      font-size: 1.125em;
+      margin-bottom: 0.8888em;
+    }
+
+    h6 {
+      font-size: 1em;
+      margin-bottom: 1em;
+    }
+
+    p,
+    ol,
+    ul,
+    blockquote,
+    table,
+    pre {
+      &:not(:last-child) {
+        margin-bottom: 1em;
+      }
+    }
+
+    ol,
+    ul {
+      margin-left: 2em;
+      margin-top: 1em;
+    }
+
+    ul {
+      list-style: disc outside;
+    }
+
+    ol {
+      list-style: decimal outside;
+    }
+
+    li+li {
+      margin-top: 0.25em;
+    }
+
+    a {
+      color: var(--secondary-light-color);
+      text-decoration: underline;
+
+      &:hover {
+        color: var(--secondary-color);
+      }
+    }
+
+    strong {
+      font-weight: 700;
+    }
+
+    em {
+      font-style: italic;
+    }
+  }
+
+  .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .icon-text {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.25em;
+  }
 }
 
-.section {
-  font-size: 1.1em;
-}
-
+// ============================================
+// Legacy/Utility Classes
+// ============================================
 .v-lazy-image {
   filter: blur(5px) opacity(50%) !important;
   transition: filter 0.7s;

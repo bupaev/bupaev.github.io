@@ -173,7 +173,7 @@ export function CvHeroArea() {
                 </span>
               </p>
             </div>
-            <div className="column max-md:hidden">
+            <div className="column hidden md:block">
               <div className={styles.parallelogramImageContainer}>
                 <Image
                   src="/pics/portrait-1-desktop.jpg"
