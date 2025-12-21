@@ -92,6 +92,8 @@
 
 /* Hero */
 @utility hero-body {
+  position: relative;
+  z-index: 1;
   padding: 3rem 1.5rem;
 }
 
@@ -103,6 +105,98 @@
 /* Content - Bulma's prose styling */
 @utility content {
   line-height: 1.6;
+
+  /* Headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-accent);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+  }
+
+  h2 {
+    font-size: 1.75em;
+    margin-bottom: 0.5714em;
+  }
+
+  h3 {
+    font-size: 1.5em;
+    margin-bottom: 0.6666em;
+  }
+
+  h4 {
+    font-size: 1.25em;
+    margin-bottom: 0.8em;
+  }
+
+  h5 {
+    font-size: 1.125em;
+    margin-bottom: 0.8888em;
+  }
+
+  h6 {
+    font-size: 1em;
+    margin-bottom: 1em;
+  }
+
+  /* Block elements */
+  p,
+  ol,
+  ul,
+  blockquote,
+  table,
+  pre {
+    &:not(:last-child) {
+      margin-bottom: 1em;
+    }
+  }
+
+  /* Lists */
+  ol,
+  ul {
+    margin-left: 2em;
+    margin-top: 1em;
+  }
+
+  ul {
+    list-style: disc outside;
+  }
+
+  ol {
+    list-style: decimal outside;
+  }
+
+  li+li {
+    margin-top: 0.25em;
+  }
+
+  /* Links */
+  a {
+    color: var(--color-secondary-light);
+    text-decoration: underline;
+
+    &:hover {
+      color: var(--color-secondary);
+    }
+  }
+
+  /* Strong and emphasis */
+  strong {
+    font-weight: 700;
+  }
+
+  em {
+    font-style: italic;
+  }
 }
 
 /* Title - handled in global.scss for proper dark mode support */
@@ -132,26 +226,32 @@
 /* Bulma size classes */
 @utility is-size-1 {
   font-size: var(--font-size-1);
+  line-height: 1.125;
 }
 
 @utility is-size-2 {
   font-size: var(--font-size-2);
+  line-height: 1.125;
 }
 
 @utility is-size-3 {
   font-size: var(--font-size-3);
+  line-height: 1.125;
 }
 
 @utility is-size-4 {
   font-size: var(--font-size-4);
+  line-height: 1.125;
 }
 
 @utility is-size-5 {
   font-size: var(--font-size-5);
+  line-height: 1.125;
 }
 
 @utility is-2 {
   font-size: var(--font-size-2);
+  line-height: 1.125;
 }
 
 /* Bulma text utilities */
