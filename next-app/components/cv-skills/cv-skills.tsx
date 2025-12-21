@@ -229,7 +229,7 @@ const skills: SkillGroup[] = [
 export function CvSkills() {
   return (
     <div className={`${styles.skills} container`}>
-      <h2 className="title is-2 has-text-weight-bold">Skills</h2>
+      <h2 className="title text-4xl leading-tight font-bold">Skills</h2>
       <div className="content">
         <h3>What I can do:</h3>
         <ul>

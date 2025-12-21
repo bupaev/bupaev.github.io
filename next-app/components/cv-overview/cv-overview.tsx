@@ -6,7 +6,7 @@ import styles from "./cv-overview.module.scss";
 export function CvOverview() {
   return (
     <div className={`${styles.overview} container`}>
-      <h2 className="title is-2">Overview</h2>
+      <h2 className="title text-4xl leading-tight">Overview</h2>
       <div className="columns">
         <div className="column">
           <div className="content">
@@ -38,7 +38,7 @@ export function CvOverview() {
             <p>I achieve this goal through expertise in the following areas:</p>
             <div className={styles.sectionWithDelimiter}>
               <p>
-                <span className={`${styles.bullet} is-hidden-widescreen`} />
+                <span className={`${styles.bullet} xl:hidden`} />
                 <strong>Front-end engineering</strong> as my main
                 specialization: building scalable, maintainable front-end
                 architectures, writing clean, readable code and making robust
@@ -47,7 +47,7 @@ export function CvOverview() {
                 that you can find in trendy FE tech stack.
               </p>
               <p className="mb-4">
-                <span className={`${styles.bullet} is-hidden-widescreen`} />
+                <span className={`${styles.bullet} xl:hidden`} />
                 <strong>Visual design and user experience</strong> as an
                 important addition. My longstanding interest in photography and
                 behavioral psychology gave me a good fundamental basis; ten

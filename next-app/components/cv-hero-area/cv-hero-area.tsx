@@ -86,10 +86,10 @@ export function CvHeroArea() {
         <div className="hero-body">
           <div className="columns">
             <div
-              className={`${styles.leftColumn} column has-text-right is-three-fifths-touch`}
+              className={`${styles.leftColumn} column text-right max-lg:w-3/5 max-lg:flex-none`}
             >
               <div
-                className={`${styles.parallelogramImageContainer} is-hidden-tablet`}
+                className={`${styles.parallelogramImageContainer} md:hidden`}
               >
                 <Image
                   src="/pics/portrait-1-mobile-2x.jpg"
@@ -101,20 +101,20 @@ export function CvHeroArea() {
                   onLoad={() => setMobileImageLoaded(true)}
                 />
               </div>
-              <h1 className={`title pt-6 ${styles.title}`}>
+              <h1 className={`title pt-8 ${styles.title}`}>
                 <div
-                  className={`${styles.textShapeLimiter} is-hidden-mobile`}
+                  className={`${styles.textShapeLimiter} max-md:hidden`}
                 />
-                <span className="is-size-1 has-text-right">
+                <span className="text-5xl leading-tight text-right">
                   Hi! I&apos;m Pavel Buramensky
                 </span>
-                <p className="is-size-2 pt-4">
+                <p className="text-4xl leading-tight pt-4">
                   I&apos;m a front-end developer who cares about user experience
                   and tries to make the world a better place
                 </p>
               </h1>
-              <p className={`${styles.contacts} pt-5`}>
-                <span className="mr-5">
+              <p className={`${styles.contacts} pt-6`}>
+                <span className="mr-6">
                   <a href="mailto:mail@paulbu.com">
                     <span className="icon-text">
                       <span className={`icon ${styles.icon}`}>
@@ -124,7 +124,7 @@ export function CvHeroArea() {
                     </span>
                   </a>
                 </span>
-                <span className="mr-5">
+                <span className="mr-6">
                   <a
                     href="https://t.me/bupaev"
                     target="_blank"
@@ -152,9 +152,9 @@ export function CvHeroArea() {
                     </span>
                   </a>
                 </span>
-                <span className="is-block-tablet">
+                <span className="md:block">
                   <span
-                    className={`${styles.verticalAlignHack} mr-2 is-hidden-mobile`}
+                    className={`${styles.verticalAlignHack} mr-2 max-md:hidden`}
                   >
                     also you can
                   </span>
@@ -173,7 +173,7 @@ export function CvHeroArea() {
                 </span>
               </p>
             </div>
-            <div className="column is-hidden-mobile">
+            <div className="column max-md:hidden">
               <div className={styles.parallelogramImageContainer}>
                 <Image
                   src="/pics/portrait-1-desktop.jpg"

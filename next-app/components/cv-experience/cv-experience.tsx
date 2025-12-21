@@ -7,9 +7,9 @@ import styles from "./cv-experience.module.scss";
 export function CvExperience() {
   return (
     <div className={`${styles.experience} container`}>
-      <h2 className="title is-2">Experience</h2>
+      <h2 className="title text-4xl leading-tight">Experience</h2>
       <Timeline />
-      <div className="content mt-5">
+      <div className="content mt-6">
         <section id="epam" className={styles.jobRecord}>
           <h3>
             <span className={styles.jobTitle}>Lead Front-end engineer</span>

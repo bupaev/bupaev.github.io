@@ -1,7 +1,7 @@
 export function CvEducation() {
   return (
     <div className="education container">
-      <h2 className="title is-2">Education</h2>
+      <h2 className="title text-4xl leading-tight">Education</h2>
       <div className="content">
         <h3>Endless professional self-development</h3>
         <p>

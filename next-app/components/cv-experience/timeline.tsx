@@ -288,7 +288,7 @@ export function Timeline() {
                 <div className={styles.jobText}>
                   {job.position}
                   {job.company ? "," : ""}{" "}
-                  <span className="has-text-weight-normal">{job.company}</span>
+                  <span className="font-normal">{job.company}</span>
                 </div>
               </div>
             ))}
