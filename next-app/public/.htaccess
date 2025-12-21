@@ -1,0 +1,30 @@
+#
+# This is needed for my old Apache-based hosting only
+#
+
+ErrorDocument 404 /404.html
+
+RewriteEngine On
+### Force HTTPS for main domain ###
+### based on https://stackoverflow.com/questions/29994663/force-https-for-main-domain-and-http-for-all-subdomains
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} =paulbu.com
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+### Force HTTP for subdomain ###
+RewriteCond %{HTTPS} on
+RewriteCond %{HTTP_HOST} ^.+\.paulbu\.com$
+RewriteRule ^ http://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+### Redirect to CV page ###
+# RewriteEngine On
+# RewriteCond %{HTTP_HOST} paulbu.com
+# RewriteRule (.*) https://paulbu.com/cv [R=301,L]
+
+### Use dist folder as root folder
+# RewriteEngine on
+# RewriteCond %{HTTP_HOST} ^paulbu.com$ [NC,OR]
+# RewriteCond %{HTTP_HOST} ^www.paulbu.com$
+# RewriteCond %{REQUEST_URI} !dist/
+# RewriteRule (.*) /dist/ [L]
+

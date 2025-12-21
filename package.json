@@ -11,7 +11,9 @@
     "lint:style": "stylelint \"**/*.{vue,css}\" --ignore-path .gitignore",
     "prepare": "husky install",
     "lint": "npm run lint:js && npm run lint:style",
-    "test": "jest"
+    "test": "jest",
+    "test:e2e": "playwright test --config=e2e/playwright.config.ts",
+    "test:e2e:ui": "playwright test --config=e2e/playwright.config.ts --ui"
   },
   "lint-staged": {
     "*.{js,vue}": "eslint",
@@ -30,6 +32,7 @@
     "@nuxtjs/eslint-module": "^3.0.2",
     "@nuxtjs/stylelint-module": "^4.0.0",
     "@nuxtjs/svg": "^0.3.0",
+    "@playwright/test": "^1.57.0",
     "@vue/test-utils": "^1.2.2",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^27.0.5",
@@ -40,7 +43,6 @@
     "husky": "^7.0.4",
     "jest": "^27.3.1",
     "lint-staged": "^12.0.2",
-    "playwright": "^1.16.3",
     "sass": "^1.43.4",
     "sass-loader": "^10.1.1",
     "stylelint": "^13.13.1",

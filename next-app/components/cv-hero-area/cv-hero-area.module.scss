@@ -1,0 +1,293 @@
+@import "@/styles/mixins";
+@import "@/styles/variables";
+
+.heroArea {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  font-family: $accent-font;
+  z-index: 2;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    bottom: -100%;
+    left: -50%;
+    right: -50%;
+    background: var(--wave-gradient);
+    background-size: 50% 100%;
+    animation: moving-gradient 15s linear infinite;
+    will-change: background-color;
+    transform: rotate(15deg);
+  }
+
+  @keyframes moving-gradient {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: repeating-linear-gradient(
+      105deg,
+      var(--background-color) 0,
+      var(--background-color) 3px,
+      transparent 4px,
+      transparent 13px
+    );
+  }
+
+  // This transition through 0 opacity is needed because browser can't animate colors in linear gradient above
+  :global([data-color-scheme="light"]) &::after {
+    animation: transition-to-light calc(var(--dark-light-transition) * 1.2)
+      ease-in;
+  }
+
+  :global([data-color-scheme="dark"]) &::after {
+    animation: transition-to-dark calc(var(--dark-light-transition) * 1.2)
+      ease-in;
+  }
+
+  @keyframes transition-to-light {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes transition-to-dark {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  :global(.container) {
+    z-index: 1;
+  }
+
+  @include desktop-only {
+    :global(.container) {
+      max-width: 960px;
+    }
+  }
+
+  :global(.hero-body) {
+    @include tablet {
+      padding-right: 0;
+      padding-left: 10px;
+    }
+
+    @include touch {
+      min-height: 500px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    @include mobile {
+      margin-bottom: 0;
+      padding-bottom: 45px;
+      padding-right: 20px;
+    }
+  }
+
+  .leftColumn {
+    z-index: 1;
+
+    // On less than 1050px Hero Area texts are too close to VerticalMenu
+    @media screen and (min-width: $desktop) and (max-width: 1050px) {
+      flex-grow: 1.25;
+      padding-left: 40px;
+    }
+
+    @include mobile {
+      // can't just use ".is-full-mobile" cause ".is-three-fifths-touch" has higher priority
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 478px;
+
+      .parallelogramImageContainer {
+        position: absolute;
+        left: -196px;
+        top: 0;
+        height: 600px;
+        width: 250px;
+        margin-right: 0;
+        margin-left: 0;
+        z-index: 0;
+
+        img {
+          position: absolute;
+          top: -28px;
+          left: 64%;
+          transform: skew(15deg) scale(1);
+        }
+      }
+    }
+  }
+
+  a {
+    position: relative;
+
+    @include text-hover-effect();
+  }
+
+  .icon svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--text-color) !important;
+  }
+
+  .title {
+    position: relative;
+    font-weight: 600;
+    font-style: italic;
+    z-index: 1;
+
+    @include desktop-only {
+      margin-right: -50px;
+    }
+
+    @include mobile {
+      margin-right: -50px;
+      padding-left: 8%;
+    }
+
+    @include tablet-only {
+      margin-right: -50px;
+      padding-left: 20px;
+    }
+
+    @include mobile {
+      margin-right: 0;
+
+      @include text-contour(var(--background-color), 0.05em);
+    }
+  }
+
+  .contacts {
+    font-weight: 600;
+    font-size: $size-4;
+    font-style: italic;
+
+    & > span {
+      display: inline-block;
+      padding-bottom: 15px;
+
+      a {
+        display: inline-block;
+        height: 1.3em;
+      }
+    }
+
+    @include touch {
+      font-size: 1.3rem;
+    }
+
+    @include mobile {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+
+      & > span {
+        margin-right: 0 !important;
+
+        a {
+          margin-left: 1em;
+        }
+      }
+    }
+  }
+
+  .verticalAlignHack {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: -0.25em;
+  }
+
+  .textShapeLimiter {
+    float: right;
+    width: 120px;
+    height: 400px;
+    shape-outside: polygon(100% 0%, 100% 100%, 0 100%);
+    pointer-events: none;
+
+    @include tablet-only {
+      width: 135px;
+      height: 450px;
+    }
+  }
+
+  .parallelogramImageContainer {
+    position: relative;
+    overflow: hidden;
+    height: 472px;
+    margin-left: -50px;
+    margin-right: 32px;
+    border-radius: 12px;
+    transform: skew(-15deg);
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(#fff, 0.05);
+    }
+
+    @include desktop-only {
+      height: 550px;
+      margin-left: auto;
+      margin-right: -200px;
+    }
+
+    @include touch {
+      height: 500px;
+      margin-left: auto;
+      margin-right: -80px;
+      border-radius: 0;
+    }
+
+    // has to be placed after touch
+    @include tablet-only {
+      height: 100%;
+      border-radius: 0;
+    }
+
+    img {
+      height: 100%;
+      transform: skew(15deg) scale(1.22) translateY(-32px);
+      object-fit: cover;
+
+      @include desktop-only {
+        transform: skew(15deg) scale(1.3) translateY(-25px);
+      }
+
+      @include tablet-only {
+        transform: skew(15deg) scale(1.3) translate(-14px, -30px);
+      }
+
+      @include mobile {
+        transform: skew(15deg) scale(1.3) translate(-24px, -30px);
+      }
+    }
+  }
+}
