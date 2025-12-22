@@ -48,6 +48,10 @@ body {
   background-color: var(--background-color);
   transition: background-color var(--dark-light-transition), color var(--dark-light-transition);
   will-change: background-color, color;
+
+  // Match Bulma's font smoothing (makes fonts appear thinner/cleaner)
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a,
