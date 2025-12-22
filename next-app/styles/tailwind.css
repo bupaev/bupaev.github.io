@@ -1,3 +1,4 @@
+/* stylelint-disable custom-property-empty-line-before */
 @import "tailwindcss";
 
 /*
@@ -16,4 +17,6 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1216px;
   --breakpoint-2xl: 1408px;
+
+  --text-4xl: 2.5rem;
 }
