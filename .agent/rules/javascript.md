@@ -1,16 +1,25 @@
-Code Style and Structure
+---
+trigger: always_on
+---
+
+# Javascript coding rules
+
+## Code Style and Structure
+
 - Write concise, technical TypeScript code strictly following Airbnb TypeScript Styleguide
 - Use functional and declarative programming patterns; avoid classes.
 - Prefer composition over inheritance.
 
-TypeScript Usage
+## TypeScript Usage
+
 - Use TypeScript for all code; prefer types over interfaces.
 - Use strict mode in TypeScript for better type safety.
 - Avoid enums; use maps instead.
 - Avoid using `any` or `unknown` unless absolutely necessary. Look for type definitions in the codebase instead.
 - Avoid type assertions with `as` or `!`.
 
-React Best Practices
+## React Best Practices
+
 - Use React v19 features and syntax
 - Use react-router v7
 - Reduce manual use of `useMemo`/`useCallback` unless handling expensive computations, because React 19 compiler automatically handles: Component memoization, State update batching, Async rendering optimizations
@@ -27,14 +36,17 @@ React Best Practices
 - Use cleanup functions in useEffect to prevent memory leaks.
 - Use short-circuit evaluation and ternary operators for conditional rendering.
 
-Performance Optimization
+## Performance Optimization
+
 - Avoid unnecessary re-renders by memoizing components and using useMemo and useCallback hooks appropriately.
 
-State Management
+## State Management
+
 - Use Redux Toolkit
 - Use context for intermediate state sharing when prop drilling becomes cumbersome.
 
-Error Handling and Validation
+## Error Handling and Validation
+
 - Use Zod for runtime validation and error handling.
 - Implement error boundaries to catch and handle errors gracefully.
 - Prioritize error handling and edge cases:
@@ -43,17 +55,20 @@ Error Handling and Validation
   - Avoid unnecessary else statements; use if-return pattern instead.
   - Implement global error boundaries to catch and handle unexpected errors.
 
-Testing
+## Testing
+
 - Write comprehensive unit tests for all component using Vitest and React Testing Library.
 - Run unit tests after each code change using watch mode
 - Implement integration tests for critical user flows.
 - Use snapshot testing for components to ensure UI consistency judiciously.
 
-Security
+## Security
+
 - Sanitize user inputs to prevent XSS attacks.
 - Ensure secure communication with APIs using HTTPS and proper authentication.
 
-Documentation
+## Documentation
+
 - Use @JSDoc format with well-defined description of business logic and non-obvious code
 - Don't add redundant comments to self-explanatory code
 
