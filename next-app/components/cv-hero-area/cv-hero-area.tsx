@@ -4,6 +4,9 @@ import { useState } from "react";
 import Image from "next/image";
 import styles from "./cv-hero-area.module.scss";
 
+import portraitDesktop from "./images/portrait-1-desktop.jpg";
+import portraitMobile from "./images/portrait-1-mobile-2x.jpg";
+
 function LinkedinIcon() {
   return (
     <svg
@@ -92,10 +95,10 @@ export function CvHeroArea() {
                 className={`${styles.parallelogramImageContainer} md:hidden`}
               >
                 <Image
-                  src="/pics/portrait-1-mobile-2x.jpg"
+                  src={portraitMobile}
                   alt="Pavel Buramensky portrait"
-                  width={250}
-                  height={600}
+                  fill
+                  placeholder="blur"
                   priority
                   className={mobileImageLoaded ? styles.loaded : ""}
                   onLoad={() => setMobileImageLoaded(true)}
@@ -176,10 +179,10 @@ export function CvHeroArea() {
             <div className="column hidden md:block">
               <div className={styles.parallelogramImageContainer}>
                 <Image
-                  src="/pics/portrait-1-desktop.jpg"
+                  src={portraitDesktop}
                   alt="Pavel Buramensky portrait"
                   fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  placeholder="blur"
                   priority
                   className={desktopImageLoaded ? styles.loaded : ""}
                   onLoad={() => setDesktopImageLoaded(true)}
