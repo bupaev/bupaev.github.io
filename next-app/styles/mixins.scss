@@ -1,4 +1,5 @@
-@import "./variables";
+@forward "variables";
+@use "variables" as *;
 
 // Define gap locally (previously from Bulma)
 $gap: 32px;
@@ -12,7 +13,9 @@ $desktop: $desktop-custom + (2 * $gap);
 }
 
 @mixin tablet {
-  @media screen and (min-width: $tablet), print {
+
+  @media screen and (min-width: $tablet),
+  print {
     @content;
   }
 }
@@ -128,6 +131,7 @@ $desktop: $desktop-custom + (2 * $gap);
       left: -0.2em;
     }
   }
+
   &:active {
     &::after {
       transform: scale(1.1) skew(-15deg);
@@ -136,11 +140,10 @@ $desktop: $desktop-custom + (2 * $gap);
 }
 
 @mixin text-contour($color: #fff, $distance: 0.1em, $blur-radius: 0) {
-  text-shadow:
-    -1*$distance -1*$distance $blur-radius #{$color},
-    $distance -1*$distance $blur-radius #{$color},
-    -1*$distance $distance $blur-radius #{$color},
-    $distance $distance $blur-radius #{$color};
+  text-shadow: -1*$distance -1*$distance $blur-radius #{$color},
+  $distance -1*$distance $blur-radius #{$color},
+  -1*$distance $distance $blur-radius #{$color},
+  $distance $distance $blur-radius #{$color};
 }
 
 @mixin rhombus($color: #000) {

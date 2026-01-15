@@ -1,11 +1,11 @@
-@import "@/styles/mixins";
+@use "@/styles/mixins" as *;
 
 .experience {
   .content {
     h3 {
       line-height: 1.3;
 
-      & + p > em {
+      &+p>em {
         display: block;
         margin-top: -0.8em;
         margin-bottom: 1.1em;
@@ -19,7 +19,7 @@
       margin-bottom: 0.2em;
     }
 
-    h4 + ul {
+    h4+ul {
       margin-top: 0.5em;
     }
 
