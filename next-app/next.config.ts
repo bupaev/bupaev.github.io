@@ -13,7 +13,6 @@ const nextConfig: NextConfig = {
   },
   experimental: {
   },
-  // @ts-expect-error - turbopack is not yet in NextConfig type
   turbopack: {
     root: path.resolve(__dirname, ".."),
   },
