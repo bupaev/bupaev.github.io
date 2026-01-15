@@ -1,29 +1,58 @@
-# My minimum viable personal page 👽
+# My Personal Website 👽
 
-The extremely simple web-site created with [NuxtJS](https://nuxtjs.org/) and [Bulma](https://bulma.io/)
+A personal portfolio website built with [Next.js 16](https://nextjs.org/), [React 19](https://react.dev/), [TypeScript](https://www.typescriptlang.org/), and [Tailwind CSS v4](https://tailwindcss.com/).
 
-You can see it live on [paulbu.com](https://paulbu.com/)
+🌐 **Live:** [paulbu.com](https://paulbu.com/)
 
-## Standard build setup
+## Tech Stack
+
+- **Framework:** Next.js 16.1.0 (App Router, static export)
+- **UI:** React 19, TypeScript
+- **Styling:** Tailwind CSS v4, SCSS modules, Bulma (utilities)
+- **Build:** Turbopack
+
+## Development
 
 ```bash
-# install dependencies
-$ npm install
+# Install dependencies
+npm install
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+# Start dev server (http://localhost:3000)
+npm run dev
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+# Build for production (static export to ./out)
+npm run build
 
-# generate static project
-$ npm run generate
+# Run production server
+npm run start
 ```
 
-There is known issue with Node 17+ related to OpenSSL. It can be fixed by the following command
+## Linting
+
 ```bash
-export NODE_OPTIONS=--openssl-legacy-provider
+# ESLint
+npm run lint
+
+# Stylelint (CSS/SCSS)
+npm run lint:css
 ```
-## Semantic Commit Messages
-For commit naming is [Semantic commit types](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716) are used.
+
+## Testing
+
+```bash
+# E2E tests with Playwright
+npm run test:e2e
+
+# E2E tests with UI
+npm run test:e2e:ui
+```
+
+## Commit Convention
+
+This project uses [Conventional Commits](https://www.conventionalcommits.org/):
+
+```
+type(scope): subject
+
+feat, fix, docs, style, refactor, perf, test, build, ci, chore
+```
