@@ -1,3 +1,5 @@
 {
-    "stylelint.configFile": "next-app/.stylelintrc.json"
+    "stylelint.workingDirectories": [
+        "./next-app"
+    ]
 }
