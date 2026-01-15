@@ -31,7 +31,6 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/smoothscroll-polyfill": "^0.3.4",
-    "bulma": "^1.0.4",
     "eslint": "^9",
     "eslint-config-next": "16.1.0",
     "husky": "^7.0.4",
