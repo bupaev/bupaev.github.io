@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "lint:css": "stylelint '**/*.{css,scss}'"
   },
   "dependencies": {
     "next": "16.1.0",
