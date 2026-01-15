@@ -64,22 +64,7 @@ strong {
 // Wrapped in @layer base so Tailwind utilities can override
 // ============================================
 @layer base {
-  .container {
-    width: 100%;
-    max-width: 960px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
 
-    @include from($widescreen) {
-      max-width: 1152px;
-    }
-
-    @include from($fullhd) {
-      max-width: 1344px;
-    }
-  }
 
   .hero {
     position: relative;
