@@ -1,27 +1,27 @@
 @forward "variables";
-@use "variables" as *;
+@use "variables";
 
 // Define gap locally (previously from Bulma)
 $gap: 32px;
-$desktop: $desktop-custom + (2 * $gap);
+$desktop: variables.$desktop-custom + (2 * $gap);
 
 // Re-export Bulma mixins for component usage
 @mixin mobile {
-  @media screen and (max-width: ($tablet - 1px)) {
+  @media screen and (max-width: (variables.$tablet - 1px)) {
     @content;
   }
 }
 
 @mixin tablet {
 
-  @media screen and (min-width: $tablet),
+  @media screen and (min-width: variables.$tablet),
   print {
     @content;
   }
 }
 
 @mixin tablet-only {
-  @media screen and (min-width: $tablet) and (max-width: ($desktop - 1px)) {
+  @media screen and (min-width: variables.$tablet) and (max-width: ($desktop - 1px)) {
     @content;
   }
 }
@@ -39,19 +39,19 @@ $desktop: $desktop-custom + (2 * $gap);
 }
 
 @mixin desktop-only {
-  @media screen and (min-width: $desktop) and (max-width: ($widescreen - 1px)) {
+  @media screen and (min-width: $desktop) and (max-width: (variables.$widescreen - 1px)) {
     @content;
   }
 }
 
 @mixin widescreen {
-  @media screen and (min-width: $widescreen) {
+  @media screen and (min-width: variables.$widescreen) {
     @content;
   }
 }
 
 @mixin fullhd {
-  @media screen and (min-width: $fullhd) {
+  @media screen and (min-width: variables.$fullhd) {
     @content;
   }
 }
@@ -68,7 +68,7 @@ $desktop: $desktop-custom + (2 * $gap);
   }
 }
 
-@mixin multiline-text-hover-effect($color: $accent-color) {
+@mixin multiline-text-hover-effect($color: variables.$accent-color) {
   background-image: linear-gradient(to top, $color 50%, transparent 50%);
   background-size: 100% 4px;
   background-position: 0 100%;
@@ -99,7 +99,7 @@ $desktop: $desktop-custom + (2 * $gap);
 
 // This effect visually similar to the previous one but doesn't work properly with multiline links
 // Keep it for use in Hero Area due to Safari bug with animation
-@mixin text-hover-effect($color: $accent-color) {
+@mixin text-hover-effect($color: variables.$accent-color) {
   transition: color 250ms, fill 250ms;
 
   svg {

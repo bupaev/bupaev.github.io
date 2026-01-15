@@ -1,5 +1,4 @@
-@use "@/styles/variables" as *;
-@use "@/styles/mixins" as *;
+@use "@/styles/variables";
 
 .cvPage {
   position: relative;
@@ -42,7 +41,7 @@
       filter: invert(48%) sepia(51%) saturate(585%) hue-rotate(161deg) brightness(92%) contrast(86%);
     }
 
-    @media (min-width: $big-screen) {
+    @media (min-width: variables.$big-screen) {
       background-size: 750px;
     }
 
@@ -55,7 +54,7 @@
       background-position: right -150px bottom 15%;
     }
 
-    @media (max-width: $small-mobile) {
+    @media (max-width: variables.$small-mobile) {
       background-position: right -230px bottom 15%;
     }
   }
@@ -76,7 +75,7 @@
     background-image: url("/icons/academic-cap-detailed.svg");
     height: 100%;
 
-    @media (min-width: $big-screen) {
+    @media (min-width: variables.$big-screen) {
       background-size: 720px;
       background-position-x: 92%;
     }

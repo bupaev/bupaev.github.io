@@ -1,4 +1,4 @@
-@use "bulma/sass/utilities/mixins" as *;
+@use "@/styles/mixins.scss";
 
 .goToTop {
   display: flex;
@@ -14,7 +14,7 @@
   position: relative;
 
   .arrow {
-    @include arrow();
+    @include mixins.arrow();
 
     position: relative;
     top: auto;

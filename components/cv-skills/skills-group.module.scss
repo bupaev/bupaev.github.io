@@ -1,16 +1,15 @@
-@use "@/styles/mixins" as *;
-@use "@/styles/variables" as *;
+@use "@/styles/mixins";
 
 .skillsSection {
   width: 100%;
   min-width: 100%;
 
-  @include desktop {
+  @include mixins.desktop {
     width: 49%;
     min-width: 49%;
   }
 
-  @include fullhd {
+  @include mixins.fullhd {
     width: 32%;
     min-width: 32%;
   }

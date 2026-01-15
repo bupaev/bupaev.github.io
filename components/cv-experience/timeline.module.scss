@@ -1,5 +1,5 @@
-@use "@/styles/mixins" as *;
-@use "@/styles/variables" as *;
+@use "@/styles/mixins";
+@use "@/styles/variables";
 
 .timeline {
   $year-height: 30px;
@@ -9,7 +9,7 @@
   overflow: hidden;
 
   // Use more space on tablet and mobile
-  @include until($desktop) {
+  @include mixins.until(variables.$desktop) {
     margin-left: -0.5rem;
     margin-right: -1rem;
     width: calc(100% + 1.5rem);
@@ -58,22 +58,22 @@
     line-height: 1.2;
     word-break: break-word;
     font-weight: 700;
-    background-color: rgba($accent-color, 0.5);
+    background-color: rgba(variables.$accent-color, 0.5);
     padding: 5px 5px 5px 10px;
     cursor: pointer;
     overflow: hidden;
     transition: background-color 200ms;
 
-    @include tablet-only {
+    @include mixins.tablet-only {
       font-size: 12px;
     }
 
-    @include mobile {
+    @include mixins.mobile {
       font-size: 11px;
     }
 
     &.isSabbatical {
-      background-color: rgba($secondary-light-color, 0.5);
+      background-color: rgba(variables.$secondary-light-color, 0.5);
 
       &:hover {
         background-color: var(--color-secondary-light);
@@ -109,7 +109,7 @@
       &::after {
         font-size: 16px;
 
-        @include rhombus(var(--text-color));
+        @include mixins.rhombus(var(--text-color));
 
         content: "";
         top: -4px;
@@ -118,7 +118,7 @@
       }
 
       &:last-child::before {
-        @include arrow(var(--text-color));
+        @include mixins.arrow(var(--text-color));
 
         content: "";
         border-width: 1px !important;

@@ -1,5 +1,5 @@
-@use "@/styles/mixins" as *;
-@use "@/styles/variables" as *;
+@use "@/styles/mixins";
+@use "@/styles/variables";
 
 $menu-open-width: 10em;
 
@@ -20,12 +20,12 @@ $menu-open-width: 10em;
   z-index: 2;
   user-select: none;
 
-  @include tablet-only {
+  @include mixins.tablet-only {
     position: fixed;
   }
 
   // position and top values also managed by JS in the parent component
-  @include touch {
+  @include mixins.touch {
     position: fixed;
     top: 0;
     width: 10%;
@@ -54,7 +54,7 @@ $menu-open-width: 10em;
     cursor: pointer;
     will-change: auto;
 
-    @include from(1700px) {
+    @include mixins.from(1700px) {
       width: $menu-open-width;
 
       .itemText::before {
@@ -62,7 +62,7 @@ $menu-open-width: 10em;
       }
     }
 
-    @include touch {
+    @include mixins.touch {
       position: relative;
       overflow: visible;
       height: 15vh;
@@ -194,11 +194,11 @@ $menu-open-width: 10em;
     left: -0.1em;
     height: 2em;
     width: 2.2em;
-    background-color: rgba($accent-color, 0.2);
-    border-left: 2px $accent-color solid;
+    background-color: rgba(variables.$accent-color, 0.2);
+    border-left: 2px variables.$accent-color solid;
     pointer-events: none;
 
-    @include touch {
+    @include mixins.touch {
       top: 0;
       left: 0;
       width: 10px;

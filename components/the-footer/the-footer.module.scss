@@ -1,5 +1,4 @@
-@use "@/styles/variables" as *;
-@use "@/styles/mixins" as *;
+@use "@/styles/mixins";
 
 .footer {
   position: relative;
@@ -17,7 +16,7 @@
   a {
     color: var(--text-color);
 
-    @include multiline-text-hover-effect;
+    @include mixins.multiline-text-hover-effect;
   }
 
   .text {

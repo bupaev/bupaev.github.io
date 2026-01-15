@@ -1,4 +1,4 @@
-@use "@/styles/mixins" as *;
+@use "@/styles/mixins";
 
 .vennDiagramProfessions {
   $duration: 0.7s;
@@ -8,7 +8,7 @@
   margin: 20%;
   font-size: 13.3px;
 
-  @include until($small-mobile) {
+  @include mixins.until(mixins.$small-mobile) {
     margin-left: 10%;
     margin-right: 10%;
     margin-bottom: 25%;
@@ -75,13 +75,13 @@
     font-weight: 700;
     color: var(--text-color);
 
-    @include text-contour(var(--background-color));
+    @include mixins.text-contour(var(--background-color));
 
     @media (max-width: 576px) {
       font-size: 1.5em;
     }
 
-    @include desktop-only {
+    @include mixins.desktop-only {
       font-size: 1.6em;
     }
   }
@@ -113,7 +113,7 @@
       left: 58%;
     }
 
-    @include desktop-only {
+    @include mixins.desktop-only {
       font-size: 1.5em;
       top: 18%;
       left: 58%;

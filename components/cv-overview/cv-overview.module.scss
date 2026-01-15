@@ -1,13 +1,13 @@
-@use "@/styles/mixins" as *;
+@use "@/styles/mixins";
 
 .overview {
   .diagramContainer {
-    @include desktop {
+    @include mixins.desktop {
       width: calc(40% - 4em);
       float: left;
     }
 
-    @include tablet-only {
+    @include mixins.tablet-only {
       float: left;
       width: 50%;
     }
@@ -21,13 +21,13 @@
     padding-right: 0.8em;
 
     &::after {
-      @include rhombus(var(--text-color));
+      @include mixins.rhombus(var(--text-color));
 
       content: "";
     }
   }
 
-  @include widescreen {
+  @include mixins.widescreen {
     .sectionWithDelimiter {
       display: inline-block;
       width: 60%;

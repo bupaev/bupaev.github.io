@@ -1,6 +1,3 @@
-@use "bulma/sass/utilities/initial-variables";
-@use "@/styles/variables" as *;
-
 // @TODO: Rework styles to make it more robust
 // Now it's extremely fragile. E.g. depends on width of labels
 .darkModeToggle {

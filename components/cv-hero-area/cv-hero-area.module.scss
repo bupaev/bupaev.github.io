@@ -1,5 +1,5 @@
-@use "@/styles/mixins" as *;
-@use "@/styles/variables" as *;
+@use "@/styles/mixins";
+@use "@/styles/variables";
 
 .heroArea {
   position: relative;
@@ -73,25 +73,25 @@
     z-index: 1;
   }
 
-  @include desktop-only {
+  @include mixins.desktop-only {
     :global(.container) {
       max-width: 960px;
     }
   }
 
   :global(.hero-body) {
-    @include tablet {
+    @include mixins.tablet {
       padding-right: 0;
       padding-left: 10px;
     }
 
-    @include touch {
+    @include mixins.touch {
       min-height: 500px;
       padding-top: 0;
       padding-bottom: 0;
     }
 
-    @include mobile {
+    @include mixins.mobile {
       margin-bottom: 0;
       padding-bottom: 45px;
       padding-right: 20px;
@@ -102,12 +102,12 @@
     z-index: 1;
 
     // On less than 1050px Hero Area texts are too close to VerticalMenu
-    @media screen and (min-width: $desktop) and (max-width: 1050px) {
+    @media screen and (min-width: variables.$desktop) and (max-width: 1050px) {
       flex-grow: 1.25;
       padding-left: 40px;
     }
 
-    @include mobile {
+    @include mixins.mobile {
       // can't just use ".is-full-mobile" cause ".is-three-fifths-touch" has higher priority
       width: 100%;
       display: flex;
@@ -138,7 +138,7 @@
   a {
     position: relative;
 
-    @include text-hover-effect();
+    @include mixins.text-hover-effect();
   }
 
   .icon svg {
@@ -153,24 +153,24 @@
     font-style: italic;
     z-index: 1;
 
-    @include desktop-only {
+    @include mixins.desktop-only {
       margin-right: -50px;
     }
 
-    @include mobile {
+    @include mixins.mobile {
       margin-right: -50px;
       padding-left: 8%;
     }
 
-    @include tablet-only {
+    @include mixins.tablet-only {
       margin-right: -50px;
       padding-left: 20px;
     }
 
-    @include mobile {
+    @include mixins.mobile {
       margin-right: 0;
 
-      @include text-contour(var(--background-color), 0.05em);
+      @include mixins.text-contour(var(--background-color), 0.05em);
     }
   }
 
@@ -189,11 +189,11 @@
       }
     }
 
-    @include touch {
+    @include mixins.touch {
       font-size: 1.3rem;
     }
 
-    @include mobile {
+    @include mixins.mobile {
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-end;
@@ -221,7 +221,7 @@
     shape-outside: polygon(100% 0%, 100% 100%, 0 100%);
     pointer-events: none;
 
-    @include tablet-only {
+    @include mixins.tablet-only {
       width: 135px;
       height: 450px;
     }
@@ -246,13 +246,13 @@
       background-color: rgba(#fff, 0.05);
     }
 
-    @include desktop-only {
+    @include mixins.desktop-only {
       height: 550px;
       margin-left: auto;
       margin-right: -200px;
     }
 
-    @include touch {
+    @include mixins.touch {
       height: 500px;
       margin-left: auto;
       margin-right: -80px;
@@ -260,7 +260,7 @@
     }
 
     // has to be placed after touch
-    @include tablet-only {
+    @include mixins.tablet-only {
       height: 100%;
       border-radius: 0;
     }
@@ -270,15 +270,15 @@
       transform: skew(15deg) scale(1.22) translateY(-32px);
       object-fit: cover;
 
-      @include desktop-only {
+      @include mixins.desktop-only {
         transform: skew(15deg) scale(1.3) translateY(-25px);
       }
 
-      @include tablet-only {
+      @include mixins.tablet-only {
         transform: skew(15deg) scale(1.3) translate(-14px, -30px);
       }
 
-      @include mobile {
+      @include mixins.mobile {
         transform: skew(15deg) scale(1.3) translate(-24px, -30px);
       }
     }

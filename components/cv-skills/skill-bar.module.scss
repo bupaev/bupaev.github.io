@@ -1,5 +1,5 @@
 @use "sass:color";
-@use "@/styles/variables" as *;
+@use "@/styles/variables";
 
 .skillBar {
   display: flex;
@@ -16,15 +16,15 @@
 
     &.filled {
       &[data-level="1"] {
-        background-color: color.scale($accent-color, $whiteness: 50%);
+        background-color: color.scale(variables.$accent-color, $whiteness: 50%);
       }
 
       &[data-level="2"] {
-        background-color: color.scale($accent-color, $whiteness: 25%);
+        background-color: color.scale(variables.$accent-color, $whiteness: 25%);
       }
 
       &[data-level="3"] {
-        background-color: color.scale($accent-color, $whiteness: 0%);
+        background-color: color.scale(variables.$accent-color, $whiteness: 0%);
       }
     }
   }
