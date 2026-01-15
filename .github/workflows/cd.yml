@@ -12,20 +12,20 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [16]
+        node: [22]
 
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@master
 
       - name: Setup node env 🏗
-        uses: actions/setup-node@v2.4.1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
           check-latest: true
 
       - name: Cache node_modules 📦
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -38,14 +38,14 @@ jobs:
       - name: Run linter 👀
         run: npm run lint
 
-      - name: Generate 🚀
-        run: npm run generate
+      - name: Build 🚀
+        run: npm run build
 
       - name: Deploy to GitGub pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./out
 
       - name: Deploy to my web-server
         uses: kevinpainchaud/simple-ftp-deploy-action@v1.2.1
@@ -53,7 +53,8 @@ jobs:
           ftp_host: ${{ secrets.FTP_SERVER }}
           ftp_username: ${{ secrets.FTP_USERNAME }}
           ftp_password: ${{ secrets.FTP_PASSWORD }}
-          local_source_dir: "dist"
+          local_source_dir: "out"
           dist_target_dir: "/"
           delete: "true"
           exclude: "'^cdntx/' '^external/' '^projects/'"
+

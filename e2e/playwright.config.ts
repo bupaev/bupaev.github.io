@@ -23,9 +23,7 @@ export default defineConfig({
     },
   ],
   webServer: process.env.BASE_URL ? undefined : {
-    command: process.env.TEST_NEXTJS === 'true'
-      ? 'npm run dev --prefix next-app'
-      : 'NODE_OPTIONS=--openssl-legacy-provider npm run dev',
+    command: 'npm run dev',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,

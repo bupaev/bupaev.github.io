@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import path from "path";
 
 const nextConfig: NextConfig = {
   output: "export",
@@ -11,11 +10,7 @@ const nextConfig: NextConfig = {
     silenceDeprecations: ["legacy-js-api"],
     quietDeps: true,
   },
-  experimental: {
-  },
-  turbopack: {
-    root: path.resolve(__dirname, ".."),
-  },
 };
 
 export default nextConfig;
+
