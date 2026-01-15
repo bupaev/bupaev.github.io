@@ -11,10 +11,7 @@
   &::before {
     content: "";
     position: absolute;
-    top: -100%;
-    bottom: -100%;
-    left: -50%;
-    right: -50%;
+    inset: -100% -50%;
     background: var(--wave-gradient);
     background-size: 50% 100%;
     animation: moving-gradient 15s linear infinite;
@@ -35,10 +32,7 @@
   &::after {
     content: "";
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
     background: repeating-linear-gradient(105deg,
         var(--background-color) 0,
         var(--background-color) 3px,

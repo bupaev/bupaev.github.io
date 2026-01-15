@@ -10,7 +10,7 @@
   --color-accent: #ffd700;
   --color-secondary: #193b5e;
   --color-secondary-light: #3e8bbf;
-  --color-text-dark: hsl(0, 0%, 14%);
+  --color-text-dark: hsl(0deg 0% 14%);
   --font-accent: "Dosis", "Lucida Console", sans-serif;
   --font-main: "Nunito", "Trebuchet MS", sans-serif;
   --size-4: 1.5rem;
@@ -22,8 +22,8 @@
   --secondary-light-color: var(--color-secondary-light);
   --background-color: #fff;
   --contrasty-color: #000;
-  --contrasty-transparent-color: rgba(0, 0, 0, 0.03);
-  --wave-gradient: linear-gradient(90deg, rgba(0, 91, 188, 0.1) 0%, rgba(255, 214, 3, 0.05) 40%, rgba(0, 91, 188, 0.1) 100%);
+  --contrasty-transparent-color: rgb(0 0 0 / 3%);
+  --wave-gradient: linear-gradient(90deg, rgb(0 91 188 / 10%) 0%, rgb(255 214 3 / 5%) 40%, rgb(0 91 188 / 10%) 100%);
   --dark-light-transition: 500ms;
 }
 
@@ -31,8 +31,8 @@
   --text-color: #fafafa;
   --background-color: #121e2b;
   --contrasty-color: #fff;
-  --contrasty-transparent-color: rgba(255, 255, 255, 0.03);
-  --wave-gradient: linear-gradient(90deg, rgba(0, 91, 188, 0.3) 0%, rgba(255, 214, 3, 0.2) 40%, rgba(0, 91, 188, 0.3) 100%);
+  --contrasty-transparent-color: rgb(255 255 255 / 3%);
+  --wave-gradient: linear-gradient(90deg, rgb(0 91 188 / 30%) 0%, rgb(255 214 3 / 20%) 40%, rgb(0 91 188 / 30%) 100%);
 
   img[src$=".svg"] {
     filter: invert(1);
@@ -64,8 +64,6 @@ strong {
 // Wrapped in @layer base so Tailwind utilities can override
 // ============================================
 @layer base {
-
-
   .hero {
     position: relative;
   }
@@ -85,9 +83,7 @@ strong {
 
   .column {
     display: block;
-    flex-basis: 0;
-    flex-grow: 1;
-    flex-shrink: 1;
+    flex: 1 1 0;
     padding: 0.75rem;
   }
 
