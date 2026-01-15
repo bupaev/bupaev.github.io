@@ -104,7 +104,7 @@ export function CvHeroArea() {
                   onLoad={() => setMobileImageLoaded(true)}
                 />
               </div>
-              <h1 className={`title pt-8 ${styles.title}`}>
+              <h1 className={`title pt-8 mb-6 ${styles.title}`}>
                 <div
                   className={`${styles.textShapeLimiter} max-md:hidden`}
                 />
@@ -176,7 +176,7 @@ export function CvHeroArea() {
                 </span>
               </p>
             </div>
-            <div className="column hidden md:block">
+            <div className="column hidden md:block pt-0">
               <div className={styles.parallelogramImageContainer}>
                 <Image
                   src={portraitDesktop}
