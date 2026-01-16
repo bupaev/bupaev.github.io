@@ -1,0 +1,25 @@
+/* stylelint-disable-next-line at-rule-no-unknown */
+@import "tailwindcss";
+
+/*
+ * Tailwind Theme Configuration
+ *
+ * IMPORTANT: Breakpoint values must match variables.scss
+ * If you update breakpoints, update both files!
+ * See: styles/variables.scss for the SCSS source of truth.
+ *
+ * Colors, fonts, and sizes are defined in global.scss :root
+ * for proper CSS var access in SCSS modules.
+ */
+
+/* stylelint-disable-next-line at-rule-no-unknown */
+@theme {
+  /* Breakpoints - keep in sync with variables.scss */
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 769px;
+  --breakpoint-lg: 960px;
+  --breakpoint-xl: 1215px;
+  --breakpoint-2xl: 1407px;
+  --text-4xl: 2.5rem;
+  --leading-tight: 1.125;
+}

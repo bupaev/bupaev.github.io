@@ -1,3 +1,5 @@
+@use "variables";
+
 // ============================================
 // CSS Custom Properties (Design Tokens)
 // Values match tailwind.css @theme for consistency
@@ -84,19 +86,19 @@ strong {
     margin-inline: auto;
     z-index: 1;
 
-    @media (width >=1408px) {
+    @media (width >=#{variables.$breakpoint-2xl}) {
       max-width: 1344px;
     }
 
-    @media (width <=1407px) {
+    @media (width <=#{variables.$breakpoint-2xl - 1}) {
       max-width: 1152px;
     }
 
-    @media (width <=1215px) {
+    @media (width <=#{variables.$breakpoint-xl - 1}) {
       max-width: 960px;
     }
 
-    @media (width <=960px) {
+    @media (width <=#{variables.$breakpoint-lg}) {
       max-width: 100%;
       margin-inline: 0;
     }

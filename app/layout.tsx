@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "@/styles/tailwind.scss";
+import "@/styles/tailwind.css";
 import "@/styles/global.scss";
 
 export const metadata: Metadata = {

@@ -5,15 +5,19 @@
 // 2. Colors: Some SCSS files use color functions like rgba(), color.scale()
 // ============================================
 
-// Breakpoints (matching Tailwind theme values)
-$tablet: 769px;
-$desktop: 1024px;
-$widescreen: 1216px;
-$fullhd: 1408px;
-$small-mobile: 576px;
-$big-screen: 1500px;
+// ============================================
+// Breakpoints - KEEP IN SYNC with tailwind.css
+// These values are duplicated in tailwind.css (hardcoded)
+// If you change breakpoints here, update tailwind.css too!
+// ============================================
+$breakpoint-sm: 576px;
+$breakpoint-md: 769px;
+$breakpoint-lg: 960px;
+$breakpoint-xl: 1216px;
+$breakpoint-2xl: 1408px;
+$breakpoint-3xl: 1500px;
 
-// Custom breakpoint for layout calculation
+// Custom breakpoint for layout calculation (used in mixins.scss)
 $desktop-custom: 896px; // 2*gap will be added in mixins.scss
 
 // Colors (needed for SCSS functions like rgba(), color.scale())

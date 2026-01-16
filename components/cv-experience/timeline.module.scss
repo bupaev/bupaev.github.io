@@ -9,7 +9,7 @@
   overflow: hidden;
 
   // Use more space on tablet and mobile
-  @include mixins.until(variables.$desktop) {
+  @include mixins.until(variables.$breakpoint-lg) {
     margin-left: -0.5rem;
     margin-right: -1rem;
     width: calc(100% + 1.5rem);

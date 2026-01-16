@@ -1,3 +1,4 @@
+@use "@/styles/mixins";
 @use "@/styles/variables";
 
 .cvPage {
@@ -41,20 +42,20 @@
       filter: invert(48%) sepia(51%) saturate(585%) hue-rotate(161deg) brightness(92%) contrast(86%);
     }
 
-    @media (min-width: variables.$big-screen) {
+    @include mixins.from(variables.$breakpoint-3xl) {
       background-size: 750px;
     }
 
-    @media (min-width: 769px) and (max-width: 1023px) {
+    @include mixins.tablet-only {
       background-size: 65%;
     }
 
-    @media (max-width: 768px) {
+    @include mixins.mobile {
       background-size: 500px;
       background-position: right -150px bottom 15%;
     }
 
-    @media (max-width: variables.$small-mobile) {
+    @include mixins.small-mobile {
       background-position: right -230px bottom 15%;
     }
   }
@@ -75,7 +76,7 @@
     background-image: url("/icons/academic-cap-detailed.svg");
     height: 100%;
 
-    @media (min-width: variables.$big-screen) {
+    @include mixins.from(variables.$breakpoint-3xl) {
       background-size: 720px;
       background-position-x: 92%;
     }

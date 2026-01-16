@@ -5,23 +5,29 @@
 $gap: 32px;
 $desktop: variables.$desktop-custom + (2 * $gap);
 
-// Re-export Bulma mixins for component usage
+// Semantic breakpoint mixins using Tailwind-based variables
+@mixin small-mobile {
+  @media screen and (max-width: (variables.$breakpoint-sm - 1px)) {
+    @content;
+  }
+}
+
 @mixin mobile {
-  @media screen and (max-width: (variables.$tablet - 1px)) {
+  @media screen and (max-width: (variables.$breakpoint-md - 1px)) {
     @content;
   }
 }
 
 @mixin tablet {
 
-  @media screen and (min-width: variables.$tablet),
+  @media screen and (min-width: variables.$breakpoint-md),
   print {
     @content;
   }
 }
 
 @mixin tablet-only {
-  @media screen and (min-width: variables.$tablet) and (max-width: ($desktop - 1px)) {
+  @media screen and (min-width: variables.$breakpoint-md) and (max-width: ($desktop - 1px)) {
     @content;
   }
 }
@@ -39,19 +45,19 @@ $desktop: variables.$desktop-custom + (2 * $gap);
 }
 
 @mixin desktop-only {
-  @media screen and (min-width: $desktop) and (max-width: (variables.$widescreen - 1px)) {
+  @media screen and (min-width: $desktop) and (max-width: (variables.$breakpoint-xl - 1px)) {
     @content;
   }
 }
 
 @mixin widescreen {
-  @media screen and (min-width: variables.$widescreen) {
+  @media screen and (min-width: variables.$breakpoint-xl) {
     @content;
   }
 }
 
 @mixin fullhd {
-  @media screen and (min-width: variables.$fullhd) {
+  @media screen and (min-width: variables.$breakpoint-2xl) {
     @content;
   }
 }
