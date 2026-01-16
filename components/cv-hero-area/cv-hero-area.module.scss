@@ -69,16 +69,6 @@
     }
   }
 
-  :global(.container) {
-    z-index: 1;
-  }
-
-  @include mixins.desktop-only {
-    :global(.container) {
-      max-width: 960px;
-    }
-  }
-
   :global(.hero-body) {
     @include mixins.tablet {
       padding-right: 0;
@@ -102,7 +92,7 @@
     z-index: 1;
 
     // On less than 1050px Hero Area texts are too close to VerticalMenu
-    @media screen and (min-width: variables.$desktop) and (max-width: 1050px) {
+    @media screen and (min-width: 960px) and (max-width: 1050px) {
       flex-grow: 1.25;
       padding-left: 40px;
     }
@@ -125,10 +115,13 @@
         margin-left: 0;
         z-index: 0;
 
+        /* !important is needed to override NextJS Image component inline styles */
         img {
           position: absolute;
-          top: -28px;
-          left: 64%;
+          width: auto !important;
+          inset: unset !important;
+          top: -28px !important;
+          left: 64% !important;
           transform: skew(15deg) scale(1);
         }
       }
