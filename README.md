@@ -40,7 +40,16 @@ npm run lint:css
 ## Testing
 
 ```bash
-# E2E tests with Playwright
+# Unit tests (Vitest + React Testing Library)
+npm run test
+
+# Unit tests with watch mode
+npm run test:watch
+
+# Unit tests with coverage
+npm run test:coverage
+
+# E2E tests (Playwright)
 npm run test:e2e
 
 # E2E tests with UI
