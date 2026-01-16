@@ -23,27 +23,32 @@
 }
 
 /*
- * Container configuration
- * Centered with max-widths at breakpoints:
- * - lg (960px): 896px content
- * - xl (1215px): 1152px content
- * - 2xl (1407px): 1344px content
+ * Custom container implementation
+ * Defined as a standard class (unlayered) to override Tailwind's
+ * default container utility (which is in @layer utilities).
+ * Unlayered styles always defeat layered styles in CSS Cascade Layers.
  */
-@utility container {
-  margin-inline: auto;
+.container {
   width: 100%;
-  padding-inline: 1rem;
+  max-width: unset;
+  padding-inline: 0;
+  margin-inline: auto;
+  z-index: 1;
 
-  @media (width >=960px) {
-    max-width: 896px;
-    padding-inline: 0;
+  @media (width >=1408px) {
+    max-width: 1344px;
   }
 
-  @media (width >=1215px) {
+  @media (width <=1407px) {
     max-width: 1152px;
   }
 
-  @media (width >=1407px) {
-    max-width: 1344px;
+  @media (width <=1215px) {
+    max-width: 960px;
+  }
+
+  @media (width <=960px) {
+    max-width: 100%;
+    margin-inline: 0;
   }
 }

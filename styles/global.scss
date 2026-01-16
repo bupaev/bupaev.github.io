@@ -71,6 +71,37 @@ strong {
     padding: 3rem 1.5rem;
   }
 
+  /*
+  * Custom container implementation
+  * Defined as a standard class (unlayered) to override Tailwind's
+  * default container utility (which is in @layer utilities).
+  * Unlayered styles always defeat layered styles in CSS Cascade Layers.
+  */
+  .container {
+    width: 100%;
+    max-width: unset;
+    padding-inline: 0;
+    margin-inline: auto;
+    z-index: 1;
+
+    @media (width >=1408px) {
+      max-width: 1344px;
+    }
+
+    @media (width <=1407px) {
+      max-width: 1152px;
+    }
+
+    @media (width <=1215px) {
+      max-width: 960px;
+    }
+
+    @media (width <=960px) {
+      max-width: 100%;
+      margin-inline: 0;
+    }
+  }
+
   .columns {
     display: flex;
     flex-wrap: wrap;
