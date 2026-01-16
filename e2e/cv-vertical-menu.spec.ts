@@ -18,7 +18,7 @@ test.describe('CvVerticalMenu - Visibility', () => {
 
         // Use direct child selector to avoid matching nested elements like itemIcon/itemText
         const menu = page.locator('nav[class*="verticalMenu"]');
-        const menuItems = menu.locator('> div > div[class*="item"]');
+        const menuItems = menu.locator('> div > button[class*="item"]');
         await expect(menuItems).toHaveCount(5);
     });
 
@@ -42,7 +42,7 @@ test.describe('CvVerticalMenu - Navigation', () => {
         test.skip(isMobile, 'Desktop-only test');
 
         const menu = page.locator('nav[class*="verticalMenu"]');
-        const helloItem = menu.locator('> div > div[class*="item"]').first();
+        const helloItem = menu.locator('> div > button[class*="item"]').first();
         await helloItem.click();
         await page.waitForTimeout(1000); // Wait for smooth scroll
 
@@ -55,7 +55,7 @@ test.describe('CvVerticalMenu - Navigation', () => {
 
         // Overview/Synopsis is the 2nd item (index 1)
         const menu = page.locator('nav[class*="verticalMenu"]');
-        const overviewItem = menu.locator('> div > div[class*="item"]').nth(1);
+        const overviewItem = menu.locator('> div > button[class*="item"]').nth(1);
         await overviewItem.click();
         await page.waitForTimeout(1000);
 
@@ -69,7 +69,7 @@ test.describe('CvVerticalMenu - Navigation', () => {
 
         // Skills is the 3rd item (index 2)
         const menu = page.locator('nav[class*="verticalMenu"]');
-        const skillsItem = menu.locator('> div > div[class*="item"]').nth(2);
+        const skillsItem = menu.locator('> div > button[class*="item"]').nth(2);
         await skillsItem.click();
         await page.waitForTimeout(1000);
 
@@ -82,7 +82,7 @@ test.describe('CvVerticalMenu - Navigation', () => {
 
         // Experience is the 4th item (index 3)
         const menu = page.locator('nav[class*="verticalMenu"]');
-        const experienceItem = menu.locator('> div > div[class*="item"]').nth(3);
+        const experienceItem = menu.locator('> div > button[class*="item"]').nth(3);
         await experienceItem.click();
         await page.waitForTimeout(1000);
 
@@ -95,7 +95,7 @@ test.describe('CvVerticalMenu - Navigation', () => {
 
         // Education is the 5th item (index 4)
         const menu = page.locator('nav[class*="verticalMenu"]');
-        const educationItem = menu.locator('> div > div[class*="item"]').nth(4);
+        const educationItem = menu.locator('> div > button[class*="item"]').nth(4);
         await educationItem.click();
         await page.waitForTimeout(1000);
 
@@ -174,7 +174,7 @@ test.describe('CvVerticalMenu - Hover Interactions', () => {
         test.skip(isMobile, 'Desktop-only test');
 
         const menu = page.locator('nav[class*="verticalMenu"]');
-        const menuItem = menu.locator('> div > div[class*="item"]').first();
+        const menuItem = menu.locator('> div > button[class*="item"]').first();
 
         // Get initial width
         const initialWidth = await menuItem.evaluate((el) => el.clientWidth);

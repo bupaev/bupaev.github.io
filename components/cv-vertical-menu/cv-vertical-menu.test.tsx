@@ -3,28 +3,21 @@ import { render, screen, fireEvent, cleanup, act } from '@testing-library/react'
 import { CvVerticalMenu } from './cv-vertical-menu';
 
 describe('CvVerticalMenu', () => {
-    const mockSectionElements = [
-        { clientHeight: 500, offsetTop: 0 },
-        { clientHeight: 600, offsetTop: 500 },
-        { clientHeight: 700, offsetTop: 1100 },
-        { clientHeight: 400, offsetTop: 1800 },
-        { clientHeight: 500, offsetTop: 2200 },
-    ];
 
     beforeEach(() => {
         vi.useFakeTimers();
 
-        // Mock getElementsByClassName to return our mock sections
-        vi.spyOn(document, 'getElementsByClassName').mockReturnValue({
-            length: mockSectionElements.length,
-            [Symbol.iterator]: function* () {
-                for (const el of mockSectionElements) {
-                    yield el as unknown as Element;
-                }
-            },
-            item: (index: number) => mockSectionElements[index] as unknown as Element,
-            namedItem: () => null,
-        } as unknown as HTMLCollectionOf<Element>);
+        // Mock getElementById to return our mock sections
+        vi.spyOn(document, 'getElementById').mockImplementation((id: string) => {
+            const sectionMap: Record<string, { clientHeight: number; offsetTop: number }> = {
+                'hero-area': { clientHeight: 500, offsetTop: 0 },
+                'synopsis': { clientHeight: 600, offsetTop: 500 },
+                'skills': { clientHeight: 700, offsetTop: 1100 },
+                'experience': { clientHeight: 400, offsetTop: 1800 },
+                'education': { clientHeight: 500, offsetTop: 2200 },
+            };
+            return sectionMap[id] as unknown as HTMLElement | null;
+        });
 
         // Reset scrollY
         Object.defineProperty(window, 'scrollY', {
@@ -70,17 +63,16 @@ describe('CvVerticalMenu', () => {
             expect(screen.getByText('Education')).toBeInTheDocument();
         });
 
-        it('renders menu item icons', async () => {
+        it('renders menu items as accessible buttons', async () => {
             await renderAndInitialize();
 
-            const images = screen.getAllByRole('img');
-            expect(images).toHaveLength(5);
+            const buttons = screen.getAllByRole('button');
+            expect(buttons).toHaveLength(5);
 
-            expect(images[0]).toHaveAttribute('alt', 'Hello!');
-            expect(images[1]).toHaveAttribute('alt', 'Overview');
-            expect(images[2]).toHaveAttribute('alt', 'Skills');
-            expect(images[3]).toHaveAttribute('alt', 'Experience');
-            expect(images[4]).toHaveAttribute('alt', 'Education');
+            // Check ARIA labels for accessibility
+            expect(buttons[0]).toHaveAttribute('aria-label', 'Navigate to Hello! section');
+            expect(buttons[1]).toHaveAttribute('aria-label', 'Navigate to Overview section');
+            expect(buttons[2]).toHaveAttribute('aria-label', 'Navigate to Skills section');
         });
 
         it('renders visible area marker', async () => {
@@ -95,11 +87,11 @@ describe('CvVerticalMenu', () => {
         it('scrolls to correct section when menu item clicked', async () => {
             await renderAndInitialize();
 
-            const overviewItem = screen.getByText('Overview').closest('[class*="item"]');
-            expect(overviewItem).toBeInTheDocument();
+            const overviewButton = screen.getByRole('button', { name: /navigate to overview/i });
+            expect(overviewButton).toBeInTheDocument();
 
             await act(async () => {
-                fireEvent.click(overviewItem!);
+                fireEvent.click(overviewButton);
             });
 
             expect(window.scrollTo).toHaveBeenCalledWith({
@@ -112,10 +104,10 @@ describe('CvVerticalMenu', () => {
         it('scrolls to first section (hero) when first menu item clicked', async () => {
             await renderAndInitialize();
 
-            const helloItem = screen.getByText('Hello!').closest('[class*="item"]');
+            const helloButton = screen.getByRole('button', { name: /navigate to hello/i });
 
             await act(async () => {
-                fireEvent.click(helloItem!);
+                fireEvent.click(helloButton);
             });
 
             expect(window.scrollTo).toHaveBeenCalledWith({
@@ -128,10 +120,10 @@ describe('CvVerticalMenu', () => {
         it('scrolls to last section (education) when last menu item clicked', async () => {
             await renderAndInitialize();
 
-            const educationItem = screen.getByText('Education').closest('[class*="item"]');
+            const educationButton = screen.getByRole('button', { name: /navigate to education/i });
 
             await act(async () => {
-                fireEvent.click(educationItem!);
+                fireEvent.click(educationButton);
             });
 
             expect(window.scrollTo).toHaveBeenCalledWith({
@@ -150,7 +142,8 @@ describe('CvVerticalMenu', () => {
 
             expect(addEventListenerSpy).toHaveBeenCalledWith(
                 'scroll',
-                expect.any(Function)
+                expect.any(Function),
+                { passive: true }
             );
             expect(addEventListenerSpy).toHaveBeenCalledWith(
                 'resize',

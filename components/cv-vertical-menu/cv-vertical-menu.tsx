@@ -2,28 +2,12 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
+import { MENU_ITEMS, ICON_BASE_PATH } from "@/config/navigation-config";
 import styles from "./cv-vertical-menu.module.scss";
-
-type MenuItem = {
-  title: string;
-  id: string;
-  icon: string;
-};
-
-const menuItems: MenuItem[] = [
-  { title: "Hello!", id: "hero-area", icon: "head-with-glasses.svg" },
-  { title: "Overview", id: "synopsis", icon: "venn-diagram.svg" },
-  { title: "Skills", id: "skills", icon: "pen-and-wrench.svg" },
-  { title: "Experience", id: "experience", icon: "mountain-with-flag.svg" },
-  { title: "Education", id: "education", icon: "academic-cap.svg" },
-];
 
 export function CvVerticalMenu() {
   const menuRef = useRef<HTMLDivElement>(null);
   const [menuItemHeight, setMenuItemHeight] = useState(0);
-  const [contentSectionsHeightArray, setContentSectionsHeightArray] = useState<
-    number[]
-  >([]);
   const [contentSectionsOffsetArray, setContentSectionsOffsetArray] = useState<
     number[]
   >([]);
@@ -31,21 +15,33 @@ export function CvVerticalMenu() {
   const [markerOffset, setMarkerOffset] = useState(0);
   const [markerHeight, setMarkerHeight] = useState(0);
 
+  /**
+   * Retrieves a property value from all navigation anchor sections.
+   * Uses section IDs from menu config instead of class name queries.
+   */
   const getSectionsProp = useCallback(
     (propName: "clientHeight" | "offsetTop"): number[] => {
-      const sectionsHTMLCollection =
-        document.getElementsByClassName("anchor-for-navigation");
-      return [...sectionsHTMLCollection].map(
-        (section) => (section as HTMLElement)[propName]
-      );
+      return MENU_ITEMS.map((item) => {
+        const section = document.getElementById(item.id);
+        return section ? section[propName] : 0;
+      });
     },
     []
   );
 
   /**
+   * Calculates the rescaled offset for the visible area marker.
+   * Maps content section positions to corresponding menu item positions.
+   *
    * Menu items have equal heights but content sections have different heights.
-   * We have to map content sections offsets to menu items offsets
-   * to mark the current visible page area correctly
+   * This function converts scroll position in the page to corresponding
+   * position within the menu to correctly mark the visible area.
+   *
+   * @param windowScroll - Current window scroll position (scrollY)
+   * @param offsets - Array of section offsetTop positions
+   * @param coefficients - Scaling coefficients (menuItemHeight / sectionHeight)
+   * @param itemHeight - Height of individual menu items
+   * @returns Calculated offset for the marker position in pixels
    */
   const getRescaledOffset = useCallback(
     (
@@ -64,7 +60,7 @@ export function CvVerticalMenu() {
       return (
         selectedMenuItem * itemHeight +
         (windowScroll - offsets[selectedMenuItem]) *
-          coefficients[selectedMenuItem]
+        coefficients[selectedMenuItem]
       );
     },
     []
@@ -90,7 +86,7 @@ export function CvVerticalMenu() {
     );
     setMarkerOffset(newMarkerOffset);
 
-    // when user reaches end of the page make visible area marker equals size of menu item
+    // When user reaches end of the page, make visible area marker equal to menu item size
     if (windowBottomScrollY >= document.body.clientHeight) {
       setMarkerHeight(menuItemHeight);
       return;
@@ -124,10 +120,9 @@ export function CvVerticalMenu() {
       const heights = getSectionsProp("clientHeight");
       const offsets = getSectionsProp("offsetTop");
 
-      setContentSectionsHeightArray(heights);
       setContentSectionsOffsetArray(offsets);
 
-      // menu pixel per content pixel
+      // Calculate scaling coefficients: menu pixels per content pixel
       const coeffs = heights.map((sectionHeight) => {
         return itemHeight / sectionHeight;
       });
@@ -141,13 +136,26 @@ export function CvVerticalMenu() {
   }, [getSectionsProp]);
 
   useEffect(() => {
-    setAreaMarkerPosition();
-    window.addEventListener("scroll", setAreaMarkerPosition);
-    window.addEventListener("resize", setAreaMarkerPosition);
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setAreaMarkerPosition();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // Trigger initial position calculation via scroll handler
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", setAreaMarkerPosition);
-      window.removeEventListener("resize", setAreaMarkerPosition);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, [setAreaMarkerPosition]);
 
@@ -162,32 +170,36 @@ export function CvVerticalMenu() {
   };
 
   return (
-    <nav className={styles.verticalMenu}>
+    <nav className={styles.verticalMenu} aria-label="Page navigation">
       <div
         className={styles.visibleAreaMarker}
         style={{
           transform: `translateY(${markerOffset}px)`,
           height: `${markerHeight}px`,
         }}
+        aria-hidden="true"
       />
       <div ref={menuRef}>
-        {menuItems.map((item, index) => (
-          <div
+        {MENU_ITEMS.map((item, index) => (
+          <button
             key={item.id}
+            type="button"
             className={styles.item}
             onClick={() => onMenuItemClick(index)}
+            aria-label={`Navigate to ${item.title} section`}
           >
             <span className={styles.itemIcon}>
               <Image
-                src={`/icons/vertical-menu/${item.icon}`}
-                alt={item.title}
+                src={`${ICON_BASE_PATH}${item.icon}`}
+                alt=""
                 width={32}
                 height={32}
                 draggable={false}
+                aria-hidden="true"
               />
             </span>
             <span className={styles.itemText}>{item.title}</span>
-          </div>
+          </button>
         ))}
       </div>
     </nav>
