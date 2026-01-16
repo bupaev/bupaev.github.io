@@ -203,9 +203,11 @@ strong {
 
   .icon-text {
     display: inline-flex;
-    align-items: center;
     flex-wrap: wrap;
-    gap: 0.25em;
+    line-height: 1.5rem;
+    vertical-align: top;
+    align-items: flex-start;
+    color: inherit;
   }
 }
 

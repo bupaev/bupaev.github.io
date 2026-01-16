@@ -157,7 +157,7 @@ export function CvHeroArea() {
                 </span>
                 <span className="md:block">
                   <span
-                    className={`${styles.verticalAlignHack} mr-2 max-md:hidden`}
+                    className={`${styles.verticalAlignHack} mr-3 max-md:hidden`}
                   >
                     also you can
                   </span>
