@@ -22,7 +22,7 @@ type CvVerticalMenuProps = {
 
 export function CvVerticalMenu({ heroHeight }: CvVerticalMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null);
   const [menuItemHeight, setMenuItemHeight] = useState(0);
   const [contentSectionsOffsetArray, setContentSectionsOffsetArray] = useState<
     number[]
@@ -182,10 +182,10 @@ export function CvVerticalMenu({ heroHeight }: CvVerticalMenuProps) {
    * On mobile: menu sticks to top after scrolling past hero area.
    */
   const updateStickyState = useCallback(() => {
-    if (!wrapperRef.current || heroHeight === undefined) return;
+    if (!navRef.current || heroHeight === undefined) return;
 
     const isScrolledPastHero = window.scrollY >= heroHeight;
-    wrapperRef.current.dataset.sticky = isScrolledPastHero ? "true" : "false";
+    navRef.current.dataset.sticky = isScrolledPastHero ? "true" : "false";
   }, [heroHeight]);
 
   // Handle mobile sticky positioning
@@ -193,8 +193,8 @@ export function CvVerticalMenu({ heroHeight }: CvVerticalMenuProps) {
     if (heroHeight === undefined) return;
 
     // Update CSS custom property for hero height
-    if (wrapperRef.current) {
-      wrapperRef.current.style.setProperty("--hero-height", `${heroHeight}px`);
+    if (navRef.current) {
+      navRef.current.style.setProperty("--hero-height", `${heroHeight}px`);
     }
 
     const onResize = () => {
@@ -203,8 +203,8 @@ export function CvVerticalMenu({ heroHeight }: CvVerticalMenuProps) {
         window.addEventListener("scroll", updateStickyState, { passive: true });
       } else {
         window.removeEventListener("scroll", updateStickyState);
-        if (wrapperRef.current) {
-          wrapperRef.current.dataset.sticky = "";
+        if (navRef.current) {
+          navRef.current.dataset.sticky = "";
         }
       }
     };
@@ -231,44 +231,44 @@ export function CvVerticalMenu({ heroHeight }: CvVerticalMenuProps) {
 
 
   return (
-    <div
-      ref={wrapperRef}
-      className={styles.menuWrapper}
+    <nav
+      ref={navRef}
+      className={styles.verticalMenu}
+      aria-label="Page navigation"
       style={{ opacity: heroHeight !== undefined ? 1 : undefined }}
     >
-      <nav className={styles.verticalMenu} aria-label="Page navigation">
-        <div
-          className={styles.visibleAreaMarker}
-          style={{
-            transform: `translateY(${markerOffset}px)`,
-            height: `${markerHeight}px`,
-          }}
-          aria-hidden="true"
-        />
-        <div ref={menuRef}>
-          {MENU_ITEMS.map((item, index) => (
-            <button
-              key={item.id}
-              type="button"
-              className={styles.item}
-              onClick={() => onMenuItemClick(index)}
-              aria-label={`Navigate to ${item.title} section`}
-            >
-              <span className={styles.itemIcon}>
-                <Image
-                  src={`${ICON_BASE_PATH}${item.icon}`}
-                  alt=""
-                  width={32}
-                  height={32}
-                  draggable={false}
-                  aria-hidden="true"
-                />
-              </span>
-              <span className={styles.itemText}>{item.title}</span>
-            </button>
-          ))}
-        </div>
-      </nav>
-    </div>
+      <div
+        className={styles.visibleAreaMarker}
+        style={{
+          transform: `translateY(${markerOffset}px)`,
+          height: `${markerHeight}px`,
+        }}
+        aria-hidden="true"
+      />
+      <div ref={menuRef}>
+        {MENU_ITEMS.map((item, index) => (
+          <button
+            key={item.id}
+            type="button"
+            className={styles.item}
+            onClick={() => onMenuItemClick(index)}
+            aria-label={`Navigate to ${item.title} section`}
+          >
+            <span className={styles.itemIcon}>
+              <Image
+                src={`${ICON_BASE_PATH}${item.icon}`}
+                alt=""
+                width={32}
+                height={32}
+                draggable={false}
+                aria-hidden="true"
+              />
+            </span>
+            <span className={styles.itemText}>{item.title}</span>
+          </button>
+        ))}
+      </div>
+    </nav>
+
   );
 }
