@@ -6,7 +6,7 @@ test.describe('CV Page - Layout and Structure', () => {
   });
 
   test('page loads with correct title', async ({ page }) => {
-    await expect(page).toHaveTitle(/Pavel Buramensky/);
+    await expect(page).toHaveTitle(/Paul Buramensky/);
   });
 
   test('hero section is visible with portrait image', async ({ page }) => {

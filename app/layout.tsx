@@ -3,7 +3,7 @@ import "@/styles/tailwind.css";
 import "@/styles/global.scss";
 
 export const metadata: Metadata = {
-  title: "Pavel Buramensky",
+  title: "Paul Buramensky",
   description:
     "Creative front-end developer who cares about user experience and tries to make the world a better place",
   formatDetection: {
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "My personal page",
     url: "https://paulbu.com",
-    title: "Hi! I'm Pavel Buramensky and that's my page",
+    title: "Hi! I'm Paul Buramensky and that's my page",
     description:
       "I'm front-end developer who cares about user experience and tries to make the world a better place",
     images: [

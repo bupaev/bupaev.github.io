@@ -96,7 +96,7 @@ export function CvHeroArea() {
               >
                 <Image
                   src={portraitMobile}
-                  alt="Pavel Buramensky portrait"
+                  alt="Paul Buramensky portrait"
                   fill
                   placeholder="blur"
                   priority
@@ -109,11 +109,10 @@ export function CvHeroArea() {
                   className={`${styles.textShapeLimiter} max-md:hidden`}
                 />
                 <span className="text-5xl leading-tight text-right">
-                  Hi! I&apos;m Pavel Buramensky
+                  Hi! I&apos;m Paul Buramensky
                 </span>
                 <p className="text-4xl leading-tight pt-4">
-                  I&apos;m a front-end developer who cares about user experience
-                  and tries to make the world a better place
+                  Front-end engineer and AI-enthusiast with strong UX expertise
                 </p>
               </h1>
               <p className={`${styles.contacts} pt-6`}>
@@ -178,7 +177,7 @@ export function CvHeroArea() {
               <div className={styles.parallelogramImageContainer}>
                 <Image
                   src={portraitDesktop}
-                  alt="Pavel Buramensky portrait"
+                  alt="Paul Buramensky portrait"
                   fill
                   placeholder="blur"
                   priority
