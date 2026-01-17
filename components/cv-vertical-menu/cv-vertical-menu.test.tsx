@@ -38,8 +38,8 @@ describe('CvVerticalMenu', () => {
     /** 
      * Helper to render component and wait for initialization
      */
-    const renderAndInitialize = async () => {
-        const result = render(<CvVerticalMenu />);
+    const renderAndInitialize = async (props: { heroHeight?: number } = {}) => {
+        const result = render(<CvVerticalMenu {...props} />);
         await act(async () => {
             vi.advanceTimersByTime(150);
         });
@@ -189,6 +189,63 @@ describe('CvVerticalMenu', () => {
             const marker = container.querySelector('[class*="visibleAreaMarker"]');
             // Marker should have moved - exact value depends on rescale calculation
             expect(marker).toBeInTheDocument();
+        });
+    });
+    describe('Sticky and Mobile Behavior', () => {
+        it('applies opacity: 1 when heroHeight is provided', async () => {
+            await renderAndInitialize({ heroHeight: 500 });
+            const nav = screen.getByRole('navigation');
+            expect(nav).toHaveStyle({ opacity: '1' });
+        });
+
+        it('does not apply opacity: 1 when heroHeight is undefined', async () => {
+            await renderAndInitialize({});
+            const nav = screen.getByRole('navigation');
+            expect(nav).not.toHaveStyle({ opacity: '1' });
+        });
+
+        it('toggles data-sticky attribute on mobile scroll', async () => {
+            // Mock mobile viewport
+            Object.defineProperty(window, 'innerWidth', { value: 600, writable: true });
+
+            await renderAndInitialize({ heroHeight: 300 });
+
+            // Trigger resize to activate mobile logic
+            fireEvent.resize(window);
+
+            const nav = screen.getByRole('navigation');
+
+            // Initially scrollY is 0, so not sticky
+            expect(nav).toHaveAttribute('data-sticky', 'false');
+
+            // Scroll past hero height (300)
+            Object.defineProperty(window, 'scrollY', { value: 350, writable: true });
+            fireEvent.scroll(window);
+
+            expect(nav).toHaveAttribute('data-sticky', 'true');
+
+            // Scroll back up
+            Object.defineProperty(window, 'scrollY', { value: 100, writable: true });
+            fireEvent.scroll(window);
+
+            expect(nav).toHaveAttribute('data-sticky', 'false');
+        });
+
+        it('does not toggle data-sticky on desktop', async () => {
+            // Mock desktop viewport
+            Object.defineProperty(window, 'innerWidth', { value: 1200, writable: true });
+
+            await renderAndInitialize({ heroHeight: 300 });
+            fireEvent.resize(window);
+
+            const nav = screen.getByRole('navigation');
+
+            Object.defineProperty(window, 'scrollY', { value: 350, writable: true });
+            fireEvent.scroll(window);
+
+            // Should not have data-sticky attribute or it should be empty/undefined based on logic
+            // Our logic: on desktop it clears it: navRef.current.dataset.sticky = "";
+            expect(nav).not.toHaveAttribute('data-sticky', 'true');
         });
     });
 });
