@@ -131,7 +131,7 @@
   a {
     position: relative;
 
-    @include mixins.text-hover-effect();
+    @include mixins.text-hover-effect;
   }
 
   .icon svg {
