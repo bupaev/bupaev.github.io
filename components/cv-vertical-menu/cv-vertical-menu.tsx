@@ -229,8 +229,13 @@ export function CvVerticalMenu({ heroHeight }: CvVerticalMenuProps) {
     }
   };
 
+
   return (
-    <div ref={wrapperRef} className={styles.menuWrapper}>
+    <div
+      ref={wrapperRef}
+      className={styles.menuWrapper}
+      style={{ opacity: heroHeight !== undefined ? 1 : undefined }}
+    >
       <nav className={styles.verticalMenu} aria-label="Page navigation">
         <div
           className={styles.visibleAreaMarker}

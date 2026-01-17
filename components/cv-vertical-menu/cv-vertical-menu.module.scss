@@ -25,6 +25,8 @@ $menu-open-width: 10em;
     left: 6px;
     margin-top: 56px;
     z-index: 3;
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
 
     // When scrolled past hero, switch to fixed positioning
     &[data-sticky="true"] {

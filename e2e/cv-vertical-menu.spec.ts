@@ -238,6 +238,12 @@ test.describe('CvVerticalMenu - Mobile Sticky Behavior', () => {
         await page.waitForLoadState('domcontentloaded');
         // Wait for menu initialization and hero height calculation
         await page.waitForTimeout(300);
+
+        // Wait for hydration/visibility (opacity 1)
+        if ((await page.viewportSize())?.width && (await page.viewportSize())!.width <= 960) {
+            const wrapper = page.locator('[class*="menuWrapper"]');
+            await expect(wrapper).toHaveCSS('opacity', '1');
+        }
     });
 
     test('menu wrapper starts below hero area on mobile', async ({ page, isMobile }) => {
