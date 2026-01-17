@@ -156,9 +156,7 @@ export function CvHeroArea() {
                   </a>
                 </span>
                 <span className="md:block">
-                  <span
-                    className={`${styles.verticalAlignHack} mr-3 max-md:hidden`}
-                  >
+                  <span className="mr-3 max-md:hidden md:inline-block align-top -mt-[0.25em]">
                     also you can
                   </span>
                   <a
