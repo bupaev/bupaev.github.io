@@ -87,7 +87,8 @@ strong {
   }
 
   .section {
-    padding: 3rem 1.5rem;
+    position: relative;
+    padding: 3rem 3rem 3rem 5rem;
     font-size: 1.1em;
   }
 
@@ -224,21 +225,20 @@ strong {
   margin-inline: auto;
   z-index: 1;
 
-  @media (width >=#{variables.$breakpoint-2xl}) {
+  @media (width >= #{variables.$breakpoint-2xl}) {
     max-width: 1344px;
   }
 
-  @media (width <=#{variables.$breakpoint-2xl - 1}) {
+  @media (width <= #{variables.$breakpoint-2xl - 1}) {
     max-width: 1152px;
   }
 
-  @media (width <=#{variables.$breakpoint-xl - 1}) {
+  @media (width <= #{variables.$breakpoint-xl - 1}) {
     max-width: 960px;
   }
 
-  @media (width <=#{variables.$breakpoint-lg}) {
-    max-width: 100%;
-    margin-inline: 0;
+  @media (width <= #{variables.$breakpoint-lg}) {
+    max-width: 896px;
   }
 }
 
