@@ -16,7 +16,10 @@
     "test:coverage": "vitest run --coverage"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint",
+    "*.{js,jsx,ts,tsx}": [
+      "eslint",
+      "vitest related --run"
+    ],
     "*.{css,scss}": "stylelint"
   },
   "dependencies": {
