@@ -231,3 +231,86 @@ test.describe('CvVerticalMenu - Dark Mode', () => {
         }
     });
 });
+
+test.describe('CvVerticalMenu - Mobile Sticky Behavior', () => {
+    test.beforeEach(async ({ page }) => {
+        await page.goto('/cv');
+        await page.waitForLoadState('domcontentloaded');
+        // Wait for menu initialization and hero height calculation
+        await page.waitForTimeout(300);
+    });
+
+    test('menu wrapper starts below hero area on mobile', async ({ page, isMobile }) => {
+        test.skip(!isMobile, 'Mobile-only test');
+
+        const menuWrapper = page.locator('[class*="menuWrapper"]');
+        const heroArea = page.locator('#hero-area');
+
+        // Get hero area height
+        const heroHeight = await heroArea.evaluate((el) => el.clientHeight);
+
+        // Get menu wrapper position
+        const wrapperStyle = await menuWrapper.evaluate((el) => ({
+            position: window.getComputedStyle(el).position,
+            top: window.getComputedStyle(el).top,
+        }));
+
+        // Menu wrapper should be absolutely positioned at hero height
+        expect(wrapperStyle.position).toBe('absolute');
+        expect(parseInt(wrapperStyle.top, 10)).toBe(heroHeight);
+    });
+
+    test('menu becomes sticky after scrolling past hero on mobile', async ({ page, isMobile }) => {
+        test.skip(!isMobile, 'Mobile-only test');
+
+        const menuWrapper = page.locator('[class*="menuWrapper"]');
+        const heroArea = page.locator('#hero-area');
+
+        // Get hero area height
+        const heroHeight = await heroArea.evaluate((el) => el.clientHeight);
+
+        // Scroll past the hero area
+        await page.evaluate((scrollTo) => window.scrollTo(0, scrollTo), heroHeight + 100);
+        await page.waitForTimeout(200);
+
+        // Menu wrapper should now be fixed at top (with 56px offset for dark mode toggle)
+        const wrapperStyle = await menuWrapper.evaluate((el) => ({
+            position: window.getComputedStyle(el).position,
+            top: window.getComputedStyle(el).top,
+            rectTop: el.getBoundingClientRect().top,
+        }));
+
+        expect(wrapperStyle.position).toBe('fixed');
+        expect(wrapperStyle.rectTop).toBe(56);
+    });
+
+    test('menu returns to absolute position when scrolling back up on mobile', async ({ page, isMobile }) => {
+        test.skip(!isMobile, 'Mobile-only test');
+
+        const menuWrapper = page.locator('[class*="menuWrapper"]');
+        const heroArea = page.locator('#hero-area');
+
+        // Get hero area height
+        const heroHeight = await heroArea.evaluate((el) => el.clientHeight);
+
+        // Scroll past hero area first
+        await page.evaluate((scrollTo) => window.scrollTo(0, scrollTo), heroHeight + 100);
+        await page.waitForTimeout(200);
+
+        // Verify it's sticky
+        let wrapperPosition = await menuWrapper.evaluate((el) =>
+            window.getComputedStyle(el).position
+        );
+        expect(wrapperPosition).toBe('fixed');
+
+        // Scroll back to top
+        await page.evaluate(() => window.scrollTo(0, 0));
+        await page.waitForTimeout(200);
+
+        // Menu should return to absolute positioning
+        wrapperPosition = await menuWrapper.evaluate((el) =>
+            window.getComputedStyle(el).position
+        );
+        expect(wrapperPosition).toBe('absolute');
+    });
+});
