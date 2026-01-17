@@ -1,5 +1,12 @@
 {
-    "stylelint.workingDirectories": [
-        "./next-app"
-    ]
+    "stylelint.enable": true,
+    "stylelint.validate": [
+        "css",
+        "scss"
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.stylelint": "explicit"
+    },
+    "css.validate": false,
+    "scss.validate": false
 }
