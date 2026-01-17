@@ -5,8 +5,24 @@ import Image from "next/image";
 import { MENU_ITEMS, ICON_BASE_PATH } from "@/config/navigation-config";
 import styles from "./cv-vertical-menu.module.scss";
 
-export function CvVerticalMenu() {
+/**
+ * Mobile breakpoint for vertical menu positioning behavior.
+ * Menu appears below hero and becomes sticky on scroll for viewports <= this width.
+ */
+const TOUCH_SCREEN_BREAKPOINT = 960;
+
+type CvVerticalMenuProps = {
+  /**
+   * Height of the hero area in pixels.
+   * Used for mobile sticky positioning - menu starts below hero area.
+   * When undefined, mobile sticky behavior is disabled.
+   */
+  heroHeight?: number;
+};
+
+export function CvVerticalMenu({ heroHeight }: CvVerticalMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const [menuItemHeight, setMenuItemHeight] = useState(0);
   const [contentSectionsOffsetArray, setContentSectionsOffsetArray] = useState<
     number[]
@@ -107,6 +123,7 @@ export function CvVerticalMenu() {
     getRescaledOffset,
   ]);
 
+  // Initialize menu item heights and section offsets
   useEffect(() => {
     const initMenu = () => {
       if (!menuRef.current) return;
@@ -135,6 +152,7 @@ export function CvVerticalMenu() {
     return () => clearTimeout(timer);
   }, [getSectionsProp]);
 
+  // Handle scroll for marker position updates
   useEffect(() => {
     let ticking = false;
 
@@ -159,6 +177,48 @@ export function CvVerticalMenu() {
     };
   }, [setAreaMarkerPosition]);
 
+  /**
+   * Updates the sticky state based on scroll position.
+   * On mobile: menu sticks to top after scrolling past hero area.
+   */
+  const updateStickyState = useCallback(() => {
+    if (!wrapperRef.current || heroHeight === undefined) return;
+
+    const isScrolledPastHero = window.scrollY >= heroHeight;
+    wrapperRef.current.dataset.sticky = isScrolledPastHero ? "true" : "false";
+  }, [heroHeight]);
+
+  // Handle mobile sticky positioning
+  useEffect(() => {
+    if (heroHeight === undefined) return;
+
+    // Update CSS custom property for hero height
+    if (wrapperRef.current) {
+      wrapperRef.current.style.setProperty("--hero-height", `${heroHeight}px`);
+    }
+
+    const onResize = () => {
+      if (window.innerWidth <= TOUCH_SCREEN_BREAKPOINT) {
+        updateStickyState();
+        window.addEventListener("scroll", updateStickyState, { passive: true });
+      } else {
+        window.removeEventListener("scroll", updateStickyState);
+        if (wrapperRef.current) {
+          wrapperRef.current.dataset.sticky = "";
+        }
+      }
+    };
+
+    // Initial setup
+    onResize();
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("scroll", updateStickyState);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [heroHeight, updateStickyState]);
+
   const onMenuItemClick = (targetIndex: number) => {
     if (contentSectionsOffsetArray[targetIndex] !== undefined) {
       window.scrollTo({
@@ -170,38 +230,40 @@ export function CvVerticalMenu() {
   };
 
   return (
-    <nav className={styles.verticalMenu} aria-label="Page navigation">
-      <div
-        className={styles.visibleAreaMarker}
-        style={{
-          transform: `translateY(${markerOffset}px)`,
-          height: `${markerHeight}px`,
-        }}
-        aria-hidden="true"
-      />
-      <div ref={menuRef}>
-        {MENU_ITEMS.map((item, index) => (
-          <button
-            key={item.id}
-            type="button"
-            className={styles.item}
-            onClick={() => onMenuItemClick(index)}
-            aria-label={`Navigate to ${item.title} section`}
-          >
-            <span className={styles.itemIcon}>
-              <Image
-                src={`${ICON_BASE_PATH}${item.icon}`}
-                alt=""
-                width={32}
-                height={32}
-                draggable={false}
-                aria-hidden="true"
-              />
-            </span>
-            <span className={styles.itemText}>{item.title}</span>
-          </button>
-        ))}
-      </div>
-    </nav>
+    <div ref={wrapperRef} className={styles.menuWrapper}>
+      <nav className={styles.verticalMenu} aria-label="Page navigation">
+        <div
+          className={styles.visibleAreaMarker}
+          style={{
+            transform: `translateY(${markerOffset}px)`,
+            height: `${markerHeight}px`,
+          }}
+          aria-hidden="true"
+        />
+        <div ref={menuRef}>
+          {MENU_ITEMS.map((item, index) => (
+            <button
+              key={item.id}
+              type="button"
+              className={styles.item}
+              onClick={() => onMenuItemClick(index)}
+              aria-label={`Navigate to ${item.title} section`}
+            >
+              <span className={styles.itemIcon}>
+                <Image
+                  src={`${ICON_BASE_PATH}${item.icon}`}
+                  alt=""
+                  width={32}
+                  height={32}
+                  draggable={false}
+                  aria-hidden="true"
+                />
+              </span>
+              <span className={styles.itemText}>{item.title}</span>
+            </button>
+          ))}
+        </div>
+      </nav>
+    </div>
   );
 }

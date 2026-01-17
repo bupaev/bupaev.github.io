@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { DarkModeToggle } from "@/components/dark-mode-toggle/dark-mode-toggle";
 import { CvVerticalMenu } from "@/components/cv-vertical-menu/cv-vertical-menu";
 import { CvHeroArea } from "@/components/cv-hero-area/cv-hero-area";
@@ -11,80 +11,30 @@ import { CvEducation } from "@/components/cv-education/cv-education";
 import { TheFooter } from "@/components/the-footer/the-footer";
 import styles from "./cv.module.scss";
 
-/**
- * Mobile breakpoint for vertical menu positioning behavior.
- * Menu appears below hero and becomes sticky on scroll for viewports <= this width.
- */
-const TOUCH_SCREEN_BREAKPOINT = 960;
-
 export default function CvPage() {
   const heroAreaRef = useRef<HTMLElement>(null);
-  const menuWrapperRef = useRef<HTMLDivElement>(null);
+  const [heroHeight, setHeroHeight] = useState<number | undefined>(undefined);
 
-  /**
-   * Updates the menu position based on scroll state.
-   * When scrolled past hero area, menu sticks to top; otherwise stays below hero.
-   */
-  const updateMenuPosition = useCallback(() => {
-    if (!heroAreaRef.current || !menuWrapperRef.current) return;
-
-    const heroAreaHeight = heroAreaRef.current.clientHeight;
-    const isScrolledPastHero = window.scrollY >= heroAreaHeight;
-
-    menuWrapperRef.current.dataset.sticky = isScrolledPastHero ? "true" : "false";
-  }, []);
-
-  /**
-   * Updates the CSS custom property for hero area height.
-   * Used by the menu wrapper to position below the hero area on mobile.
-   */
-  const updateHeroHeight = useCallback(() => {
-    if (!heroAreaRef.current || !menuWrapperRef.current) return;
-
-    const heroAreaHeight = heroAreaRef.current.clientHeight;
-    menuWrapperRef.current.style.setProperty("--hero-height", `${heroAreaHeight}px`);
-  }, []);
-
-  /**
-   * Handles window resize events.
-   * Only attaches scroll listener on mobile viewports.
-   */
-  const onResize = useCallback(() => {
-    updateHeroHeight();
-
-    if (window.innerWidth <= TOUCH_SCREEN_BREAKPOINT) {
-      updateMenuPosition();
-      window.addEventListener("scroll", updateMenuPosition, { passive: true });
-    } else {
-      window.removeEventListener("scroll", updateMenuPosition);
-      if (menuWrapperRef.current) {
-        menuWrapperRef.current.dataset.sticky = "";
-      }
-    }
-  }, [updateHeroHeight, updateMenuPosition]);
-
+  // Measure hero area height for menu sticky positioning
   useEffect(() => {
-    // Initial setup
-    updateHeroHeight();
-    if (window.innerWidth <= TOUCH_SCREEN_BREAKPOINT) {
-      updateMenuPosition();
-    }
-    onResize();
+    const updateHeroHeight = () => {
+      if (heroAreaRef.current) {
+        setHeroHeight(heroAreaRef.current.clientHeight);
+      }
+    };
 
-    window.addEventListener("resize", onResize);
+    updateHeroHeight();
+    window.addEventListener("resize", updateHeroHeight);
 
     return () => {
-      window.removeEventListener("scroll", updateMenuPosition);
-      window.removeEventListener("resize", onResize);
+      window.removeEventListener("resize", updateHeroHeight);
     };
-  }, [onResize, updateHeroHeight, updateMenuPosition]);
+  }, []);
 
   return (
     <div className={styles.cvPage}>
       <DarkModeToggle />
-      <div ref={menuWrapperRef} className={styles.menuWrapper}>
-        <CvVerticalMenu />
-      </div>
+      <CvVerticalMenu heroHeight={heroHeight} />
 
       <section
         id="hero-area"

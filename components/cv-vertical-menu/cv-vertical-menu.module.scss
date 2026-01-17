@@ -11,6 +11,31 @@ $menu-open-width: 10em;
   }
 }
 
+/**
+ * Wrapper for vertical menu with mobile-specific positioning.
+ * On mobile: starts below hero area, becomes sticky when scrolled past hero.
+ * Uses CSS custom property --hero-height set by JavaScript.
+ */
+.menuWrapper {
+
+  // Mobile/Tablet: dynamic positioning based on scroll state
+  @include mixins.touch {
+    position: absolute;
+    top: var(--hero-height, 0);
+    left: 6px;
+    margin-top: 56px;
+    z-index: 3;
+
+    // When scrolled past hero, switch to fixed positioning
+    &[data-sticky="true"] {
+      position: fixed;
+      top: 56px;
+      margin-top: 0;
+    }
+  }
+}
+
+
 .verticalMenu {
   position: fixed;
   top: max(10vh, 110px);
