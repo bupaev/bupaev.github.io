@@ -1,4 +1,5 @@
 @use "variables";
+@use "mixins";
 
 // ============================================
 // CSS Custom Properties (Design Tokens)
@@ -106,28 +107,17 @@ strong {
   .content {
     line-height: 1.6;
 
-    h1,
-    h2,
     h3,
     h4,
     h5,
     h6 {
-      font-family: var(--font-accent);
       font-weight: 600;
+      line-height: 1.125;
       color: var(--text-color);
     }
 
-    h1 {
-      font-size: 2em;
-      margin-bottom: 0.5em;
-    }
-
-    h2 {
-      font-size: 1.75em;
-      margin-bottom: 0.5714em;
-    }
-
     h3 {
+      font-family: var(--font-accent);
       font-size: 1.5em;
       margin-bottom: 0.6666em;
     }
@@ -160,16 +150,32 @@ strong {
 
     ol,
     ul {
-      margin-left: 2em;
       margin-top: 1em;
     }
 
-    ul {
-      list-style: disc outside;
+    ol {
+      margin-left: 2em;
+      list-style: decimal outside;
     }
 
-    ol {
-      list-style: decimal outside;
+    ul {
+      margin-left: 0;
+
+      >li {
+        position: relative;
+        list-style: none;
+        padding-left: 1em;
+
+        &::after {
+          font-size: 0.8em;
+
+          @include mixins.rhombus(var(--text-color));
+
+          content: "";
+          left: 0.15em;
+          top: 0.7em;
+        }
+      }
     }
 
     li+li {
@@ -177,12 +183,7 @@ strong {
     }
 
     a {
-      color: var(--secondary-light-color);
-      text-decoration: underline;
-
-      &:hover {
-        color: var(--secondary-color);
-      }
+      @include mixins.multiline-text-hover-effect;
     }
 
     strong {
@@ -210,6 +211,14 @@ strong {
     align-items: flex-start;
     color: inherit;
   }
+
+  // Legacy bulma-style vertical spacing for block-level components
+  .content,
+  .title {
+    &:not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+  }
 }
 
 /*
@@ -225,19 +234,19 @@ strong {
   margin-inline: auto;
   z-index: 1;
 
-  @media (width >= #{variables.$breakpoint-2xl}) {
+  @media (width >=#{variables.$breakpoint-2xl}) {
     max-width: 1344px;
   }
 
-  @media (width <= #{variables.$breakpoint-2xl - 1}) {
+  @media (width <=#{variables.$breakpoint-2xl - 1}) {
     max-width: 1152px;
   }
 
-  @media (width <= #{variables.$breakpoint-xl - 1}) {
+  @media (width <=#{variables.$breakpoint-xl - 1}) {
     max-width: 960px;
   }
 
-  @media (width <= #{variables.$breakpoint-lg}) {
+  @media (width <=#{variables.$breakpoint-lg}) {
     max-width: 896px;
   }
 }

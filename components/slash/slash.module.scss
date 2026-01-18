@@ -1,8 +1,9 @@
 .slash {
   padding-right: 0.5em;
-  font-size: 1.3em;
+  font-size: 1.2em;
   font-style: italic;
   line-height: 0.8em;
   vertical-align: -0.1em;
-  color: rgba(var(--text-color), 0.3);
+  color: var(--text-color);
+  opacity: 0.9;
 }
