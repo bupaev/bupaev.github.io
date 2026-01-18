@@ -18,10 +18,9 @@
 
     position: relative;
     top: auto;
-    margin-top: 3px;
+    margin: 2px 0;
     border-color: var(--contrasty-color);
-    border-width: 2px !important;
-    transform: rotate(135deg);
+    transform: rotate(45deg);
     transition: border-color 400ms;
   }
 
