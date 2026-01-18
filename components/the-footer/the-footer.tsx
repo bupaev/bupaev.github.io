@@ -7,14 +7,15 @@ export function TheFooter() {
       <GoToTop />
       <div className={styles.text}>
         <span>
-          Made with{" "}
+          Made with&nbsp;
           <a
             href="https://github.com/bupaev/bupaev.github.io"
             target="_blank"
             rel="noopener noreferrer"
           >
-            love and Next.js
+            love and <s>Nuxt</s> Next.js
           </a>
+          <br />&copy; 2021-2026
         </span>
       </div>
       <GoToTop />
