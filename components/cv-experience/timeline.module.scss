@@ -36,6 +36,7 @@
 
       .job:last-child {
         border-right-width: 0;
+        border-top-right-radius: 0;
       }
     }
   }
@@ -54,6 +55,7 @@
     bottom: -1px;
     height: 100%;
     border: 1px solid var(--text-color);
+    border-radius: 4px 4px 0 0;
     font-size: 13px;
     line-height: 1.2;
     word-break: break-word;
