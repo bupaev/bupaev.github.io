@@ -234,19 +234,19 @@ strong {
   margin-inline: auto;
   z-index: 1;
 
-  @media (width >=#{variables.$breakpoint-2xl}) {
+  @media (min-width: #{variables.$breakpoint-2xl}) {
     max-width: 1344px;
   }
 
-  @media (width <=#{variables.$breakpoint-2xl - 1}) {
+  @media (max-width: #{variables.$breakpoint-2xl - 1}) {
     max-width: 1152px;
   }
 
-  @media (width <=#{variables.$breakpoint-xl - 1}) {
+  @media (max-width: #{variables.$breakpoint-xl - 1}) {
     max-width: 960px;
   }
 
-  @media (width <=#{variables.$breakpoint-lg}) {
+  @media (max-width: #{variables.$breakpoint-lg}) {
     max-width: 896px;
   }
 }
