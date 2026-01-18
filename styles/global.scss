@@ -91,6 +91,10 @@ strong {
     position: relative;
     padding: 3rem 3rem 3rem 5rem;
     font-size: 1.1em;
+
+    @include mixins.touch {
+      padding: 3rem 1.5rem;
+    }
   }
 
   .footer {
