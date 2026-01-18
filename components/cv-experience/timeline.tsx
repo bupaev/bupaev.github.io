@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useLayoutEffect, useRef, useCallback } from "react";
+import { flushSync } from "react-dom";
 import styles from "./timeline.module.scss";
 
 type Job = {
@@ -103,11 +104,10 @@ const optimalYearWidth = [110, 80];
 
 export function Timeline() {
   const timelineRef = useRef<HTMLDivElement>(null);
-  const [rowsRanges, setRowsRanges] = useState<RowRange[]>([]);
-  const [jobRows, setJobRows] = useState<Job[][]>([]);
 
   /**
-   * Return year intervals for each row of timeline
+   * Return year intervals for each row of timeline.
+   * Extracted as a standalone function so it can be used for initial state.
    */
   const getRowIntervals = useCallback((): RowRange[] => {
     // Add 1 year to real date 2008-08 because otherwise we'll draw timeline from 2007-06
@@ -162,14 +162,23 @@ export function Timeline() {
     []
   );
 
+  // Start with empty state; populated by useLayoutEffect before first paint
+  const [rowsRanges, setRowsRanges] = useState<RowRange[]>([]);
+  const [jobRows, setJobRows] = useState<Job[][]>([]);
+
   const updateTimeline = useCallback(() => {
     const newRanges = getRowIntervals();
     setRowsRanges(newRanges);
     setJobRows(getJobRows(newRanges));
   }, [getRowIntervals, getJobRows]);
 
-  useEffect(() => {
-    updateTimeline();
+  // useLayoutEffect runs synchronously after DOM mutations but before paint.
+  // This is the correct place to read refs and update state based on measurements.
+  // Using flushSync explicitly signals intentional synchronous state update for layout.
+  useLayoutEffect(() => {
+    flushSync(() => {
+      updateTimeline();
+    });
     window.addEventListener("resize", updateTimeline);
     return () => window.removeEventListener("resize", updateTimeline);
   }, [updateTimeline]);
