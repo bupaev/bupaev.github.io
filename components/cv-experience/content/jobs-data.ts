@@ -12,7 +12,7 @@ export type Job = {
     id?: string;
     height?: number;
     zIndex?: number;
-    isSabbatical?: boolean;
+    isBreak?: boolean;
 };
 
 export const jobs: Job[] = [
@@ -82,14 +82,21 @@ export const jobs: Job[] = [
         skills: "Take a break and some NuxtJS",
         startDate: "2021-05",
         endDate: "2021-12",
-        isSabbatical: true,
+        isBreak: true,
     },
     {
         position: "Lead Front-end engineer",
         company: "EPAM",
         skills: "HTML, SCSS, Vanilla JS, TS, Team leading, UX/UI-design",
         startDate: "2021-12",
-        endDate: new Date().toISOString(),
+        endDate: "2025-09",
         id: "epam",
+    },
+    {
+        position: "Relocation 🇩🇪",
+        skills: "Relocating to Germany, bureaucracy battles, exploring new horizons",
+        startDate: "2025-09",
+        endDate: new Date().toISOString(),
+        isBreak: true,
     },
 ];

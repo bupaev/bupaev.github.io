@@ -201,7 +201,7 @@ export function Timeline() {
                 key={job.company || job.position}
                 title={job.skills}
                 style={getJobPositionStyle(job, jobRowIndex)}
-                className={`${styles.job} ${job.isSabbatical ? styles.isSabbatical : ""}`}
+                className={`${styles.job} ${job.isBreak ? styles.isBreak : ""}`}
                 onClick={() => goToJob(job.id)}
               >
                 <div className={styles.jobText}>
