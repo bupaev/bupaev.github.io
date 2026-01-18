@@ -26,7 +26,12 @@
   }
 }
 
-.jobRecord {
+// MDX Content Styles
+// These use :global() because MDX outputs plain class names (e.g., "job-record")
+// that are not processed through CSS Modules. The content is authored in
+// experience.mdx and rendered at build time, so class names must match exactly.
+
+:global(.job-record) {
   margin-bottom: 1.5em;
 
   &:last-of-type {
@@ -34,18 +39,18 @@
   }
 }
 
-.jobTitle {
+:global(.job-title) {
   @include mixins.mobile {
     display: block;
   }
 }
 
-.interval {
+:global(.interval) {
   white-space: nowrap;
 }
 
-.jobTitle,
-.company,
-.interval {
+:global(.job-title),
+:global(.company),
+:global(.interval) {
   padding-right: 0.35em;
 }
