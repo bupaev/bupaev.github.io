@@ -11,6 +11,7 @@ type RowRange = {
 };
 
 const optimalYearWidth = [110, 80];
+const NOW = Date.now();
 
 export function Timeline() {
   const timelineRef = useRef<HTMLDivElement>(null);
@@ -119,16 +120,18 @@ export function Timeline() {
     if (!rowRange) return {};
 
     const startPosition = getDatePosition(job.startDate, rowRange);
-    const width = getDatePosition(job.endDate, rowRange) - startPosition;
+    const endPosition = getDatePosition(job.endDate, rowRange);
+    const width = endPosition - startPosition;
+    const centerPosition = startPosition + width / 2;
     // Need this shift for jobs because we show year marker in the center
     const halfYearShift = 100 / ((rowRange.endYear - rowRange.startYear) * 2);
 
     return {
-      left: `${startPosition + halfYearShift}%`,
+      left: `${centerPosition + halfYearShift}%`,
       width: `calc(${width}% - 1px)`,
       height: `${(job.height || 1) * 60}%`,
       zIndex: job.zIndex || 0,
-    };
+    } as React.CSSProperties;
   };
 
   const getYearPositionStyle = (
@@ -191,6 +194,13 @@ export function Timeline() {
       .map((_, i) => rowRange.startYear + i);
   };
 
+  const isJobShort = (job: Job): boolean => {
+    const start = new Date(job.startDate).getTime();
+    const end = job.endDate ? new Date(job.endDate).getTime() : NOW;
+    const durationInDays = (end - start) / (1000 * 60 * 60 * 24);
+    return durationInDays < 365;
+  };
+
   return (
     <div ref={timelineRef} className={styles.timeline}>
       {jobRows.map((jobRow, jobRowIndex) => (
@@ -201,7 +211,7 @@ export function Timeline() {
                 key={job.company || job.position}
                 title={job.skills}
                 style={getJobPositionStyle(job, jobRowIndex)}
-                className={`${styles.job} ${job.isBreak ? styles.isBreak : ""}`}
+                className={`${styles.job} ${job.isBreak ? styles.isBreak : ""} ${isJobShort(job) ? styles.isShort : ""}`}
                 onClick={() => goToJob(job.id)}
               >
                 <div className={styles.jobText}>

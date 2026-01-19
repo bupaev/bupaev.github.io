@@ -51,20 +51,21 @@
   }
 
   .job {
+    $border-radius: 4px;
+
     position: absolute;
     bottom: -1px;
     height: 100%;
     border: 1px solid var(--text-color);
-    border-radius: 4px 4px 0 0;
+    border-radius: $border-radius $border-radius 0 0;
     font-size: 13px;
-    line-height: 1.2;
-    word-break: break-word;
     font-weight: 700;
     background-color: rgba(variables.$accent-color, 0.5);
     padding: 5px 5px 5px 10px;
     cursor: pointer;
     overflow: hidden;
     transition: background-color 200ms;
+    transform: translateX(-50%);
 
     @include mixins.tablet-only {
       font-size: 12px;
@@ -82,6 +83,25 @@
       }
     }
 
+    // Short jobs expand to a fixed width on hover.
+    // Base state: width is controlled by inline styles (%).
+    &.isShort {
+      transition: width 200ms ease-out, background-color 200ms;
+
+      &:hover {
+        width: 100px !important;
+        border-radius: $border-radius;
+        border-color: transparent;
+        z-index: 1 !important;
+        transform: translateX(-50%) scaleY(1.05);
+        transition: all 200ms;
+
+        .jobText {
+          mask-image: none;
+        }
+      }
+    }
+
     &:hover {
       background-color: var(--color-accent);
       color: #000;
@@ -89,7 +109,13 @@
     }
 
     .jobText {
+      display: inline-block;
+      width: 100%;
+      overflow: hidden;
       transform: skew(15deg);
+      mask-image: linear-gradient(90deg,
+          #000 calc(100% - 15px),
+          transparent 100%);
     }
   }
 
