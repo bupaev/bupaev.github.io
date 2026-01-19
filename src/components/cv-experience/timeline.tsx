@@ -202,6 +202,26 @@ export function Timeline() {
     return durationInDays < 365;
   };
 
+  const getDuration = (start: string, end?: string) => {
+    const startDate = new Date(start);
+    const endDate = end ? new Date(end) : new Date();
+
+    let months = (endDate.getFullYear() - startDate.getFullYear()) * 12;
+    months -= startDate.getMonth();
+    months += endDate.getMonth();
+
+    if (months <= 0) return "< 1 month";
+
+    const years = Math.floor(months / 12);
+    const extraMonths = months % 12;
+
+    const parts = [];
+    if (years > 0) parts.push(`${years} year${years > 1 ? "s" : ""}`);
+    if (extraMonths > 0) parts.push(`${extraMonths} month${extraMonths > 1 ? "s" : ""}`);
+
+    return parts.join(", ");
+  };
+
   return (
     <div ref={timelineRef} className={styles.timeline}>
       {jobRows.map((jobRow, jobRowIndex) => (
@@ -219,7 +239,9 @@ export function Timeline() {
                   {job.company ? "," : ""}{" "}
                   <span className="font-normal">{job.company}</span>
                 </div>
-                <span className={styles.jobSkills}>{job.skills}</span>
+                <span className={styles.jobDuration}>
+                  <span className="not-italic">◆ {getDuration(job.startDate, job.endDate)}</span>
+                </span>
               </div>
             ))}
           </div>
