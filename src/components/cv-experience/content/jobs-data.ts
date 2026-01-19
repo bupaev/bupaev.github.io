@@ -28,8 +28,7 @@ export const jobs: Job[] = [
     {
         position: "Teaching Assistant",
         company: "Omsk State Technical University",
-        skills:
-            "Developing and conducting courses, conducting exams, Artificial Intelligence Systems, Control theory",
+        skills: "Conducting courses and exams on AI Systems and Control theory",
         startDate: "2009-09",
         endDate: "2014-09",
         height: 1.6,
@@ -38,7 +37,7 @@ export const jobs: Job[] = [
     {
         position: "Web developer",
         company: "Mir IT",
-        skills: "C#, .NET, HTML, CSS, jQuery",
+        skills: "C#, .NET, PHP, HTML, CSS, JS",
         startDate: "2011-06",
         endDate: "2012-07",
         zIndex: 2,
@@ -47,7 +46,7 @@ export const jobs: Job[] = [
     {
         position: "Front-end developer",
         company: "DXC Luxoft",
-        skills: "React, Angular, VueJS",
+        skills: "HTML5, CSS3, LESS, JS, XSLT, Sitecore, UI/UX",
         startDate: "2012-07",
         endDate: "2014-09",
         zIndex: 2,
@@ -56,7 +55,7 @@ export const jobs: Job[] = [
     {
         position: "Front-end developer",
         company: "Bandlab",
-        skills: "Angular 1.x, Web Audio API",
+        skills: "Angular 1.x, SCSS, Web Audio API",
         startDate: "2014-09",
         endDate: "2016-10",
         id: "bandlab",
@@ -79,7 +78,7 @@ export const jobs: Job[] = [
     },
     {
         position: "Sabbatical ⛱️",
-        skills: "Take a break and some NuxtJS",
+        skills: "",
         startDate: "2021-05",
         endDate: "2021-12",
         isBreak: true,
@@ -94,7 +93,7 @@ export const jobs: Job[] = [
     },
     {
         position: "Relocation ✈️",
-        skills: "Relocating to Germany, bureaucracy battles, exploring new horizons",
+        skills: "",
         startDate: "2025-09",
         endDate: new Date().toISOString(),
         isBreak: true,

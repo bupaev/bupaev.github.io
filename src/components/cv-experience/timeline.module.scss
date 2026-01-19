@@ -104,9 +104,14 @@
     }
 
     &:hover {
+      height: auto !important;
       background-color: var(--color-accent);
       color: #000;
       z-index: 3 !important;
+
+      .jobSkills {
+        display: block;
+      }
     }
 
     .jobText {
@@ -117,6 +122,15 @@
       mask-image: linear-gradient(90deg,
           #000 calc(100% - 15px),
           transparent 100%);
+    }
+
+    .jobSkills {
+      display: none;
+      font-size: 0.9em;
+      line-height: 1;
+      font-weight: 400;
+      transform: skew(15deg);
+      font-style: italic;
     }
   }
 

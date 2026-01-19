@@ -130,6 +130,7 @@ export function Timeline() {
       left: `${centerPosition + halfYearShift}%`,
       width: `calc(${width}% - 1px)`,
       height: `${(job.height || 1) * 60}%`,
+      minHeight: `${(job.height || 1) * 60}%`, // min-height is needed because we override height on hover
       zIndex: job.zIndex || 0,
     } as React.CSSProperties;
   };
@@ -209,7 +210,6 @@ export function Timeline() {
             {jobRow.map((job) => (
               <div
                 key={job.company || job.position}
-                title={job.skills}
                 style={getJobPositionStyle(job, jobRowIndex)}
                 className={`${styles.job} ${job.isBreak ? styles.isBreak : ""} ${isJobShort(job) ? styles.isShort : ""}`}
                 onClick={() => goToJob(job.id)}
@@ -219,6 +219,7 @@ export function Timeline() {
                   {job.company ? "," : ""}{" "}
                   <span className="font-normal">{job.company}</span>
                 </div>
+                <span className={styles.jobSkills}>{job.skills}</span>
               </div>
             ))}
           </div>
