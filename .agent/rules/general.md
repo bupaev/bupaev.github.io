@@ -11,9 +11,9 @@ Key Conventions
 - Review the attached files thoroughly. If there is anything you need referenced that’s missing, ask for it.  
 - If you’re unsure about any aspect of the task, ask for clarification. Don’t guess. Don’t make assumptions.  
   
-Completeness  
+Completeness
 - Leave NO todo’s, placeholders or missing pieces.  
-- Ensure code is complete! Verify thoroughly finalized.  
+- Ensure code is complete, verify thoroughly finalized.  
 - If you think there might not be a correct answer, you say so.  
 - If you do not know the answer, say so, instead of guessing.  
 - Write code in full with no placeholders. If you get cut off, I’ll say “continue”  
@@ -21,4 +21,4 @@ Completeness
 Naming Conventions  
 - Use kebab-case with dashes for directories and files names  
 - Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).  
-- Favor named exports for components.  
+- Favor named exports for components.
