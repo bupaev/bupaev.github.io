@@ -26,7 +26,7 @@ export const jobs: Job[] = [
         zIndex: 1,
     },
     {
-        position: "Teaching Assistant",
+        position: "Assistant Lecturer (AI systems and control theory)",
         company: "Omsk State Technical University",
         skills: "Conducting courses and exams on AI Systems and Control theory",
         startDate: "2009-09",
