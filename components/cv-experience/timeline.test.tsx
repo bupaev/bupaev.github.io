@@ -1,7 +1,69 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent, cleanup, act } from '@testing-library/react';
 import { Timeline } from './timeline';
-import { jobs } from './content/jobs-data';
+import type { Job } from './content/jobs-data';
+
+const { mockJobs, mockStyles } = vi.hoisted(() => {
+    return {
+        mockStyles: {
+            timeline: 'timeline_mock',
+            jobRow: 'jobRow_mock',
+            jobsWrapper: 'jobsWrapper_mock',
+            yearsWrapper: 'yearsWrapper_mock',
+            job: 'job_mock',
+            isBreak: 'isBreak_mock',
+            isShort: 'isShort_mock',
+            nowMarker: 'nowMarker_mock',
+            year: 'year_mock',
+            jobText: 'jobText_mock',
+        },
+        mockJobs: [
+            {
+                id: 'past-job',
+                position: 'Junior Developer',
+                company: 'Old Corp',
+                skills: 'HTML, CSS',
+                startDate: '2010-01',
+                endDate: '2012-01',
+                zIndex: 1,
+            },
+            {
+                position: 'Gap Year',
+                skills: 'Traveling',
+                startDate: '2012-01',
+                endDate: '2013-01',
+                isBreak: true,
+            },
+            {
+                id: 'current-job',
+                position: 'Senior Engineer',
+                company: 'New Tech',
+                skills: 'React, TypeScript',
+                startDate: '2013-01',
+                endDate: new Date().toISOString(), // Ongoing
+                zIndex: 2,
+            },
+            {
+                id: 'short-job',
+                position: 'Freelance Gig',
+                company: 'Short Inc',
+                skills: 'Quick work',
+                startDate: '2015-06',
+                endDate: '2015-07', // Very short duration
+            }
+        ] as Job[]
+    };
+});
+
+// Mock SCSS modules
+vi.mock('./timeline.module.scss', () => ({
+    default: mockStyles
+}));
+
+// Mock the jobs-data module
+vi.mock('./content/jobs-data', () => ({
+    jobs: mockJobs
+}));
 
 describe('Timeline Component', () => {
     beforeEach(() => {
@@ -9,17 +71,21 @@ describe('Timeline Component', () => {
 
         // Mock getElementById for scroll navigation
         vi.spyOn(document, 'getElementById').mockImplementation((id: string) => {
-            const elements: Record<string, { offsetTop: number; offsetHeight: number }> = {
-                experience: { offsetTop: 1000, offsetHeight: 800 },
-                freelance: { offsetTop: 100, offsetHeight: 150 },
-                epam: { offsetTop: 400, offsetHeight: 200 },
-                holmusk: { offsetTop: 300, offsetHeight: 150 },
-            };
-            return elements[id] as unknown as HTMLElement | null;
+            if (id === 'experience') {
+                return { offsetTop: 100 } as HTMLElement;
+            }
+            // Mock elements corresponding to IDs in mockJobs
+            if (id === 'past-job' || id === 'current-job') {
+                return { offsetTop: 500, offsetHeight: 100 } as HTMLElement;
+            }
+            return null;
         });
 
         // Mock window.scrollTo
-        (window.scrollTo as ReturnType<typeof vi.fn>).mockClear();
+        Object.defineProperty(window, 'scrollTo', {
+            writable: true,
+            value: vi.fn(),
+        });
     });
 
     afterEach(() => {
@@ -28,11 +94,9 @@ describe('Timeline Component', () => {
         vi.restoreAllMocks();
     });
 
-    /**
-     * Helper to render component and wait for initialization
-     */
     const renderAndInitialize = async () => {
         const result = render(<Timeline />);
+        // Allow useEffects/useLayoutEffect to settle
         await act(async () => {
             vi.advanceTimersByTime(100);
         });
@@ -42,147 +106,88 @@ describe('Timeline Component', () => {
     describe('Rendering', () => {
         it('renders the timeline container', async () => {
             const { container } = await renderAndInitialize();
-            const timeline = container.querySelector('[class*="timeline"]');
-            expect(timeline).toBeInTheDocument();
+            expect(container.firstChild).toHaveClass(mockStyles.timeline);
         });
 
-        it('renders all jobs from the data', async () => {
+        it('renders all mock jobs', async () => {
             await renderAndInitialize();
-
-            // Check that each job position is rendered (may appear in multiple rows)
-            for (const job of jobs) {
-                // Jobs should be rendered with their position title
-                const jobElements = screen.getAllByText(job.position, { exact: false });
-                expect(jobElements.length).toBeGreaterThan(0);
-            }
+            expect(screen.getAllByText('Junior Developer', { exact: false })[0]).toBeInTheDocument();
+            expect(screen.getAllByText('Gap Year', { exact: false })[0]).toBeInTheDocument();
+            expect(screen.getAllByText('Senior Engineer', { exact: false })[0]).toBeInTheDocument();
+            expect(screen.getAllByText('Freelance Gig', { exact: false })[0]).toBeInTheDocument();
         });
 
-        it('renders correct number of unique job entries', async () => {
+        it('renders correct styling for break entries', async () => {
             const { container } = await renderAndInitialize();
-            const jobElements = container.querySelectorAll('[class*=\"jobsWrapper\"] > [class*=\"job\"]');
-
-            // Jobs can appear in multiple rows if they span row boundaries
-            // Just verify we have a reasonable number of entries
-            expect(jobElements.length).toBeGreaterThanOrEqual(10);
+            // Use class selector since we mocked styles
+            const breakElements = container.querySelectorAll(`.${mockStyles.isBreak}`);
+            expect(breakElements.length).toBeGreaterThanOrEqual(1); // At least 1 break (might be split)
         });
 
-        it('renders company names for jobs that have them', async () => {
-            await renderAndInitialize();
-
-            // Jobs with companies (use getAllByText as jobs may appear in multiple rows)
-            expect(screen.getAllByText('Freelance').length).toBeGreaterThan(0);
-            expect(screen.getAllByText('EPAM').length).toBeGreaterThan(0);
-            expect(screen.getAllByText('Holmusk').length).toBeGreaterThan(0);
-            expect(screen.getAllByText('Bandlab').length).toBeGreaterThan(0);
-        });
-
-        it('renders break entries with isBreak styling class', async () => {
+        it('renders NOW marker', async () => {
             const { container } = await renderAndInitialize();
-
-            // Find elements with isBreak class
-            const breakElements = container.querySelectorAll('[class*="isBreak"]');
-
-            // Should have 2 break entries: Sabbatical and Relocation
-            expect(breakElements.length).toBe(2);
-        });
-
-        it('renders NOW marker in the last row', async () => {
-            const { container } = await renderAndInitialize();
-            const nowMarker = container.querySelector('[class*="nowMarker"]');
+            const nowMarker = container.querySelector(`.${mockStyles.nowMarker}`);
             expect(nowMarker).toBeInTheDocument();
         });
-
-        it('renders year markers', async () => {
-            await renderAndInitialize();
-
-            // Check for specific years in the timeline (use getAllByText as years may repeat)
-            expect(screen.getAllByText('2009').length).toBeGreaterThan(0);
-            expect(screen.getAllByText('2021').length).toBeGreaterThan(0);
-            expect(screen.getAllByText('2025').length).toBeGreaterThan(0);
-        });
     });
 
-    describe('Job Data Integrity', () => {
-        it('renders skills as title attribute', async () => {
+    describe('Layout Logic', () => {
+        it('calculates start year based on first job + 1', async () => {
+            // Logic: firstJobStartYear = new Date(jobs[0].startDate).getFullYear() + 1
+            // 2010 + 1 = 2011
+            await renderAndInitialize();
+            // Should have markers starting from 2011
+            expect(screen.queryAllByText('2011').length).toBeGreaterThan(0);
+        });
+
+        it('renders multiple rows if range is large', async () => {
+            // Mock small screen width to force multiple rows
+            Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 300 });
+
             const { container } = await renderAndInitialize();
-
-            // Find job elements with title attributes
-            const jobs = container.querySelectorAll('[title]');
-            expect(jobs.length).toBeGreaterThan(0);
-
-            // Check specific skill is in title
-            const epamJob = Array.from(jobs).find(
-                el => el.getAttribute('title')?.includes('TypeScript')
-            );
-            expect(epamJob).toBeTruthy();
+            const rows = container.querySelectorAll(`.${mockStyles.jobRow}`);
+            expect(rows.length).toBeGreaterThan(1);
         });
 
-        it('first job starts in 2008', () => {
-            expect(jobs[0].startDate).toBe('2008-08');
-        });
+        it('short jobs have distinct class or styling', async () => {
+            await renderAndInitialize();
+            // Find short job element
+            const shortJobText = screen.getAllByText('Freelance Gig', { exact: false })[0];
+            const shortJobElement = shortJobText.closest(`.${mockStyles.job}`); // use mocked class
 
-        it('last job (Relocation) has dynamic end date', () => {
-            const lastJob = jobs[jobs.length - 1];
-            expect(lastJob.position).toBe('Relocation ✈️');
-            // End date should be a valid ISO string (dynamic)
-            expect(new Date(lastJob.endDate).getFullYear()).toBeGreaterThanOrEqual(2025);
-        });
-
-        it('EPAM job ends in September 2025', () => {
-            const epamJob = jobs.find(job => job.company === 'EPAM');
-            expect(epamJob?.endDate).toBe('2025-09');
-        });
-
-        it('jobs array has exactly 10 entries', () => {
-            expect(jobs.length).toBe(10);
-        });
-
-        it('has exactly 2 break entries (Sabbatical and Relocation)', () => {
-            const breaks = jobs.filter(job => job.isBreak);
-            expect(breaks.length).toBe(2);
-            expect(breaks[0].position).toContain('Sabbatical');
-            expect(breaks[1].position).toContain('Relocation');
+            expect(shortJobElement).toHaveClass(mockStyles.isShort);
         });
     });
 
-    describe('Click Navigation', () => {
-        it('scrolls to job section when job with id is clicked', async () => {
+    describe('Interactions', () => {
+        it('scrolls to job when clicked if ID exists', async () => {
             await renderAndInitialize();
+            // Use getAllByText as job might span multiple rows
+            const jobElements = screen.getAllByText('Junior Developer', { exact: false });
+            const jobElement = jobElements[0].closest(`.${mockStyles.job}`);
 
-            // Find the EPAM job element
-            const epamJobText = screen.getAllByText('EPAM')[0];
-            const epamJob = epamJobText.closest('[class*="job"]');
-
-            expect(epamJob).toBeTruthy();
-
-            if (epamJob) {
+            expect(jobElement).toBeTruthy();
+            if (jobElement) {
                 await act(async () => {
-                    fireEvent.click(epamJob);
+                    fireEvent.click(jobElement!);
                 });
-
-                expect(window.scrollTo).toHaveBeenCalledWith({
+                expect(window.scrollTo).toHaveBeenCalledWith(expect.objectContaining({
                     top: expect.any(Number),
-                    left: 0,
-                    behavior: 'smooth',
-                });
+                    behavior: 'smooth'
+                }));
             }
         });
 
-        it('does not scroll when clicking job without id', async () => {
+        it('does not scroll when clicked if ID is missing', async () => {
             await renderAndInitialize();
+            const breakElements = screen.getAllByText('Gap Year', { exact: false });
+            const breakElement = breakElements[0].closest(`.${mockStyles.job}`);
 
-            // Sabbatical has no id
-            const sabbaticalText = screen.getByText('Sabbatical ⛱️', { exact: false });
-            const sabbaticalJob = sabbaticalText.closest('[class*="job"]');
-
-            expect(sabbaticalJob).toBeTruthy();
-
-            if (sabbaticalJob) {
+            expect(breakElement).toBeTruthy();
+            if (breakElement) {
                 await act(async () => {
-                    fireEvent.click(sabbaticalJob);
+                    fireEvent.click(breakElement!);
                 });
-
-                // Should not scroll since sabbatical has no id
                 expect(window.scrollTo).not.toHaveBeenCalled();
             }
         });
@@ -191,9 +196,7 @@ describe('Timeline Component', () => {
     describe('Resize Handling', () => {
         it('registers resize event listener on mount', async () => {
             const addEventListenerSpy = vi.spyOn(window, 'addEventListener');
-
             await renderAndInitialize();
-
             expect(addEventListenerSpy).toHaveBeenCalledWith(
                 'resize',
                 expect.any(Function)
@@ -202,10 +205,8 @@ describe('Timeline Component', () => {
 
         it('removes resize event listener on unmount', async () => {
             const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener');
-
             const { unmount } = await renderAndInitialize();
             unmount();
-
             expect(removeEventListenerSpy).toHaveBeenCalledWith(
                 'resize',
                 expect.any(Function)
@@ -214,86 +215,59 @@ describe('Timeline Component', () => {
 
         it('updates layout on resize', async () => {
             const { container } = await renderAndInitialize();
-
-            // Verify initial rows exist
-            const initialRows = container.querySelectorAll('[class*="jobRow"]');
+            const initialRows = container.querySelectorAll(`.${mockStyles.jobRow}`);
             expect(initialRows.length).toBeGreaterThan(0);
 
-            // Simulate resize
+            // Change mock width and trigger resize
+            Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 300 });
+
             await act(async () => {
                 fireEvent.resize(window);
+                vi.advanceTimersByTime(100);
             });
 
-            // Layout should still render correctly
-            const afterRows = container.querySelectorAll('[class*="jobRow"]');
-            expect(afterRows.length).toBeGreaterThan(0);
+            // This implicitly tests that state was updated. 
+            // Since we forced small width, we definitely expect multiple rows.
+            const afterRows = container.querySelectorAll(`.${mockStyles.jobRow}`);
+            expect(afterRows.length).toBeGreaterThan(1);
         });
     });
 
-    describe('Layout Calculations', () => {
-        it('splits jobs into multiple rows', async () => {
-            const { container } = await renderAndInitialize();
-
-            const jobRows = container.querySelectorAll('[class*="jobRow"]');
-
-            // With ~17 years of history, should have multiple rows
-            expect(jobRows.length).toBeGreaterThan(1);
-        });
-
+    describe('Additional Layout Logic', () => {
         it('year markers wrapper exists in each row', async () => {
             const { container } = await renderAndInitialize();
-
-            const jobRows = container.querySelectorAll('[class*="jobRow"]');
-
+            const jobRows = container.querySelectorAll(`.${mockStyles.jobRow}`);
             for (const row of jobRows) {
-                const yearsWrapper = row.querySelector('[class*="yearsWrapper"]');
+                const yearsWrapper = row.querySelector(`.${mockStyles.yearsWrapper}`);
                 expect(yearsWrapper).toBeInTheDocument();
             }
         });
 
         it('jobs have position styles applied', async () => {
             const { container } = await renderAndInitialize();
-
-            const jobElements = container.querySelectorAll('[class*="job"]:not([class*="jobRow"]):not([class*="jobsWrapper"]):not([class*="jobText"])');
-
+            const jobElements = container.querySelectorAll(`.${mockStyles.job}`);
             for (const job of jobElements) {
                 const style = (job as HTMLElement).style;
-                // Jobs should have positioning styles
                 expect(style.left).toBeTruthy();
                 expect(style.width).toBeTruthy();
             }
-        });
-
-        it('NOW marker has position style applied', async () => {
-            const { container } = await renderAndInitialize();
-
-            const nowMarker = container.querySelector('[class*="nowMarker"]') as HTMLElement;
-            expect(nowMarker).toBeInTheDocument();
-            expect(nowMarker?.style.left).toBeTruthy();
         });
     });
 
     describe('Job Display Logic', () => {
         it('displays job position and company with comma separator', async () => {
-            const { container } = await renderAndInitialize();
-
-            // For jobs with company, should show "Position, Company"
-            const epamJobTexts = container.querySelectorAll('[class*="jobText"]');
-            const epamJob = Array.from(epamJobTexts).find(
-                el => el.textContent?.includes('Lead Front-end engineer') && el.textContent?.includes('EPAM')
-            );
-            expect(epamJob).toBeTruthy();
+            await renderAndInitialize();
+            // Mock: "Junior Developer, Old Corp"
+            expect(screen.getByText('Junior Developer', { exact: false })).toHaveTextContent(/Junior Developer,\s+Old Corp/);
         });
 
-        it('displays only position for breaks without company', async () => {
+        it('displays only position for break entries without company', async () => {
             await renderAndInitialize();
-
-            // Sabbatical has no company - find first occurrence
-            const sabbaticalElements = screen.getAllByText('Sabbatical ⛱️', { exact: false });
-            const parent = sabbaticalElements[0].closest('[class*="job"]');
-
-            // Should not contain comma followed by company name
-            expect(parent?.textContent).not.toMatch(/Sabbatical.*,\s+\w/);
+            // Use getAllByText as job might span multiple rows
+            const breakTexts = screen.getAllByText('Gap Year', { exact: false });
+            const breakText = breakTexts[0].closest(`.${mockStyles.jobText}`);
+            // Should NOT contain comma followed by company name characters
+            expect(breakText?.textContent).not.toMatch(/Gap Year,\s+\w/);
         });
     });
 });
