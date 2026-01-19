@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import { SkillBar } from "./skill-bar";
 import styles from "./skills-group.module.scss";
 
@@ -27,7 +27,7 @@ export function SkillsGroup({ title, info, items, className = "" }: SkillsGroupP
             {item.info && (
               <span>
                 <i className={styles.infoIcon}>
-                  <Image
+                  <img
                     alt="icon"
                     src="/icons/info.svg"
                     width={16}

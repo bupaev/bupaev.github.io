@@ -214,8 +214,7 @@ test.describe('CV Page - Responsive', () => {
     const menu = page.locator('.vertical-menu, [class*="vertical-menu"]');
     if (await menu.count() > 0) {
       // On mobile, menu might be hidden or have different positioning
-      const isVisible = await menu.first().isVisible();
-      // This is informational - mobile may have different menu behavior
+      // On mobile, menu visibility may vary - this is just informational
     }
   });
 

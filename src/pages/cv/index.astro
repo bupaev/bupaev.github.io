@@ -1,0 +1,91 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { DarkModeToggle } from "../../components/dark-mode-toggle/dark-mode-toggle";
+import { CvVerticalMenu } from "../../components/cv-vertical-menu/cv-vertical-menu";
+import { CvHeroArea } from "../../components/cv-hero-area/cv-hero-area";
+import { CvOverview } from "../../components/cv-overview/cv-overview";
+import { CvSkills } from "../../components/cv-skills/cv-skills";
+import CvExperience from "../../components/cv-experience/CvExperience.astro";
+import { CvEducation } from "../../components/cv-education/cv-education";
+import { TheFooter } from "../../components/the-footer/the-footer"; // Fixed import path
+import styles from "../../components/cv-experience/timeline.module.scss"; // Using for styles reference if needed, but mostly relying on global/module styles
+// Note: In Astro, we can import SCSS modules directly in the frontmatter if they are used in the template, 
+// OR we can rely on the React components importing them. 
+// Since the original specific page styles were in cv.module.scss (which we need to migrate or inline), let's check that.
+// I will create a specific styles file for this page if needed, or use a slightly different approach. 
+// For now, I'll inline the specific page structural styles or create a minimal css/scss block.
+
+// Mimicking app/cv/cv.module.scss
+const pageStyles = {
+  minHeight: "100vh",
+  paddingBottom: "100px" // roughly matching common layouts
+};
+---
+
+<Layout title="Paul Buramensky">
+  <!-- 
+       We need to pass client:load (or client:only="react") to interactive components.
+       DarkModeToggle needs access to window/document immediately to prevent flash, so client:load is good.
+       CvVerticalMenu needs window resize/scroll, so client:load.
+       CvHeroArea has some state for image loading, client:load.
+  -->
+  
+  <div class="cv-page">
+    <DarkModeToggle client:load />
+    
+    <!-- CvVerticalMenu needs hero height. In the React version, this was passed via state. 
+         In Astro, we might need a different approach or keep it as a React island that measures the DOM. 
+         Since CvVerticalMenu is a React component, we can pass client:load and let it measure. 
+         However, the original code passed heroHeight as a prop from the parent. 
+         We can wrap the page logic in a React component OR Refactor CvVerticalMenu to measure internally.
+         
+         Decision: For now, I will mount CvVerticalMenu interactively. 
+         NOTE: The original `heroHeight` prop logic in `app/cv/page.tsx` measured the `heroAreaRef`.
+         I will modify CvVerticalMenu to handle its own measurement or use a small script.
+         Actually, let's keep it simple: pass nothing and rely on internal logic if possible, 
+         or just fix it in the next step.
+    -->
+    <CvVerticalMenu client:load />
+
+    <section id="hero-area" class="anchor-for-navigation hero-area-section">
+      <CvHeroArea client:load />
+    </section>
+
+    <section id="synopsis" class="section anchor-for-navigation is-primary">
+      <CvOverview client:visible />
+    </section>
+
+    <section id="skills" class="section anchor-for-navigation with-background skills-section">
+      <CvSkills />
+    </section>
+
+    <section id="experience" class="section anchor-for-navigation with-background experience-section">
+      <CvExperience />
+    </section>
+
+    <section id="education" class="section anchor-for-navigation with-background education-section">
+      <CvEducation />
+    </section>
+
+    <TheFooter />
+  </div>
+</Layout>
+
+<style lang="scss">
+  /* Replicating cv.module.scss structure */
+  .cv-page {
+    position: relative;
+    background-color: var(--body-bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .with-background {
+    background-color: var(--section-bg-color);
+  }
+
+  /* Specific section styles from original SCSS modules if they weren't inside the components */
+  .skills-section {
+    /* styles */
+  }
+</style>

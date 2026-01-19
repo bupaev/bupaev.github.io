@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+
 import styles from "./cv-hero-area.module.scss";
 
 import portraitDesktop from "./images/portrait-1-desktop.jpg";
@@ -94,14 +94,12 @@ export function CvHeroArea() {
               <div
                 className={`${styles.parallelogramImageContainer} md:hidden`}
               >
-                <Image
-                  src={portraitMobile}
+                <img
+                  src={portraitMobile.src}
                   alt="Paul Buramensky portrait"
-                  fill
-                  placeholder="blur"
-                  priority
-                  className={mobileImageLoaded ? styles.loaded : ""}
+                  className={`${styles.image} ${mobileImageLoaded ? styles.loaded : ""}`}
                   onLoad={() => setMobileImageLoaded(true)}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
               <h1 className={`title pt-8 mb-6 ${styles.title}`}>
@@ -175,14 +173,12 @@ export function CvHeroArea() {
             </div>
             <div className="column hidden md:block py-0 max-lg:w-2/5 max-lg:flex-none">
               <div className={styles.parallelogramImageContainer}>
-                <Image
-                  src={portraitDesktop}
+                <img
+                  src={portraitDesktop.src}
                   alt="Paul Buramensky portrait"
-                  fill
-                  placeholder="blur"
-                  priority
-                  className={desktopImageLoaded ? styles.loaded : ""}
+                  className={`${styles.image} ${desktopImageLoaded ? styles.loaded : ""}`}
                   onLoad={() => setDesktopImageLoaded(true)}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
             </div>

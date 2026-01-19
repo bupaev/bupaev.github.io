@@ -23,7 +23,8 @@ test.describe('CV Experience Section', () => {
             await experienceSection.scrollIntoViewIfNeeded();
 
             // Timeline should render job rows
-            const jobRows = page.locator('#experience [class*="__jobRow"]');
+            const jobRows = page.locator('#experience [class*="jobRow"]');
+            await expect(jobRows.first()).toBeVisible();
             const count = await jobRows.count();
             expect(count).toBeGreaterThan(0);
         });
@@ -43,7 +44,8 @@ test.describe('CV Experience Section', () => {
             const experienceSection = page.locator('#experience');
             await experienceSection.scrollIntoViewIfNeeded();
 
-            const jobRows = page.locator('[class*="__jobRow"]');
+            const jobRows = page.locator('[class*="jobRow"]');
+            await expect(jobRows.first()).toBeVisible();
             const count = await jobRows.count();
 
             // Should have at least 2 rows (spanning ~17 years)
@@ -226,7 +228,8 @@ test.describe('CV Experience Section', () => {
             await experienceSection.scrollIntoViewIfNeeded();
 
             // Timeline should still be visible via job rows
-            const jobRows = page.locator('[class*="__jobRow"]');
+            const jobRows = page.locator('[class*="jobRow"]');
+            await expect(jobRows.first()).toBeVisible();
             const count = await jobRows.count();
             expect(count).toBeGreaterThan(0);
         });
@@ -239,13 +242,15 @@ test.describe('CV Experience Section', () => {
             const experienceSection = page.locator('#experience');
             await experienceSection.scrollIntoViewIfNeeded();
 
-            const wideRows = await page.locator('[class*="__jobRow"]').count();
+            const jobRows = page.locator('[class*="jobRow"]');
+            await expect(jobRows.first()).toBeVisible();
+            const wideRows = await jobRows.count();
 
             // Switch to narrow viewport
             await page.setViewportSize({ width: 600, height: 800 });
             await page.waitForTimeout(300); // Wait for resize handler
 
-            const narrowRows = await page.locator('[class*="__jobRow"]').count();
+            const narrowRows = await page.locator('[class*="jobRow"]').count();
 
             // Narrow viewport may have same or more rows (more year splits)
             expect(narrowRows).toBeGreaterThanOrEqual(wideRows);

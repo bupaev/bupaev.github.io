@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
+
 import styles from "./dark-mode-toggle.module.scss";
 
 function getCookie(name: string): string | undefined {
@@ -81,14 +81,14 @@ export function DarkModeToggle() {
         <div className={styles.slider}>
           <span className={styles.labelDark}>Dark</span>
           <div className={styles.handler}>
-            <Image
+            <img
               className={styles.iconLight}
               src="/icons/dark-mode/sun.svg"
               alt="Light mode"
               width={30}
               height={30}
             />
-            <Image
+            <img
               className={styles.iconDark}
               src="/icons/dark-mode/moon.svg"
               alt="Dark mode"

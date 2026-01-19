@@ -1,0 +1,23 @@
+---
+import { Timeline } from "./timeline";
+import ExperienceContent from "./content/experience.mdx";
+import styles from "./cv-experience.module.scss";
+import { JobTitle, Company, Interval } from "./content/mdx-ui-components";
+
+// Map components for MDX
+const components = {
+  JobTitle,
+  Company,
+  Interval
+};
+---
+
+<div class={`experience container ${styles.experience}`}>
+  <h2 class="title text-4xl leading-tight">Experience</h2>
+  <!-- Timeline is interactive, requires client-side JS -->
+  <Timeline client:visible />
+  
+  <div class="content mt-6">
+    <ExperienceContent components={components} />
+  </div>
+</div>

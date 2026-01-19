@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import Image from "next/image";
+
 import { MENU_ITEMS, ICON_BASE_PATH } from "@/config/navigation-config";
 import styles from "./cv-vertical-menu.module.scss";
 
@@ -255,7 +255,7 @@ export function CvVerticalMenu({ heroHeight }: CvVerticalMenuProps) {
             aria-label={`Navigate to ${item.title} section`}
           >
             <span className={styles.itemIcon}>
-              <Image
+              <img
                 src={`${ICON_BASE_PATH}${item.icon}`}
                 alt=""
                 width={32}

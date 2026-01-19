@@ -20,9 +20,9 @@ node_modules/
 /coverage
 /.nyc_output
 
-# Next.js
-/.next/
-/out/
+# Astro
+/.astro/
+/dist/
 /build
 
 # Misc
@@ -44,7 +44,6 @@ node_modules/
 
 # TypeScript
 *.tsbuildinfo
-next-env.d.ts
 
 # Vim swap files
 *.swp

@@ -1,20 +1,6 @@
 import '@testing-library/jest-dom/vitest';
 import { vi } from 'vitest';
 
-// Mock Next.js Image component
-vi.mock('next/image', () => ({
-    default: ({ src, alt, width, height, ...props }: {
-        src: string;
-        alt: string;
-        width: number;
-        height: number;
-        [key: string]: unknown;
-    }) => {
-        // eslint-disable-next-line @next/next/no-img-element
-        return <img src={src} alt={alt} width={width} height={height} {...props} />;
-    },
-}));
-
 // Mock CSS modules
 vi.mock('*.module.scss', () => ({
     default: new Proxy({}, {
