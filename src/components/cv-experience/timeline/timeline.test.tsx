@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent, cleanup, act } from '@testing-library/react';
-import { Timeline } from './timeline';
-import type { Job } from './content/jobs-data';
+import { Timeline } from './index';
+import type { Job } from "../content/jobs-data";
 
 const { mockJobs, mockStyles } = vi.hoisted(() => {
     return {
@@ -61,7 +61,7 @@ vi.mock('./timeline.module.scss', () => ({
 }));
 
 // Mock the jobs-data module
-vi.mock('./content/jobs-data', () => ({
+vi.mock('../content/jobs-data', () => ({
     jobs: mockJobs
 }));
 
