@@ -198,10 +198,11 @@ describe('CvVerticalMenu', () => {
             expect(nav).toHaveStyle({ opacity: '1' });
         });
 
-        it('does not apply opacity: 1 when heroHeight is undefined', async () => {
+        it('applies opacity: 1 after mount regardless of heroHeight', async () => {
             await renderAndInitialize({});
             const nav = screen.getByRole('navigation');
-            expect(nav).not.toHaveStyle({ opacity: '1' });
+            // New behavior: opacity is set to 1 after component mounts (mounted state)
+            expect(nav).toHaveStyle({ opacity: '1' });
         });
 
         it('toggles data-sticky attribute on mobile scroll', async () => {

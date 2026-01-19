@@ -23,6 +23,7 @@ type CvVerticalMenuProps = {
 export function CvVerticalMenu({ heroHeight }: CvVerticalMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
+  const [mounted, setMounted] = useState(false);
   const [menuItemHeight, setMenuItemHeight] = useState(0);
   const [contentSectionsOffsetArray, setContentSectionsOffsetArray] = useState<
     number[]
@@ -30,6 +31,11 @@ export function CvVerticalMenu({ heroHeight }: CvVerticalMenuProps) {
   const [scaleCoefficients, setScaleCoefficients] = useState<number[]>([]);
   const [markerOffset, setMarkerOffset] = useState(0);
   const [markerHeight, setMarkerHeight] = useState(0);
+
+  // Set mounted state after hydration
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   /**
    * Retrieves a property value from all navigation anchor sections.
@@ -235,7 +241,7 @@ export function CvVerticalMenu({ heroHeight }: CvVerticalMenuProps) {
       ref={navRef}
       className={styles.verticalMenu}
       aria-label="Page navigation"
-      style={{ opacity: heroHeight !== undefined ? 1 : undefined }}
+      style={{ opacity: mounted ? 1 : undefined }}
     >
       <div
         className={styles.visibleAreaMarker}

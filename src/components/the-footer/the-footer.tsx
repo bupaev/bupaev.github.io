@@ -13,7 +13,7 @@ export function TheFooter() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            love and <s>Nuxt</s> Next.js
+            love and <s>Nuxt</s> <s>Next.js</s> Astro
           </a>
           <br />&copy; 2021-2026
         </span>
