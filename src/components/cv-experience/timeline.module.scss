@@ -65,8 +65,8 @@
     padding: 5px 5px 5px 10px;
     cursor: pointer;
     overflow: hidden;
-    transition: background-color 200ms;
     transform: translateX(-50%);
+    transition: all 200ms ease-out;
 
     @include mixins.tablet-only {
       font-size: 12px;
@@ -76,41 +76,38 @@
       font-size: 11px;
     }
 
+    &:hover {
+      transform: translateX(-50%) scale(1.05, 1.1);
+      border-radius: $border-radius;
+      border-color: transparent;
+      background-color: var(--color-accent);
+      color: #000;
+      z-index: 3 !important;
+
+      // Workaround to avoid a jumping height due to text content and small width of the element
+      &:not(.isShort) {
+        height: auto !important;
+      }
+
+      // Short jobs expand to a fixed width on hover
+      &.isShort {
+        width: 100px !important;
+      }
+
+      .jobText {
+        mask-image: none;
+      }
+
+      .jobDuration {
+        display: block;
+      }
+    }
+
     &.isBreak {
       background-color: rgba(variables.$secondary-light-color, 0.5);
 
       &:hover {
         background-color: var(--color-secondary-light);
-      }
-    }
-
-    // Short jobs expand to a fixed width on hover.
-    // Base state: width is controlled by inline styles (%).
-    &.isShort {
-      transition: width 200ms ease-out, background-color 200ms;
-
-      &:hover {
-        width: 100px !important;
-        border-radius: $border-radius;
-        border-color: transparent;
-        z-index: 1 !important;
-        transform: translateX(-50%) scaleY(1.05);
-        transition: all 200ms;
-
-        .jobText {
-          mask-image: none;
-        }
-      }
-    }
-
-    &:hover {
-      height: auto !important;
-      background-color: var(--color-accent);
-      color: #000;
-      z-index: 3 !important;
-
-      .jobDuration {
-        display: block;
       }
     }
 

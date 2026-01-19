@@ -233,6 +233,7 @@ export function Timeline() {
                 style={getJobPositionStyle(job, jobRowIndex)}
                 className={`${styles.job} ${job.isBreak ? styles.isBreak : ""} ${isJobShort(job) ? styles.isShort : ""}`}
                 onClick={() => goToJob(job.id)}
+                title={job.skills}
               >
                 <div className={styles.jobText}>
                   {job.position}
