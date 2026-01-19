@@ -1,11 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 import styles from "./cv-hero-area.module.scss";
 
-import portraitDesktop from "./images/portrait-1-desktop.jpg";
-import portraitMobile from "./images/portrait-1-mobile-2x.jpg";
+interface ImageProps {
+  src: string;
+  placeholderSrc: string;
+}
+
+export interface CvHeroAreaProps {
+  desktopImage: ImageProps;
+  mobileImage: ImageProps;
+}
 
 function LinkedinIcon() {
   return (
@@ -17,7 +24,7 @@ function LinkedinIcon() {
       <path
         fill="currentColor"
         d="M2,18.6c-0.4,0-0.7-0.3-0.7-0.7v-16c0-0.4,0.3-0.7,0.7-0.7h16c0.4,0,0.7,0.3,0.7,0.7v16c0,0.4-0.3,0.7-0.7,0.7H2z
-		 M2.7,17.2h14.6V2.6H2.7V17.2z M13.8,15.1v-4c0-1.1-0.9-2-2-2c-1.1,0-2,0.9-2,2v4H8.3V8.2h1.4v0.8l0.5-0.5C10.8,8,11.4,7.7,12,7.7
+		 M2.7,17.2h14.6V2.6H2.7V17.2z M13.8,15.1v-4c-1.1,0-2,0.9-2,2v4H8.3V8.2h1.4v0.8l0.5-0.5C10.8,8,11.4,7.7,12,7.7
 		c1.8,0,3.2,1.5,3.2,3.5v4H13.8z M4.8,15.1V8.2h1.4v6.9H4.8z M5.5,6.6c-0.7,0-1.2-0.5-1.2-1.2s0.5-1.2,1.2-1.2s1.2,0.5,1.2,1.2
 		S6.2,6.6,5.5,6.6z"
       />
@@ -79,9 +86,20 @@ function DownloadIcon() {
   );
 }
 
-export function CvHeroArea() {
+export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
   const [desktopImageLoaded, setDesktopImageLoaded] = useState(false);
   const [mobileImageLoaded, setMobileImageLoaded] = useState(false);
+  const desktopImgRef = useRef<HTMLImageElement>(null);
+  const mobileImgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    if (desktopImgRef.current && desktopImgRef.current.complete) {
+      setDesktopImageLoaded(true);
+    }
+    if (mobileImgRef.current && mobileImgRef.current.complete) {
+      setMobileImageLoaded(true);
+    }
+  }, []);
 
   return (
     <div className={`${styles.heroArea} hero`}>
@@ -95,17 +113,22 @@ export function CvHeroArea() {
                 className={`${styles.parallelogramImageContainer} md:hidden`}
               >
                 <img
-                  src={portraitMobile.src}
+                  src={mobileImage.placeholderSrc}
+                  alt=""
+                  aria-hidden="true"
+                  style={{ filter: "blur(20px)" }}
+                />
+                <img
+                  ref={mobileImgRef}
+                  src={mobileImage.src}
                   alt="Paul Buramensky portrait"
-                  className={`${styles.image} ${mobileImageLoaded ? styles.loaded : ""}`}
+                  className={styles.hideableImage}
+                  data-loaded={mobileImageLoaded}
                   onLoad={() => setMobileImageLoaded(true)}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
               <h1 className={`title pt-8 mb-6 ${styles.title}`}>
-                <div
-                  className={`${styles.textShapeLimiter} max-md:hidden`}
-                />
+                <div className={`${styles.textShapeLimiter} max-md:hidden`} />
                 <span className="text-5xl leading-tight text-right">
                   Hi! I&apos;m Paul Buramensky
                 </span>
@@ -174,11 +197,18 @@ export function CvHeroArea() {
             <div className="column hidden md:block py-0 max-lg:w-2/5 max-lg:flex-none">
               <div className={styles.parallelogramImageContainer}>
                 <img
-                  src={portraitDesktop.src}
+                  src={desktopImage.placeholderSrc}
+                  alt=""
+                  aria-hidden="true"
+                  style={{ filter: "blur(20px)" }}
+                />
+                <img
+                  ref={desktopImgRef}
+                  src={desktopImage.src}
                   alt="Paul Buramensky portrait"
-                  className={`${styles.image} ${desktopImageLoaded ? styles.loaded : ""}`}
+                  className={styles.hideableImage}
+                  data-loaded={desktopImageLoaded}
                   onLoad={() => setDesktopImageLoaded(true)}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
             </div>

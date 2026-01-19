@@ -1,0 +1,29 @@
+---
+import { getImage } from "astro:assets";
+import { CvHeroArea as CvHeroAreaReact } from "./cv-hero-area";
+import portraitDesktop from "./images/portrait-1-desktop.jpg";
+import portraitMobile from "./images/portrait-1-mobile-2x.jpg";
+
+const desktopPlaceholder = await getImage({
+  src: portraitDesktop,
+  width: 20,
+  format: "webp",
+});
+const mobilePlaceholder = await getImage({
+  src: portraitMobile,
+  width: 20,
+  format: "webp",
+});
+---
+
+<CvHeroAreaReact
+  client:load
+  desktopImage={{
+    src: portraitDesktop.src,
+    placeholderSrc: desktopPlaceholder.src,
+  }}
+  mobileImage={{
+    src: portraitMobile.src,
+    placeholderSrc: mobilePlaceholder.src,
+  }}
+/>
