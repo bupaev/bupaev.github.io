@@ -123,7 +123,7 @@ describe('Timeline Component', () => {
 
         it('last job (Relocation) has dynamic end date', () => {
             const lastJob = jobs[jobs.length - 1];
-            expect(lastJob.position).toBe('Relocation 🇩🇪');
+            expect(lastJob.position).toBe('Relocation ✈️');
             // End date should be a valid ISO string (dynamic)
             expect(new Date(lastJob.endDate).getFullYear()).toBeGreaterThanOrEqual(2025);
         });
