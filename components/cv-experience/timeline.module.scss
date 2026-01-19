@@ -48,6 +48,7 @@
     height: calc(100% - #{$year-height});
     width: 100%;
     transform: skew(-15deg);
+    z-index: 1;
   }
 
   .job {
@@ -123,7 +124,6 @@
     position: absolute;
     bottom: 30px;
     width: 100%;
-    z-index: 5;
 
     .year {
       top: 0;
@@ -135,14 +135,13 @@
       font-size: 14px;
 
       &::after {
-        font-size: 16px;
+        font-size: 10px;
 
-        @include mixins.rhombus(var(--text-color));
+        @include mixins.triangle(var(--text-color));
 
         content: "";
-        top: -4px;
-        left: calc(50% - 4px);
-        background-color: var(--background-color);
+        top: 0;
+        left: calc(50% - 0.4em);
       }
 
       &:last-child::before {
@@ -159,16 +158,20 @@
   }
 
   .nowMarker {
-    top: -4px;
+    top: 0;
     margin-left: min(1vw, 14px);
     /* @TODO: Replace this hack with proper fix of Marker position */
     position: absolute;
-    width: 8px;
-    height: 8px;
-    border: 2px var(--accent-color) solid;
-    border-radius: 100%;
-    background-color: var(--background-color);
-    z-index: 1;
+
+    &::before {
+      font-size: 16px;
+
+      @include mixins.triangle(var(--accent-color));
+
+      content: "";
+      top: 0;
+      left: 0;
+    }
 
     &::after {
       content: "NOW";
