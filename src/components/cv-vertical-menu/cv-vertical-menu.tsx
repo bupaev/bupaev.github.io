@@ -1,4 +1,4 @@
-"use client";
+
 
 import { useState, useEffect, useRef, useCallback } from "react";
 
@@ -11,16 +11,7 @@ import styles from "./cv-vertical-menu.module.scss";
  */
 const TOUCH_SCREEN_BREAKPOINT = 960;
 
-type CvVerticalMenuProps = {
-  /**
-   * Height of the hero area in pixels.
-   * Used for mobile sticky positioning - menu starts below hero area.
-   * When undefined, mobile sticky behavior is disabled.
-   */
-  heroHeight?: number;
-};
-
-export function CvVerticalMenu({ heroHeight }: CvVerticalMenuProps) {
+export function CvVerticalMenu() {
   const menuRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const [mounted, setMounted] = useState(false);
@@ -31,6 +22,8 @@ export function CvVerticalMenu({ heroHeight }: CvVerticalMenuProps) {
   const [scaleCoefficients, setScaleCoefficients] = useState<number[]>([]);
   const [markerOffset, setMarkerOffset] = useState(0);
   const [markerHeight, setMarkerHeight] = useState(0);
+  // Use ref for hero height to avoid re-renders during scroll/resize measurements
+  const heroHeightRef = useRef<number | undefined>(undefined);
 
   // Set mounted state after hydration
   useEffect(() => {
@@ -188,22 +181,29 @@ export function CvVerticalMenu({ heroHeight }: CvVerticalMenuProps) {
    * On mobile: menu sticks to top after scrolling past hero area.
    */
   const updateStickyState = useCallback(() => {
-    if (!navRef.current || heroHeight === undefined) return;
+    if (!navRef.current || heroHeightRef.current === undefined) return;
 
-    const isScrolledPastHero = window.scrollY >= heroHeight;
+    const isScrolledPastHero = window.scrollY >= heroHeightRef.current;
     navRef.current.dataset.sticky = isScrolledPastHero ? "true" : "false";
-  }, [heroHeight]);
+  }, []);
 
-  // Handle mobile sticky positioning
+  // Handle mobile sticky positioning and hero height measurement
   useEffect(() => {
-    if (heroHeight === undefined) return;
-
-    // Update CSS custom property for hero height
-    if (navRef.current) {
-      navRef.current.style.setProperty("--hero-height", `${heroHeight}px`);
-    }
+    const updateHeroHeight = () => {
+      // Measure the DOM element to determine hero height
+      const heroSection = document.getElementById("hero-area");
+      if (heroSection) {
+        const height = heroSection.clientHeight;
+        heroHeightRef.current = height;
+        if (navRef.current) {
+          navRef.current.style.setProperty("--hero-height", `${height}px`);
+        }
+      }
+    };
 
     const onResize = () => {
+      updateHeroHeight();
+
       if (window.innerWidth <= TOUCH_SCREEN_BREAKPOINT) {
         updateStickyState();
         window.addEventListener("scroll", updateStickyState, { passive: true });
@@ -216,6 +216,7 @@ export function CvVerticalMenu({ heroHeight }: CvVerticalMenuProps) {
     };
 
     // Initial setup
+    updateHeroHeight(); // Measure immediately
     onResize();
     window.addEventListener("resize", onResize);
 
@@ -223,7 +224,7 @@ export function CvVerticalMenu({ heroHeight }: CvVerticalMenuProps) {
       window.removeEventListener("scroll", updateStickyState);
       window.removeEventListener("resize", onResize);
     };
-  }, [heroHeight, updateStickyState]);
+  }, [updateStickyState]);
 
   const onMenuItemClick = (targetIndex: number) => {
     if (contentSectionsOffsetArray[targetIndex] !== undefined) {

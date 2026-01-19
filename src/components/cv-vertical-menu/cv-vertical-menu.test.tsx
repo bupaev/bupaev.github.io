@@ -38,8 +38,8 @@ describe('CvVerticalMenu', () => {
     /** 
      * Helper to render component and wait for initialization
      */
-    const renderAndInitialize = async (props: { heroHeight?: number } = {}) => {
-        const result = render(<CvVerticalMenu {...props} />);
+    const renderAndInitialize = async () => {
+        const result = render(<CvVerticalMenu />);
         await act(async () => {
             vi.advanceTimersByTime(150);
         });
@@ -192,16 +192,10 @@ describe('CvVerticalMenu', () => {
         });
     });
     describe('Sticky and Mobile Behavior', () => {
-        it('applies opacity: 1 when heroHeight is provided', async () => {
-            await renderAndInitialize({ heroHeight: 500 });
+        it('applies opacity: 1 after mount', async () => {
+            await renderAndInitialize();
             const nav = screen.getByRole('navigation');
-            expect(nav).toHaveStyle({ opacity: '1' });
-        });
-
-        it('applies opacity: 1 after mount regardless of heroHeight', async () => {
-            await renderAndInitialize({});
-            const nav = screen.getByRole('navigation');
-            // New behavior: opacity is set to 1 after component mounts (mounted state)
+            // Opacity is set to 1 after component mounts (mounted state)
             expect(nav).toHaveStyle({ opacity: '1' });
         });
 
@@ -209,7 +203,7 @@ describe('CvVerticalMenu', () => {
             // Mock mobile viewport
             Object.defineProperty(window, 'innerWidth', { value: 600, writable: true });
 
-            await renderAndInitialize({ heroHeight: 300 });
+            await renderAndInitialize();
 
             // Trigger resize to activate mobile logic
             fireEvent.resize(window);
@@ -219,8 +213,8 @@ describe('CvVerticalMenu', () => {
             // Initially scrollY is 0, so not sticky
             expect(nav).toHaveAttribute('data-sticky', 'false');
 
-            // Scroll past hero height (300)
-            Object.defineProperty(window, 'scrollY', { value: 350, writable: true });
+            // Scroll past hero height (mocked at 500)
+            Object.defineProperty(window, 'scrollY', { value: 550, writable: true });
             fireEvent.scroll(window);
 
             expect(nav).toHaveAttribute('data-sticky', 'true');
@@ -236,16 +230,15 @@ describe('CvVerticalMenu', () => {
             // Mock desktop viewport
             Object.defineProperty(window, 'innerWidth', { value: 1200, writable: true });
 
-            await renderAndInitialize({ heroHeight: 300 });
+            await renderAndInitialize();
             fireEvent.resize(window);
 
             const nav = screen.getByRole('navigation');
 
-            Object.defineProperty(window, 'scrollY', { value: 350, writable: true });
+            Object.defineProperty(window, 'scrollY', { value: 600, writable: true });
             fireEvent.scroll(window);
 
-            // Should not have data-sticky attribute or it should be empty/undefined based on logic
-            // Our logic: on desktop it clears it: navRef.current.dataset.sticky = "";
+            // Should not have data-sticky attribute
             expect(nav).not.toHaveAttribute('data-sticky', 'true');
         });
     });
