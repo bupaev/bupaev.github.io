@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useLayoutEffect, useRef, useCallback } from "react";
-import { flushSync } from "react-dom";
 import styles from "./timeline.module.scss";
 import { jobs, type Job } from "../content/jobs-data";
 import type { RowRange } from "./timeline-types";
@@ -80,11 +79,8 @@ export function Timeline() {
 
     // useLayoutEffect runs synchronously after DOM mutations but before paint.
     // This is the correct place to read refs and update state based on measurements.
-    // Using flushSync explicitly signals intentional synchronous state update for layout.
     useLayoutEffect(() => {
-        flushSync(() => {
-            updateTimeline();
-        });
+        updateTimeline();
         window.addEventListener("resize", updateTimeline);
         return () => window.removeEventListener("resize", updateTimeline);
     }, [updateTimeline]);
