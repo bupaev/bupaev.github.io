@@ -168,11 +168,11 @@ $gap: 32px;
   border-color: #{$color} transparent transparent transparent;
 }
 
-@mixin arrow($color: #000) {
+@mixin arrow($color: #000, $border-width: 2px) {
   position: absolute;
   display: block;
   height: 0.5em;
   width: 0.5em;
-  border-top: 2px solid #{$color};
-  border-left: 2px solid #{$color};
+  border-top: $border-width solid #{$color};
+  border-left: $border-width solid #{$color};
 }

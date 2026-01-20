@@ -43,9 +43,8 @@ export function Timeline() {
         });
     }, []);
 
-    /**
-     * Split timeline to several lines if needed
-     */
+
+    // Split timeline to several lines if needed
     const getJobRows = useCallback(
         (ranges: RowRange[]): Job[][] => {
             return Array.from({ length: ranges.length }, (_, index) => {
@@ -90,9 +89,7 @@ export function Timeline() {
         return () => window.removeEventListener("resize", updateTimeline);
     }, [updateTimeline]);
 
-    /**
-     * Calculate position of specific date on timeline in %
-     */
+    // Calculate position of specific date on timeline in %
     const getDatePosition = (isoStringDate: string, rowRange: RowRange): number => {
         const startYearTimeInMs = new Date(rowRange.startYear, 0, 1).getTime();
         const timelineDurationInSec =
@@ -164,9 +161,7 @@ export function Timeline() {
         };
     };
 
-    /**
-     * Return list of year numbers for time arrow
-     */
+    //Return list of year numbers for time arrow
     const getYearsMarks = (jobRowIndex: number): number[] => {
         const rowRange = rowsRanges[jobRowIndex];
         if (!rowRange) return [];

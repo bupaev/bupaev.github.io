@@ -156,14 +156,12 @@
       }
 
       &:last-child::before {
-        @include mixins.arrow(var(--text-color));
+        @include mixins.arrow(var(--text-color), 1px);
 
         content: "";
-        border-width: 1px !important;
-        transform: rotate(-135deg);
-        right: 2px;
-        top: 1px;
-        border-radius: 0;
+        transform: rotate(135deg);
+        right: 1px;
+        top: -4px;
       }
     }
   }
@@ -175,13 +173,13 @@
     position: absolute;
 
     &::before {
+      @include mixins.rhombus(var(--accent-color));
+
       font-size: 16px;
-
-      @include mixins.triangle(var(--accent-color));
-
       content: "";
-      top: 0;
-      left: 0;
+      top: -2px;
+      left: 2px;
+      background-color: var(--accent-color);
     }
 
     &::after {

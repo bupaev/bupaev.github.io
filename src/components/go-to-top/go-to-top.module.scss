@@ -14,12 +14,11 @@
   position: relative;
 
   .arrow {
-    @include mixins.arrow;
+    @include mixins.arrow(var(--contrasty-color), 2px);
 
     position: relative;
     top: auto;
     margin: 2px 0;
-    border-color: var(--contrasty-color);
     transform: rotate(45deg);
     transition: border-color 400ms;
   }
