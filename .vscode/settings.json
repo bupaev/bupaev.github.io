@@ -8,5 +8,9 @@
         "source.fixAll.stylelint": "explicit"
     },
     "css.validate": false,
-    "scss.validate": false
+    "scss.validate": false,
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+        "typescript": "typescriptreact"
+    }
 }
