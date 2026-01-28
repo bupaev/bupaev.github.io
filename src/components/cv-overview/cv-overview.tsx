@@ -1,12 +1,18 @@
 "use client";
 
 import { VennDiagramProfessions } from "./venn-diagram-professions";
+import { Diagram } from "./diagram";
 import styles from "./cv-overview.module.scss";
 
 export function CvOverview() {
   return (
     <div className={`${styles.overview} container`}>
       <h2 className="title text-4xl leading-tight">Overview</h2>
+      <div className="columns">
+        <div className="column">
+          <Diagram />
+        </div>
+      </div>
       <div className="columns">
         <div className="column">
           <div className="content">

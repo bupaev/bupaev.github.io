@@ -1,0 +1,107 @@
+@use "@/styles/mixins";
+@use "@/styles/variables";
+
+.diagram {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    aspect-ratio: 1;
+}
+
+// Hidden SVG for filter definition
+.gooFilter {
+    position: absolute;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+.container {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    filter: url("#goo");
+}
+
+// Base styles for all areas
+.areaTopLeft,
+.areaTopRight,
+.areaBottomLeft,
+.areaBottomRight {
+    display: block;
+}
+
+// Colors for each area - pastel tones matching the design
+.areaTopLeft {
+    background-color: hsl(50deg 100% 80% / 90%); // Yellow
+    border-radius: 50% 30% 0;
+}
+
+.areaTopRight {
+    background-color: hsl(10deg 100% 85% / 90%); // Pink/coral
+    border-radius: 30% 50% 30% 0;
+}
+
+.areaBottomLeft {
+    background-color: hsl(140deg 70% 80% / 90%); // Green
+    border-radius: 30% 0 30% 50%;
+}
+
+.areaBottomRight {
+    background-color: hsl(225deg 70% 85% / 90%); // Blue
+    border-radius: 0 30% 50%;
+}
+
+// Labels container - positioned outside filtered area
+.labels {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    pointer-events: none;
+}
+
+// Labels for each area
+.areaLabel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10%;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-color, #1a1a1a);
+    text-align: center;
+    line-height: 1.3;
+
+    @include mixins.small-mobile {
+        font-size: 1rem;
+    }
+
+    @include mixins.desktop-only {
+        font-size: 1.75rem;
+    }
+}
+
+.labelTopLeft {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.labelTopRight {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.labelBottomLeft {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.labelBottomRight {
+    grid-column: 2;
+    grid-row: 2;
+}
