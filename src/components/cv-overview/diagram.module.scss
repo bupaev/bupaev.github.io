@@ -9,68 +9,114 @@
     aspect-ratio: 1;
 }
 
-// Hidden SVG for filter definition
-.gooFilter {
-    position: absolute;
-    width: 0;
-    height: 0;
-    visibility: hidden;
-}
-
-.container {
+// SVG takes full container size
+.gooSvg {
     position: absolute;
     inset: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    filter: url("#goo");
+    width: 100%;
+    height: 100%;
+    overflow: visible; // Allow blobs to animate from outside
 }
 
-// Base styles for all areas
+// SVG ellipse colors and scroll-driven animations
 .areaTopLeft,
 .areaTopRight,
 .areaBottomLeft,
 .areaBottomRight {
-    display: block;
+    // Scroll-driven animation for movement and opacity
+    animation-duration: 1ms; // Required for scroll-driven animation
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 50%; // Complete when diagram center reaches viewport center
 }
 
-// Colors for each area - pastel tones matching the design
+// Front-end engineering - larger (55%)
 .areaTopLeft {
-    background-color: hsl(50deg 100% 80% / 90%); // Yellow
-    border-radius: 50% 30% 0;
+    fill: hsl(50deg 100% 80% / 90%); // Yellow
+    animation-name: slide-from-top-left;
 }
 
+// Leadership
 .areaTopRight {
-    background-color: hsl(10deg 100% 85% / 90%); // Pink/coral
-    border-radius: 30% 50% 30% 0;
+    fill: hsl(10deg 100% 85% / 90%); // Pink/coral
+    animation-name: slide-from-top-right;
 }
 
+// UI/UX Design
 .areaBottomLeft {
-    background-color: hsl(140deg 70% 80% / 90%); // Green
-    border-radius: 30% 0 30% 50%;
+    fill: hsl(140deg 70% 80% / 90%); // Green
+    animation-name: slide-from-bottom-left;
 }
 
+// AI expertize
 .areaBottomRight {
-    background-color: hsl(225deg 70% 85% / 90%); // Blue
-    border-radius: 0 30% 50%;
+    fill: hsl(225deg 70% 85% / 90%); // Blue
+    animation-name: slide-from-bottom-right;
 }
 
-// Labels container - positioned outside filtered area
+// Scroll-driven keyframes - blocks slide in from corners and fade in (250px offset)
+@keyframes slide-from-top-left {
+    from {
+        opacity: 0;
+        transform: translate(-250px, -250px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes slide-from-top-right {
+    from {
+        opacity: 0;
+        transform: translate(250px, -250px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes slide-from-bottom-left {
+    from {
+        opacity: 0;
+        transform: translate(-250px, 250px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes slide-from-bottom-right {
+    from {
+        opacity: 0;
+        transform: translate(250px, 250px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+// Labels container - overlays SVG, no pointer events
 .labels {
     position: absolute;
     inset: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
     pointer-events: none;
 }
 
-// Labels for each area
+// Labels for each area - matching area positions
 .areaLabel {
+    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10%;
     font-size: 1.5rem;
     font-weight: 500;
     color: var(--text-color, #1a1a1a);
@@ -87,21 +133,29 @@
 }
 
 .labelTopLeft {
-    grid-column: 1;
-    grid-row: 1;
+    top: 10%;
+    left: 5%;
+    width: 50%;
+    height: 45%;
 }
 
 .labelTopRight {
-    grid-column: 2;
-    grid-row: 1;
+    top: 10%;
+    right: 5%;
+    width: 40%;
+    height: 40%;
 }
 
 .labelBottomLeft {
-    grid-column: 1;
-    grid-row: 2;
+    bottom: 10%;
+    left: 5%;
+    width: 40%;
+    height: 40%;
 }
 
 .labelBottomRight {
-    grid-column: 2;
-    grid-row: 2;
+    bottom: 10%;
+    right: 5%;
+    width: 40%;
+    height: 40%;
 }

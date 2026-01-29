@@ -3,42 +3,72 @@ import styles from "./diagram.module.scss";
 /**
  * Diagram component displaying four overlapping skill areas
  * with a gooey color transition effect creating a blob-like appearance.
- * Labels are positioned outside the filtered container to prevent blur.
+ * Uses native SVG elements instead of HTML divs for Safari CSS animation compatibility.
+ * Labels are positioned outside the SVG to prevent blur from the filter.
  */
 export function Diagram() {
     return (
         <div className={styles.diagram}>
-            {/* SVG filter for gooey effect */}
+            {/* SVG with native elements - filter applied via attribute for Safari compatibility */}
             <svg
+                className={styles.gooSvg}
+                viewBox="0 0 500 500"
                 xmlns="http://www.w3.org/2000/svg"
-                version="1.1"
-                className={styles.gooFilter}
+                preserveAspectRatio="xMidYMid meet"
             >
                 <defs>
                     <filter id="goo">
                         <feGaussianBlur
                             in="SourceGraphic"
-                            stdDeviation="10"
+                            stdDeviation="40"
                             result="blur"
                         />
                         <feColorMatrix
                             in="blur"
-                            mode="matrix"
-                            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 21 -7"
+                            type="matrix"
+                            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 50 -18"
                         />
                     </filter>
                 </defs>
+
+                {/* Apply filter to group via attribute - works in Safari with animations */}
+                <g filter="url(#goo)">
+                    {/* Front-end engineering - larger (55%) */}
+                    <ellipse
+                        className={styles.areaTopLeft}
+                        cx="137.5"
+                        cy="137.5"
+                        rx="137.5"
+                        ry="137.5"
+                    />
+                    {/* Leadership */}
+                    <ellipse
+                        className={styles.areaTopRight}
+                        cx="380"
+                        cy="120"
+                        rx="120"
+                        ry="120"
+                    />
+                    {/* UI/UX Design */}
+                    <ellipse
+                        className={styles.areaBottomLeft}
+                        cx="120"
+                        cy="380"
+                        rx="120"
+                        ry="120"
+                    />
+                    {/* AI expertize */}
+                    <ellipse
+                        className={styles.areaBottomRight}
+                        cx="375"
+                        cy="375"
+                        rx="125"
+                        ry="125"
+                    />
+                </g>
             </svg>
 
-            {/* Colored areas with goo filter */}
-            <div className={styles.container}>
-                <div className={styles.areaTopLeft} />
-                <div className={styles.areaTopRight} />
-                <div className={styles.areaBottomLeft} />
-                <div className={styles.areaBottomRight} />
-            </div>
-
-            {/* Labels positioned outside filtered container */}
+            {/* Labels positioned outside SVG for sharp text */}
             <div className={styles.labels}>
                 <span className={`${styles.areaLabel} ${styles.labelTopLeft}`}>
                     Front-end
