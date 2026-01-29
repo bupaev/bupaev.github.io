@@ -12,7 +12,7 @@ export function Diagram() {
             {/* SVG with native elements - filter applied via attribute for Safari compatibility */}
             <svg
                 className={styles.gooSvg}
-                viewBox="0 0 500 500"
+                viewBox="0 0 800 500"
                 xmlns="http://www.w3.org/2000/svg"
                 preserveAspectRatio="xMidYMid meet"
             >
@@ -32,41 +32,31 @@ export function Diagram() {
                 </defs>
 
                 {/* Apply filter to group via attribute - works in Safari with animations */}
-                <g filter="url(#goo)">
-                    {/* Front-end engineering - larger (55%) */}
-                    <ellipse
+                {/* <g filter="url(#goo)"></g> */}
+                <g>
+                    {/* Front-end engineering - top-left parallelogram */}
+                    <polygon
                         className={styles.areaTopLeft}
-                        cx="137.5"
-                        cy="137.5"
-                        rx="137.5"
-                        ry="137.5"
+                        points="127,0 464,0 400,250 63,250"
                     />
-                    {/* Leadership */}
-                    <ellipse
+                    {/* Leadership - top-right parallelogram */}
+                    <polygon
                         className={styles.areaTopRight}
-                        cx="380"
-                        cy="120"
-                        rx="120"
-                        ry="120"
+                        points="464,0 800,0 736,250 400,250"
                     />
-                    {/* UI/UX Design */}
-                    <ellipse
+                    {/* UI/UX Design - bottom-left parallelogram */}
+                    <polygon
                         className={styles.areaBottomLeft}
-                        cx="120"
-                        cy="380"
-                        rx="120"
-                        ry="120"
+                        points="64,250 400,250 336,500 0,500"
                     />
-                    {/* AI expertize */}
-                    <ellipse
+                    {/* AI expertize - bottom-right parallelogram */}
+                    <polygon
                         className={styles.areaBottomRight}
-                        cx="375"
-                        cy="375"
-                        rx="125"
-                        ry="125"
+                        points="400,250 736,250 671,500 336,500"
                     />
                 </g>
             </svg>
+
 
             {/* Labels positioned outside SVG for sharp text */}
             <div className={styles.labels}>
