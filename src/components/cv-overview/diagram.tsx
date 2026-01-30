@@ -33,7 +33,7 @@ export function Diagram() {
 
                 {/* Apply filter to group via attribute - works in Safari with animations */}
                 {/* <g filter="url(#goo)"></g> */}
-                <g>
+                <g filter="url(#goo)">
                     {/* Front-end engineering - top-left parallelogram */}
                     <polygon
                         className={styles.areaTopLeft}
