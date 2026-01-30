@@ -116,6 +116,33 @@
     }
 }
 
+// Center icon - inverted to white with scroll-driven blur animation
+.centerIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    pointer-events: none;
+    opacity: 0.1;
+    // Scroll-driven blur animation synced with diagram
+    animation: center-icon-blur 1ms ease-in both;
+    animation-timeline: --diagram-timeline;
+    animation-range: cover 10% cover 50%;
+}
+
+@keyframes center-icon-blur {
+    from {
+        filter: invert(1) blur(50px);
+        transform: translate(-50%, -50%) scale(0.1);
+    }
+
+    to {
+        filter: invert(1) blur(0);
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
 // Labels container - overlays SVG, no pointer events
 .labels {
     position: absolute;

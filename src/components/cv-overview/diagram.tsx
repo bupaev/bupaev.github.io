@@ -135,6 +135,13 @@ export function Diagram() {
             </svg>
 
 
+            {/* Center icon */}
+            <img
+                src="/icons/vertical-menu/head-with-glasses.svg"
+                alt=""
+                className={styles.centerIcon}
+            />
+
             {/* Labels positioned outside SVG for sharp text */}
             <div className={styles.labels}>
                 <span className={`${styles.areaLabel} ${styles.labelTopLeft}`}>
