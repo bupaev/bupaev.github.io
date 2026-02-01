@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, type CSSProperties } from "react";
-import styles from "./diagram-graph.module.scss";
+import { useEffect, useRef, useState } from "react";
+import styles from "./diagram.module.scss";
 
 /** Blur animation range matching CSS animation-range: cover 10% cover 60% */
 
@@ -17,21 +17,22 @@ const POLYGONS = [
         scaleY: 1.74,
         cx: 271,
         cy: 144,
-        label: ["Front-end", "engineering"],
-        keywords: [
-            "React",
-            "Vue",
-            "Angular",
-            "TypeScript",
-            "JavaScript",
-            "HTML5",
-            "CSS3",
-            "SCSS",
-            "Gatsby",
-            "Web Audio API",
-            "Responsive Design",
-        ],
+        label: (
+            <>
+                Front-end
+                <br />
+                engineering
+            </>
+        ),
         labelClass: styles.labelTopLeft,
+        keywords: [
+            "Scalable SPA Architecture",
+            "Legacy System Modernization",
+            "Performance Engineering",
+            "Code Quality Guardian",
+            "Modern JavaScript Ecosystem",
+            "Strive to good DX",
+        ],
     },
     {
         id: "topRight",
@@ -41,18 +42,15 @@ const POLYGONS = [
         scaleY: 1.98,
         cx: 632,
         cy: 162,
-        label: ["Leadership"],
-        keywords: [
-            "Team Leading",
-            "Mentoring",
-            "Code Review",
-            "Architecture",
-            "Hiring",
-            "Agile",
-            "Scrum",
-            "Process Optimization",
-        ],
+        label: <>Leadership</>,
         labelClass: styles.labelTopRight,
+        keywords: [
+            "Technical Orchestrator",
+            "Engineering Culture Architect",
+            "Cross-Functional Influence",
+            "Crisis Management",
+            "Trust-Based Mentorship",
+        ],
     },
     {
         id: "bottomLeft",
@@ -62,18 +60,15 @@ const POLYGONS = [
         scaleY: 2.36,
         cx: 232,
         cy: 394,
-        label: ["UI/UX Design"],
-        keywords: [
-            "Figma",
-            "User Research",
-            "Prototyping",
-            "Wireframing",
-            "Accessibility",
-            "Design Systems",
-            "Interaction Design",
-            "Visual Design",
-        ],
+        label: <>UI/UX Design</>,
         labelClass: styles.labelBottomLeft,
+        keywords: [
+            "UX/Engineering Bridge",
+            "Reasonable Perfectionist",
+            "Accessibility (WCAG) Advocate",
+            "Design Systems Integration",
+            "Human-Centric Interface Design",
+        ],
     },
     {
         id: "bottomRight",
@@ -83,18 +78,14 @@ const POLYGONS = [
         scaleY: 2.59,
         cx: 560,
         cy: 385,
-        label: ["AI expertise"],
-        keywords: [
-            "AI Agents",
-            "LLMs",
-            "Prompt Engineering",
-            "Python",
-            "RAG",
-            "AI Systems",
-            "Control Theory",
-            "Automation",
-        ],
+        label: <>AI expertize</>,
         labelClass: styles.labelBottomRight,
+        keywords: [
+            "High-Leverage Engineer",
+            "Critical Systems Thinker",
+            "GenAI Pair Programming",
+            "AI Output Validation",
+        ],
     },
 ] as const;
 
@@ -113,19 +104,23 @@ export function Diagram() {
     const [sortId, setSortId] = useState<PolygonId>(null);
     const [scaleId, setScaleId] = useState<PolygonId>(null);
     const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const leaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     const handleMouseEnter = (id: PolygonId) => {
-        // Clear any pending leave actions
+        // Clear any pending leave actions (both scale and sort)
         if (hoverTimeoutRef.current) {
             clearTimeout(hoverTimeoutRef.current);
             hoverTimeoutRef.current = null;
+        }
+        if (leaveTimeoutRef.current) {
+            clearTimeout(leaveTimeoutRef.current);
+            leaveTimeoutRef.current = null;
         }
 
         // Sequence: 1. Move to top (Z-index), 2. Scale up
         setSortId(id);
 
         // Small delay to ensure DOM reorder happens before scale transition starts
-        // This prevents the "jump" effect
         requestAnimationFrame(() => {
             startBlurTransition(); // Ensure blur is robustly triggered
             setScaleId(id);
@@ -133,12 +128,15 @@ export function Diagram() {
     };
 
     const handleMouseLeave = () => {
-        // Sequence: 1. Scale down, 2. Restore Z-index
-        setScaleId(null);
+        // Small delay to allow moving between polygon and keywords without losing state
+        leaveTimeoutRef.current = setTimeout(() => {
+            setScaleId(null);
 
-        hoverTimeoutRef.current = setTimeout(() => {
-            setSortId(null);
-        }, 200); // Wait for transition duration (200ms)
+            // Sequence: 1. Scale down, 2. Restore Z-index
+            hoverTimeoutRef.current = setTimeout(() => {
+                setSortId(null);
+            }, 200); // Wait for transition duration (200ms)
+        }, 100);
     };
 
     // Track blur values to avoid unnecessary DOM updates and manage transitions
@@ -185,25 +183,18 @@ export function Diagram() {
 
         let isVisible = false;
 
-        /**
-         * Calculate scroll progress matching CSS animation-timeline: view()
-         * Progress: 0 = element just entering viewport, 1 = element fully left viewport
-         */
         const updateBlur = () => {
             if (!isVisible) return;
 
             const rect = container.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
 
-            // Calculate "cover" progress: 0 when top enters bottom, 1 when bottom exits top
             const totalDistance = viewportHeight + rect.height;
             const distanceTraveled = viewportHeight - rect.top;
             const progress = Math.max(0, Math.min(1, distanceTraveled / totalDistance));
 
-            // Determine target blur based on animation phase
             const desiredBlur = progress >= ANIMATION_END ? STD_DEV_HIGH : STD_DEV_LOW;
 
-            // If target changes, cancel any running animation and start a new one
             if (targetBlurRef.current !== desiredBlur) {
                 targetBlurRef.current = desiredBlur;
                 if (rafRef.current !== null) {
@@ -218,7 +209,6 @@ export function Diagram() {
             updateBlur();
         };
 
-        // Only attach scroll listener when element is visible (performance optimization)
         const observer = new IntersectionObserver(
             (entries) => {
                 isVisible = entries[0].isIntersecting;
@@ -249,15 +239,26 @@ export function Diagram() {
     });
 
     const getTransform = (id: string, cx: number, cy: number, scaleX: number, scaleY: number) => {
-        // We calculate transform based on the id's own properties
-        // But we only applying scale if it matches the current scaleId
         if (id === scaleId) {
-            // Translate center of polygon to center of SVG (400, 250)
             const tx = 400 - cx;
             const ty = 250 - cy;
             return `translate(${tx}px, ${ty}px) scale(${scaleX}, ${scaleY})`;
         }
         return "translate(0px, 0px) scale(1, 1)";
+    };
+
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!containerRef.current) return;
+        const rect = containerRef.current.getBoundingClientRect();
+
+        // 0,0 at center of 800x500 container
+        const x = e.clientX - rect.left - 400;
+        const y = e.clientY - rect.top - 250;
+
+
+        setMousePos({ x, y });
     };
 
     return (
@@ -315,55 +316,83 @@ export function Diagram() {
                 </g>
             </svg>
 
-            {/* Labels positioned outside SVG for sharp text */}
-            <div className={styles.labels}>
-                {POLYGONS.map((area) => (
-                    <div
-                        key={area.id}
-                        className={`${styles.areaLabelContainer} ${sortId === area.id ? styles.active : sortId ? styles.inactive : ""
-                            }`}
-                        style={
-                            {
-                                "--cx": `${area.cx}px`,
-                                "--cy": `${area.cy}px`,
-                            } as CSSProperties
-                        }
-                    >
-                        <span className={`${styles.areaLabel} ${area.labelClass}`}>
-                            {area.label.map((line, i) => (
-                                <span key={i}>
-                                    {line}
-                                    {i < area.label.length - 1 && <br />}
-                                </span>
-                            ))}
-                        </span>
+            {/* Labels overlay */}
+            <div
+                className={styles.labels}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={() => setMousePos({ x: 9999, y: 9999 })} // Reset effectively
+            >
+                {POLYGONS.map((polygon) => {
+                    const isHovered = scaleId === polygon.id;
+                    const isAnyHovered = scaleId !== null;
+                    const isOtherHovered = isAnyHovered && !isHovered;
 
-                        {area.keywords && (
+                    return (
+                        <div
+                            key={polygon.id}
+                            className={`${styles.areaLabelContainer} ${isHovered ? styles.active : ""
+                                } ${isOtherHovered ? styles.inactive : ""}`}
+                            style={
+                                {
+                                    "--cx": `${polygon.cx}px`,
+                                    "--cy": `${polygon.cy}px`,
+                                } as React.CSSProperties
+                            }
+                            onMouseEnter={() => handleMouseEnter(polygon.id)}
+                            onMouseLeave={handleMouseLeave}
+                        >
+                            <span className={`${styles.areaLabel} ${polygon.labelClass}`}>
+                                {polygon.label}
+                            </span>
+
+                            {/* Keywords List - Only visible when hovered */}
                             <div className={styles.keywords}>
-                                {area.keywords.map((kw, i) => {
-                                    // Distribute keywords in a spiral or random scatter
-                                    // Using deterministic pseudo-random based on index + string length
-                                    const angle = (i * (360 / area.keywords.length) + i * 20) % 360;
-                                    const dist = 140 + (i % 3) * 40; // Vary distance from center (140-220px)
-                                    const x = Math.cos((angle * Math.PI) / 180) * dist;
-                                    const y = Math.sin((angle * Math.PI) / 180) * dist;
+                                {polygon.keywords.map((keyword, i) => {
+                                    const total = polygon.keywords.length;
+                                    // Ellipse parameters corresponding to 600x350 container (approx) or adjusted visual fit
+                                    const rx = 240; // Horizontal radius
+                                    const ry = 200; // Vertical radius
+
+                                    // Distribute starting from -PI/2 (top)
+                                    // angle = -PI/2 + (2 * PI * i) / total
+                                    const angle = -Math.PI / 2 + (2 * Math.PI * i) / total;
+
+                                    const kx = Math.cos(angle) * rx;
+                                    const ky = Math.sin(angle) * ry;
+
+                                    // Calculate distance from mouse to this keyword center
+                                    const dist = Math.sqrt(Math.pow(mousePos.x - kx, 2) + Math.pow(mousePos.y - ky, 2));
+
+                                    // Magnification logic
+                                    const MAX_DIST = 150;
+                                    const MAX_SCALE = 1.6;
+                                    const MIN_SCALE = 1;
+
+                                    let scale = MIN_SCALE;
+                                    if (dist < MAX_DIST) {
+                                        scale =
+                                            MIN_SCALE +
+                                            (MAX_SCALE - MIN_SCALE) *
+                                            (1 - dist / MAX_DIST);
+                                    }
 
                                     return (
                                         <span
                                             key={i}
                                             className={styles.keyword}
                                             style={{
-                                                transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
+                                                transform: `translate(calc(-50% + ${kx}px), calc(-50% + ${ky}px)) scale(${scale})`,
+                                                zIndex: scale > 1.1 ? 10 : 1, // Bring magnified items to front
                                             }}
                                         >
-                                            {kw}
+                                            {keyword}
                                         </span>
                                     );
                                 })}
                             </div>
-                        )}
-                    </div>
-                ))}
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );

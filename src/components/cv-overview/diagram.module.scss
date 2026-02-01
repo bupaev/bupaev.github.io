@@ -149,17 +149,9 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
+    // We can't use overflow hidden here because keywords might extend?
+    // But diagram has max-width/aspect-ratio, so maybe OK.
     overflow: visible;
-}
-
-// Top level state classes to ensure they are exported by CSS Modules
-.active {
-    z-index: 10;
-}
-
-.inactive {
-    opacity: 0;
-    pointer-events: none;
 }
 
 // Container for each label + keywords
@@ -185,14 +177,13 @@
         // Move to absolute center of 800x500 diagram
         // 400px x 250px
         transform: translate(400px, 250px) !important;
+        z-index: 10;
         transition-delay: 50ms; // Small delay to sync with blob
+    }
 
-        // Reveal keywords when parent container is active
-        .keywords {
-            opacity: 1;
-            transition-delay: 150ms;
-            pointer-events: auto; // Allow mouse interaction for magnification
-        }
+    &.inactive {
+        opacity: 0;
+        pointer-events: none;
     }
 }
 
@@ -228,6 +219,19 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 200ms ease;
+
+    // Use absolute positioning for children instead of flex
+    // display: flex;
+    // flex-wrap: wrap;
+    // align-items: center;
+    // justify-content: center;
+    // gap: 16px;
+
+    .active & {
+        opacity: 1;
+        transition-delay: 150ms;
+        pointer-events: auto; // Allow mouse interaction for magnification
+    }
 }
 
 .keyword {
@@ -246,6 +250,7 @@
 }
 
 // Specific label animations for entrance (scroll-driven)
+// We still want them to slide in initially
 .labelTopLeft {
     animation: label-slide-from-top-left 1ms ease-out both;
     animation-timeline: --diagram-timeline;
@@ -271,6 +276,7 @@
 }
 
 // Label animations - matching polygon slide animations
+// Note: We use -50%, -50% as base because of the internal transform
 @keyframes label-slide-from-top-left {
     from {
         transform: translate(calc(-50% - 150px), calc(-50% - 150px));
