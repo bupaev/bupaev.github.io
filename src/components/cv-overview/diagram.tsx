@@ -1,11 +1,21 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./diagram.module.scss";
 
 /** Blur animation range matching CSS animation-range: cover 10% cover 60% */
-const ANIMATION_START = 0.1; // 10% of view progress
-const ANIMATION_END = 0.6; // 60% of view progress
-const STD_DEV_START = 10;
-const STD_DEV_END = 100;
+
+const ANIMATION_END = 0.5; // Trigger early (vs CSS 60%) to overlap with ease-out tail
+const STD_DEV_LOW = 20;
+const STD_DEV_HIGH = 100;
+
+/** Polygon data for the four skill areas */
+const POLYGONS = [
+    { id: "topLeft", className: styles.areaTopLeft, points: "80,0 535,0 463,288 8,288", scaleX: 1.52, scaleY: 1.74, cx: 271, cy: 144 },
+    { id: "topRight", className: styles.areaTopRight, points: "526,35 800,35 737,288 464,288", scaleX: 2.38, scaleY: 1.98, cx: 632, cy: 162 },
+    { id: "bottomLeft", className: styles.areaBottomLeft, points: "52,288 463,288 411,500 0,500", scaleX: 1.73, scaleY: 2.36, cx: 232, cy: 394 },
+    { id: "bottomRight", className: styles.areaBottomRight, points: "459,288 709,288 660,481 411,481", scaleX: 2.68, scaleY: 2.59, cx: 560, cy: 385 },
+] as const;
+
+type PolygonId = (typeof POLYGONS)[number]["id"] | null;
 
 /**
  * Diagram component displaying four overlapping skill areas
@@ -17,13 +27,79 @@ const STD_DEV_END = 100;
 export function Diagram() {
     const containerRef = useRef<HTMLDivElement>(null);
     const blurRef = useRef<SVGFEGaussianBlurElement>(null);
+    const [sortId, setSortId] = useState<PolygonId>(null);
+    const [scaleId, setScaleId] = useState<PolygonId>(null);
+    const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    const handleMouseEnter = (id: PolygonId) => {
+        // Clear any pending leave actions
+        if (hoverTimeoutRef.current) {
+            clearTimeout(hoverTimeoutRef.current);
+            hoverTimeoutRef.current = null;
+        }
+
+        // Sequence: 1. Move to top (Z-index), 2. Scale up
+        setSortId(id);
+
+        // Small delay to ensure DOM reorder happens before scale transition starts
+        // This prevents the "jump" effect
+        requestAnimationFrame(() => {
+            startBlurTransition(); // Ensure blur is robustly triggered
+            setScaleId(id);
+        });
+    };
+
+    const handleMouseLeave = () => {
+        // Sequence: 1. Scale down, 2. Restore Z-index
+        setScaleId(null);
+
+        hoverTimeoutRef.current = setTimeout(() => {
+            setSortId(null);
+        }, 200); // Wait for transition duration (200ms)
+    };
+
+    // Track blur values to avoid unnecessary DOM updates and manage transitions
+    const currentBlurRef = useRef(STD_DEV_LOW);
+    const targetBlurRef = useRef(STD_DEV_LOW);
+    const rafRef = useRef<number | null>(null);
+
+    const startBlurTransition = () => {
+        if (rafRef.current !== null) return; // Animation already running
+
+        let startTime: number | null = null;
+        const startVal = currentBlurRef.current;
+        const endVal = targetBlurRef.current;
+        const duration = 1000; // transition time in ms
+        const blur = blurRef.current;
+
+        const animate = (timestamp: number) => {
+            if (!startTime) startTime = timestamp;
+            const elapsed = timestamp - startTime;
+            const t = Math.min(1, elapsed / duration);
+
+            // Ease-out cubic
+            const easeT = 1 - Math.pow(1 - t, 3);
+
+            const currentVal = startVal + (endVal - startVal) * easeT;
+            currentBlurRef.current = currentVal;
+            if (blur) {
+                blur.setAttribute("stdDeviation", String(currentVal));
+            }
+
+            if (t < 1) {
+                rafRef.current = requestAnimationFrame(animate);
+            } else {
+                rafRef.current = null;
+            }
+        };
+
+        rafRef.current = requestAnimationFrame(animate);
+    };
 
     useEffect(() => {
         const container = containerRef.current;
-        const blur = blurRef.current;
-        if (!container || !blur) return;
+        if (!container) return;
 
-        let rafId: number | null = null;
         let isVisible = false;
 
         /**
@@ -41,23 +117,22 @@ export function Diagram() {
             const distanceTraveled = viewportHeight - rect.top;
             const progress = Math.max(0, Math.min(1, distanceTraveled / totalDistance));
 
-            // Map progress from [ANIMATION_START, ANIMATION_END] to [0, 1]
-            const animationProgress = Math.max(
-                0,
-                Math.min(1, (progress - ANIMATION_START) / (ANIMATION_END - ANIMATION_START))
-            );
+            // Determine target blur based on animation phase
+            const desiredBlur = progress >= ANIMATION_END ? STD_DEV_HIGH : STD_DEV_LOW;
 
-            // Interpolate stdDeviation from 100 to 10
-            const stdDev = STD_DEV_START - animationProgress * (STD_DEV_START - STD_DEV_END);
-            blur.setAttribute("stdDeviation", String(stdDev));
+            // If target changes, cancel any running animation and start a new one
+            if (targetBlurRef.current !== desiredBlur) {
+                targetBlurRef.current = desiredBlur;
+                if (rafRef.current !== null) {
+                    cancelAnimationFrame(rafRef.current);
+                    rafRef.current = null;
+                }
+                startBlurTransition();
+            }
         };
 
         const handleScroll = () => {
-            if (rafId !== null) return; // Throttle with rAF
-            rafId = requestAnimationFrame(() => {
-                updateBlur();
-                rafId = null;
-            });
+            updateBlur();
         };
 
         // Only attach scroll listener when element is visible (performance optimization)
@@ -79,9 +154,28 @@ export function Diagram() {
         return () => {
             observer.disconnect();
             window.removeEventListener("scroll", handleScroll);
-            if (rafId !== null) cancelAnimationFrame(rafId);
+            if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
         };
     }, []);
+
+    // Sort polygons so the hovered one is rendered last (on top)
+    const sortedPolygons = [...POLYGONS].sort((a, b) => {
+        if (a.id === sortId) return 1;
+        if (b.id === sortId) return -1;
+        return 0; // Maintain order for non-hovered items
+    });
+
+    const getTransform = (id: string, cx: number, cy: number, scaleX: number, scaleY: number) => {
+        // We calculate transform based on the id's own properties
+        // But we only applying scale if it matches the current scaleId
+        if (id === scaleId) {
+            // Translate center of polygon to center of SVG (400, 250)
+            const tx = 400 - cx;
+            const ty = 250 - cy;
+            return `translate(${tx}px, ${ty}px) scale(${scaleX}, ${scaleY})`;
+        }
+        return "translate(0px, 0px) scale(1, 1)";
+    };
 
     return (
         <div ref={containerRef} className={styles.diagram}>
@@ -97,7 +191,7 @@ export function Diagram() {
                         <feGaussianBlur
                             ref={blurRef}
                             in="SourceGraphic"
-                            stdDeviation="100"
+                            stdDeviation="20"
                             result="blur"
                         />
                         <feColorMatrix
@@ -108,39 +202,35 @@ export function Diagram() {
                     </filter>
                 </defs>
 
-                {/* Apply filter to group via attribute - works in Safari with animations */}
-                {/* <g filter="url(#goo)"></g> */}
+                {/* MERGED LAYER: Visuals + Interaction */}
                 <g filter="url(#goo)">
-                    {/* Front-end engineering - top-left parallelogram */}
-                    <polygon
-                        className={styles.areaTopLeft}
-                        points="80,0 535,0 463,288 8,288"
-                    />
-                    {/* Leadership - top-right parallelogram */}
-                    <polygon
-                        className={styles.areaTopRight}
-                        points="526,35 800,35 737,288 464,288"
-                    />
-                    {/* UI/UX Design - bottom-left parallelogram */}
-                    <polygon
-                        className={styles.areaBottomLeft}
-                        points="52,288 463,288 411,500 0,500"
-                    />
-                    {/* AI expertize - bottom-right parallelogram */}
-                    <polygon
-                        className={styles.areaBottomRight}
-                        points="459,288 709,288 660,481 411,481"
-                    />
+                    {sortedPolygons.map((polygon) => (
+                        <g
+                            key={polygon.id}
+                            style={{
+                                transformBox: "view-box",
+                                transformOrigin: `${polygon.cx}px ${polygon.cy}px`,
+                                transform: getTransform(
+                                    polygon.id,
+                                    polygon.cx,
+                                    polygon.cy,
+                                    polygon.scaleX,
+                                    polygon.scaleY
+                                ),
+                                transition: "transform 200ms ease",
+                            }}
+                        >
+                            <polygon
+                                className={polygon.className}
+                                points={polygon.points}
+                                style={{ cursor: "pointer" }}
+                                onMouseEnter={() => handleMouseEnter(polygon.id)}
+                                onMouseLeave={handleMouseLeave}
+                            />
+                        </g>
+                    ))}
                 </g>
             </svg>
-
-
-            {/* Center icon */}
-            <img
-                src="/icons/vertical-menu/head-with-glasses.svg"
-                alt=""
-                className={styles.centerIcon}
-            />
 
             {/* Labels positioned outside SVG for sharp text */}
             <div className={styles.labels}>
