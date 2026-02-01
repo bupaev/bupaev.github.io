@@ -1,7 +1,4 @@
-"use client";
-
 import { useState, useEffect, useCallback } from "react";
-
 import styles from "./dark-mode-toggle.module.scss";
 
 function getCookie(name: string): string | undefined {
@@ -23,7 +20,6 @@ export function DarkModeToggle() {
     setIsDark(dark);
     const theme = dark ? "dark" : "light";
     document.documentElement.setAttribute("data-color-scheme", theme);
-    // remember user's choice for next six hours
     document.cookie = `color-scheme=${theme}; max-age=21600`;
   }, []);
 
@@ -35,7 +31,6 @@ export function DarkModeToggle() {
     setMounted(true);
 
     const savedSchemeValue = getCookie("color-scheme");
-
     if (savedSchemeValue === undefined) {
       setDarkMode(
         window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -46,9 +41,7 @@ export function DarkModeToggle() {
 
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const handleMediaChange = (e: MediaQueryListEvent) => {
-      if (getCookie("color-scheme")) {
-        return;
-      }
+      if (getCookie("color-scheme")) return;
       setDarkMode(e.matches);
     };
 
@@ -62,10 +55,6 @@ export function DarkModeToggle() {
     };
   }, [setDarkMode, setCompactState]);
 
-  if (!mounted) {
-    return null;
-  }
-
   const toggleClasses = [
     styles.darkModeToggle,
     "max-lg:hidden",
@@ -75,26 +64,18 @@ export function DarkModeToggle() {
     .filter(Boolean)
     .join(" ");
 
+  if (!mounted) {
+    return <div className={styles.darkModeToggle} style={{ visibility: "hidden" }}></div>;
+  }
+
   return (
     <div>
       <div className={toggleClasses} onClick={() => setDarkMode(!isDark)}>
         <div className={styles.slider}>
           <span className={styles.labelDark}>Dark</span>
           <div className={styles.handler}>
-            <img
-              className={styles.iconLight}
-              src="/icons/dark-mode/sun.svg"
-              alt="Light mode"
-              width={30}
-              height={30}
-            />
-            <img
-              className={styles.iconDark}
-              src="/icons/dark-mode/moon.svg"
-              alt="Dark mode"
-              width={30}
-              height={30}
-            />
+            <img className={styles.iconLight} src="/icons/dark-mode/sun.svg" alt="Light mode" width={30} height={30} />
+            <img className={styles.iconDark} src="/icons/dark-mode/moon.svg" alt="Dark mode" width={30} height={30} />
           </div>
           <span className={styles.labelLight}>Light</span>
         </div>
