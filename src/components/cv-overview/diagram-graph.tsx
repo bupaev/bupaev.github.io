@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import styles from "./diagram.module.scss";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import styles from "./diagram-graph.module.scss";
 
 /** Blur animation range matching CSS animation-range: cover 10% cover 60% */
 
@@ -9,10 +9,93 @@ const STD_DEV_HIGH = 100;
 
 /** Polygon data for the four skill areas */
 const POLYGONS = [
-    { id: "topLeft", className: styles.areaTopLeft, points: "80,0 535,0 463,288 8,288", scaleX: 1.52, scaleY: 1.74, cx: 271, cy: 144 },
-    { id: "topRight", className: styles.areaTopRight, points: "526,35 800,35 737,288 464,288", scaleX: 2.38, scaleY: 1.98, cx: 632, cy: 162 },
-    { id: "bottomLeft", className: styles.areaBottomLeft, points: "52,288 463,288 411,500 0,500", scaleX: 1.73, scaleY: 2.36, cx: 232, cy: 394 },
-    { id: "bottomRight", className: styles.areaBottomRight, points: "459,288 709,288 660,481 411,481", scaleX: 2.68, scaleY: 2.59, cx: 560, cy: 385 },
+    {
+        id: "topLeft",
+        className: styles.areaTopLeft,
+        points: "80,0 535,0 463,288 8,288",
+        scaleX: 1.52,
+        scaleY: 1.74,
+        cx: 271,
+        cy: 144,
+        label: ["Front-end", "engineering"],
+        keywords: [
+            "React",
+            "Vue",
+            "Angular",
+            "TypeScript",
+            "JavaScript",
+            "HTML5",
+            "CSS3",
+            "SCSS",
+            "Gatsby",
+            "Web Audio API",
+            "Responsive Design",
+        ],
+        labelClass: styles.labelTopLeft,
+    },
+    {
+        id: "topRight",
+        className: styles.areaTopRight,
+        points: "526,35 800,35 737,288 464,288",
+        scaleX: 2.38,
+        scaleY: 1.98,
+        cx: 632,
+        cy: 162,
+        label: ["Leadership"],
+        keywords: [
+            "Team Leading",
+            "Mentoring",
+            "Code Review",
+            "Architecture",
+            "Hiring",
+            "Agile",
+            "Scrum",
+            "Process Optimization",
+        ],
+        labelClass: styles.labelTopRight,
+    },
+    {
+        id: "bottomLeft",
+        className: styles.areaBottomLeft,
+        points: "52,288 463,288 411,500 0,500",
+        scaleX: 1.73,
+        scaleY: 2.36,
+        cx: 232,
+        cy: 394,
+        label: ["UI/UX Design"],
+        keywords: [
+            "Figma",
+            "User Research",
+            "Prototyping",
+            "Wireframing",
+            "Accessibility",
+            "Design Systems",
+            "Interaction Design",
+            "Visual Design",
+        ],
+        labelClass: styles.labelBottomLeft,
+    },
+    {
+        id: "bottomRight",
+        className: styles.areaBottomRight,
+        points: "459,288 709,288 660,481 411,481",
+        scaleX: 2.68,
+        scaleY: 2.59,
+        cx: 560,
+        cy: 385,
+        label: ["AI expertise"],
+        keywords: [
+            "AI Agents",
+            "LLMs",
+            "Prompt Engineering",
+            "Python",
+            "RAG",
+            "AI Systems",
+            "Control Theory",
+            "Automation",
+        ],
+        labelClass: styles.labelBottomRight,
+    },
 ] as const;
 
 type PolygonId = (typeof POLYGONS)[number]["id"] | null;
@@ -234,20 +317,53 @@ export function Diagram() {
 
             {/* Labels positioned outside SVG for sharp text */}
             <div className={styles.labels}>
-                <span className={`${styles.areaLabel} ${styles.labelTopLeft}`}>
-                    Front-end
-                    <br />
-                    engineering
-                </span>
-                <span className={`${styles.areaLabel} ${styles.labelTopRight}`}>
-                    Leadership
-                </span>
-                <span className={`${styles.areaLabel} ${styles.labelBottomLeft}`}>
-                    UI/UX Design
-                </span>
-                <span className={`${styles.areaLabel} ${styles.labelBottomRight}`}>
-                    AI expertize
-                </span>
+                {POLYGONS.map((area) => (
+                    <div
+                        key={area.id}
+                        className={`${styles.areaLabelContainer} ${sortId === area.id ? styles.active : sortId ? styles.inactive : ""
+                            }`}
+                        style={
+                            {
+                                "--cx": `${area.cx}px`,
+                                "--cy": `${area.cy}px`,
+                            } as CSSProperties
+                        }
+                    >
+                        <span className={`${styles.areaLabel} ${area.labelClass}`}>
+                            {area.label.map((line, i) => (
+                                <span key={i}>
+                                    {line}
+                                    {i < area.label.length - 1 && <br />}
+                                </span>
+                            ))}
+                        </span>
+
+                        {area.keywords && (
+                            <div className={styles.keywords}>
+                                {area.keywords.map((kw, i) => {
+                                    // Distribute keywords in a spiral or random scatter
+                                    // Using deterministic pseudo-random based on index + string length
+                                    const angle = (i * (360 / area.keywords.length) + i * 20) % 360;
+                                    const dist = 140 + (i % 3) * 40; // Vary distance from center (140-220px)
+                                    const x = Math.cos((angle * Math.PI) / 180) * dist;
+                                    const y = Math.sin((angle * Math.PI) / 180) * dist;
+
+                                    return (
+                                        <span
+                                            key={i}
+                                            className={styles.keyword}
+                                            style={{
+                                                transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
+                                            }}
+                                        >
+                                            {kw}
+                                        </span>
+                                    );
+                                })}
+                            </div>
+                        )}
+                    </div>
+                ))}
             </div>
         </div>
     );

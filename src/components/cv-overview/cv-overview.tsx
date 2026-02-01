@@ -1,7 +1,7 @@
 "use client";
 
 import { VennDiagramProfessions } from "./venn-diagram-professions";
-import { Diagram } from "./diagram";
+import { Diagram } from "./index";
 import styles from "./cv-overview.module.scss";
 
 export function CvOverview() {
