@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { POLYGONS } from "./diagram/data";
 import { useHoverState } from "./diagram/hooks/use-hover-state";
 import { useBlurAnimation } from "./diagram/hooks/use-blur-animation";
@@ -16,9 +16,35 @@ import styles from "./diagram.module.scss";
 export function Diagram() {
     const containerRef = useRef<HTMLDivElement>(null);
     const blurRef = useRef<SVGFEGaussianBlurElement>(null);
+    const isAnimationCompleteRef = useRef(false);
 
     const { sortId, scaleId, handleMouseEnter, handleMouseLeave } = useHoverState();
-    const { triggerBlur } = useBlurAnimation(containerRef, blurRef);
+    const { triggerBlur, isAnimationComplete } = useBlurAnimation(containerRef, blurRef);
+
+    // Keep ref in sync with state to avoid stale closures
+    useEffect(() => {
+        isAnimationCompleteRef.current = isAnimationComplete;
+    }, [isAnimationComplete]);
+
+    // Helper to check if animation is complete based on current scroll position
+    // This avoids race conditions with async state updates
+    const checkAnimationComplete = (): boolean => {
+        // First check the ref for the React state
+        if (isAnimationCompleteRef.current) return true;
+
+        // If state says not complete, double-check with DOM measurement
+        // This handles cases where scroll happened but React hasn't re-rendered yet
+        const container = containerRef.current;
+        if (!container) return false;
+
+        const rect = container.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const totalDistance = viewportHeight + rect.height;
+        const distanceTraveled = viewportHeight - rect.top;
+        const progress = Math.max(0, Math.min(1, distanceTraveled / totalDistance));
+
+        return progress >= 0.6; // 60% threshold matching use-blur-animation
+    };
 
     // Sort polygons so the hovered one is rendered last (on top)
     const sortedPolygons = [...POLYGONS].sort((a, b) => {
@@ -28,7 +54,8 @@ export function Diagram() {
     });
 
     const onPolygonEnter = (id: typeof sortId) => {
-        if (id) handleMouseEnter(id, triggerBlur);
+        const isComplete = checkAnimationComplete();
+        if (id && isComplete) handleMouseEnter(id, triggerBlur);
     };
 
     return (
@@ -44,7 +71,7 @@ export function Diagram() {
                 polygons={POLYGONS}
                 scaleId={scaleId}
                 containerRef={containerRef}
-                onMouseEnter={(id) => handleMouseEnter(id, triggerBlur)}
+                onMouseEnter={(id) => checkAnimationComplete() && handleMouseEnter(id, triggerBlur)}
                 onMouseLeave={handleMouseLeave}
             />
         </div>

@@ -28,13 +28,56 @@ describe('Diagram', () => {
             rafCallbacks.push(cb);
             return ++rafIdCounter;
         });
-        vi.spyOn(window, 'cancelAnimationFrame').mockImplementation(() => {});
+        vi.spyOn(window, 'cancelAnimationFrame').mockImplementation(() => { });
+
+        // Default mock for getBoundingClientRect to simulate "in view" but not necessarily "completed animation"
+        // Individual tests can override this.
+        // By default, we place it well below viewport (top large positive) to simulate initial state
+        vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
+            bottom: 2000,
+            height: 500,
+            left: 0,
+            right: 800,
+            top: 1500,
+            width: 800,
+            x: 0,
+            y: 0,
+            toJSON: () => { },
+        });
     });
 
     const flushRaf = () => {
         // Execute one batch of queued rAF callbacks
         const batch = rafCallbacks.splice(0, rafCallbacks.length);
         batch.forEach((cb) => cb(performance.now()));
+    };
+
+    const simulateAnimationComplete = () => {
+        // Mock client rect to be fully in view (top = 0)
+        vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
+            bottom: 500,
+            height: 500,
+            left: 0,
+            right: 800,
+            top: 0,
+            width: 800,
+            x: 0,
+            y: 0,
+            toJSON: () => { },
+        });
+
+        // Trigger intersection to start observing scroll
+        act(() => {
+            if (mockIntersectionCallback) {
+                mockIntersectionCallback(
+                    [{ isIntersecting: true } as IntersectionObserverEntry],
+                    {} as IntersectionObserver,
+                );
+            }
+        });
+
+        // Trigger scroll event to update state
+        fireEvent.scroll(window);
     };
 
     afterEach(() => {
@@ -71,6 +114,8 @@ describe('Diagram', () => {
         const { container } = render(<Diagram />);
         const polygons = container.querySelectorAll('polygon');
 
+        simulateAnimationComplete();
+
         await act(async () => {
             fireEvent.mouseEnter(polygons[0]);
         });
@@ -85,6 +130,8 @@ describe('Diagram', () => {
     it('hides keywords on mouse leave', async () => {
         const { container } = render(<Diagram />);
         const polygons = container.querySelectorAll('polygon');
+
+        simulateAnimationComplete();
 
         await act(async () => {
             fireEvent.mouseEnter(polygons[0]);
@@ -159,6 +206,8 @@ describe('Diagram', () => {
         const { container } = render(<Diagram />);
         const polygons = container.querySelectorAll('polygon');
 
+        simulateAnimationComplete();
+
         await act(async () => {
             fireEvent.mouseEnter(polygons[0]);
         });
@@ -176,6 +225,8 @@ describe('Diagram', () => {
     it('marks other labels as inactive when one is hovered', async () => {
         const { container } = render(<Diagram />);
         const polygons = container.querySelectorAll('polygon');
+
+        simulateAnimationComplete();
 
         await act(async () => {
             fireEvent.mouseEnter(polygons[0]);

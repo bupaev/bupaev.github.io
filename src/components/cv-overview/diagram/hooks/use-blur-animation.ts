@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const ANIMATION_END = 0.5;
 const STD_DEV_LOW = 20;
@@ -47,6 +47,8 @@ export function useBlurAnimation(
         rafRef.current = requestAnimationFrame(animate);
     };
 
+    const [isAnimationComplete, setIsAnimationComplete] = useState(false);
+
     /** Trigger blur transition manually (e.g. on hover) */
     const triggerBlur = () => {
         startTransition();
@@ -66,6 +68,15 @@ export function useBlurAnimation(
             const totalDistance = viewportHeight + rect.height;
             const distanceTraveled = viewportHeight - rect.top;
             const progress = Math.max(0, Math.min(1, distanceTraveled / totalDistance));
+
+            // Animation finishes at 60% of timeline (matching CSS animation-range: cover 60%)
+            const ANIMATION_COMPLETE_THRESHOLD = 0.6;
+
+            // Use functional state updates to avoid stale closure issues
+            setIsAnimationComplete((prev) => {
+                const shouldBeComplete = progress >= ANIMATION_COMPLETE_THRESHOLD;
+                return shouldBeComplete !== prev ? shouldBeComplete : prev;
+            });
 
             const desiredBlur = progress >= ANIMATION_END ? STD_DEV_HIGH : STD_DEV_LOW;
 
@@ -103,7 +114,7 @@ export function useBlurAnimation(
             window.removeEventListener("scroll", handleScroll);
             if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
         };
-    }, []);
+    }, [containerRef, blurRef]);
 
-    return { triggerBlur };
+    return { triggerBlur, isAnimationComplete };
 }
