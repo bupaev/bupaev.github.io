@@ -1,8 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 
-const ANIMATION_END = 0.5;
+// Threshold (0-1) where the scroll-driven animation is considered complete.
+// At this point:
+// 1. The CSS animation finishes (matches `animation-range: cover 50%`)
+// 2. The blur filter transitions to a stronger value for the full "gooey" effect (static state)
+// 3. User interactions (hover effects) are enabled
+export const ANIMATION_COMPLETE_THRESHOLD = 0.5;
+
+// Low blur stdDeviation used during animation.
+// A smaller radius reduces the rendering cost of the filter, ensuring smooth 60fps scrolling.
 const STD_DEV_LOW = 20;
+
+// High blur stdDeviation used when static.
+// A larger radius creates a smoother, more liquid-like merger between shapes (maximal "gooey" effect),
+// but is too computationally expensive to render during animation.
 const STD_DEV_HIGH = 100;
+
+// Duration (ms) for the smooth transition between blur levels.
 const TRANSITION_DURATION = 1000;
 
 /**
@@ -69,16 +83,13 @@ export function useBlurAnimation(
             const distanceTraveled = viewportHeight - rect.top;
             const progress = Math.max(0, Math.min(1, distanceTraveled / totalDistance));
 
-            // Animation finishes at 60% of timeline (matching CSS animation-range: cover 60%)
-            const ANIMATION_COMPLETE_THRESHOLD = 0.6;
-
             // Use functional state updates to avoid stale closure issues
             setIsAnimationComplete((prev) => {
                 const shouldBeComplete = progress >= ANIMATION_COMPLETE_THRESHOLD;
                 return shouldBeComplete !== prev ? shouldBeComplete : prev;
             });
 
-            const desiredBlur = progress >= ANIMATION_END ? STD_DEV_HIGH : STD_DEV_LOW;
+            const desiredBlur = progress >= ANIMATION_COMPLETE_THRESHOLD ? STD_DEV_HIGH : STD_DEV_LOW;
 
             if (targetBlurRef.current !== desiredBlur) {
                 targetBlurRef.current = desiredBlur;

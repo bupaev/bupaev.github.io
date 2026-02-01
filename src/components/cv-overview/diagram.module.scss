@@ -11,7 +11,7 @@
 
     // Scroll-driven opacity animation for the whole diagram
     // (applied here because SVG filter interferes with area-level opacity)
-    animation: diagram-fade-in 1ms ease both;
+    animation: diagram-fade-in 1ms ease-in both;
     animation-timeline: view();
     animation-range: cover 0% cover 50%;
 }
@@ -23,31 +23,5 @@
 
     to {
         opacity: 1;
-    }
-}
-
-// Center icon - inverted to white with scroll-driven blur animation
-.centerIcon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    pointer-events: none;
-    opacity: 0.1;
-    animation: center-icon-blur 1ms ease-in both;
-    animation-timeline: --diagram-timeline;
-    animation-range: cover 10% cover 50%;
-}
-
-@keyframes center-icon-blur {
-    from {
-        filter: invert(1) blur(50px);
-        transform: translate(-50%, -50%) scale(0.1);
-    }
-
-    to {
-        filter: invert(1) blur(0);
-        transform: translate(-50%, -50%) scale(1);
     }
 }

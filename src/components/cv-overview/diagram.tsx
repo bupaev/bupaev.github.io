@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { POLYGONS } from "./diagram/data";
 import { useHoverState } from "./diagram/hooks/use-hover-state";
-import { useBlurAnimation } from "./diagram/hooks/use-blur-animation";
+import { useBlurAnimation, ANIMATION_COMPLETE_THRESHOLD } from "./diagram/hooks/use-blur-animation";
 import { PolygonsLayer } from "./diagram/components/polygons-layer";
 import { LabelsLayer } from "./diagram/components/labels-layer";
 import styles from "./diagram.module.scss";
@@ -43,7 +43,7 @@ export function Diagram() {
         const distanceTraveled = viewportHeight - rect.top;
         const progress = Math.max(0, Math.min(1, distanceTraveled / totalDistance));
 
-        return progress >= 0.6; // 60% threshold matching use-blur-animation
+        return progress >= ANIMATION_COMPLETE_THRESHOLD;
     };
 
     // Sort polygons so the hovered one is rendered last (on top)
