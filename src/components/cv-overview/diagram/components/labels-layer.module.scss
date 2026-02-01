@@ -1,0 +1,131 @@
+@use "@/styles/mixins";
+
+.labels {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.areaLabelContainer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    transform: translate(var(--cx), var(--cy));
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 300ms ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+
+    &.active {
+        transform: translate(400px, 250px) !important;
+        z-index: 10;
+        transition-delay: 50ms;
+    }
+
+    &.inactive {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+.areaLabel {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color, #1a1a1a);
+    text-align: center;
+    line-height: 1.2;
+    white-space: nowrap;
+    transform: translate(-50%, -50%);
+    transition: transform 300ms ease;
+
+    @include mixins.small-mobile {
+        font-size: 1rem;
+    }
+
+    @include mixins.desktop-only {
+        font-size: 1.75rem;
+    }
+}
+
+.keywords {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 350px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease;
+
+    .active & {
+        opacity: 1;
+        transition-delay: 150ms;
+        pointer-events: auto;
+    }
+}
+
+.keyword {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    font-size: 1.2rem;
+    max-width: 10rem;
+    text-align: center;
+    color: rgb(0 0 0 / 70%);
+
+    @include mixins.small-mobile {
+        font-size: 0.8rem;
+    }
+}
+
+// Label entrance animations (scroll-driven)
+.labelTopLeft {
+    animation: label-slide-from-top-left 1ms ease-out both;
+    animation-timeline: --diagram-timeline;
+    animation-range: cover 10% cover 60%;
+}
+
+.labelTopRight {
+    animation: label-slide-from-top-right 1ms ease-out both;
+    animation-timeline: --diagram-timeline;
+    animation-range: cover 10% cover 60%;
+}
+
+.labelBottomLeft {
+    animation: label-slide-from-bottom-left 1ms ease-out both;
+    animation-timeline: --diagram-timeline;
+    animation-range: cover 10% cover 60%;
+}
+
+.labelBottomRight {
+    animation: label-slide-from-bottom-right 1ms ease-out both;
+    animation-timeline: --diagram-timeline;
+    animation-range: cover 10% cover 60%;
+}
+
+@keyframes label-slide-from-top-left {
+    from { transform: translate(calc(-50% - 150px), calc(-50% - 150px)); }
+    to { transform: translate(-50%, -50%); }
+}
+
+@keyframes label-slide-from-top-right {
+    from { transform: translate(calc(-50% + 150px), calc(-50% - 150px)); }
+    to { transform: translate(-50%, -50%); }
+}
+
+@keyframes label-slide-from-bottom-left {
+    from { opacity: 0; transform: translate(calc(-50% - 150px), calc(-50% + 150px)); }
+    to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+@keyframes label-slide-from-bottom-right {
+    from { transform: translate(calc(-50% + 150px), calc(-50% + 150px)); }
+    to { transform: translate(-50%, -50%); }
+}

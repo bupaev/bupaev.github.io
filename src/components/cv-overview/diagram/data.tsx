@@ -1,7 +1,9 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
-export interface PolygonData {
-    id: "topLeft" | "topRight" | "bottomLeft" | "bottomRight";
+export type PolygonId = "topLeft" | "topRight" | "bottomLeft" | "bottomRight";
+
+export type PolygonData = {
+    id: PolygonId;
     points: string;
     scaleX: number;
     scaleY: number;
@@ -9,7 +11,7 @@ export interface PolygonData {
     cy: number;
     label: ReactNode;
     keywords: string[];
-}
+};
 
 /** Polygon data for the four skill areas */
 export const POLYGONS: PolygonData[] = [
@@ -22,8 +24,8 @@ export const POLYGONS: PolygonData[] = [
         cy: 144,
         label: (
             <>
-                Front - end
-                < br />
+                Front-end
+                <br />
                 engineering
             </>
         ),
@@ -43,7 +45,7 @@ export const POLYGONS: PolygonData[] = [
         scaleY: 1.98,
         cx: 632,
         cy: 162,
-        label: <>Leadership </>,
+        label: <>Leadership</>,
         keywords: [
             "Technical Orchestrator",
             "Engineering Culture Architect",
@@ -59,7 +61,7 @@ export const POLYGONS: PolygonData[] = [
         scaleY: 2.36,
         cx: 232,
         cy: 394,
-        label: <>UI / UX Design</>,
+        label: <>UI/UX Design</>,
         keywords: [
             "UX/Engineering Bridge",
             "Reasonable Perfectionist",
@@ -75,7 +77,7 @@ export const POLYGONS: PolygonData[] = [
         scaleY: 2.59,
         cx: 560,
         cy: 385,
-        label: <>AI expertize </>,
+        label: <>AI expertize</>,
         keywords: [
             "High-Leverage Engineer",
             "Critical Systems Thinker",
@@ -84,5 +86,3 @@ export const POLYGONS: PolygonData[] = [
         ],
     },
 ];
-
-export type PolygonId = (typeof POLYGONS)[number]["id"] | null;
