@@ -46,7 +46,7 @@ export function Diagram() {
         return progress >= ANIMATION_COMPLETE_THRESHOLD;
     };
 
-    // Sort polygons so the hovered one is rendered last (on top)
+    // Sort polygons so the hovered one is rendered last (on top in SVG)
     const sortedPolygons = [...POLYGONS].sort((a, b) => {
         if (a.id === sortId) return 1;
         if (b.id === sortId) return -1;

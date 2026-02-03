@@ -2,42 +2,48 @@ import { useRef, useState } from "react";
 import type { PolygonId } from "../data";
 
 /**
- * Manages hover state for diagram polygons with coordinated
- * z-index reordering (sortId) and scale animation (scaleId).
+ * Manages hover state for diagram polygons.
+ * 
+ * Uses two separate IDs to prevent animation jank:
+ * - sortId: Controls DOM order (z-index in SVG) - changes immediately
+ * - scaleId: Controls scale animation - changes after DOM reordering completes
+ * 
+ * SVG doesn't support CSS z-index, so we must reorder DOM elements.
+ * The double RAF ensures DOM reordering completes before animation starts.
  */
 export function useHoverState() {
     const [sortId, setSortId] = useState<PolygonId | null>(null);
     const [scaleId, setScaleId] = useState<PolygonId | null>(null);
-    const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const leaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     const handleMouseEnter = (id: PolygonId, onEnter?: () => void) => {
-        if (hoverTimeoutRef.current) {
-            clearTimeout(hoverTimeoutRef.current);
-            hoverTimeoutRef.current = null;
-        }
         if (leaveTimeoutRef.current) {
             clearTimeout(leaveTimeoutRef.current);
             leaveTimeoutRef.current = null;
         }
 
-        // Sequence: 1. Move to top (Z-index), 2. Scale up
+        // Step 1: Reorder DOM (bring hovered polygon to top)
         setSortId(id);
 
+        // Step 2: Wait for DOM reordering to complete, then trigger animation
+        // Double RAF ensures: 1st RAF = after React commit, 2nd RAF = after browser paint
         requestAnimationFrame(() => {
-            onEnter?.();
-            setScaleId(id);
+            requestAnimationFrame(() => {
+                onEnter?.();
+                setScaleId(id);
+            });
         });
     };
 
     const handleMouseLeave = () => {
         leaveTimeoutRef.current = setTimeout(() => {
+            // Step 1: Animate scale down
             setScaleId(null);
 
-            // Sequence: 1. Scale down, 2. Restore Z-index
-            hoverTimeoutRef.current = setTimeout(() => {
+            // Step 2: After animation completes (500ms), restore DOM order
+            setTimeout(() => {
                 setSortId(null);
-            }, 200);
+            }, 500);
         }, 100);
     };
 

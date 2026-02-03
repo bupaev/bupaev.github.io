@@ -119,7 +119,9 @@ describe('Diagram', () => {
         await act(async () => {
             fireEvent.mouseEnter(polygons[0]);
         });
+        // Double RAF for the double requestAnimationFrame in useHoverState
         await act(async () => {
+            flushRaf();
             flushRaf();
         });
 
@@ -136,13 +138,15 @@ describe('Diagram', () => {
         await act(async () => {
             fireEvent.mouseEnter(polygons[0]);
         });
+        // Double RAF for the double requestAnimationFrame in useHoverState
         await act(async () => {
+            flushRaf();
             flushRaf();
         });
 
         await act(async () => {
             fireEvent.mouseLeave(polygons[0]);
-            vi.advanceTimersByTime(400);
+            vi.advanceTimersByTime(700); // 100ms delay + 500ms animation + margin
         });
 
         const activeContainer = container.querySelector('[class*="active"]');
@@ -211,7 +215,9 @@ describe('Diagram', () => {
         await act(async () => {
             fireEvent.mouseEnter(polygons[0]);
         });
+        // Double RAF for the double requestAnimationFrame in useHoverState
         await act(async () => {
+            flushRaf();
             flushRaf();
         });
 
@@ -231,7 +237,9 @@ describe('Diagram', () => {
         await act(async () => {
             fireEvent.mouseEnter(polygons[0]);
         });
+        // Double RAF for the double requestAnimationFrame in useHoverState
         await act(async () => {
+            flushRaf();
             flushRaf();
         });
 

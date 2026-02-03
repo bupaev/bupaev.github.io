@@ -59,7 +59,7 @@ export function PolygonsLayer({ polygons, scaleId, blurRef, onMouseEnter, onMous
                             transformBox: "view-box",
                             transformOrigin: `${polygon.cx}px ${polygon.cy}px`,
                             transform: getTransform(polygon.id, polygon.cx, polygon.cy, polygon.scaleX, polygon.scaleY, scaleId),
-                            transition: "transform 200ms ease",
+                            transition: "transform 500ms ease",
                         }}
                     >
                         <polygon
