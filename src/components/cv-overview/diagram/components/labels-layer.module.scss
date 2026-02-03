@@ -87,6 +87,15 @@
     max-width: 10rem;
     text-align: center;
     color: rgb(0 0 0 / 70%);
+    background: transparent;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    transition: color 150ms ease;
+
+    &:hover {
+        color: rgb(0 0 0 / 90%);
+    }
 
     @include mixins.small-mobile {
         font-size: 0.8rem;

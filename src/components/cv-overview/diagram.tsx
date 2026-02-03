@@ -1,10 +1,17 @@
-import { useRef, useEffect } from "react";
-import { POLYGONS } from "./diagram/data";
+import { useRef, useEffect, useState } from "react";
+import { POLYGONS, type PolygonId, type KeywordInfo } from "./diagram/data";
 import { useHoverState } from "./diagram/hooks/use-hover-state";
 import { useBlurAnimation, ANIMATION_COMPLETE_THRESHOLD } from "./diagram/hooks/use-blur-animation";
 import { PolygonsLayer } from "./diagram/components/polygons-layer";
 import { LabelsLayer } from "./diagram/components/labels-layer";
+import { KeywordPopup } from "./diagram/components/keyword-popup";
 import styles from "./diagram.module.scss";
+
+type ActiveKeywordState = {
+    polygonId: PolygonId;
+    info: KeywordInfo;
+    position: { x: number; y: number };
+} | null;
 
 /**
  * Diagram component displaying four overlapping skill areas
@@ -17,6 +24,7 @@ export function Diagram() {
     const containerRef = useRef<HTMLDivElement>(null);
     const blurRef = useRef<SVGFEGaussianBlurElement>(null);
     const isAnimationCompleteRef = useRef(false);
+    const [activeKeyword, setActiveKeyword] = useState<ActiveKeywordState>(null);
 
     const { sortId, scaleId, handleMouseEnter, handleMouseLeave } = useHoverState();
     const { triggerBlur, isAnimationComplete } = useBlurAnimation(containerRef, blurRef);
@@ -58,22 +66,43 @@ export function Diagram() {
         if (id && isComplete) handleMouseEnter(id, triggerBlur);
     };
 
+    const handleKeywordClick = (polygonId: PolygonId, keyword: KeywordInfo, position: { x: number; y: number }) => {
+        setActiveKeyword({ polygonId, info: keyword, position });
+    };
+
+    const handleClosePopup = () => {
+        setActiveKeyword(null);
+    };
+
+    // Use activeKeyword's polygon to keep it scaled when popup is open
+    const effectiveScaleId = activeKeyword ? activeKeyword.polygonId : scaleId;
+
     return (
         <div ref={containerRef} className={styles.diagram}>
             <PolygonsLayer
                 polygons={sortedPolygons}
-                scaleId={scaleId}
+                scaleId={effectiveScaleId}
                 blurRef={blurRef}
                 onMouseEnter={onPolygonEnter}
                 onMouseLeave={handleMouseLeave}
             />
             <LabelsLayer
                 polygons={POLYGONS}
-                scaleId={scaleId}
+                scaleId={effectiveScaleId}
+                activePolygonId={activeKeyword?.polygonId ?? null}
                 containerRef={containerRef}
-                onMouseEnter={(id) => checkAnimationComplete() && handleMouseEnter(id, triggerBlur)}
+                onMouseEnter={(id: PolygonId) => checkAnimationComplete() && handleMouseEnter(id, triggerBlur)}
                 onMouseLeave={handleMouseLeave}
+                onKeywordClick={handleKeywordClick}
             />
+
+            {activeKeyword && (
+                <KeywordPopup
+                    keyword={activeKeyword.info}
+                    position={activeKeyword.position}
+                    onClose={handleClosePopup}
+                />
+            )}
         </div>
     );
 }
