@@ -8,7 +8,7 @@ const CONTAINER_HEIGHT = 500;
 
 // Center coordinates derived from container dimensions
 const CONTAINER_CENTER_X = CONTAINER_WIDTH / 2;
-const CONTAINER_CENTER_Y = CONTAINER_HEIGHT / 2;
+const CONTAINER_CENTER_Y = CONTAINER_HEIGHT / 2 - CONTAINER_HEIGHT / 20;
 
 // Coordinate used to move the mouse position effectively "off-screen" when the mouse leaves the container
 const MOUSE_OFF_SCREEN_COORD = Math.max(CONTAINER_WIDTH, CONTAINER_HEIGHT) * 20;
@@ -17,13 +17,13 @@ const MOUSE_OFF_SCREEN_COORD = Math.max(CONTAINER_WIDTH, CONTAINER_HEIGHT) * 20;
 const KEYWORD_DISTRIBUTION_RADIUS_X = CONTAINER_WIDTH * 0.3;
 
 // Vertical radius for the elliptical distribution of keywords (40% of container height)
-const KEYWORD_DISTRIBUTION_RADIUS_Y = CONTAINER_HEIGHT * 0.4;
+const KEYWORD_DISTRIBUTION_RADIUS_Y = CONTAINER_HEIGHT * 0.3;
 
 // Maximum distance from cursor for magnification effect (30% of container height)
 const MOUSE_PROXIMITY_THRESHOLD = CONTAINER_HEIGHT * 0.3;
 
 // Maximum scale factor applied to a keyword when the mouse is directly over it
-const KEYWORD_MAX_SCALE = 1.4;
+const KEYWORD_MAX_SCALE = 1.2;
 
 // Base scale factor for keywords when getting far from the mouse
 const KEYWORD_MIN_SCALE = 1;
@@ -69,6 +69,12 @@ export function LabelsLayer({ polygons, scaleId, containerRef, onMouseEnter, onM
             className={styles.labels}
             onMouseMove={handleMouseMove}
             onMouseLeave={() => setMousePos({ x: MOUSE_OFF_SCREEN_COORD, y: MOUSE_OFF_SCREEN_COORD })}
+            style={
+                {
+                    "--center-x": `${CONTAINER_CENTER_X}px`,
+                    "--center-y": `${CONTAINER_CENTER_Y}px`,
+                } as React.CSSProperties
+            }
         >
             {polygons.map((polygon) => {
                 const isHovered = scaleId === polygon.id;

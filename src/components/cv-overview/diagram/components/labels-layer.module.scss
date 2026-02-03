@@ -23,7 +23,7 @@
     opacity: 1;
 
     &.active {
-        transform: translate(400px, 250px) !important;
+        transform: translate(var(--center-x), var(--center-y)) !important;
         z-index: 10;
         transition-delay: 50ms;
     }
