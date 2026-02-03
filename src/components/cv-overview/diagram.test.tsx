@@ -223,7 +223,7 @@ describe('Diagram', () => {
 
         const groups = container.querySelectorAll('g[style]');
         const scaledGroup = Array.from(groups).find((g) =>
-            (g as HTMLElement).style.transform.includes('scale(1.52'),
+            (g as HTMLElement).style.transform.includes('scale(1.4'),
         );
         expect(scaledGroup).toBeTruthy();
     });

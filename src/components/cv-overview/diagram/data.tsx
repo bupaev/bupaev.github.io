@@ -18,10 +18,10 @@ export const POLYGONS: PolygonData[] = [
     {
         id: "topLeft",
         points: "80,0 535,0 463,288 8,288",
-        scaleX: 1.52,
-        scaleY: 1.74,
-        cx: 271,
-        cy: 144,
+        scaleX: 1.4,
+        scaleY: 1.5,
+        cx: 310,
+        cy: 170,
         label: (
             <>
                 Front-end
@@ -41,10 +41,10 @@ export const POLYGONS: PolygonData[] = [
     {
         id: "topRight",
         points: "526,35 800,35 737,288 464,288",
-        scaleX: 2.38,
-        scaleY: 1.98,
-        cx: 632,
-        cy: 162,
+        scaleX: 2.2,
+        scaleY: 1.6,
+        cx: 610,
+        cy: 170,
         label: <>Leadership</>,
         keywords: [
             "Technical Orchestrator",
@@ -57,10 +57,10 @@ export const POLYGONS: PolygonData[] = [
     {
         id: "bottomLeft",
         points: "52,288 463,288 411,500 0,500",
-        scaleX: 1.73,
-        scaleY: 2.36,
-        cx: 232,
-        cy: 394,
+        scaleX: 1.3,
+        scaleY: 1.9,
+        cx: 290,
+        cy: 370,
         label: <>UI/UX Design</>,
         keywords: [
             "UX/Engineering Bridge",
@@ -72,11 +72,11 @@ export const POLYGONS: PolygonData[] = [
     },
     {
         id: "bottomRight",
-        points: "459,288 709,288 660,481 411,481",
-        scaleX: 2.68,
-        scaleY: 2.59,
-        cx: 560,
-        cy: 385,
+        points: "459,288 725,288 676,481 411,481",
+        scaleX: 2.4,
+        scaleY: 2.1,
+        cx: 565,
+        cy: 365,
         label: <>AI expertize</>,
         keywords: [
             "High-Leverage Engineer",

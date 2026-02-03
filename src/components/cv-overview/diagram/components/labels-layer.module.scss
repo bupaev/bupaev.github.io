@@ -35,6 +35,9 @@
 }
 
 .areaLabel {
+    position: absolute;
+    left: 50%;
+    top: 50%;
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--text-color, #1a1a1a);
@@ -42,7 +45,7 @@
     line-height: 1.2;
     white-space: nowrap;
     transform: translate(-50%, -50%);
-    transition: transform 300ms ease;
+    transition: all 300ms ease;
 
     @include mixins.small-mobile {
         font-size: 1rem;
@@ -50,6 +53,11 @@
 
     @include mixins.desktop-only {
         font-size: 1.75rem;
+    }
+
+    .active & {
+        font-size: 2.5em;
+        opacity: 0.5 !important;
     }
 }
 
@@ -111,21 +119,43 @@
 }
 
 @keyframes label-slide-from-top-left {
-    from { transform: translate(calc(-50% - 150px), calc(-50% - 150px)); }
-    to { transform: translate(-50%, -50%); }
+    from {
+        transform: translate(calc(-50% - 150px), calc(-50% - 150px));
+    }
+
+    to {
+        transform: translate(-50%, -50%);
+    }
 }
 
 @keyframes label-slide-from-top-right {
-    from { transform: translate(calc(-50% + 150px), calc(-50% - 150px)); }
-    to { transform: translate(-50%, -50%); }
+    from {
+        transform: translate(calc(-50% + 150px), calc(-50% - 150px));
+    }
+
+    to {
+        transform: translate(-50%, -50%);
+    }
 }
 
 @keyframes label-slide-from-bottom-left {
-    from { opacity: 0; transform: translate(calc(-50% - 150px), calc(-50% + 150px)); }
-    to { opacity: 1; transform: translate(-50%, -50%); }
+    from {
+        opacity: 0;
+        transform: translate(calc(-50% - 150px), calc(-50% + 150px));
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
 }
 
 @keyframes label-slide-from-bottom-right {
-    from { transform: translate(calc(-50% + 150px), calc(-50% + 150px)); }
-    to { transform: translate(-50%, -50%); }
+    from {
+        transform: translate(calc(-50% + 150px), calc(-50% + 150px));
+    }
+
+    to {
+        transform: translate(-50%, -50%);
+    }
 }
