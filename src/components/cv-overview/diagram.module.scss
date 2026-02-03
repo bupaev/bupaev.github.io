@@ -14,6 +14,18 @@
     animation: diagram-fade-in 1ms ease-in both;
     animation-timeline: view();
     animation-range: cover 0% cover 50%;
+
+    // Mask the diagram to the brain shape
+    /* stylelint-disable property-no-vendor-prefix */
+    -webkit-mask-image: url("/black-brain-mask.png");
+    mask-image: url("/black-brain-mask.png");
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    /* stylelint-enable property-no-vendor-prefix */
 }
 
 @keyframes diagram-fade-in {
