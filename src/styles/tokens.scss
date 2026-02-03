@@ -1,0 +1,37 @@
+// ============================================
+// CSS Custom Properties (Design Tokens)
+// Values match tailwind.css @theme for consistency
+// ============================================
+:root {
+    // Base tokens (source values)
+    --color-accent: #ffd700;
+    --color-secondary: #193b5e;
+    --color-secondary-light: #3e8bbf;
+    --color-text-dark: hsl(0deg 0% 14%);
+    --font-accent: "Dosis", "Lucida Console", sans-serif;
+    --font-main: "Nunito", "Trebuchet MS", sans-serif;
+    --size-4: 1.5rem;
+
+    // Semantic tokens (used throughout the app)
+    --text-color: var(--color-text-dark);
+    --accent-color: var(--color-accent);
+    --secondary-color: var(--color-secondary);
+    --secondary-light-color: var(--color-secondary-light);
+    --background-color: #fff;
+    --contrasty-color: #000;
+    --contrasty-transparent-color: rgb(0 0 0 / 3%);
+    --wave-gradient: linear-gradient(90deg, rgb(0 91 188 / 10%) 0%, rgb(255 214 3 / 5%) 40%, rgb(0 91 188 / 10%) 100%);
+    --dark-light-transition: 500ms;
+}
+
+[data-color-scheme="dark"] {
+    --text-color: #fafafa;
+    --background-color: #121e2b;
+    --contrasty-color: #fff;
+    --contrasty-transparent-color: rgb(255 255 255 / 3%);
+    --wave-gradient: linear-gradient(90deg, rgb(0 91 188 / 30%) 0%, rgb(255 214 3 / 20%) 40%, rgb(0 91 188 / 30%) 100%);
+
+    img[src$=".svg"] {
+        filter: invert(1);
+    }
+}

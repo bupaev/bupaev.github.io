@@ -1,5 +1,5 @@
 ---
-import "../styles/global.scss";
+import "../styles/main.scss";
 import "../styles/tailwind.css";
 
 interface Props {
@@ -47,7 +47,9 @@ const {
   // Restore theme from cookie to prevent flashing
   const getCookie = (name: string) => {
     const matches = document.cookie.match(
-      new RegExp("(?:^|; )" + name.replace(/([.$?*|{}()[\]\\/+^])/g, "\\$1") + "=([^;]*)"),
+      new RegExp(
+        "(?:^|; )" + name.replace(/([.$?*|{}()[\]\\/+^])/g, "\\$1") + "=([^;]*)",
+      ),
     );
     return matches ? matches[1] : undefined;
   };

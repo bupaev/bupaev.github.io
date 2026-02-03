@@ -7,7 +7,7 @@
  * If you update breakpoints, update both files!
  * See: styles/variables.scss for the SCSS source of truth.
  *
- * Colors, fonts, and sizes are defined in global.scss :root
+ * Colors, fonts, and sizes are defined in tokens.scss :root
  * for proper CSS var access in SCSS modules.
  */
 

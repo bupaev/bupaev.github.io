@@ -1,0 +1,145 @@
+@use "variables";
+@use "mixins";
+
+// ============================================
+// Semantic Layout Classes
+// Wrapped in @layer base so Tailwind utilities can override
+// ============================================
+@layer base {
+    .hero {
+        position: relative;
+    }
+
+    .hero-body {
+        position: relative;
+        z-index: 1;
+        padding: 3rem 1.5rem;
+    }
+
+    .columns {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -0.75rem;
+        margin-right: -0.75rem;
+    }
+
+    .column {
+        display: block;
+        flex: 1 1 0;
+        padding: 0.75rem;
+    }
+
+    .section {
+        position: relative;
+        padding: 3rem 3rem 3rem 5rem;
+        font-size: 1.1em;
+
+        @include mixins.touch {
+            padding: 3rem 1.5rem;
+        }
+    }
+
+    #education {
+        padding-bottom: 100px;
+    }
+
+    .with-background {
+        position: relative;
+
+        &>.container {
+            z-index: 1;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            display: block;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: calc(100% - 15px);
+            max-height: 100%;
+            background-size: 50%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: 95% 90%;
+            opacity: 0.04;
+            filter: invert(15%) sepia(32%) saturate(10000%) hue-rotate(185deg) brightness(96%) contrast(86%);
+            pointer-events: none;
+
+            [data-color-scheme="dark"] & {
+                opacity: 0.05;
+                filter: invert(48%) sepia(51%) saturate(585%) hue-rotate(161deg) brightness(92%) contrast(86%);
+            }
+
+            @include mixins.fullhd {
+                background-size: 750px;
+            }
+
+            @include mixins.tablet-only {
+                background-size: 65%;
+            }
+
+            @include mixins.mobile {
+                background-size: 500px;
+                background-position: right -150px bottom 15%;
+            }
+
+            @include mixins.small-mobile {
+                background-position: right -230px bottom 15%;
+            }
+        }
+
+        &#skills::after {
+            background-image: url("/icons/pen-and-wrench-detailed.svg");
+        }
+
+        &#experience::after {
+            background-image: url("/icons/mountain-with-flag-detailed.svg");
+        }
+
+        &#education::after {
+            background-image: url("/icons/academic-cap-detailed.svg");
+            height: 100%;
+
+            @include mixins.fullhd {
+                background-size: 720px;
+                background-position-x: 92%;
+            }
+        }
+    }
+
+    .footer {
+        padding: 3rem 1.5rem;
+    }
+}
+
+/*
+  * Custom container implementation
+  * Defined as a standard class (unlayered) to override Tailwind's
+  * default container utility (which is in @layer utilities).
+  * Unlayered styles always defeat layered styles in CSS Cascade Layers.
+  */
+.container {
+    width: 100%;
+    max-width: unset;
+    padding-inline: 0;
+    margin-inline: auto;
+    z-index: 1;
+
+    @media (min-width: #{variables.$breakpoint-2xl}) {
+        max-width: 1344px;
+    }
+
+    @media (max-width: #{variables.$breakpoint-2xl - 1}) {
+        max-width: 1152px;
+    }
+
+    @media (max-width: #{variables.$breakpoint-xl - 1}) {
+        max-width: 960px;
+    }
+
+    @media (max-width: #{variables.$breakpoint-lg}) {
+        max-width: 896px;
+    }
+}

@@ -1,1 +1,20 @@
-@use "global";
+// ============================================
+// Main Styles - Orchestrator
+// ============================================
+// This file imports all SCSS modules in the correct order.
+// Each module has a single, focused responsibility.
+
+// 1. Design Tokens (CSS Custom Properties)
+@use "tokens";
+
+// 2. Base Element Styles
+@use "base";
+
+// 3. Layout Components
+@use "layout";
+
+// 4. Typography & Content Styles
+@use "typography";
+
+// 5. Icon & Utility Classes
+@use "utilities";

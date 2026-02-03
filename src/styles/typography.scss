@@ -1,0 +1,113 @@
+@use "mixins";
+
+// ============================================
+// Typography & Content Styles
+// Wrapped in @layer base so Tailwind utilities can override
+// ============================================
+@layer base {
+    .title {
+        font-family: var(--font-accent);
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    // Prose styling for rich text content
+    .content {
+        line-height: 1.6;
+
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 600;
+            line-height: 1.125;
+            color: var(--text-color);
+        }
+
+        h3 {
+            font-family: var(--font-accent);
+            font-size: 1.5em;
+            margin-bottom: 0.6666em;
+        }
+
+        h4 {
+            font-size: 1.25em;
+            margin-bottom: 0.8em;
+        }
+
+        h5 {
+            font-size: 1.125em;
+            margin-bottom: 0.8888em;
+        }
+
+        h6 {
+            font-size: 1em;
+            margin-bottom: 1em;
+        }
+
+        p,
+        ol,
+        ul,
+        blockquote,
+        table,
+        pre {
+            &:not(:last-child) {
+                margin-bottom: 1em;
+            }
+        }
+
+        ol,
+        ul {
+            margin-top: 1em;
+        }
+
+        ol {
+            margin-left: 2em;
+            list-style: decimal outside;
+        }
+
+        ul {
+            margin-left: 0;
+
+            >li {
+                position: relative;
+                list-style: none;
+                padding-left: 1em;
+
+                &::after {
+                    font-size: 0.8em;
+
+                    @include mixins.rhombus(var(--text-color));
+
+                    content: "";
+                    left: 0.15em;
+                    top: 0.7em;
+                }
+            }
+        }
+
+        li+li {
+            margin-top: 0.25em;
+        }
+
+        a {
+            @include mixins.multiline-text-hover-effect;
+        }
+
+        strong {
+            font-weight: 700;
+        }
+
+        em {
+            font-style: italic;
+        }
+    }
+
+    // Legacy bulma-style vertical spacing for block-level components
+    .content,
+    .title {
+        &:not(:last-child) {
+            margin-bottom: 1.5rem;
+        }
+    }
+}
