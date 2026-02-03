@@ -98,7 +98,69 @@ strong {
   }
 
   .with-background {
-    background-color: var(--section-bg-color);
+    position: relative;
+
+    &>.container {
+      z-index: 1;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      display: block;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: calc(100% - 15px);
+      max-height: 100%;
+      background-size: 50%;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: 95% 90%;
+      opacity: 0.04;
+      filter: invert(15%) sepia(32%) saturate(10000%) hue-rotate(185deg) brightness(96%) contrast(86%);
+      pointer-events: none;
+
+      [data-color-scheme="dark"] & {
+        opacity: 0.05;
+        filter: invert(48%) sepia(51%) saturate(585%) hue-rotate(161deg) brightness(92%) contrast(86%);
+      }
+
+      @include mixins.fullhd {
+        background-size: 750px;
+      }
+
+      @include mixins.tablet-only {
+        background-size: 65%;
+      }
+
+      @include mixins.mobile {
+        background-size: 500px;
+        background-position: right -150px bottom 15%;
+      }
+
+      @include mixins.small-mobile {
+        background-position: right -230px bottom 15%;
+      }
+    }
+
+    &#skills::after {
+      background-image: url("/icons/pen-and-wrench-detailed.svg");
+    }
+
+    &#experience::after {
+      background-image: url("/icons/mountain-with-flag-detailed.svg");
+    }
+
+    &#education::after {
+      background-image: url("/icons/academic-cap-detailed.svg");
+      height: 100%;
+
+      @include mixins.fullhd {
+        background-size: 720px;
+        background-position-x: 92%;
+      }
+    }
   }
 
   .footer {
