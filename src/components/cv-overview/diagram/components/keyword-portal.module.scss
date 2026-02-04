@@ -43,16 +43,19 @@
 
     transform: translate(-50%, -50%) scale(0.6);
     opacity: 0;
+    filter: blur(20px);
     z-index: 999;
     pointer-events: none;
     transition:
-        transform 400ms ease,
-        opacity 350ms ease;
-    will-change: transform, opacity;
+        transform 300ms ease-out,
+        opacity 300ms ease-out,
+        filter 300ms ease-out;
+    will-change: transform, opacity, filter;
 
     &.popupVisible {
         transform: translate(-50%, -50%) scale(1);
         opacity: 1;
+        filter: blur(0);
         pointer-events: auto;
     }
 }

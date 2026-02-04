@@ -90,7 +90,7 @@ export function LabelsLayer({ polygons, scaleId, expandedKeyword, containerRef, 
     }, [handleKeyDown]);
 
     // Find the expanded keyword data and position for portal
-    const expandedKeywordData = useMemo(() => {
+    const currentKeywordData = useMemo(() => {
         if (!expandedKeyword) return null;
 
         const polygon = polygons.find((p) => p.id === expandedKeyword.polygonId);
@@ -106,6 +106,21 @@ export function LabelsLayer({ polygons, scaleId, expandedKeyword, containerRef, 
 
         return { keyword, position: { x: kx, y: ky }, polygonId: expandedKeyword.polygonId };
     }, [expandedKeyword, polygons]);
+
+    // Keep data persistent for exit animation
+    const [persistentKeywordData, setPersistentKeywordData] = useState<typeof currentKeywordData>(null);
+
+    useEffect(() => {
+        if (currentKeywordData) {
+            setPersistentKeywordData(currentKeywordData);
+        } else {
+            // Buffer time to allow exit animation to complete (400ms in CSS + small margin)
+            const timer = setTimeout(() => {
+                setPersistentKeywordData(null);
+            }, 600);
+            return () => clearTimeout(timer);
+        }
+    }, [currentKeywordData]);
 
     const handleClosePortal = useCallback(() => {
         if (expandedKeyword) {
@@ -191,11 +206,11 @@ export function LabelsLayer({ polygons, scaleId, expandedKeyword, containerRef, 
             </div>
 
             {/* Portal-rendered expanded keyword popup */}
-            {expandedKeywordData && (
+            {persistentKeywordData && (
                 <KeywordPortal
-                    keyword={expandedKeywordData.keyword}
-                    keywordPosition={expandedKeywordData.position}
-                    polygonId={expandedKeywordData.polygonId}
+                    keyword={persistentKeywordData.keyword}
+                    keywordPosition={persistentKeywordData.position}
+                    polygonId={persistentKeywordData.polygonId}
                     diagramRef={diagramRef}
                     onClose={handleClosePortal}
                     isOpen={expandedKeyword !== null}
