@@ -98,27 +98,6 @@ export function KeywordPortal({
         };
     }, [shouldRender, updatePosition]);
 
-    // Close on click outside
-    useEffect(() => {
-        if (!isOpen) return;
-
-        const handleClickOutside = (e: MouseEvent) => {
-            if (portalRef.current && !portalRef.current.contains(e.target as Node)) {
-                onClose();
-            }
-        };
-
-        // Delay to prevent immediate close from the opening click
-        const timer = setTimeout(() => {
-            document.addEventListener("click", handleClickOutside);
-        }, 100);
-
-        return () => {
-            clearTimeout(timer);
-            document.removeEventListener("click", handleClickOutside);
-        };
-    }, [isOpen, onClose]);
-
     // Close on Escape
     useEffect(() => {
         if (!isOpen) return;
@@ -186,9 +165,6 @@ export function KeywordPortal({
                         {/* Composite to clip and finalize */}
                         <feComposite in="feathered" in2="gooey" operator="atop" />
                     </filter>
-
-
-
                 </defs>
             </svg>
 
@@ -204,6 +180,7 @@ export function KeywordPortal({
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="keyword-title"
+                onMouseLeave={onClose}
             >
                 <div className={styles.blobBackground} />
 
