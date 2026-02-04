@@ -187,17 +187,8 @@ export function KeywordPortal({
                         <feComposite in="feathered" in2="gooey" operator="atop" />
                     </filter>
 
-                    {/* Softer variant for the outer glow */}
-                    <filter id="organic-glow" x="-100%" y="-100%" width="300%" height="300%">
-                        <feGaussianBlur stdDeviation="15" result="blur" />
-                        <feColorMatrix
-                            type="matrix"
-                            values="1 0 0 0 0
-                                    0 1 0 0 0
-                                    0 0 1 0 0
-                                    0 0 0 0.3 0"
-                        />
-                    </filter>
+
+
                 </defs>
             </svg>
 
@@ -214,15 +205,7 @@ export function KeywordPortal({
                 aria-modal="true"
                 aria-labelledby="keyword-title"
             >
-                {/* Organic blob background layers */}
-                <div className={styles.blobContainer}>
-                    {/* Outer glow blob */}
-                    <div className={styles.blobGlow} />
-                    {/* Main organic blob shape */}
-                    <div className={styles.blobMain} />
-                    {/* Inner highlight blob */}
-                    <div className={styles.blobHighlight} />
-                </div>
+                <div className={styles.blobBackground} />
 
                 {/* Content wrapper */}
                 <div className={styles.content}>
