@@ -20,24 +20,12 @@ type KeywordPortalProps = {
     isOpen: boolean;
 };
 
-/** Maps polygon ID to a light background color (HSL) */
-const POLYGON_COLORS: Record<PolygonId, { bg: string; glow: string }> = {
-    topLeft: {
-        bg: "hsl(50deg 100% 92%)",
-        glow: "hsl(50deg 100% 80% / 40%)",
-    },
-    topRight: {
-        bg: "hsl(10deg 100% 94%)",
-        glow: "hsl(10deg 100% 85% / 40%)",
-    },
-    bottomLeft: {
-        bg: "hsl(140deg 70% 92%)",
-        glow: "hsl(140deg 70% 80% / 40%)",
-    },
-    bottomRight: {
-        bg: "hsl(225deg 70% 94%)",
-        glow: "hsl(225deg 70% 85% / 40%)",
-    },
+/** Maps polygon ID to its theme class */
+const THEME_CLASS_MAP: Record<PolygonId, string> = {
+    topLeft: styles.themeTopLeft,
+    topRight: styles.themeTopRight,
+    bottomLeft: styles.themeBottomLeft,
+    bottomRight: styles.themeBottomRight,
 };
 
 /**
@@ -52,7 +40,6 @@ export function KeywordPortal({
     onClose,
     isOpen,
 }: KeywordPortalProps) {
-    const colors = POLYGON_COLORS[polygonId];
     const portalRef = useRef<HTMLDivElement>(null);
     const [position, setPosition] = useState({ top: 0, left: 0 });
     const [isAnimating, setIsAnimating] = useState(false);
@@ -217,13 +204,11 @@ export function KeywordPortal({
             {/* Main popup with organic styling */}
             <div
                 ref={portalRef}
-                className={`${styles.popup} ${isAnimating ? styles.popupVisible : ""}`}
+                className={`${styles.popup} ${isAnimating ? styles.popupVisible : ""} ${THEME_CLASS_MAP[polygonId]}`}
                 style={{
                     position: "fixed",
                     top: position.top,
                     left: position.left,
-                    "--popup-bg": colors.bg,
-                    "--popup-glow": colors.glow,
                 } as React.CSSProperties}
                 role="dialog"
                 aria-modal="true"

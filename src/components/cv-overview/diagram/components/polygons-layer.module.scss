@@ -20,23 +20,24 @@
     cursor: pointer;
 }
 
+// Define colors using global HSL tokens
 .areaTopLeft {
-    fill: hsl(50deg 100% 80% / 90%);
+    fill: hsl(var(--diag-tl-h) var(--diag-tl-s) var(--diag-tl-l) / 95%);
     animation-name: slide-from-top-left;
 }
 
 .areaTopRight {
-    fill: hsl(10deg 100% 85% / 90%);
+    fill: hsl(var(--diag-tr-h) var(--diag-tr-s) var(--diag-tr-l) / 95%);
     animation-name: slide-from-top-right;
 }
 
 .areaBottomLeft {
-    fill: hsl(140deg 70% 80% / 90%);
+    fill: hsl(var(--diag-bl-h) var(--diag-bl-s) var(--diag-bl-l) / 95%);
     animation-name: slide-from-bottom-left;
 }
 
 .areaBottomRight {
-    fill: hsl(225deg 70% 85% / 90%);
+    fill: hsl(var(--diag-br-h) var(--diag-br-s) var(--diag-br-l) / 95%);
     animation-name: slide-from-bottom-right;
 }
 

@@ -87,7 +87,7 @@
     font-size: 1.2rem;
     max-width: 10rem;
     text-align: center;
-    color: rgb(0 0 0 / 70%);
+    color: color-mix(in srgb, var(--text-color, #1a1a1a), transparent 30%);
     background: transparent;
     border: none;
     padding: 0.25rem 0.5rem;
@@ -101,7 +101,7 @@
     transform-origin: center center;
 
     &:hover:not(.keywordExpanded) {
-        color: rgb(0 0 0 / 90%);
+        color: var(--text-color, #1a1a1a);
     }
 
     @include mixins.small-mobile {
@@ -117,7 +117,7 @@
 
 // Active state - keyword is selected/expanded (portal is open)
 .keywordActive {
-    color: rgb(0 0 0 / 100%);
+    color: var(--text-color, #1a1a1a);
     font-weight: 600;
 
     // Subtle pulsing to show it's the source of the portal
@@ -149,10 +149,6 @@
         color: var(--text-color, #1a1a1a);
     }
 }
-
-
-
-
 
 // Label entrance animations (scroll-driven)
 .labelTopLeft {

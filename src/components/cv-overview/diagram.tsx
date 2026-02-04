@@ -53,10 +53,12 @@ export function Diagram() {
         return progress >= ANIMATION_COMPLETE_THRESHOLD;
     };
 
-    // Sort polygons so the hovered one is rendered last (on top in SVG)
+    // Sort polygons so the hovered OR expanded one is rendered last (on top in SVG)
+    const activeId = expandedKeyword ? expandedKeyword.polygonId : sortId;
+
     const sortedPolygons = [...POLYGONS].sort((a, b) => {
-        if (a.id === sortId) return 1;
-        if (b.id === sortId) return -1;
+        if (a.id === activeId) return 1;
+        if (b.id === activeId) return -1;
         return 0;
     });
 

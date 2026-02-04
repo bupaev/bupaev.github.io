@@ -22,6 +22,33 @@
     --contrasty-transparent-color: rgb(0 0 0 / 3%);
     --wave-gradient: linear-gradient(90deg, rgb(0 91 188 / 10%) 0%, rgb(255 214 3 / 5%) 40%, rgb(0 91 188 / 10%) 100%);
     --dark-light-transition: 500ms;
+
+    // Diagram Colors (HSL Components)
+    // Top Left: Yellow (Front-end)
+    --diag-tl-h: 50deg;
+    --diag-tl-s: 100%;
+    --diag-tl-l: 80%;
+
+    // Top Right: Red/Orange (Leadership)
+    --diag-tr-h: 10deg;
+    --diag-tr-s: 100%;
+    --diag-tr-l: 85%;
+
+    // Bottom Left: Green (UI/UX)
+    --diag-bl-h: 140deg;
+    --diag-bl-s: 70%;
+    --diag-bl-l: 80%;
+
+    // Bottom Right: Blue (AI)
+    --diag-br-h: 225deg;
+    --diag-br-s: 70%;
+    --diag-br-l: 85%;
+
+    // Popup Calculation Modifiers (Light Mode)
+    --popup-l-delta: 8%; // Make popup lighter than polygon
+    --popup-s-scale: 1; // Keep saturation
+    --glow-l-delta: 0%; // Glow same lightness as polygon base
+    --glow-opacity: 0.4;
 }
 
 [data-color-scheme="dark"] {
@@ -30,6 +57,27 @@
     --contrasty-color: #fff;
     --contrasty-transparent-color: rgb(255 255 255 / 3%);
     --wave-gradient: linear-gradient(90deg, rgb(0 91 188 / 30%) 0%, rgb(255 214 3 / 20%) 40%, rgb(0 91 188 / 30%) 100%);
+
+    // Diagram Colors (Dark Mode Overrides)
+    // Darker base colors for polygons
+
+    // Top Left: Blue (Swapped from Bottom Right for Dark Mode)
+    // Blue provides great contrast for Front-end in dark mode
+    --diag-tl-h: 225deg;
+    --diag-tl-s: 70%;
+    --diag-tl-l: 40%; // Darker blue for background
+    --diag-tr-l: 40%;
+    --diag-bl-l: 35%;
+    // Bottom Right: Vibrant Purple (Swapped to replace Yellow in Dark Mode)
+    --diag-br-h: 280deg;
+    --diag-br-s: 80%;
+    --diag-br-l: 60%;
+
+    // Popup Calculation Modifiers (Dark Mode)
+    // Make popup slightly darker than polygon
+    --popup-l-delta: -8%;
+    --glow-l-delta: -200%;
+    --glow-opacity: 0.05;
 
     img[src$=".svg"] {
         filter: invert(1);

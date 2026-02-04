@@ -9,14 +9,47 @@
     pointer-events: none;
 }
 
-// Main popup container - positioned at keyword location
+// Theme classes for different polygon areas
+// Colors are dynamically calculated from the base polygon HSL values
+// and global modifiers defined in tokens.scss
+.themeTopLeft {
+    --h: var(--diag-tl-h);
+    --s: var(--diag-tl-s);
+    --l: var(--diag-tl-l);
+}
+
+.themeTopRight {
+    --h: var(--diag-tr-h);
+    --s: var(--diag-tr-s);
+    --l: var(--diag-tr-l);
+}
+
+.themeBottomLeft {
+    --h: var(--diag-bl-h);
+    --s: var(--diag-bl-s);
+    --l: var(--diag-bl-l);
+}
+
+.themeBottomRight {
+    --h: var(--diag-br-h);
+    --s: var(--diag-br-s);
+    --l: var(--diag-br-l);
+}
+
+// Calculate the final colors using the variables set above
 .popup {
+    // Popup background: Adjusted saturation and lightness based on mode
+    --popup-bg: hsl(var(--h) calc(var(--s) * var(--popup-s-scale)) calc(var(--l) + var(--popup-l-delta)) / 98%);
+
+    // Outer glow: Matches polygon color but with adjusted lightness
+    --popup-glow: hsl(var(--h) var(--s) calc(var(--l) + var(--glow-l-delta)) / var(--glow-opacity));
+
     transform: translate(-50%, -50%) scale(0.6);
     opacity: 0;
     z-index: 999;
     pointer-events: none;
     transition:
-        transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        transform 400ms ease,
         opacity 350ms ease;
     will-change: transform, opacity;
 
