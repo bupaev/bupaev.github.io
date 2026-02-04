@@ -15,7 +15,7 @@
     animation-timeline: view();
     animation-range: cover 0% cover 50%;
     // Mask the diagram to the brain shape
-    mask-image: url("/black-brain-mask.png");
+    mask-image: url("./diagram/black-brain-mask.svg");
     mask-size: contain;
     mask-repeat: no-repeat;
     mask-position: center;

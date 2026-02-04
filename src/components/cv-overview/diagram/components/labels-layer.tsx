@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import type { PolygonData, PolygonId, KeywordInfo } from "../data";
+import { KeywordPortal } from "./keyword-portal";
 import styles from "./labels-layer.module.scss";
 
 // Base dimensions of the diagram container (SVG viewport size)
@@ -37,6 +38,9 @@ const Z_INDEX_ACTIVE = 10;
 // Z-index for keywords in their normal state
 const Z_INDEX_NORMAL = 1;
 
+// Z-index for expanded keyword
+const Z_INDEX_EXPANDED = 100;
+
 /** Maps polygon id to its label entrance animation class */
 const LABEL_CLASS_MAP: Record<PolygonId, string> = {
     topLeft: styles.labelTopLeft,
@@ -45,17 +49,24 @@ const LABEL_CLASS_MAP: Record<PolygonId, string> = {
     bottomRight: styles.labelBottomRight,
 };
 
+type ExpandedKeyword = {
+    polygonId: PolygonId;
+    keywordIndex: number;
+} | null;
+
 type LabelsLayerProps = {
     polygons: PolygonData[];
     scaleId: PolygonId | null;
-    activePolygonId: PolygonId | null;
+    expandedKeyword: ExpandedKeyword;
     containerRef: React.RefObject<HTMLDivElement | null>;
+    /** Reference to the diagram container for portal positioning */
+    diagramRef: React.RefObject<HTMLDivElement | null>;
     onMouseEnter: (id: PolygonId) => void;
     onMouseLeave: () => void;
-    onKeywordClick: (polygonId: PolygonId, keyword: KeywordInfo, position: { x: number; y: number }) => void;
+    onKeywordToggle: (polygonId: PolygonId, keywordIndex: number) => void;
 };
 
-export function LabelsLayer({ polygons, scaleId, activePolygonId, containerRef, onMouseEnter, onMouseLeave, onKeywordClick }: LabelsLayerProps) {
+export function LabelsLayer({ polygons, scaleId, expandedKeyword, containerRef, diagramRef, onMouseEnter, onMouseLeave, onKeywordToggle }: LabelsLayerProps) {
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
     const handleMouseMove = (e: React.MouseEvent) => {
@@ -66,15 +77,41 @@ export function LabelsLayer({ polygons, scaleId, activePolygonId, containerRef, 
         setMousePos({ x, y });
     };
 
-    const handleKeywordClick = (polygonId: PolygonId, keyword: KeywordInfo, e: React.MouseEvent) => {
-        e.stopPropagation();
-        const buttonRect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-        // Use viewport coordinates for fixed positioning
-        onKeywordClick(polygonId, keyword, {
-            x: buttonRect.left + buttonRect.width / 2,
-            y: buttonRect.top,
-        });
-    };
+    // Close expanded keyword on Escape
+    const handleKeyDown = useCallback((e: KeyboardEvent) => {
+        if (e.key === "Escape" && expandedKeyword) {
+            onKeywordToggle(expandedKeyword.polygonId, expandedKeyword.keywordIndex);
+        }
+    }, [expandedKeyword, onKeywordToggle]);
+
+    useEffect(() => {
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    }, [handleKeyDown]);
+
+    // Find the expanded keyword data and position for portal
+    const expandedKeywordData = useMemo(() => {
+        if (!expandedKeyword) return null;
+
+        const polygon = polygons.find((p) => p.id === expandedKeyword.polygonId);
+        if (!polygon) return null;
+
+        const keyword = polygon.keywords[expandedKeyword.keywordIndex];
+        if (!keyword) return null;
+
+        const total = polygon.keywords.length;
+        const angle = -Math.PI / 2 + (2 * Math.PI * expandedKeyword.keywordIndex) / total;
+        const kx = Math.cos(angle) * KEYWORD_DISTRIBUTION_RADIUS_X;
+        const ky = Math.sin(angle) * KEYWORD_DISTRIBUTION_RADIUS_Y;
+
+        return { keyword, position: { x: kx, y: ky }, polygonId: expandedKeyword.polygonId };
+    }, [expandedKeyword, polygons]);
+
+    const handleClosePortal = useCallback(() => {
+        if (expandedKeyword) {
+            onKeywordToggle(expandedKeyword.polygonId, expandedKeyword.keywordIndex);
+        }
+    }, [expandedKeyword, onKeywordToggle]);
 
     return (
         <>
@@ -90,9 +127,9 @@ export function LabelsLayer({ polygons, scaleId, activePolygonId, containerRef, 
                 }
             >
                 {polygons.map((polygon) => {
-                    // Keep polygon expanded if popup is open for a keyword in this polygon
-                    const isPopupOpenForThis = activePolygonId === polygon.id;
-                    const effectiveScaleId = isPopupOpenForThis ? polygon.id : scaleId;
+                    // Keep polygon expanded if a keyword is expanded in this polygon
+                    const hasExpandedKeyword = expandedKeyword?.polygonId === polygon.id;
+                    const effectiveScaleId = hasExpandedKeyword ? polygon.id : scaleId;
                     const isHovered = effectiveScaleId === polygon.id;
                     const isAnyHovered = effectiveScaleId !== null;
                     const isOtherHovered = isAnyHovered && !isHovered;
@@ -129,19 +166,22 @@ export function LabelsLayer({ polygons, scaleId, activePolygonId, containerRef, 
                                         scale = KEYWORD_MIN_SCALE + (KEYWORD_MAX_SCALE - KEYWORD_MIN_SCALE) * (1 - dist / MOUSE_PROXIMITY_THRESHOLD);
                                     }
 
+                                    const isExpanded = expandedKeyword?.polygonId === polygon.id && expandedKeyword?.keywordIndex === i;
+                                    const hasAnyExpanded = expandedKeyword !== null;
+                                    const isDimmed = hasAnyExpanded && !isExpanded;
+
                                     return (
-                                        <button
-                                            type="button"
+                                        <KeywordButton
                                             key={i}
-                                            className={styles.keyword}
-                                            style={{
-                                                transform: `translate(calc(-50% + ${kx}px), calc(-50% + ${ky}px)) scale(${scale})`,
-                                                zIndex: scale > KEYWORD_Z_INDEX_THRESHOLD ? Z_INDEX_ACTIVE : Z_INDEX_NORMAL,
-                                            }}
-                                            onClick={(e) => handleKeywordClick(polygon.id, keyword, e)}
-                                        >
-                                            {keyword.name}
-                                        </button>
+                                            keyword={keyword}
+                                            kx={kx}
+                                            ky={ky}
+                                            scale={isExpanded ? 1 : scale}
+                                            isExpanded={isExpanded}
+                                            isDimmed={isDimmed}
+                                            zIndex={isExpanded ? Z_INDEX_EXPANDED : scale > KEYWORD_Z_INDEX_THRESHOLD ? Z_INDEX_ACTIVE : Z_INDEX_NORMAL}
+                                            onClick={() => onKeywordToggle(polygon.id, i)}
+                                        />
                                     );
                                 })}
                             </div>
@@ -149,6 +189,50 @@ export function LabelsLayer({ polygons, scaleId, activePolygonId, containerRef, 
                     );
                 })}
             </div>
+
+            {/* Portal-rendered expanded keyword popup */}
+            {expandedKeywordData && (
+                <KeywordPortal
+                    keyword={expandedKeywordData.keyword}
+                    keywordPosition={expandedKeywordData.position}
+                    polygonId={expandedKeywordData.polygonId}
+                    diagramRef={diagramRef}
+                    onClose={handleClosePortal}
+                    isOpen={expandedKeyword !== null}
+                />
+            )}
         </>
+    );
+}
+
+type KeywordButtonProps = {
+    keyword: KeywordInfo;
+    kx: number;
+    ky: number;
+    scale: number;
+    isExpanded: boolean;
+    isDimmed: boolean;
+    zIndex: number;
+    onClick: () => void;
+};
+
+/**
+ * Keyword button in the diagram - clicking opens the portal popup.
+ * When expanded, this button stays in place while the portal shows the details.
+ */
+function KeywordButton({ keyword, kx, ky, scale, isExpanded, isDimmed, zIndex, onClick }: KeywordButtonProps) {
+    return (
+        <button
+            type="button"
+            className={`${styles.keyword} ${isExpanded ? styles.keywordActive : ""} ${isDimmed ? styles.keywordDimmed : ""}`}
+            style={{
+                transform: `translate(calc(-50% + ${kx}px), calc(-50% + ${ky}px)) scale(${scale})`,
+                zIndex,
+            }}
+            onClick={onClick}
+            aria-expanded={isExpanded}
+        >
+            <span className={styles.keywordName}>{keyword.name}</span>
+        </button>
     );
 }

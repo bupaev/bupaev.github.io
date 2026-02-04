@@ -1,0 +1,224 @@
+@use "@/styles/mixins";
+
+// Hidden SVG for filter definitions (rendered but invisible)
+.filterSvg {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+// Main popup container - positioned at keyword location
+.popup {
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 0;
+    z-index: 999;
+    pointer-events: none;
+    transition:
+        transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 350ms ease;
+    will-change: transform, opacity;
+
+    &.popupVisible {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+// Container for the organic blob background layers
+.blobContainer {
+    position: absolute;
+    inset: -30px;
+    pointer-events: none;
+    filter: url("#organic-blob-filter");
+}
+
+// Outer glow blob - creates ambient brain-like aura
+.blobGlow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(ellipse 130% 150% at 30% 30%,
+            var(--popup-glow, rgb(255 200 150 / 40%)) 0%,
+            var(--popup-glow, rgb(255 180 130 / 25%)) 30%,
+            transparent 60%);
+    border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%;
+    filter: url("#organic-glow");
+    animation: blob-glow-morph 3s ease-in-out infinite;
+}
+
+// Main organic blob shape - core background
+.blobMain {
+    position: absolute;
+    inset: 0;
+    background: var(--popup-bg, rgb(255 250 248 / 98%));
+    box-shadow:
+        0 4px 20px var(--popup-glow, rgb(255 180 130 / 20%)),
+        0 8px 40px var(--popup-glow, rgb(255 150 100 / 15%)),
+        inset 0 2px 10px rgb(255 255 255 / 50%);
+    animation: blob-main-morph 4s linear infinite alternate;
+}
+
+// Inner highlight blob - adds depth and dimension
+.blobHighlight {
+    position: absolute;
+    inset: 5% 40% 60% 10%;
+    background: radial-gradient(ellipse at 30% 30%,
+            rgb(255 255 255 / 60%) 0%,
+            rgb(255 255 255 / 20%) 50%,
+            transparent 100%);
+    border-radius: 50% 60% 40% 50% / 60% 40%;
+    animation: blob-highlight-morph 2s ease-in-out infinite alternate-reverse;
+}
+
+// Content wrapper inside the blob
+.content {
+    position: relative;
+    max-width: 20rem;
+    padding: 0.25rem 0.5rem 0.25rem 1rem;
+    z-index: 1;
+
+    @include mixins.small-mobile {
+        max-width: 16rem;
+        padding: 1rem 1.25rem;
+    }
+}
+
+// Keyword title
+.title {
+    margin: 0 0 0.625rem;
+    font-family: var(--font-accent, "Dosis", sans-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-color, #1a1a1a);
+    line-height: 1.3;
+
+    @include mixins.small-mobile {
+        font-size: 1rem;
+    }
+}
+
+// Description text
+.description {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-color, #333);
+    line-height: 1.55;
+    opacity: 0.88;
+    animation: description-fade-in 400ms ease 100ms backwards;
+
+    @include mixins.small-mobile {
+        font-size: 0.85rem;
+    }
+}
+
+// ===== ANIMATIONS =====
+
+// Organic morphing for outer glow
+@keyframes blob-glow-morph {
+    0% {
+        border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%;
+        transform: rotate(0deg) scale(1);
+    }
+
+    20% {
+        border-radius: 52% 48% 45% 55% / 50% 50% 48% 52%;
+        transform: rotate(1deg) scale(1.01);
+    }
+
+    40% {
+        border-radius: 45% 55% 40% 60% / 55% 45% 60% 40%;
+        transform: rotate(2deg) scale(1.03);
+    }
+
+    60% {
+        border-radius: 48% 52% 55% 45% / 45% 55% 52% 48%;
+        transform: rotate(0deg) scale(1.01);
+    }
+
+    80% {
+        border-radius: 55% 45% 60% 40% / 40% 60% 45% 55%;
+        transform: rotate(-2deg) scale(0.98);
+    }
+
+    100% {
+        border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%;
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+// Organic morphing for main blob
+@keyframes blob-main-morph {
+    0% {
+        border-radius: 55% 45% 50% 50% / 50% 50% 45% 55%;
+        transform: scale(1);
+    }
+
+    25% {
+        border-radius: 52% 48% 48% 52% / 52% 48% 50% 50%;
+        transform: scale(1.01);
+    }
+
+    50% {
+        border-radius: 50% 50% 45% 55% / 55% 45% 50% 50%;
+        transform: scale(1.02);
+    }
+
+    75% {
+        border-radius: 48% 52% 52% 48% / 50% 50% 48% 52%;
+        transform: scale(1.01);
+    }
+
+    100% {
+        border-radius: 45% 55% 55% 45% / 45% 55% 55% 45%;
+        transform: scale(1);
+    }
+}
+
+// Organic morphing for highlight
+@keyframes blob-highlight-morph {
+    0% {
+        border-radius: 50% 60% 40% 50% / 60% 40%;
+        opacity: 0.6;
+        transform: translate(0, 0);
+    }
+
+    25% {
+        border-radius: 55% 45% 45% 55% / 50% 50% 55% 45%;
+        opacity: 0.5;
+        transform: translate(2px, -1px);
+    }
+
+    50% {
+        border-radius: 45% 55% 50% 50% / 45% 55% 50% 50%;
+        opacity: 0.45;
+        transform: translate(-1px, 2px);
+    }
+
+    75% {
+        border-radius: 52% 48% 55% 45% / 55% 45% 45% 55%;
+        opacity: 0.5;
+        transform: translate(1px, 1px);
+    }
+
+    100% {
+        border-radius: 60% 40% 50% 50% / 40% 60%;
+        opacity: 0.4;
+        transform: translate(0, 0);
+    }
+}
+
+// Description fades in with subtle movement
+@keyframes description-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 0.88;
+        transform: translateY(0);
+    }
+}

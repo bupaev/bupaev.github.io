@@ -1,16 +1,15 @@
 import { useRef, useEffect, useState } from "react";
-import { POLYGONS, type PolygonId, type KeywordInfo } from "./diagram/data";
+import { POLYGONS, type PolygonId } from "./diagram/data";
 import { useHoverState } from "./diagram/hooks/use-hover-state";
 import { useBlurAnimation, ANIMATION_COMPLETE_THRESHOLD } from "./diagram/hooks/use-blur-animation";
 import { PolygonsLayer } from "./diagram/components/polygons-layer";
 import { LabelsLayer } from "./diagram/components/labels-layer";
-import { KeywordPopup } from "./diagram/components/keyword-popup";
 import styles from "./diagram.module.scss";
 
-type ActiveKeywordState = {
+/** Tracks which keyword is expanded: polygon ID and keyword index */
+type ExpandedKeyword = {
     polygonId: PolygonId;
-    info: KeywordInfo;
-    position: { x: number; y: number };
+    keywordIndex: number;
 } | null;
 
 /**
@@ -24,7 +23,7 @@ export function Diagram() {
     const containerRef = useRef<HTMLDivElement>(null);
     const blurRef = useRef<SVGFEGaussianBlurElement>(null);
     const isAnimationCompleteRef = useRef(false);
-    const [activeKeyword, setActiveKeyword] = useState<ActiveKeywordState>(null);
+    const [expandedKeyword, setExpandedKeyword] = useState<ExpandedKeyword>(null);
 
     const { sortId, scaleId, handleMouseEnter, handleMouseLeave } = useHoverState();
     const { triggerBlur, isAnimationComplete } = useBlurAnimation(containerRef, blurRef);
@@ -66,16 +65,17 @@ export function Diagram() {
         if (id && isComplete) handleMouseEnter(id, triggerBlur);
     };
 
-    const handleKeywordClick = (polygonId: PolygonId, keyword: KeywordInfo, position: { x: number; y: number }) => {
-        setActiveKeyword({ polygonId, info: keyword, position });
+    const handleKeywordToggle = (polygonId: PolygonId, keywordIndex: number) => {
+        // Toggle: if same keyword clicked, collapse; otherwise expand new one
+        if (expandedKeyword?.polygonId === polygonId && expandedKeyword?.keywordIndex === keywordIndex) {
+            setExpandedKeyword(null);
+        } else {
+            setExpandedKeyword({ polygonId, keywordIndex });
+        }
     };
 
-    const handleClosePopup = () => {
-        setActiveKeyword(null);
-    };
-
-    // Use activeKeyword's polygon to keep it scaled when popup is open
-    const effectiveScaleId = activeKeyword ? activeKeyword.polygonId : scaleId;
+    // Use expanded keyword's polygon to keep it scaled when expanded
+    const effectiveScaleId = expandedKeyword ? expandedKeyword.polygonId : scaleId;
 
     return (
         <div ref={containerRef} className={styles.diagram}>
@@ -89,20 +89,13 @@ export function Diagram() {
             <LabelsLayer
                 polygons={POLYGONS}
                 scaleId={effectiveScaleId}
-                activePolygonId={activeKeyword?.polygonId ?? null}
+                expandedKeyword={expandedKeyword}
                 containerRef={containerRef}
+                diagramRef={containerRef}
                 onMouseEnter={(id: PolygonId) => checkAnimationComplete() && handleMouseEnter(id, triggerBlur)}
                 onMouseLeave={handleMouseLeave}
-                onKeywordClick={handleKeywordClick}
+                onKeywordToggle={handleKeywordToggle}
             />
-
-            {activeKeyword && (
-                <KeywordPopup
-                    keyword={activeKeyword.info}
-                    position={activeKeyword.position}
-                    onClose={handleClosePopup}
-                />
-            )}
         </div>
     );
 }
