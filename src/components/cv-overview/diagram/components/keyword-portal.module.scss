@@ -72,26 +72,7 @@
     animation: blob-main-morph 4s linear infinite alternate;
     overflow: hidden;
 
-    &::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-        background: linear-gradient(105deg,
-                transparent 0%,
-                rgb(255 255 255 / 0%) calc(var(--x, 50%) - 40%),
-                rgb(255 255 255 / 100%) var(--x, 50%),
-                rgb(255 255 255 / 0%) calc(var(--x, 50%) + 40%),
-                transparent 100%);
-        transition: opacity 0.3s ease;
-        pointer-events: none;
-        z-index: 1;
-        mix-blend-mode: overlay;
-    }
-
-    .popupVisible:hover &::after {
-        opacity: var(--sheen-opacity);
-    }
+    @include mixins.sheen-effect(0, 105deg, ".popupVisible:hover &");
 }
 
 

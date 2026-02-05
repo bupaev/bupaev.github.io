@@ -176,3 +176,26 @@ $gap: 32px;
   border-top: $border-width solid #{$color};
   border-left: $border-width solid #{$color};
 }
+
+@mixin sheen-effect($opacity-adjustment: 0, $angle: 90deg, $hover-selector: "&:hover") {
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background: linear-gradient($angle,
+        transparent 0%,
+        rgb(255 255 255 / 0%) calc(var(--x, 50%) - 40%),
+        rgb(255 255 255 / 100%) var(--x, 50%),
+        rgb(255 255 255 / 0%) calc(var(--x, 50%) + 40%),
+        transparent 100%);
+    transition: opacity 0.3s ease;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  #{$hover-selector}::after {
+    opacity: calc(var(--sheen-opacity, 0) + #{$opacity-adjustment});
+  }
+}
