@@ -43,12 +43,13 @@
     --diag-br-h: 225deg;
     --diag-br-s: 70%;
     --diag-br-l: 85%;
-
-    // Popup Calculation Modifiers (Light Mode)
     --popup-l-delta: 8%; // Make popup lighter than polygon
     --popup-s-scale: 1; // Keep saturation
     --glow-l-delta: 0%; // Glow same lightness as polygon base
     --glow-opacity: 0.4;
+    // Glass sheen tokens
+    --sheen-opacity: 0.6;
+    --sheen-intensity: rgb(255 255 255 / var(--sheen-opacity));
 }
 
 [data-color-scheme="dark"] {
@@ -72,12 +73,12 @@
     --diag-br-h: 280deg;
     --diag-br-s: 80%;
     --diag-br-l: 60%;
-
-    // Popup Calculation Modifiers (Dark Mode)
-    // Make popup slightly darker than polygon
     --popup-l-delta: -8%;
     --glow-l-delta: -200%;
     --glow-opacity: 0.05;
+    // Glass sheen tokens (subtler in dark mode)
+    --sheen-opacity: 0.15;
+    --sheen-intensity: rgb(255 255 255 / var(--sheen-opacity));
 
     img[src$=".svg"] {
         filter: invert(1);

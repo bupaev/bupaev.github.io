@@ -68,7 +68,29 @@
     filter: url("#organic-blob-filter");
     background: var(--popup-bg, rgb(255 250 248 / 98%));
     animation: blob-main-morph 4s linear infinite alternate;
+    overflow: hidden;
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        background: linear-gradient(105deg,
+                transparent 0%,
+                rgb(255 255 255 / 0%) calc(var(--x, 50%) - 40%),
+                var(--sheen-intensity) var(--x, 50%),
+                rgb(255 255 255 / 0%) calc(var(--x, 50%) + 40%),
+                transparent 100%);
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .popupVisible:hover &::after {
+        opacity: 1;
+    }
 }
+
 
 // Content wrapper inside the blob
 .content {

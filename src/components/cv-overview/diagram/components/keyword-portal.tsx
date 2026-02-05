@@ -110,6 +110,15 @@ export function KeywordPortal({
         return () => document.removeEventListener("keydown", handleEscape);
     }, [isOpen, onClose]);
 
+    // Track mouse position for hover effects
+    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        e.currentTarget.style.setProperty("--x", `${x}%`);
+        e.currentTarget.style.setProperty("--y", `${y}%`);
+    }, []);
+
     if (!shouldRender) return null;
 
     const portalContent = (
@@ -181,6 +190,7 @@ export function KeywordPortal({
                 aria-modal="true"
                 aria-labelledby="keyword-title"
                 onMouseLeave={onClose}
+                onMouseMove={handleMouseMove}
             >
                 <div className={styles.blobBackground} />
 
