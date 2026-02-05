@@ -7,7 +7,7 @@ import styles from "./area-content-layer.module.scss";
 const CONTAINER_WIDTH = 800;
 const CONTAINER_HEIGHT = 500;
 
-// Center coordinates derived from container dimensions
+// Center coordinates derived from container dimensions (for reference)
 const CONTAINER_CENTER_X = CONTAINER_WIDTH / 2;
 const CONTAINER_CENTER_Y = CONTAINER_HEIGHT / 2 - CONTAINER_HEIGHT / 20;
 
@@ -72,8 +72,13 @@ export function AreaContentLayer({ areas, scaleId, expandedTopic, containerRef, 
     const handleMouseMove = (e: React.MouseEvent) => {
         if (!containerRef.current) return;
         const rect = containerRef.current.getBoundingClientRect();
-        const x = e.clientX - rect.left - CONTAINER_CENTER_X;
-        const y = e.clientY - rect.top - CONTAINER_CENTER_Y;
+
+        // Normalize mouse coordinates to reference 800x500 space
+        const scaleX = CONTAINER_WIDTH / rect.width;
+        const scaleY = CONTAINER_HEIGHT / rect.height;
+
+        const x = (e.clientX - rect.left) * scaleX - CONTAINER_CENTER_X;
+        const y = (e.clientY - rect.top) * scaleY - CONTAINER_CENTER_Y;
         setMousePos({ x, y });
     };
 
@@ -136,8 +141,8 @@ export function AreaContentLayer({ areas, scaleId, expandedTopic, containerRef, 
                 onMouseLeave={() => setMousePos({ x: MOUSE_OFF_SCREEN_COORD, y: MOUSE_OFF_SCREEN_COORD })}
                 style={
                     {
-                        "--center-x": `${CONTAINER_CENTER_X}px`,
-                        "--center-y": `${CONTAINER_CENTER_Y}px`,
+                        "--center-x": `50%`,
+                        "--center-y": `45%`,
                     } as React.CSSProperties
                 }
             >
@@ -156,8 +161,8 @@ export function AreaContentLayer({ areas, scaleId, expandedTopic, containerRef, 
                                 } ${isOtherHovered ? styles.inactive : ""}`}
                             style={
                                 {
-                                    "--cx": `${area.cx}px`,
-                                    "--cy": `${area.cy}px`,
+                                    "--cx": `${(area.cx / CONTAINER_WIDTH) * 100}%`,
+                                    "--cy": `${(area.cy / CONTAINER_HEIGHT) * 100}%`,
                                 } as React.CSSProperties
                             }
                             onMouseEnter={() => onMouseEnter(area.id)}
@@ -186,8 +191,8 @@ export function AreaContentLayer({ areas, scaleId, expandedTopic, containerRef, 
                                         <TopicButton
                                             key={i}
                                             topic={topic}
-                                            kx={kx}
-                                            ky={ky}
+                                            kx={(kx / CONTAINER_WIDTH) * 100}
+                                            ky={(ky / CONTAINER_HEIGHT) * 100}
                                             scale={isExpanded ? 1 : scale}
                                             isExpanded={isExpanded}
                                             zIndex={isExpanded ? Z_INDEX_EXPANDED : scale > TOPIC_Z_INDEX_THRESHOLD ? Z_INDEX_ACTIVE : Z_INDEX_NORMAL}
@@ -218,8 +223,8 @@ export function AreaContentLayer({ areas, scaleId, expandedTopic, containerRef, 
 
 type TopicButtonProps = {
     topic: TopicInfo;
-    kx: number;
-    ky: number;
+    kx: number; // percentage
+    ky: number; // percentage
     scale: number;
     isExpanded: boolean;
     zIndex: number;
@@ -244,7 +249,14 @@ function TopicButton({ topic, kx, ky, scale, isExpanded, zIndex, onClick }: Topi
             type="button"
             className={`${styles.topic} ${isExpanded ? styles.topicActive : ""}`}
             style={{
-                transform: `translate(calc(-50% + ${kx}px), calc(-50% + ${ky}px)) scale(${scale})`,
+                // kx and ky are now percentages relative to parent .topics
+                // We use calc to offset from center (50%) + kx%
+                // But kx was computed as offset from center.
+                // If kx=0, position should be 50%.
+                // So left: calc(50% + kx%), top: calc(50% + ky%)
+                left: `calc(50% + ${kx}%)`,
+                top: `calc(50% + ${ky}%)`,
+                transform: `translate(-50%, -50%) scale(${scale})`,
                 zIndex,
             }}
             onClick={onClick}

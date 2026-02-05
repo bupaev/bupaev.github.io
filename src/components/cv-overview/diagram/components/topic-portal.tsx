@@ -55,10 +55,22 @@ export function TopicPortal({
         const centerX = diagramRect.left + diagramRect.width / 2;
         const centerY = diagramRect.top + diagramRect.height / 2 - diagramRect.height / 20;
 
-        setPosition({
-            left: centerX + topicPosition.x,
-            top: centerY + topicPosition.y,
-        });
+        // Check if we are on a small screen (tablet or mobile)
+        // Breakpoint matches $breakpoint-lg (960px) from variables.scss
+        const isSmallScreen = window.innerWidth < 960;
+
+        if (isSmallScreen) {
+            // center the popup on the diagram for maximum space
+            setPosition({
+                left: centerX,
+                top: centerY,
+            });
+        } else {
+            setPosition({
+                left: centerX + topicPosition.x,
+                top: centerY + topicPosition.y,
+            });
+        }
     }, [diagramRef, topicPosition]);
 
     // Handle open/close animations
