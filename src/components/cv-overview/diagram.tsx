@@ -1,14 +1,14 @@
 import { useRef, useEffect, useState } from "react";
-import { POLYGONS, type PolygonId } from "./diagram/data";
+import { AREAS, type AreaId } from "./diagram/data";
 import { useHoverState } from "./diagram/hooks/use-hover-state";
 import { useBlurAnimation, ANIMATION_COMPLETE_THRESHOLD } from "./diagram/hooks/use-blur-animation";
-import { PolygonsLayer } from "./diagram/components/polygons-layer";
+import { AreasLayer } from "./diagram/components/areas-layer";
 import { LabelsLayer } from "./diagram/components/labels-layer";
 import styles from "./diagram.module.scss";
 
-/** Tracks which keyword is expanded: polygon ID and keyword index */
+/** Tracks which keyword is expanded: area ID and keyword index */
 type ExpandedKeyword = {
-    polygonId: PolygonId;
+    areaId: AreaId;
     keywordIndex: number;
 } | null;
 
@@ -53,41 +53,41 @@ export function Diagram() {
         return progress >= ANIMATION_COMPLETE_THRESHOLD;
     };
 
-    const onPolygonEnter = (id: typeof sortId) => {
+    const onAreaEnter = (id: typeof sortId) => {
         const isComplete = checkAnimationComplete();
         if (id && isComplete) handleMouseEnter(id, triggerBlur);
     };
 
-    const handleKeywordToggle = (polygonId: PolygonId, keywordIndex: number) => {
+    const handleKeywordToggle = (areaId: AreaId, keywordIndex: number) => {
         // Toggle: if same keyword clicked, collapse; otherwise expand new one
-        if (expandedKeyword?.polygonId === polygonId && expandedKeyword?.keywordIndex === keywordIndex) {
+        if (expandedKeyword?.areaId === areaId && expandedKeyword?.keywordIndex === keywordIndex) {
             setExpandedKeyword(null);
         } else {
-            setExpandedKeyword({ polygonId, keywordIndex });
+            setExpandedKeyword({ areaId, keywordIndex });
         }
     };
 
-    // Use expanded keyword's polygon to keep it scaled when expanded
-    const effectiveScaleId = expandedKeyword ? expandedKeyword.polygonId : scaleId;
-    const activeId = expandedKeyword ? expandedKeyword.polygonId : sortId;
+    // Use expanded keyword's area to keep it scaled when expanded
+    const effectiveScaleId = expandedKeyword ? expandedKeyword.areaId : scaleId;
+    const activeId = expandedKeyword ? expandedKeyword.areaId : sortId;
 
     return (
         <div ref={containerRef} className={styles.diagram}>
-            <PolygonsLayer
-                polygons={POLYGONS}
+            <AreasLayer
+                areas={AREAS}
                 scaleId={effectiveScaleId}
                 sortId={activeId}
                 blurRef={blurRef}
-                onMouseEnter={onPolygonEnter}
+                onMouseEnter={onAreaEnter}
                 onMouseLeave={handleMouseLeave}
             />
             <LabelsLayer
-                polygons={POLYGONS}
+                areas={AREAS}
                 scaleId={effectiveScaleId}
                 expandedKeyword={expandedKeyword}
                 containerRef={containerRef}
                 diagramRef={containerRef}
-                onMouseEnter={(id: PolygonId) => checkAnimationComplete() && handleMouseEnter(id, triggerBlur)}
+                onMouseEnter={(id: AreaId) => checkAnimationComplete() && handleMouseEnter(id, triggerBlur)}
                 onMouseLeave={handleMouseLeave}
                 onKeywordToggle={handleKeywordToggle}
             />

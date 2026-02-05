@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
-import type { PolygonId } from "../data";
+import type { AreaId } from "../data";
 
 /**
- * Manages hover state for diagram polygons.
+ * Manages hover state for diagram areas.
  * 
  * Uses two separate IDs to prevent animation jank:
  * - sortId: Controls DOM order (z-index in SVG) - changes immediately
@@ -12,17 +12,17 @@ import type { PolygonId } from "../data";
  * The double RAF ensures DOM reordering completes before animation starts.
  */
 export function useHoverState() {
-    const [sortId, setSortId] = useState<PolygonId | null>(null);
-    const [scaleId, setScaleId] = useState<PolygonId | null>(null);
+    const [sortId, setSortId] = useState<AreaId | null>(null);
+    const [scaleId, setScaleId] = useState<AreaId | null>(null);
     const leaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-    const handleMouseEnter = (id: PolygonId, onEnter?: () => void) => {
+    const handleMouseEnter = (id: AreaId, onEnter?: () => void) => {
         if (leaveTimeoutRef.current) {
             clearTimeout(leaveTimeoutRef.current);
             leaveTimeoutRef.current = null;
         }
 
-        // Step 1: Reorder DOM (bring hovered polygon to top)
+        // Step 1: Reorder DOM (bring hovered area to top)
         setSortId(id);
 
         // Step 2: Wait for DOM reordering to complete, then trigger animation

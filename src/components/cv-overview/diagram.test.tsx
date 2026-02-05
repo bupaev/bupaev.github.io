@@ -96,10 +96,10 @@ describe('Diagram', () => {
         expect(filter).toBeInTheDocument();
     });
 
-    it('renders four polygon areas', () => {
+    it('renders four skill areas', () => {
         const { container } = render(<Diagram />);
-        const polygons = container.querySelectorAll('polygon');
-        expect(polygons).toHaveLength(4);
+        const areas = container.querySelectorAll('polygon');
+        expect(areas).toHaveLength(4);
     });
 
     it('renders labels for all skill areas', () => {
@@ -110,14 +110,14 @@ describe('Diagram', () => {
         expect(screen.getByText('AI expertize')).toBeInTheDocument();
     });
 
-    it('shows keywords on polygon hover', async () => {
+    it('shows keywords on area hover', async () => {
         const { container } = render(<Diagram />);
-        const polygons = container.querySelectorAll('polygon');
+        const areas = container.querySelectorAll('polygon');
 
         simulateAnimationComplete();
 
         await act(async () => {
-            fireEvent.mouseEnter(polygons[0]);
+            fireEvent.mouseEnter(areas[0]);
         });
         // Double RAF for the double requestAnimationFrame in useHoverState
         await act(async () => {
@@ -131,12 +131,12 @@ describe('Diagram', () => {
 
     it('hides keywords on mouse leave', async () => {
         const { container } = render(<Diagram />);
-        const polygons = container.querySelectorAll('polygon');
+        const areas = container.querySelectorAll('polygon');
 
         simulateAnimationComplete();
 
         await act(async () => {
-            fireEvent.mouseEnter(polygons[0]);
+            fireEvent.mouseEnter(areas[0]);
         });
         // Double RAF for the double requestAnimationFrame in useHoverState
         await act(async () => {
@@ -145,7 +145,7 @@ describe('Diagram', () => {
         });
 
         await act(async () => {
-            fireEvent.mouseLeave(polygons[0]);
+            fireEvent.mouseLeave(areas[0]);
             vi.advanceTimersByTime(700); // 100ms delay + 500ms animation + margin
         });
 
@@ -206,14 +206,14 @@ describe('Diagram', () => {
         expect(removeEventSpy).toHaveBeenCalledWith('scroll', expect.any(Function));
     });
 
-    it('applies scale transform on hover to the correct polygon group', async () => {
+    it('applies scale transform on hover to the correct area group', async () => {
         const { container } = render(<Diagram />);
-        const polygons = container.querySelectorAll('polygon');
+        const areas = container.querySelectorAll('polygon');
 
         simulateAnimationComplete();
 
         await act(async () => {
-            fireEvent.mouseEnter(polygons[0]);
+            fireEvent.mouseEnter(areas[0]);
         });
         // Double RAF for the double requestAnimationFrame in useHoverState
         await act(async () => {
@@ -230,12 +230,12 @@ describe('Diagram', () => {
 
     it('marks other labels as inactive when one is hovered', async () => {
         const { container } = render(<Diagram />);
-        const polygons = container.querySelectorAll('polygon');
+        const areas = container.querySelectorAll('polygon');
 
         simulateAnimationComplete();
 
         await act(async () => {
-            fireEvent.mouseEnter(polygons[0]);
+            fireEvent.mouseEnter(areas[0]);
         });
         // Double RAF for the double requestAnimationFrame in useHoverState
         await act(async () => {

@@ -1,14 +1,14 @@
 import type { ReactNode } from "react";
 
-export type PolygonId = "topLeft" | "topRight" | "bottomLeft" | "bottomRight";
+export type AreaId = "topLeft" | "topRight" | "bottomLeft" | "bottomRight";
 
 export type KeywordInfo = {
     name: string;
     description: string;
 };
 
-export type PolygonData = {
-    id: PolygonId;
+export type AreaData = {
+    id: AreaId;
     points: string;
     scaleX: number;
     scaleY: number;
@@ -18,8 +18,8 @@ export type PolygonData = {
     keywords: KeywordInfo[];
 };
 
-/** Polygon data for the four skill areas */
-export const POLYGONS: PolygonData[] = [
+/** Area data for the four skill areas */
+export const AREAS: AreaData[] = [
     {
         id: "topLeft",
         points: "80,0 535,0 463,288 8,288",

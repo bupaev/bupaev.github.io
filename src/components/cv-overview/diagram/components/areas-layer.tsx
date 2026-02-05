@@ -1,25 +1,25 @@
 import type { RefObject } from "react";
-import type { PolygonData, PolygonId } from "../data";
-import styles from "./polygons-layer.module.scss";
+import type { AreaData, AreaId } from "../data";
+import styles from "./areas-layer.module.scss";
 
-/** Maps polygon id to its CSS fill class */
-const AREA_CLASS_MAP: Record<PolygonId, string> = {
+/** Maps area id to its CSS fill class */
+const AREA_CLASS_MAP: Record<AreaId, string> = {
     topLeft: styles.areaTopLeft,
     topRight: styles.areaTopRight,
     bottomLeft: styles.areaBottomLeft,
     bottomRight: styles.areaBottomRight,
 };
 
-type PolygonsLayerProps = {
-    polygons: PolygonData[];
-    scaleId: PolygonId | null;
-    sortId: PolygonId | null;
+type AreasLayerProps = {
+    areas: AreaData[];
+    scaleId: AreaId | null;
+    sortId: AreaId | null;
     blurRef: RefObject<SVGFEGaussianBlurElement | null>;
-    onMouseEnter: (id: PolygonId) => void;
+    onMouseEnter: (id: AreaId) => void;
     onMouseLeave: () => void;
 };
 
-function getTransform(id: PolygonId, cx: number, cy: number, scaleX: number, scaleY: number, scaleId: PolygonId | null) {
+function getTransform(id: AreaId, cx: number, cy: number, scaleX: number, scaleY: number, scaleId: AreaId | null) {
     if (id === scaleId) {
         const tx = 400 - cx;
         const ty = 250 - cy;
@@ -28,11 +28,11 @@ function getTransform(id: PolygonId, cx: number, cy: number, scaleX: number, sca
     return "translate(0px, 0px) scale(1, 1)";
 }
 
-export function PolygonsLayer({ polygons, scaleId, sortId, blurRef, onMouseEnter, onMouseLeave }: PolygonsLayerProps) {
-    // Render the active (sorted) polygon last so it appears on top
-    const otherPolygons = polygons.filter((p) => p.id !== sortId);
-    const activePolygon = polygons.find((p) => p.id === sortId);
-    const renderOrder = activePolygon ? [...otherPolygons, activePolygon] : polygons;
+export function AreasLayer({ areas, scaleId, sortId, blurRef, onMouseEnter, onMouseLeave }: AreasLayerProps) {
+    // Render the active (sorted) area last so it appears on top
+    const otherAreas = areas.filter((p) => p.id !== sortId);
+    const activeArea = areas.find((p) => p.id === sortId);
+    const renderOrder = activeArea ? [...otherAreas, activeArea] : areas;
 
     return (
         <svg
@@ -58,21 +58,21 @@ export function PolygonsLayer({ polygons, scaleId, sortId, blurRef, onMouseEnter
             </defs>
 
             <g filter="url(#goo)">
-                {renderOrder.map((polygon) => (
+                {renderOrder.map((area) => (
                     <g
-                        key={polygon.id}
+                        key={area.id}
                         style={{
                             transformBox: "view-box",
-                            transformOrigin: `${polygon.cx}px ${polygon.cy}px`,
-                            transform: getTransform(polygon.id, polygon.cx, polygon.cy, polygon.scaleX, polygon.scaleY, scaleId),
+                            transformOrigin: `${area.cx}px ${area.cy}px`,
+                            transform: getTransform(area.id, area.cx, area.cy, area.scaleX, area.scaleY, scaleId),
                             transition: "transform 500ms ease",
                         }}
                     >
                         <polygon
-                            className={AREA_CLASS_MAP[polygon.id]}
-                            points={polygon.points}
+                            className={AREA_CLASS_MAP[area.id]}
+                            points={area.points}
                             style={{ cursor: "pointer" }}
-                            onMouseEnter={() => onMouseEnter(polygon.id)}
+                            onMouseEnter={() => onMouseEnter(area.id)}
                             onMouseLeave={onMouseLeave}
                         />
                     </g>

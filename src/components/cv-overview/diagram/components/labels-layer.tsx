@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
-import type { PolygonData, PolygonId, KeywordInfo } from "../data";
+import type { AreaData, AreaId, KeywordInfo } from "../data";
 import { KeywordPortal } from "./keyword-portal";
 import styles from "./labels-layer.module.scss";
 
@@ -41,8 +41,8 @@ const Z_INDEX_NORMAL = 1;
 // Z-index for expanded keyword
 const Z_INDEX_EXPANDED = 100;
 
-/** Maps polygon id to its label entrance animation class */
-const LABEL_CLASS_MAP: Record<PolygonId, string> = {
+/** Maps area id to its label entrance animation class */
+const LABEL_CLASS_MAP: Record<AreaId, string> = {
     topLeft: styles.labelTopLeft,
     topRight: styles.labelTopRight,
     bottomLeft: styles.labelBottomLeft,
@@ -50,23 +50,23 @@ const LABEL_CLASS_MAP: Record<PolygonId, string> = {
 };
 
 type ExpandedKeyword = {
-    polygonId: PolygonId;
+    areaId: AreaId;
     keywordIndex: number;
 } | null;
 
 type LabelsLayerProps = {
-    polygons: PolygonData[];
-    scaleId: PolygonId | null;
+    areas: AreaData[];
+    scaleId: AreaId | null;
     expandedKeyword: ExpandedKeyword;
     containerRef: React.RefObject<HTMLDivElement | null>;
     /** Reference to the diagram container for portal positioning */
     diagramRef: React.RefObject<HTMLDivElement | null>;
-    onMouseEnter: (id: PolygonId) => void;
+    onMouseEnter: (id: AreaId) => void;
     onMouseLeave: () => void;
-    onKeywordToggle: (polygonId: PolygonId, keywordIndex: number) => void;
+    onKeywordToggle: (areaId: AreaId, keywordIndex: number) => void;
 };
 
-export function LabelsLayer({ polygons, scaleId, expandedKeyword, containerRef, diagramRef, onMouseEnter, onMouseLeave, onKeywordToggle }: LabelsLayerProps) {
+export function LabelsLayer({ areas, scaleId, expandedKeyword, containerRef, diagramRef, onMouseEnter, onMouseLeave, onKeywordToggle }: LabelsLayerProps) {
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
     const handleMouseMove = (e: React.MouseEvent) => {
@@ -80,7 +80,7 @@ export function LabelsLayer({ polygons, scaleId, expandedKeyword, containerRef, 
     // Close expanded keyword on Escape
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
         if (e.key === "Escape" && expandedKeyword) {
-            onKeywordToggle(expandedKeyword.polygonId, expandedKeyword.keywordIndex);
+            onKeywordToggle(expandedKeyword.areaId, expandedKeyword.keywordIndex);
         }
     }, [expandedKeyword, onKeywordToggle]);
 
@@ -93,19 +93,19 @@ export function LabelsLayer({ polygons, scaleId, expandedKeyword, containerRef, 
     const currentKeywordData = useMemo(() => {
         if (!expandedKeyword) return null;
 
-        const polygon = polygons.find((p) => p.id === expandedKeyword.polygonId);
-        if (!polygon) return null;
+        const area = areas.find((p) => p.id === expandedKeyword.areaId);
+        if (!area) return null;
 
-        const keyword = polygon.keywords[expandedKeyword.keywordIndex];
+        const keyword = area.keywords[expandedKeyword.keywordIndex];
         if (!keyword) return null;
 
-        const total = polygon.keywords.length;
+        const total = area.keywords.length;
         const angle = -Math.PI / 2 + (2 * Math.PI * expandedKeyword.keywordIndex) / total;
         const kx = Math.cos(angle) * KEYWORD_DISTRIBUTION_RADIUS_X;
         const ky = Math.sin(angle) * KEYWORD_DISTRIBUTION_RADIUS_Y;
 
-        return { keyword, position: { x: kx, y: ky }, polygonId: expandedKeyword.polygonId };
-    }, [expandedKeyword, polygons]);
+        return { keyword, position: { x: kx, y: ky }, areaId: expandedKeyword.areaId };
+    }, [expandedKeyword, areas]);
 
     // Keep data persistent for exit animation
     const [persistentKeywordData, setPersistentKeywordData] = useState<typeof currentKeywordData>(null);
@@ -124,7 +124,7 @@ export function LabelsLayer({ polygons, scaleId, expandedKeyword, containerRef, 
 
     const handleClosePortal = useCallback(() => {
         if (expandedKeyword) {
-            onKeywordToggle(expandedKeyword.polygonId, expandedKeyword.keywordIndex);
+            onKeywordToggle(expandedKeyword.areaId, expandedKeyword.keywordIndex);
         }
     }, [expandedKeyword, onKeywordToggle]);
 
@@ -141,35 +141,35 @@ export function LabelsLayer({ polygons, scaleId, expandedKeyword, containerRef, 
                     } as React.CSSProperties
                 }
             >
-                {polygons.map((polygon) => {
-                    // Keep polygon expanded if a keyword is expanded in this polygon
-                    const hasExpandedKeyword = expandedKeyword?.polygonId === polygon.id;
-                    const effectiveScaleId = hasExpandedKeyword ? polygon.id : scaleId;
-                    const isHovered = effectiveScaleId === polygon.id;
+                {areas.map((area) => {
+                    // Keep area expanded if a keyword is expanded in this area
+                    const hasExpandedKeyword = expandedKeyword?.areaId === area.id;
+                    const effectiveScaleId = hasExpandedKeyword ? area.id : scaleId;
+                    const isHovered = effectiveScaleId === area.id;
                     const isAnyHovered = effectiveScaleId !== null;
                     const isOtherHovered = isAnyHovered && !isHovered;
 
                     return (
                         <div
-                            key={polygon.id}
+                            key={area.id}
                             className={`${styles.areaLabelContainer} ${isHovered ? styles.active : ""
                                 } ${isOtherHovered ? styles.inactive : ""}`}
                             style={
                                 {
-                                    "--cx": `${polygon.cx}px`,
-                                    "--cy": `${polygon.cy}px`,
+                                    "--cx": `${area.cx}px`,
+                                    "--cy": `${area.cy}px`,
                                 } as React.CSSProperties
                             }
-                            onMouseEnter={() => onMouseEnter(polygon.id)}
+                            onMouseEnter={() => onMouseEnter(area.id)}
                             onMouseLeave={onMouseLeave}
                         >
-                            <span className={`${styles.areaLabel} ${LABEL_CLASS_MAP[polygon.id]}`}>
-                                {polygon.label}
+                            <span className={`${styles.areaLabel} ${LABEL_CLASS_MAP[area.id]}`}>
+                                {area.label}
                             </span>
 
                             <div className={styles.keywords}>
-                                {polygon.keywords.map((keyword, i) => {
-                                    const total = polygon.keywords.length;
+                                {area.keywords.map((keyword, i) => {
+                                    const total = area.keywords.length;
                                     const angle = -Math.PI / 2 + (2 * Math.PI * i) / total;
                                     const kx = Math.cos(angle) * KEYWORD_DISTRIBUTION_RADIUS_X;
                                     const ky = Math.sin(angle) * KEYWORD_DISTRIBUTION_RADIUS_Y;
@@ -181,7 +181,7 @@ export function LabelsLayer({ polygons, scaleId, expandedKeyword, containerRef, 
                                         scale = KEYWORD_MIN_SCALE + (KEYWORD_MAX_SCALE - KEYWORD_MIN_SCALE) * (1 - dist / MOUSE_PROXIMITY_THRESHOLD);
                                     }
 
-                                    const isExpanded = expandedKeyword?.polygonId === polygon.id && expandedKeyword?.keywordIndex === i;
+                                    const isExpanded = expandedKeyword?.areaId === area.id && expandedKeyword?.keywordIndex === i;
                                     return (
                                         <KeywordButton
                                             key={i}
@@ -191,7 +191,7 @@ export function LabelsLayer({ polygons, scaleId, expandedKeyword, containerRef, 
                                             scale={isExpanded ? 1 : scale}
                                             isExpanded={isExpanded}
                                             zIndex={isExpanded ? Z_INDEX_EXPANDED : scale > KEYWORD_Z_INDEX_THRESHOLD ? Z_INDEX_ACTIVE : Z_INDEX_NORMAL}
-                                            onClick={() => onKeywordToggle(polygon.id, i)}
+                                            onClick={() => onKeywordToggle(area.id, i)}
                                         />
                                     );
                                 })}
@@ -206,7 +206,7 @@ export function LabelsLayer({ polygons, scaleId, expandedKeyword, containerRef, 
                 <KeywordPortal
                     keyword={persistentKeywordData.keyword}
                     keywordPosition={persistentKeywordData.position}
-                    polygonId={persistentKeywordData.polygonId}
+                    areaId={persistentKeywordData.areaId}
                     diagramRef={diagramRef}
                     onClose={handleClosePortal}
                     isOpen={expandedKeyword !== null}

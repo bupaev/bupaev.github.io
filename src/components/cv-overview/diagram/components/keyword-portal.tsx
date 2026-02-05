@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 import { useEffect, useRef, useState, useCallback } from "react";
-import type { KeywordInfo, PolygonId } from "../data";
+import type { AreaId, KeywordInfo } from "../data";
 import styles from "./keyword-portal.module.scss";
 
 /** Unique filter ID for the organic blob effect */
@@ -10,8 +10,8 @@ type KeywordPortalProps = {
     keyword: KeywordInfo;
     /** Position where the keyword button is located (relative to diagram container) */
     keywordPosition: { x: number; y: number };
-    /** Polygon ID for color theming */
-    polygonId: PolygonId;
+    /** Area ID for color theming */
+    areaId: AreaId;
     /** Reference to the diagram container for position calculations */
     diagramRef: React.RefObject<HTMLDivElement | null>;
     /** Callback when portal should close */
@@ -20,8 +20,8 @@ type KeywordPortalProps = {
     isOpen: boolean;
 };
 
-/** Maps polygon ID to its theme class */
-const THEME_CLASS_MAP: Record<PolygonId, string> = {
+/** Maps area ID to its theme class */
+const THEME_CLASS_MAP: Record<AreaId, string> = {
     topLeft: styles.themeTopLeft,
     topRight: styles.themeTopRight,
     bottomLeft: styles.themeBottomLeft,
@@ -35,7 +35,7 @@ const THEME_CLASS_MAP: Record<PolygonId, string> = {
 export function KeywordPortal({
     keyword,
     keywordPosition,
-    polygonId,
+    areaId,
     diagramRef,
     onClose,
     isOpen,
@@ -180,7 +180,7 @@ export function KeywordPortal({
             {/* Main popup with organic styling */}
             <div
                 ref={portalRef}
-                className={`${styles.popup} ${isAnimating ? styles.popupVisible : ""} ${THEME_CLASS_MAP[polygonId]}`}
+                className={`${styles.popup} ${isAnimating ? styles.popupVisible : ""} ${THEME_CLASS_MAP[areaId]}`}
                 style={{
                     position: "fixed",
                     top: position.top,
