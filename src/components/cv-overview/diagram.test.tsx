@@ -102,7 +102,7 @@ describe('Diagram', () => {
         expect(areas).toHaveLength(4);
     });
 
-    it('renders labels for all skill areas', () => {
+    it('renders headings for all skill areas', () => {
         render(<Diagram />);
         expect(screen.getByText('Front-end', { exact: false })).toBeInTheDocument();
         expect(screen.getByText('Leadership')).toBeInTheDocument();
@@ -110,7 +110,7 @@ describe('Diagram', () => {
         expect(screen.getByText('AI expertize')).toBeInTheDocument();
     });
 
-    it('shows keywords on area hover', async () => {
+    it('shows topics on area hover', async () => {
         const { container } = render(<Diagram />);
         const areas = container.querySelectorAll('polygon');
 
@@ -129,7 +129,7 @@ describe('Diagram', () => {
         expect(activeContainer).toBeTruthy();
     });
 
-    it('hides keywords on mouse leave', async () => {
+    it('hides topics on mouse leave', async () => {
         const { container } = render(<Diagram />);
         const areas = container.querySelectorAll('polygon');
 
@@ -164,7 +164,7 @@ describe('Diagram', () => {
         expect(mockDisconnect).toHaveBeenCalled();
     });
 
-    it('renders keywords for each skill area', () => {
+    it('renders topics for each skill area', () => {
         render(<Diagram />);
         expect(screen.getByText('Scalable SPA Architecture')).toBeInTheDocument();
         expect(screen.getByText('Trust-Based Mentorship')).toBeInTheDocument();
@@ -228,7 +228,7 @@ describe('Diagram', () => {
         expect(scaledGroup).toBeTruthy();
     });
 
-    it('marks other labels as inactive when one is hovered', async () => {
+    it('marks other headings as inactive when one is hovered', async () => {
         const { container } = render(<Diagram />);
         const areas = container.querySelectorAll('polygon');
 

@@ -1,13 +1,13 @@
 @use "@/styles/mixins";
 
-.labels {
+.areaContent {
     position: absolute;
     inset: 0;
     pointer-events: none;
     overflow: visible;
 }
 
-.areaLabelContainer {
+.areaContentContainer {
     position: absolute;
     left: 0;
     top: 0;
@@ -34,7 +34,7 @@
     }
 }
 
-.areaLabel {
+.areaHeading {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -61,7 +61,7 @@
     }
 }
 
-.keywords {
+.topics {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -79,8 +79,8 @@
     }
 }
 
-// Base keyword style
-.keyword {
+// Base topic style
+.topic {
     top: 50%;
     left: 50%;
     position: absolute;
@@ -99,13 +99,13 @@
     }
 }
 
-// Active state - keyword is selected/expanded (portal is open)
-.keywordActive {
+// Active state - topic is selected/expanded (portal is open)
+.topicActive {
     filter: blur(10px);
 }
 
-// Keyword name inside expanded state
-.keywordName {
+// Topic name inside expanded state
+.topicName {
     display: block;
     font-family: var(--font-accent, "Dosis", sans-serif);
     font-weight: 700;
@@ -135,43 +135,43 @@
         transition: opacity 0.3s ease;
     }
 
-    .keyword:hover &::after {
+    .topic:hover &::after {
         opacity: 1;
     }
 
-    .keywordExpanded & {
+    .topicExpanded & {
         font-size: 1.1rem;
         margin-bottom: 0.5rem;
         color: var(--text-color, #1a1a1a);
     }
 }
 
-// Label entrance animations (scroll-driven)
-.labelTopLeft {
-    animation: label-slide-from-top-left 1ms ease-out both;
+// Heading entrance animations (scroll-driven)
+.headingTopLeft {
+    animation: heading-slide-from-top-left 1ms ease-out both;
     animation-timeline: --diagram-timeline;
     animation-range: cover 5% cover 45%;
 }
 
-.labelTopRight {
-    animation: label-slide-from-top-right 1ms ease-out both;
+.headingTopRight {
+    animation: heading-slide-from-top-right 1ms ease-out both;
     animation-timeline: --diagram-timeline;
     animation-range: cover 5% cover 45%;
 }
 
-.labelBottomLeft {
-    animation: label-slide-from-bottom-left 1ms ease-out both;
+.headingBottomLeft {
+    animation: heading-slide-from-bottom-left 1ms ease-out both;
     animation-timeline: --diagram-timeline;
     animation-range: cover 5% cover 45%;
 }
 
-.labelBottomRight {
-    animation: label-slide-from-bottom-right 1ms ease-out both;
+.headingBottomRight {
+    animation: heading-slide-from-bottom-right 1ms ease-out both;
     animation-timeline: --diagram-timeline;
     animation-range: cover 5% cover 45%;
 }
 
-@keyframes label-slide-from-top-left {
+@keyframes heading-slide-from-top-left {
     from {
         transform: translate(calc(-50% - 150px), calc(-50% - 150px));
     }
@@ -181,7 +181,7 @@
     }
 }
 
-@keyframes label-slide-from-top-right {
+@keyframes heading-slide-from-top-right {
     from {
         transform: translate(calc(-50% + 150px), calc(-50% - 150px));
     }
@@ -191,7 +191,7 @@
     }
 }
 
-@keyframes label-slide-from-bottom-left {
+@keyframes heading-slide-from-bottom-left {
     from {
         opacity: 0;
         transform: translate(calc(-50% - 150px), calc(-50% + 150px));
@@ -203,7 +203,7 @@
     }
 }
 
-@keyframes label-slide-from-bottom-right {
+@keyframes heading-slide-from-bottom-right {
     from {
         transform: translate(calc(-50% + 150px), calc(-50% + 150px));
     }

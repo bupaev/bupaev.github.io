@@ -3,27 +3,27 @@ import { AREAS, type AreaId } from "./diagram/data";
 import { useHoverState } from "./diagram/hooks/use-hover-state";
 import { useBlurAnimation, ANIMATION_COMPLETE_THRESHOLD } from "./diagram/hooks/use-blur-animation";
 import { AreasLayer } from "./diagram/components/areas-layer";
-import { LabelsLayer } from "./diagram/components/labels-layer";
+import { AreaContentLayer } from "./diagram/components/area-content-layer";
 import styles from "./diagram.module.scss";
 
-/** Tracks which keyword is expanded: area ID and keyword index */
-type ExpandedKeyword = {
+/** Tracks which topic is expanded: area ID and topic index */
+type ExpandedTopic = {
     areaId: AreaId;
-    keywordIndex: number;
+    topicIndex: number;
 } | null;
 
 /**
  * Diagram component displaying four overlapping skill areas
  * with a gooey color transition effect creating a blob-like appearance.
  * Uses native SVG elements instead of HTML divs for Safari CSS animation compatibility.
- * Labels are positioned outside the SVG to prevent blur from the filter.
+ * Headings and topics are positioned outside the SVG to prevent blur from the filter.
  * Blur filter stdDeviation is animated via JS to sync with scroll-driven CSS animations.
  */
 export function Diagram() {
     const containerRef = useRef<HTMLDivElement>(null);
     const blurRef = useRef<SVGFEGaussianBlurElement>(null);
     const isAnimationCompleteRef = useRef(false);
-    const [expandedKeyword, setExpandedKeyword] = useState<ExpandedKeyword>(null);
+    const [expandedTopic, setExpandedTopic] = useState<ExpandedTopic>(null);
 
     const { sortId, scaleId, handleMouseEnter, handleMouseLeave } = useHoverState();
     const { triggerBlur, isAnimationComplete } = useBlurAnimation(containerRef, blurRef);
@@ -58,18 +58,18 @@ export function Diagram() {
         if (id && isComplete) handleMouseEnter(id, triggerBlur);
     };
 
-    const handleKeywordToggle = (areaId: AreaId, keywordIndex: number) => {
-        // Toggle: if same keyword clicked, collapse; otherwise expand new one
-        if (expandedKeyword?.areaId === areaId && expandedKeyword?.keywordIndex === keywordIndex) {
-            setExpandedKeyword(null);
+    const handleTopicToggle = (areaId: AreaId, topicIndex: number) => {
+        // Toggle: if same topic clicked, collapse; otherwise expand new one
+        if (expandedTopic?.areaId === areaId && expandedTopic?.topicIndex === topicIndex) {
+            setExpandedTopic(null);
         } else {
-            setExpandedKeyword({ areaId, keywordIndex });
+            setExpandedTopic({ areaId, topicIndex });
         }
     };
 
-    // Use expanded keyword's area to keep it scaled when expanded
-    const effectiveScaleId = expandedKeyword ? expandedKeyword.areaId : scaleId;
-    const activeId = expandedKeyword ? expandedKeyword.areaId : sortId;
+    // Use expanded topic's area to keep it scaled when expanded
+    const effectiveScaleId = expandedTopic ? expandedTopic.areaId : scaleId;
+    const activeId = expandedTopic ? expandedTopic.areaId : sortId;
 
     return (
         <div ref={containerRef} className={styles.diagram}>
@@ -81,15 +81,15 @@ export function Diagram() {
                 onMouseEnter={onAreaEnter}
                 onMouseLeave={handleMouseLeave}
             />
-            <LabelsLayer
+            <AreaContentLayer
                 areas={AREAS}
                 scaleId={effectiveScaleId}
-                expandedKeyword={expandedKeyword}
+                expandedTopic={expandedTopic}
                 containerRef={containerRef}
                 diagramRef={containerRef}
                 onMouseEnter={(id: AreaId) => checkAnimationComplete() && handleMouseEnter(id, triggerBlur)}
                 onMouseLeave={handleMouseLeave}
-                onKeywordToggle={handleKeywordToggle}
+                onTopicToggle={handleTopicToggle}
             />
         </div>
     );

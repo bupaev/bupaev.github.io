@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
-import type { AreaData, AreaId, KeywordInfo } from "../data";
-import { KeywordPortal } from "./keyword-portal";
-import styles from "./labels-layer.module.scss";
+import type { AreaData, AreaId, TopicInfo } from "../data";
+import { TopicPortal } from "./topic-portal";
+import styles from "./area-content-layer.module.scss";
 
 // Base dimensions of the diagram container (SVG viewport size)
 const CONTAINER_WIDTH = 800;
@@ -14,59 +14,59 @@ const CONTAINER_CENTER_Y = CONTAINER_HEIGHT / 2 - CONTAINER_HEIGHT / 20;
 // Coordinate used to move the mouse position effectively "off-screen" when the mouse leaves the container
 const MOUSE_OFF_SCREEN_COORD = Math.max(CONTAINER_WIDTH, CONTAINER_HEIGHT) * 20;
 
-// Horizontal radius for the elliptical distribution of keywords (30% of container width)
-const KEYWORD_DISTRIBUTION_RADIUS_X = CONTAINER_WIDTH * 0.3;
+// Horizontal radius for the elliptical distribution of topics (30% of container width)
+const TOPIC_DISTRIBUTION_RADIUS_X = CONTAINER_WIDTH * 0.3;
 
-// Vertical radius for the elliptical distribution of keywords (40% of container height)
-const KEYWORD_DISTRIBUTION_RADIUS_Y = CONTAINER_HEIGHT * 0.3;
+// Vertical radius for the elliptical distribution of topics (40% of container height)
+const TOPIC_DISTRIBUTION_RADIUS_Y = CONTAINER_HEIGHT * 0.3;
 
 // Maximum distance from cursor for magnification effect (30% of container height)
 const MOUSE_PROXIMITY_THRESHOLD = CONTAINER_HEIGHT * 0.3;
 
-// Maximum scale factor applied to a keyword when the mouse is directly over it
-const KEYWORD_MAX_SCALE = 1.4;
+// Maximum scale factor applied to a topic when the mouse is directly over it
+const TOPIC_MAX_SCALE = 1.4;
 
-// Base scale factor for keywords when getting far from the mouse
-const KEYWORD_MIN_SCALE = 1;
+// Base scale factor for topics when getting far from the mouse
+const TOPIC_MIN_SCALE = 1;
 
-// Scale threshold at which a keyword is brought to the front (z-index boost)
-const KEYWORD_Z_INDEX_THRESHOLD = 1.1;
+// Scale threshold at which a topic is brought to the front (z-index boost)
+const TOPIC_Z_INDEX_THRESHOLD = 1.1;
 
-// Z-index for keywords that are magnified/active
+// Z-index for topics that are magnified/active
 const Z_INDEX_ACTIVE = 10;
 
-// Z-index for keywords in their normal state
+// Z-index for topics in their normal state
 const Z_INDEX_NORMAL = 1;
 
-// Z-index for expanded keyword
+// Z-index for expanded topic
 const Z_INDEX_EXPANDED = 100;
 
-/** Maps area id to its label entrance animation class */
-const LABEL_CLASS_MAP: Record<AreaId, string> = {
-    topLeft: styles.labelTopLeft,
-    topRight: styles.labelTopRight,
-    bottomLeft: styles.labelBottomLeft,
-    bottomRight: styles.labelBottomRight,
+/** Maps area id to its heading entrance animation class */
+const HEADING_CLASS_MAP: Record<AreaId, string> = {
+    topLeft: styles.headingTopLeft,
+    topRight: styles.headingTopRight,
+    bottomLeft: styles.headingBottomLeft,
+    bottomRight: styles.headingBottomRight,
 };
 
-type ExpandedKeyword = {
+type ExpandedTopic = {
     areaId: AreaId;
-    keywordIndex: number;
+    topicIndex: number;
 } | null;
 
-type LabelsLayerProps = {
+type AreaContentLayerProps = {
     areas: AreaData[];
     scaleId: AreaId | null;
-    expandedKeyword: ExpandedKeyword;
+    expandedTopic: ExpandedTopic;
     containerRef: React.RefObject<HTMLDivElement | null>;
     /** Reference to the diagram container for portal positioning */
     diagramRef: React.RefObject<HTMLDivElement | null>;
     onMouseEnter: (id: AreaId) => void;
     onMouseLeave: () => void;
-    onKeywordToggle: (areaId: AreaId, keywordIndex: number) => void;
+    onTopicToggle: (areaId: AreaId, topicIndex: number) => void;
 };
 
-export function LabelsLayer({ areas, scaleId, expandedKeyword, containerRef, diagramRef, onMouseEnter, onMouseLeave, onKeywordToggle }: LabelsLayerProps) {
+export function AreaContentLayer({ areas, scaleId, expandedTopic, containerRef, diagramRef, onMouseEnter, onMouseLeave, onTopicToggle }: AreaContentLayerProps) {
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
     const handleMouseMove = (e: React.MouseEvent) => {
@@ -77,61 +77,61 @@ export function LabelsLayer({ areas, scaleId, expandedKeyword, containerRef, dia
         setMousePos({ x, y });
     };
 
-    // Close expanded keyword on Escape
+    // Close expanded topic on Escape
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
-        if (e.key === "Escape" && expandedKeyword) {
-            onKeywordToggle(expandedKeyword.areaId, expandedKeyword.keywordIndex);
+        if (e.key === "Escape" && expandedTopic) {
+            onTopicToggle(expandedTopic.areaId, expandedTopic.topicIndex);
         }
-    }, [expandedKeyword, onKeywordToggle]);
+    }, [expandedTopic, onTopicToggle]);
 
     useEffect(() => {
         document.addEventListener("keydown", handleKeyDown);
         return () => document.removeEventListener("keydown", handleKeyDown);
     }, [handleKeyDown]);
 
-    // Find the expanded keyword data and position for portal
-    const currentKeywordData = useMemo(() => {
-        if (!expandedKeyword) return null;
+    // Find the expanded topic data and position for portal
+    const currentTopicData = useMemo(() => {
+        if (!expandedTopic) return null;
 
-        const area = areas.find((p) => p.id === expandedKeyword.areaId);
+        const area = areas.find((p) => p.id === expandedTopic.areaId);
         if (!area) return null;
 
-        const keyword = area.keywords[expandedKeyword.keywordIndex];
-        if (!keyword) return null;
+        const topic = area.topics[expandedTopic.topicIndex];
+        if (!topic) return null;
 
-        const total = area.keywords.length;
-        const angle = -Math.PI / 2 + (2 * Math.PI * expandedKeyword.keywordIndex) / total;
-        const kx = Math.cos(angle) * KEYWORD_DISTRIBUTION_RADIUS_X;
-        const ky = Math.sin(angle) * KEYWORD_DISTRIBUTION_RADIUS_Y;
+        const total = area.topics.length;
+        const angle = -Math.PI / 2 + (2 * Math.PI * expandedTopic.topicIndex) / total;
+        const kx = Math.cos(angle) * TOPIC_DISTRIBUTION_RADIUS_X;
+        const ky = Math.sin(angle) * TOPIC_DISTRIBUTION_RADIUS_Y;
 
-        return { keyword, position: { x: kx, y: ky }, areaId: expandedKeyword.areaId };
-    }, [expandedKeyword, areas]);
+        return { topic, position: { x: kx, y: ky }, areaId: expandedTopic.areaId };
+    }, [expandedTopic, areas]);
 
     // Keep data persistent for exit animation
-    const [persistentKeywordData, setPersistentKeywordData] = useState<typeof currentKeywordData>(null);
+    const [persistentTopicData, setPersistentTopicData] = useState<typeof currentTopicData>(null);
 
     useEffect(() => {
-        if (currentKeywordData) {
-            setPersistentKeywordData(currentKeywordData);
+        if (currentTopicData) {
+            setPersistentTopicData(currentTopicData);
         } else {
             // Buffer time to allow exit animation to complete (400ms in CSS + small margin)
             const timer = setTimeout(() => {
-                setPersistentKeywordData(null);
+                setPersistentTopicData(null);
             }, 600);
             return () => clearTimeout(timer);
         }
-    }, [currentKeywordData]);
+    }, [currentTopicData]);
 
     const handleClosePortal = useCallback(() => {
-        if (expandedKeyword) {
-            onKeywordToggle(expandedKeyword.areaId, expandedKeyword.keywordIndex);
+        if (expandedTopic) {
+            onTopicToggle(expandedTopic.areaId, expandedTopic.topicIndex);
         }
-    }, [expandedKeyword, onKeywordToggle]);
+    }, [expandedTopic, onTopicToggle]);
 
     return (
         <>
             <div
-                className={styles.labels}
+                className={styles.areaContent}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={() => setMousePos({ x: MOUSE_OFF_SCREEN_COORD, y: MOUSE_OFF_SCREEN_COORD })}
                 style={
@@ -142,9 +142,9 @@ export function LabelsLayer({ areas, scaleId, expandedKeyword, containerRef, dia
                 }
             >
                 {areas.map((area) => {
-                    // Keep area expanded if a keyword is expanded in this area
-                    const hasExpandedKeyword = expandedKeyword?.areaId === area.id;
-                    const effectiveScaleId = hasExpandedKeyword ? area.id : scaleId;
+                    // Keep area expanded if a topic is expanded in this area
+                    const hasExpandedTopic = expandedTopic?.areaId === area.id;
+                    const effectiveScaleId = hasExpandedTopic ? area.id : scaleId;
                     const isHovered = effectiveScaleId === area.id;
                     const isAnyHovered = effectiveScaleId !== null;
                     const isOtherHovered = isAnyHovered && !isHovered;
@@ -152,7 +152,7 @@ export function LabelsLayer({ areas, scaleId, expandedKeyword, containerRef, dia
                     return (
                         <div
                             key={area.id}
-                            className={`${styles.areaLabelContainer} ${isHovered ? styles.active : ""
+                            className={`${styles.areaContentContainer} ${isHovered ? styles.active : ""
                                 } ${isOtherHovered ? styles.inactive : ""}`}
                             style={
                                 {
@@ -163,35 +163,35 @@ export function LabelsLayer({ areas, scaleId, expandedKeyword, containerRef, dia
                             onMouseEnter={() => onMouseEnter(area.id)}
                             onMouseLeave={onMouseLeave}
                         >
-                            <span className={`${styles.areaLabel} ${LABEL_CLASS_MAP[area.id]}`}>
-                                {area.label}
-                            </span>
+                            <h3 className={`${styles.areaHeading} ${HEADING_CLASS_MAP[area.id]}`}>
+                                {area.heading}
+                            </h3>
 
-                            <div className={styles.keywords}>
-                                {area.keywords.map((keyword, i) => {
-                                    const total = area.keywords.length;
+                            <div className={styles.topics}>
+                                {area.topics.map((topic, i) => {
+                                    const total = area.topics.length;
                                     const angle = -Math.PI / 2 + (2 * Math.PI * i) / total;
-                                    const kx = Math.cos(angle) * KEYWORD_DISTRIBUTION_RADIUS_X;
-                                    const ky = Math.sin(angle) * KEYWORD_DISTRIBUTION_RADIUS_Y;
+                                    const kx = Math.cos(angle) * TOPIC_DISTRIBUTION_RADIUS_X;
+                                    const ky = Math.sin(angle) * TOPIC_DISTRIBUTION_RADIUS_Y;
 
                                     const dist = Math.sqrt(Math.pow(mousePos.x - kx, 2) + Math.pow(mousePos.y - ky, 2));
 
-                                    let scale = KEYWORD_MIN_SCALE;
+                                    let scale = TOPIC_MIN_SCALE;
                                     if (dist < MOUSE_PROXIMITY_THRESHOLD) {
-                                        scale = KEYWORD_MIN_SCALE + (KEYWORD_MAX_SCALE - KEYWORD_MIN_SCALE) * (1 - dist / MOUSE_PROXIMITY_THRESHOLD);
+                                        scale = TOPIC_MIN_SCALE + (TOPIC_MAX_SCALE - TOPIC_MIN_SCALE) * (1 - dist / MOUSE_PROXIMITY_THRESHOLD);
                                     }
 
-                                    const isExpanded = expandedKeyword?.areaId === area.id && expandedKeyword?.keywordIndex === i;
+                                    const isExpanded = expandedTopic?.areaId === area.id && expandedTopic?.topicIndex === i;
                                     return (
-                                        <KeywordButton
+                                        <TopicButton
                                             key={i}
-                                            keyword={keyword}
+                                            topic={topic}
                                             kx={kx}
                                             ky={ky}
                                             scale={isExpanded ? 1 : scale}
                                             isExpanded={isExpanded}
-                                            zIndex={isExpanded ? Z_INDEX_EXPANDED : scale > KEYWORD_Z_INDEX_THRESHOLD ? Z_INDEX_ACTIVE : Z_INDEX_NORMAL}
-                                            onClick={() => onKeywordToggle(area.id, i)}
+                                            zIndex={isExpanded ? Z_INDEX_EXPANDED : scale > TOPIC_Z_INDEX_THRESHOLD ? Z_INDEX_ACTIVE : Z_INDEX_NORMAL}
+                                            onClick={() => onTopicToggle(area.id, i)}
                                         />
                                     );
                                 })}
@@ -201,23 +201,23 @@ export function LabelsLayer({ areas, scaleId, expandedKeyword, containerRef, dia
                 })}
             </div>
 
-            {/* Portal-rendered expanded keyword popup */}
-            {persistentKeywordData && (
-                <KeywordPortal
-                    keyword={persistentKeywordData.keyword}
-                    keywordPosition={persistentKeywordData.position}
-                    areaId={persistentKeywordData.areaId}
+            {/* Portal-rendered expanded topic popup */}
+            {persistentTopicData && (
+                <TopicPortal
+                    topic={persistentTopicData.topic}
+                    topicPosition={persistentTopicData.position}
+                    areaId={persistentTopicData.areaId}
                     diagramRef={diagramRef}
                     onClose={handleClosePortal}
-                    isOpen={expandedKeyword !== null}
+                    isOpen={expandedTopic !== null}
                 />
             )}
         </>
     );
 }
 
-type KeywordButtonProps = {
-    keyword: KeywordInfo;
+type TopicButtonProps = {
+    topic: TopicInfo;
     kx: number;
     ky: number;
     scale: number;
@@ -227,10 +227,10 @@ type KeywordButtonProps = {
 };
 
 /**
- * Keyword button in the diagram - clicking opens the portal popup.
+ * Topic button in the diagram - clicking opens the portal popup.
  * When expanded, this button stays in place while the portal shows the details.
  */
-function KeywordButton({ keyword, kx, ky, scale, isExpanded, zIndex, onClick }: KeywordButtonProps) {
+function TopicButton({ topic, kx, ky, scale, isExpanded, zIndex, onClick }: TopicButtonProps) {
     const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
         const rect = e.currentTarget.getBoundingClientRect();
         const x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -242,7 +242,7 @@ function KeywordButton({ keyword, kx, ky, scale, isExpanded, zIndex, onClick }: 
     return (
         <button
             type="button"
-            className={`${styles.keyword} ${isExpanded ? styles.keywordActive : ""}`}
+            className={`${styles.topic} ${isExpanded ? styles.topicActive : ""}`}
             style={{
                 transform: `translate(calc(-50% + ${kx}px), calc(-50% + ${ky}px)) scale(${scale})`,
                 zIndex,
@@ -251,8 +251,8 @@ function KeywordButton({ keyword, kx, ky, scale, isExpanded, zIndex, onClick }: 
             onMouseMove={handleMouseMove}
             aria-expanded={isExpanded}
         >
-            <span className={styles.keywordName} data-text={keyword.name}>
-                {keyword.name}
+            <span className={styles.topicName} data-text={topic.name}>
+                {topic.name}
             </span>
         </button>
     );

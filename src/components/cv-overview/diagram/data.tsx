@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 export type AreaId = "topLeft" | "topRight" | "bottomLeft" | "bottomRight";
 
-export type KeywordInfo = {
+export type TopicInfo = {
     name: string;
     description: string;
 };
@@ -14,8 +14,8 @@ export type AreaData = {
     scaleY: number;
     cx: number;
     cy: number;
-    label: ReactNode;
-    keywords: KeywordInfo[];
+    heading: ReactNode;
+    topics: TopicInfo[];
 };
 
 /** Area data for the four skill areas */
@@ -27,14 +27,14 @@ export const AREAS: AreaData[] = [
         scaleY: 1.5,
         cx: 310,
         cy: 170,
-        label: (
+        heading: (
             <>
                 Front-end
                 <br />
                 engineering
             </>
         ),
-        keywords: [
+        topics: [
             {
                 name: "Scalable SPA Architecture",
                 description: "Reflecting 15+ years of experience building complex applications (like Electronic Health Records and Audio Workstations) using modern frameworks (Vue, React, Angular).",
@@ -68,8 +68,8 @@ export const AREAS: AreaData[] = [
         scaleY: 1.6,
         cx: 610,
         cy: 170,
-        label: <>Leadership</>,
-        keywords: [
+        heading: <>Leadership</>,
+        topics: [
             {
                 name: "Technical Orchestrator",
                 description: "Defining the role as a leader who designs systems and \"defines the melody\" while managing AI tools and team workflows.",
@@ -99,8 +99,8 @@ export const AREAS: AreaData[] = [
         scaleY: 1.9,
         cx: 290,
         cy: 370,
-        label: <>UI/UX Design</>,
-        keywords: [
+        heading: <>UI/UX Design</>,
+        topics: [
             {
                 name: "UX/Engineering Bridge",
                 description: "Replacing the \"Unicorn\" label to describe unique ability to translate abstract design concepts into concrete, feasible technical specifications.",
@@ -130,8 +130,8 @@ export const AREAS: AreaData[] = [
         scaleY: 2.1,
         cx: 565,
         cy: 365,
-        label: <>AI expertize</>,
-        keywords: [
+        heading: <>AI expertize</>,
+        topics: [
             {
                 name: "High-Leverage Engineer",
                 description: "Positioning as a senior professional who uses AI as a \"force multiplier\" to increase output while maintaining high standards.",

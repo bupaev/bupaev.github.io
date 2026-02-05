@@ -1,15 +1,15 @@
 import { createPortal } from "react-dom";
 import { useEffect, useRef, useState, useCallback } from "react";
-import type { AreaId, KeywordInfo } from "../data";
-import styles from "./keyword-portal.module.scss";
+import type { AreaId, TopicInfo } from "../data";
+import styles from "./topic-portal.module.scss";
 
 /** Unique filter ID for the organic blob effect */
 const ORGANIC_FILTER_ID = "organic-blob-filter";
 
-type KeywordPortalProps = {
-    keyword: KeywordInfo;
-    /** Position where the keyword button is located (relative to diagram container) */
-    keywordPosition: { x: number; y: number };
+type TopicPortalProps = {
+    topic: TopicInfo;
+    /** Position where the topic button is located (relative to diagram container) */
+    topicPosition: { x: number; y: number };
     /** Area ID for color theming */
     areaId: AreaId;
     /** Reference to the diagram container for position calculations */
@@ -29,17 +29,17 @@ const THEME_CLASS_MAP: Record<AreaId, string> = {
 };
 
 /**
- * Portal component that renders expanded keyword details outside the masked diagram.
+ * Portal component that renders expanded topic details outside the masked diagram.
  * Uses SVG filters to create organic blob-like appearance that integrates with brain aesthetic.
  */
-export function KeywordPortal({
-    keyword,
-    keywordPosition,
+export function TopicPortal({
+    topic,
+    topicPosition,
     areaId,
     diagramRef,
     onClose,
     isOpen,
-}: KeywordPortalProps) {
+}: TopicPortalProps) {
     const portalRef = useRef<HTMLDivElement>(null);
     const [position, setPosition] = useState({ top: 0, left: 0 });
     const [isAnimating, setIsAnimating] = useState(false);
@@ -51,15 +51,15 @@ export function KeywordPortal({
 
         const diagramRect = diagramRef.current.getBoundingClientRect();
 
-        // Convert keyword position (relative to diagram center) to viewport coordinates
+        // Convert topic position (relative to diagram center) to viewport coordinates
         const centerX = diagramRect.left + diagramRect.width / 2;
         const centerY = diagramRect.top + diagramRect.height / 2 - diagramRect.height / 20;
 
         setPosition({
-            left: centerX + keywordPosition.x,
-            top: centerY + keywordPosition.y,
+            left: centerX + topicPosition.x,
+            top: centerY + topicPosition.y,
         });
-    }, [diagramRef, keywordPosition]);
+    }, [diagramRef, topicPosition]);
 
     // Handle open/close animations
     useEffect(() => {
@@ -188,7 +188,7 @@ export function KeywordPortal({
                 } as React.CSSProperties}
                 role="dialog"
                 aria-modal="true"
-                aria-labelledby="keyword-title"
+                aria-labelledby="topic-title"
                 onMouseMove={handleMouseMove}
                 onMouseLeave={onClose}
             >
@@ -196,10 +196,10 @@ export function KeywordPortal({
 
                 {/* Content wrapper */}
                 <div className={styles.content}>
-                    <h3 id="keyword-title" className={styles.title}>
-                        {keyword.name}
+                    <h3 id="topic-title" className={styles.title}>
+                        {topic.name}
                     </h3>
-                    <p className={styles.description}>{keyword.description}</p>
+                    <p className={styles.description}>{topic.description}</p>
                 </div>
             </div>
         </>

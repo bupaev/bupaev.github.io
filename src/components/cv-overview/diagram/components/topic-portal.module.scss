@@ -9,8 +9,8 @@
     pointer-events: none;
 }
 
-// Theme classes for different polygon areas
-// Colors are dynamically calculated from the base polygon HSL values
+// Theme classes for different skill areas
+// Colors are dynamically calculated from the base area HSL values
 // and global modifiers defined in tokens.scss
 .themeTopLeft {
     --h: var(--diag-tl-h);
@@ -89,7 +89,7 @@
     }
 }
 
-// Keyword title
+// Topic title
 .title {
     margin: 0 0 0.625rem;
     font-family: var(--font-accent, "Dosis", sans-serif);
