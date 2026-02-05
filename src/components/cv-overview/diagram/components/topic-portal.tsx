@@ -110,7 +110,7 @@ export function TopicPortal({
         };
     }, [shouldRender, updatePosition]);
 
-    // Close on Escape
+    // Close on Escape or Click Outside (for mobile reliability)
     useEffect(() => {
         if (!isOpen) return;
 
@@ -118,8 +118,25 @@ export function TopicPortal({
             if (e.key === "Escape") onClose();
         };
 
+        const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+            if (
+                portalRef.current &&
+                !portalRef.current.contains(e.target as Node)
+            ) {
+                onClose();
+            }
+        };
+
         document.addEventListener("keydown", handleEscape);
-        return () => document.removeEventListener("keydown", handleEscape);
+        // Use mousedown/touchstart for better responsiveness than click
+        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("touchstart", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("keydown", handleEscape);
+            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("touchstart", handleClickOutside);
+        };
     }, [isOpen, onClose]);
 
     // Track mouse position for hover effects
