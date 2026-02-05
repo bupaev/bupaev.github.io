@@ -24,7 +24,7 @@ const KEYWORD_DISTRIBUTION_RADIUS_Y = CONTAINER_HEIGHT * 0.3;
 const MOUSE_PROXIMITY_THRESHOLD = CONTAINER_HEIGHT * 0.3;
 
 // Maximum scale factor applied to a keyword when the mouse is directly over it
-const KEYWORD_MAX_SCALE = 1.2;
+const KEYWORD_MAX_SCALE = 1.4;
 
 // Base scale factor for keywords when getting far from the mouse
 const KEYWORD_MIN_SCALE = 1;
@@ -182,9 +182,6 @@ export function LabelsLayer({ polygons, scaleId, expandedKeyword, containerRef, 
                                     }
 
                                     const isExpanded = expandedKeyword?.polygonId === polygon.id && expandedKeyword?.keywordIndex === i;
-                                    const hasAnyExpanded = expandedKeyword !== null;
-                                    const isDimmed = hasAnyExpanded && !isExpanded;
-
                                     return (
                                         <KeywordButton
                                             key={i}
@@ -193,7 +190,6 @@ export function LabelsLayer({ polygons, scaleId, expandedKeyword, containerRef, 
                                             ky={ky}
                                             scale={isExpanded ? 1 : scale}
                                             isExpanded={isExpanded}
-                                            isDimmed={isDimmed}
                                             zIndex={isExpanded ? Z_INDEX_EXPANDED : scale > KEYWORD_Z_INDEX_THRESHOLD ? Z_INDEX_ACTIVE : Z_INDEX_NORMAL}
                                             onClick={() => onKeywordToggle(polygon.id, i)}
                                         />
@@ -226,7 +222,6 @@ type KeywordButtonProps = {
     ky: number;
     scale: number;
     isExpanded: boolean;
-    isDimmed: boolean;
     zIndex: number;
     onClick: () => void;
 };
@@ -235,19 +230,29 @@ type KeywordButtonProps = {
  * Keyword button in the diagram - clicking opens the portal popup.
  * When expanded, this button stays in place while the portal shows the details.
  */
-function KeywordButton({ keyword, kx, ky, scale, isExpanded, isDimmed, zIndex, onClick }: KeywordButtonProps) {
+function KeywordButton({ keyword, kx, ky, scale, isExpanded, zIndex, onClick }: KeywordButtonProps) {
+    const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        // Calculate x position as percentage for the gradient center
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        e.currentTarget.style.setProperty("--x", `${x}%`);
+    };
+
     return (
         <button
             type="button"
-            className={`${styles.keyword} ${isExpanded ? styles.keywordActive : ""} ${isDimmed ? styles.keywordDimmed : ""}`}
+            className={`${styles.keyword} ${isExpanded ? styles.keywordActive : ""}`}
             style={{
                 transform: `translate(calc(-50% + ${kx}px), calc(-50% + ${ky}px)) scale(${scale})`,
                 zIndex,
             }}
             onClick={onClick}
+            onMouseMove={handleMouseMove}
             aria-expanded={isExpanded}
         >
-            <span className={styles.keywordName}>{keyword.name}</span>
+            <span className={styles.keywordName} data-text={keyword.name}>
+                {keyword.name}
+            </span>
         </button>
     );
 }

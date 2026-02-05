@@ -92,47 +92,16 @@
     border: none;
     padding: 0.25rem 0.5rem;
     cursor: pointer;
-    transition:
-        color 150ms ease,
-        opacity 250ms ease,
-        max-width 400ms cubic-bezier(0.22, 1, 0.36, 1),
-        padding 400ms cubic-bezier(0.22, 1, 0.36, 1),
-        background 300ms ease;
-    transform-origin: center center;
-
-    &:hover:not(.keywordExpanded) {
-        color: var(--text-color, #1a1a1a);
-    }
+    transition: filter 300ms ease;
 
     @include mixins.small-mobile {
         font-size: 0.8rem;
     }
 }
 
-// Dimmed state for non-expanded keywords when one is expanded
-.keywordDimmed {
-    opacity: 0.2;
-    pointer-events: none;
-}
-
 // Active state - keyword is selected/expanded (portal is open)
 .keywordActive {
-    color: var(--text-color, #1a1a1a);
-    font-weight: 600;
-
-    // Subtle pulsing to show it's the source of the portal
-    animation: keyword-pulse 2s ease-in-out infinite;
-}
-
-@keyframes keyword-pulse {
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.7;
-    }
+    filter: blur(10px);
 }
 
 // Keyword name inside expanded state
@@ -142,6 +111,46 @@
     font-weight: 700;
     line-height: 1.3;
     transition: font-size 300ms ease;
+
+    // Sheen effect setup
+    position: relative;
+
+    &::after {
+        content: attr(data-text);
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        user-select: none;
+
+        // Match parent text properties
+        font-family: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+        font-size: inherit;
+
+        // Gradient Sheen - "Flashlight" effect: reveals full opacity text color
+        background: linear-gradient(105deg,
+                color-mix(in srgb, var(--text-color, #1a1a1a), transparent 100%) 0%,
+                color-mix(in srgb, var(--text-color, #1a1a1a), transparent 100%) calc(var(--x, -100%) - 20%),
+                var(--text-color, #1a1a1a) var(--x, -100%),
+                color-mix(in srgb, var(--text-color, #1a1a1a), transparent 100%) calc(var(--x, -100%) + 20%),
+                color-mix(in srgb, var(--text-color, #1a1a1a), transparent 100%) 100%);
+
+        // Mask to text
+        background-clip: text;
+        color: transparent;
+
+        // Blending
+        mix-blend-mode: normal;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    // Trigger sheen on button hover
+    .keyword:hover &::after {
+        opacity: 1;
+    }
 
     .keywordExpanded & {
         font-size: 1.1rem;

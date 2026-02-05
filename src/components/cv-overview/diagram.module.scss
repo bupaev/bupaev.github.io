@@ -13,7 +13,7 @@
     // (applied here because SVG filter interferes with area-level opacity)
     animation: diagram-fade-in 1ms ease-in both;
     animation-timeline: view();
-    animation-range: cover 0% cover 50%;
+    animation-range: cover 0% cover 10%;
     // Mask the diagram to the brain shape
     mask-image: url("./diagram/black-brain-mask.svg");
     mask-size: contain;
