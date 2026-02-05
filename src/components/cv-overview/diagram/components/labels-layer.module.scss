@@ -123,31 +123,18 @@
         pointer-events: none;
         user-select: none;
 
-        // Match parent text properties
-        font-family: inherit;
-        font-weight: inherit;
-        line-height: inherit;
-        font-size: inherit;
-
         // Gradient Sheen - "Flashlight" effect: reveals full opacity text color
-        background: linear-gradient(105deg,
-                color-mix(in srgb, var(--text-color, #1a1a1a), transparent 100%) 0%,
-                color-mix(in srgb, var(--text-color, #1a1a1a), transparent 100%) calc(var(--x, -100%) - 20%),
-                var(--text-color, #1a1a1a) var(--x, -100%),
-                color-mix(in srgb, var(--text-color, #1a1a1a), transparent 100%) calc(var(--x, -100%) + 20%),
-                color-mix(in srgb, var(--text-color, #1a1a1a), transparent 100%) 100%);
-
-        // Mask to text
+        // Radial Flashlight effect: reveals full opacity text color at cursor
+        background: radial-gradient(circle at var(--x, 50%) var(--y, 50%),
+                var(--text-color, #1a1a1a) 0%,
+                color-mix(in srgb, var(--text-color, #1a1a1a), transparent 100%) 60%);
         background-clip: text;
         color: transparent;
-
-        // Blending
         mix-blend-mode: normal;
         opacity: 0;
         transition: opacity 0.3s ease;
     }
 
-    // Trigger sheen on button hover
     .keyword:hover &::after {
         opacity: 1;
     }

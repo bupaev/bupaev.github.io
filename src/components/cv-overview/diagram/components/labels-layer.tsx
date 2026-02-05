@@ -233,9 +233,10 @@ type KeywordButtonProps = {
 function KeywordButton({ keyword, kx, ky, scale, isExpanded, zIndex, onClick }: KeywordButtonProps) {
     const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
         const rect = e.currentTarget.getBoundingClientRect();
-        // Calculate x position as percentage for the gradient center
         const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
         e.currentTarget.style.setProperty("--x", `${x}%`);
+        e.currentTarget.style.setProperty("--y", `${y}%`);
     };
 
     return (
