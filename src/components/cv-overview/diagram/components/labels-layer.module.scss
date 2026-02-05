@@ -150,25 +150,25 @@
 .labelTopLeft {
     animation: label-slide-from-top-left 1ms ease-out both;
     animation-timeline: --diagram-timeline;
-    animation-range: cover 10% cover 60%;
+    animation-range: cover 5% cover 45%;
 }
 
 .labelTopRight {
     animation: label-slide-from-top-right 1ms ease-out both;
     animation-timeline: --diagram-timeline;
-    animation-range: cover 10% cover 60%;
+    animation-range: cover 5% cover 45%;
 }
 
 .labelBottomLeft {
     animation: label-slide-from-bottom-left 1ms ease-out both;
     animation-timeline: --diagram-timeline;
-    animation-range: cover 10% cover 60%;
+    animation-range: cover 5% cover 45%;
 }
 
 .labelBottomRight {
     animation: label-slide-from-bottom-right 1ms ease-out both;
     animation-timeline: --diagram-timeline;
-    animation-range: cover 10% cover 60%;
+    animation-range: cover 5% cover 45%;
 }
 
 @keyframes label-slide-from-top-left {
