@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import styles from "./timeline.module.scss";
 import type { JobElementProps } from "./timeline-types";
 
@@ -51,11 +52,20 @@ export function JobElement({ job, style, isShort }: JobElementProps) {
         .filter(Boolean)
         .join(" ");
 
+    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        e.currentTarget.style.setProperty("--x", `${x}%`);
+        e.currentTarget.style.setProperty("--y", `${y}%`);
+    }, []);
+
     return (
         <div
             style={style}
             className={classNames}
             onClick={() => goToJob(job.id)}
+            onMouseMove={handleMouseMove}
             title={job.skills}
         >
             <div className={styles.jobText}>

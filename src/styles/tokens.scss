@@ -48,8 +48,7 @@
     --glow-l-delta: 0%; // Glow same lightness as polygon base
     --glow-opacity: 0.4;
     // Glass sheen tokens
-    --sheen-opacity: 0.6;
-    --sheen-intensity: rgb(255 255 255 / var(--sheen-opacity));
+    --sheen-opacity: 0.4;
 }
 
 [data-color-scheme="dark"] {
@@ -78,7 +77,6 @@
     --glow-opacity: 0.05;
     // Glass sheen tokens (subtler in dark mode)
     --sheen-opacity: 0.15;
-    --sheen-intensity: rgb(255 255 255 / var(--sheen-opacity));
 
     img[src$=".svg"] {
         filter: invert(1);
