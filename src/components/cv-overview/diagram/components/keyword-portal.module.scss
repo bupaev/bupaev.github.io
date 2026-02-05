@@ -58,12 +58,14 @@
         filter: blur(0);
         pointer-events: auto;
     }
+
+    padding: 30px;
 }
 
 // Main organic blob shape - core background
 .blobBackground {
     position: absolute;
-    inset: -30px;
+    inset: 0;
     pointer-events: none;
     filter: url("#organic-blob-filter");
     background: var(--popup-bg, rgb(255 250 248 / 98%));

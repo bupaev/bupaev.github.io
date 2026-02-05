@@ -189,8 +189,8 @@ export function KeywordPortal({
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="keyword-title"
-                onMouseLeave={onClose}
                 onMouseMove={handleMouseMove}
+                onMouseLeave={onClose}
             >
                 <div className={styles.blobBackground} />
 

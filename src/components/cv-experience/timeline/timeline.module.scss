@@ -148,7 +148,7 @@
     }
 
     &:hover::after {
-      opacity: calc(var(--sheen-opacity) + 0.3);
+      opacity: calc(var(--sheen-opacity) + 0.2);
     }
   }
 
