@@ -13,6 +13,7 @@ const AREA_CLASS_MAP: Record<PolygonId, string> = {
 type PolygonsLayerProps = {
     polygons: PolygonData[];
     scaleId: PolygonId | null;
+    sortId: PolygonId | null;
     blurRef: RefObject<SVGFEGaussianBlurElement | null>;
     onMouseEnter: (id: PolygonId) => void;
     onMouseLeave: () => void;
@@ -27,7 +28,12 @@ function getTransform(id: PolygonId, cx: number, cy: number, scaleX: number, sca
     return "translate(0px, 0px) scale(1, 1)";
 }
 
-export function PolygonsLayer({ polygons, scaleId, blurRef, onMouseEnter, onMouseLeave }: PolygonsLayerProps) {
+export function PolygonsLayer({ polygons, scaleId, sortId, blurRef, onMouseEnter, onMouseLeave }: PolygonsLayerProps) {
+    // Render the active (sorted) polygon last so it appears on top
+    const otherPolygons = polygons.filter((p) => p.id !== sortId);
+    const activePolygon = polygons.find((p) => p.id === sortId);
+    const renderOrder = activePolygon ? [...otherPolygons, activePolygon] : polygons;
+
     return (
         <svg
             className={styles.gooSvg}
@@ -52,7 +58,7 @@ export function PolygonsLayer({ polygons, scaleId, blurRef, onMouseEnter, onMous
             </defs>
 
             <g filter="url(#goo)">
-                {polygons.map((polygon) => (
+                {renderOrder.map((polygon) => (
                     <g
                         key={polygon.id}
                         style={{

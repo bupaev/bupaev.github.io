@@ -53,15 +53,6 @@ export function Diagram() {
         return progress >= ANIMATION_COMPLETE_THRESHOLD;
     };
 
-    // Sort polygons so the hovered OR expanded one is rendered last (on top in SVG)
-    const activeId = expandedKeyword ? expandedKeyword.polygonId : sortId;
-
-    const sortedPolygons = [...POLYGONS].sort((a, b) => {
-        if (a.id === activeId) return 1;
-        if (b.id === activeId) return -1;
-        return 0;
-    });
-
     const onPolygonEnter = (id: typeof sortId) => {
         const isComplete = checkAnimationComplete();
         if (id && isComplete) handleMouseEnter(id, triggerBlur);
@@ -78,12 +69,14 @@ export function Diagram() {
 
     // Use expanded keyword's polygon to keep it scaled when expanded
     const effectiveScaleId = expandedKeyword ? expandedKeyword.polygonId : scaleId;
+    const activeId = expandedKeyword ? expandedKeyword.polygonId : sortId;
 
     return (
         <div ref={containerRef} className={styles.diagram}>
             <PolygonsLayer
-                polygons={sortedPolygons}
+                polygons={POLYGONS}
                 scaleId={effectiveScaleId}
+                sortId={activeId}
                 blurRef={blurRef}
                 onMouseEnter={onPolygonEnter}
                 onMouseLeave={handleMouseLeave}
