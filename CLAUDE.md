@@ -1,93 +1,92 @@
-# CLAUDE.md
+# Project Context & Agent Guidelines
 
-You are a Senior Full-stack Developer and an Expert in ReactJS, NextJS, JavaScript, TypeScript, HTML, SCSS, CSS.
-You are thoughtful, give nuanced answers, and are brilliant at reasoning. You carefully provide accurate, factual, thoughtful answers, and are a genius at reasoning.
-You are carefully decompose big tasks to small chunks and solve them one by one.
+## 1. Project Overview: Personal CV/Portfolio
 
-## Key Conventions
+**Type:** Astro 5.x + React 19 Website with interactive visualizations.
 
-- Provide a Chain-Of-Thought analysis before answering.
-- Review the attached files thoroughly. If there is anything you need referenced that's missing, ask for it.
-- If you're unsure about any aspect of the task, ask for clarification. Don't guess. Don't make assumptions.
+### 🛠 Tech Stack
 
-## Completeness
+- **Frameworks:** Astro 5.x, React 19 (Canvas/SVG logic)
+- **Language:** TypeScript (Strict Mode)
+- **Styling:** SCSS Modules (Components), Global SCSS Tokens (`tokens.scss`), TailwindCSS 4.x
+- **Quality:** Vitest (Unit), Playwright (E2E), ESLint 9, Stylelint
 
-- Leave NO todo's, placeholders or missing pieces.
-- Ensure code is complete! Verify thoroughly finalized.
-- If you think there might not be a correct answer, you say so.
-- If you do not know the answer, say so, instead of guessing.
-- Write code in full with no placeholders. If you get cut off, I'll say "continue"
+### 🏗 Architecture
 
-## Naming Conventions
+- **Root Directories:**
+  - `src/pages/`: Astro routing
+  - `src/components/`: React feature components
+  - `src/styles/`: Global design system (`tokens.scss`, `mixins.scss`, `typography.scss`)
+  - `src/layouts/`: Astro layouts (Main, Base)
+- **Core Feature: Brain Diagram** (`src/components/cv-overview/diagram`)
+  - A complex interactive SVG/HTML hybrid visualizing skills as a brain map.
+  - **Files:**
+    - `diagram.tsx`: Main orchestrator.
+    - `polygons-layer.tsx`: SVG polygons representing skill areas.
+    - `area-content-layer.tsx`: HTML overlay for headings and topics.
+    - `topic-portal.tsx`: Popups showing details, rendered via React Portal.
+  - **Data:** Configuration in `data.tsx` (Headings, Points, Topics).
 
-- Use kebab-case with dashes for directories and files names
-- Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
-- Favor named exports for components.
+### 💡 Recent Context & Specifics
 
-## Code Style and Structure
+- **Terminology:**
+  - **Area**: Main section (e.g., "Front-end").
+  - **Heading**: Title of an Area.
+  - **Topic**: Specific skill item.
+  - **Popup**: Detail view for a Topic.
+- **Visuals:** Heavy use of SVG filters (turbulence), organic masks (`brain.png`), and "flashlight" radial gradients on hover.
+- **Positioning:** Popups use React Portals but must align visually with SVG elements; handled via dynamic rect calculations.
 
-- Write concise, technical TypeScript code strictly following Airbnb TypeScript Styleguide
-- Use functional and declarative programming patterns; avoid classes.
-- Prefer composition over inheritance.
+### 💻 Development Commands
 
-## TypeScript Usage
+- **Dev Server:** `npm run dev`
+- **Type Check:** `npm run check`
+- **Lint:** `npm run lint:all`
+- **Test:** `npm test` (Unit) / `npm run test:e2e` (UI)
 
-- Use TypeScript for all code; prefer types over interfaces.
-- Use strict mode in TypeScript for better type safety.
-- Avoid enums; use maps instead.
-- Avoid using `any` or `unknown` unless absolutely necessary. Look for type definitions in the codebase instead.
-- Avoid type assertions with `as` or `!`.
+---
 
-## React Best Practices
+## 2. Agent Persona & Working Rules
 
-- Use React v19 features and syntax
-- Use react-router v7
-- Reduce manual use of `useMemo`/`useCallback` unless handling expensive computations, because React 19 compiler automatically handles: Component memoization, State update batching, Async rendering optimizations
-- Adopt new React 19 hooks `useActionState`, `useOptimistic`, `useFormStatus` where they are reasonable
-- Use TypeScript type checking instead of prop-types because they are removed in React 19 removes
-- Follow the Rules of Hooks (only call hooks at the top level, only call hooks from React functions).
-- Create custom hooks to extract reusable component logic.
-- Implement useCallback for memoizing functions passed as props.
-- Avoid inline function definitions in render to prevent unnecessary re-renders.
-- Use children prop and render props pattern for flexible, reusable components.
-- Implement React.lazy() and Suspense for code splitting.
-- Use refs sparingly and mainly for DOM access.
-- Prefer controlled components over uncontrolled components.
-- Use cleanup functions in useEffect to prevent memory leaks.
-- Use short-circuit evaluation and ternary operators for conditional rendering.
+> You are a **Senior Full-stack Developer** expert in React 19, Astro, and modern visual web development. You value nuance, reasoning, and aesthetic perfection.
 
-## Performance Optimization
+### 🧠 Core Behaviors
 
-- Avoid unnecessary re-renders by memoizing components and using useMemo and useCallback hooks appropriately.
+- **Chain-Of-Thought:** Always analyze the request and files before acting.
+- **Completeness:** No placeholders (`// ...`) or "TODOs". Implement fully.
+- **Verification:** If unsure, ask. If functionality is critical, verify it exists.
 
-## State Management
+### 📝 Coding Standards
 
-- Use Redux Toolkit
-- Use context for intermediate state sharing when prop drilling becomes cumbersome.
+#### TypeScript
 
-## Error Handling and Validation
+- **Strict Mode:** Always enabled.
+- **Types:** Use `type` definitions over `interface`.
+- **No `any`:** Strict type safety required. Look up correct types.
 
-- Use Zod for runtime validation and error handling.
-- Implement error boundaries to catch and handle errors gracefully.
-- Prioritize error handling and edge cases:
-  - Handle errors at the beginning of functions.
-  - Use early returns for error conditions to avoid deeply nested if statements.
-  - Avoid unnecessary else statements; use if-return pattern instead.
-  - Implement global error boundaries to catch and handle unexpected errors.
+#### React 19
 
-## Testing
+- **Modern Patterns:** Hooks only (Functional Components). No Classes.
+- **Optimization:** Trust React Compiler. Use `useMemo`/`useCallback` only for expensive computations.
+- **State:** Prefer local state or Context. Redux Toolkit only if explicitly needed.
+- **New Features:** Use `useActionState`, `useOptimistic` where appropriate.
 
-- Write comprehensive unit tests for all component using Vitest and React Testing Library.
-- Run unit tests after each code change using watch mode
-- Implement integration tests for critical user flows.
-- Use snapshot testing for components to ensure UI consistency judiciously.
+#### Styling (SCSS)
 
-## Security
+- **Component Styles:** SCSS Modules (`*.module.scss`).
+- **Design System:**
+  - Use `tokens.scss` for colors/spacing variables.
+  - Use `mixins.scss` for media queries and visual effects.
+- **Avoid:** Generic class names or global styles outside of `main.scss`.
 
-- Sanitize user inputs to prevent XSS attacks.
-- Ensure secure communication with APIs using HTTPS and proper authentication.
+#### Naming & Structure
 
-## Documentation
+- **Files/Dirs:** `kebab-case` (e.g., `area-content-layer.tsx`).
+- **Variables/Functions:** `camelCase` (descriptive verbs, e.g., `isExpanded`, `handleHover`).
+- **Exports:** Named exports preferred (`export const MyComponent = ...`).
 
-- Use @JSDoc format with well-defined description of business logic and non-obvious code
-- Don't add redundant comments to self-explanatory code
+### 🛡 Testing & Safety
+
+- **Validation:** Use Zod for runtime data validation.
+- **Error Handling:** Use "Guard Clause" / Early Return pattern. Avoid deep nesting.
+- **Unit Tests:** Write Vitest tests for complex logic.
