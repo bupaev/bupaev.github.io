@@ -4,7 +4,7 @@
   position: fixed;
   z-index: 3;
   top: 36px;
-  left: 6px;
+  left: max(6px, calc((100vw - 2000px) / 2));
   width: 100px;
   height: 40px;
   border: 2px solid var(--accent-color);

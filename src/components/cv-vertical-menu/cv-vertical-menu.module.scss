@@ -14,7 +14,7 @@ $menu-open-width: 10em;
 .verticalMenu {
   position: fixed;
   top: max(10vh, 110px);
-  left: 6px;
+  left: max(6px, calc((100vw - 2000px) / 2));
   font-family: "Dosis", sans-serif;
   font-size: 20px;
   z-index: 3;
