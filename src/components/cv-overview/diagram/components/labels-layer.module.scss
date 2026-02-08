@@ -1,0 +1,206 @@
+@use "@/styles/mixins";
+
+.labels {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.areaLabelContainer {
+    position: absolute;
+    transform: translate(var(--cx), var(--cy));
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 300ms ease;
+
+    &.active {
+        transform: translate(var(--center-x), var(--center-y)) !important;
+        z-index: 10;
+        transition-delay: 50ms;
+    }
+
+    &.inactive {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+.areaLabel {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color, #1a1a1a);
+    text-align: center;
+    line-height: 1.2;
+    white-space: nowrap;
+    transform: translate(-50%, -50%);
+    transition: all 300ms ease;
+
+    @include mixins.small-mobile {
+        font-size: 1rem;
+    }
+
+    @include mixins.desktop-only {
+        font-size: 1.75rem;
+    }
+
+    .active & {
+        font-size: 2.5em;
+        opacity: 0.3 !important;
+        transform: translate(-50%, -50%) !important;
+    }
+}
+
+.keywords {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 350px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease;
+
+    .active & {
+        opacity: 1;
+        transition-delay: 150ms;
+        pointer-events: auto;
+    }
+}
+
+// Base keyword style
+.keyword {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    font-size: 1.2rem;
+    max-width: 10rem;
+    text-align: center;
+    color: color-mix(in srgb, var(--text-color, #1a1a1a), transparent 30%);
+    background: transparent;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    transition: filter 300ms ease;
+
+    @include mixins.small-mobile {
+        font-size: 0.8rem;
+    }
+}
+
+// Active state - keyword is selected/expanded (portal is open)
+.keywordActive {
+    filter: blur(10px);
+}
+
+// Keyword name inside expanded state
+.keywordName {
+    display: block;
+    font-family: var(--font-accent, "Dosis", sans-serif);
+    font-weight: 700;
+    line-height: 1.3;
+    transition: font-size 300ms ease;
+
+    // Sheen effect setup
+    position: relative;
+
+    &::after {
+        content: attr(data-text);
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        user-select: none;
+
+        // Gradient Sheen - "Flashlight" effect: reveals full opacity text color
+        // Radial Flashlight effect: reveals full opacity text color at cursor
+        background: radial-gradient(circle at var(--x, 50%) var(--y, 50%),
+                var(--text-color, #1a1a1a) 0%,
+                color-mix(in srgb, var(--text-color, #1a1a1a), transparent 100%) 60%);
+        background-clip: text;
+        color: transparent;
+        mix-blend-mode: normal;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .keyword:hover &::after {
+        opacity: 1;
+    }
+
+    .keywordExpanded & {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-color, #1a1a1a);
+    }
+}
+
+// Label entrance animations (scroll-driven)
+.labelTopLeft {
+    animation: label-slide-from-top-left 1ms ease-out both;
+    animation-timeline: --diagram-timeline;
+    animation-range: cover 5% cover 45%;
+}
+
+.labelTopRight {
+    animation: label-slide-from-top-right 1ms ease-out both;
+    animation-timeline: --diagram-timeline;
+    animation-range: cover 5% cover 45%;
+}
+
+.labelBottomLeft {
+    animation: label-slide-from-bottom-left 1ms ease-out both;
+    animation-timeline: --diagram-timeline;
+    animation-range: cover 5% cover 45%;
+}
+
+.labelBottomRight {
+    animation: label-slide-from-bottom-right 1ms ease-out both;
+    animation-timeline: --diagram-timeline;
+    animation-range: cover 5% cover 45%;
+}
+
+@keyframes label-slide-from-top-left {
+    from {
+        transform: translate(calc(-50% - 150px), calc(-50% - 150px));
+    }
+
+    to {
+        transform: translate(calc(-50% - 30px), -50%);
+    }
+}
+
+@keyframes label-slide-from-top-right {
+    from {
+        transform: translate(calc(-50% + 150px), calc(-50% - 150px));
+    }
+
+    to {
+        transform: translate(calc(-50% - 30px), -50%);
+    }
+}
+
+@keyframes label-slide-from-bottom-left {
+    from {
+        opacity: 0;
+        transform: translate(calc(-50% - 150px), calc(-50% + 150px));
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(calc(-50% - 30px), -50%);
+    }
+}
+
+@keyframes label-slide-from-bottom-right {
+    from {
+        transform: translate(calc(-50% + 150px), calc(-50% + 150px));
+    }
+
+    to {
+        transform: translate(calc(-50% - 30px), -50%);
+    }
+}
