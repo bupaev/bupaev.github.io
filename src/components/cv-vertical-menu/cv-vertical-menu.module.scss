@@ -20,6 +20,11 @@ $menu-open-width: 10em;
   z-index: 3;
   user-select: none;
 
+  @include mixins.desktop {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
   @include mixins.tablet-only {
     position: fixed;
   }

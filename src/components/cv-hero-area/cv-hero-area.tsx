@@ -97,37 +97,33 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
     <div className={`${styles.heroArea} hero`}>
       <div className="container">
         <div className="hero-body">
-          <div className="columns">
+          <div className={styles.text}>
             <div
-              className={`${styles.leftColumn} column text-right max-lg:w-3/5 max-lg:flex-none`}
+              className={`${styles.parallelogramImageContainer} md:hidden`}
             >
-              <div
-                className={`${styles.parallelogramImageContainer} md:hidden`}
-              >
-                <img
-                  src={mobileImage.placeholderSrc}
-                  alt=""
-                  aria-hidden="true"
-                  style={{ filter: "blur(20px)" }}
-                />
-                <img
-                  ref={mobileImgRef}
-                  src={mobileImage.src}
-                  alt="Paul Buramensky portrait"
-                  className={styles.hideableImage}
-                  data-loaded={mobileImageLoaded}
-                  onLoad={() => setMobileImageLoaded(true)}
-                />
-              </div>
-              <h1 className={`title pt-8 mb-6 ${styles.title}`}>
-                <div className={`${styles.textShapeLimiter} max-md:hidden`} />
-                <span className="text-5xl leading-tight text-right">
-                  Hi! I&apos;m Paul Buramensky
-                </span>
-                <p className="text-4xl leading-tight pt-4">
-                  Front-end engineer and AI-enthusiast with strong UX expertise
-                </p>
+              <img
+                src={mobileImage.placeholderSrc}
+                alt=""
+                aria-hidden="true"
+                style={{ filter: "blur(20px)" }}
+              />
+              <img
+                ref={mobileImgRef}
+                src={mobileImage.src}
+                alt="Paul Buramensky portrait"
+                className={styles.hideableImage}
+                data-loaded={mobileImageLoaded}
+                onLoad={() => setMobileImageLoaded(true)}
+              />
+            </div>
+            <div className={`title pt-8 ${styles.title}`}>
+              <div className={`${styles.textShapeLimiter} max-md:hidden`} />
+              <h1 className="text-5xl leading-tight text-right">
+                Hi! I&apos;m Paul Buramensky
               </h1>
+              <h2 className="text-4xl leading-tight pt-4 pb-4">
+                Front-end engineer and AI-enthusiast with strong UX expertise
+              </h2>
               <p className={`${styles.contacts} pt-6`}>
                 <span className="mr-6">
                   <a href="mailto:mail@paulbu.com">
@@ -187,23 +183,23 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
                 </span>
               </p>
             </div>
-            <div className="column hidden md:block py-0 max-lg:w-2/5 max-lg:flex-none">
-              <div className={styles.parallelogramImageContainer}>
-                <img
-                  src={desktopImage.placeholderSrc}
-                  alt=""
-                  aria-hidden="true"
-                  style={{ filter: "blur(20px)" }}
-                />
-                <img
-                  ref={desktopImgRef}
-                  src={desktopImage.src}
-                  alt="Paul Buramensky portrait"
-                  className={styles.hideableImage}
-                  data-loaded={desktopImageLoaded}
-                  onLoad={() => setDesktopImageLoaded(true)}
-                />
-              </div>
+          </div>
+          <div className={styles.image}>
+            <div className={styles.parallelogramImageContainer}>
+              <img
+                src={desktopImage.placeholderSrc}
+                alt=""
+                aria-hidden="true"
+                style={{ filter: "blur(20px)" }}
+              />
+              <img
+                ref={desktopImgRef}
+                src={desktopImage.src}
+                alt="Paul Buramensky portrait"
+                className={styles.hideableImage}
+                data-loaded={desktopImageLoaded}
+                onLoad={() => setDesktopImageLoaded(true)}
+              />
             </div>
           </div>
         </div>
