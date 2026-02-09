@@ -332,6 +332,20 @@
       width: 100%;
       object-fit: cover;
 
+      &.placeholderImage {
+        opacity: 1;
+        filter: blur(20px);
+      }
+
+      &.realImage {
+        opacity: 0;
+        transition: opacity 0.6s ease-out;
+
+        &.revealed {
+          opacity: 1;
+        }
+      }
+
       @include mixins.desktop-only {
         transform: translateY(-25px) scale(1.3);
       }
@@ -346,12 +360,5 @@
     }
   }
 
-  .hideableImage {
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
 
-    &[data-loaded="true"] {
-      opacity: 1;
-    }
-  }
 }
