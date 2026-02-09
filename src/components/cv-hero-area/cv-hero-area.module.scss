@@ -137,15 +137,14 @@
     justify-content: center;
     text-align: right;
 
+    // text column gradually increases width, which shifts the image column progressively to the right
+    @media screen and (max-width: variables.$breakpoint-3xl) and (min-width: variables.$breakpoint-md) {
+      flex-grow: calc(1 + (1500px - 100vw) / 800px);
+    }
+
     @include mixins.touch {
       flex: none;
       width: 60%;
-    }
-
-    // On less than 1050px Hero Area texts are too close to VerticalMenu
-    @media screen and (min-width: variables.$breakpoint-lg) and (max-width: 1050px) {
-      flex-grow: 1.25;
-      padding-left: 40px;
     }
 
     @include mixins.mobile {
@@ -184,12 +183,23 @@
     position: relative;
 
     @include mixins.text-hover-effect;
+
+    &::after {
+      width: 100%;
+    }
+
+    &:hover {
+      &::after {
+        width: calc(100% + 0.4em);
+      }
+    }
   }
 
   .icon svg {
     width: 100%;
     height: 100%;
     fill: var(--text-color) !important;
+    transform: skew(-15deg);
   }
 
   .title {
@@ -198,22 +208,8 @@
     font-style: italic;
     font-weight: 600;
 
-    @include mixins.desktop-only {
-      margin-right: -50px;
-    }
-
     @include mixins.mobile {
       padding-left: 8%;
-      margin-right: -50px;
-    }
-
-    @include mixins.tablet-only {
-      padding-left: 20px;
-      margin-right: -50px;
-    }
-
-    @include mixins.mobile {
-      margin-right: 0;
 
       @include mixins.text-contour(var(--background-color), 0.05em);
     }
@@ -251,6 +247,10 @@
         }
       }
     }
+  }
+
+  .contactLabel {
+    margin-bottom: 10px;
   }
 
   .textShapeLimiter {
@@ -297,7 +297,7 @@
     img {
       position: absolute;
       top: 0;
-      left: min(0px, calc(20vw - 400px));
+      left: min(0px, calc((20vw - 500px) * 1vh / 1vw));
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -314,14 +314,6 @@
         &.revealed {
           opacity: 1;
         }
-      }
-
-      @include mixins.desktop-only {
-        transform: translateY(-25px) scale(1.3);
-      }
-
-      @include mixins.tablet-only {
-        transform: translate(-14px, -30px) scale(1.3);
       }
 
       @include mixins.mobile {

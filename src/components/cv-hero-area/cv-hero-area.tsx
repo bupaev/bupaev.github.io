@@ -56,7 +56,7 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
               />
               <img
                 src={mobileImage.src}
-                alt="Paul Buramensky portrait"
+                alt="Paul Buramensky"
                 className={styles.realImage}
                 loading="eager"
                 fetchPriority="high"
@@ -75,7 +75,10 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
               <h2 className="text-4xl leading-tight pt-4 pb-4">
                 Front-end engineer and AI-enthusiast with strong UX expertise
               </h2>
-              <p className={`${styles.contacts} pt-6`}>
+              <div className={`${styles.contacts} pt-6`}>
+                <div className={'mb-3'}>
+                  contact me via
+                </div>
                 <span className="mr-6">
                   <a href="mailto:mail@paulbu.com">
                     <span className="icon-text">
@@ -87,13 +90,9 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
                   </a>
                 </span>
                 <span className="mr-6">
-                  <a
-                    href="https://t.me/bupaev"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href="https://t.me/bupaev" target="_blank" rel="noopener noreferrer">
                     <span className="icon-text">
-                      <span className={`icon ${styles.icon}`}>
+                      <span className={`icon ${styles.icon}`} style={{ transform: "skew(-5deg)" }}>
                         <TelegramIcon />
                       </span>
                       <span>Telegram</span>
@@ -101,38 +100,27 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
                   </a>
                 </span>
                 <span>
-                  <a
-                    href="https://www.linkedin.com/in/pavel-buramensky/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href="https://www.linkedin.com/in/pavel-buramensky/" target="_blank" rel="noopener noreferrer">
                     <span className="icon-text">
-                      <span className={`icon ${styles.icon}`}
-                        style={{ transform: "scale(0.9)" }} >
+                      <span className={`icon ${styles.icon}`}>
                         <LinkedinIcon />
                       </span>
                       <span>LinkedIn</span>
                     </span>
                   </a>
                 </span>
-                <span className="md:block">
-                  <span className="mr-3 max-md:hidden md:inline-block align-top -mt-[0.25em]">
-                    or just
-                  </span>
-                  <a
-                    href="/pavel-buramensky-cv.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span className="icon-text">
-                      <span className={`icon ${styles.icon}`}>
-                        <DownloadIcon />
-                      </span>
-                      <span>Download my CV</span>
+                <div className="mb-[9px]">
+                  or just 
+                </div>
+                <a href="/pavel-buramensky-cv.pdf" target="_blank" rel="noopener noreferrer">
+                  <span className="icon-text">
+                    <span className={`icon ${styles.icon}`}>
+                      <DownloadIcon />
                     </span>
-                  </a>
-                </span>
-              </p>
+                    <span>Download my CV</span>
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
           <div className={styles.image}>
