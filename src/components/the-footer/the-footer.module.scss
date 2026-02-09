@@ -2,11 +2,13 @@
 
 .footer {
   position: relative;
+  z-index: 2;
   display: flex;
   flex-flow: row nowrap;
   height: 110px;
   padding: 0;
   font-family: var(--font-accent);
+  background-color: var(--background-color);
   background-image: repeating-linear-gradient(105deg,
       var(--contrasty-transparent-color) 0,
       var(--contrasty-transparent-color) 10px,
