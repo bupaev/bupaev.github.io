@@ -175,8 +175,6 @@
           inset: unset;
           top: -28px;
           left: 64%;
-          // Remove skew
-          transform: scale(1);
         }
       }
     }
@@ -269,20 +267,21 @@
   }
 
   .parallelogramImageContainer {
-    position: absolute; // Requested
-    top: 0; // Requested
-    left: -150px; // Requested
+    position: absolute;
+    top: 0;
+    left: -150px;
+    margin: 0;
+    height: 100%;
     overflow: hidden;
-    height: 100%; // Requested/Maintained
-    aspect-ratio: 1.5; // Requested
-
-    // Use the mask
+    aspect-ratio: 1.5;
     mask-image: url("./images/parallelogram-mask.svg");
     mask-size: 100% 100%;
     mask-repeat: no-repeat;
-
-    // Remove margins as we are using absolute positioning
-    margin: 0;
+    background: repeating-linear-gradient(105deg,
+        var(--accent-color) 0,
+        var(--accent-color) 3px,
+        transparent 4px,
+        transparent 13px);
 
     &::after {
       content: "";
@@ -293,35 +292,6 @@
       width: 100%;
       background-color: rgba(#fff, 0.05);
       pointer-events: none;
-    }
-
-    @include mixins.touch {
-      // Revert to static/relative for touch if needed, but user didn't specify. Assuming desktop context mainly.
-      // But if we apply this globally, it affects mobile too.
-      // On mobile `.image` is `display: none` usually (based on previous code `hidden md:block`), 
-      // wait, `hidden md:block` was removed and replaced with `.image` styles.
-      // In `.image`: `display: none; @include mixins.tablet { display: block; }`.
-      // So `.image` is hidden on mobile. Thus this container is only relevant for tablet/desktop.
-      // However, on tablet/touch, the layout might be different.
-      // Let's keep the user's requested styles as base, but ensure touch styles override if needed.
-      // Actually, previous touch styles had `margin-left: auto; margin-right: -80px`.
-      // If I replace everything with absolute, those margins are irrelevant.
-      // Let's stick to the requested styles as the primary definition.
-    }
-
-    // Previous touch styles were about margins. I'll comment them out or remove them as we are using absolute now.
-    @include mixins.touch {
-      // Ideally we might want to adjust left/aspect-ratio for touch if it looks bad, 
-      // but strictly following instructions: add these styles.
-      // The user said "Instead add this styles", implying replacement of my hacked approach.
-      // I will trust the absolute positioning works for their design.
-      height: 100%;
-      border-radius: 0;
-    }
-
-    @include mixins.tablet-only {
-      height: 100%;
-      border-radius: 0;
     }
 
     img {
@@ -359,6 +329,4 @@
       }
     }
   }
-
-
 }
