@@ -41,11 +41,12 @@
     // Popup background: Adjusted saturation and lightness based on mode
     --popup-bg: hsl(var(--h) calc(var(--s) * var(--popup-s-scale)) calc(var(--l) + var(--popup-l-delta)) / 98%);
 
-    transform: translate(-50%, -50%) scale(0.6);
+    z-index: 999;
+    padding: 30px;
+    pointer-events: none;
     opacity: 0;
     filter: blur(20px);
-    z-index: 999;
-    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.6);
     transition:
         transform 300ms ease-out,
         opacity 300ms ease-out,
@@ -53,24 +54,22 @@
     will-change: transform, opacity, filter;
 
     &.popupVisible {
-        transform: translate(-50%, -50%) scale(1);
+        pointer-events: auto;
         opacity: 1;
         filter: blur(0);
-        pointer-events: auto;
+        transform: translate(-50%, -50%) scale(1);
     }
-
-    padding: 30px;
 }
 
 // Main organic blob shape - core background
 .blobBackground {
     position: absolute;
     inset: 0;
-    pointer-events: none;
-    filter: url("#organic-blob-filter");
-    background: var(--popup-bg, rgb(255 250 248 / 98%));
-    animation: blob-main-morph 4s linear infinite alternate;
     overflow: hidden;
+    pointer-events: none;
+    background: var(--popup-bg, rgb(255 250 248 / 98%));
+    filter: url("#organic-blob-filter");
+    animation: blob-main-morph 4s linear infinite alternate;
 
     @include mixins.sheen-effect(0, 105deg, ".popupVisible:hover &");
 }
@@ -79,9 +78,9 @@
 // Content wrapper inside the blob
 .content {
     position: relative;
+    z-index: 1;
     max-width: 20rem;
     padding: 0.25rem 0.5rem 0.25rem 1rem;
-    z-index: 1;
 
     @include mixins.small-mobile {
         max-width: 16rem;
@@ -95,8 +94,8 @@
     font-family: var(--font-accent, "Dosis", sans-serif);
     font-size: 1.15rem;
     font-weight: 700;
-    color: var(--text-color, #1a1a1a);
     line-height: 1.3;
+    color: var(--text-color, #1a1a1a);
 
     @include mixins.small-mobile {
         font-size: 1rem;
@@ -108,8 +107,8 @@
     margin: 0;
     font-size: 0.9rem;
     font-weight: 400;
-    color: var(--text-color, #333);
     line-height: 1.55;
+    color: var(--text-color, #333);
     opacity: 0.88;
     animation: description-fade-in 400ms ease 100ms backwards;
 

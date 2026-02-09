@@ -3,17 +3,17 @@
 
 .skillBar {
   display: flex;
-  height: 0.7em;
   width: 10em;
+  height: 0.7em;
 
   .segment {
     width: 30%;
     height: 100%;
     margin-right: 3%;
-    transform: skew(-15deg);
+    background-color: var(--background-color);
     border: 1px solid #868686;
     border-radius: 3px;
-    background-color: var(--background-color);
+    transform: skew(-15deg);
 
     &.filled {
       &[data-level="1"] {

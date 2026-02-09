@@ -3,8 +3,8 @@
 .labels {
     position: absolute;
     inset: 0;
-    pointer-events: none;
     overflow: visible;
+    pointer-events: none;
 }
 
 .areaLabelContainer {
@@ -14,26 +14,26 @@
         opacity 300ms ease;
 
     &.active {
-        transform: translate(var(--center-x), var(--center-y)) !important;
         z-index: 10;
+        transform: translate(var(--center-x), var(--center-y)) !important;
         transition-delay: 50ms;
     }
 
     &.inactive {
-        opacity: 0;
         pointer-events: none;
+        opacity: 0;
     }
 }
 
 .areaLabel {
     position: absolute;
-    left: 50%;
     top: 50%;
+    left: 50%;
     font-size: 1.5rem;
     font-weight: 600;
+    line-height: 1.2;
     color: var(--text-color, #1a1a1a);
     text-align: center;
-    line-height: 1.2;
     white-space: nowrap;
     transform: translate(-50%, -50%);
     transition: all 300ms ease;
@@ -57,33 +57,33 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     width: 600px;
     height: 350px;
-    opacity: 0;
     pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -50%);
     transition: opacity 200ms ease;
 
     .active & {
+        pointer-events: auto;
         opacity: 1;
         transition-delay: 150ms;
-        pointer-events: auto;
     }
 }
 
 // Base keyword style
 .keyword {
+    position: absolute;
     top: 50%;
     left: 50%;
-    position: absolute;
-    font-size: 1.2rem;
     max-width: 10rem;
-    text-align: center;
+    padding: 0.25rem 0.5rem;
+    font-size: 1.2rem;
     color: color-mix(in srgb, var(--text-color, #1a1a1a), transparent 30%);
+    text-align: center;
+    cursor: pointer;
     background: transparent;
     border: none;
-    padding: 0.25rem 0.5rem;
-    cursor: pointer;
     transition: filter 300ms ease;
 
     @include mixins.small-mobile {
@@ -98,22 +98,23 @@
 
 // Keyword name inside expanded state
 .keywordName {
+
+    // Sheen effect setup
+    position: relative;
     display: block;
     font-family: var(--font-accent, "Dosis", sans-serif);
     font-weight: 700;
     line-height: 1.3;
     transition: font-size 300ms ease;
 
-    // Sheen effect setup
-    position: relative;
-
     &::after {
-        content: attr(data-text);
         position: absolute;
         inset: 0;
         z-index: 1;
+        color: transparent;
         pointer-events: none;
         user-select: none;
+        content: attr(data-text);
 
         // Gradient Sheen - "Flashlight" effect: reveals full opacity text color
         // Radial Flashlight effect: reveals full opacity text color at cursor
@@ -121,7 +122,6 @@
                 var(--text-color, #1a1a1a) 0%,
                 color-mix(in srgb, var(--text-color, #1a1a1a), transparent 100%) 60%);
         background-clip: text;
-        color: transparent;
         mix-blend-mode: normal;
         opacity: 0;
         transition: opacity 0.3s ease;
@@ -132,8 +132,8 @@
     }
 
     .keywordExpanded & {
-        font-size: 1.1rem;
         margin-bottom: 0.5rem;
+        font-size: 1.1rem;
         color: var(--text-color, #1a1a1a);
     }
 }

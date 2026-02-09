@@ -12,12 +12,12 @@
 .areaTopRight,
 .areaBottomLeft,
 .areaBottomRight {
+    cursor: pointer;
     animation-duration: 1ms;
     animation-timing-function: ease-in-out;
     animation-fill-mode: both;
     animation-timeline: --diagram-timeline;
     animation-range: cover 0% cover 35%;
-    cursor: pointer;
 }
 
 // Define colors using global HSL tokens

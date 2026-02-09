@@ -2,9 +2,9 @@
 
 .footer {
   position: relative;
-  height: 110px;
   display: flex;
   flex-flow: row nowrap;
+  height: 110px;
   padding: 0;
   font-family: var(--font-accent);
   background-image: repeating-linear-gradient(105deg,
@@ -24,7 +24,7 @@
     flex-grow: 1;
     align-items: center;
     justify-content: center;
-    text-align: center;
     line-height: 1.5;
+    text-align: center;
   }
 }

@@ -19,8 +19,8 @@
   }
 
   .itemTitle {
-    line-height: 1.4em;
     padding-right: 0.2em;
+    line-height: 1.4em;
   }
 
   ul {
@@ -39,12 +39,12 @@
 
   .infoIcon {
     display: inline-block;
-    overflow: hidden;
     width: 1em;
     height: 1em;
-    transition: opacity 400ms 100ms;
+    overflow: hidden;
     vertical-align: -0.18em;
     opacity: 1;
+    transition: opacity 400ms 100ms;
 
     img {
       margin-bottom: 0;
@@ -53,11 +53,11 @@
   }
 
   .info {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
     font-size: 0.9em;
     line-height: 1.2em;
-    display: block;
-    overflow: hidden;
-    max-height: 0;
     transition: max-height var(--dark-light-transition) linear;
   }
 

@@ -36,12 +36,12 @@
 
 
   .identityList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
 
     li {
       position: relative;
@@ -52,23 +52,23 @@
       &::before {
         @include mixins.rhombus(var(--text-color));
 
-        content: "";
         position: absolute;
-        left: 0;
         top: 0.5rem;
+        left: 0;
+        content: "";
       }
 
       strong {
-        color: var(--primary-color, var(--text-color));
         font-weight: 600;
+        color: var(--primary-color, var(--text-color));
       }
     }
   }
 
   .diagramContainer {
     @include mixins.desktop {
-      width: calc(40% - 4em);
       float: left;
+      width: calc(40% - 4em);
     }
 
     @include mixins.tablet-only {
@@ -93,9 +93,9 @@
 
   @include mixins.widescreen {
     .sectionWithDelimiter {
+      float: left;
       display: inline-block;
       width: 60%;
-      float: left;
       margin-bottom: 0.1em;
 
       p:nth-child(1) {
@@ -106,22 +106,22 @@
         margin-right: 2%;
 
         &::after {
-          content: "";
           position: absolute;
-          float: left;
           top: 0;
           right: 0;
+          float: left;
           width: 11%;
           height: 100%;
-          opacity: 0.2;
+          content: "";
           background-color: var(--text-color);
+          opacity: 0.2;
           clip-path: polygon(94% 0%, 100% 0%, 6% 100%, 0 100%);
         }
       }
 
       p:nth-child(2) {
-        width: 46%;
         float: left;
+        width: 46%;
       }
     }
   }

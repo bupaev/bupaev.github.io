@@ -72,9 +72,9 @@ $gap: 32px;
 
 @mixin multiline-text-hover-effect($color: variables.$accent-color) {
   background-image: linear-gradient(to top, $color 50%, transparent 50%);
-  background-size: 100% 4px;
-  background-position: 0 100%;
   background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 4px;
   transition: background-size 200ms ease, color 200ms ease;
 
   svg {
@@ -82,10 +82,10 @@ $gap: 32px;
   }
 
   &:hover {
-    padding-left: 0.45em;
     padding-right: 0.45em;
-    margin-left: -0.45em;
+    padding-left: 0.45em;
     margin-right: -0.45em;
+    margin-left: -0.45em;
     color: #000;
 
     // There is a bug in Safari: animation isn't applied to the second linear gradient
@@ -110,16 +110,16 @@ $gap: 32px;
   }
 
   &::after {
-    content: "";
     position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
     width: calc(100% + 0.4em);
     height: 2px;
-    left: 0;
-    bottom: 0;
+    content: "";
     background: $color;
     transform: scaleY(1) skew(-15deg);
     transition: height 250ms ease;
-    z-index: -1;
   }
 
   &:hover {
@@ -130,8 +130,8 @@ $gap: 32px;
     }
 
     &::after {
-      height: 110%;
       left: -0.2em;
+      height: 110%;
     }
   }
 
@@ -152,8 +152,8 @@ $gap: 32px;
 @mixin rhombus($color: #000) {
   position: absolute;
   display: block;
-  height: 0.4em;
   width: 0.4em;
+  height: 0.4em;
   border: 1px solid #{$color};
   transform: rotate(45deg);
 }
@@ -163,36 +163,36 @@ $gap: 32px;
   display: block;
   width: 0;
   height: 0;
+  border-color: #{$color} transparent transparent transparent;
   border-style: solid;
   border-width: 0.4em 0.4em 0;
-  border-color: #{$color} transparent transparent transparent;
 }
 
 @mixin arrow($color: #000, $border-width: 2px) {
   position: absolute;
   display: block;
-  height: 0.5em;
   width: 0.5em;
+  height: 0.5em;
   border-top: $border-width solid #{$color};
   border-left: $border-width solid #{$color};
 }
 
 @mixin sheen-effect($opacity-adjustment: 0, $angle: 90deg, $hover-selector: "&:hover") {
   &::after {
-    content: "";
     position: absolute;
     inset: 0;
-    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+    content: "";
     background: linear-gradient($angle,
         transparent 0%,
         rgb(255 255 255 / 0%) calc(var(--x, 50%) - 40%),
         rgb(255 255 255 / 100%) var(--x, 50%),
         rgb(255 255 255 / 0%) calc(var(--x, 50%) + 40%),
         transparent 100%);
-    transition: opacity 0.3s ease;
     mix-blend-mode: overlay;
-    pointer-events: none;
-    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
 
   #{$hover-selector}::after {

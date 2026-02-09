@@ -12,13 +12,13 @@
     display: block;
     margin-top: -0.8em;
     margin-bottom: 1.1em;
-    font-style: normal;
     font-size: 0.9em;
+    font-style: normal;
   }
 
   :global(h4) {
-    font-size: 1em;
     margin-bottom: 0.2em;
+    font-size: 1em;
   }
 
   :global(h4 + ul) {

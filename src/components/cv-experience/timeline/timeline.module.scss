@@ -10,15 +10,15 @@
 
   // Use more space on tablet and mobile
   @include mixins.until(variables.$breakpoint-lg) {
-    margin-left: -0.5rem;
-    margin-right: -1rem;
     width: calc(100% + 1.5rem);
+    margin-right: -1rem;
+    margin-left: -0.5rem;
   }
 
   .jobRow {
     position: relative;
-    height: 120px;
     width: 100%;
+    height: 120px;
     mask-image: linear-gradient(105deg,
         transparent 20px,
         #000 50px,
@@ -45,10 +45,10 @@
     position: absolute;
     bottom: $year-height;
     left: 1%;
-    height: calc(100% - #{$year-height});
-    width: 100%;
-    transform: skew(-15deg);
     z-index: 1;
+    width: 100%;
+    height: calc(100% - #{$year-height});
+    transform: skew(-15deg);
   }
 
   .job {
@@ -57,14 +57,14 @@
     position: absolute;
     bottom: -1px;
     height: 100%;
-    border: 1px solid var(--text-color);
-    border-radius: $border-radius $border-radius 0 0;
+    padding: 5px 5px 5px 10px;
+    overflow: hidden;
     font-size: 13px;
     font-weight: 700;
-    background-color: rgba(variables.$accent-color, 0.5);
-    padding: 5px 5px 5px 10px;
     cursor: pointer;
-    overflow: hidden;
+    background-color: rgba(variables.$accent-color, 0.5);
+    border: 1px solid var(--text-color);
+    border-radius: $border-radius $border-radius 0 0;
     transform: translateX(-50%);
     transition: all 200ms ease-out;
 
@@ -77,12 +77,12 @@
     }
 
     &:hover {
-      transform: translateX(-50%) scale(1.1, 1.15);
-      border-radius: $border-radius;
-      border-color: transparent;
-      background-color: var(--color-accent);
-      color: #000;
       z-index: 3 !important;
+      color: #000;
+      background-color: var(--color-accent);
+      border-color: transparent;
+      border-radius: $border-radius;
+      transform: translateX(-50%) scale(1.1, 1.15);
 
       // Workaround to avoid a jumping height due to text content and small width of the element
       &:not(.isShort) {
@@ -115,19 +115,19 @@
       display: inline-block;
       width: 100%;
       overflow: hidden;
-      transform: skew(15deg);
       mask-image: linear-gradient(90deg,
           #000 calc(100% - 15px),
           transparent 100%);
+      transform: skew(15deg);
     }
 
     .jobDuration {
       display: none;
       font-size: 0.9em;
-      line-height: 1;
-      font-weight: 400;
-      transform: skew(15deg);
       font-style: italic;
+      font-weight: 400;
+      line-height: 1;
+      transform: skew(15deg);
     }
 
     @include mixins.sheen-effect(0.2);
@@ -139,60 +139,59 @@
     width: 100%;
 
     .year {
-      top: 0;
       position: absolute;
+      top: 0;
       height: $year-height;
-      border-top: 1px solid var(--text-color);
       padding-top: 2px;
-      text-align: center;
       font-size: 14px;
+      text-align: center;
+      border-top: 1px solid var(--text-color);
 
       &::after {
-        font-size: 10px;
-
-        @include mixins.triangle(var(--text-color));
-
-        content: "";
         top: 0;
         left: calc(50% - 0.4em);
+        font-size: 10px;
+        content: "";
+
+        @include mixins.triangle(var(--text-color));
       }
 
       &:last-child::before {
         @include mixins.arrow(var(--text-color), 1px);
 
+        top: -4px;
+        right: 1px;
         content: "";
         transform: rotate(135deg);
-        right: 1px;
-        top: -4px;
       }
     }
   }
 
   .nowMarker {
-    top: 0;
-    margin-left: min(1vw, 14px);
     /* @TODO: Replace this hack with proper fix of Marker position */
     position: absolute;
+    top: 0;
+    margin-left: min(1vw, 14px);
 
     &::before {
       @include mixins.rhombus(var(--accent-color));
 
-      font-size: 16px;
-      content: "";
       top: -2px;
       left: 2px;
+      font-size: 16px;
+      content: "";
       background-color: var(--accent-color);
     }
 
     &::after {
-      content: "NOW";
       position: absolute;
       top: -32px;
       left: 2px;
-      transform: rotate(-75deg);
       font-size: 0.7em;
       font-weight: 700;
       color: var(--accent-color);
+      content: "NOW";
+      transform: rotate(-75deg);
     }
   }
 }

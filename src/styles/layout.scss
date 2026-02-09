@@ -18,8 +18,8 @@
     .columns {
         display: flex;
         flex-wrap: wrap;
-        margin-left: -0.75rem;
         margin-right: -0.75rem;
+        margin-left: -0.75rem;
     }
 
     .column {
@@ -50,21 +50,21 @@
         }
 
         &::after {
-            content: "";
             position: absolute;
-            display: block;
             top: 0;
             right: 0;
+            display: block;
             width: 100%;
             height: calc(100% - 15px);
             max-height: 100%;
-            background-size: 50%;
+            pointer-events: none;
+            content: "";
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: 95% 90%;
+            background-size: 50%;
             opacity: 0.04;
             filter: invert(15%) sepia(32%) saturate(10000%) hue-rotate(185deg) brightness(96%) contrast(86%);
-            pointer-events: none;
 
             [data-color-scheme="dark"] & {
                 opacity: 0.05;
@@ -80,8 +80,8 @@
             }
 
             @include mixins.mobile {
-                background-size: 500px;
                 background-position: right -150px bottom 15%;
+                background-size: 500px;
             }
 
             @include mixins.small-mobile {
@@ -98,12 +98,12 @@
         }
 
         &#education::after {
-            background-image: url("/icons/academic-cap-detailed.svg");
             height: 100%;
+            background-image: url("/icons/academic-cap-detailed.svg");
 
             @include mixins.fullhd {
-                background-size: 720px;
                 background-position-x: 92%;
+                background-size: 720px;
             }
         }
     }
@@ -120,11 +120,11 @@
   * Unlayered styles always defeat layered styles in CSS Cascade Layers.
   */
 .container {
+    z-index: 1;
     width: 100%;
     max-width: unset;
     padding-inline: 0;
     margin-inline: auto;
-    z-index: 1;
 
     @media (min-width: #{variables.$breakpoint-2xl}) {
         max-width: 1344px;

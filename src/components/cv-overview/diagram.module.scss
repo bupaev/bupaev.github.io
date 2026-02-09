@@ -5,20 +5,20 @@
     width: 100%;
     max-width: 800px;
     aspect-ratio: 1.6;
-
-    // Named view-timeline for synchronized child animations
-    view-timeline: --diagram-timeline block;
+    // Mask the diagram to the brain shape
+    mask-image: url("./diagram/black-brain-mask.svg");
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
 
     // Scroll-driven opacity animation for the whole diagram
     // (applied here because SVG filter interferes with area-level opacity)
     animation: diagram-fade-in 1ms ease-in both;
+
+    // Named view-timeline for synchronized child animations
+    view-timeline: --diagram-timeline block;
     animation-timeline: view();
     animation-range: cover 0% cover 10%;
-    // Mask the diagram to the brain shape
-    mask-image: url("./diagram/black-brain-mask.svg");
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    mask-position: center;
 }
 
 @keyframes diagram-fade-in {

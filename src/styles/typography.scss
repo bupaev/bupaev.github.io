@@ -25,24 +25,24 @@
         }
 
         h3 {
+            margin-bottom: 0.6666em;
             font-family: var(--font-accent);
             font-size: 1.5em;
-            margin-bottom: 0.6666em;
         }
 
         h4 {
-            font-size: 1.25em;
             margin-bottom: 0.8em;
+            font-size: 1.25em;
         }
 
         h5 {
-            font-size: 1.125em;
             margin-bottom: 0.8888em;
+            font-size: 1.125em;
         }
 
         h6 {
-            font-size: 1em;
             margin-bottom: 1em;
+            font-size: 1em;
         }
 
         p,
@@ -71,17 +71,16 @@
 
             >li {
                 position: relative;
-                list-style: none;
                 padding-left: 1em;
+                list-style: none;
 
                 &::after {
+                    top: 0.7em;
+                    left: 0.15em;
                     font-size: 0.8em;
+                    content: "";
 
                     @include mixins.rhombus(var(--text-color));
-
-                    content: "";
-                    left: 0.15em;
-                    top: 0.7em;
                 }
             }
         }

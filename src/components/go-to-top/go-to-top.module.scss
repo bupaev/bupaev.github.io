@@ -1,6 +1,7 @@
 @use "@/styles/mixins";
 
 .goToTop {
+  position: relative;
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -8,10 +9,9 @@
   justify-content: center;
   width: 80px;
   height: 100%;
+  overflow: hidden;
   cursor: pointer;
   user-select: none;
-  overflow: hidden;
-  position: relative;
 
   .arrow {
     @include mixins.arrow(var(--contrasty-color), 2px);
@@ -24,13 +24,13 @@
   }
 
   &::before {
-    content: "";
     position: absolute;
-    width: 27px;
     bottom: -100%;
+    width: 27px;
+    height: 70px;
+    content: "";
     background-color: var(--accent-color);
     clip-path: polygon(50% 0, 100% 15%, 100% 100%, 50% 85%, 0 100%, 0 15%);
-    height: 70px;
     transition: bottom 250ms;
   }
 
