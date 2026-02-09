@@ -13,7 +13,6 @@ $menu-open-width: 10em;
 
 .verticalMenu {
   position: fixed;
-  top: max(10vh, 110px);
   left: max(6px, calc((100vw - 2000px) / 2));
   z-index: 3;
   font-family: "Dosis", sans-serif;
@@ -21,8 +20,10 @@ $menu-open-width: 10em;
   user-select: none;
 
   @include mixins.desktop {
-    top: 50%;
-    transform: translateY(-50%);
+    top: 300px;
+    bottom: 300px;
+    height: fit-content;
+    margin-block: auto;
   }
 
   @include mixins.tablet-only {
@@ -37,9 +38,9 @@ $menu-open-width: 10em;
     margin-top: 56px;
     overflow: hidden;
     background-image: linear-gradient(90deg,
-      #e6e6e6 0,
-      #e6e6e6 10px,
-      transparent 10px);
+        #e6e6e6 0,
+        #e6e6e6 10px,
+        transparent 10px);
     opacity: 0;
     transition: opacity 0.3s ease-in;
 
