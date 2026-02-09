@@ -269,7 +269,7 @@
   .parallelogramImageContainer {
     position: absolute;
     top: 0;
-    left: -150px;
+    left: min(-15vh, -100px);
     height: 100%;
     aspect-ratio: 1.5;
     margin: 0;
