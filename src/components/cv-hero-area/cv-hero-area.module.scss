@@ -83,8 +83,7 @@
     flex: 1;
     flex-wrap: wrap;
     align-items: stretch;
-    height: 100%;
-    min-height: 100%;
+    align-self: stretch;
 
     @include mixins.tablet {
       padding-right: 0;
@@ -95,11 +94,6 @@
       min-height: 600px;
       padding: 80px 0 60px;
     }
-  }
-
-  :global(.container) {
-    display: flex;
-    flex: 1;
   }
 
   .mediaWrapper {
@@ -190,6 +184,10 @@
       @include mixins.text-contour(var(--background-color), 0.02em);
 
       padding-left: 15%;
+
+      br {
+        display: none;
+      }
     }
   }
 

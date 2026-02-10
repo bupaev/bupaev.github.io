@@ -38,8 +38,7 @@ const DownloadIcon = () => (
 export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
   return (
     <div className={`${styles.heroArea}`}>
-      <div className="container">
-        <div className={styles.heroBody}>
+      <div className={`container ${styles.heroBody}`}>
           <div className={styles.textWrapper}>
             <div className={`pt-8 ${styles.title}`}>
               <div className={`${styles.textShapeLimiter} max-md:hidden`} />
@@ -47,7 +46,7 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
                 Hi! I&apos;m Paul Buramensky
               </h1>
               <h2 className={styles.heroSubheading}>
-                Lead front-end engineer and AI-enthusiast with strong UX expertise
+                Lead front-end engineer<br /> with strong UX expertise<br /> and AI-enthusiast
               </h2>
               <div className={`${styles.contacts} pt-6`}>
                 <div className={'mb-2'}>
@@ -134,7 +133,6 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
               </picture>
             </div>
           </div>
-        </div>
       </div>
     </div>
   );
