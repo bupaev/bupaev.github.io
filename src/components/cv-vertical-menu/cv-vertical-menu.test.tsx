@@ -11,7 +11,7 @@ describe('CvVerticalMenu', () => {
         vi.spyOn(document, 'getElementById').mockImplementation((id: string) => {
             const sectionMap: Record<string, { clientHeight: number; offsetTop: number }> = {
                 'hero-area': { clientHeight: 500, offsetTop: 0 },
-                'synopsis': { clientHeight: 600, offsetTop: 500 },
+                'overview': { clientHeight: 600, offsetTop: 500 },
                 'skills': { clientHeight: 700, offsetTop: 1100 },
                 'experience': { clientHeight: 400, offsetTop: 1800 },
                 'education': { clientHeight: 500, offsetTop: 2200 },
@@ -56,8 +56,8 @@ describe('CvVerticalMenu', () => {
         it('renders all 5 menu items', async () => {
             await renderAndInitialize();
 
-            expect(screen.getByText('Hello!')).toBeInTheDocument();
-            expect(screen.getByText('Overview')).toBeInTheDocument();
+            expect(screen.getByText('Who I am')).toBeInTheDocument();
+            expect(screen.getByText('My Core')).toBeInTheDocument();
             expect(screen.getByText('Skills')).toBeInTheDocument();
             expect(screen.getByText('Experience')).toBeInTheDocument();
             expect(screen.getByText('Education')).toBeInTheDocument();
@@ -70,8 +70,8 @@ describe('CvVerticalMenu', () => {
             expect(buttons).toHaveLength(5);
 
             // Check ARIA labels for accessibility
-            expect(buttons[0]).toHaveAttribute('aria-label', 'Navigate to Hello! section');
-            expect(buttons[1]).toHaveAttribute('aria-label', 'Navigate to Overview section');
+            expect(buttons[0]).toHaveAttribute('aria-label', 'Navigate to Who I am section');
+            expect(buttons[1]).toHaveAttribute('aria-label', 'Navigate to My Core section');
             expect(buttons[2]).toHaveAttribute('aria-label', 'Navigate to Skills section');
         });
 
@@ -87,7 +87,7 @@ describe('CvVerticalMenu', () => {
         it('scrolls to correct section when menu item clicked', async () => {
             await renderAndInitialize();
 
-            const overviewButton = screen.getByRole('button', { name: /navigate to overview/i });
+            const overviewButton = screen.getByRole('button', { name: /navigate to my core/i });
             expect(overviewButton).toBeInTheDocument();
 
             await act(async () => {
@@ -104,7 +104,7 @@ describe('CvVerticalMenu', () => {
         it('scrolls to first section (hero) when first menu item clicked', async () => {
             await renderAndInitialize();
 
-            const helloButton = screen.getByRole('button', { name: /navigate to hello/i });
+            const helloButton = screen.getByRole('button', { name: /navigate to who i am/i });
 
             await act(async () => {
                 fireEvent.click(helloButton);

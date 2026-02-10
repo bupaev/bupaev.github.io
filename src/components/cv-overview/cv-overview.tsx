@@ -7,7 +7,7 @@ import styles from "./cv-overview.module.scss";
 export function CvOverview() {
   return (
     <div className={`${styles.overview} container`}>
-      <h2 className="title text-4xl leading-tight">Overview</h2>
+      <h2 className="title text-4xl leading-tight">My Professional Core</h2>
       <div className={styles.strategicIdentity}>
         <div className={styles.diagramColumn}>
           <Diagram />

@@ -47,7 +47,7 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
                 Hi! I&apos;m Paul Buramensky
               </h1>
               <h2 className={styles.heroSubheading}>
-                Front-end engineer and AI-enthusiast with strong UX expertise
+                Lead front-end engineer and AI-enthusiast with strong UX expertise
               </h2>
               <div className={`${styles.contacts} pt-6`}>
                 <div className={'mb-2'}>

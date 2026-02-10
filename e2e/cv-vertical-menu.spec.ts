@@ -53,15 +53,14 @@ test.describe('CvVerticalMenu - Navigation', () => {
     test('clicking menu item scrolls to overview section', async ({ page, isMobile }) => {
         test.skip(isMobile, 'Desktop-only test');
 
-        // Overview/Synopsis is the 2nd item (index 1)
+        // Overview/overview is the 2nd item (index 1)
         const menu = page.locator('nav[class*="verticalMenu"]');
         const overviewItem = menu.locator('> div > button[class*="item"]').nth(1);
         await overviewItem.click();
         await page.waitForTimeout(1000);
 
-        // Section ID is 'synopsis' not 'overview'
-        const synopsisSection = page.locator('#synopsis');
-        await expect(synopsisSection).toBeInViewport();
+        const overviewSection = page.locator('#overview');
+        await expect(overviewSection).toBeInViewport();
     });
 
     test('clicking menu item scrolls to skills section', async ({ page, isMobile }) => {

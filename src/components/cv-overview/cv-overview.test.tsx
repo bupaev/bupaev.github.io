@@ -15,9 +15,9 @@ describe('CvOverview', () => {
         cleanup();
     });
 
-    it('renders the Overview heading', () => {
+    it('renders the core heading', () => {
         render(<CvOverview />);
-        expect(screen.getByText('Overview')).toBeInTheDocument();
+        expect(screen.getByText('My Professional Core')).toBeInTheDocument();
     });
 
     it('renders the Diagram component', () => {
