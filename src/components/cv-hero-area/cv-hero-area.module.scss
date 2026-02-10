@@ -126,19 +126,16 @@
 
     // text column gradually increases width, which shifts the image column progressively to the right
     @media screen and (max-width: variables.$breakpoint-3xl) and (min-width: variables.$breakpoint-md) {
-      flex-grow: calc(1 + (1500px - 100vw) / 800px);
-    }
-
-    @include mixins.touch {
-      flex: none;
-      width: 60%;
+      flex-grow: calc(1 + (1500px - 100vw) / 700px);
+      transform: translateX(clamp(0px, calc(25px * (960px - 100vw) / 100px), 36px));
     }
 
     @include mixins.mobile {
       flex: none;
       width: 100%;
-      padding-left: calc(40% + 1rem);
-      text-align: left;
+      padding-right: calc(5px + 10 * ((100vw - 360px) / 100));
+      padding-left: 240px;
+      text-align: right;
     }
   }
 
@@ -190,12 +187,6 @@
         height: 1.3em;
       }
     }
-
-    @include mixins.touch {
-      font-size: 1.3rem;
-    }
-
-
   }
 
   .contactLabel {
