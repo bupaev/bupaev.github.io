@@ -13,6 +13,12 @@ export function CvOverview() {
           <Diagram />
         </div>
         <div className={styles.contentColumn}>
+          I am a Product Engineer who acts as a diplomat between stakeholders,
+          a guardian of quality, and a pragmatic architect.
+          Every aspect of my professional core—from AI to Leadership -
+          is subservient to one single goal: building a great product.
+          <br />
+          <br />
           <ul className={styles.identityList}>
             <li>
               <strong>Technical Orchestrator:</strong> I don&apos;t just write
