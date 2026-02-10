@@ -84,16 +84,10 @@
       padding-left: 10px;
     }
 
-    @include mixins.touch {
-      min-height: 500px;
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-
     @include mixins.mobile {
-      padding-right: 20px;
-      padding-bottom: 45px;
-      margin-bottom: 0;
+      flex-direction: row-reverse;
+      padding-right: 0;
+      padding-left: 0;
     }
   }
 
@@ -103,28 +97,21 @@
   }
 
   .image {
-    position: relative; // Added context for absolute child
-    display: none;
+    position: relative;
+    display: block;
     flex: 1 1 0;
     height: 100%;
-
-    @include mixins.tablet {
-      display: block;
-    }
-
-    @include mixins.touch {
-      flex: none;
-      width: 40%;
-    }
 
     .parallelogramImageContainer {
       height: 100%;
     }
 
-    @include mixins.desktop {
-      .parallelogramImageContainer {
-        height: 100%;
-      }
+    @include mixins.mobile {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40%;
+      height: 100%;
     }
   }
 
@@ -148,34 +135,10 @@
     }
 
     @include mixins.mobile {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      // can't just use ".is-full-mobile" cause ".is-three-fifths-touch" has higher priority
+      flex: none;
       width: 100%;
-      min-height: 478px;
-
-      .parallelogramImageContainer {
-        position: absolute;
-        top: 0;
-        left: -196px;
-        z-index: 0;
-        width: 250px;
-        height: 600px;
-        margin-right: 0;
-        margin-left: 0;
-        mask-image: url("./images/parallelogram-mask.svg");
-        mask-repeat: no-repeat;
-        mask-size: 100% 100%;
-
-        img {
-          position: absolute;
-          inset: unset;
-          top: -28px;
-          left: 64%;
-          width: auto;
-        }
-      }
+      padding-left: calc(40% + 1rem);
+      text-align: left;
     }
   }
 
@@ -209,8 +172,6 @@
     font-weight: 600;
 
     @include mixins.mobile {
-      padding-left: 8%;
-
       @include mixins.text-contour(var(--background-color), 0.05em);
     }
   }
@@ -234,19 +195,7 @@
       font-size: 1.3rem;
     }
 
-    @include mixins.mobile {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
 
-      &>span {
-        margin-right: 0 !important;
-
-        a {
-          margin-left: 1em;
-        }
-      }
-    }
   }
 
   .contactLabel {
@@ -283,6 +232,12 @@
     mask-repeat: no-repeat;
     mask-size: 100% 100%;
 
+    @include mixins.mobile {
+      left: 0;
+      aspect-ratio: 0.268;
+      mask-image: url("./images/parallelogram-mobile-mask.svg");
+    }
+
     &::after {
       position: absolute;
       top: 0;
@@ -297,10 +252,14 @@
     img {
       position: absolute;
       top: 0;
-      left: min(0px, calc((20vw - 500px) * 1vh / 1vw));
+      left: min(0px, calc((20vw - 450px) * 1vh / 1vw));
       width: 100%;
       height: 100%;
       object-fit: cover;
+
+      @include mixins.mobile {
+        left: 0;
+      }
 
       &.placeholderImage {
         opacity: 1;
@@ -314,10 +273,6 @@
         &.revealed {
           opacity: 1;
         }
-      }
-
-      @include mixins.mobile {
-        transform: translate(-24px, -30px) scale(1.3);
       }
     }
   }

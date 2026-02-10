@@ -42,31 +42,6 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
       <div className="container">
         <div className="hero-body">
           <div className={styles.text}>
-            <div
-              className={`${styles.parallelogramImageContainer} md:hidden`}
-            >
-              <img
-                src={mobileImage.placeholderSrc}
-                alt=""
-                aria-hidden="true"
-                className={styles.placeholderImage}
-                loading="eager"
-                fetchPriority="high"
-                decoding="sync"
-              />
-              <img
-                src={mobileImage.src}
-                alt="Paul Buramensky"
-                className={styles.realImage}
-                loading="eager"
-                fetchPriority="high"
-                decoding="sync"
-                ref={(img) => {
-                  if (img?.complete) img.classList.add(styles.revealed);
-                }}
-                onLoad={(e) => e.currentTarget.classList.add(styles.revealed)}
-              />
-            </div>
             <div className={`title pt-8 ${styles.title}`}>
               <div className={`${styles.textShapeLimiter} max-md:hidden`} />
               <h1 className="text-5xl leading-tight text-right">
@@ -125,27 +100,39 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
           </div>
           <div className={styles.image}>
             <div className={styles.parallelogramImageContainer}>
-              <img
-                src={desktopImage.placeholderSrc}
-                alt=""
-                aria-hidden="true"
-                className={styles.placeholderImage}
-                loading="eager"
-                fetchPriority="high"
-                decoding="sync"
-              />
-              <img
-                src={desktopImage.src}
-                alt="Paul Buramensky portrait"
-                className={styles.realImage}
-                loading="eager"
-                fetchPriority="high"
-                decoding="sync"
-                ref={(img) => {
-                  if (img?.complete) img.classList.add(styles.revealed);
-                }}
-                onLoad={(e) => e.currentTarget.classList.add(styles.revealed)}
-              />
+              <picture>
+                <source
+                  media="(max-width: 768px)"
+                  srcSet={mobileImage.src}
+                />
+                <img
+                  src={desktopImage.placeholderSrc}
+                  alt=""
+                  aria-hidden="true"
+                  className={styles.placeholderImage}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="sync"
+                />
+              </picture>
+              <picture>
+                <source
+                  media="(max-width: 768px)"
+                  srcSet={mobileImage.src}
+                />
+                <img
+                  src={desktopImage.src}
+                  alt="Paul Buramensky portrait"
+                  className={styles.realImage}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="sync"
+                  ref={(img) => {
+                    if (img?.complete) img.classList.add(styles.revealed);
+                  }}
+                  onLoad={(e) => e.currentTarget.classList.add(styles.revealed)}
+                />
+              </picture>
             </div>
           </div>
         </div>
