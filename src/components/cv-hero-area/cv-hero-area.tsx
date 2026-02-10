@@ -40,7 +40,7 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
   return (
     <div className={`${styles.heroArea} hero`}>
       <div className="container">
-        <div className="hero-body">
+        <div className={styles.heroBody}>
           <div className={styles.textWrapper}>
             <div className={`pt-8 ${styles.title}`}>
               <div className={`${styles.textShapeLimiter} max-md:hidden`} />

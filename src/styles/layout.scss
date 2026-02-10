@@ -6,13 +6,13 @@
 // Wrapped in @layer base so Tailwind utilities can override
 // ============================================
 @layer base {
-    .hero {
+    .cv-page {
         position: relative;
-    }
-
-    .hero-body {
-        position: relative;
-        z-index: 1;
+        color: var(--text-color);
+        background-color: var(--background-color);
+        transition:
+            background-color 0.3s ease,
+            color 0.3s ease;
     }
 
     .columns {
@@ -30,8 +30,10 @@
 
     .section {
         position: relative;
+        z-index: 2;
         padding: 3rem 3rem 3rem 5rem;
         font-size: 1.1em;
+        background-color: var(--background-color);
 
         @include mixins.tablet-only {
             padding: 3rem 1rem 3rem 4rem;
@@ -44,6 +46,16 @@
 
     #education {
         padding-bottom: 100px;
+    }
+
+    .hero-area-section {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+
+        @include mixins.mobile {
+            position: relative;
+        }
     }
 
     .with-background {

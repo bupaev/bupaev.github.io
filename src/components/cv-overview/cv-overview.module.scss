@@ -1,6 +1,8 @@
 @use "@/styles/mixins";
 
 .overview {
+    overflow: hidden;
+
   .strategicIdentity {
     display: flex;
     flex-direction: column;

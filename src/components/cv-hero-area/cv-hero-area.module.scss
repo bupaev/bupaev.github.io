@@ -2,7 +2,7 @@
 @use "@/styles/variables";
 
 .heroArea {
-  position: relative;
+  top: 0;
   z-index: 2;
   display: flex;
   min-height: max(100vh, 650px);
@@ -71,7 +71,9 @@
     }
   }
 
-  :global(.hero-body) {
+  .heroBody {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex: 1;
     flex-wrap: wrap;
@@ -84,10 +86,6 @@
       padding-left: 10px;
     }
 
-    @include mixins.mobile {
-      padding-right: 0;
-      padding-left: 0;
-    }
   }
 
   :global(.container) {
@@ -103,8 +101,8 @@
 
     @include mixins.mobile {
       position: absolute;
-      top: clamp(-130px, calc(60vw - 350px), 0px);
-      left: clamp(-50px, calc(25vw - 130px), 0px);
+      top: clamp(-100px, calc(60vw - 300px), 0px);
+      left: clamp(-30px, calc(25vw - 100px), 0px);
     }
   }
 
