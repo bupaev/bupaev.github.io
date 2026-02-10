@@ -36,7 +36,6 @@ const DownloadIcon = () => (
 );
 
 export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
-
   return (
     <div className={`${styles.heroArea}`}>
       <div className="container">
@@ -51,7 +50,7 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
                 Front-end engineer and AI-enthusiast with strong UX expertise
               </h2>
               <div className={`${styles.contacts} pt-6`}>
-                <div className={'mb-3'}>
+                <div className={'mb-2'}>
                   contact me via
                 </div>
                 <span>
@@ -84,7 +83,7 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
                     </span>
                   </a>
                 </span>
-                <div className="mb-[9px]">
+                <div className="mb-[6px]">
                   or just 
                 </div>
                 <a href="/pavel-buramensky-cv.pdf" target="_blank" rel="noopener noreferrer">
