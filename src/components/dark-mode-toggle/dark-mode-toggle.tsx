@@ -57,7 +57,6 @@ export function DarkModeToggle() {
 
   const toggleClasses = [
     styles.darkModeToggle,
-    "max-lg:hidden",
     isDark ? styles.darkModeEnabled : "",
     isCompact ? styles.compact : "",
   ]

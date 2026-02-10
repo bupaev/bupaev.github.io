@@ -1,3 +1,5 @@
+@use "../../styles/mixins";
+
 // @TODO: Rework styles to make it more robust
 // Now it's extremely fragile. E.g. depends on width of labels
 .darkModeToggle {
@@ -13,6 +15,12 @@
   border: 2px solid var(--accent-color);
   border-radius: 9999px;
   transition: background-color 400ms, width 400ms;
+
+  @include mixins.mobile {
+    position: absolute;
+    right: 6px;
+    left: auto;
+  }
 
   .slider {
     position: absolute;
