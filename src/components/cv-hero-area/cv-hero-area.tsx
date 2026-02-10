@@ -41,20 +41,20 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
     <div className={`${styles.heroArea} hero`}>
       <div className="container">
         <div className="hero-body">
-          <div className={styles.text}>
-            <div className={`title pt-8 ${styles.title}`}>
+          <div className={styles.textWrapper}>
+            <div className={`pt-8 ${styles.title}`}>
               <div className={`${styles.textShapeLimiter} max-md:hidden`} />
-              <h1 className="text-5xl leading-tight text-right">
+              <h1 className={styles.heroHeading}>
                 Hi! I&apos;m Paul Buramensky
               </h1>
-              <h2 className="text-4xl leading-tight pt-4 pb-4">
+              <h2 className={styles.heroSubheading}>
                 Front-end engineer and AI-enthusiast with strong UX expertise
               </h2>
               <div className={`${styles.contacts} pt-6`}>
                 <div className={'mb-3'}>
                   contact me via
                 </div>
-                <span className="mr-6">
+                <span>
                   <a href="mailto:mail@paulbu.com">
                     <span className="icon-text">
                       <span className={`icon ${styles.icon}`}>
@@ -64,10 +64,10 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
                     </span>
                   </a>
                 </span>
-                <span className="mr-6">
+                <span>
                   <a href="https://t.me/bupaev" target="_blank" rel="noopener noreferrer">
                     <span className="icon-text">
-                      <span className={`icon ${styles.icon}`} style={{ transform: "skew(-5deg)" }}>
+                      <span className={`icon ${styles.icon}`} style={{ transform: "skew(0)" }}>
                         <TelegramIcon />
                       </span>
                       <span>Telegram</span>
@@ -98,7 +98,7 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
               </div>
             </div>
           </div>
-          <div className={styles.media}>
+          <div className={styles.mediaWrapper}>
             <div className={styles.parallelogramImageContainer}>
               <picture>
                 <source

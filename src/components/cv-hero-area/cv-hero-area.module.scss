@@ -85,7 +85,6 @@
     }
 
     @include mixins.mobile {
-      flex-direction: row-reverse;
       padding-right: 0;
       padding-left: 0;
     }
@@ -96,26 +95,20 @@
     flex: 1;
   }
 
-  .media {
+  .mediaWrapper {
     position: relative;
     display: block;
     flex: 1 1 0;
     height: 100%;
 
-    .parallelogramImageContainer {
-      height: 100%;
-    }
-
     @include mixins.mobile {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 40%;
-      height: 100%;
+      top: clamp(-130px, calc(60vw - 350px), 0px);
+      left: clamp(-50px, calc(25vw - 130px), 0px);
     }
   }
 
-  .text {
+  .textWrapper {
     position: relative;
     z-index: 1;
     display: flex;
@@ -133,8 +126,7 @@
     @include mixins.mobile {
       flex: none;
       width: 100%;
-      padding-right: calc(5px + 10 * ((100vw - 360px) / 100));
-      padding-left: 240px;
+      padding-right: calc(10px + 10 * ((100vw - 360px) / 100));
       text-align: right;
     }
   }
@@ -167,9 +159,30 @@
     z-index: 1;
     font-style: italic;
     font-weight: 600;
+  }
+
+  .heroHeading {
+    font-size: 3rem;
+    line-height: 1.25;
+    text-align: right;
 
     @include mixins.mobile {
-      @include mixins.text-contour(var(--background-color), 0.05em);
+      @include mixins.text-contour(var(--background-color), 0.02em);
+
+      padding-left: 25%;
+    }
+  }
+
+  .heroSubheading {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 2.25rem;
+    line-height: 1.25;
+
+    @include mixins.mobile {
+      @include mixins.text-contour(var(--background-color), 0.02em);
+
+      padding-left: 15%;
     }
   }
 
@@ -181,6 +194,11 @@
     &>span {
       display: inline-block;
       padding-bottom: 15px;
+      margin-left: 1em;
+
+      @include mixins.mobile {
+        margin-left: 0.5em;
+      }
 
       a {
         display: inline-block;
@@ -243,7 +261,7 @@
     img {
       position: absolute;
       top: 0;
-      left: min(0px, calc((20vw - 450px) * 1vh / 1vw));
+      left: min(0px, calc((20vw - 480px) * 1vh / 1vw));
       width: 100%;
       height: 100%;
       object-fit: cover;
