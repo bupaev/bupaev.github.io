@@ -9,7 +9,7 @@ import styles from "./cv-vertical-menu.module.scss";
  * Mobile breakpoint for vertical menu positioning behavior.
  * Menu appears below hero and becomes sticky on scroll for viewports <= this width.
  */
-const TOUCH_SCREEN_BREAKPOINT = 960;
+const TOUCH_SCREEN_BREAKPOINT = 768;
 
 export function CvVerticalMenu() {
   const menuRef = useRef<HTMLDivElement>(null);

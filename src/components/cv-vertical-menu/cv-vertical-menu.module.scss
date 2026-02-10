@@ -19,7 +19,7 @@ $menu-open-width: 10em;
   font-size: 20px;
   user-select: none;
 
-  @include mixins.desktop {
+  @include mixins.tablet {
     top: 300px;
     bottom: 300px;
     height: fit-content;
@@ -31,7 +31,7 @@ $menu-open-width: 10em;
   }
 
   // position and top values also managed by JS in the parent component
-  @include mixins.touch {
+  @include mixins.mobile {
     position: absolute;
     top: var(--hero-height, 0);
     width: 14px;
@@ -59,7 +59,6 @@ $menu-open-width: 10em;
     }
   }
 
-
   .item {
     display: flex;
     width: 2em;
@@ -85,7 +84,7 @@ $menu-open-width: 10em;
       }
     }
 
-    @include mixins.touch {
+    @include mixins.mobile {
       position: relative;
       height: 15vh;
       overflow: visible;
@@ -221,7 +220,7 @@ $menu-open-width: 10em;
     background-color: rgba(variables.$accent-color, 0.2);
     border-left: 2px variables.$accent-color solid;
 
-    @include mixins.touch {
+    @include mixins.mobile {
       top: 0;
       left: 0;
       width: 10px;
