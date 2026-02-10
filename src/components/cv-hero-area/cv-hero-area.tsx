@@ -39,8 +39,7 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
   return (
     <div className={`${styles.heroArea}`}>
       <div className={`container ${styles.heroBody}`}>
-          <div className={styles.textWrapper}>
-            <div className={`pt-8 ${styles.title}`}>
+          <div className={`${styles.textWrapper} pt-8`}>
               <div className={`${styles.textShapeLimiter} max-md:hidden`} />
               <h1 className={styles.heroHeading}>
                 Hi! I&apos;m Paul Buramensky
@@ -94,7 +93,6 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
                   </span>
                 </a>
               </div>
-            </div>
           </div>
           <div className={styles.mediaWrapper}>
             <div className={styles.parallelogramImageContainer}>

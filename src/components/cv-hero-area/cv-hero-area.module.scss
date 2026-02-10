@@ -112,10 +112,10 @@
   .textWrapper {
     position: relative;
     z-index: 1;
-    display: flex;
     flex: 1 1 0;
-    flex-direction: column;
-    justify-content: center;
+    align-self: center;
+    font-style: italic;
+    font-weight: 600;
     text-align: right;
 
     // text column gradually increases width, which shifts the image column progressively to the right
@@ -155,12 +155,7 @@
     transform: skew(-15deg);
   }
 
-  .title {
-    position: relative;
-    z-index: 1;
-    font-style: italic;
-    font-weight: 600;
-  }
+
 
   .heroHeading {
     font-size: 3rem;
