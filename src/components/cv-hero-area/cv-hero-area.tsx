@@ -98,7 +98,7 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
               </div>
             </div>
           </div>
-          <div className={styles.image}>
+          <div className={styles.media}>
             <div className={styles.parallelogramImageContainer}>
               <picture>
                 <source
