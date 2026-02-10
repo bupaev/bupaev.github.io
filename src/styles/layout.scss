@@ -33,7 +33,11 @@
         padding: 3rem 3rem 3rem 5rem;
         font-size: 1.1em;
 
-        @include mixins.touch {
+        @include mixins.tablet-only {
+            padding: 3rem 1rem 3rem 4rem;
+        }
+
+        @include mixins.mobile {
             padding: 3rem 1.5rem;
         }
     }
