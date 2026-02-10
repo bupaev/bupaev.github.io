@@ -6,6 +6,10 @@
 // Wrapped in @layer base so Tailwind utilities can override
 // ============================================
 @layer base {
+    .hero {
+        position: relative;
+    }
+
     .cv-page {
         position: relative;
         color: var(--text-color);

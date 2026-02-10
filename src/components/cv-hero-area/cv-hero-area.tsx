@@ -38,7 +38,7 @@ const DownloadIcon = () => (
 export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
 
   return (
-    <div className={`${styles.heroArea} hero`}>
+    <div className={`${styles.heroArea}`}>
       <div className="container">
         <div className={styles.heroBody}>
           <div className={styles.textWrapper}>
