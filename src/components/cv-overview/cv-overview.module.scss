@@ -5,14 +5,12 @@
 
   .strategicIdentity {
     display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    flex-direction: row;
     margin-bottom: 2.5rem;
 
-    @include mixins.desktop {
-      flex-direction: row;
-      gap: 3rem;
-      align-items: flex-start;
+    @include mixins.mobile {
+      flex-direction: column;
+      gap: 2rem;
     }
   }
 
