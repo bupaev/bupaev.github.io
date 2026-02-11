@@ -231,6 +231,16 @@ export function CvSkills() {
     <div className={`${styles.skills} container`}>
       <h2 className="title text-4xl leading-tight font-bold">Skills</h2>
       <div className="content">
+        <p>
+          We are currently experiencing a tectonic shift in the IT industry. 
+          Skills that were critical yesterday and defined your market value, 
+          are rapidly losing their relevance today, as AI handles syntax and coding far better than any human.
+        </p>
+        <p>
+          I am fortunate that writing code was never my end goal or sole skill.
+          What has always truly interested me is creating real, working products that I can be proud of.
+          Nevertheless, the good old list of tools and technologies I possess may still be useful.
+        </p>
         <h3>What I can do:</h3>
         <ul>
           <li>
