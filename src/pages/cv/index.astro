@@ -4,6 +4,7 @@ import { DarkModeToggle } from "../../components/dark-mode-toggle/dark-mode-togg
 import { CvVerticalMenu } from "../../components/cv-vertical-menu/cv-vertical-menu";
 import CvHeroArea from "../../components/cv-hero-area/cv-hero-area.astro";
 import { CvOverview } from "../../components/cv-overview/cv-overview";
+import { CvFitCheck } from "../../components/cv-right-fit/cv-fit-check";
 import { CvSkills } from "../../components/cv-skills/cv-skills";
 import CvExperience from "../../components/cv-experience/cv-experience.astro";
 import { CvEducation } from "../../components/cv-education/cv-education";
@@ -23,6 +24,10 @@ import { TheFooter } from "../../components/the-footer/the-footer";
 
     <section id="overview" class="section anchor-for-navigation is-primary">
       <CvOverview client:visible />
+    </section>
+
+    <section id="fit-check" class="section anchor-for-navigation is-primary">
+      <CvFitCheck client:visible />
     </section>
 
     <section
