@@ -1,4 +1,5 @@
 @use "@/styles/mixins";
+@use "@/styles/variables";
 
 .overview {
     overflow: hidden;
@@ -15,25 +16,22 @@
   }
 
   .diagramColumn {
-    flex: 1;
-    min-width: 0;
+    width: 950px;
 
-    @include mixins.desktop {
-      flex: 0 0 66.666%;
-      max-width: 66.666%;
+    @include mixins.until(variables.$breakpoint-2xl) {
+      width: 850px;
+    }
+
+    @include mixins.until(variables.$breakpoint-xl) {
+      width: 100%;
     }
   }
 
   .contentColumn {
     flex: 1;
+    width: 100%;
     min-width: 0;
-
-    @include mixins.desktop {
-      flex: 0 0 33.333%;
-      max-width: 33.333%;
-    }
   }
-
 
   .identityList {
     display: flex;
@@ -61,67 +59,6 @@
       strong {
         font-weight: 600;
         color: var(--primary-color, var(--text-color));
-      }
-    }
-  }
-
-  .diagramContainer {
-    @include mixins.desktop {
-      float: left;
-      width: calc(40% - 4em);
-    }
-
-    @include mixins.tablet-only {
-      float: left;
-      width: 50%;
-    }
-  }
-
-  .bullet {
-    position: relative;
-    display: inline-block;
-    width: 0.5em;
-    height: 0.5em;
-    padding-right: 0.8em;
-
-    &::after {
-      @include mixins.rhombus(var(--text-color));
-
-      content: "";
-    }
-  }
-
-  @include mixins.widescreen {
-    .sectionWithDelimiter {
-      float: left;
-      display: inline-block;
-      width: 60%;
-      margin-bottom: 0.1em;
-
-      p:nth-child(1) {
-        position: relative;
-        float: left;
-        width: 52%;
-        padding-right: 6%;
-        margin-right: 2%;
-
-        &::after {
-          position: absolute;
-          top: 0;
-          right: 0;
-          float: left;
-          width: 11%;
-          height: 100%;
-          content: "";
-          background-color: var(--text-color);
-          opacity: 0.2;
-          clip-path: polygon(94% 0%, 100% 0%, 6% 100%, 0 100%);
-        }
-      }
-
-      p:nth-child(2) {
-        float: left;
-        width: 46%;
       }
     }
   }
