@@ -15,7 +15,7 @@ describe('CvFitCheck', () => {
     it('renders the subtitle', () => {
         render(<CvFitCheck />);
         expect(
-            screen.getByText(/reasonable perfectionist who cares about the product/),
+            screen.getByText(/To save our mutual time, here is a breakdown/),
         ).toBeInTheDocument();
     });
 
@@ -32,13 +32,13 @@ describe('CvFitCheck', () => {
     it('renders "I Fit" labels for all criteria', () => {
         render(<CvFitCheck />);
         const fitLabels = screen.getAllByText('I Fit');
-        expect(fitLabels).toHaveLength(6);
+        expect(fitLabels).toHaveLength(7); // 6 cards + 1 header
     });
 
     it('renders "I Don\'t Fit" labels for all criteria', () => {
         render(<CvFitCheck />);
         const noFitLabels = screen.getAllByText("I Don't Fit");
-        expect(noFitLabels).toHaveLength(6);
+        expect(noFitLabels).toHaveLength(7); // 6 cards + 1 header
     });
 
     it('renders fit and no-fit card text for Product Complexity', () => {
