@@ -5,54 +5,50 @@
     overflow: hidden;
 
   .strategicIdentity {
-    display: flex;
-    flex-direction: row;
+    display: flow-root;
     margin-bottom: 2.5rem;
-
-    @include mixins.mobile {
-      flex-direction: column;
-      gap: 2rem;
-    }
   }
 
   .diagramColumn {
+    float: left;
     width: 950px;
+    margin-right: 2rem;
+    margin-bottom: 1rem;
 
     @include mixins.until(variables.$breakpoint-2xl) {
       width: 850px;
     }
 
     @include mixins.until(variables.$breakpoint-xl) {
+      float: none;
       width: 100%;
+      margin-right: 0;
+      margin-bottom: 2rem;
     }
   }
 
-  .contentColumn {
-    flex: 1;
-    width: 100%;
-    min-width: 0;
-  }
-
   .identityList {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    display: block;
     padding: 0;
     margin: 0;
     list-style: none;
 
     li {
-      position: relative;
-      padding-left: 1.5rem;
+      margin-bottom: 1rem;
       line-height: 1.6;
       color: var(--text-color);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
 
       &::before {
         @include mixins.rhombus(var(--text-color));
 
-        position: absolute;
-        top: 0.5rem;
-        left: 0;
+        position: relative;
+        top: -1px;
+        display: inline-block;
+        margin-right: 0.75rem;
         content: "";
       }
 
