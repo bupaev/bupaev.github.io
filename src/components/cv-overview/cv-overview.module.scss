@@ -2,7 +2,7 @@
 @use "@/styles/variables";
 
 .overview {
-    overflow: hidden;
+    overflow: clip;
 
   .overviewContent {
     display: flow-root;

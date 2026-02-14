@@ -72,7 +72,15 @@ export function Diagram() {
     const activeId = expandedTopic ? expandedTopic.areaId : sortId;
 
     return (
-        <div ref={containerRef} className={styles.diagram}>
+        <div
+            ref={containerRef}
+            className={styles.diagram}
+            style={
+                {
+                    "--animation-complete-threshold": ANIMATION_COMPLETE_THRESHOLD,
+                } as React.CSSProperties
+            }
+        >
             <AreasGeometry
                 areas={AREAS}
                 scaleId={effectiveScaleId}

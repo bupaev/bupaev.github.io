@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 // 1. The CSS animation finishes (matches `animation-range: cover 50%`)
 // 2. The blur filter transitions to a stronger value for the full "gooey" effect (static state)
 // 3. User interactions (hover effects) are enabled
-export const ANIMATION_COMPLETE_THRESHOLD = 0.3;
+export const ANIMATION_COMPLETE_THRESHOLD = 0.6;
 
 // Low blur stdDeviation used during animation.
 // A smaller radius reduces the rendering cost of the filter, ensuring smooth 60fps scrolling.
