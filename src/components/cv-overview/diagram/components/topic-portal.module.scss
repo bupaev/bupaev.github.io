@@ -9,38 +9,9 @@
     pointer-events: none;
 }
 
-// Theme classes for different skill areas
-// Colors are dynamically calculated from the base area HSL values
-// and global modifiers defined in tokens.scss
-.themeTopLeft {
-    --h: var(--diag-tl-h);
-    --s: var(--diag-tl-s);
-    --l: var(--diag-tl-l);
-}
-
-.themeTopRight {
-    --h: var(--diag-tr-h);
-    --s: var(--diag-tr-s);
-    --l: var(--diag-tr-l);
-}
-
-.themeBottomLeft {
-    --h: var(--diag-bl-h);
-    --s: var(--diag-bl-s);
-    --l: var(--diag-bl-l);
-}
-
-.themeBottomRight {
-    --h: var(--diag-br-h);
-    --s: var(--diag-br-s);
-    --l: var(--diag-br-l);
-}
-
 // Calculate the final colors using the variables set above
 .popup {
-    // Popup background: Adjusted saturation and lightness based on mode
-    --popup-bg: hsl(var(--h) calc(var(--s) * var(--popup-s-scale)) calc(var(--l) + var(--popup-l-delta)) / 98%);
-
+    // Popup background color is now provided by the theme class
     z-index: 999;
     padding: 30px;
     pointer-events: none;
@@ -83,7 +54,7 @@
     padding: 0.25rem 0.5rem 0.25rem 1rem;
 
     @include mixins.small-mobile {
-        max-width: 16rem;
+        max-width: 90vw;
         padding: 1rem 1.25rem;
     }
 }

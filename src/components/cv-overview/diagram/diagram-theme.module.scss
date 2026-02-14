@@ -1,0 +1,31 @@
+// Shared theme definitions for diagram components
+// These classes define the color variables for each area
+// and calculate derived colors like --popup-bg
+
+.themeTopLeft {
+    --h: var(--diag-tl-h);
+    --s: var(--diag-tl-s);
+    --l: var(--diag-tl-l);
+    --popup-bg: hsl(var(--h) calc(var(--s) * var(--popup-s-scale)) calc(var(--l) + var(--popup-l-delta)) / 98%);
+}
+
+.themeTopRight {
+    --h: var(--diag-tr-h);
+    --s: var(--diag-tr-s);
+    --l: var(--diag-tr-l);
+    --popup-bg: hsl(var(--h) calc(var(--s) * var(--popup-s-scale)) calc(var(--l) + var(--popup-l-delta)) / 98%);
+}
+
+.themeBottomLeft {
+    --h: var(--diag-bl-h);
+    --s: var(--diag-bl-s);
+    --l: var(--diag-bl-l);
+    --popup-bg: hsl(var(--h) calc(var(--s) * var(--popup-s-scale)) calc(var(--l) + var(--popup-l-delta)) / 98%);
+}
+
+.themeBottomRight {
+    --h: var(--diag-br-h);
+    --s: var(--diag-br-s);
+    --l: var(--diag-br-l);
+    --popup-bg: hsl(var(--h) calc(var(--s) * var(--popup-s-scale)) calc(var(--l) + var(--popup-l-delta)) / 98%);
+}

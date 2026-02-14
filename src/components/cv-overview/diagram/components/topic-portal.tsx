@@ -2,6 +2,7 @@ import { createPortal } from "react-dom";
 import { useEffect, useRef, useState, useCallback } from "react";
 import type { AreaId, TopicInfo } from "../data";
 import styles from "./topic-portal.module.scss";
+import themeStyles from "../diagram-theme.module.scss";
 
 /** Unique filter ID for the organic blob effect */
 const ORGANIC_FILTER_ID = "organic-blob-filter";
@@ -22,10 +23,10 @@ type TopicPortalProps = {
 
 /** Maps area ID to its theme class */
 const THEME_CLASS_MAP: Record<AreaId, string> = {
-    topLeft: styles.themeTopLeft,
-    topRight: styles.themeTopRight,
-    bottomLeft: styles.themeBottomLeft,
-    bottomRight: styles.themeBottomRight,
+    topLeft: themeStyles.themeTopLeft,
+    topRight: themeStyles.themeTopRight,
+    bottomLeft: themeStyles.themeBottomLeft,
+    bottomRight: themeStyles.themeBottomRight,
 };
 
 /**

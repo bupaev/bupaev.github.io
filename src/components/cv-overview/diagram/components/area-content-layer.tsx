@@ -3,6 +3,8 @@ import type { AreaData, AreaId, TopicInfo } from "../data";
 import { TopicPortal } from "./topic-portal";
 import styles from "./area-content-layer.module.scss";
 
+import themeStyles from "../diagram-theme.module.scss";
+
 // Base dimensions of the diagram container (SVG viewport size)
 const CONTAINER_WIDTH = 800;
 const CONTAINER_HEIGHT = 500;
@@ -14,11 +16,11 @@ const CONTAINER_CENTER_Y = CONTAINER_HEIGHT / 2 - CONTAINER_HEIGHT / 20;
 // Coordinate used to move the mouse position effectively "off-screen" when the mouse leaves the container
 const MOUSE_OFF_SCREEN_COORD = Math.max(CONTAINER_WIDTH, CONTAINER_HEIGHT) * 20;
 
-// Horizontal radius for the elliptical distribution of topics (30% of container width)
-const TOPIC_DISTRIBUTION_RADIUS_X = CONTAINER_WIDTH * 0.3;
+// Horizontal radius for the elliptical distribution of topics 
+const TOPIC_DISTRIBUTION_RADIUS_X = CONTAINER_WIDTH * 0.27;
 
-// Vertical radius for the elliptical distribution of topics (40% of container height)
-const TOPIC_DISTRIBUTION_RADIUS_Y = CONTAINER_HEIGHT * 0.3;
+// Vertical radius for the elliptical distribution of topics
+const TOPIC_DISTRIBUTION_RADIUS_Y = CONTAINER_HEIGHT * 0.27;
 
 // Maximum distance from cursor for magnification effect (30% of container height)
 const MOUSE_PROXIMITY_THRESHOLD = CONTAINER_HEIGHT * 0.3;
@@ -47,6 +49,14 @@ const HEADING_CLASS_MAP: Record<AreaId, string> = {
     topRight: styles.headingTopRight,
     bottomLeft: styles.headingBottomLeft,
     bottomRight: styles.headingBottomRight,
+};
+
+/** Maps area ID to its theme class */
+const THEME_CLASS_MAP: Record<AreaId, string> = {
+    topLeft: themeStyles.themeTopLeft,
+    topRight: themeStyles.themeTopRight,
+    bottomLeft: themeStyles.themeBottomLeft,
+    bottomRight: themeStyles.themeBottomRight,
 };
 
 type ExpandedTopic = {
@@ -157,7 +167,7 @@ export function AreaContentLayer({ areas, scaleId, expandedTopic, containerRef, 
                     return (
                         <div
                             key={area.id}
-                            className={`${styles.areaContentContainer} ${isHovered ? styles.active : ""
+                            className={`${styles.areaContentContainer} ${THEME_CLASS_MAP[area.id]} ${isHovered ? styles.active : ""
                                 } ${isOtherHovered ? styles.inactive : ""}`}
                             style={
                                 {
@@ -242,6 +252,8 @@ function TopicButton({ topic, kx, ky, scale, isExpanded, zIndex, onClick }: Topi
         const y = ((e.clientY - rect.top) / rect.height) * 100;
         e.currentTarget.style.setProperty("--x", `${x}%`);
         e.currentTarget.style.setProperty("--y", `${y}%`);
+        e.currentTarget.style.setProperty("--x-px", `${(e.clientX - rect.left).toFixed(1)}px`);
+        e.currentTarget.style.setProperty("--y-px", `${(e.clientY - rect.top).toFixed(1)}px`);
     };
 
     return (

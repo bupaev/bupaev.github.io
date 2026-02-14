@@ -1,14 +1,16 @@
 @use "@/styles/mixins";
+@use "@/styles/variables";
 
 .diagram {
     position: relative;
-    width: calc(100% + 60px);
+    width: 112%;
     aspect-ratio: 1.58;
+    container-type: inline-size;
     mask-image: url("./diagram/black-brain-mask.svg");
     mask-repeat: no-repeat;
     mask-position: center;
     mask-size: contain;
-    transform: translateX(-50px);
+    transform: translateX(-6%);
 
     // Scroll-driven opacity animation for the whole diagram
     // (applied here because SVG filter interferes with area-level opacity)
@@ -16,6 +18,10 @@
     view-timeline: --diagram-timeline block;
     animation-timeline: view();
     animation-range: cover 0% cover 10%;
+
+    @include mixins.until(variables.$breakpoint-lg) {
+        transform: translateX(-5%);
+    }
 }
 
 @keyframes diagram-fade-in {
