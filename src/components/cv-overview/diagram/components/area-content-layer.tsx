@@ -78,6 +78,18 @@ type AreaContentLayerProps = {
 
 export function AreaContentLayer({ areas, scaleId, expandedTopic, containerRef, diagramRef, onMouseEnter, onMouseLeave, onTopicToggle }: AreaContentLayerProps) {
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const [isLargeScreen, setIsLargeScreen] = useState(false);
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia("(min-width: 577px)");
+        const handler = (e: MediaQueryListEvent) => setIsLargeScreen(e.matches);
+
+        // Set initial value
+        setIsLargeScreen(mediaQuery.matches);
+
+        mediaQuery.addEventListener("change", handler);
+        return () => mediaQuery.removeEventListener("change", handler);
+    }, []);
 
     const handleMouseMove = (e: React.MouseEvent) => {
         if (!containerRef.current) return;
@@ -178,9 +190,11 @@ export function AreaContentLayer({ areas, scaleId, expandedTopic, containerRef, 
                             onMouseEnter={() => onMouseEnter(area.id)}
                             onMouseLeave={onMouseLeave}
                         >
-                            <h3 className={`${styles.areaHeading} ${HEADING_CLASS_MAP[area.id]}`}>
-                                {area.heading}
-                            </h3>
+                            <div className={`${styles.headingWrapper} ${HEADING_CLASS_MAP[area.id]}`}>
+                                <h3 className={styles.areaHeading}>
+                                    {area.heading}
+                                </h3>
+                            </div>
 
                             <div className={styles.topics}>
                                 {area.topics.map((topic, i) => {
@@ -192,7 +206,8 @@ export function AreaContentLayer({ areas, scaleId, expandedTopic, containerRef, 
                                     const dist = Math.sqrt(Math.pow(mousePos.x - kx, 2) + Math.pow(mousePos.y - ky, 2));
 
                                     let scale = TOPIC_MIN_SCALE;
-                                    if (dist < MOUSE_PROXIMITY_THRESHOLD) {
+                                    // Only apply scaling on large screens
+                                    if (isLargeScreen && dist < MOUSE_PROXIMITY_THRESHOLD) {
                                         scale = TOPIC_MIN_SCALE + (TOPIC_MAX_SCALE - TOPIC_MIN_SCALE) * (1 - dist / MOUSE_PROXIMITY_THRESHOLD);
                                     }
 
