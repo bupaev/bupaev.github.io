@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import type { AreaData, AreaId, TopicInfo } from "../data";
 import { TopicPortal } from "./topic-portal";
-import styles from "./area-content-layer.module.scss";
+import styles from "./area-content.module.scss";
 
 import themeStyles from "../diagram-theme.module.scss";
 
@@ -64,7 +64,7 @@ type ExpandedTopic = {
     topicIndex: number;
 } | null;
 
-type AreaContentLayerProps = {
+type AreaContentProps = {
     areas: AreaData[];
     scaleId: AreaId | null;
     expandedTopic: ExpandedTopic;
@@ -76,7 +76,7 @@ type AreaContentLayerProps = {
     onTopicToggle: (areaId: AreaId, topicIndex: number) => void;
 };
 
-export function AreaContentLayer({ areas, scaleId, expandedTopic, containerRef, diagramRef, onMouseEnter, onMouseLeave, onTopicToggle }: AreaContentLayerProps) {
+export function AreaContent({ areas, scaleId, expandedTopic, containerRef, diagramRef, onMouseEnter, onMouseLeave, onTopicToggle }: AreaContentProps) {
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [isLargeScreen, setIsLargeScreen] = useState(false);
 

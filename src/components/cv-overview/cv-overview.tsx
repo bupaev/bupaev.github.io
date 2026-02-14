@@ -6,11 +6,13 @@ export function CvOverview() {
   return (
     <div className={`${styles.overview} container`}>
       <h2 className="title text-4xl leading-tight">My Professional Core</h2>
-      <div className={styles.strategicIdentity}>
-        <div className={styles.diagramColumn}>
+      <div className={styles.overviewContent}>
+        <div className={styles.diagramWrapper}>
           <Diagram />
         </div>
-        <div className={styles.contentColumn}>
+        <div className={styles.textWrapper}>
+          In 3 words I'm <strong>product-oriented reasonable perfectionist</strong>.
+          <br />
           I am a Product Engineer who acts as a diplomat between stakeholders,
           a guardian of quality, and a pragmatic architect.
           Every aspect of my professional core—from AI to Leadership -

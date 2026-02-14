@@ -2,8 +2,8 @@ import { useRef, useEffect, useState } from "react";
 import { AREAS, type AreaId } from "./diagram/data";
 import { useHoverState } from "./diagram/hooks/use-hover-state";
 import { useBlurAnimation, ANIMATION_COMPLETE_THRESHOLD } from "./diagram/hooks/use-blur-animation";
-import { AreasLayer } from "./diagram/components/areas-layer";
-import { AreaContentLayer } from "./diagram/components/area-content-layer";
+import { AreasGeometry } from "./diagram/components/areas-geometry";
+import { AreaContent } from "./diagram/components/area-content";
 import styles from "./diagram.module.scss";
 
 /** Tracks which topic is expanded: area ID and topic index */
@@ -73,7 +73,7 @@ export function Diagram() {
 
     return (
         <div ref={containerRef} className={styles.diagram}>
-            <AreasLayer
+            <AreasGeometry
                 areas={AREAS}
                 scaleId={effectiveScaleId}
                 sortId={activeId}
@@ -81,7 +81,7 @@ export function Diagram() {
                 onMouseEnter={onAreaEnter}
                 onMouseLeave={handleMouseLeave}
             />
-            <AreaContentLayer
+            <AreaContent
                 areas={AREAS}
                 scaleId={effectiveScaleId}
                 expandedTopic={expandedTopic}

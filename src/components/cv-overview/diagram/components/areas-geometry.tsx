@@ -1,6 +1,6 @@
 import type { RefObject } from "react";
 import type { AreaData, AreaId } from "../data";
-import styles from "./areas-layer.module.scss";
+import styles from "./areas-geometry.module.scss";
 
 /** Maps area id to its CSS fill class */
 const AREA_CLASS_MAP: Record<AreaId, string> = {
@@ -10,7 +10,7 @@ const AREA_CLASS_MAP: Record<AreaId, string> = {
     bottomRight: styles.areaBottomRight,
 };
 
-type AreasLayerProps = {
+type AreasGeometryProps = {
     areas: AreaData[];
     scaleId: AreaId | null;
     sortId: AreaId | null;
@@ -28,7 +28,7 @@ function getTransform(id: AreaId, cx: number, cy: number, scaleX: number, scaleY
     return "translate(0px, 0px) scale(1, 1)";
 }
 
-export function AreasLayer({ areas, scaleId, sortId, blurRef, onMouseEnter, onMouseLeave }: AreasLayerProps) {
+export function AreasGeometry({ areas, scaleId, sortId, blurRef, onMouseEnter, onMouseLeave }: AreasGeometryProps) {
     // Render the active (sorted) area last so it appears on top
     const otherAreas = areas.filter((p) => p.id !== sortId);
     const activeArea = areas.find((p) => p.id === sortId);
