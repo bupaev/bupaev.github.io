@@ -29,7 +29,7 @@ export const AREAS: AreaData[] = [
         cy: 170,
         heading: (
             <>
-                Front-end
+                Software
                 <br />
                 engineering
             </>

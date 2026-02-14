@@ -104,7 +104,7 @@ describe('Diagram', () => {
 
     it('renders headings for all skill areas', () => {
         render(<Diagram />);
-        expect(screen.getByText('Front-end', { exact: false })).toBeInTheDocument();
+        expect(screen.getByText(/Software/, { exact: false })).toBeInTheDocument();
         expect(screen.getByText('Leadership')).toBeInTheDocument();
         expect(screen.getByText('UI/UX Design')).toBeInTheDocument();
         expect(screen.getByText('AI expertize')).toBeInTheDocument();
