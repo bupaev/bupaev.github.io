@@ -16,7 +16,7 @@ export type MenuItem = {
 export const MENU_ITEMS: MenuItem[] = [
     { title: "Who I am", id: "hero-area", icon: "head-with-glasses.svg" },
     { title: "My Core", id: "overview", icon: "venn-diagram.svg" },
-    { title: "Right Fit", id: "fit-check", icon: "right-fit.svg" },
+    { title: "Fit Check", id: "fit-check", icon: "right-fit.svg" },
     { title: "Skills", id: "skills", icon: "pen-and-wrench.svg" },
     { title: "Experience", id: "experience", icon: "mountain-with-flag.svg" },
     { title: "Education", id: "education", icon: "academic-cap.svg" },

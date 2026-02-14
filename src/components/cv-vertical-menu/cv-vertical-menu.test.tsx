@@ -59,7 +59,7 @@ describe('CvVerticalMenu', () => {
 
             expect(screen.getByText('Who I am')).toBeInTheDocument();
             expect(screen.getByText('My Core')).toBeInTheDocument();
-            expect(screen.getByText('Right Fit')).toBeInTheDocument();
+            expect(screen.getByText('Fit Check')).toBeInTheDocument();
             expect(screen.getByText('Skills')).toBeInTheDocument();
             expect(screen.getByText('Experience')).toBeInTheDocument();
             expect(screen.getByText('Education')).toBeInTheDocument();
@@ -74,7 +74,7 @@ describe('CvVerticalMenu', () => {
             // Check ARIA labels for accessibility
             expect(buttons[0]).toHaveAttribute('aria-label', 'Navigate to Who I am section');
             expect(buttons[1]).toHaveAttribute('aria-label', 'Navigate to My Core section');
-            expect(buttons[2]).toHaveAttribute('aria-label', 'Navigate to Right Fit section');
+            expect(buttons[2]).toHaveAttribute('aria-label', 'Navigate to Fit Check section');
         });
 
         it('renders visible area marker', async () => {
