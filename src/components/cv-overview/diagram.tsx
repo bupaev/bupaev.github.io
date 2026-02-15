@@ -77,7 +77,7 @@ export function Diagram() {
             className={styles.diagram}
             style={
                 {
-                    "--animation-complete-threshold": ANIMATION_COMPLETE_THRESHOLD,
+                    "--animation-complete-threshold": `${ANIMATION_COMPLETE_THRESHOLD * 100}%`,
                 } as React.CSSProperties
             }
         >

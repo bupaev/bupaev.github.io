@@ -3,7 +3,7 @@ import type { AreaData, AreaId, TopicInfo } from "../data";
 import { TopicPortal } from "./topic-portal";
 import styles from "./area-content.module.scss";
 
-import themeStyles from "../diagram-theme.module.scss";
+import themeStyles from "../diagram-config.module.scss";
 
 // Base dimensions of the diagram container (SVG viewport size)
 const CONTAINER_WIDTH = 800;

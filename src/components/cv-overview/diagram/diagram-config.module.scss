@@ -2,6 +2,10 @@
 // These classes define the color variables for each area
 // and calculate derived colors like --popup-bg
 
+:root {
+    --animation-start-offset: 5%;
+}
+
 .themeTopLeft {
     --h: var(--diag-tl-h);
     --s: var(--diag-tl-s);

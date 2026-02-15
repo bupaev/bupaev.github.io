@@ -1,5 +1,6 @@
 @use "@/styles/mixins";
 
+
 .gooSvg {
     position: absolute;
     inset: 0;
@@ -17,7 +18,7 @@
     animation-timing-function: ease-in-out;
     animation-fill-mode: both;
     animation-timeline: --diagram-timeline;
-    animation-range: cover 20% cover 60%;
+    animation-range: cover var(--animation-start-offset) cover var(--animation-complete-threshold);
 }
 
 // Define colors using global HSL tokens

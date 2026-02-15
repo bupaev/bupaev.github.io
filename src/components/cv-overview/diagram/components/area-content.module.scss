@@ -177,27 +177,27 @@
 // Heading entrance animations (scroll-driven)
 .headingTopLeft {
     transform: translate(-62%, -65%);
-    animation: heading-slide-from-top-left 1ms ease-out both;
+    animation: heading-slide-from-top-left 1ms ease-in-out both;
     animation-timeline: --diagram-timeline;
-    animation-range: cover 15% cover calc(var(--animation-complete-threshold) * 100%);
+    animation-range: cover var(--animation-start-offset) cover var(--animation-complete-threshold);
 }
 
 .headingTopRight {
-    animation: heading-slide-from-top-right 1ms ease-out both;
+    animation: heading-slide-from-top-right 1ms ease-in-out both;
     animation-timeline: --diagram-timeline;
-    animation-range: cover 15% cover calc(var(--animation-complete-threshold) * 100%);
+    animation-range: cover var(--animation-start-offset) cover var(--animation-complete-threshold);
 }
 
 .headingBottomLeft {
-    animation: heading-slide-from-bottom-left 1ms ease-out both;
+    animation: heading-slide-from-bottom-left 1ms ease-in-out both;
     animation-timeline: --diagram-timeline;
-    animation-range: cover 15% cover calc(var(--animation-complete-threshold) * 100%);
+    animation-range: cover var(--animation-start-offset) cover var(--animation-complete-threshold);
 }
 
 .headingBottomRight {
-    animation: heading-slide-from-bottom-right 1ms ease-out both;
+    animation: heading-slide-from-bottom-right 1ms ease-in-out both;
     animation-timeline: --diagram-timeline;
-    animation-range: cover 15% cover calc(var(--animation-complete-threshold) * 100%);
+    animation-range: cover var(--animation-start-offset) cover var(--animation-complete-threshold);
 }
 
 @keyframes heading-slide-from-top-left {
