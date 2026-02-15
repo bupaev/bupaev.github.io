@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState, useRef } from "react";
 import styles from "./cv-hero-area.module.scss";
 
 interface ImageProps {
@@ -10,6 +11,8 @@ interface ImageProps {
 export interface CvHeroAreaProps {
   desktopImage: ImageProps;
   mobileImage: ImageProps;
+  darkDesktopImage?: ImageProps;
+  darkMobileImage?: ImageProps;
 }
 
 const LinkedinIcon = () => (
@@ -35,7 +38,126 @@ const DownloadIcon = () => (
   </svg>
 );
 
-export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
+// Helper component for controlled images to reduce duplication
+const ControlledImage = ({
+  desktop,
+  mobile,
+  className,
+  priority = false, // If true, load immediately/eagerly
+  onLoad,
+}: {
+  desktop: ImageProps;
+  mobile: ImageProps;
+  className: string;
+  priority?: boolean;
+  onLoad?: () => void;
+}) => {
+  const [loaded, setLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  // If priority is false, we want to delay loading until permitted (handled by parent passing priority=true eventually)
+  // BUT: standard HTML behavior is that if src is present, it loads.
+  // So we only render the "real" picture sources if priority is true.
+  
+  return (
+    <div className={className}>
+      <picture>
+        <source media="(max-width: 768px)" srcSet={mobile.placeholderSrc} />
+        <img
+          src={desktop.placeholderSrc}
+          alt=""
+          aria-hidden="true"
+          className={`${styles.placeholderImage} ${loaded ? styles.hidden : ""}`}
+        />
+      </picture>
+      
+      {priority && (
+        <picture>
+          <source media="(max-width: 768px)" srcSet={mobile.src} />
+          <img
+            ref={imgRef}
+            src={desktop.src}
+            alt="Paul Buramensky portrait"
+            className={`${styles.realImage} ${loaded ? styles.revealed : ""}`}
+            loading={priority ? "eager" : "lazy"}
+            fetchPriority={priority ? "high" : "auto"}
+            decoding="sync"
+            onLoad={() => {
+              setLoaded(true);
+              onLoad?.();
+            }}
+          />
+        </picture>
+      )}
+    </div>
+  );
+};
+
+
+export function CvHeroArea({ 
+  desktopImage, 
+  mobileImage,
+  darkDesktopImage,
+  darkMobileImage 
+}: CvHeroAreaProps) {
+  const [mounted, setMounted] = useState(false);
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    
+    // Initial theme check
+    const checkTheme = () => {
+      const theme = document.documentElement.getAttribute("data-color-scheme");
+      setIsDark(theme === "dark");
+    };
+    
+    checkTheme();
+
+    // Observer for theme changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === "data-color-scheme") {
+          checkTheme();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-color-scheme"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // When theme changes, if the new primary image isn't loaded, we might want to reset primaryLoaded?
+  // Logic: 
+  // If I am Dark, Dark image is Primary. Light image is Secondary.
+  // If I switch to Light, Light image becomes Primary. Dark image becomes Secondary.
+  // If Light was already loaded (from previous visit or background load), great.
+  // If not, it becomes priority.
+  // The ControlledImage component handles its own "loaded" state.
+  // We just need to tell which one is allowed to load first.
+  
+  // Strategy:
+  // "Primary" is the one matching current theme. PROPS: priority=true.
+  // "Secondary" is the other. PROPS: priority=primaryLoaded.
+  
+  // Wait! If I switch theme, "primaryLoaded" might refer to the OLD primary.
+  // We need distinct "lightLoaded" and "darkLoaded" states at this level to coordinate?
+  // No, `ControlledImage` handles the actual loading of the image resource.
+  // The prompt asked: "Unused image has to be loaded with lower priority, only when visible image are loaded".
+  // So:
+  // Light Image Priority = (isLight) OR (isDark AND darkImageLoaded)
+  // Dark Image Priority = (isDark) OR (isLight AND lightImageLoaded)
+
+  const [lightImageLoaded, setLightImageLoaded] = useState(false);
+  const [darkImageLoaded, setDarkImageLoaded] = useState(false);
+
+  const lightPriority = !isDark || darkImageLoaded;
+  const darkPriority = isDark || lightImageLoaded;
+
   return (
     <div className={`${styles.heroArea}`}>
       <div className={`container ${styles.heroBody}`}>
@@ -96,39 +218,74 @@ export function CvHeroArea({ desktopImage, mobileImage }: CvHeroAreaProps) {
           </div>
           <div className={styles.mediaWrapper}>
             <div className={styles.parallelogramImageContainer}>
-              <picture>
-                <source
-                  media="(max-width: 768px)"
-                  srcSet={mobileImage.src}
-                />
-                <img
-                  src={desktopImage.placeholderSrc}
-                  alt=""
-                  aria-hidden="true"
-                  className={styles.placeholderImage}
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="sync"
-                />
-              </picture>
-              <picture>
-                <source
-                  media="(max-width: 768px)"
-                  srcSet={mobileImage.src}
-                />
-                <img
-                  src={desktopImage.src}
-                  alt="Paul Buramensky portrait"
-                  className={styles.realImage}
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="sync"
-                  ref={(img) => {
-                    if (img?.complete) img.classList.add(styles.revealed);
-                  }}
-                  onLoad={(e) => e.currentTarget.classList.add(styles.revealed)}
-                />
-              </picture>
+              {!mounted ? (
+                /* SSR / No-JS Fallback: Use native picture with media queries */
+                /* This ensures LCP is fast and correct based on system pref */
+                <>
+                {darkDesktopImage && darkMobileImage ? (
+                   <picture>
+                     {/* Dark Mode Sources */}
+                     <source 
+                       media="(prefers-color-scheme: dark) and (max-width: 768px)" 
+                       srcSet={darkMobileImage.src} 
+                     />
+                     <source 
+                       media="(prefers-color-scheme: dark)" 
+                       srcSet={darkDesktopImage.src} 
+                     />
+                     
+                     {/* Light Mode Sources (Default) */}
+                     <source 
+                        media="(max-width: 768px)" 
+                        srcSet={mobileImage.src} 
+                     />
+                     <img
+                       src={desktopImage.src}
+                       alt="Paul Buramensky portrait"
+                       className={styles.realImage + ' ' + styles.revealed}
+                       loading="eager"
+                       fetchPriority="high"
+                       decoding="sync"
+                     />
+                   </picture>
+                ) : (
+                  <picture>
+                    <source
+                      media="(max-width: 768px)"
+                      srcSet={mobileImage.src}
+                    />
+                    <img
+                      src={desktopImage.src}
+                      alt="Paul Buramensky portrait"
+                      className={styles.realImage + ' ' + styles.revealed}
+                      loading="eager"
+                      fetchPriority="high"
+                      decoding="sync"
+                    />
+                  </picture>
+                )}
+                </>
+              ) : (
+                /* Hydrated: Controlled Images with Manual Toggle Support */
+                <>
+                  <ControlledImage 
+                    desktop={desktopImage} 
+                    mobile={mobileImage} 
+                    className={styles.lightImage}
+                    priority={lightPriority}
+                    onLoad={() => setLightImageLoaded(true)}
+                  />
+                  {darkDesktopImage && darkMobileImage && (
+                    <ControlledImage 
+                      desktop={darkDesktopImage} 
+                      mobile={darkMobileImage} 
+                      className={styles.darkImage}
+                      priority={darkPriority}
+                      onLoad={() => setDarkImageLoaded(true)}
+                    />
+                  )}
+                </>
+              )}
             </div>
           </div>
       </div>

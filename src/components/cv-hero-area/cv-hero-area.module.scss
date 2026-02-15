@@ -273,6 +273,11 @@
       &.placeholderImage {
         opacity: 1;
         filter: blur(20px);
+        transition: opacity 0.6s ease-out;
+
+        &.hidden {
+          opacity: 0;
+        }
       }
 
       &.realImage {
@@ -282,6 +287,42 @@
         &.revealed {
           opacity: 1;
         }
+      }
+    }
+
+    // Container styles for the controlled images to ensure they overlap
+    .lightImage,
+    .darkImage {
+      position: absolute;
+      inset: 0;
+      will-change: opacity;
+    }
+
+    // Default: Light mode active
+    .lightImage {
+      z-index: 1;
+      opacity: 1;
+      // When going to Light mode (active): Become opaque instantly so we are ready behind the fading-out dark image
+      transition: opacity 0s;
+    }
+
+    .darkImage {
+      z-index: 2;
+      opacity: 0;
+      // Always fade smoothly
+      transition: opacity 300ms ease-in-out;
+    }
+
+    // Dark mode overrides
+    :global([data-color-scheme="dark"]) & {
+      .lightImage {
+        opacity: 0;
+        // When going to Dark mode (inactive): Stay opaque until the dark image (on top) has fully faded in
+        transition: opacity 0s linear 300ms;
+      }
+
+      .darkImage {
+        opacity: 1;
       }
     }
   }

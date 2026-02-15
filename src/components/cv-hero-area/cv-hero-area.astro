@@ -3,6 +3,8 @@ import { getImage } from "astro:assets";
 import { CvHeroArea as CvHeroAreaReact } from "./cv-hero-area";
 import portraitDesktop from "./images/portrait-desktop.avif";
 import portraitMobile from "./images/portrait-mobile-2x.avif";
+import portraitDarkDesktop from "./images/portrait-dark-desktop.avif";
+import portraitDarkMobile from "./images/portrait-dark-mobile-2x.avif";
 
 const desktopPlaceholder = await getImage({
   src: portraitDesktop,
@@ -11,6 +13,18 @@ const desktopPlaceholder = await getImage({
 });
 const mobilePlaceholder = await getImage({
   src: portraitMobile,
+  width: 20,
+  format: "avif",
+});
+
+const darkDesktopPlaceholder = await getImage({
+  src: portraitDarkDesktop,
+  width: 20,
+  format: "avif",
+});
+
+const darkMobilePlaceholder = await getImage({
+  src: portraitDarkMobile,
   width: 20,
   format: "avif",
 });
@@ -25,5 +39,13 @@ const mobilePlaceholder = await getImage({
   mobileImage={{
     src: portraitMobile.src,
     placeholderSrc: mobilePlaceholder.src,
+  }}
+  darkDesktopImage={{
+    src: portraitDarkDesktop.src,
+    placeholderSrc: darkDesktopPlaceholder.src,
+  }}
+  darkMobileImage={{
+    src: portraitDarkMobile.src,
+    placeholderSrc: darkMobilePlaceholder.src,
   }}
 />
