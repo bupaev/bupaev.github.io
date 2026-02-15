@@ -56,7 +56,8 @@
         "declaration-block-single-line-max-declarations": null,
         "no-duplicate-selectors": null,
         "selector-attribute-quotes": null,
-        "nesting-selector-no-missing-scoping-root": null
+        "nesting-selector-no-missing-scoping-root": null,
+        "@stylistic/max-empty-lines": 1
     },
     "overrides": [
         {
