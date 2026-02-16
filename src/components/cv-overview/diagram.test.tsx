@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { render, screen, fireEvent, cleanup, act } from '@testing-library/react';
+import { render, screen, fireEvent, cleanup, act, within } from '@testing-library/react';
 import { Diagram } from './diagram';
 
 describe('Diagram', () => {
@@ -13,6 +13,21 @@ describe('Diagram', () => {
         vi.useFakeTimers();
         rafCallbacks = [];
         rafIdCounter = 0;
+
+        // Mock matchMedia
+        Object.defineProperty(window, 'matchMedia', {
+            writable: true,
+            value: vi.fn().mockImplementation(query => ({
+                matches: false,
+                media: query,
+                onchange: null,
+                addListener: vi.fn(), // deprecated
+                removeListener: vi.fn(), // deprecated
+                addEventListener: vi.fn(),
+                removeEventListener: vi.fn(),
+                dispatchEvent: vi.fn(),
+            })),
+        });
 
         vi.stubGlobal('IntersectionObserver', vi.fn(function (this: unknown, callback: IntersectionObserverCallback) {
             mockIntersectionCallback = callback;
@@ -245,5 +260,55 @@ describe('Diagram', () => {
 
         const inactiveContainers = container.querySelectorAll('[class*="inactive"]');
         expect(inactiveContainers).toHaveLength(3);
+    });
+
+    it('opens topic popup on click and closes via close button', async () => {
+        render(<Diagram />);
+        const topicName = 'Scalable SPA Architecture';
+        // Get button specifically
+        const topicButton = screen.getByText(topicName).closest('button');
+        expect(topicButton).toBeTruthy();
+
+        // Click topic to open portal
+        await act(async () => {
+            fireEvent.click(topicButton!);
+        });
+
+        // Manually flush effects and rAFs to ensure portal renders
+        await act(async () => {
+            vi.runAllTimers();
+            flushRaf(); // TopicPortal mount
+            flushRaf(); // First rAF
+            flushRaf(); // Second rAF (setIsAnimating)
+        });
+
+        const dialog = screen.getByRole('dialog');
+        expect(dialog).toBeInTheDocument();
+        
+        // Use within to find the heading inside the dialog
+        const heading = within(dialog).getByRole('heading', { name: topicName });
+        expect(heading).toBeInTheDocument();
+
+        // Check close button
+        const closeBtn = screen.getByLabelText('Close');
+        
+        // Verify mouse leave does NOT close it
+        await act(async () => {
+            fireEvent.mouseLeave(dialog);
+            vi.advanceTimersByTime(1000);
+        });
+        expect(dialog).toBeInTheDocument();
+
+        // Click close button
+        await act(async () => {
+            fireEvent.click(closeBtn);
+        });
+
+        // Wait for exit animations
+        await act(async () => {
+            vi.runAllTimers();
+        });
+
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     });
 });

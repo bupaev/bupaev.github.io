@@ -220,8 +220,18 @@ export function TopicPortal({
                 aria-modal="true"
                 aria-labelledby="topic-title"
                 onMouseMove={handleMouseMove}
-                onMouseLeave={onClose}
             >
+                <button
+                    type="button"
+                    className={styles.closeButton}
+                    onClick={onClose}
+                    onMouseDown={(e) => e.stopPropagation()}
+                    aria-label="Close"
+                >
+                    <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+                        <path d="M5 5L19 19M5 19L19 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                </button>
                 <div className={styles.blobBackground} />
 
                 {/* Content wrapper */}
