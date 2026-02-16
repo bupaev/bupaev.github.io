@@ -59,21 +59,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: calc(0.5rem + 3cqw);
+    font-size: calc(0.5rem + 4cqw);
     font-weight: 600;
     line-height: 1.2;
+    font-style: italic;
     color: var(--text-color, #1a1a1a);
     text-align: center;
     white-space: nowrap;
     pointer-events: auto;
     cursor: pointer;
+    opacity: 0.85;
     transition: transform 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
         opacity 300ms ease,
         color 300ms ease;
 
     .active & {
-        opacity: 0.05 !important;
-        transform: scale(2);
+        opacity: 0.05;
     }
 }
 
@@ -84,7 +85,25 @@
 // Since wrapper is max-content, 12% of wrapper width compensates for the -12% wrapper shift.
 .headingWrapper.headingTopLeft .areaHeading {
     .active & {
-        transform: translate(12%, 15%) scale(2);
+        transform: translate(12%, 15%) scale(1.5);
+    }
+}
+
+.headingWrapper.headingTopRight .areaHeading {
+    .active & {
+        transform: translate(10%, 0) scale(1.5);
+    }
+}
+
+.headingWrapper.headingBottomLeft .areaHeading {
+    .active & {
+        transform: translate(0, 30%) scale(1.5);
+    }
+}
+
+.headingWrapper.headingBottomRight .areaHeading {
+    .active & {
+        transform: translate(0, 25%) scale(1.5);
     }
 }
 
@@ -183,18 +202,21 @@
 }
 
 .headingTopRight {
+    transform: translate(-60%, -50%);
     animation: heading-slide-from-top-right 1ms ease-in-out both;
     animation-timeline: --diagram-timeline;
     animation-range: cover var(--animation-start-offset) cover var(--animation-complete-threshold);
 }
 
 .headingBottomLeft {
+    transform: translate(-50%, -80%);
     animation: heading-slide-from-bottom-left 1ms ease-in-out both;
     animation-timeline: --diagram-timeline;
     animation-range: cover var(--animation-start-offset) cover var(--animation-complete-threshold);
 }
 
 .headingBottomRight {
+    transform: translate(-50%, -75%);
     animation: heading-slide-from-bottom-right 1ms ease-in-out both;
     animation-timeline: --diagram-timeline;
     animation-range: cover var(--animation-start-offset) cover var(--animation-complete-threshold);
@@ -216,7 +238,7 @@
     }
 
     to {
-        transform: translate(-50%, -50%);
+        transform: translate(-60%, -50%);
     }
 }
 
@@ -228,7 +250,7 @@
 
     to {
         opacity: 1;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -80%);
     }
 }
 
@@ -238,6 +260,6 @@
     }
 
     to {
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -75%);
     }
 }

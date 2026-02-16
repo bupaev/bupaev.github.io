@@ -73,10 +73,6 @@
     &:hover {
         opacity: 1;
         filter: drop-shadow(0 0 2px var(--shadow-color)) drop-shadow(0 0 5px var(--shadow-color));
-
-        svg {
-            transform: scale(1.1);
-        }
     }
 }
 

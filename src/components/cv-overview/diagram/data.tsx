@@ -130,7 +130,7 @@ export const AREAS: AreaData[] = [
         scaleY: 2.1,
         cx: 565,
         cy: 365,
-        heading: <>AI expertize</>,
+        heading: <>AI <br/> expertize</>,
         topics: [
             {
                 name: "High-Leverage Engineer",
