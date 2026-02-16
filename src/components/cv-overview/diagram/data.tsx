@@ -99,7 +99,7 @@ export const AREAS: AreaData[] = [
         scaleY: 1.9,
         cx: 290,
         cy: 370,
-        heading: <>UI/UX Design</>,
+        heading: <>UI/UX <br/> Design</>,
         topics: [
             {
                 name: "UX/Engineering Bridge",
