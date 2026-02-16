@@ -70,5 +70,34 @@ export function useActiveArea() {
         lockedRef.current = false;
     }, []);
 
-    return { sortId, scaleId, handleMouseEnter, handleMouseLeave, lockArea, unlockArea };
+    /** Cancel any pending leave timeout without side-effects */
+    const cancelLeave = useCallback(() => {
+        if (leaveTimeoutRef.current) {
+            clearTimeout(leaveTimeoutRef.current);
+            leaveTimeoutRef.current = null;
+        }
+    }, []);
+
+    /**
+     * Fully deactivate: clear timeouts, reset both IDs, and briefly lock
+     * to prevent immediate re-activation when the back button disappears
+     * and exposes the area polygon underneath.
+     */
+    const deactivateArea = useCallback(() => {
+        lockedRef.current = true;
+
+        if (leaveTimeoutRef.current) {
+            clearTimeout(leaveTimeoutRef.current);
+            leaveTimeoutRef.current = null;
+        }
+
+        setScaleId(null);
+
+        setTimeout(() => {
+            setSortId(null);
+            lockedRef.current = false;
+        }, 500);
+    }, []);
+
+    return { sortId, scaleId, handleMouseEnter, handleMouseLeave, lockArea, unlockArea, deactivateArea, cancelLeave };
 }

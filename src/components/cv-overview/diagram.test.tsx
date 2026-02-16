@@ -117,9 +117,8 @@ describe('Diagram', () => {
 
     it('renders the SVG with goo filter', () => {
         const { container } = render(<Diagram />);
-        const svg = container.querySelector('svg');
+        const svg = container.querySelector('svg[viewBox="0 0 800 500"]');
         expect(svg).toBeInTheDocument();
-        expect(svg).toHaveAttribute('viewBox', '0 0 800 500');
 
         const filter = container.querySelector('#goo');
         expect(filter).toBeInTheDocument();
