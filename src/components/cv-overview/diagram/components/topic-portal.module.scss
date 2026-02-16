@@ -63,8 +63,16 @@
         transition: transform 300ms ease;
     }
 
+    // Define glow color based on the area's hue
+    --shadow-color: hsl(var(--h, 0) 100% 90%);
+
+    :global([data-color-scheme="dark"]) & {
+        --shadow-color: var(--text-color);
+    }
+
     &:hover {
         opacity: 1;
+        filter: drop-shadow(0 0 2px var(--shadow-color)) drop-shadow(0 0 5px var(--shadow-color));
 
         svg {
             transform: scale(1.1);
