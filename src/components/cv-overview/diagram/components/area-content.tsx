@@ -74,9 +74,11 @@ type AreaContentProps = {
     onMouseEnter: (id: AreaId) => void;
     onMouseLeave: () => void;
     onTopicToggle: (areaId: AreaId, topicIndex: number) => void;
+    /** Close the popup without toggling — preserves the active area */
+    onClosePopup: () => void;
 };
 
-export function AreaContent({ areas, scaleId, expandedTopic, containerRef, diagramRef, onMouseEnter, onMouseLeave, onTopicToggle }: AreaContentProps) {
+export function AreaContent({ areas, scaleId, expandedTopic, containerRef, diagramRef, onMouseEnter, onMouseLeave, onTopicToggle, onClosePopup }: AreaContentProps) {
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [isLargeScreen, setIsLargeScreen] = useState(false);
 
@@ -150,10 +152,8 @@ export function AreaContent({ areas, scaleId, expandedTopic, containerRef, diagr
     }, [currentTopicData]);
 
     const handleClosePortal = useCallback(() => {
-        if (expandedTopic) {
-            onTopicToggle(expandedTopic.areaId, expandedTopic.topicIndex);
-        }
-    }, [expandedTopic, onTopicToggle]);
+        onClosePopup();
+    }, [onClosePopup]);
 
     return (
         <>
@@ -169,11 +169,8 @@ export function AreaContent({ areas, scaleId, expandedTopic, containerRef, diagr
                 }
             >
                 {areas.map((area) => {
-                    // Keep area expanded if a topic is expanded in this area
-                    const hasExpandedTopic = expandedTopic?.areaId === area.id;
-                    const effectiveScaleId = hasExpandedTopic ? area.id : scaleId;
-                    const isHovered = effectiveScaleId === area.id;
-                    const isAnyHovered = effectiveScaleId !== null;
+                    const isHovered = scaleId === area.id;
+                    const isAnyHovered = scaleId !== null;
                     const isOtherHovered = isAnyHovered && !isHovered;
 
                     return (

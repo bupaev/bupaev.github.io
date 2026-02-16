@@ -95,6 +95,20 @@ describe('Diagram', () => {
         fireEvent.scroll(window);
     };
 
+    const activateArea = async (container: HTMLElement, areaIndex: number) => {
+        const areas = container.querySelectorAll('polygon');
+        simulateAnimationComplete();
+
+        await act(async () => {
+            fireEvent.mouseEnter(areas[areaIndex]);
+        });
+        // Double RAF for the double requestAnimationFrame in useActiveArea
+        await act(async () => {
+            flushRaf();
+            flushRaf();
+        });
+    };
+
     afterEach(() => {
         cleanup();
         vi.useRealTimers();
@@ -127,18 +141,8 @@ describe('Diagram', () => {
 
     it('shows topics on area hover', async () => {
         const { container } = render(<Diagram />);
-        const areas = container.querySelectorAll('polygon');
 
-        simulateAnimationComplete();
-
-        await act(async () => {
-            fireEvent.mouseEnter(areas[0]);
-        });
-        // Double RAF for the double requestAnimationFrame in useHoverState
-        await act(async () => {
-            flushRaf();
-            flushRaf();
-        });
+        await activateArea(container, 0);
 
         const activeContainer = container.querySelector('[class*="active"]');
         expect(activeContainer).toBeTruthy();
@@ -148,16 +152,7 @@ describe('Diagram', () => {
         const { container } = render(<Diagram />);
         const areas = container.querySelectorAll('polygon');
 
-        simulateAnimationComplete();
-
-        await act(async () => {
-            fireEvent.mouseEnter(areas[0]);
-        });
-        // Double RAF for the double requestAnimationFrame in useHoverState
-        await act(async () => {
-            flushRaf();
-            flushRaf();
-        });
+        await activateArea(container, 0);
 
         await act(async () => {
             fireEvent.mouseLeave(areas[0]);
@@ -223,18 +218,8 @@ describe('Diagram', () => {
 
     it('applies scale transform on hover to the correct area group', async () => {
         const { container } = render(<Diagram />);
-        const areas = container.querySelectorAll('polygon');
 
-        simulateAnimationComplete();
-
-        await act(async () => {
-            fireEvent.mouseEnter(areas[0]);
-        });
-        // Double RAF for the double requestAnimationFrame in useHoverState
-        await act(async () => {
-            flushRaf();
-            flushRaf();
-        });
+        await activateArea(container, 0);
 
         const groups = container.querySelectorAll('g[style]');
         const scaledGroup = Array.from(groups).find((g) =>
@@ -245,18 +230,8 @@ describe('Diagram', () => {
 
     it('marks other headings as inactive when one is hovered', async () => {
         const { container } = render(<Diagram />);
-        const areas = container.querySelectorAll('polygon');
 
-        simulateAnimationComplete();
-
-        await act(async () => {
-            fireEvent.mouseEnter(areas[0]);
-        });
-        // Double RAF for the double requestAnimationFrame in useHoverState
-        await act(async () => {
-            flushRaf();
-            flushRaf();
-        });
+        await activateArea(container, 0);
 
         const inactiveContainers = container.querySelectorAll('[class*="inactive"]');
         expect(inactiveContainers).toHaveLength(3);
@@ -310,5 +285,115 @@ describe('Diagram', () => {
         });
 
         expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    });
+
+    it('keeps area active after closing popup via close button', async () => {
+        const { container } = render(<Diagram />);
+
+        // Activate the first area (topLeft = Software Engineering)
+        await activateArea(container, 0);
+
+        // Open a topic popup
+        const topicButton = screen.getByText('Scalable SPA Architecture').closest('button');
+        await act(async () => {
+            fireEvent.click(topicButton!);
+        });
+
+        await act(async () => {
+            vi.runAllTimers();
+            flushRaf();
+            flushRaf();
+            flushRaf();
+        });
+
+        const dialog = screen.getByRole('dialog');
+        expect(dialog).toBeInTheDocument();
+
+        // Click close button
+        const closeBtn = screen.getByLabelText('Close');
+        await act(async () => {
+            fireEvent.click(closeBtn);
+        });
+
+        await act(async () => {
+            vi.runAllTimers();
+        });
+
+        // The area should STILL be active after closing the popup
+        const activeContainer = container.querySelector('[class*="active"]');
+        expect(activeContainer).toBeTruthy();
+    });
+
+    it('keeps area active after closing popup by clicking outside', async () => {
+        const { container } = render(<Diagram />);
+
+        // Activate the first area
+        await activateArea(container, 0);
+
+        // Open a topic popup
+        const topicButton = screen.getByText('Scalable SPA Architecture').closest('button');
+        await act(async () => {
+            fireEvent.click(topicButton!);
+        });
+
+        await act(async () => {
+            vi.runAllTimers();
+            flushRaf();
+            flushRaf();
+            flushRaf();
+        });
+
+        expect(screen.getByRole('dialog')).toBeInTheDocument();
+
+        // Click outside the popup (on document body)
+        await act(async () => {
+            fireEvent.click(document.body);
+        });
+
+        await act(async () => {
+            vi.runAllTimers();
+        });
+
+        // The area should STILL be active after outside click closes the popup
+        const activeContainer = container.querySelector('[class*="active"]');
+        expect(activeContainer).toBeTruthy();
+    });
+
+    it('does not change active area when mouse events fire while popup is open', async () => {
+        const { container } = render(<Diagram />);
+        const areas = container.querySelectorAll('polygon');
+
+        // Activate first area
+        await activateArea(container, 0);
+
+        // Open a topic popup
+        const topicButton = screen.getByText('Scalable SPA Architecture').closest('button');
+        await act(async () => {
+            fireEvent.click(topicButton!);
+        });
+
+        await act(async () => {
+            vi.runAllTimers();
+            flushRaf();
+            flushRaf();
+            flushRaf();
+        });
+
+        // While popup is open, try to hover a different area
+        await act(async () => {
+            fireEvent.mouseLeave(areas[0]);
+            fireEvent.mouseEnter(areas[1]);
+        });
+        await act(async () => {
+            flushRaf();
+            flushRaf();
+        });
+
+        // The scaled group should still be for the first area, not the second
+        const groups = container.querySelectorAll('g[style]');
+        const scaledGroup = Array.from(groups).find((g) =>
+            (g as HTMLElement).style.transform.includes('scale(1.4'),
+        );
+        expect(scaledGroup).toBeTruthy();
     });
 });

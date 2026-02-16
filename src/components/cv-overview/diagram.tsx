@@ -1,6 +1,6 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { AREAS, type AreaId } from "./diagram/data";
-import { useHoverState } from "./diagram/hooks/use-hover-state";
+import { useActiveArea } from "./diagram/hooks/use-hover-state";
 import { useBlurAnimation, ANIMATION_COMPLETE_THRESHOLD } from "./diagram/hooks/use-blur-animation";
 import { AreasGeometry } from "./diagram/components/areas-geometry";
 import { AreaContent } from "./diagram/components/area-content";
@@ -25,7 +25,7 @@ export function Diagram() {
     const isAnimationCompleteRef = useRef(false);
     const [expandedTopic, setExpandedTopic] = useState<ExpandedTopic>(null);
 
-    const { sortId, scaleId, handleMouseEnter, handleMouseLeave } = useHoverState();
+    const { sortId, scaleId, handleMouseEnter, handleMouseLeave, lockArea, unlockArea } = useActiveArea();
     const { triggerBlur, isAnimationComplete } = useBlurAnimation(containerRef, blurRef);
 
     // Keep ref in sync with state to avoid stale closures
@@ -35,7 +35,7 @@ export function Diagram() {
 
     // Helper to check if animation is complete based on current scroll position
     // This avoids race conditions with async state updates
-    const checkAnimationComplete = (): boolean => {
+    const checkAnimationComplete = useCallback((): boolean => {
         // First check the ref for the React state
         if (isAnimationCompleteRef.current) return true;
 
@@ -51,25 +51,28 @@ export function Diagram() {
         const progress = Math.max(0, Math.min(1, distanceTraveled / totalDistance));
 
         return progress >= ANIMATION_COMPLETE_THRESHOLD;
-    };
+    }, []);
 
-    const onAreaEnter = (id: typeof sortId) => {
+    const onAreaEnter = useCallback((id: AreaId) => {
         const isComplete = checkAnimationComplete();
         if (id && isComplete) handleMouseEnter(id, triggerBlur);
-    };
+    }, [checkAnimationComplete, handleMouseEnter, triggerBlur]);
 
-    const handleTopicToggle = (areaId: AreaId, topicIndex: number) => {
+    const handleTopicToggle = useCallback((areaId: AreaId, topicIndex: number) => {
         // Toggle: if same topic clicked, collapse; otherwise expand new one
         if (expandedTopic?.areaId === areaId && expandedTopic?.topicIndex === topicIndex) {
             setExpandedTopic(null);
+            unlockArea();
         } else {
             setExpandedTopic({ areaId, topicIndex });
+            lockArea();
         }
-    };
+    }, [expandedTopic, lockArea, unlockArea]);
 
-    // Use expanded topic's area to keep it scaled when expanded
-    const effectiveScaleId = expandedTopic ? expandedTopic.areaId : scaleId;
-    const activeId = expandedTopic ? expandedTopic.areaId : sortId;
+    const handleClosePopup = useCallback(() => {
+        setExpandedTopic(null);
+        unlockArea();
+    }, [unlockArea]);
 
     return (
         <div
@@ -83,21 +86,22 @@ export function Diagram() {
         >
             <AreasGeometry
                 areas={AREAS}
-                scaleId={effectiveScaleId}
-                sortId={activeId}
+                scaleId={scaleId}
+                sortId={sortId}
                 blurRef={blurRef}
                 onMouseEnter={onAreaEnter}
                 onMouseLeave={handleMouseLeave}
             />
             <AreaContent
                 areas={AREAS}
-                scaleId={effectiveScaleId}
+                scaleId={scaleId}
                 expandedTopic={expandedTopic}
                 containerRef={containerRef}
                 diagramRef={containerRef}
                 onMouseEnter={(id: AreaId) => checkAnimationComplete() && handleMouseEnter(id, triggerBlur)}
                 onMouseLeave={handleMouseLeave}
                 onTopicToggle={handleTopicToggle}
+                onClosePopup={handleClosePopup}
             />
         </div>
     );

@@ -119,7 +119,18 @@ export function TopicPortal({
             if (e.key === "Escape") onClose();
         };
 
-        const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+        // Use click (not mousedown) so the close button's stopPropagation
+        // prevents this handler from firing on close-button clicks
+        const handleClickOutside = (e: MouseEvent) => {
+            if (
+                portalRef.current &&
+                !portalRef.current.contains(e.target as Node)
+            ) {
+                onClose();
+            }
+        };
+
+        const handleTouchOutside = (e: TouchEvent) => {
             if (
                 portalRef.current &&
                 !portalRef.current.contains(e.target as Node)
@@ -129,14 +140,13 @@ export function TopicPortal({
         };
 
         document.addEventListener("keydown", handleEscape);
-        // Use mousedown/touchstart for better responsiveness than click
-        document.addEventListener("mousedown", handleClickOutside);
-        document.addEventListener("touchstart", handleClickOutside);
+        document.addEventListener("click", handleClickOutside);
+        document.addEventListener("touchend", handleTouchOutside);
 
         return () => {
             document.removeEventListener("keydown", handleEscape);
-            document.removeEventListener("mousedown", handleClickOutside);
-            document.removeEventListener("touchstart", handleClickOutside);
+            document.removeEventListener("click", handleClickOutside);
+            document.removeEventListener("touchend", handleTouchOutside);
         };
     }, [isOpen, onClose]);
 
@@ -224,8 +234,10 @@ export function TopicPortal({
                 <button
                     type="button"
                     className={styles.closeButton}
-                    onClick={onClose}
-                    onMouseDown={(e) => e.stopPropagation()}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        onClose();
+                    }}
                     aria-label="Close"
                 >
                     <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
