@@ -231,6 +231,12 @@ export function TopicPortal({
                 aria-labelledby="topic-title"
                 onMouseMove={handleMouseMove}
             >
+                {/* Visuals container - filtered together for organic merging */}
+                <div className={styles.visuals}>
+                    <div className={styles.blobBackground} />
+                    <div className={styles.closeBlob} />
+                </div>
+
                 <button
                     type="button"
                     className={styles.closeButton}
@@ -244,7 +250,6 @@ export function TopicPortal({
                         <path d="M5 5L19 19M5 19L19 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </button>
-                <div className={styles.blobBackground} />
 
                 {/* Content wrapper */}
                 <div className={styles.content}>

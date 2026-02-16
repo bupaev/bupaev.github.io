@@ -33,30 +33,55 @@
 }
 
 // Close button in top-right corner
+// Visuals wrapper that applies the organic filter to all child blobs
+.visuals {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    filter: url("#organic-blob-filter");
+}
+
+// Close button in top-right corner
 .closeButton {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 16px;
+    right: 16px;
     z-index: 2;
     width: 36px;
     height: 36px;
     padding: 0;
     color: var(--text-color, #333);
     cursor: pointer;
-    background: none;
+    background: transparent;
     border: none;
     opacity: 0.5;
-    transition: opacity 300ms ease, transform 300ms ease;
+    transition: opacity 300ms ease;
 
     svg {
         width: 100%;
         height: 100%;
+        transition: transform 300ms ease;
     }
 
     &:hover {
         opacity: 1;
-        transform: scale(1.1);
+
+        svg {
+            transform: scale(1.1);
+        }
     }
+}
+
+// Blob underneath the close button
+.closeBlob {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    background: var(--popup-bg, rgb(255 250 248 / 98%));
+    border-radius: 50%;
+    animation: sway 3s ease-in-out infinite alternate;
 }
 
 // Main organic blob shape - core background
@@ -66,7 +91,6 @@
     overflow: hidden;
     pointer-events: none;
     background: var(--popup-bg, rgb(255 250 248 / 98%));
-    filter: url("#organic-blob-filter");
     animation: blob-main-morph 4s linear infinite alternate;
 
     @include mixins.sheen-effect(0, 105deg, ".popupVisible:hover &");
@@ -153,5 +177,16 @@
     to {
         opacity: 0.88;
         transform: translateY(0);
+    }
+}
+
+// Subtle side-to-side sway
+@keyframes sway {
+    from {
+        transform: translateX(-2px) rotate(45deg);
+    }
+
+    to {
+        transform: translateX(2px) rotate(90deg);
     }
 }
