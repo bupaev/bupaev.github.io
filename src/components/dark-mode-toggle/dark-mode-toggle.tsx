@@ -1,14 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
 import styles from "./dark-mode-toggle.module.scss";
+import sunIcon from "./icons/sun.svg";
+import moonIcon from "./icons/moon.svg";
 
 function getCookie(name: string): string | undefined {
   if (typeof document === "undefined") return undefined;
-  const matches = document.cookie.match(
-    new RegExp(
-      "(?:^|; )" + name.replace(/([.$?*|{}()[\]\\/+^])/g, "\\$1") + "=([^;]*)"
-    )
-  );
-  return matches ? matches[1] : undefined;
+  return document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(`${name}=`))
+    ?.split("=")[1];
 }
 
 export function DarkModeToggle() {
@@ -73,8 +73,8 @@ export function DarkModeToggle() {
         <div className={styles.slider}>
           <span className={styles.labelDark}>Dark</span>
           <div className={styles.handler}>
-            <img className={styles.iconLight} src="/icons/dark-mode/sun.svg" alt="Light mode" width={30} height={30} />
-            <img className={styles.iconDark} src="/icons/dark-mode/moon.svg" alt="Dark mode" width={30} height={30} />
+            <img className={styles.iconLight} src={sunIcon.src} alt="Light mode" width={30} height={30} />
+            <img className={styles.iconDark} src={moonIcon.src} alt="Dark mode" width={30} height={30} />
           </div>
           <span className={styles.labelLight}>Light</span>
         </div>
