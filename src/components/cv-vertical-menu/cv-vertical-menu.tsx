@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 
-import { MENU_ITEMS, ICON_BASE_PATH } from "@/config/navigation-config";
+import { MENU_ITEMS } from "./navigation-config";
 import styles from "./cv-vertical-menu.module.scss";
 
 /**
@@ -263,7 +263,7 @@ export function CvVerticalMenu() {
           >
             <span className={styles.itemIcon}>
               <img
-                src={`${ICON_BASE_PATH}${item.icon}`}
+                src={item.icon}
                 alt=""
                 width={32}
                 height={32}
