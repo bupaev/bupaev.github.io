@@ -7,7 +7,7 @@ import academicCap from "./icons/academic-cap.svg";
 import headWithGlasses from "./icons/head-with-glasses.svg";
 import mountainWithFlag from "./icons/mountain-with-flag.svg";
 import penAndWrench from "./icons/pen-and-wrench.svg";
-import rightFit from "./icons/fit-check.svg";
+import fitCheck from "./icons/fit-check.svg";
 import vennDiagram from "./icons/venn-diagram.svg";
 
 export type MenuItem = {
@@ -23,7 +23,7 @@ export type MenuItem = {
 export const MENU_ITEMS: MenuItem[] = [
     { title: "Who I am", id: "hero-area", icon: headWithGlasses.src },
     { title: "My Core", id: "overview", icon: vennDiagram.src },
-    { title: "Fit Check", id: "fit-check", icon: rightFit.src },
+    { title: "Fit Check", id: "fit-check", icon: fitCheck.src },
     { title: "Skills", id: "skills", icon: penAndWrench.src },
     { title: "Experience", id: "experience", icon: mountainWithFlag.src },
     { title: "Education", id: "education", icon: academicCap.src },
