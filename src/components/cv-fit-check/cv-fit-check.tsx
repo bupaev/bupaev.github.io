@@ -1,6 +1,6 @@
 "use client";
 
-import { FIT_CRITERIA } from "./right-fit-data";
+import { FIT_CRITERIA } from "./fit-check-data";
 import styles from "./cv-fit-check.module.scss";
 
 export function CvFitCheck() {
@@ -15,9 +15,17 @@ export function CvFitCheck() {
       <div className={styles.tableContainer}>
         {/* Desktop Header */}
         <div className={styles.tableHeader} aria-hidden="true">
-          <div className={styles.headerCell}>Criteria</div>
-          <div className={styles.headerCell}>I Fit</div>
-          <div className={styles.headerCell}>I Don&apos;t Fit</div>
+          <div className={styles.headerCell}>CRITERIA</div>
+          <div className={styles.headerCell}>
+            <span className={styles.checkIcon} aria-hidden="true">✓</span>
+            I FIT
+              <span className="pl-2 text-[1em] font-normal">if...</span>
+            </div>
+          <div className={styles.headerCell}>
+            <span className={styles.crossIcon} aria-hidden="true">✗</span>
+            I DON&apos;T FIT 
+            <span className="pl-2 text-[1em] font-normal">if...</span>
+            </div>
         </div>
 
         {/* Rows */}

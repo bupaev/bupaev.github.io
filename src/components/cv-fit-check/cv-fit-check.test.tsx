@@ -31,13 +31,13 @@ describe('CvFitCheck', () => {
 
     it('renders "I Fit" labels for all criteria', () => {
         render(<CvFitCheck />);
-        const fitLabels = screen.getAllByText('I Fit');
+        const fitLabels = screen.getAllByText(/I Fit/i);
         expect(fitLabels).toHaveLength(7); // 6 cards + 1 header
     });
 
     it('renders "I Don\'t Fit" labels for all criteria', () => {
         render(<CvFitCheck />);
-        const noFitLabels = screen.getAllByText("I Don't Fit");
+        const noFitLabels = screen.getAllByText(/I Don't Fit/i);
         expect(noFitLabels).toHaveLength(7); // 6 cards + 1 header
     });
 
@@ -55,7 +55,7 @@ describe('CvFitCheck', () => {
         render(<CvFitCheck />);
         const checkMarks = screen.getAllByText('✓');
         const crossMarks = screen.getAllByText('✗');
-        expect(checkMarks).toHaveLength(6);
-        expect(crossMarks).toHaveLength(6);
+        expect(checkMarks).toHaveLength(7);
+        expect(crossMarks).toHaveLength(7);
     });
 });

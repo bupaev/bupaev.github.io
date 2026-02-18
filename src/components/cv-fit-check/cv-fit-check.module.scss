@@ -7,7 +7,7 @@
     font-size: 1.05em;
     line-height: 1.7;
     color: var(--text-color);
-    opacity: 0.85;
+    opacity: 0.8
   }
 }
 
@@ -21,7 +21,7 @@
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
   gap: 1.5rem;
-  padding: 0 1.5rem 0.75rem;
+  padding: 0 0 0.75rem;
   margin-bottom: -0.5rem;
   border-bottom: 1px solid var(--border-color);
 
@@ -32,11 +32,9 @@
 
 .headerCell {
   font-family: var(--font-accent);
-  font-size: 0.85em;
-  font-weight: 700;
+  font-size: 1.5em;
+  font-weight: 600;
   color: var(--text-color-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .tableBody {
@@ -66,7 +64,6 @@
   display: flex;
   align-items: flex-start;
   padding-top: 1.25rem; // Align with text in data cells
-  padding-left: 0.5rem;
 
   @include mixins.mobile {
     padding: 0;

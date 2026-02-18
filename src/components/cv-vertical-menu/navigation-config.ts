@@ -7,7 +7,7 @@ import academicCap from "./icons/academic-cap.svg";
 import headWithGlasses from "./icons/head-with-glasses.svg";
 import mountainWithFlag from "./icons/mountain-with-flag.svg";
 import penAndWrench from "./icons/pen-and-wrench.svg";
-import rightFit from "./icons/right-fit.svg";
+import rightFit from "./icons/fit-check.svg";
 import vennDiagram from "./icons/venn-diagram.svg";
 
 export type MenuItem = {
