@@ -181,6 +181,10 @@ $menu-open-width: 10em;
       img {
         width: 2em;
         max-width: 2em;
+        
+        :global([data-color-scheme="dark"]) & {
+            filter: invert(1);
+        }
       }
     }
 
