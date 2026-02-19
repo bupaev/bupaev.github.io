@@ -6,8 +6,8 @@
   width: 10em;
   height: 0.7em;
   overflow: hidden;
-  border: 1px solid #868686;
-  border-radius: 3px;
+  border: 1px solid var(--contrasty-transparent-color);
+  border-radius: 4px;
   transform: skew(-15deg);
 
   .segment {

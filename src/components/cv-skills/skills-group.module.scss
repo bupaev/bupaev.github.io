@@ -61,19 +61,19 @@
     transition: max-height var(--dark-light-transition) linear;
   }
 
-  &:hover {
-    outline-color: var(--contrasty-transparent-color);
+  // &:hover {
+  //   outline-color: var(--contrasty-transparent-color);
 
-    .infoIcon {
-      opacity: 0;
+  //   .infoIcon {
+  //     opacity: 0;
 
-      img {
-        margin-bottom: -0.7em;
-      }
-    }
+  //     img {
+  //       margin-bottom: -0.7em;
+  //     }
+  //   }
 
-    .info {
-      max-height: 2.5em; // space just for 2 lines
-    }
-  }
+  //   .info {
+  //     max-height: 2.5em; // space just for 2 lines
+  //   }
+  // }
 }

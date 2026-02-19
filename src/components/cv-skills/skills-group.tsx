@@ -24,7 +24,7 @@ export function SkillsGroup({ title, info, items, className = "" }: SkillsGroupP
         {items.map((item) => (
           <div key={item.title} className={styles.skillItem}>
             <span className={styles.itemTitle}>{item.title}</span>
-            {item.info && (
+            {/* {item.info && (
               <span>
                 <i className={styles.infoIcon}>
                   <img
@@ -36,7 +36,7 @@ export function SkillsGroup({ title, info, items, className = "" }: SkillsGroupP
                 </i>
                 <span className={styles.info}>{item.info}</span>
               </span>
-            )}
+            )} */}
             <SkillBar level={item.level} />
           </div>
         ))}
