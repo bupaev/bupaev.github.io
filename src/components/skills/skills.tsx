@@ -1,7 +1,7 @@
 "use client";
 
 import { SkillsGroup } from "./skills-group";
-import styles from "./cv-skills.module.scss";
+import styles from "./skills.module.scss";
 
 type SkillItem = {
   title: string;
@@ -226,7 +226,7 @@ const skills: SkillGroup[] = [
   },
 ];
 
-export function CvSkills() {
+export function Skills() {
   return (
     <div className={`${styles.skills} container`}>
       <h2 className="title text-4xl leading-tight font-bold">Skills</h2>

@@ -1,9 +1,9 @@
 "use client";
 
 import { FIT_CRITERIA } from "./fit-check-data";
-import styles from "./cv-fit-check.module.scss";
+import styles from "./fit-check.module.scss";
 
-export function CvFitCheck() {
+export function FitCheck() {
   return (
     <div className={`${styles.fitCheck} container`}>
       <h2 className="title text-4xl leading-tight">Are We the Right Fit?</h2>

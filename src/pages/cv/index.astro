@@ -1,13 +1,13 @@
 ---
 import Layout from "../../layouts/layout.astro";
 import { DarkModeToggle } from "../../components/dark-mode-toggle/dark-mode-toggle";
-import { CvVerticalMenu } from "../../components/cv-vertical-menu/cv-vertical-menu";
-import CvHeroArea from "../../components/cv-hero-area/cv-hero-area.astro";
-import { CvOverview } from "../../components/cv-overview/cv-overview";
-import { CvFitCheck } from "../../components/cv-fit-check/cv-fit-check";
-import { CvSkills } from "../../components/cv-skills/cv-skills";
-import CvExperience from "../../components/cv-experience/cv-experience.astro";
-import { CvEducation } from "../../components/cv-education/cv-education";
+import { VerticalMenu } from "../../components/vertical-menu/vertical-menu";
+import HeroArea from "../../components/hero-area/hero-area.astro";
+import { Overview } from "../../components/overview/overview";
+import { FitCheck } from "../../components/fit-check/fit-check";
+import { Skills } from "../../components/skills/skills";
+import Experience from "../../components/experience/experience.astro";
+import { Education } from "../../components/education/education";
 import { TheFooter } from "../../components/the-footer/the-footer";
 ---
 
@@ -15,40 +15,40 @@ import { TheFooter } from "../../components/the-footer/the-footer";
   <div class="cv-page">
     <DarkModeToggle client:load />
 
-    <!-- CvVerticalMenu handles hero height measurement internally as a React island. -->
-    <CvVerticalMenu client:load />
+    <!-- VerticalMenu handles hero height measurement internally as a React island. -->
+    <VerticalMenu client:load />
 
     <section id="hero-area" class="anchor-for-navigation hero-area-section">
-      <CvHeroArea />
+      <HeroArea />
     </section>
 
     <section id="overview" class="section anchor-for-navigation is-primary">
-      <CvOverview client:visible />
+      <Overview client:visible />
     </section>
 
     <section id="fit-check" class="section anchor-for-navigation is-primary">
-      <CvFitCheck client:visible />
+      <FitCheck client:visible />
     </section>
 
     <section
       id="skills"
       class="section anchor-for-navigation with-background skills-section"
     >
-      <CvSkills />
+      <Skills />
     </section>
 
     <section
       id="experience"
       class="section anchor-for-navigation with-background experience-section"
     >
-      <CvExperience />
+      <Experience />
     </section>
 
     <section
       id="education"
       class="section anchor-for-navigation with-background education-section"
     >
-      <CvEducation />
+      <Education />
     </section>
 
     <TheFooter client:load />

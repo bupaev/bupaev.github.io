@@ -1,6 +1,6 @@
 ---
 import { getImage } from "astro:assets";
-import { CvHeroArea as CvHeroAreaReact } from "./cv-hero-area";
+import { HeroArea } from "./hero-area";
 import portraitDesktop from "./images/portrait-desktop.avif";
 import portraitMobile from "./images/portrait-mobile-2x.avif";
 import portraitDarkDesktop from "./images/portrait-dark-desktop.avif";
@@ -30,7 +30,7 @@ const darkMobilePlaceholder = await getImage({
 });
 ---
 
-<CvHeroAreaReact
+<HeroArea
   client:load
   desktopImage={{
     src: portraitDesktop.src,

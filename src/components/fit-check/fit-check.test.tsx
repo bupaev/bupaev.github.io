@@ -1,26 +1,26 @@
 import { describe, it, expect, afterEach } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
-import { CvFitCheck } from './cv-fit-check';
+import { FitCheck } from './fit-check';
 
-describe('CvFitCheck', () => {
+describe('FitCheck', () => {
     afterEach(() => {
         cleanup();
     });
 
     it('renders the section heading', () => {
-        render(<CvFitCheck />);
+        render(<FitCheck />);
         expect(screen.getByText('Are We the Right Fit?')).toBeInTheDocument();
     });
 
     it('renders the subtitle', () => {
-        render(<CvFitCheck />);
+        render(<FitCheck />);
         expect(
             screen.getByText(/To save our mutual time, here is a breakdown/),
         ).toBeInTheDocument();
     });
 
     it('renders all 6 criteria titles', () => {
-        render(<CvFitCheck />);
+        render(<FitCheck />);
         expect(screen.getByText('Product Complexity')).toBeInTheDocument();
         expect(screen.getByText('Engineering Balance')).toBeInTheDocument();
         expect(screen.getByText('Product Mindset')).toBeInTheDocument();
@@ -30,19 +30,19 @@ describe('CvFitCheck', () => {
     });
 
     it('renders "I Fit" labels for all criteria', () => {
-        render(<CvFitCheck />);
+        render(<FitCheck />);
         const fitLabels = screen.getAllByText(/I Fit/i);
         expect(fitLabels).toHaveLength(7); // 6 cards + 1 header
     });
 
     it('renders "I Don\'t Fit" labels for all criteria', () => {
-        render(<CvFitCheck />);
+        render(<FitCheck />);
         const noFitLabels = screen.getAllByText(/I Don't Fit/i);
         expect(noFitLabels).toHaveLength(7); // 6 cards + 1 header
     });
 
     it('renders fit and no-fit card text for Product Complexity', () => {
-        render(<CvFitCheck />);
+        render(<FitCheck />);
         expect(
             screen.getByText(/complex, feature-rich interfaces/),
         ).toBeInTheDocument();
@@ -52,7 +52,7 @@ describe('CvFitCheck', () => {
     });
 
     it('renders check and cross indicators', () => {
-        render(<CvFitCheck />);
+        render(<FitCheck />);
         const checkMarks = screen.getAllByText('✓');
         const crossMarks = screen.getAllByText('✗');
         expect(checkMarks).toHaveLength(7);

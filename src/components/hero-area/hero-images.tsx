@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import styles from "./cv-hero-area.module.scss";
+import styles from "./hero-area.module.scss";
 
 export interface ImageProps {
   src: string;
   placeholderSrc: string;
 }
 
-export interface CvHeroImagesProps {
+export interface HeroImagesProps {
   desktopImage: ImageProps;
   mobileImage: ImageProps;
   darkDesktopImage?: ImageProps;
@@ -67,7 +67,7 @@ const ControlledImage = ({
 };
 
 /**
- * CvHeroImages handles theme-based hero image switching with several optimizations:
+ * HeroImages handles theme-based hero image switching with several optimizations:
  *
  * 1. Hybrid Rendering Strategy:
  *    - SSR/No-JS: Renders a native <picture> tag with media queries for instant LCP based on system preference.
@@ -82,12 +82,12 @@ const ControlledImage = ({
  *    - Switching to Dark (Light -> Dark): Light image (z-index: 1) stays opaque (delayed fade-out) while Dark image (z-index: 2) fades in on top.
  *    - Switching to Light (Dark -> Light): Light image becomes opaque instantly (0s transition) to underlay the fading-out Dark image.
  */
-export function CvHeroImages({
+export function HeroImages({
   desktopImage,
   mobileImage,
   darkDesktopImage,
   darkMobileImage
-}: CvHeroImagesProps) {
+}: HeroImagesProps) {
   const [mounted, setMounted] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const [lightImageLoaded, setLightImageLoaded] = useState(false);

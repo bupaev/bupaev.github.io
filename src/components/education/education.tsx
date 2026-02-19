@@ -1,4 +1,4 @@
-export function CvEducation() {
+export function Education() {
   return (
     <div className="education container">
       <h2 className="title text-4xl leading-tight">Education</h2>

@@ -1,10 +1,10 @@
 "use client";
 
-import styles from "./cv-hero-area.module.scss";
-import { CvHeroImages, type CvHeroImagesProps } from "./cv-hero-images";
+import styles from "./hero-area.module.scss";
+import { HeroImages, type HeroImagesProps } from "./hero-images";
 
 // Re-export props for consumers (like the Astro component)
-export type CvHeroAreaProps = CvHeroImagesProps;
+export type HeroAreaProps = HeroImagesProps;
 
 const LinkedinIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 394 394"><path fill="currentColor" d="M65 151h51v183H65V151Zm91 0h51v14l1 13 2-4c5-8 12-14 21-18 18-7 47-6 65 3 18 10 28 28 32 59l1 116h-52l-1-107c-2-10-6-16-13-20-4-2-9-3-14-3-16 0-25 7-29 20-3 8-3 8-3 61v49h-61V151Z" /><circle cx="90.5" cy="94.5" r="26.5" fill="currentColor" /><path stroke="currentColor" strokeWidth="28" fill="transparent" d="M335 14c24 0 44 20 44 44v277c0 24-20 44-44 44H58c-24 0-44-20-44-44V58c0-24 20-44 44-44h277Z" /></svg>
@@ -29,7 +29,7 @@ const DownloadIcon = () => (
   </svg>
 );
 
-export function CvHeroArea(props: CvHeroAreaProps) {
+export function HeroArea(props: HeroAreaProps) {
   return (
     <div className={`${styles.heroArea}`}>
       <div className={`container ${styles.heroBody}`}>
@@ -89,7 +89,7 @@ export function CvHeroArea(props: CvHeroAreaProps) {
               </div>
           </div>
           <div className={styles.mediaWrapper}>
-            <CvHeroImages {...props} />
+            <HeroImages {...props} />
           </div>
       </div>
     </div>

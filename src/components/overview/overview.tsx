@@ -1,8 +1,8 @@
 "use client";
 import { Diagram } from "./index";
-import styles from "./cv-overview.module.scss";
+import styles from "./overview.module.scss";
 
-export function CvOverview() {
+export function Overview() {
   return (
     <div className={`${styles.overview} container`}>
       <h2 className="title text-4xl leading-tight">My Professional Core</h2>

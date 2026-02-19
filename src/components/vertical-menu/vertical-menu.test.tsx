@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent, cleanup, act } from '@testing-library/react';
-import { CvVerticalMenu } from './cv-vertical-menu';
+import { VerticalMenu } from './vertical-menu';
 
-describe('CvVerticalMenu', () => {
+describe('VerticalMenu', () => {
 
     beforeEach(() => {
         vi.useFakeTimers();
@@ -40,7 +40,7 @@ describe('CvVerticalMenu', () => {
      * Helper to render component and wait for initialization
      */
     const renderAndInitialize = async () => {
-        const result = render(<CvVerticalMenu />);
+        const result = render(<VerticalMenu />);
         await act(async () => {
             vi.advanceTimersByTime(150);
         });

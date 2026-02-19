@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
 import { MENU_ITEMS } from "./navigation-config";
-import styles from "./cv-vertical-menu.module.scss";
+import styles from "./vertical-menu.module.scss";
 
 /**
  * Mobile breakpoint for vertical menu positioning behavior.
@@ -11,7 +11,7 @@ import styles from "./cv-vertical-menu.module.scss";
  */
 const TOUCH_SCREEN_BREAKPOINT = 768;
 
-export function CvVerticalMenu() {
+export function VerticalMenu() {
   const menuRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const [mounted, setMounted] = useState(false);
