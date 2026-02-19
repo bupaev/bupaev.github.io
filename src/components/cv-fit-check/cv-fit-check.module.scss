@@ -2,12 +2,10 @@
 
 .fitCheck {
   .subtitle {
-    max-width: 52em;
     margin-bottom: 3rem;
-    font-size: 1.05em;
-    line-height: 1.7;
+    font-size: 1em;
+    line-height: 1.6;
     color: var(--text-color);
-    opacity: 0.8
   }
 }
 
@@ -84,13 +82,16 @@
   padding: 1.25rem 1.5rem;
   overflow: hidden;
   border-radius: 8px;
+  transform: skew(-15deg);
   transition: transform 200ms ease-out;
 
-  @include mixins.sheen-effect(0.05);
+  > * {
+    transform: skew(15deg);
+  }
 
   &:hover {
     z-index: 1;
-    transform: scale(1.03, 1.05);
+    transform: skew(-15deg) scale(1.03, 1.05);
   }
 }
 
@@ -133,10 +134,12 @@
 .checkIcon,
 .crossIcon {
   display: inline-flex;
+  flex-shrink: 0; // Prevent shrinking when flex item
   align-items: center;
   justify-content: center;
   width: 1.4em;
   height: 1.4em;
+  margin-right: 0.5em;
   font-size: 0.95em;
   font-weight: 800;
   color: #fff;

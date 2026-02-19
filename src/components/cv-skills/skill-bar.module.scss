@@ -5,23 +5,23 @@
   display: flex;
   width: 10em;
   height: 0.7em;
+  overflow: hidden;
+  border: 1px solid #868686;
+  border-radius: 3px;
+  transform: skew(-15deg);
 
   .segment {
-    width: 30%;
+    width: 33.333%;
     height: 100%;
-    margin-right: 3%;
     background-color: var(--background-color);
-    border: 1px solid #868686;
-    border-radius: 3px;
-    transform: skew(-15deg);
 
     &.filled {
       &[data-level="1"] {
-        background-color: color.scale(variables.$accent-color, $whiteness: 50%);
+        background-color: color.scale(variables.$accent-color, $whiteness: 65%);
       }
 
       &[data-level="2"] {
-        background-color: color.scale(variables.$accent-color, $whiteness: 25%);
+        background-color: color.scale(variables.$accent-color, $whiteness: 35%);
       }
 
       &[data-level="3"] {
