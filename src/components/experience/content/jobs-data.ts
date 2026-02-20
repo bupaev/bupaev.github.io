@@ -86,7 +86,7 @@ export const jobs: Job[] = [
     {
         position: "Lead Front-end engineer",
         company: "EPAM",
-        skills: "HTML, SCSS, Vanilla JS, TS, Team leading, UX/UI-design",
+        skills: "AI Pair Programming, React, SASS, TS, JS, Leading Teams, AEM, UX",
         startDate: "2021-12",
         endDate: "2025-09",
         id: "epam",
