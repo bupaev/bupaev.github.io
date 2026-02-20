@@ -44,7 +44,8 @@ export function FitCheck() {
               <div className={`${styles.dataCell} ${styles.fitCell}`}>
                 <div className={styles.mobileLabel}>
                   <FitIcon className={styles.icon} aria-hidden="true" />
-                  <span>I Fit</span>
+                  <span>I FIT</span>
+                  <span className="text-[1em]">if...</span>
                 </div>
                 <p className={styles.cellText}>{criterion.fit}</p>
               </div>
@@ -53,7 +54,8 @@ export function FitCheck() {
               <div className={`${styles.dataCell} ${styles.noFitCell}`}>
                 <div className={styles.mobileLabel}>
                   <NoFitIcon className={styles.icon} aria-hidden="true" />
-                  <span>I Don&apos;t Fit</span>
+                  <span>I DON&apos;T FIT</span>
+                  <span className="text-[1em]">if...</span>
                 </div>
                 <p className={styles.cellText}>{criterion.noFit}</p>
               </div>

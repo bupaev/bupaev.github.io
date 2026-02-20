@@ -52,7 +52,7 @@
   }
 
   &.fit {
-    --gradient-color: rgb(var(--fit-rgb) / 10%);
+    // --gradient-color: rgb(var(--fit-rgb) / 10%);
     --text-color: color-mix(in srgb, rgb(var(--fit-rgb)), black 30%);
 
     &::after {
@@ -61,7 +61,7 @@
   }
 
   &.noFit {
-    --gradient-color: rgb(var(--no-fit-rgb) / 10%);
+    // --gradient-color: rgb(var(--no-fit-rgb) / 10%);
     --text-color: color-mix(in srgb, rgb(var(--no-fit-rgb)), black 5%);
 
     &::after {
@@ -95,7 +95,7 @@
   @include mixins.mobile {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0;
   }
 }
 
@@ -142,6 +142,12 @@
 }
 
 .fitCell {
+  .mobileLabel {
+    --text-color: color-mix(in srgb, rgb(var(--fit-rgb)), black 30%);
+
+    color: var(--text-color);
+  }
+
   &::after {
     background-color: rgb(var(--fit-rgb) / 6%);
     border-radius: 8px 0 0 8px;
@@ -149,15 +155,26 @@
     [data-color-scheme="dark"] & {
       background-color: rgb(var(--fit-rgb) / 8%);
     }
+
+    @include mixins.mobile {
+      border-radius: 8px 8px 0 0;
+    }
   }
 }
 
 .noFitCell {
+  .mobileLabel {
+    --text-color: color-mix(in srgb, rgb(var(--no-fit-rgb)), black 5%);
+
+    color: var(--text-color);
+  }
+
   &::after {
     background-color: rgb(var(--no-fit-rgb) / 5%);
     border-radius: 0 8px 8px 0;
 
     @include mixins.mobile {
+      border-radius: 0 0 8px 8px;
       transform: scaleY(1) skew(15deg);
 
       [data-color-scheme="dark"] & {
@@ -172,13 +189,12 @@
 
   @include mixins.mobile {
     display: flex;
+    gap: 0.5rem;
     align-items: center;
     margin-bottom: 0.75rem;
     font-family: var(--font-accent);
-    font-size: 1.2em;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-size: 1.5em;
+    font-weight: 600;
   }
 }
 
