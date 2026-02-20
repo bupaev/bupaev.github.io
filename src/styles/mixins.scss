@@ -118,6 +118,7 @@ $gap: 32px;
     height: 2px;
     content: "";
     background: $color;
+    border-radius: 4px;
     transform: scaleY(1) skew(-15deg);
     transition: height 250ms ease, width 250ms ease, left 250ms ease;
   }

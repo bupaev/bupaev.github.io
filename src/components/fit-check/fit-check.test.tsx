@@ -50,12 +50,4 @@ describe('FitCheck', () => {
             screen.getByText(/basic interfaces for simple CRUD/),
         ).toBeInTheDocument();
     });
-
-    it('renders check and cross indicators', () => {
-        render(<FitCheck />);
-        const checkMarks = screen.getAllByText('✓');
-        const crossMarks = screen.getAllByText('✗');
-        expect(checkMarks).toHaveLength(7);
-        expect(crossMarks).toHaveLength(7);
-    });
 });
