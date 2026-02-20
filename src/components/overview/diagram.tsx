@@ -4,7 +4,11 @@ import { useActiveArea } from "./diagram/hooks/use-hover-state";
 import { useBlurAnimation, ANIMATION_COMPLETE_THRESHOLD } from "./diagram/hooks/use-blur-animation";
 import { AreasGeometry } from "./diagram/components/areas-geometry";
 import { AreaContent } from "./diagram/components/area-content";
+import { ViewModeToggle } from "./diagram/components/view-mode-toggle";
+import { TextView } from "./diagram/components/text-view";
 import styles from "./diagram.module.scss";
+
+type ViewMode = "graphic" | "text";
 
 /** Tracks which topic is expanded: area ID and topic index */
 type ExpandedTopic = {
@@ -24,8 +28,15 @@ export function Diagram() {
     const blurRef = useRef<SVGFEGaussianBlurElement>(null);
     const isAnimationCompleteRef = useRef(false);
     const [expandedTopic, setExpandedTopic] = useState<ExpandedTopic>(null);
+    const [viewMode, setViewMode] = useState<ViewMode>("graphic");
 
     const { sortId, scaleId, handleMouseEnter, handleMouseLeave, lockArea, unlockArea, deactivateArea, cancelLeave } = useActiveArea();
+
+    const toggleViewMode = useCallback(() => {
+        setViewMode(prev => prev === "graphic" ? "text" : "graphic");
+        setExpandedTopic(null);
+        deactivateArea();
+    }, [deactivateArea]);
     const { triggerBlur, isAnimationComplete } = useBlurAnimation(containerRef, blurRef);
 
     // Keep ref in sync with state to avoid stale closures
@@ -80,48 +91,60 @@ export function Diagram() {
         deactivateArea();
     }, [deactivateArea]);
 
+    const isGraphic = viewMode === "graphic";
+
     return (
         <div className={styles.diagramWrapper}>
-            <button
-                type="button"
-                className={`${styles.backButton} ${scaleId ? styles.backButtonVisible : ""}`}
-                onClick={handleBackToMain}
-                onMouseEnter={cancelLeave}
-                aria-label="Back to main view"
-            >
-                <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M21 12H3M3 12L10 5M3 12L10 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-            </button>
-            <div
-                ref={containerRef}
-                className={styles.diagram}
-                style={
-                    {
-                        "--animation-complete-threshold": `${ANIMATION_COMPLETE_THRESHOLD * 100}%`,
-                    } as React.CSSProperties
-                }
-            >
-                <AreasGeometry
-                    areas={AREAS}
-                    scaleId={scaleId}
-                    sortId={sortId}
-                    blurRef={blurRef}
-                    onMouseEnter={onAreaEnter}
-                    onMouseLeave={handleMouseLeave}
-                />
-                <AreaContent
-                    areas={AREAS}
-                    scaleId={scaleId}
-                    expandedTopic={expandedTopic}
-                    containerRef={containerRef}
-                    diagramRef={containerRef}
-                    onMouseEnter={(id: AreaId) => checkAnimationComplete() && handleMouseEnter(id, triggerBlur)}
-                    onMouseLeave={handleMouseLeave}
-                    onTopicToggle={handleTopicToggle}
-                    onClosePopup={handleClosePopup}
-                />
+            <div className={styles.toolbar}>
+                <ViewModeToggle mode={viewMode} onToggle={toggleViewMode} />
             </div>
+
+            {isGraphic ? (
+                <>
+                    <button
+                        type="button"
+                        className={`${styles.backButton} ${scaleId ? styles.backButtonVisible : ""}`}
+                        onClick={handleBackToMain}
+                        onMouseEnter={cancelLeave}
+                        aria-label="Back to main view"
+                    >
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M21 12H3M3 12L10 5M3 12L10 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    </button>
+                    <div
+                        ref={containerRef}
+                        className={styles.diagram}
+                        style={
+                            {
+                                "--animation-complete-threshold": `${ANIMATION_COMPLETE_THRESHOLD * 100}%`,
+                            } as React.CSSProperties
+                        }
+                    >
+                        <AreasGeometry
+                            areas={AREAS}
+                            scaleId={scaleId}
+                            sortId={sortId}
+                            blurRef={blurRef}
+                            onMouseEnter={onAreaEnter}
+                            onMouseLeave={handleMouseLeave}
+                        />
+                        <AreaContent
+                            areas={AREAS}
+                            scaleId={scaleId}
+                            expandedTopic={expandedTopic}
+                            containerRef={containerRef}
+                            diagramRef={containerRef}
+                            onMouseEnter={(id: AreaId) => checkAnimationComplete() && handleMouseEnter(id, triggerBlur)}
+                            onMouseLeave={handleMouseLeave}
+                            onTopicToggle={handleTopicToggle}
+                            onClosePopup={handleClosePopup}
+                        />
+                    </div>
+                </>
+            ) : (
+                <TextView areas={AREAS} />
+            )}
         </div>
     );
 }

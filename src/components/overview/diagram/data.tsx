@@ -15,6 +15,7 @@ export type AreaData = {
     cx: number;
     cy: number;
     heading: ReactNode;
+    headingText: string;
     topics: TopicInfo[];
 };
 
@@ -34,6 +35,7 @@ export const AREAS: AreaData[] = [
                 engineering
             </>
         ),
+        headingText: "Software Engineering",
         topics: [
             {
                 name: "Scalable SPA Architecture",
@@ -69,6 +71,7 @@ export const AREAS: AreaData[] = [
         cx: 610,
         cy: 170,
         heading: <>Leadership</>,
+        headingText: "Leadership",
         topics: [
             {
                 name: "Technical Orchestrator",
@@ -100,6 +103,7 @@ export const AREAS: AreaData[] = [
         cx: 290,
         cy: 370,
         heading: <>UI/UX <br/> Design</>,
+        headingText: "UI/UX Design",
         topics: [
             {
                 name: "UX/Engineering Bridge",
@@ -131,6 +135,7 @@ export const AREAS: AreaData[] = [
         cx: 565,
         cy: 365,
         heading: <>AI <br/> expertize</>,
+        headingText: "AI Expertise",
         topics: [
             {
                 name: "High-Leverage Engineer",

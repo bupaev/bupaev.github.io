@@ -5,6 +5,18 @@
     position: relative;
 }
 
+.toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 11;
+
+    @include mixins.mobile {
+        right: 0;
+        left: auto;
+    }
+}
+
 .diagram {
     position: relative;
     width: 112%;

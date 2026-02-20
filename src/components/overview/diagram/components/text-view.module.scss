@@ -1,0 +1,116 @@
+@use "@/styles/mixins";
+
+.textView {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 3rem;
+    padding: 1rem 0;
+
+    @include mixins.mobile {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+.area {
+    // Area accent color derived from theme classes
+    --area-color: hsl(var(--h) var(--s) var(--l));
+    --area-color-muted: hsl(var(--h) calc(var(--s) * 0.6) calc(var(--l) + 5%));
+}
+
+.areaHeading {
+    margin-bottom: 0.75rem;
+    font-family: var(--font-accent);
+    font-size: var(--text-heading-h4);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-heading);
+    color: var(--text-color);
+}
+
+.topicList {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.topicItem {
+    border-bottom: 1px solid hsl(var(--h) calc(var(--s) * 0.3) calc(var(--l) + 10%) / 40%);
+
+    &:first-child {
+        border-top: 1px solid hsl(var(--h) calc(var(--s) * 0.3) calc(var(--l) + 10%) / 40%);
+    }
+}
+
+.topicButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.6rem 0;
+    font-family: var(--font-main);
+    font-size: var(--text-body);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-body);
+    color: var(--text-color);
+    text-align: left;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: color 200ms;
+
+    &:hover {
+        color: var(--area-color);
+    }
+
+    &.topicExpanded {
+        color: var(--area-color);
+
+        .chevron {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.topicName {
+    flex: 1;
+    min-width: 0;
+}
+
+.chevron {
+    flex-shrink: 0;
+    width: 1em;
+    height: 1em;
+    margin-left: 0.5rem;
+    opacity: 0.5;
+    transition: transform 300ms ease, opacity 200ms;
+
+    .topicButton:hover & {
+        opacity: 1;
+    }
+}
+
+.description {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 300ms ease;
+
+    > p {
+        overflow: hidden;
+        font-family: var(--font-main);
+        font-size: var(--text-body-small);
+        line-height: var(--leading-body);
+        color: var(--text-color);
+        opacity: 0.75;
+    }
+
+    &.descriptionVisible {
+        grid-template-rows: 1fr;
+
+        > p {
+            padding-bottom: 0.75rem;
+        }
+    }
+}
