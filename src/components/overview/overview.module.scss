@@ -2,7 +2,7 @@
 @use "@/styles/variables";
 
 .overview {
-    overflow: clip;
+  overflow: clip;
 
   .overviewContent {
     display: flow-root;
@@ -46,9 +46,10 @@
         @include mixins.rhombus(var(--text-color));
 
         position: relative;
-        top: -1px;
+        top: -2px;
+        left: 1px;
         display: inline-block;
-        margin-right: 0.75rem;
+        margin-right: 0.5rem;
         content: "";
       }
 
