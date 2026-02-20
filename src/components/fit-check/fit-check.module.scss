@@ -33,7 +33,7 @@
   gap: 0.5rem;
   align-items: center;
   width: 100%;
-  padding: 0 0.6em 0 0.4em;
+  padding: 0 0.6em 0 0.9em;
   font-family: var(--font-accent);
   font-size: 1.5em;
   font-weight: 600;
@@ -112,8 +112,9 @@
 
 .criterionTitle {
   margin: 0;
-  font-size: 1.1em;
-  font-weight: 700;
+  font-family: var(--font-accent);
+  font-size: 1.5em;
+  font-weight: 600;
   line-height: 1.4;
   color: var(--text-color);
 }
