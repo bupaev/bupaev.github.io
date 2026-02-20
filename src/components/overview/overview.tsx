@@ -5,7 +5,7 @@ import styles from "./overview.module.scss";
 export function Overview() {
   return (
     <div className={`${styles.overview} container`}>
-      <h2 className="title text-4xl leading-tight">My Professional Core</h2>
+      <h2 className="title">My Professional Core</h2>
       <div className={styles.overviewContent}>
         <div className={styles.diagramWrapper}>
           <Diagram />

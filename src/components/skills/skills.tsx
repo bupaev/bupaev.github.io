@@ -229,7 +229,7 @@ const skills: SkillGroup[] = [
 export function Skills() {
   return (
     <div className={`${styles.skills} container`}>
-      <h2 className="title text-4xl leading-tight font-bold">Skills</h2>
+      <h2 className={`title ${styles.skillsTitle}`}>Skills</h2>
       <div className="content">
         <p>
           We are currently experiencing a tectonic shift in the IT industry. 

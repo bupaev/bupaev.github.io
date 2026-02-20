@@ -71,10 +71,10 @@ export function JobElement({ job, style, isShort }: JobElementProps) {
             <div className={styles.jobText}>
                 {job.position}
                 {job.company ? "," : ""}{" "}
-                <span className="font-normal">{job.company}</span>
+                <span className={styles.companyName}>{job.company}</span>
             </div>
             <span className={styles.jobDuration}>
-                <span className="not-italic">◆ {getDuration(job.startDate, job.endDate)}</span>
+                <span className={styles.durationText}>◆ {getDuration(job.startDate, job.endDate)}</span>
             </span>
         </div>
     );

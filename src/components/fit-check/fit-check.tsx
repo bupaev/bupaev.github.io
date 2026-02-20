@@ -7,7 +7,7 @@ import { FitIcon, NoFitIcon } from "./fit-check-icons";
 export function FitCheck() {
   return (
     <div className={`${styles.fitCheck} container`}>
-      <h2 className="title text-4xl leading-tight">Are We the Right Fit?</h2>
+      <h2 className="title">Are We the Right Fit?</h2>
       <p className={styles.subtitle}>
         To save our mutual time, here is a breakdown of environments where I bring the most value
         versus where I might not be the right fit.

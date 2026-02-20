@@ -18,7 +18,7 @@ type SkillsGroupProps = {
 export function SkillsGroup({ title, info, items, className = "" }: SkillsGroupProps) {
   return (
     <div className={`${styles.skillsSection} ${styles.interactiveArea} ${className}`}>
-      <h4 className="text-xl leading-tight font-bold mb-4">{title}</h4>
+      <h4 className={`${styles.groupTitle} mb-4`}>{title}</h4>
       {info && <div className="mb-2">{info}</div>}
       <div>
         {items.map((item) => (

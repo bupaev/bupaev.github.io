@@ -120,6 +120,10 @@
       transform: skew(15deg);
     }
 
+    .companyName {
+      font-weight: var(--font-weight-normal);
+    }
+
     .jobDuration {
       display: none;
       font-size: 0.9em;
@@ -127,6 +131,10 @@
       font-weight: 400;
       line-height: 1;
       transform: skew(15deg);
+
+      .durationText {
+        font-style: normal;
+      }
     }
 
     @include mixins.sheen-effect(0.2);
