@@ -29,15 +29,15 @@ describe('FitCheck', () => {
         expect(screen.getByText('AI & Innovation')).toBeInTheDocument();
     });
 
-    it('renders "I Fit" labels for all criteria', () => {
+    it('renders "We Fit" labels for all criteria', () => {
         render(<FitCheck />);
-        const fitLabels = screen.getAllByText(/I Fit/i);
+        const fitLabels = screen.getAllByText(/We Fit/i);
         expect(fitLabels).toHaveLength(7); // 6 cards + 1 header
     });
 
-    it('renders "I Don\'t Fit" labels for all criteria', () => {
+    it('renders "We Don\'t Fit" labels for all criteria', () => {
         render(<FitCheck />);
-        const noFitLabels = screen.getAllByText(/I Don't Fit/i);
+        const noFitLabels = screen.getAllByText(/We Don't Fit/i);
         expect(noFitLabels).toHaveLength(7); // 6 cards + 1 header
     });
 

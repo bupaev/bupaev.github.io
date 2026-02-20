@@ -70,11 +70,36 @@
   }
 }
 
-.icon {
+%icon {
   display: inline-flex;
   width: 1em;
   height: 1em;
   color: var(--text-color);
+}
+
+.icon {
+  @extend %icon;
+}
+
+.fitIcon {
+  @extend %icon;
+
+  background-color: currentcolor;
+  mask-image: url("./icons/fit-mask.svg");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+
+.noFitIcon {
+  @extend %icon;
+
+  width: 1.5em;
+  background-color: currentcolor;
+  mask-image: url("./icons/not-fit-mask.svg");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
 }
 
 .tableBody {

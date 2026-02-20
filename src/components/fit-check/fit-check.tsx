@@ -2,7 +2,6 @@
 
 import { FIT_CRITERIA } from "./fit-check-data";
 import styles from "./fit-check.module.scss";
-import { FitIcon, NoFitIcon } from "./fit-check-icons";
 
 export function FitCheck() {
   return (
@@ -18,14 +17,14 @@ export function FitCheck() {
         <div className={styles.tableHeader} aria-hidden="true">
           <div className={styles.headerCell}></div>
           <div className={`${styles.headerCell} ${styles.fit}`}>
-            <FitIcon className={styles.icon} aria-hidden="true" />
-            <span>I FIT</span>
-            <span className="text-[1em]">if...</span>
+            <span className={styles.fitIcon} aria-hidden="true" />
+            <span>We FIT</span>
+            <span className="text-[1em]">when...</span>
           </div>
           <div className={`${styles.headerCell} ${styles.noFit}`}>
-            <NoFitIcon className={styles.icon} aria-hidden="true" />
-            <span>I DON&apos;T FIT</span>
-            <span className="text-[1em]">if...</span>
+            <span className={styles.noFitIcon} aria-hidden="true" />
+            <span>We DON&apos;T FIT</span>
+            <span className="text-[1em]">when...</span>
           </div>
         </div>
 
@@ -43,9 +42,9 @@ export function FitCheck() {
               {/* Fit Cell */}
               <div className={`${styles.dataCell} ${styles.fitCell}`}>
                 <div className={styles.mobileLabel}>
-                  <FitIcon className={styles.icon} aria-hidden="true" />
-                  <span>I FIT</span>
-                  <span className="text-[1em]">if...</span>
+                  <span className={styles.fitIcon} aria-hidden="true" />
+                  <span>WE FIT</span>
+                  <span className="text-[1em]">when...</span>
                 </div>
                 <p className={styles.cellText}>{criterion.fit}</p>
               </div>
@@ -53,9 +52,9 @@ export function FitCheck() {
               {/* No Fit Cell */}
               <div className={`${styles.dataCell} ${styles.noFitCell}`}>
                 <div className={styles.mobileLabel}>
-                  <NoFitIcon className={styles.icon} aria-hidden="true" />
-                  <span>I DON&apos;T FIT</span>
-                  <span className="text-[1em]">if...</span>
+                  <span className={styles.noFitIcon} aria-hidden="true" />
+                  <span>WE DON&apos;T FIT</span>
+                  <span className="text-[1em]">when...</span>
                 </div>
                 <p className={styles.cellText}>{criterion.noFit}</p>
               </div>
