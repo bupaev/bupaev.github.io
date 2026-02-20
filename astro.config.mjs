@@ -8,6 +8,9 @@ import tailwindcss from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
     // Use "static" output for purely static site generation (like Next.js output: "export")
+    experimental: {
+        chromeDevtoolsWorkspace: true,
+    },
     output: "static",
 
     integrations: [
@@ -23,6 +26,7 @@ export default defineConfig({
     vite: {
         plugins: [tailwindcss()],
         css: {
+            devSourcemap: true,
             preprocessorOptions: {
                 scss: {
                     api: 'modern-compiler',
