@@ -1,16 +1,35 @@
 import styles from "./skill-bar.module.scss";
 
+export type SkillLevel = "basic" | "advanced" | "expert";
+
 type SkillBarProps = {
-  level: number;
+  title: string;
+  level: SkillLevel;
 };
 
-export function SkillBar({ level }: SkillBarProps) {
+const levelMap: Record<SkillLevel, number> = {
+  basic: 1,
+  advanced: 2,
+  expert: 3,
+};
+
+export function SkillBar({ title, level }: SkillBarProps) {
+  const numLevel = levelMap[level];
+
   return (
-    <div className={`${styles.skillBar} mb-4 mt-1`}>
+    <div
+      className={`${styles.skillBar} mb-4 mt-1`}
+      role="meter"
+      aria-label={`${title} skill level`}
+      aria-valuemin={1}
+      aria-valuemax={3}
+      aria-valuenow={numLevel}
+      aria-valuetext={level}
+    >
       {[1, 2, 3].map((i) => (
         <div
           key={i}
-          className={`${styles.segment} ${level >= i ? styles.filled : ""}`}
+          className={`${styles.segment} ${numLevel >= i ? styles.filled : ""}`}
           data-level={i}
         />
       ))}

@@ -1,10 +1,9 @@
-
-import { SkillBar } from "./skill-bar";
+import { SkillBar, type SkillLevel } from "./skill-bar";
 import styles from "./skills-group.module.scss";
 
 type SkillItem = {
   title: string;
-  level: number;
+  level: SkillLevel;
   info?: string;
 };
 
@@ -37,7 +36,7 @@ export function SkillsGroup({ title, info, items, className = "" }: SkillsGroupP
                 <span className={styles.info}>{item.info}</span>
               </span>
             )} */}
-            <SkillBar level={item.level} />
+            <SkillBar title={item.title} level={item.level} />
           </div>
         ))}
       </div>

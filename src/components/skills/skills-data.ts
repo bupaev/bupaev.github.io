@@ -5,7 +5,7 @@
 export type SkillItem = {
   title: string;
   info?: string;
-  level: 1 | 2 | 3;
+  level: "basic" | "advanced" | "expert";
 };
 
 export type SkillGroup = {
@@ -21,27 +21,27 @@ export const SKILLS_DATA: SkillGroup[] = [
       {
         title: "Javascript",
         info: "",
-        level: 3,
+        level: "expert",
       },
       {
         title: "TypeScript",
         info: "",
-        level: 2,
+        level: "advanced",
       },
       {
         title: "HTML5",
         info: "Key points: Semantic markup, accessibility, native controls",
-        level: 3,
+        level: "expert",
       },
       {
         title: "CSS/SCSS",
         info: "Key points: Atomic and BEM, Flexbox, Grids, CSS Animation",
-        level: 3,
+        level: "expert",
       },
       {
         title: "Tailwind CSS",
         info: "Utility-first CSS framework",
-        level: 2,
+        level: "advanced",
       },
     ],
   },
@@ -51,27 +51,27 @@ export const SKILLS_DATA: SkillGroup[] = [
       {
         title: "React",
         info: "Modern React ecosystem (Hooks, React 19, Server Components)",
-        level: 3,
+        level: "expert",
       },
       {
         title: "Vue",
         info: "Standard stack (Vuex and Vue Router) plus TypeScript, Vuetify and Vuelidate",
-        level: 2,
+        level: "advanced",
       },
       {
         title: "NextJS",
         info: "SSR/SSG, App Router, Server Actions",
-        level: 2,
+        level: "advanced",
       },
       {
         title: "Astro",
         info: "Static Site Generation, Islands Architecture",
-        level: 2,
+        level: "advanced",
       },
       {
         title: "NuxtJS",
         info: "Vue framework for SSR/SSG",
-        level: 1,
+        level: "basic",
       },
     ],
   },
@@ -81,22 +81,22 @@ export const SKILLS_DATA: SkillGroup[] = [
       {
         title: "Web Audio (Web Audio API, MIDI API)",
         info: "",
-        level: 3,
+        level: "expert",
       },
       {
         title: "Web Graphics (SVG, Canvas)",
         info: "",
-        level: 2,
+        level: "advanced",
       },
       {
         title: "Data Storage (Local Storage, IndexedDB)",
         info: "",
-        level: 2,
+        level: "advanced",
       },
       {
         title: "Web Worker",
         info: "",
-        level: 2,
+        level: "advanced",
       },
     ],
   },
@@ -105,15 +105,15 @@ export const SKILLS_DATA: SkillGroup[] = [
     items: [
       {
         title: "Figma",
-        level: 3,
+        level: "expert",
       },
       {
         title: "Lightroom",
-        level: 3,
+        level: "expert",
       },
       {
         title: "Photoshop",
-        level: 2,
+        level: "advanced",
       },
     ],
   },
@@ -122,23 +122,23 @@ export const SKILLS_DATA: SkillGroup[] = [
     items: [
       {
         title: "Git (GitHub, Gitlab, Bitbucket)",
-        level: 3,
+        level: "expert",
       },
       {
         title: "Bundling/Automation (Vite, Webpack, Rollup)",
-        level: 3,
+        level: "expert",
       },
       {
         title: "CI/CD (GitHub Actions, Gitlab CI, Azure, AWS)",
-        level: 2,
+        level: "advanced",
       },
       {
         title: "Enterprise CMS (Adobe Experience Manager)",
-        level: 2,
+        level: "advanced",
       },
       {
         title: "Virtualization (Docker, VMware)",
-        level: 1,
+        level: "basic",
       },
     ],
   },
@@ -148,26 +148,26 @@ export const SKILLS_DATA: SkillGroup[] = [
       {
         title: "REST API",
         info: "Key points: API design, Axios, Fetch API, JSON",
-        level: 3,
+        level: "expert",
       },
       {
         title: "GraphQL",
-        level: 2,
+        level: "advanced",
       },
       {
         title: "Node.js",
         info: "Backend services, custom scripts, and tooling",
-        level: 1,
+        level: "basic",
       },
       {
         title: "Express / NestJS",
         info: "Building REST APIs and server applications",
-        level: 1,
+        level: "basic",
       },
       {
         title: "Databases (SQL / NoSQL)",
         info: "MySQL, SQLite, MongoDB",
-        level: 1,
+        level: "basic",
       },
     ],
   },
@@ -177,26 +177,26 @@ export const SKILLS_DATA: SkillGroup[] = [
       {
         title: "Linting, Formatting, Style guides",
         info: "Establishing rigorous code review processes and automated linting (ESLint, Prettier, Airbnb styles)",
-        level: 3,
+        level: "expert",
       },
       {
         title: "Testing (Vitest, RTL, Jest, Playwright)",
-        level: 3,
+        level: "expert",
       },
       {
         title: "Documentation (JSDoc, Swagger)",
         info: "",
-        level: 3,
+        level: "expert",
       },
       {
         title: "Web accessibility (WCAG, a11y)",
         info: "Strict accessibility compliance, semantic markup",
-        level: 3,
+        level: "advanced",
       },
       {
         title: "Web page performance",
         info: "PageSpeed, Lighthouse, Chrome Performance tools, Performance budgets",
-        level: 3,
+        level: "advanced",
       },
     ],
   },
@@ -205,19 +205,19 @@ export const SKILLS_DATA: SkillGroup[] = [
     items: [
       {
         title: "Agile SCRUM/KANBAN",
-        level: 3,
+        level: "expert",
       },
       {
         title: "AI-Assisted Programming / AI Pair Programming",
-        level: 3,
+        level: "expert",
       },
       {
         title: "JIRA / Confluence",
-        level: 3,
+        level: "advanced",
       },
       {
         title: "Code review & Team mentoring",
-        level: 3,
+        level: "expert",
       },
     ],
   },
@@ -227,22 +227,22 @@ export const SKILLS_DATA: SkillGroup[] = [
       {
         title: "Claude Code & Gemini",
         info: "AI Pair Programming, codebase analysis, and architecture exploration",
-        level: 3,
+        level: "expert",
       },
       {
         title: "Antigravity",
         info: "AI Agent for automated coding and workflow acceleration",
-        level: 3,
+        level: "expert",
       },
       {
         title: "NotebookLM",
         info: "Contextual understanding and documentation synthesis",
-        level: 3,
+        level: "expert",
       },
       {
-        title: "NanoClaw",
+        title: "NanoClaw, ClaudeClaw",
         info: "AI Agent for automated coding and workflow acceleration",
-        level: 1,
+        level: "basic",
       },
     ],
   },
@@ -252,17 +252,17 @@ export const SKILLS_DATA: SkillGroup[] = [
       {
         title: "Russian",
         info: "Native",
-        level: 3,
+        level: "expert",
       },
       {
         title: "English",
         info: "Working language for over 10 years (C1)",
-        level: 3,
+        level: "expert",
       },
       {
         title: "German",
         info: "Just enough to survive for several days in a German language-only environment 😅 (A2)",
-        level: 1,
+        level: "basic",
       },
     ],
   },
