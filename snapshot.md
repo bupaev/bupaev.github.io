@@ -1,0 +1,460 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4] [cursor=pointer]:
+      - generic [ref=e5]: Dark
+      - generic [ref=e6]:
+        - img "Light mode" [ref=e7]
+        - img "Dark mode" [ref=e8]
+      - generic [ref=e9]: Light
+    - navigation "Page navigation" [ref=e11]:
+      - generic [ref=e12]:
+        - button "Navigate to Who I am section" [ref=e13] [cursor=pointer]:
+          - img [ref=e15]
+          - generic [ref=e16]: Who I am
+        - button "Navigate to My Core section" [ref=e17] [cursor=pointer]:
+          - img [ref=e19]
+          - generic [ref=e20]: My Core
+        - button "Navigate to Fit Check section" [ref=e21] [cursor=pointer]:
+          - img [ref=e23]
+          - generic [ref=e24]: Fit Check
+        - button "Navigate to Skills section" [ref=e25] [cursor=pointer]:
+          - img [ref=e27]
+          - generic [ref=e28]: Skills
+        - button "Navigate to Experience section" [ref=e29] [cursor=pointer]:
+          - img [ref=e31]
+          - generic [ref=e32]: Experience
+        - button "Navigate to Education section" [ref=e33] [cursor=pointer]:
+          - img [ref=e35]
+          - generic [ref=e36]: Education
+    - generic [ref=e40]:
+      - generic [ref=e41]:
+        - heading "Hi! I'm Paul Buramensky" [level=1] [ref=e42]
+        - heading "Lead front-end engineer with strong UX expertise and AI-enthusiast" [level=2] [ref=e43]:
+          - text: Lead front-end engineer
+          - text: with strong UX expertise
+          - text: and AI-enthusiast
+        - generic [ref=e44]:
+          - generic [ref=e45]: contact me via
+          - link "Email" [ref=e47] [cursor=pointer]:
+            - /url: mailto:mail@paulbu.com
+            - generic [ref=e48]:
+              - img [ref=e50]
+              - generic [ref=e52]: Email
+          - link "Telegram" [ref=e54] [cursor=pointer]:
+            - /url: https://t.me/bupaev
+            - generic [ref=e55]:
+              - img [ref=e57]
+              - generic [ref=e59]: Telegram
+          - link "LinkedIn" [ref=e61] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/pavel-buramensky/
+            - generic [ref=e62]:
+              - img [ref=e64]
+              - generic [ref=e68]: LinkedIn
+          - generic [ref=e69]: or just
+          - link "Download my CV" [ref=e70] [cursor=pointer]:
+            - /url: /pavel-buramensky-cv.pdf
+            - generic [ref=e71]:
+              - img [ref=e73]
+              - generic [ref=e76]: Download my CV
+      - generic [ref=e78]:
+        - generic [ref=e79]:
+          - img [ref=e80]
+          - img "Paul Buramensky portrait" [ref=e81]
+        - generic [ref=e82]:
+          - img [ref=e83]
+          - img "Paul Buramensky portrait" [ref=e84]
+    - generic [ref=e87]:
+      - heading "My Professional Core" [level=2] [ref=e88]
+      - generic [ref=e89]:
+        - paragraph [ref=e90]:
+          - text: I am a
+          - strong [ref=e91]: Frontend-focused Product Engineer
+          - text: ", a"
+          - strong [ref=e92]: player-coach
+          - text: ", and a"
+          - strong [ref=e93]: bridge
+          - text: between business, design, and development.
+        - generic [ref=e94]:
+          - generic [ref=e95]:
+            - paragraph [ref=e96]:
+              - text: "In Three Words:"
+              - strong [ref=e97]: Product-Oriented, Reasonable, Perfectionist
+            - list [ref=e98]:
+              - listitem [ref=e99]:
+                - strong [ref=e100]: "Product-Oriented:"
+                - text: I feel a deep personal responsibility for what I build. I put a lot of effort into my work, and I am genuinely interested in its success.
+              - listitem [ref=e101]:
+                - strong [ref=e102]: "Reasonable:"
+                - text: I rely on data and critical thinking to make complex decisions and practical compromises. Subjective, biased choices are often very costly, and even the smartest people can fall into
+                - link "cognitive traps" [ref=e103] [cursor=pointer]:
+                  - /url: https://pubmed.ncbi.nlm.nih.gov/22663351/
+                - text: .
+              - listitem [ref=e104]:
+                - strong [ref=e105]: "Perfectionist:"
+                - text: Building something truly great is very important to me. I care deeply about the quality of my craft and want to be proud of my work.
+          - generic [ref=e106]:
+            - paragraph [ref=e107]: "The following diagram illustrates the four pillars of my professional core:"
+            - generic [ref=e108]:
+              - button "Switch to text view" [ref=e110] [cursor=pointer]:
+                - img [ref=e112]
+              - button "Back to main view":
+                - img
+              - generic [ref=e113]:
+                - img [ref=e114]
+                - generic:
+                  - generic:
+                    - heading "Software engineering" [level=3] [ref=e124] [cursor=pointer]:
+                      - text: Software
+                      - text: engineering
+                    - generic:
+                      - button "Prioritizing Web Fundamentals Prioritizing Web Fundamentals":
+                        - generic: Prioritizing Web Fundamentals Prioritizing Web Fundamentals
+                      - button "Applying Objective Engineering Applying Objective Engineering":
+                        - generic: Applying Objective Engineering Applying Objective Engineering
+                      - button "Enforcing Quality Standards Enforcing Quality Standards":
+                        - generic: Enforcing Quality Standards Enforcing Quality Standards
+                      - button "Cultivating Excellent DX Cultivating Excellent DX":
+                        - generic: Cultivating Excellent DX Cultivating Excellent DX
+                      - button "Owning the Full Lifecycle Owning the Full Lifecycle":
+                        - generic: Owning the Full Lifecycle Owning the Full Lifecycle
+                  - generic:
+                    - heading "Leadership" [level=3] [ref=e125] [cursor=pointer]
+                    - generic:
+                      - button "Horizontal Engineering Culture Horizontal Engineering Culture":
+                        - generic: Horizontal Engineering Culture Horizontal Engineering Culture
+                      - button "Building Frictionless Workflows Building Frictionless Workflows":
+                        - generic: Building Frictionless Workflows Building Frictionless Workflows
+                      - button "Leading with Constructive Honesty Leading with Constructive Honesty":
+                        - generic: Leading with Constructive Honesty Leading with Constructive Honesty
+                      - button "Maintaining a Sustainable Pace Maintaining a Sustainable Pace":
+                        - generic: Maintaining a Sustainable Pace Maintaining a Sustainable Pace
+                  - generic:
+                    - heading "UI/UX Design" [level=3] [ref=e126] [cursor=pointer]:
+                      - text: UI/UX
+                      - text: Design
+                    - generic:
+                      - button "Practicing Pragmatic Perfectionism Practicing Pragmatic Perfectionism":
+                        - generic: Practicing Pragmatic Perfectionism Practicing Pragmatic Perfectionism
+                      - button "Solving Product Problems Solving Product Problems":
+                        - generic: Solving Product Problems Solving Product Problems
+                      - button "Designing Human-Centric Spaces Designing Human-Centric Spaces":
+                        - generic: Designing Human-Centric Spaces Designing Human-Centric Spaces
+                      - button "Bridging Design and Engineering Bridging Design and Engineering":
+                        - generic: Bridging Design and Engineering Bridging Design and Engineering
+                      - button "Advocating for Accessibility Advocating for Accessibility":
+                        - generic: Advocating for Accessibility Advocating for Accessibility
+                  - generic:
+                    - heading "AI expertize" [level=3] [ref=e127] [cursor=pointer]:
+                      - text: AI
+                      - text: expertize
+                    - generic:
+                      - button "Embracing the AI Revolution Embracing the AI Revolution":
+                        - generic: Embracing the AI Revolution Embracing the AI Revolution
+                      - button "Validating AI Outputs Validating AI Outputs":
+                        - generic: Validating AI Outputs Validating AI Outputs
+                      - button "Amplifying Engineering Impact Amplifying Engineering Impact":
+                        - generic: Amplifying Engineering Impact Amplifying Engineering Impact
+                      - button "Filtering the Hype Filtering the Hype":
+                        - generic: Filtering the Hype Filtering the Hype
+    - generic [ref=e130]:
+      - heading "Are We the Right Fit?" [level=2] [ref=e131]
+      - paragraph [ref=e132]: To save our mutual time, here is a breakdown of environments where I bring the most value versus where I might not be the right fit.
+      - generic [ref=e133]:
+        - generic [ref=e134]:
+          - generic [ref=e136]:
+            - generic [ref=e138]: We FIT
+            - generic [ref=e139]: when...
+          - generic [ref=e140]:
+            - generic [ref=e142]: We DON'T FIT
+            - generic [ref=e143]: when...
+        - generic [ref=e144]:
+          - generic [ref=e145]:
+            - heading "Product Complexity" [level=3] [ref=e147]
+            - paragraph [ref=e149]: You are building complex, feature-rich interfaces where sophisticated design and top-tier User Experience are critical for success.
+            - paragraph [ref=e151]: You need basic interfaces for simple CRUD operations where user delight is an afterthought or not important for business.
+          - generic [ref=e152]:
+            - heading "Engineering Balance" [level=3] [ref=e154]
+            - paragraph [ref=e156]: You strive for a sustainable balance between code quality, maintainability, extensibility, and speed of delivery.
+            - paragraph [ref=e158]: You prioritize "pushing code to production" at all costs, treating technical debt as a problem for another day (or never).
+          - generic [ref=e159]:
+            - heading "Product Mindset" [level=3] [ref=e161]
+            - paragraph [ref=e163]: You need a partner who dives deep into business context, asks "Why?", and cares about the product’s success as much as the code.
+            - paragraph [ref=e165]: You are looking for a "ticket closer" who silently executes specifications without questioning product decisions.
+          - generic [ref=e166]:
+            - heading "Design & Process" [level=3] [ref=e168]
+            - paragraph [ref=e170]: You treat Design Systems and Accessibility as first-class citizens and value a bridge between design and engineering.
+            - paragraph [ref=e172]: You accept "it looks roughly like the mockup" as a passing grade and view UI details as unnecessary polish.
+          - generic [ref=e173]:
+            - heading "Team Culture" [level=3] [ref=e175]
+            - paragraph [ref=e177]: You want to build a transparent culture (like an orchestra) with clear processes, documentation, and knowledge sharing.
+            - paragraph [ref=e179]: You rely on chaos, "hero culture," or isolated coding where processes are seen purely as bureaucracy.
+          - generic [ref=e180]:
+            - heading "AI & Innovation" [level=3] [ref=e182]
+            - paragraph [ref=e184]: "You embrace a balanced approach to AI: harnessing its power as a force multiplier while maintaining critical awareness of its risks, limitations, and legal boundaries."
+            - paragraph [ref=e186]: "You tend toward extremes: either fearing AI like fire due to compliance paralysis, or blindly chasing the \"vibe-coding\" hype with no clue what’s running under the hood."
+    - generic [ref=e188]:
+      - heading "Skills" [level=2] [ref=e189]
+      - generic [ref=e190]:
+        - paragraph [ref=e191]: We are currently experiencing a tectonic shift in the IT industry. Skills that were critical yesterday and defined your market value, are rapidly losing their relevance today, as AI handles syntax and coding far better than any human.
+        - paragraph [ref=e192]: I am fortunate that writing code was never my end goal or sole skill. What has always truly interested me is creating real, working products that I can be proud of. Nevertheless, the good old list of tools and technologies I possess may still be useful.
+        - heading "What I can do:" [level=3] [ref=e193]
+        - list [ref=e194]:
+          - listitem [ref=e195]: develop and maintain complex web apps with modern JS frameworks (preferably Vue, but I have worked with React and AngularJS too)
+          - listitem [ref=e196]: create reasonably pixel-perfect, adaptive, rich-media web interfaces with a nontrivial design
+          - listitem [ref=e197]: make wireframes and user flows based on business requirements, create interactive HTML prototypes
+          - listitem [ref=e198]: manage a small team of developers in Agile process. However, I prefer coding and UX design more
+        - heading "Detailed list:" [level=3] [ref=e199]
+        - generic [ref=e200]:
+          - generic [ref=e201] [cursor=pointer]:
+            - heading "Programming/Markup languages" [level=4] [ref=e202]
+            - generic [ref=e203]:
+              - generic [ref=e204]: Javascript
+              - generic [ref=e209]: TypeScript
+              - generic [ref=e214]: CSS, SCSS, LESS, JSS
+              - generic [ref=e219]: HTML5
+          - generic [ref=e224] [cursor=pointer]:
+            - heading "JavaScript Frameworks and SSR" [level=4] [ref=e225]
+            - generic [ref=e226]:
+              - generic [ref=e227]: Vue
+              - generic [ref=e232]: React
+              - generic [ref=e237]: AngularJS 1.x
+              - generic [ref=e242]: NuxtJS
+              - generic [ref=e247]: Gatsby
+          - generic [ref=e252] [cursor=pointer]:
+            - heading "Browser APIs" [level=4] [ref=e253]
+            - generic [ref=e254]:
+              - generic [ref=e255]: Web Audio (Web Audio API, MIDI API)
+              - generic [ref=e260]: Web Graphics (SVG, Canvas)
+              - generic [ref=e265]: Data Storage (Local Storage, IndexedDB)
+              - generic [ref=e270]: Web Worker
+          - generic [ref=e275] [cursor=pointer]:
+            - heading "UX/UI design tools" [level=4] [ref=e276]
+            - generic [ref=e277]:
+              - generic [ref=e278]: Photoshop
+              - generic [ref=e283]: Figma
+              - generic [ref=e288]: Illustrator
+              - generic [ref=e293]: Balsamiq
+          - generic [ref=e298] [cursor=pointer]:
+            - heading "Infrastructure" [level=4] [ref=e299]
+            - generic [ref=e300]:
+              - generic [ref=e301]: Git (GitHub, Gitlab, Bitbucket)
+              - generic [ref=e306]: Bundling/Automation (Webpack, gulp)
+              - generic [ref=e311]: CI/CD (Azure, AWS, Travis, CircleCI, Gitlab Pipeline)
+              - generic [ref=e316]: Virtualization (Docker, VMware Workstation)
+          - generic [ref=e321] [cursor=pointer]:
+            - heading "Server communication" [level=4] [ref=e322]
+            - generic [ref=e323]:
+              - generic [ref=e324]: REST API
+              - generic [ref=e329]: GraphQL
+              - generic [ref=e334]: WebSocket
+          - generic [ref=e339] [cursor=pointer]:
+            - heading "Code quality and performance" [level=4] [ref=e340]
+            - generic [ref=e341]:
+              - generic [ref=e342]: Linting, Formatting, Style guides
+              - generic [ref=e347]: Unit-testing (Jest, Vue Test Utils, Mocha/Ava)
+              - generic [ref=e352]: Documentation (JSDoc, Swagger)
+              - generic [ref=e357]: Code review
+              - generic [ref=e362]: Web page performance
+          - generic [ref=e367] [cursor=pointer]:
+            - heading "Workflow & Methodology" [level=4] [ref=e368]
+            - generic [ref=e369]:
+              - generic [ref=e370]: Agile SCRUM/KANBAN
+              - generic [ref=e375]: JIRA
+              - generic [ref=e380]: Confluence
+              - generic [ref=e385]: Trello
+          - generic [ref=e390] [cursor=pointer]:
+            - heading "Languages" [level=4] [ref=e391]
+            - generic [ref=e392]:
+              - generic [ref=e393]: Russian
+              - generic [ref=e398]: English
+              - generic [ref=e403]: German
+    - generic [ref=e409]:
+      - heading "Experience" [level=2] [ref=e410]
+      - generic [ref=e411]:
+        - generic [ref=e412]:
+          - heading "Lead Front-end engineer|EPAM|2021 - 2025" [level=3] [ref=e413]:
+            - text: Lead Front-end engineer
+            - generic [ref=e414]:
+              - text: "|"
+              - link "EPAM" [ref=e415] [cursor=pointer]:
+                - /url: https://www.epam.com/
+            - generic [ref=e416]: "|2021 - 2025"
+          - paragraph [ref=e417]:
+            - emphasis [ref=e418]: EPAM Systems, Inc. is an American company that specializes in software engineering services, digital platform engineering, and digital product design.
+          - heading "Used Skills" [level=4] [ref=e419]
+          - paragraph [ref=e420]: AI Pair Programming / AI-Assisted Programming, React.js, User Experience (UX), SASS, TypeScript, Front-End Development, Leading Development Teams, Adobe Experience Manager (AEM), JavaScript
+          - heading "Responsibilities" [level=4] [ref=e421]
+          - list [ref=e422]:
+            - listitem [ref=e423]: Led the development of high-quality, public-facing web interfaces for a major insurance client (VHI), ensuring pixel-perfect implementation and strict accessibility compliance
+            - listitem [ref=e424]: Conducted a comprehensive technical assessment and executed a strategic rewrite of a legacy AEM frontend codebase, modernizing the stack to industry standards
+            - listitem [ref=e425]: Bridged the gap between Design and Engineering by translating abstract business requirements into user-centric, feasible technical specifications
+            - listitem [ref=e426]: Acted as a “Guardian of Quality,” establishing rigorous code review processes, automated linting, and performance budgets to prevent technical debt
+            - listitem [ref=e427]: Orchestrated team workflows and fostered a transparent engineering culture through detailed documentation and knowledge-sharing sessions
+          - heading "Challenges" [level=4] [ref=e428]
+          - paragraph [ref=e429]: "The primary challenge was transforming a “minefield” legacy codebase, where simple components often had thousands of lines of redundant CSS into a stable, scalable product. It required operating as a “T-Shaped” professional: filling gaps in Business Analysis and QA, teaching the team AEM best practices that were previously ignored, and rebuilding client trust. However, the effort was worth it because it proved that even a chaotic environment can be turned into a productive engineering system through the right culture and processes."
+        - generic [ref=e430]:
+          - heading "Lead Front-end developer|Holmusk|2018 - 2021" [level=3] [ref=e431]:
+            - text: Lead Front-end developer
+            - generic [ref=e432]:
+              - text: "|"
+              - link "Holmusk" [ref=e433] [cursor=pointer]:
+                - /url: https://www.holmusk.com/
+            - generic [ref=e434]: "|2018 - 2021"
+          - paragraph [ref=e435]:
+            - emphasis [ref=e436]: Holmusk is a data science and health technology company that aims to reverse chronic disease and behavioral health issues.
+          - heading "Used Skills" [level=4] [ref=e437]
+          - paragraph [ref=e438]: VueJS (with Vuex and Vue Router), Vuetify, TypeScript, Jest, Vue Test Utils, FHIR API, HTML5/CSS3, SASS, UX expertise, Team leading, SCRUM
+          - heading "Responsibilities" [level=4] [ref=e439]
+          - list [ref=e440]:
+            - listitem [ref=e441]: Delivered a complex front-end application (electronic health record system) with Vue and RESTful FHIR API
+            - listitem [ref=e442]: Communicated with product managers and coordinated with BA, QA and back-end developers to deliver the quality product
+            - listitem [ref=e443]: Analyzed the product design complexity, planned the workload, communicated the risks; ensured the technical feasibility of UI/UX designs
+            - listitem [ref=e444]: Performed unit, integration, and performance testing
+            - listitem [ref=e445]: Led the team, established and maintained code quality standards
+            - listitem [ref=e446]: Fine-tuned middle-fidelity wireframes, creating interfaces based on wireframes and UI library
+            - listitem [ref=e447]: Documented code and design of the product
+          - heading "Challenges" [level=4] [ref=e448]
+          - paragraph [ref=e449]:
+            - text: Working with
+            - link "FHIR API" [ref=e450] [cursor=pointer]:
+              - /url: http://hl7.org/fhir/
+            - text: requires a deep dive into the extremely sophisticated domain of Healthcare data management. However, that was worth it because FHIR is a great architectural example of a good organization of complex real data structures.
+          - paragraph [ref=e451]: Also, it was my first serious experience of fully remote work with a team distributed in six different time zones from West Coast (UTC-8) to Singapore (UTC+8).
+        - generic [ref=e452]:
+          - heading "Lead UI/Front-end developer|Codenetix|2016 - 2018" [level=3] [ref=e453]:
+            - text: Lead UI/Front-end developer
+            - generic [ref=e454]:
+              - text: "|"
+              - link "Codenetix" [ref=e455] [cursor=pointer]:
+                - /url: http://cdntx.paulbu.com
+            - generic [ref=e456]: "|2016 - 2018"
+          - paragraph [ref=e457]:
+            - emphasis [ref=e458]: CODENETIX is a software agency with the focus on complex custom solutions and just a dream team of passionate skillful specialists︎
+          - heading "Used Skills" [level=4] [ref=e459]
+          - paragraph [ref=e460]: ES6, React (with React Router, Redux, SAGA), Gatsby, HTML5/SCSS, CSS and Canvas animation, Docker, UX/UI expertise, Agile
+          - heading "Responsibilities" [level=4] [ref=e461]
+          - list [ref=e462]:
+            - listitem [ref=e463]: Developed and managed robust codebases with appealing interfaces for a variety of applications, from design to production
+            - listitem [ref=e464]: Made interactive multimedia content and complex animations with Canvas and HTML/CSS
+            - listitem [ref=e465]: Defined overall technology direction for the company projects
+            - listitem [ref=e466]: Led and mentored the team, established and maintained high code quality standards and best practices
+            - listitem [ref=e467]: Assisted in the collection and documentation of user’s requirements, development of user stories, estimates and work plans
+            - listitem [ref=e468]: Created wireframes and prototypes, occasionally took up UX/UI-design tasks
+          - heading "Challenges" [level=4] [ref=e469]
+          - paragraph [ref=e470]: This position gave me a lot of new professional experience. I joined the team at an early stage of its formation and took an active part in its growth and development, forming a great front-end team from scratch. It was an exceptional experience performing many roles and quickly switching between them and tasks, often outside the front-end of development.
+        - generic [ref=e471]:
+          - heading "Front-end developer|Bandlab|2014 - 2016" [level=3] [ref=e472]:
+            - text: Front-end developer
+            - generic [ref=e473]:
+              - text: "|"
+              - link "Bandlab" [ref=e474] [cursor=pointer]:
+                - /url: https://www.bandlab.com/
+            - generic [ref=e475]: "|2014 - 2016"
+          - paragraph [ref=e476]:
+            - emphasis [ref=e477]: BandLab is a Singapore based social music creation platform, the combination of social network, multitrack audio workstation and VCS-like music storage
+          - heading "Used Skills" [level=4] [ref=e478]
+          - paragraph [ref=e479]: Vanilla JS ES5/ES6, AngularJS 1.x, Web Audio API, HTML5, SASS, Canvas, SVG, WebWorkers, IndexedDB, Local Storage, WebRTC, Agile
+          - heading "Responsibilities" [level=4] [ref=e480]
+          - list [ref=e481]:
+            - listitem [ref=e482]: Developed a browser-based multitrack digital audio workstation with AngularJS 1.x. and Web Audio API
+          - heading "Challenges" [level=4] [ref=e483]
+          - paragraph [ref=e484]: Making SPA with functionality of GarageBand was an ambiguous challenge that required strong JavaScript skills, profound knowledge of digital signal processing and Web Audio API. I faced many nontrivial tasks on the way such as multitrack sound mixing, adding audio effects, audio latency detection, sound pitch detection with the use of Fourier analysis and autocorrelation, and so on. The solution of these issues required good math skills, rational usage of design patterns and understanding of sound nature. Eventually, I am proud of having taken part in creating one of the best web-based audio workstations of today.
+        - generic [ref=e485]:
+          - heading "Front-end developer|DXC Luxoft|2012 - 2014" [level=3] [ref=e486]:
+            - text: Front-end developer
+            - generic [ref=e487]:
+              - text: "|"
+              - link "DXC Luxoft" [ref=e488] [cursor=pointer]:
+                - /url: http://www.luxoft.com/
+            - generic [ref=e489]: "|2012 - 2014"
+          - paragraph [ref=e490]:
+            - emphasis [ref=e491]: Luxoft is a DXC Technology Company, is a digital strategy and software engineering firm, with about 13k employees within its 41 offices in 22 countries.
+          - heading "Used Skills" [level=4] [ref=e492]
+          - paragraph [ref=e493]: HTML5, CSS3, LESS, VanillaJS, jQuery, XSLT with .NET-driven CMS (Sitecore, Sharepoint), UI/UX expertise, Agile
+          - heading "Responsibilities" [level=4] [ref=e494]
+          - list [ref=e495]:
+            - listitem [ref=e496]: Created adaptive HTML5/CSS3 layouts with jQuery for projects such as PromSvyazBank public site, LikePR OneClick Yakutsk platform, M-Video internal services
+            - listitem [ref=e497]: Assisted in the collection and documentation of user’s requirements, development of user stories, estimates and work plans
+            - listitem [ref=e498]: Optimized front-end for high load sites and mobile devices
+            - listitem [ref=e499]: Managed a small team of front-end developers
+          - heading "Challenges" [level=4] [ref=e500]
+          - paragraph [ref=e501]: Crafting top notch interfaces for large companies, developing interactive maps, complex client-side data validation and calculations (loan calculators, credit wizards, etc.)
+        - generic [ref=e502]:
+          - heading "Web developer|Mir IT|2011 - 2012" [level=3] [ref=e503]:
+            - text: Web developer
+            - generic [ref=e504]:
+              - text: "|"
+              - link "Mir IT" [ref=e505] [cursor=pointer]:
+                - /url: http://mir-it.info/
+            - generic [ref=e506]: "|2011 - 2012"
+          - paragraph [ref=e507]:
+            - emphasis [ref=e508]: Mir IT is a small software company focused on web development, design and SEO services
+          - heading "Used Skills" [level=4] [ref=e509]
+          - paragraph [ref=e510]: PHP, HTML5, CSS, JavaScript, jQuery, C#, ADO.NET, MS SQL Server, MySQL
+          - heading "Responsibilities" [level=4] [ref=e511]
+          - list [ref=e512]:
+            - listitem [ref=e513]: Developed and tested web sites with LAMP stack and HTML/CSS/jQuery
+            - listitem [ref=e514]: Developed electronic document management systems with C# and MS SQL/SQLite
+        - generic [ref=e515]:
+          - heading "Teaching Assistant|Omsk State Technical University|2009 – 2014" [level=3] [ref=e516]:
+            - text: Teaching Assistant
+            - generic [ref=e517]:
+              - text: "|"
+              - link "Omsk State Technical University" [ref=e518] [cursor=pointer]:
+                - /url: http://omgtu.ru/
+            - generic [ref=e519]: "|2009 – 2014"
+          - paragraph [ref=e520]:
+            - emphasis [ref=e521]: Omsk State Technical University (OmSTU) is a scientific-technological university which trains engineers, economists and classical scholars. OmSTU offers over 40 Bachelor degree programmes and 32 Master of Science degree programmes, 23 Doctoral programmes.
+          - heading "Used Skills" [level=4] [ref=e522]
+          - paragraph [ref=e523]: Public speech, explanation and communication skills, research.
+          - heading "Responsibilities" [level=4] [ref=e524]
+          - list [ref=e525]:
+            - listitem [ref=e526]: Developed and conducted courses (Artificial Intelligence Systems, Decision Support System)
+            - listitem [ref=e527]: Set up and conducted practical classes (Control theory)
+            - listitem [ref=e528]: Conducted exams and assessed students’ knowledge
+        - generic [ref=e529]:
+          - heading "Software developer, 3D modeller, Photographer|Freelance|2008 – 2011" [level=3] [ref=e530]:
+            - text: Software developer, 3D modeller, Photographer
+            - generic [ref=e531]: "|Freelance"
+            - generic [ref=e532]: "|2008 – 2011"
+          - paragraph [ref=e533]:
+            - emphasis [ref=e534]: Working on a wide range of projects has given me a better understanding of what I would like to do in my life
+          - heading "Used Skills" [level=4] [ref=e535]
+          - paragraph [ref=e536]: HTML5, CSS, JavaScript, PHP, C#/ASP.NET, MySQL, 3Ds Max, Sony Vegas, Adobe Photoshop, Adobe Lightroom
+          - heading "Responsibilities" [level=4] [ref=e537]
+          - list [ref=e538]:
+            - listitem [ref=e539]: Web design and programming with HTML5, CSS3, JavaScript ES5, PHP, C#/ASP.NET, MySQL, etc.
+            - listitem [ref=e540]: 3d-modelling and animation, video editing
+            - listitem [ref=e541]: Event and studio photography
+    - generic [ref=e543]:
+      - heading "Education" [level=2] [ref=e544]
+      - generic [ref=e545]:
+        - heading "Endless professional self-development" [level=3] [ref=e546]
+        - paragraph [ref=e547]: Udemy, Coursera, Skillbox, JavaScript.Ninja, Refactoring.Guru and infinite number of articles, books and Youtube videos
+        - heading "Doctor of Philosophy (postgraduate student), Computer science (unfinished)" [level=3] [ref=e548]
+        - paragraph [ref=e549]: Omsk State Technical University, 2013 - 2015.
+        - heading "Master of Science, Computer science" [level=3] [ref=e550]
+        - paragraph [ref=e551]: Omsk State Technical University, 2009-2011 - GPA 4.9/5.0
+        - heading "Bachelor of Science, Computer science" [level=3] [ref=e552]
+        - paragraph [ref=e553]: Omsk State Technical University, 2005-2009 - GPA 4.6/5.0
+    - contentinfo [ref=e555]:
+      - generic [ref=e561]:
+        - text: Made with
+        - link "love and Nuxt Next.js Astro" [ref=e562] [cursor=pointer]:
+          - /url: https://github.com/bupaev/bupaev.github.io
+        - text: © 2021-2026
+  - generic [ref=e569]:
+    - button "Menu" [ref=e570]:
+      - img [ref=e572]
+      - generic: Menu
+    - button "Inspect" [ref=e576]:
+      - img [ref=e578]
+      - generic: Inspect
+    - button "Audit" [ref=e580]:
+      - generic [ref=e581]:
+        - img [ref=e582]
+        - img [ref=e585]
+      - generic: Audit
+    - button "Settings" [ref=e588]:
+      - img [ref=e590]
+      - generic: Settings
