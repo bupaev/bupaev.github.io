@@ -4,15 +4,11 @@
 .overview {
   overflow: clip;
 
-  .overviewContent {
-    display: flow-root;
-    margin-bottom: 2.5rem;
-  }
-
   .columns {
     display: flex;
     gap: 2rem;
     align-items: flex-start;
+    margin-bottom: 2.5rem;
 
     @include mixins.until(variables.$breakpoint-xl) {
       flex-direction: column;
@@ -23,6 +19,10 @@
   .textWrapper {
     flex: 1 1 auto;
     min-width: 0;
+
+    a {
+      @include mixins.multiline-text-hover-effect;
+    }
   }
 
   .diagramWrapper {
