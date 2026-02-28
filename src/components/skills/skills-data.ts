@@ -246,24 +246,4 @@ export const SKILLS_DATA: SkillGroup[] = [
       },
     ],
   },
-  {
-    title: "Languages",
-    items: [
-      {
-        title: "Russian",
-        info: "Native",
-        level: "expert",
-      },
-      {
-        title: "English",
-        info: "Working language for over 10 years (C1)",
-        level: "expert",
-      },
-      {
-        title: "German",
-        info: "Just enough to survive for several days in a German language-only environment 😅 (A2)",
-        level: "basic",
-      },
-    ],
-  },
 ];
