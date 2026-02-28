@@ -8,8 +8,7 @@ export function FitCheck() {
     <div className={`${styles.fitCheck} container`}>
       <h2 className="title">Are We the Right Fit?</h2>
       <p className={styles.subtitle}>
-        To save our mutual time, here is a breakdown of environments where I bring the most value
-        versus where I might not be the right fit.
+        Here is a quick, honest look at how I work, to help us figure out if we're a good fit for each other.
       </p>
 
       <div className={styles.tableContainer}>
@@ -18,13 +17,11 @@ export function FitCheck() {
           <div className={styles.headerCell}></div>
           <div className={`${styles.headerCell} ${styles.fit}`}>
             <span className={styles.fitIcon} aria-hidden="true" />
-            <span>We FIT</span>
-            <span className="text-[1em]">when...</span>
+            <span>We are a GREAT FIT if...</span>
           </div>
           <div className={`${styles.headerCell} ${styles.noFit}`}>
             <span className={styles.noFitIcon} aria-hidden="true" />
-            <span>We DON&apos;T FIT</span>
-            <span className="text-[1em]">when...</span>
+            <span>We are likely NOT A FIT if...</span>
           </div>
         </div>
 
@@ -43,8 +40,7 @@ export function FitCheck() {
               <div className={`${styles.dataCell} ${styles.fitCell}`}>
                 <div className={styles.mobileLabel}>
                   <span className={styles.fitIcon} aria-hidden="true" />
-                  <span>WE FIT</span>
-                  <span className="text-[1em]">when...</span>
+                  <span>We are a GREAT FIT if...</span>
                 </div>
                 <p className={styles.cellText}>{criterion.fit}</p>
               </div>
@@ -53,8 +49,7 @@ export function FitCheck() {
               <div className={`${styles.dataCell} ${styles.noFitCell}`}>
                 <div className={styles.mobileLabel}>
                   <span className={styles.noFitIcon} aria-hidden="true" />
-                  <span>WE DON&apos;T FIT</span>
-                  <span className="text-[1em]">when...</span>
+                  <span>We are NOT A FIT if...</span>
                 </div>
                 <p className={styles.cellText}>{criterion.noFit}</p>
               </div>

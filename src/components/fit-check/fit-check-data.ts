@@ -11,33 +11,38 @@ export type FitCriterion = {
 
 export const FIT_CRITERIA: FitCriterion[] = [
   {
-    title: 'Product Complexity',
-    fit: 'You are building complex, feature-rich interfaces where sophisticated design and top-tier User Experience are critical for success.',
-    noFit: 'You need basic interfaces for simple CRUD operations where user delight is an afterthought or not important for business.',
+    title: 'Dedication to Success',
+    fit: 'You are genuinely interested in your product\'s success and care deeply about the quality of the final outcome.',
+    noFit: 'You are indifferent to the success of the product, don\'t care about its quality, and don\'t truly believe in its long-term vision.',
   },
   {
-    title: 'Engineering Balance',
-    fit: 'You strive for a sustainable balance between code quality, maintainability, extensibility, and speed of delivery.',
-    noFit: 'You prioritize "pushing code to production" at all costs, treating technical debt as a problem for another day (or never).',
+    title: 'Technical Breadth',
+    fit: 'You value a "T-shaped" engineer. You need someone with a strong fundamental background who sees the bigger picture and can quickly adapt to changing tech stacks.',
+    noFit: 'You are strictly looking for a narrow specialist with hyper-focused  expertise in one specific framework. If the role is confined to the quirks of a single technology, our approaches might not align.',
+  },
+  {
+    title: 'Product Complexity',
+    fit: 'You are building complex, feature-rich interfaces where a smooth, thoughtful user experience is what sets you apart from the competition.',
+    noFit: 'You just need a few basic internal CRUD forms knocked out, where visual polish and user satisfaction don\'t really move the needle for your business.',
+  },
+  {
+    title: 'Sustainable Balance',
+    fit: 'You know that software is a marathon. You value a healthy, sustainable balance between delivering quickly and keeping the foundation solid.',
+    noFit: 'Everything is an emergency. The mindset is "ship it yesterday," and we\'re constantly piling up technical debt for our future selves to deal with.',
   },
   {
     title: 'Product Mindset',
-    fit: 'You need a partner who dives deep into business context, asks "Why?", and cares about the product\u2019s success as much as the code.',
-    noFit: 'You are looking for a "ticket closer" who silently executes specifications without questioning product decisions.',
-  },
-  {
-    title: 'Design & Process',
-    fit: 'You treat Design Systems and Accessibility as first-class citizens and value a bridge between design and engineering.',
-    noFit: 'You accept "it looks roughly like the mockup" as a passing grade and view UI details as unnecessary polish.',
-  },
-  {
-    title: 'Team Culture',
-    fit: 'You want to build a transparent culture (like an orchestra) with clear processes, documentation, and knowledge sharing.',
-    noFit: 'You rely on chaos, "hero culture," or isolated coding where processes are seen purely as bureaucracy.',
+    fit: 'You want a lead engineer who looks at the big picture and asks "Why?" before typing. You appreciate someone who challenges assumptions and brings ideas to the table.',
+    noFit: 'You just want a silent "ticket closer." If you\'re looking for someone to take orders and blindly implement Jira tickets without asking questions, I\'m not your guy.',
   },
   {
     title: 'AI & Innovation',
-    fit: 'You embrace a balanced approach to AI: harnessing its power as a force multiplier while maintaining critical awareness of its risks, limitations, and legal boundaries.',
-    noFit: 'You tend toward extremes: either fearing AI like fire due to compliance paralysis, or blindly chasing the "vibe-coding" hype with no clue what\u2019s running under the hood.',
+    fit: 'You treat AI as a smart assistant—a powerful tool to help us work smarter and faster, while keeping a critical eye on its limitations and security.',
+    noFit: 'You\'re caught in the extremes: either completely terrified of new tools, or blindly trusting AI to generate your core product without understanding what\'s under the hood.',
+  },
+  {
+    title: 'Purpose & Impact',
+    fit: 'You recognize that financial success is the baseline, but you are also deeply driven by the global purpose of your product and its positive impact on users.',
+    noFit: 'Your only metric for success is profit, and you are completely indifferent to the actual value or human impact your product delivers.',
   },
 ];

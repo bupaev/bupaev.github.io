@@ -15,39 +15,40 @@ describe('FitCheck', () => {
     it('renders the subtitle', () => {
         render(<FitCheck />);
         expect(
-            screen.getByText(/To save our mutual time, here is a breakdown/),
+            screen.getByText(/Here is a quick, honest look at how I work/),
         ).toBeInTheDocument();
     });
 
-    it('renders all 6 criteria titles', () => {
+    it('renders all criteria titles', () => {
         render(<FitCheck />);
+        expect(screen.getByText('Dedication to Success')).toBeInTheDocument();
+        expect(screen.getByText('Technical Breadth')).toBeInTheDocument();
         expect(screen.getByText('Product Complexity')).toBeInTheDocument();
-        expect(screen.getByText('Engineering Balance')).toBeInTheDocument();
+        expect(screen.getByText('Sustainable Balance')).toBeInTheDocument();
         expect(screen.getByText('Product Mindset')).toBeInTheDocument();
-        expect(screen.getByText('Design & Process')).toBeInTheDocument();
-        expect(screen.getByText('Team Culture')).toBeInTheDocument();
         expect(screen.getByText('AI & Innovation')).toBeInTheDocument();
+        expect(screen.getByText('Purpose & Impact')).toBeInTheDocument();
     });
 
-    it('renders "We Fit" labels for all criteria', () => {
+    it('renders "Fit" labels for all criteria', () => {
         render(<FitCheck />);
-        const fitLabels = screen.getAllByText(/We Fit/i);
-        expect(fitLabels).toHaveLength(7); // 6 cards + 1 header
+        const fitLabels = screen.getAllByText(/We are a GREAT FIT if/i);
+        expect(fitLabels).toHaveLength(8); // 7 cards + 1 header
     });
 
-    it('renders "We Don\'t Fit" labels for all criteria', () => {
+    it('renders "No Fit" labels for all criteria', () => {
         render(<FitCheck />);
-        const noFitLabels = screen.getAllByText(/We Don't Fit/i);
-        expect(noFitLabels).toHaveLength(7); // 6 cards + 1 header
+        const noFitLabels = screen.getAllByText(/NOT A FIT if/i);
+        expect(noFitLabels).toHaveLength(8); // 7 cards + 1 header ('We are likely NOT A FIT if...' and 'We are NOT A FIT if...')
     });
 
-    it('renders fit and no-fit card text for Product Complexity', () => {
+    it('renders fit and no-fit card text for Dedication to Success', () => {
         render(<FitCheck />);
         expect(
-            screen.getByText(/complex, feature-rich interfaces/),
+            screen.getByText(/genuinely interested in your product's success/),
         ).toBeInTheDocument();
         expect(
-            screen.getByText(/basic interfaces for simple CRUD/),
+            screen.getByText(/indifferent to the success of the product/),
         ).toBeInTheDocument();
     });
 });
