@@ -175,9 +175,9 @@ describe('Diagram', () => {
 
     it('renders topics for each skill area', () => {
         render(<Diagram />);
-        expect(screen.getByText('Scalable SPA Architecture')).toBeInTheDocument();
-        expect(screen.getByText('Trust-Based Mentorship')).toBeInTheDocument();
-        expect(screen.getByText('GenAI Pair Programming')).toBeInTheDocument();
+        expect(screen.getByText('Prioritizing Web Fundamentals')).toBeInTheDocument();
+        expect(screen.getByText('Horizontal Engineering Culture')).toBeInTheDocument();
+        expect(screen.getByText('Embracing the AI Revolution')).toBeInTheDocument();
     });
 
     it('adds scroll listener when visible via IntersectionObserver', () => {
@@ -238,7 +238,7 @@ describe('Diagram', () => {
 
     it('opens topic popup on click and closes via close button', async () => {
         render(<Diagram />);
-        const topicName = 'Scalable SPA Architecture';
+        const topicName = 'Prioritizing Web Fundamentals';
         // Get button specifically
         const topicButton = screen.getByText(topicName).closest('button');
         expect(topicButton).toBeTruthy();
@@ -293,7 +293,7 @@ describe('Diagram', () => {
         await activateArea(container, 0);
 
         // Open a topic popup
-        const topicButton = screen.getByText('Scalable SPA Architecture').closest('button');
+        const topicButton = screen.getByText('Prioritizing Web Fundamentals').closest('button');
         await act(async () => {
             fireEvent.click(topicButton!);
         });
@@ -330,7 +330,7 @@ describe('Diagram', () => {
         await activateArea(container, 0);
 
         // Open a topic popup
-        const topicButton = screen.getByText('Scalable SPA Architecture').closest('button');
+        const topicButton = screen.getByText('Prioritizing Web Fundamentals').closest('button');
         await act(async () => {
             fireEvent.click(topicButton!);
         });
@@ -366,7 +366,7 @@ describe('Diagram', () => {
         await activateArea(container, 0);
 
         // Open a topic popup
-        const topicButton = screen.getByText('Scalable SPA Architecture').closest('button');
+        const topicButton = screen.getByText('Prioritizing Web Fundamentals').closest('button');
         await act(async () => {
             fireEvent.click(topicButton!);
         });

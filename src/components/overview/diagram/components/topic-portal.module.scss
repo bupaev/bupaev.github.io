@@ -105,7 +105,7 @@
     position: relative;
     z-index: 1;
     max-width: 25rem;
-    padding: 0.3rem 0.2rem 1rem 1rem;
+    padding: 0.3rem 0.3rem 1rem 2rem;
 
     @include mixins.small-mobile {
         width: 70vw;
@@ -131,15 +131,11 @@
 // Description text
 .description {
     margin: 0;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: 400;
     line-height: 1.4;
     color: var(--text-color, #333);
     animation: description-fade-in 400ms ease 100ms backwards;
-
-    @include mixins.small-mobile {
-        font-size: 1rem;
-    }
 }
 
 // ===== ANIMATIONS =====

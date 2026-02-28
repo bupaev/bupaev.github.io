@@ -38,28 +38,24 @@ export const AREAS: AreaData[] = [
         headingText: "Software Engineering",
         topics: [
             {
-                name: "Scalable SPA Architecture",
-                description: "Reflecting 15+ years of experience building complex applications (like Electronic Health Records and Audio Workstations) using modern frameworks (Vue, React, Angular).",
+                name: "Prioritizing Web Fundamentals",
+                description: "Over my career, I've watched frameworks come and go. Starting with Backbone and AngularJS and eventually moving to React and Vue taught me an important lesson: syntax is transient, but fundamentals—HTML, CSS, and JS—are forever.",
             },
             {
-                name: "Legacy System Modernization",
-                description: "Highlighting ability to refactor \"minefield\" codebases and modernize technology stacks (e.g., AEM at VHI) to industry standards.",
+                name: "Applying Objective Engineering",
+                description: "I've learned the hard way that cognitive biases can ruin businesses. For me, true engineering means making data-driven, objective decisions. And even experienced engineers make mistakes, including myself, so I am always ready to pivot when the data proves me wrong.",
             },
             {
-                name: "Performance Engineering",
-                description: "Emphasizing expertise in optimizing high-load applications, improving Core Web Vitals, and balancing aesthetics with performance.",
+                name: "Enforcing Quality Standards",
+                description: "I've spent enough time in legacy minefields to know how quickly projects rot without discipline. I prioritize long-term health through strict standards and security, preventing the slow decay that often accelerates when AI enters the mix.",
             },
             {
-                name: "Code Quality Guardian",
-                description: "Positioning as the senior engineer who enforces rigorous standards (linting, testing, security) to prevent the \"slow decay\" of code quality in the AI era.",
+                name: "Cultivating Excellent DX",
+                description: "Code is still not just for LLM; it's for the humans who maintain it. I build great Developer Experiences with readable code and clear docs, which accelerates delivery today while ensuring the project stays sustainable long after me.",
             },
             {
-                name: "Modern JavaScript Ecosystem",
-                description: "Showcasing deep mastery of ES6+, TypeScript, and Design Patterns rather than just framework usage.",
-            },
-            {
-                name: "Strive to good DX",
-                description: "Commitment to creating excellent Developer Experience through clean APIs, comprehensive documentation, and intuitive tooling.",
+                name: "Owning the Full Lifecycle",
+                description: "I don't just “close tickets”. I can and actually prefer to own the whole loop—from the first architectural brainstorm and vision design to testing and the final production launch. Seeing the big picture is how you build products.",
             },
         ],
     },
@@ -74,24 +70,20 @@ export const AREAS: AreaData[] = [
         headingText: "Leadership",
         topics: [
             {
-                name: "Technical Orchestrator",
-                description: "Defining the role as a leader who designs systems and \"defines the melody\" while managing AI tools and team workflows.",
+                name: "Horizontal Engineering Culture",
+                description: "I'm not a big fan of strict hierarchies. In my experience, teams do their work best in a flat culture where developers, designers, and stakeholders talk directly. The best ideas should always win based on technical merit, regardless of whose job title is attached to them.",
             },
             {
-                name: "Engineering Culture Architect",
-                description: "Reflecting ability to turn a \"cacophony\" into a \"symphony\" by establishing clear processes, documentation, and shared vision.",
+                name: "Building Frictionless Workflows",
+                description: "Chaos doesn’t scale. I build automated, documented workflows to remove friction and spread knowledge. This solves the 'bus factor' and lets teams grow without the usual pains. Transparency is the key to scalability.",
             },
             {
-                name: "Cross-Functional Influence",
-                description: "Demonstrating ability to build trust and align Design, Product, and Backend teams without relying solely on formal authority.",
+                name: "Psychology of Leadership",
+                description: "Leadership is fundamentally about people. I apply my knowledge of behavioral psychology to better understand team dynamics, build genuine empathy, and resolve conflicts before they turn into technical debt.",
             },
             {
-                name: "Crisis Management",
-                description: "Validating proven track record of entering chaotic environments, identifying root causes, and restoring order and trust.",
-            },
-            {
-                name: "Trust-Based Mentorship",
-                description: "Highlighting commitment to teaching and knowledge sharing to prevent the \"skill atrophy\" of junior developers.",
+                name: "Leading with Constructive Honesty",
+                description: "I believe the best professional relationships are built on trust and full transparency. I’m straightforward about technical debt and project risks, ensuring stakeholders and engineers have the full picture to make informed calls. Honesty saves time and money later.",
             },
         ],
     },
@@ -106,24 +98,24 @@ export const AREAS: AreaData[] = [
         headingText: "UI/UX Design",
         topics: [
             {
-                name: "UX/Engineering Bridge",
-                description: "Replacing the \"Unicorn\" label to describe unique ability to translate abstract design concepts into concrete, feasible technical specifications.",
+                name: "Practicing Pragmatic Perfectionism",
+                description: "I consider myself a \"reasonable perfectionist.\" While I always strive to make every UI as polished and flawless as possible, my experience has taught me how to do this pragmatically, respecting the constraints of resources and time.",
             },
             {
-                name: "Reasonable Perfectionist",
-                description: "Personal brand signature, signifying a pragmatic commitment to the highest possible quality within resource constraints.",
+                name: "Visual Aesthetics",
+                description: "My eye for detail is forged by a passion for photography, years of collaborating with talented designers, and deconstructing hundreds of designs. This mix of visual literacy and technical grit helps me to create clean and attractive UI.",
             },
             {
-                name: "Accessibility (WCAG) Advocate",
-                description: "A critical \"human\" skill where proactively enforcing inclusivity standards that AI often overlooks.",
+                name: "Designing Human-Centric Spaces",
+                description: "Whether it's a user navigating a complex interface, a junior developer reading my code, or a manager reviewing my documentation, my goal is always to create a space that feels intuitive, comfortable, and human-centric.",
             },
             {
-                name: "Design Systems Integration",
-                description: "Demonstrating technical capability to advocate for and implement consistent visual languages across products.",
+                name: "Bridging Design and Engineering",
+                description: "I speak both languages. I help designers leverage modern web tech to build design systems that are as technically robust under the hood as they are beautiful on the surface. Bridging the gap creates better products.",
             },
             {
-                name: "Human-Centric Interface Design",
-                description: "Leveraging background in behavioral psychology to create intuitive spaces for both users and developers.",
+                name: "Balanced Accessibility",
+                description: "I view accessibility as a mark of a professional product. I advocate for inclusive design based on context, meeting the standards that actually matter for the users. Professionalism is about balance.",
             },
         ],
     },
@@ -138,20 +130,20 @@ export const AREAS: AreaData[] = [
         headingText: "AI Expertise",
         topics: [
             {
-                name: "High-Leverage Engineer",
-                description: "Positioning as a senior professional who uses AI as a \"force multiplier\" to increase output while maintaining high standards.",
+                name: "Embracing the AI Revolution",
+                description: "AI is a seismic shift that is fundamentally reshaping our industry. While I remain a pragmatic enthusiast rather than a blind fanatic, I understand that being AI-fluent is now critical for both business and personal success.",
             },
             {
-                name: "Critical Systems Thinker",
-                description: "Emphasizing role in validating AI output, questioning assumptions, and ensuring systemic integrity against AI \"hallucinations\".",
+                name: "Validating AI Outputs",
+                description: "I don’t blindly trust model outputs. I do my best to review AI-generated code to ensure it is secure, maintainable, and fits our specific architecture and logical patterns. The human eye is the final safety layer.",
             },
             {
-                name: "GenAI Pair Programming",
-                description: "Showcasing practical competence in using tools like Copilot for code explanation, refactoring, and documentation.",
+                name: "Amplifying Engineering Impact",
+                description: "AI is the ultimate force multiplier. By offloading routine execution, we free up bandwidth to focus on high-level system design and product strategy, using LLMs as sounding boards.",
             },
             {
-                name: "AI Output Validation",
-                description: "Differentiating from \"code janitors\" by highlighting ability to review and validate AI-generated solutions critically.",
+                name: "Filtering the Hype",
+                description: "Because the tech landscape is moving so fast, continuous learning is non-negotiable. I actively sift through the daily noise to separate genuine breakthroughs from fleeting trends, ensuring I only adopt tools that deliver real, practical value.",
             },
         ],
     },

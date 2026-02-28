@@ -23,10 +23,8 @@ describe('Overview', () => {
 
     it('renders strategic identity list items', () => {
         render(<Overview />);
-        expect(screen.getByText('Technical Orchestrator:', { exact: false })).toBeInTheDocument();
-        expect(screen.getByText('T-Shaped Leader:', { exact: false })).toBeInTheDocument();
-        expect(screen.getByText('Critical Systems Thinker:', { exact: false })).toBeInTheDocument();
-        expect(screen.getByText('Human-Centric Engineer:', { exact: false })).toBeInTheDocument();
-        expect(screen.getByText('High-Leverage Engineer:', { exact: false })).toBeInTheDocument();
+        expect(screen.getByText('Product-Oriented:', { exact: false })).toBeInTheDocument();
+        expect(screen.getByText('Reasonable:', { exact: false })).toBeInTheDocument();
+        expect(screen.getByText('Perfectionist:', { exact: false })).toBeInTheDocument();
     });
 });

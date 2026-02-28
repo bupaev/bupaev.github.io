@@ -7,46 +7,42 @@ export function Overview() {
     <div className={`${styles.overview} container`}>
       <h2 className="title">My Professional Core</h2>
       <div className={styles.overviewContent}>
-        <div className={styles.diagramWrapper}>
-          <Diagram />
-        </div>
-        <div className={styles.textWrapper}>
-          In 3 words I'm <strong>product-oriented reasonable perfectionist</strong>.
-          <br />
-          I am a Product Engineer who acts as a diplomat between stakeholders,
-          a guardian of quality, and a pragmatic architect.
-          Every aspect of my professional core—from AI to Leadership -
-          is subservient to one single goal: building a great product.
-          <br />
-          <br />
-          <ul className={styles.identityList}>
-            <li>
-              <strong>Technical Orchestrator:</strong> I don&apos;t just write
-              code; I &quot;define the melody,&quot; managing complex systems
-              where AI agents handle rote work.
-            </li>
-            <li>
-              <strong>T-Shaped Leader:</strong> Deep vertical expertise in
-              Front-End combined with broad horizontal reach across UX, Backend,
-              and Business Analysis.
-            </li>
-            <li>
-              <strong>Critical Systems Thinker:</strong> I validate AI output
-              and business requirements, acting as the safety layer that
-              questions assumptions.
-            </li>
-            <li>
-              <strong>Human-Centric Engineer:</strong> Drawing on behavioral
-              psychology, I design solutions focused on the human
-              element—whether it&apos;s the end-user or the developer reading my
-              code.
-            </li>
-            <li>
-              <strong>High-Leverage Engineer:</strong> Using AI and automation
-              as a force multiplier to deliver value far beyond what a single
-              individual usually produces.
-            </li>
-          </ul>
+        <div className={styles.columns}>
+          <div className={styles.textWrapper}>
+            <p>
+          I am a&nbsp;<strong>Frontend-focused Product Engineer</strong>, a&nbsp;<strong>player-coach</strong>, and a&nbsp;<strong>bridge</strong> between business, design, and development.
+        </p>
+        <br />
+            <p>
+              My identity is defined by three core characteristics: <strong>Product-Oriented</strong>, <strong>Reasonable</strong>, <strong>Perfectionist</strong>.
+            </p>
+            <br />
+            <ul className={styles.identityList}>
+              <li>
+                <strong>Product-Oriented:</strong> I feel a deep personal
+                responsibility for what I build. I put a lot of effort into my work,
+                and I am genuinely interested in its success.
+              </li>
+              <li>
+                <strong>Reasonable:</strong> I rely on data and critical thinking to
+                make complex decisions and practical compromises. Subjective, biased
+                choices are often very costly, and even the smartest people can fall into
+                <a href="https://pubmed.ncbi.nlm.nih.gov/22663351/" target="_blank"> cognitive traps</a>.
+              </li>
+              <li>
+                <strong>Perfectionist:</strong> Building something truly great is
+                very important to me. I care deeply about the quality of my craft
+                and want to be proud of my work.
+              </li>
+            </ul>
+        
+          </div>
+          <div className={styles.diagramWrapper}>
+            <p>
+              The interactive diagram below maps out my key professional areas. Hover over each area to explore the principles that guide my work.
+            </p>
+            <Diagram />
+          </div>
         </div>
       </div>
     </div>

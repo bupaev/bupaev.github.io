@@ -9,21 +9,32 @@
     margin-bottom: 2.5rem;
   }
 
+  .columns {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+
+    @include mixins.until(variables.$breakpoint-xl) {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+
+  .textWrapper {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
   .diagramWrapper {
-    float: left;
+    flex: 0 0 auto;
     width: 950px;
-    margin-right: 2rem;
-    margin-bottom: 1rem;
 
     @include mixins.until(variables.$breakpoint-2xl) {
       width: 850px;
     }
 
     @include mixins.until(variables.$breakpoint-xl) {
-      float: none;
       width: 100%;
-      margin-right: 0;
-      margin-bottom: 1rem;
     }
   }
 
