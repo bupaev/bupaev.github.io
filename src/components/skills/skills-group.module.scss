@@ -64,7 +64,6 @@
   .toggleIcon {
     @include mixins.toggle-icon;
 
-    margin-bottom: -0.55rem;
     opacity: 0.7;
 
     @include mixins.tablet {

@@ -2,8 +2,6 @@
 @use "@/styles/variables";
 
 .overview {
-  overflow: clip;
-
   .columns {
     display: flex;
     gap: 2rem;
@@ -25,7 +23,7 @@
     }
   }
 
-  .diagramWrapper {
+  .graphicsWrapper {
     flex: 0 0 auto;
     width: 950px;
 

@@ -22,6 +22,7 @@
     width: 112%;
     aspect-ratio: 1.58;
     container-type: inline-size;
+    overflow: clip;
     mask-image: url("./black-brain-mask.svg");
     mask-repeat: no-repeat;
     mask-position: center;

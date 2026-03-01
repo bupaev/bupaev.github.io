@@ -21,7 +21,7 @@ export function FitCheck() {
           </div>
           <div className={`${styles.headerCell} ${styles.noFit}`}>
             <span className={styles.noFitIcon} aria-hidden="true" />
-            <span>We are likely NOT A FIT if...</span>
+            <span>We are NOT A FIT if...</span>
           </div>
         </div>
 

@@ -221,7 +221,7 @@ $gap: 32px;
   }
 
   &::before {
-    top: 25%;
+    top: 32%;
     left: 17%;
     width: 50%;
     transform: rotate(45deg);
@@ -229,7 +229,7 @@ $gap: 32px;
   }
 
   &::after {
-    top: 25%;
+    top: 32%;
     right: 17%;
     width: 50%;
     transform: rotate(-45deg);
@@ -238,7 +238,7 @@ $gap: 32px;
 }
 
 @mixin toggle-icon-expanded() {
-  transform: translate3d(0, -10%, 0) rotate(-90deg);
+  transform: translate3d(0, -1%, 0) rotate(-90deg);
 
   &::before,
   &::after {

@@ -14,6 +14,10 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
+  @include mixins.mobile {
+    overflow: hidden;
+  }
 }
 
 .tableHeader {
@@ -48,7 +52,7 @@
     content: "";
     background: var(--gradient-color);
     border-radius: 4px;
-    transform: scaleY(1) skew(-15deg);
+    transform: skew(-15deg);
   }
 
   &.fit {
@@ -145,6 +149,8 @@
 }
 
 .dataCell {
+  --skew-angle: -15deg;
+
   position: relative;
   z-index: 0;
   padding: 1.25rem 1.5rem;
@@ -157,13 +163,19 @@
     width: 100%;
     height: 100%;
     content: "";
-    transform: scaleY(1) skew(-15deg);
+    transform: skew(var(--skew-angle));
   }
 
   @include mixins.touch {
+    --skew-angle: -7deg;
+
     margin-left: 24px;
-    font-size: 0.85em;
+    font-size: var(--font-body-small);
     line-height: 1.4;
+
+    &::after {
+      left: -20px;
+    }
   }
 }
 
@@ -183,7 +195,8 @@
     }
 
     @include mixins.mobile {
-      border-radius: 8px 8px 0 0;
+      border-radius: 12px 12px 0 0;
+      transform-origin: bottom;
     }
   }
 }
@@ -200,8 +213,10 @@
     border-radius: 0 8px 8px 0;
 
     @include mixins.mobile {
-      border-radius: 0 0 8px 8px;
-      transform: scaleY(1) skew(15deg);
+      --skew-angle: 5deg;
+
+      border-radius: 0 0 12px 12px;
+      transform-origin: top;
 
       [data-color-scheme="dark"] & {
         background-color: rgb(var(--no-fit-rgb) / 10%);

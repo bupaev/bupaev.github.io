@@ -33,7 +33,7 @@ export function Overview() {
             </li>
           </ul>
         </div>
-        <div className={styles.diagramWrapper}>
+        <div className={styles.graphicsWrapper}>
           <p className="content">
             The interactive diagram below maps out my key professional areas. Hover over each area to explore the principles that guide my work.
           </p>

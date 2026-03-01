@@ -8,12 +8,14 @@
     // Prevent layout shift: align items to top and give a predefined min-height
     align-content: start;
     align-items: start;
+    width: calc(100% - 8px);
     min-height: 610px;
     padding: 1rem 0;
 
     @include mixins.mobile {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+        width: 100%;
     }
 }
 
@@ -100,7 +102,7 @@
     width: 1.25em;
     height: 1.25em;
     margin-left: 0.5rem;
-    opacity: 0.5;
+    opacity: 0.7;
     transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out, opacity 0.2s ease-out;
 
     .topicButton:hover & {
