@@ -2,8 +2,8 @@
 
 .subtitle {
   margin-bottom: 3rem;
-  font-size: 1em;
-  line-height: 1.6;
+  font-size: var(--text-body);
+  line-height: 1.5;
   color: var(--text-color);
 }
 
@@ -226,8 +226,7 @@
 
 .cellText {
   margin: 0;
-  font-size: 0.95em;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.4;
   color: var(--text-color);
-  opacity: 0.95;
 }
