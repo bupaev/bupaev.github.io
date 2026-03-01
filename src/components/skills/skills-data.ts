@@ -76,33 +76,16 @@ export const SKILLS_DATA: SkillGroup[] = [
     ],
   },
   {
-    title: "Browser APIs",
+    title: "UX/UI Design & Tools",
     items: [
       {
-        title: "Web Audio (Web Audio API, MIDI API)",
-        info: "",
+        title: "UX Design & Usability",
         level: "expert",
       },
       {
-        title: "Web Graphics (SVG, Canvas)",
-        info: "",
+        title: "Semantic Web",
         level: "advanced",
       },
-      {
-        title: "Data Storage (Local Storage, IndexedDB)",
-        info: "",
-        level: "advanced",
-      },
-      {
-        title: "Web Worker",
-        info: "",
-        level: "advanced",
-      },
-    ],
-  },
-  {
-    title: "UX/UI, image processing",
-    items: [
       {
         title: "Figma",
         level: "expert",
@@ -114,31 +97,6 @@ export const SKILLS_DATA: SkillGroup[] = [
       {
         title: "Photoshop",
         level: "advanced",
-      },
-    ],
-  },
-  {
-    title: "Infrastructure & Platforms",
-    items: [
-      {
-        title: "Git (GitHub, Gitlab, Bitbucket)",
-        level: "expert",
-      },
-      {
-        title: "Bundling/Automation (Vite, Webpack, Rollup)",
-        level: "expert",
-      },
-      {
-        title: "CI/CD (GitHub Actions, Gitlab CI, Azure, AWS)",
-        level: "advanced",
-      },
-      {
-        title: "Enterprise CMS (Adobe Experience Manager)",
-        level: "advanced",
-      },
-      {
-        title: "Virtualization (Docker, VMware)",
-        level: "basic",
       },
     ],
   },
@@ -201,31 +159,35 @@ export const SKILLS_DATA: SkillGroup[] = [
     ],
   },
   {
-    title: "Workflow & Methodology",
+    title: "Architecture & System Design",
     items: [
       {
-        title: "Agile SCRUM/KANBAN",
-        level: "expert",
-      },
-      {
-        title: "AI-Assisted Programming / AI Pair Programming",
-        level: "expert",
-      },
-      {
-        title: "JIRA / Confluence",
+        title: "System Design and Analysis",
         level: "advanced",
       },
       {
-        title: "Code review & Team mentoring",
-        level: "expert",
+        title: "Solution Architecture",
+        level: "advanced",
+      },
+      {
+        title: "Micro frontend architecture",
+        level: "advanced",
+      },
+      {
+        title: "Application Modernization",
+        level: "advanced",
       },
     ],
   },
   {
-    title: "AI Tools",
+    title: "AI Practices & Tools",
     items: [
       {
-        title: "Claude Code & Gemini",
+        title: "Prompt Engineering",
+        level: "expert",
+      },
+      {
+        title: "Claude Code, Gemini",
         info: "AI Pair Programming, codebase analysis, and architecture exploration",
         level: "expert",
       },
@@ -244,6 +206,123 @@ export const SKILLS_DATA: SkillGroup[] = [
         info: "AI Agent for automated coding and workflow acceleration",
         level: "basic",
       },
+      {
+        title: "AI Agents Design and Integration",
+        level: "basic",
+      },
     ],
   },
-];
+  {
+    title: "Infrastructure & Platforms",
+    items: [
+      {
+        title: "Git (GitHub, Gitlab)",
+        level: "expert",
+      },
+      {
+        title: "Bundling/Automation (Vite, Webpack, Bun)",
+        level: "expert",
+      },
+      {
+        title: "CI/CD (GitHub Actions, Gitlab CI, Azure, AWS)",
+        level: "advanced",
+      },
+      {
+        title: "Cloud Platforms (AWS)",
+        level: "basic",
+      },
+      {
+        title: "Docker",
+        level: "basic",
+      },
+      {
+        title: "Enterprise CMS (Adobe Experience Manager)",
+        level: "advanced",
+      },
+    ],
+  },
+  {
+    title: "Leadership & Methodology",
+    items: [
+      {
+        title: "Technical Leadership",
+        level: "advanced",
+      },
+      {
+        title: "Ownership & Critical Thinking",
+        level: "advanced",
+      },
+      {
+        title: "Agile SCRUM/KANBAN",
+        level: "expert",
+      },
+      {
+        title: "AI Pair Programming",
+        level: "expert",
+      },
+      {
+        title: "JIRA / Confluence",
+        level: "advanced",
+      },
+      {
+        title: "Code review & Team mentoring",
+        level: "expert",
+      },
+    ],
+  },
+  {
+    title: "Web APIs & Graphics",
+    items: [
+      {
+        title: "Web Audio (Web Audio API, MIDI API)",
+        info: "",
+        level: "expert",
+      },
+      {
+        title: "Data Storage (Local Storage, IndexedDB)",
+        info: "",
+        level: "advanced",
+      },
+      {
+        title: "Web Worker",
+        info: "",
+        level: "advanced",
+      },
+      {
+        title: "SVG Graphics",
+        info: "",
+        level: "expert",
+      },
+      {
+        title: "D3.js",
+        info: "Data visualization and 3D graphics",
+        level: "basic",
+      },
+      {
+        title: "Three.js",
+        info: "Data visualization and 3D graphics",
+        level: "basic",
+      },
+    ],
+  },
+  {
+    title: "Languages",
+    items: [
+      {
+        title: "English",
+        info: "Working language for over 10 years (C1)",
+        level: "expert",
+      },
+      {
+        title: "Russian",
+        info: "Native",
+        level: "expert",
+      },
+      {
+        title: "German",
+        info: "Just enough to survive for several days in a German language-only environment 😅 (A2)",
+        level: "basic",
+      },
+    ],
+  },
+];  
