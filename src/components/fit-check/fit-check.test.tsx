@@ -19,27 +19,25 @@ describe('FitCheck', () => {
         ).toBeInTheDocument();
     });
 
-    it('renders all criteria titles', () => {
+    it('renders all active criteria titles', () => {
         render(<FitCheck />);
         expect(screen.getByText('Dedication to Success')).toBeInTheDocument();
         expect(screen.getByText('Technical Breadth')).toBeInTheDocument();
         expect(screen.getByText('Product Complexity')).toBeInTheDocument();
         expect(screen.getByText('Sustainable Balance')).toBeInTheDocument();
-        expect(screen.getByText('Product Mindset')).toBeInTheDocument();
         expect(screen.getByText('AI & Innovation')).toBeInTheDocument();
-        expect(screen.getByText('Purpose & Impact')).toBeInTheDocument();
     });
 
     it('renders "Fit" labels for all criteria', () => {
         render(<FitCheck />);
-        const fitLabels = screen.getAllByText(/We are a GREAT FIT if/i);
-        expect(fitLabels).toHaveLength(8); // 7 cards + 1 header
+        const fitLabels = screen.getAllByText(/GREAT FIT if/i);
+        expect(fitLabels).toHaveLength(6); // 5 cards + 1 header
     });
 
     it('renders "No Fit" labels for all criteria', () => {
         render(<FitCheck />);
         const noFitLabels = screen.getAllByText(/NOT A FIT if/i);
-        expect(noFitLabels).toHaveLength(8); // 7 cards + 1 header ('We are likely NOT A FIT if...' and 'We are NOT A FIT if...')
+        expect(noFitLabels).toHaveLength(6); // 5 cards + 1 header
     });
 
     it('renders fit and no-fit card text for Dedication to Success', () => {

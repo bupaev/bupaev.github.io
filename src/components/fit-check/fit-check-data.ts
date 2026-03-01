@@ -30,19 +30,19 @@ export const FIT_CRITERIA: FitCriterion[] = [
     fit: 'You know that software is a marathon. You value a healthy, sustainable balance between delivering quickly and keeping the foundation solid.',
     noFit: 'Everything is an emergency. The mindset is "ship it yesterday," and we\'re constantly piling up technical debt for our future selves to deal with.',
   },
-  {
-    title: 'Product Mindset',
-    fit: 'You want a lead engineer who looks at the big picture and asks "Why?" before typing. You appreciate someone who challenges assumptions and brings ideas to the table.',
-    noFit: 'You just want a silent "ticket closer." If you\'re looking for someone to take orders and blindly implement Jira tickets without asking questions, I\'m not your guy.',
-  },
+  // {
+  //   title: 'Product Mindset',
+  //   fit: 'You want a lead engineer who looks at the big picture and asks "Why?" before typing. You appreciate someone who challenges assumptions and brings ideas to the table.',
+  //   noFit: 'You just want a silent "ticket closer." If you\'re looking for someone to take orders and blindly implement Jira tickets without asking questions, I\'m not your guy.',
+  // },
   {
     title: 'AI & Innovation',
-    fit: 'You treat AI as a smart assistant—a powerful tool to help us work smarter and faster, while keeping a critical eye on its limitations and security.',
-    noFit: 'You\'re caught in the extremes: either completely terrified of new tools, or blindly trusting AI to generate your core product without understanding what\'s under the hood.',
+    fit: 'You understand the critical role of AI in modern product success, adopting it thoughtfully but remaining fully aware of its practical limitations and security risks.',
+    noFit: 'You\'re caught in the extremes: either completely terrified of AI, or blindly trusting AI to generate your core product without understanding what\'s under the hood.',
   },
-  {
-    title: 'Purpose & Impact',
-    fit: 'You recognize that financial success is the baseline, but you are also deeply driven by the global purpose of your product and its positive impact on users.',
-    noFit: 'Your only metric for success is profit, and you are completely indifferent to the actual value or human impact your product delivers.',
-  },
+  // {
+  //   title: 'Purpose & Impact',
+  //   fit: 'You recognize that financial success is the baseline, but you are also deeply driven by the global purpose of your product and its positive impact on users.',
+  //   noFit: 'Your only metric for success is profit, and you are completely indifferent to the actual value or human impact your product delivers.',
+  // },
 ];
