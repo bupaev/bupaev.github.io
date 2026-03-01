@@ -1,2 +1,2 @@
 export { Overview } from "./overview";
-export { Diagram } from "./diagram";
+export { Diagram } from "./diagram/diagram";

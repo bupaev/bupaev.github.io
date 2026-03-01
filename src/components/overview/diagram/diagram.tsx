@@ -1,11 +1,11 @@
 import { useRef, useEffect, useState, useCallback } from "react";
-import { AREAS, type AreaId } from "./diagram/data";
-import { useActiveArea } from "./diagram/hooks/use-hover-state";
-import { useBlurAnimation, ANIMATION_COMPLETE_THRESHOLD } from "./diagram/hooks/use-blur-animation";
-import { AreasGeometry } from "./diagram/components/areas-geometry";
-import { AreaContent } from "./diagram/components/area-content";
-import { ViewModeToggle } from "./diagram/components/view-mode-toggle";
-import { TextView } from "./diagram/components/text-view";
+import { AREAS, type AreaId } from "./data";
+import { useActiveArea } from "./hooks/use-hover-state";
+import { useBlurAnimation, ANIMATION_COMPLETE_THRESHOLD } from "./hooks/use-blur-animation";
+import { AreasGeometry } from "./components/areas-geometry";
+import { AreaContent } from "./components/area-content";
+import { ViewModeToggle } from "./components/view-mode-toggle";
+import { TextView } from "./components/text-view";
 import styles from "./diagram.module.scss";
 
 type ViewMode = "graphic" | "text";
