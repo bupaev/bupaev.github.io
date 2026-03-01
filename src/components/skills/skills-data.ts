@@ -124,7 +124,7 @@ export const SKILLS_DATA: SkillGroup[] = [
         level: "basic",
       },
       {
-        title: "Databases (MySQL, MS SQL Server, MongoDB)",
+        title: "Databases (MySQL, MS SQL, MongoDB)",
         info: "",
         level: "basic",
       },
