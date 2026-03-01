@@ -150,15 +150,6 @@ export function TopicPortal({
         };
     }, [isOpen, onClose]);
 
-    // Track mouse position for hover effects
-    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        e.currentTarget.style.setProperty("--x", `${x}%`);
-        e.currentTarget.style.setProperty("--y", `${y}%`);
-    }, []);
-
     if (!shouldRender) return null;
 
     const portalContent = (
@@ -229,7 +220,6 @@ export function TopicPortal({
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="topic-title"
-                onMouseMove={handleMouseMove}
             >
                 {/* Visuals container - filtered together for organic merging */}
                 <div className={styles.visuals}>
