@@ -39,30 +39,8 @@
   }
 
   .identityList {
-    display: block;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-
     li {
-      margin-bottom: 1rem;
-      line-height: 1.6;
-      color: var(--text-color);
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-      &::before {
-        @include mixins.rhombus(var(--text-color));
-
-        position: relative;
-        top: -2px;
-        left: 1px;
-        display: inline-block;
-        margin-right: 0.5rem;
-        content: "";
-      }
+      margin-bottom: 1em;
 
       strong {
         font-weight: 600;

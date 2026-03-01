@@ -1,14 +1,11 @@
 @use "@/styles/mixins";
 
 .experience {
-
-  // Element selectors with :global() to target HTML elements within this component
-  // These are scoped to .experience (which is a CSS Module class)
-  :global(h3) {
+  h3 {
     line-height: 1.3;
   }
 
-  :global(h3 + p > em) {
+  h3 + p > em {
     display: block;
     margin-top: -0.8em;
     margin-bottom: 1.1em;
@@ -16,21 +13,20 @@
     font-style: normal;
   }
 
-  :global(h4) {
+  h4 {
     margin-bottom: 0.2em;
-    font-size: 1em;
+    font-size: 1.1em;
   }
 
-  :global(h4 + ul) {
+  h4 + ul {
     margin-top: 0.5em;
   }
 }
 
 // MDX Content Styles
-// These use :global() because MDX outputs plain class names (e.g., "job-record")
+// These use :global() because we use MDX and it outputs plain class names (e.g., "job-record")
 // that are not processed through CSS Modules. The content is authored in
 // experience.mdx and rendered at build time, so class names must match exactly.
-
 :global(.job-record) {
   margin-bottom: 1.5em;
 

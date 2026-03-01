@@ -87,23 +87,24 @@
             margin-left: 0;
 
             >li {
-                position: relative;
-                padding-left: 1em;
+                margin-top: 0.25em;
                 list-style: none;
 
-                &::after {
-                    top: 0.7em;
-                    left: 0.15em;
-                    font-size: 0.8em;
-                    content: "";
+                &:last-child {
+                    margin-bottom: 0;
+                }
 
+                &::before {
                     @include mixins.rhombus(var(--text-color));
+
+                    position: relative;
+                    top: -2px;
+                    left: 1px;
+                    display: inline-block;
+                    margin-right: 0.5rem;
+                    content: "";
                 }
             }
-        }
-
-        li+li {
-            margin-top: 0.25em;
         }
 
         a {

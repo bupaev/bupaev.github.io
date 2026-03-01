@@ -36,7 +36,6 @@
         position: relative;
         z-index: 2;
         padding: 3rem 3rem 3rem 5rem;
-        font-size: 1.1em;
         background-color: var(--background-color);
 
         @include mixins.tablet-only {

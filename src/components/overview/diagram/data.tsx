@@ -43,7 +43,7 @@ export const AREAS: AreaData[] = [
             },
             {
                 name: "Applying Objective Engineering",
-                description: "I've learned the hard way that cognitive biases can ruin businesses. For me, true engineering means making data-driven, objective decisions. And even experienced engineers make mistakes, including myself, so I am always ready to pivot when the data proves me wrong.",
+                description: "I've seen how cognitive biases ruin businesses. To me, engineering means making data-driven, objective decisions. We all make mistakes, including me, so I'm always ready to pivot when the data proves me wrong.",
             },
             {
                 name: "Enforcing Quality Standards",

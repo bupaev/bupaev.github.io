@@ -7,15 +7,13 @@ export function Overview() {
     <div className={`${styles.overview} container`}>
       <h2 className="title">My Professional Core</h2>
       <div className={styles.columns}>
-        <div className={styles.textWrapper}>
+        <div className={`${styles.textWrapper} content`}>
           <p>
             I am a&nbsp;<strong>Frontend-focused Product Engineer</strong> with 15+ years of experience, a&nbsp;<strong>player-coach</strong>, and a&nbsp;<strong>bridge</strong> between business, design, and development.
           </p>
-          <br />
           <p>
             My identity is defined by three core characteristics: <strong>Product-Oriented</strong>, <strong>Reasonable</strong>, <strong>Perfectionist</strong>.
           </p>
-          <br />
           <ul className={styles.identityList}>
             <li>
               <strong>Product-Oriented:</strong> I feel a deep personal
@@ -36,7 +34,7 @@ export function Overview() {
           </ul>
         </div>
         <div className={styles.diagramWrapper}>
-          <p>
+          <p className="content">
             The interactive diagram below maps out my key professional areas. Hover over each area to explore the principles that guide my work.
           </p>
           <Diagram />
