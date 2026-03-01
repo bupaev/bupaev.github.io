@@ -83,7 +83,8 @@ export const SKILLS_DATA: SkillGroup[] = [
         level: "expert",
       },
       {
-        title: "Semantic Web",
+        title: "Web accessibility (WCAG, a11y)",
+        info: "Strict accessibility compliance, semantic markup",
         level: "advanced",
       },
       {
@@ -104,8 +105,8 @@ export const SKILLS_DATA: SkillGroup[] = [
     title: "Backend & Server Communication",
     items: [
       {
-        title: "REST API",
-        info: "Key points: API design, Axios, Fetch API, JSON",
+        title: "REST API Design & Integration",
+        info: "Architecting scalable endpoints and consuming services via Axios/Fetch",
         level: "expert",
       },
       {
@@ -123,8 +124,8 @@ export const SKILLS_DATA: SkillGroup[] = [
         level: "basic",
       },
       {
-        title: "Databases (SQL / NoSQL)",
-        info: "MySQL, SQLite, MongoDB",
+        title: "Databases (MySQL, MS SQL Server, MongoDB)",
+        info: "",
         level: "basic",
       },
     ],
@@ -145,11 +146,6 @@ export const SKILLS_DATA: SkillGroup[] = [
         title: "Documentation (JSDoc, Swagger)",
         info: "",
         level: "expert",
-      },
-      {
-        title: "Web accessibility (WCAG, a11y)",
-        info: "Strict accessibility compliance, semantic markup",
-        level: "advanced",
       },
       {
         title: "Web page performance",
