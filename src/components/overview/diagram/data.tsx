@@ -71,7 +71,7 @@ export const AREAS: AreaData[] = [
         topics: [
             {
                 name: "Horizontal Engineering Culture",
-                description: "I'm not a big fan of strict hierarchies. In my experience, teams do their work best in a flat culture where developers, designers, and stakeholders talk directly. The best ideas should always win based on technical merit, regardless of whose job title is attached to them.",
+                description: "I'm not a big fan of strict hierarchies. In my experience, teams do their work best in a flat culture where developers, designers, and stakeholders talk directly. The best ideas must win on merit, regardless of titles.",
             },
             {
                 name: "Building Frictionless Workflows",
@@ -83,7 +83,7 @@ export const AREAS: AreaData[] = [
             },
             {
                 name: "Leading with Constructive Honesty",
-                description: "I believe the best professional relationships are built on trust and full transparency. I’m straightforward about technical debt and project risks, ensuring stakeholders and engineers have the full picture to make informed calls. Honesty saves time and money later.",
+                description: "Trust and transparency build the best professional relationships. I’m straightforward about technical debt and risks, ensuring everyone has the full picture to make informed calls. Honesty saves time and money.",
             },
         ],
     },
@@ -102,7 +102,7 @@ export const AREAS: AreaData[] = [
                 description: "I consider myself a \"reasonable perfectionist.\" While I always strive to make every UI as polished and flawless as possible, my experience has taught me how to do this pragmatically, respecting the constraints of resources and time.",
             },
             {
-                name: "Visual Aesthetics",
+                name: "Crafting Visual Aesthetics",
                 description: "My eye for detail is forged by a passion for photography, years of collaborating with talented designers, and deconstructing hundreds of designs. This mix of visual literacy and technical grit helps me to create clean and attractive UI.",
             },
             {
@@ -114,7 +114,7 @@ export const AREAS: AreaData[] = [
                 description: "I speak both languages. I help designers leverage modern web tech to build design systems that are as technically robust under the hood as they are beautiful on the surface. Bridging the gap creates better products.",
             },
             {
-                name: "Balanced Accessibility",
+                name: "Balancing Accessibility",
                 description: "I view accessibility as a mark of a professional product. I advocate for inclusive design based on context, meeting the standards that actually matter for the users. Professionalism is about balance.",
             },
         ],
