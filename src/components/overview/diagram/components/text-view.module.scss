@@ -8,7 +8,7 @@
     // Prevent layout shift: align items to top and give a predefined min-height
     align-content: start;
     align-items: start;
-    min-height: 612px;
+    min-height: 610px;
     padding: 1rem 0;
 
     @include mixins.mobile {
