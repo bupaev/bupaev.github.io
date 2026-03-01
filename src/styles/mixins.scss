@@ -212,11 +212,11 @@ $gap: 32px;
   &::before,
   &::after {
     position: absolute;
-    height: 3px;
-    margin-top: -1px;
+    height: 10%;
+    margin-top: -5%;
     content: '';
     background-color: currentcolor;
-    border-radius: 3px;
+    border-radius: 10px;
     transition: all 0.2s ease-out;
   }
 
@@ -238,7 +238,7 @@ $gap: 32px;
 }
 
 @mixin toggle-icon-expanded() {
-  transform: translate3d(0, -3px, 0) rotate(-90deg);
+  transform: translate3d(0, -10%, 0) rotate(-90deg);
 
   &::before,
   &::after {
