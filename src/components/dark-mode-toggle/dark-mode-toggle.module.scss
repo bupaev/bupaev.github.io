@@ -1,5 +1,48 @@
 @use "../../styles/mixins";
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+    animation-timing-function: ease-in;
+  }
+
+  25% {
+    transform: rotate(180deg) scale(1.2);
+    animation-timing-function: ease-out;
+  }
+
+  50% {
+    transform: rotate(360deg) scale(1);
+    animation-timing-function: linear;
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes moon-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
 // @TODO: Rework styles to make it more robust
 // Now it's extremely fragile. E.g. depends on width of labels
 .darkModeToggle {
@@ -41,8 +84,9 @@
     width: 30px;
     height: 30px;
 
-    img {
+    svg {
       width: 100%;
+      height: 100%;
     }
   }
 
@@ -50,6 +94,30 @@
   .labelDark {
     padding-top: 1px;
     color: var(--accent-color);
+  }
+
+  &:hover {
+    .iconLight {
+      animation: spin 4s infinite linear;
+    }
+    
+    &.darkModeEnabled {
+      .moonBody {
+        animation: moon-pulse 4s infinite ease-in-out;
+      }
+
+      .star1 {
+        animation: twinkle 3s infinite ease-in-out;
+      }
+
+      .star2 {
+        animation: twinkle 4s infinite ease-in-out 1s;
+      }
+
+      .star3 {
+        animation: twinkle 5s infinite ease-in-out 2s;
+      }
+    }
   }
 
   &.darkModeEnabled {

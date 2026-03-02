@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import styles from "./dark-mode-toggle.module.scss";
-import sunIcon from "./icons/sun.svg";
-import moonIcon from "./icons/moon.svg";
+import { SunIcon } from "./icons/sun-icon";
+import { MoonIcon } from "./icons/moon-icon";
 
 function getCookie(name: string): string | undefined {
   if (typeof document === "undefined") return undefined;
@@ -73,8 +73,8 @@ export function DarkModeToggle() {
         <div className={styles.slider}>
           <span className={styles.labelDark}>Dark</span>
           <div className={styles.handler}>
-            <img className={styles.iconLight} src={sunIcon.src} alt="Light mode" width={30} height={30} />
-            <img className={styles.iconDark} src={moonIcon.src} alt="Dark mode" width={30} height={30} />
+            <SunIcon className={styles.iconLight} width={30} height={30} />
+            <MoonIcon className={styles.iconDark} width={30} height={30} />
           </div>
           <span className={styles.labelLight}>Light</span>
         </div>
