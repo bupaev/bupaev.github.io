@@ -17,6 +17,7 @@ export type AreaData = {
     heading: ReactNode;
     headingText: string;
     topics: TopicInfo[];
+    hitPoints?: string;
 };
 
 /** Area data for the four skill areas */
@@ -24,6 +25,7 @@ export const AREAS: AreaData[] = [
     {
         id: "topLeft",
         points: "80,0 535,0 463,288 8,288",
+        hitPoints: "250,50 535,0 463,288 90,288 70,180",
         scaleX: 1.4,
         scaleY: 1.5,
         cx: 310,
@@ -62,6 +64,7 @@ export const AREAS: AreaData[] = [
     {
         id: "topRight",
         points: "526,35 800,35 737,288 464,288",
+        hitPoints: "526,35 680,60 740,150 737,288 464,288",
         scaleX: 2.2,
         scaleY: 1.6,
         cx: 610,
@@ -90,6 +93,7 @@ export const AREAS: AreaData[] = [
     {
         id: "bottomLeft",
         points: "52,288 463,288 411,500 0,500",
+        hitPoints: "85,288 463,288 411,500 240,490 85,380",
         scaleX: 1.3,
         scaleY: 1.9,
         cx: 290,
@@ -122,6 +126,7 @@ export const AREAS: AreaData[] = [
     {
         id: "bottomRight",
         points: "459,288 725,288 676,481 411,481",
+        hitPoints: "459,288 725,288 676,430 600,480 411,481",
         scaleX: 2.4,
         scaleY: 2.1,
         cx: 565,

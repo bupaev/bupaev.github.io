@@ -96,7 +96,8 @@ describe('Diagram', () => {
     };
 
     const activateArea = async (container: HTMLElement, areaIndex: number) => {
-        const areas = container.querySelectorAll('polygon');
+        // Find polygons that match our interactive "hit" layer
+        const areas = Array.from(container.querySelectorAll('polygon')).filter(p => p.style.pointerEvents === 'all');
         simulateAnimationComplete();
 
         await act(async () => {
@@ -124,10 +125,10 @@ describe('Diagram', () => {
         expect(filter).toBeInTheDocument();
     });
 
-    it('renders four skill areas', () => {
+    it('renders eight polygons (4 visual, 4 hit areas)', () => {
         const { container } = render(<Diagram />);
         const areas = container.querySelectorAll('polygon');
-        expect(areas).toHaveLength(4);
+        expect(areas).toHaveLength(8);
     });
 
     it('renders headings for all skill areas', () => {
@@ -149,7 +150,7 @@ describe('Diagram', () => {
 
     it('hides topics on mouse leave', async () => {
         const { container } = render(<Diagram />);
-        const areas = container.querySelectorAll('polygon');
+        const areas = Array.from(container.querySelectorAll('polygon')).filter(p => p.style.pointerEvents === 'all');
 
         await activateArea(container, 0);
 
@@ -360,7 +361,7 @@ describe('Diagram', () => {
 
     it('does not change active area when mouse events fire while popup is open', async () => {
         const { container } = render(<Diagram />);
-        const areas = container.querySelectorAll('polygon');
+        const areas = Array.from(container.querySelectorAll('polygon')).filter(p => p.style.pointerEvents === 'all');
 
         // Activate first area
         await activateArea(container, 0);

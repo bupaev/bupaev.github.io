@@ -66,12 +66,25 @@ export function AreasGeometry({ areas, scaleId, sortId, blurRef, onMouseEnter, o
                             transformOrigin: `${area.cx}px ${area.cy}px`,
                             transform: getTransform(area.id, area.cx, area.cy, area.scaleX, area.scaleY, scaleId),
                             transition: "transform 500ms ease",
+                            pointerEvents: "none",
                         }}
                     >
                         <polygon
                             className={AREA_CLASS_MAP[area.id]}
                             points={area.points}
-                            style={{ cursor: "pointer" }}
+                            style={{ pointerEvents: "none" }}
+                        />
+                    </g>
+                ))}
+            </g>
+            
+            <g>
+                {renderOrder.map((area) => (
+                    <g key={`hit-${area.id}`}>
+                        <polygon
+                            className={AREA_CLASS_MAP[area.id]}
+                            points={area.hitPoints || area.points}
+                            style={{ cursor: "pointer", fill: "transparent", pointerEvents: "all" }}
                             onMouseEnter={() => onMouseEnter(area.id)}
                             onMouseLeave={onMouseLeave}
                         />
