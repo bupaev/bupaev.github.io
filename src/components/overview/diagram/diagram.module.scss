@@ -8,13 +8,8 @@
 .toolbar {
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
     z-index: 11;
-
-    @include mixins.mobile {
-        right: 0;
-        left: auto;
-    }
 }
 
 .diagram {
@@ -45,7 +40,7 @@
 .backButton {
     position: absolute;
     top: 4%;
-    right: 4%;
+    left: 4%;
     z-index: 10;
     display: flex;
     align-items: center;
@@ -78,7 +73,7 @@
 
     @include mixins.mobile {
         top: 0;
-        right: 0;
+        left: 0;
     }
 }
 

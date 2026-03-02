@@ -35,7 +35,10 @@ export function Overview() {
         </div>
         <div className={styles.graphicsWrapper}>
           <p className="content">
-            The interactive diagram below maps out my key professional areas. Hover over each area to explore the principles that guide my work.
+            Hover over the diagram below to explore my key professional areas and guiding principles. 
+            <span style={{ opacity: 0.8, fontSize: "0.9em" }}>
+              For a more traditional reading experience, switch to a text-based view using the toggle in the top right corner.
+            </span>
           </p>
           <Diagram />
         </div>

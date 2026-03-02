@@ -1,26 +1,44 @@
 .toggle {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 40px;
     height: 40px;
     padding: 0;
-    overflow: hidden;
-    color: var(--accent-color);
+   overflow: hidden;
+    color: var(--text-color);
     cursor: pointer;
-    background-color: var(--background-color);
+    background-color: transparent;
     border: 2px solid var(--accent-color);
     border-radius: 9999px;
-    transition:
-        background-color 400ms,
-        box-shadow 300ms;
+    transition: box-shadow 300ms;
+
+    &::before {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        width: 150%;
+        height: 150%;
+        content: "";
+        background-color: var(--accent-color);
+        border-radius: 4px;
+        transform: translateX(15%) translateY(70%) skewX(-15deg);
+        transition: transform 400ms ease;
+    }
 
     &:hover {
         box-shadow: 0 0 8px -2px var(--accent-color);
+
+        &::before {
+            transform: translateX(-20%) translateY(-10%) skewX(-15deg);
+        }
     }
 }
 
 .handler {
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,5 +49,5 @@
 .icon {
     width: 100%;
     height: 100%;
-    color: var(--accent-color);
+    color: var(--text-color);
 }
