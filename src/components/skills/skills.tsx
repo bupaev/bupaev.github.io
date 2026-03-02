@@ -21,7 +21,7 @@ export function Skills() {
           Nevertheless, the good old list of tools and technologies I possess may still be useful.
         </p>
         <h3>What I can do:</h3>
-        <ul>
+        <ul className={styles.whatIDoList}>
           <li>
             develop and maintain complex web apps with modern JS frameworks
             (preferably Vue, but I have worked with React and AngularJS too)

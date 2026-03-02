@@ -10,4 +10,44 @@
   .skillsTitle {
     font-weight: var(--font-weight-bold);
   }
+
+  .whatIDoList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding: 0;
+    margin: 2rem 0;
+    list-style: none;
+
+    li {
+      position: relative;
+      z-index: 0;
+      padding: 1.5rem;
+
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        content: "";
+        background-color: var(--accent-color);
+        border-radius: 8px;
+        opacity: 0.15;
+        transform: skew(-10deg);
+        transition: opacity 0.3s ease;
+      }
+
+      &:hover::before {
+        opacity: 0.25;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .whatIDoList {
+      grid-template-columns: 1fr;
+    }
+  }
 }
