@@ -21,11 +21,23 @@
     a {
       @include mixins.multiline-text-hover-effect;
     }
+
+    &:global(.content) {
+      margin-bottom: 0 !important;
+    }
   }
 
   .graphicsWrapper {
     flex: 0 0 auto;
     width: 950px;
+
+    & > p {
+      text-align: center;
+
+      @include mixins.mobile {
+        text-align: start;
+      }
+    }
 
     @include mixins.until(variables.$breakpoint-2xl) {
       width: 850px;

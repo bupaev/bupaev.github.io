@@ -45,7 +45,7 @@ export function ViewModeToggle({ mode, onToggle }: ViewModeToggleProps) {
             </span>
             <span className={styles.textContainer}>
                 <span className={`${styles.textWrapper} ${!isText ? styles.hiddenText : ""}`}>
-                    Show Graphics
+                    Show as Brain
                 </span>
                 <span className={`${styles.textWrapper} ${isText ? styles.hiddenText : ""}`}>
                     Show as Text

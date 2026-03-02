@@ -9,7 +9,7 @@ export function Overview() {
       <div className={styles.columns}>
         <div className={`${styles.textWrapper} content`}>
           <p>
-            I am a&nbsp;<strong>Frontend-focused Product Engineer</strong> with 15+ years of experience, a&nbsp;<strong>player-coach</strong>, and a&nbsp;<strong>bridge</strong> between business, design, and development.
+            I am a&nbsp;<strong>Front-end Engineer</strong> with 15+ years of experience, a&nbsp;<strong>player-coach</strong>, and a&nbsp;<strong>bridge</strong> between business, design, and development.
           </p>
           <p>
             My identity is defined by three core characteristics: <strong>Product-Oriented</strong>, <strong>Reasonable</strong>, <strong>Perfectionist</strong>.
@@ -34,10 +34,10 @@ export function Overview() {
           </ul>
         </div>
         <div className={styles.graphicsWrapper}>
-          <p className="content text-center">
+          <p className="content">
             Hover over the diagram below to explore my key professional areas and guiding principles. 
             <span className={styles.hint}>
-              For a more traditional reading experience, switch to a text-based view using the toggle in the top right corner.
+              Too complex for a small screen? Switch to text view using the top-right toggle.
             </span>
           </p>
           <Diagram />
