@@ -57,7 +57,7 @@ describe('VerticalMenu', () => {
         it('renders all 6 menu items', async () => {
             await renderAndInitialize();
 
-            expect(screen.getByText('Who I am')).toBeInTheDocument();
+            expect(screen.getByText('Salute')).toBeInTheDocument();
             expect(screen.getByText('My Core')).toBeInTheDocument();
             expect(screen.getByText('Skills')).toBeInTheDocument();
             expect(screen.getByText('Experience')).toBeInTheDocument();
@@ -72,7 +72,7 @@ describe('VerticalMenu', () => {
             expect(buttons).toHaveLength(6);
 
             // Check ARIA labels for accessibility
-            expect(buttons[0]).toHaveAttribute('aria-label', 'Navigate to Who I am section');
+            expect(buttons[0]).toHaveAttribute('aria-label', 'Navigate to Salute section');
             expect(buttons[1]).toHaveAttribute('aria-label', 'Navigate to My Core section');
             expect(buttons[2]).toHaveAttribute('aria-label', 'Navigate to Skills section');
         });
@@ -106,7 +106,7 @@ describe('VerticalMenu', () => {
         it('scrolls to first section (hero) when first menu item clicked', async () => {
             await renderAndInitialize();
 
-            const helloButton = screen.getByRole('button', { name: /navigate to who i am/i });
+            const helloButton = screen.getByRole('button', { name: /navigate to Salute/i });
 
             await act(async () => {
                 fireEvent.click(helloButton);

@@ -21,7 +21,7 @@ export type MenuItem = {
  * Each item corresponds to a section on the CV page.
  */
 export const MENU_ITEMS: MenuItem[] = [
-    { title: "Who I am", id: "hero-area", icon: headWithGlasses.src },
+    { title: "Salute", id: "hero-area", icon: headWithGlasses.src },
     { title: "My Core", id: "overview", icon: vennDiagram.src },
     { title: "Skills", id: "skills", icon: penAndWrench.src },
     { title: "Experience", id: "experience", icon: mountainWithFlag.src },
