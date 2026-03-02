@@ -19,7 +19,7 @@ export const SKILLS_DATA: SkillGroup[] = [
     title: "Programming/Markup languages",
     items: [
       {
-        title: "Javascript",
+        title: "JavaScript",
         info: "",
         level: "expert",
       },

@@ -6,11 +6,10 @@ export function Education() {
         <h3>Endless professional self-development</h3>
         <p>
           Udemy, Coursera, Skillbox, JavaScript.Ninja, Refactoring.Guru and
-          infinite number of articles, books and Youtube videos
+          countless articles, books and Youtube videos
         </p>
         <h3>
-          Doctor of Philosophy (postgraduate student), Computer science
-          (unfinished)
+          Doctor of Philosophy (Ph.D. Candidate), Computer science
         </h3>
         <p>Omsk State Technical University, 2013 - 2015.</p>
         <h3>Master of Science, Computer science</h3>
