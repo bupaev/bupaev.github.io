@@ -26,6 +26,7 @@ const TRANSITION_DURATION = 1000;
 export function useBlurAnimation(
     containerRef: React.RefObject<HTMLDivElement | null>,
     blurRef: React.RefObject<SVGFEGaussianBlurElement | null>,
+    isActive: boolean
 ) {
     const currentBlurRef = useRef(STD_DEV_LOW);
     const targetBlurRef = useRef(STD_DEV_LOW);
@@ -75,7 +76,7 @@ export function useBlurAnimation(
         let isVisible = false;
 
         const updateBlur = () => {
-            if (!isVisible) return;
+            if (!isVisible || !isActive) return;
 
             const rect = container.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
@@ -90,6 +91,12 @@ export function useBlurAnimation(
             });
 
             const desiredBlur = progress >= ANIMATION_COMPLETE_THRESHOLD ? STD_DEV_HIGH : STD_DEV_LOW;
+
+            // Make sure the DOM node matches our internal state on initialization/remount
+            const blur = blurRef.current;
+            if (blur && currentBlurRef.current === desiredBlur) {
+                blur.setAttribute("stdDeviation", String(currentBlurRef.current));
+            }
 
             if (targetBlurRef.current !== desiredBlur) {
                 targetBlurRef.current = desiredBlur;
@@ -125,7 +132,7 @@ export function useBlurAnimation(
             window.removeEventListener("scroll", handleScroll);
             if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
         };
-    }, [containerRef, blurRef]);
+    }, [containerRef, blurRef, isActive]);
 
     return { triggerBlur, isAnimationComplete };
 }

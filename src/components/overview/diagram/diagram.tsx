@@ -43,7 +43,8 @@ export function Diagram() {
             setIsFadingOut(false);
         }, 150); // Matches CSS transition duration
     }, [deactivateArea]);
-    const { triggerBlur, isAnimationComplete } = useBlurAnimation(containerRef, blurRef);
+    const isGraphic = viewMode === "graphic";
+    const { triggerBlur, isAnimationComplete } = useBlurAnimation(containerRef, blurRef, isGraphic);
 
     // Keep ref in sync with state to avoid stale closures
     useEffect(() => {
@@ -97,7 +98,6 @@ export function Diagram() {
         deactivateArea();
     }, [deactivateArea]);
 
-    const isGraphic = viewMode === "graphic";
 
     return (
         <div className={styles.diagramWrapper}>
