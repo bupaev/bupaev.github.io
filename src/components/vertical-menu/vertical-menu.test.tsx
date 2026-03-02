@@ -12,9 +12,9 @@ describe('VerticalMenu', () => {
             const sectionMap: Record<string, { clientHeight: number; offsetTop: number }> = {
                 'hero-area': { clientHeight: 500, offsetTop: 0 },
                 'overview': { clientHeight: 600, offsetTop: 500 },
-                'fit-check': { clientHeight: 500, offsetTop: 1100 },
-                'skills': { clientHeight: 700, offsetTop: 1600 },
-                'experience': { clientHeight: 400, offsetTop: 2300 },
+                'skills': { clientHeight: 700, offsetTop: 1100 },
+                'experience': { clientHeight: 400, offsetTop: 1800 },
+                'fit-check': { clientHeight: 500, offsetTop: 2200 },
                 'education': { clientHeight: 500, offsetTop: 2700 },
             };
             return sectionMap[id] as unknown as HTMLElement | null;
@@ -59,9 +59,9 @@ describe('VerticalMenu', () => {
 
             expect(screen.getByText('Who I am')).toBeInTheDocument();
             expect(screen.getByText('My Core')).toBeInTheDocument();
-            expect(screen.getByText('Fit Check')).toBeInTheDocument();
             expect(screen.getByText('Skills')).toBeInTheDocument();
             expect(screen.getByText('Experience')).toBeInTheDocument();
+            expect(screen.getByText('Fit Check')).toBeInTheDocument();
             expect(screen.getByText('Education')).toBeInTheDocument();
         });
 
@@ -74,7 +74,7 @@ describe('VerticalMenu', () => {
             // Check ARIA labels for accessibility
             expect(buttons[0]).toHaveAttribute('aria-label', 'Navigate to Who I am section');
             expect(buttons[1]).toHaveAttribute('aria-label', 'Navigate to My Core section');
-            expect(buttons[2]).toHaveAttribute('aria-label', 'Navigate to Fit Check section');
+            expect(buttons[2]).toHaveAttribute('aria-label', 'Navigate to Skills section');
         });
 
         it('renders visible area marker', async () => {
