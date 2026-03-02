@@ -1,0 +1,83 @@
+@use "../../styles/mixins";
+
+.competenciesHeading {
+    margin-bottom: 0.25rem;
+}
+
+.competencies {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin: 0 0 2rem;
+
+    .competencyCard {
+        position: relative;
+        z-index: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1.75rem 1.5rem 1.5rem;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+        &::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            content: "";
+            background-color: var(--accent-color);
+            border-radius: 10px;
+            opacity: 0.5;
+            transform: skew(-8deg);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        &::after {
+            border-radius: 10px;
+            transform: skew(-8deg);
+        }
+
+        &:hover {
+            transform: translateY(-5px);
+
+            &::before {
+                opacity: 0.8;
+                transform: skew(-8deg) scale(1.02);
+            }
+        }
+
+        @include mixins.sheen-effect(0.25);
+    }
+
+    @include mixins.mobile {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cardIcon {
+    font-family: var(--font-accent);
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--secondary-color);
+    transition: transform 0.3s ease;
+
+    [data-color-scheme="dark"] & {
+        color: var(--accent-color);
+    }
+}
+
+.cardTitle {
+    font-family: var(--font-accent);
+    font-size: var(--text-heading-h4);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-heading);
+}
+
+.cardDescription {
+    margin: 0;
+    font-size: var(--text-body-small);
+    line-height: var(--leading-body);
+    opacity: 0.85;
+}
