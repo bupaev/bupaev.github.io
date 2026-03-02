@@ -36,7 +36,12 @@ export function ViewModeToggle({ mode, onToggle }: ViewModeToggleProps) {
             aria-label={`Switch to ${isText ? "graphic" : "text"} view`}
         >
             <span className={styles.handler}>
-                {isText ? <DiagramIcon /> : <ListIcon />}
+                <span className={`${styles.iconWrapper} ${isText ? styles.hiddenIcon : ""}`}>
+                    <ListIcon />
+                </span>
+                <span className={`${styles.iconWrapper} ${!isText ? styles.hiddenIcon : ""}`}>
+                    <DiagramIcon />
+                </span>
             </span>
         </button>
     );

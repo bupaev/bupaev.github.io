@@ -6,7 +6,7 @@
     width: 40px;
     height: 40px;
     padding: 0;
-   overflow: hidden;
+    overflow: hidden;
     color: var(--text-color);
     cursor: pointer;
     background-color: transparent;
@@ -44,6 +44,24 @@
     justify-content: center;
     width: 24px;
     height: 24px;
+}
+
+.iconWrapper {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    opacity: 1;
+    transition: opacity 300ms ease, transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hiddenIcon {
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.5) rotate(-45deg);
 }
 
 .icon {

@@ -5,6 +5,16 @@
     position: relative;
 }
 
+.contentWrapper {
+    opacity: 1;
+    transition: opacity 150ms ease-in-out;
+}
+
+.fadeOut {
+    pointer-events: none;
+    opacity: 0;
+}
+
 .toolbar {
     position: absolute;
     top: 0;
