@@ -10,35 +10,7 @@
   overflow: hidden;
   font-family: var(--font-accent);
 
-  // Scroll-driven fade-out: opacity 1→0, blur 0→20px as hero exits viewport
-  @supports (animation-timeline: scroll()) {
-    animation: hero-scroll-fade linear both;
-    animation-timeline: scroll(root);
-    animation-range: 0 100vh;
-    will-change: opacity, filter;
-  }
-
-  @keyframes hero-scroll-fade {
-    0% {
-      opacity: 1;
-      filter: blur(0);
-    }
-
-    50% {
-      opacity: 0.2;
-      filter: blur(10px);
-    }
-
-    90% {
-      opacity: 0;
-      filter: blur(40px);
-    }
-
-    100% {
-      opacity: 0;
-      filter: blur(40px);
-    }
-  }
+  @include mixins.scroll-fade;
 
   @include mixins.mobile {
     min-height: 600px;

@@ -254,3 +254,33 @@ $gap: 32px;
     right: 15%;
   }
 }
+@keyframes scroll-fade {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  50% {
+    opacity: 0.2;
+    filter: blur(10px);
+  }
+
+  90% {
+    opacity: 0;
+    filter: blur(40px);
+  }
+
+  100% {
+    opacity: 0;
+    filter: blur(40px);
+  }
+}
+
+@mixin scroll-fade($range: 0 100vh) {
+  @supports (animation-timeline: scroll()) {
+    animation: scroll-fade linear both;
+    animation-timeline: scroll(root);
+    animation-range: $range;
+    will-change: opacity, filter;
+  }
+}

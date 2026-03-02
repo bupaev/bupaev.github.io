@@ -1,27 +1,5 @@
 @use "../../styles/mixins";
 
-@keyframes toggle-scroll-fade {
-  0% {
-    opacity: 1;
-    filter: blur(0);
-  }
-
-  50% {
-    opacity: 0.2;
-    filter: blur(10px);
-  }
-
-  90% {
-    opacity: 0;
-    filter: blur(40px);
-  }
-
-  100% {
-    opacity: 0;
-    filter: blur(40px);
-  }
-}
-
 @keyframes spin {
   0% {
     transform: rotate(0deg) scale(1);
@@ -85,12 +63,7 @@
     right: 6px;
     left: auto;
 
-    @supports (animation-timeline: scroll()) {
-      animation: toggle-scroll-fade linear both;
-      animation-timeline: scroll(root);
-      animation-range: 0 100vh;
-      will-change: opacity, filter;
-    }
+    @include mixins.scroll-fade;
   }
 
   .slider {
