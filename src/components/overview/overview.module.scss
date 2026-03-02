@@ -37,9 +37,13 @@
   }
 
   .hint {
-    display: block;
-    font-size: var(--text-body-small);
-    opacity: 0.8;
+    display: none;
+
+    @include mixins.mobile {
+      display: block;
+      font-size: var(--text-body-small);
+      opacity: 0.8;
+    }
   }
 
   .identityList {

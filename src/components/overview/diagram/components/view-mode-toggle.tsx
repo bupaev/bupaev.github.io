@@ -43,6 +43,14 @@ export function ViewModeToggle({ mode, onToggle }: ViewModeToggleProps) {
                     <DiagramIcon />
                 </span>
             </span>
+            <span className={styles.textContainer}>
+                <span className={`${styles.textWrapper} ${!isText ? styles.hiddenText : ""}`}>
+                    Show Graphics
+                </span>
+                <span className={`${styles.textWrapper} ${isText ? styles.hiddenText : ""}`}>
+                    Show as Text
+                </span>
+            </span>
         </button>
     );
 }
