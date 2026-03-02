@@ -36,6 +36,12 @@
     }
   }
 
+  .hint {
+    display: block;
+    font-size: var(--text-body-small);
+    opacity: 0.8;
+  }
+
   .identityList {
     li {
       margin-bottom: 1em;

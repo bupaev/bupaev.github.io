@@ -34,9 +34,9 @@ export function Overview() {
           </ul>
         </div>
         <div className={styles.graphicsWrapper}>
-          <p className="content">
+          <p className="content text-center">
             Hover over the diagram below to explore my key professional areas and guiding principles. 
-            <span style={{ opacity: 0.8, fontSize: "0.9em" }}>
+            <span className={styles.hint}>
               For a more traditional reading experience, switch to a text-based view using the toggle in the top right corner.
             </span>
           </p>
