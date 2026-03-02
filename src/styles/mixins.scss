@@ -178,7 +178,7 @@ $gap: 32px;
   border-left: $border-width solid #{$color};
 }
 
-@mixin sheen-effect($opacity-adjustment: 0, $angle: 105deg, $hover-selector: "&:hover") {
+@mixin sheen-effect($color: #fff, $opacity-adjustment: 0, $angle: 105deg, $hover-selector: "&:hover") {
   &::after {
     position: absolute;
     inset: 0;
@@ -187,9 +187,13 @@ $gap: 32px;
     content: "";
     background: linear-gradient($angle,
         transparent 0%,
-        rgb(255 255 255 / 0%) calc(var(--x, 50%) - 40%),
-        rgb(255 255 255 / 100%) var(--x, 50%),
-        rgb(255 255 255 / 0%) calc(var(--x, 50%) + 40%),
+        rgba($color, 0) calc(var(--x, 50%) - 40%),
+        rgba($color, 0.15) calc(var(--x, 50%) - 25%),
+        rgba($color, 0.6) calc(var(--x, 50%) - 12%),
+        rgba($color, 1) var(--x, 50%),
+        rgba($color, 0.6) calc(var(--x, 50%) + 12%),
+        rgba($color, 0.15) calc(var(--x, 50%) + 25%),
+        rgba($color, 0) calc(var(--x, 50%) + 40%),
         transparent 100%);
     mix-blend-mode: overlay;
     opacity: 0;

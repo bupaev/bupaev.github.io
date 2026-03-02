@@ -61,7 +61,7 @@
         position: relative;
 
         &>.container {
-            z-index: 1;
+            // z-index: 1 removed as it creates a stacking context preventing backdrop filters!
         }
 
         &::after {
@@ -138,7 +138,7 @@
   * Unlayered styles always defeat layered styles in CSS Cascade Layers.
   */
 .container {
-    z-index: 1;
+    // z-index: 1 removed as it intercepts stacking context overrides when cards need backdrop filters
     width: 100%;
     max-width: unset;
     padding-inline: 0;

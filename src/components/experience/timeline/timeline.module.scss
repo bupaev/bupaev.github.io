@@ -137,7 +137,7 @@
       }
     }
 
-    @include mixins.sheen-effect(0.2);
+    @include mixins.sheen-effect(#fff, 0.2);
   }
 
   .yearsWrapper {

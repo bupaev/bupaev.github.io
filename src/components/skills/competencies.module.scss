@@ -12,7 +12,6 @@
 
     .competencyCard {
         position: relative;
-        z-index: 0;
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
@@ -23,32 +22,34 @@
             position: absolute;
             top: 0;
             left: 0;
-            z-index: -1;
+            z-index: 0;
             width: 100%;
             height: 100%;
             content: "";
-            background-color: var(--accent-color);
-            border-radius: 10px;
-            opacity: 0.5;
+            background-color: color-mix(in srgb, var(--accent-color), transparent 50%);
+            border-radius: var(--border-radius-md);
+            backdrop-filter: blur(4px) saturate(20%);
             transform: skew(-8deg);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
+            transition: all 0.3s ease;
 
-        &::after {
-            border-radius: 10px;
-            transform: skew(-8deg);
-        }
-
-        &:hover {
-            transform: translateY(-5px);
-
-            &::before {
-                opacity: 0.8;
-                transform: skew(-8deg) scale(1.02);
+            [data-color-scheme="dark"] & {
+                background-color: color-mix(in srgb, var(--accent-color), transparent 50%);
             }
         }
 
-        @include mixins.sheen-effect(0.25);
+        &::after {
+            z-index: 2;
+            border-radius: var(--border-radius-md);
+            transform: skew(-8deg);
+        }
+
+        [data-color-scheme="light"] & {
+            @include mixins.sheen-effect(#fff, 0.05, 90deg);
+        }
+
+        [data-color-scheme="dark"] & {
+            @include mixins.sheen-effect(gold, 0.1, 90deg);
+        }
     }
 
     @include mixins.mobile {
@@ -57,6 +58,7 @@
 }
 
 .cardIcon {
+    position: relative;
     font-family: var(--font-accent);
     font-size: 1.5rem;
     line-height: 1;
@@ -69,6 +71,7 @@
 }
 
 .cardTitle {
+    position: relative;
     font-family: var(--font-accent);
     font-size: var(--text-heading-h4);
     font-weight: var(--font-weight-semibold);
