@@ -177,7 +177,7 @@ describe('Diagram', () => {
     it('renders topics for each skill area', () => {
         render(<Diagram />);
         expect(screen.getByText('Prioritizing Web Fundamentals')).toBeInTheDocument();
-        expect(screen.getByText('Horizontal Engineering Culture')).toBeInTheDocument();
+        expect(screen.getByText('Fostering Horizontal Culture')).toBeInTheDocument();
         expect(screen.getByText('Embracing the AI Revolution')).toBeInTheDocument();
     });
 

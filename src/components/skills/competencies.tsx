@@ -31,22 +31,22 @@ export function Competencies() {
       <CompetencyCard
         icon="{ }"
         title="Build Complex Web Apps"
-        description="Develop and maintain scalable web applications using modern JS ecosystems (Vue, React, AEM). I transform complex business logic into robust, maintainable frontend architectures with a strong focus on core web fundamentals."
+        description="I apply 15+ years of hands-on experience to solve complex challenges, transforming heavy logic into responsive, robust frontend architectures"
       />
       <CompetencyCard
         icon="✦"
         title="Craft Premium UI/UX"
-        description="Deliver reasonably pixel-perfect, rich-media interfaces. I act as the technical bridge between design and code to create visually stunning, strictly accessible (WCAG compliant) experiences that adapt flawlessly across devices."
+        description="Translate ambitious designs into polished interfaces, merging technical execution with artistic vision to elevate the final user experience"
       />
       <CompetencyCard
         icon="▣"
-        title="Drive Prototyping & Flows"
-        description="Translate abstract business requirements into actionable engineering plans. I create wireframes, define logical user flows, and build interactive HTML prototypes to validate ideas before heavy development begins."
+        title="Drive End-to-End Delivery"
+        description="Drive the complete product lifecycle from initial idea to final impact, stepping into any necessary role to guarantee execution quality"
       />
       <CompetencyCard
         icon="⚐"
-        title="Lead as a &ldquo;Player-Coach&rdquo;"
-        description="Manage Agile teams, establish CI/CD workflows, and enforce objective code quality metrics. My true passion remains in the codebase&mdash;leading by example, mentoring peers, and crafting the real product alongside my team."
+        title="Lead as a Player-Coach"
+        description="Lead as a practitioner rather than a pure manager, guiding agile teams by writing production code and mentoring peers through hands-on execution"
       />
     </div>
   );

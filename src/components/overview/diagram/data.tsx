@@ -53,7 +53,7 @@ export const AREAS: AreaData[] = [
             },
             {
                 name: "Cultivating Excellent DX",
-                description: "Code is still not just for LLM; it's for the humans who maintain it. I build great Developer Experiences with readable code and clear docs, which accelerates delivery today while ensuring the project stays sustainable long after me.",
+                description: "Code is still not just for LLM; it's for the humans who maintain it. Readable code and clear docs accelerate delivery today, and the next developer doesn't have to hate you six months later.",
             },
             {
                 name: "Owning the Full Lifecycle",
@@ -73,15 +73,15 @@ export const AREAS: AreaData[] = [
         headingText: "Leadership",
         topics: [
             {
-                name: "Horizontal Engineering Culture",
+                name: "Fostering Horizontal Culture",
                 description: "I'm not a big fan of strict hierarchies. In my experience, teams do their work best in a flat culture where developers, designers, and stakeholders talk directly. The best ideas must win on merit, regardless of titles.",
             },
             {
                 name: "Building Frictionless Workflows",
-                description: "Chaos doesn’t scale. I build automated, documented workflows to remove friction and spread knowledge. This solves the 'bus factor' and lets teams grow without the usual pains. Transparency is the key to scalability.",
+                description: "Chaos doesn’t scale. I build automated, documented workflows to remove friction and spread knowledge. This solves the 'bus factor' — no single person becomes a bottleneck, and new hires can onboard without losing a week.",
             },
             {
-                name: "Psychology of Leadership",
+                name: "Applying Behavioral Psychology",
                 description: "Leadership is fundamentally about people. I apply my knowledge of behavioral psychology to better understand team dynamics, build genuine empathy, and resolve conflicts before they turn into technical debt.",
             },
             {
@@ -103,7 +103,7 @@ export const AREAS: AreaData[] = [
         topics: [
             {
                 name: "Practicing Pragmatic Perfectionism",
-                description: "I consider myself a \"reasonable perfectionist.\" While I always strive to make every UI as polished and flawless as possible, my experience has taught me how to do this pragmatically, respecting the constraints of resources and time.",
+                description: "I call myself a \"reasonable perfectionist\" — and that tension is real. I care deeply about polish, but I've shipped enough products to know when chasing perfect becomes the enemy of good. The triage is the actual skill.",
             },
             {
                 name: "Crafting Visual Aesthetics",
@@ -115,7 +115,7 @@ export const AREAS: AreaData[] = [
             },
             {
                 name: "Bridging Design and Engineering",
-                description: "I speak both languages. I help designers leverage modern web tech to build design systems that are as technically robust under the hood as they are beautiful on the surface. Bridging the gap creates better products.",
+                description: "I speak both languages. I help designers build design systems that hold together technically, not just visually, avoiding the handoff failure where beautiful Figma mockups become janky implementations.",
             },
             {
                 name: "Balancing Accessibility",
@@ -144,7 +144,7 @@ export const AREAS: AreaData[] = [
             },
             {
                 name: "Amplifying Engineering Impact",
-                description: "AI is the ultimate force multiplier. By offloading routine execution, we free up bandwidth to focus on high-level system design and product strategy, using LLMs as sounding boards.",
+                description: "The real win isn't that AI writes code faster. It's that offloading routine execution frees up mental bandwidth for the work that actually matters — system design, product strategy, the decisions LLMs genuinely can't make.",
             },
             {
                 name: "Filtering the Hype",
