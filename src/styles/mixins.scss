@@ -264,7 +264,12 @@ $gap: 32px;
     filter: blur(0);
   }
 
-  50% {
+  15% {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  60% {
     opacity: 0.2;
     filter: blur(10px);
   }

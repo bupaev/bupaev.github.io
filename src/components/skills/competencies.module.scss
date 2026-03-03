@@ -84,15 +84,16 @@
 
 .cardTitle {
     position: relative;
+    margin-bottom: 0;
     font-family: var(--font-accent);
-    font-size: var(--text-heading-h4);
+    font-size: 1.85rem;
     font-weight: var(--font-weight-semibold);
-    line-height: var(--leading-heading);
 }
 
 .cardDescription {
+    position: relative;
     margin: 0;
-    font-size: var(--text-body-small);
+    font-size: var(--text-body);
     line-height: var(--leading-body);
-    opacity: 0.85;
+    
 }
