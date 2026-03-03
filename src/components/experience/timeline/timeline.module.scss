@@ -62,24 +62,54 @@
     font-size: 13px;
     font-weight: 700;
     cursor: pointer;
-    background-color: rgba(variables.$accent-color, 0.5);
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent-color), transparent 45%) 0%,
+      color-mix(in srgb, var(--accent-color), transparent 75%) 100%
+    );
+    border: 1px solid color-mix(in srgb, var(--accent-color), transparent 70%);
+    border-bottom: none;
     border-radius: $border-radius $border-radius 0 0;
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--accent-color), transparent 85%);
     transform: translateX(-50%);
     transition: all 200ms ease-out;
 
-    @include mixins.tablet-only {
-      font-size: 12px;
+    [data-color-scheme="light"] & {
+      @include mixins.sheen-effect(#fff, 0.05, 90deg);
     }
 
-    @include mixins.mobile {
-      font-size: 11px;
+    [data-color-scheme="dark"] & {
+      background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--accent-color), transparent 75%) 0%,
+        color-mix(in srgb, var(--accent-color), transparent 90%) 100%
+      );
+      border-color: color-mix(in srgb, var(--accent-color), transparent 85%);
+      box-shadow: 0 4px 16px color-mix(in srgb, var(--accent-color), transparent 90%);
+      
+      @include mixins.sheen-effect(#fff, 0.3, 90deg);
+
+      &:hover {
+        color: #000;
+        background: linear-gradient(
+          135deg,
+          color-mix(in srgb, var(--accent-color), transparent 5%) 0%,
+          color-mix(in srgb, var(--accent-color), transparent 15%) 100%
+        );
+        border-color: color-mix(in srgb, var(--accent-color), transparent 25%);
+      }
     }
 
     &:hover {
       z-index: 3 !important;
       color: #000;
-      background-color: var(--color-accent);
-      border-color: transparent;
+      background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--accent-color), transparent 5%) 0%,
+        color-mix(in srgb, var(--accent-color), transparent 15%) 100%
+      );
+      border-color: color-mix(in srgb, var(--accent-color), transparent 25%);
+      // box-shadow: 0 8px 24px color-mix(in srgb, var(--accent-color), transparent 40%);
       border-radius: $border-radius;
       transform: translateX(-50%) scale(1.1, 1.15);
 
@@ -102,11 +132,50 @@
       }
     }
 
+    @include mixins.tablet-only {
+      font-size: 12px;
+    }
+
+    @include mixins.mobile {
+      font-size: 11px;
+    }
+
     &.isBreak {
-      background-color: rgba(variables.$secondary-light-color, 0.5);
+      background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--color-secondary-light), transparent 45%) 0%,
+        color-mix(in srgb, var(--color-secondary-light), transparent 75%) 100%
+      );
+      border-color: color-mix(in srgb, var(--color-secondary-light), transparent 70%);
+      box-shadow: 0 4px 16px color-mix(in srgb, var(--color-secondary-light), transparent 85%);
 
       &:hover {
-        background-color: var(--color-secondary-light);
+        background: linear-gradient(
+          135deg,
+          color-mix(in srgb, var(--color-secondary-light), transparent 15%) 0%,
+          color-mix(in srgb, var(--color-secondary-light), transparent 30%) 100%
+        );
+        border-color: color-mix(in srgb, var(--color-secondary-light), transparent 25%);
+        box-shadow: 0 8px 24px color-mix(in srgb, var(--color-secondary-light), transparent 40%);
+      }
+
+      [data-color-scheme="dark"] & {
+        background: linear-gradient(
+          135deg,
+          color-mix(in srgb, var(--color-secondary-light), transparent 55%) 0%,
+          color-mix(in srgb, var(--color-secondary-light), transparent 75%) 100%
+        );
+        border-color: color-mix(in srgb, var(--color-secondary-light), transparent 85%);
+        box-shadow: 0 4px 16px color-mix(in srgb, var(--color-secondary-light), transparent 90%);
+
+        &:hover {
+          background: linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--color-secondary-light), transparent 5%) 0%,
+            color-mix(in srgb, var(--color-secondary-light), transparent 15%) 100%
+          );
+          border-color: color-mix(in srgb, var(--color-secondary-light), transparent 50%);
+        }
       }
     }
 
@@ -136,8 +205,6 @@
         font-style: normal;
       }
     }
-
-    @include mixins.sheen-effect(#fff, 0.2);
   }
 
   .yearsWrapper {

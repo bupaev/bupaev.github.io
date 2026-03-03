@@ -1,9 +1,18 @@
 "use client";
 
+import { useCallback } from "react";
 import { FIT_CRITERIA } from "./fit-check-data";
 import styles from "./fit-check.module.scss";
 
 export function FitCheck() {
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    e.currentTarget.style.setProperty("--x", `${x}%`);
+    e.currentTarget.style.setProperty("--y", `${y}%`);
+  }, []);
+
   return (
     <div className={`${styles.fitCheck} container`}>
       <h2 className="title">Are We the Right Fit?</h2>
@@ -37,7 +46,10 @@ export function FitCheck() {
               </div>
 
               {/* Fit Cell */}
-              <div className={`${styles.dataCell} ${styles.fitCell}`}>
+              <div
+                className={`${styles.dataCell} ${styles.fitCell}`}
+                onMouseMove={handleMouseMove}
+              >
                 <div className={styles.mobileLabel}>
                   <span className={styles.fitIcon} aria-hidden="true" />
                   <span>We are a GREAT FIT if...</span>
@@ -46,7 +58,10 @@ export function FitCheck() {
               </div>
 
               {/* No Fit Cell */}
-              <div className={`${styles.dataCell} ${styles.noFitCell}`}>
+              <div
+                className={`${styles.dataCell} ${styles.noFitCell}`}
+                onMouseMove={handleMouseMove}
+              >
                 <div className={styles.mobileLabel}>
                   <span className={styles.noFitIcon} aria-hidden="true" />
                   <span>We are NOT A FIT if...</span>

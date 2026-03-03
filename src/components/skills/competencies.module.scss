@@ -26,14 +26,26 @@
             width: 100%;
             height: 100%;
             content: "";
-            background-color: color-mix(in srgb, var(--accent-color), transparent 50%);
+            background: linear-gradient(
+                135deg,
+                color-mix(in srgb, var(--accent-color), transparent 60%) 0%,
+                color-mix(in srgb, var(--accent-color), transparent 85%) 100%
+            );
+            border: 1px solid color-mix(in srgb, var(--accent-color), transparent 70%);
             border-radius: var(--border-radius-md);
-            backdrop-filter: blur(4px) saturate(20%);
+            box-shadow: 0 8px 32px color-mix(in srgb, var(--accent-color), transparent 85%);
+            backdrop-filter: blur(8px) saturate(120%);
             transform: skew(-8deg);
             transition: all 0.3s ease;
 
             [data-color-scheme="dark"] & {
-                background-color: color-mix(in srgb, var(--accent-color), transparent 50%);
+                background: linear-gradient(
+                    135deg,
+                    color-mix(in srgb, var(--accent-color), transparent 75%) 0%,
+                    color-mix(in srgb, var(--accent-color), transparent 90%) 100%
+                );
+                border: 1px solid color-mix(in srgb, var(--accent-color), transparent 85%);
+                box-shadow: 0 8px 32px color-mix(in srgb, var(--accent-color), transparent 90%);
             }
         }
 
