@@ -60,11 +60,9 @@
     .with-background {
         position: relative;
 
-        &>.container {
-            // z-index: 1 removed as it creates a stacking context preventing backdrop filters!
-        }
-
         &::after {
+            --bg-opacity: 0.04;
+
             position: absolute;
             top: 0;
             right: 0;
@@ -79,10 +77,19 @@
             background-attachment: fixed;
             background-position: 95% 90%;
             background-size: 50%;
-            opacity: 0.04;
+            opacity: var(--bg-opacity);
 
             [data-color-scheme="dark"] & {
-                opacity: 0.07;
+                --bg-opacity: 0.07;
+            }
+
+            @supports (animation-timeline: view()) {
+                animation: 
+                    section-bg-fade-in linear both,
+                    section-bg-fade linear forwards;
+                animation-timeline: view(), view();
+                animation-range: entry 50% entry 90%, exit 0% exit 100%;
+                will-change: opacity, filter;
             }
 
             @include mixins.fullhd {
@@ -128,6 +135,40 @@
 
     .footer {
         padding: 3rem 1.5rem;
+    }
+
+    @keyframes section-bg-fade-in {
+        0% {
+            opacity: 0;
+            filter: blur(40px);
+        }
+
+        100% {
+            opacity: var(--bg-opacity);
+            filter: blur(0);
+        }
+    }
+
+    @keyframes section-bg-fade {
+        0% {
+            opacity: var(--bg-opacity);
+            filter: blur(0);
+        }
+
+        50% {
+            opacity: calc(var(--bg-opacity) * 0.2);
+            filter: blur(10px);
+        }
+
+        90% {
+            opacity: 0;
+            filter: blur(40px);
+        }
+
+        100% {
+            opacity: 0;
+            filter: blur(40px);
+        }
     }
 }
 
