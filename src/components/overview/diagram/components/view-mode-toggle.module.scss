@@ -1,6 +1,8 @@
 @use "@/styles/mixins";
 
 .toggle {
+    --transition-duration: 300ms;
+
     position: relative;
     display: flex;
     gap: 8px;
@@ -14,7 +16,15 @@
     background-color: transparent;
     border: 2px solid var(--accent-color);
     border-radius: 9999px;
-    transition: box-shadow 300ms;
+    transition: box-shadow var(--transition-duration);
+
+    :global([data-color-scheme="light"]) & {
+        @include mixins.sheen-effect(#fff, 0.5, 105deg);
+    }
+
+    :global([data-color-scheme="dark"]) & {
+        @include mixins.sheen-effect(gold, 0.1, 105deg);
+    }
 
     @include mixins.mobile {
         gap: 0;
@@ -36,7 +46,7 @@
         );
         border-radius: 4px;
         transform: translateX(-10%) translateY(105%) skewX(-15deg);
-        transition: transform 300ms ease;
+        transition: transform var(--transition-duration) ease-in-out;
 
         :global([data-color-scheme="dark"]) & {
             background: linear-gradient(
@@ -85,7 +95,7 @@
     line-height: 1;
     white-space: nowrap;
     opacity: 1;
-    transition: opacity 300ms ease;
+    transition: opacity var(--transition-duration) ease;
 }
 
 .hiddenText {
@@ -103,7 +113,7 @@
     width: 24px;
     height: 24px;
     opacity: 1;
-    transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+    transition: opacity var(--transition-duration) ease-in-out, transform var(--transition-duration) ease-in-out;
 }
 
 .hiddenIcon {

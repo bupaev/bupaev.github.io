@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import styles from "./view-mode-toggle.module.scss";
 
 type ViewMode = "graphic" | "text";
@@ -28,11 +29,20 @@ function DiagramIcon() {
 export function ViewModeToggle({ mode, onToggle }: ViewModeToggleProps) {
     const isText = mode === "text";
 
+    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        e.currentTarget.style.setProperty("--x", `${x}%`);
+        e.currentTarget.style.setProperty("--y", `${y}%`);
+    }, []);
+
     return (
         <button
             type="button"
             className={styles.toggle}
             onClick={onToggle}
+            onMouseMove={handleMouseMove}
             aria-label={`Switch to ${isText ? "graphic" : "text"} view`}
         >
             <span className={styles.handler}>
