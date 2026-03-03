@@ -26,20 +26,32 @@
         position: absolute;
         inset: 0;
         z-index: 0;
-        width: 150%;
-        height: 150%;
+        width: 120%;
+        height: 120%;
         content: "";
-        background-color: var(--accent-color);
+        background: linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--accent-color), transparent 45%) 0%,
+            color-mix(in srgb, var(--accent-color), transparent 70%) 100%
+        );
         border-radius: 4px;
-        transform: translateX(15%) translateY(70%) skewX(-15deg);
-        transition: transform 400ms ease;
+        transform: translateX(-10%) translateY(105%) skewX(-15deg);
+        transition: transform 300ms ease;
+
+        :global([data-color-scheme="dark"]) & {
+            background: linear-gradient(
+                135deg,
+                color-mix(in srgb, var(--accent-color), transparent 45%) 0%,
+                color-mix(in srgb, var(--accent-color), transparent 70%) 100%
+            );
+        }
     }
 
     &:hover {
         box-shadow: 0 0 8px -2px var(--accent-color);
 
         &::before {
-            transform: translateX(-20%) translateY(-10%) skewX(-15deg);
+            transform: translateX(-10%) translateY(-10%) skewX(-15deg);
         }
     }
 }

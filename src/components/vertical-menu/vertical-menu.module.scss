@@ -144,6 +144,7 @@ $menu-open-width: 10em;
 
     .itemText {
       position: relative;
+      padding: 0 0.15rem;
       color: var(--text-color);
       white-space: nowrap;
       opacity: 0.5;
@@ -160,18 +161,36 @@ $menu-open-width: 10em;
         width: 0;
         height: 1.6em;
         content: "";
-        background: var(--color-accent);
+        border-radius: 4px;
         transform: scaleY(1) skew(-15deg);
-        transition: width 250ms ease;
+        transition: width 250ms ease, opacity 250ms ease;
       }
 
       &::before {
         width: calc(100% + 0.4em);
-        background: var(--background-color);
+        background: color-mix(in srgb, var(--background-color), transparent 60%);
+        backdrop-filter: blur(4px);
       }
 
       &::after {
-        background: var(--color-accent);
+        background: linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--accent-color), transparent 45%) 0%,
+            color-mix(in srgb, var(--accent-color), transparent 65%) 100%
+        );
+        // border: 1px solid color-mix(in srgb, var(--accent-color), transparent 75%);
+        box-shadow: 0 2px 6px color-mix(in srgb, var(--accent-color), transparent 90%);
+        opacity: 0;
+
+        :global([data-color-scheme="dark"]) & {
+            background: linear-gradient(
+                135deg,
+                color-mix(in srgb, var(--accent-color), transparent 45%) 0%,
+                color-mix(in srgb, var(--accent-color), transparent 65%) 100%
+            );
+            // border: 1px solid color-mix(in srgb, var(--accent-color), transparent 85%);
+            box-shadow: 0 2px 6px color-mix(in srgb, var(--accent-color), transparent 90%);
+        }
       }
     }
 
@@ -181,6 +200,7 @@ $menu-open-width: 10em;
       img {
         width: 2em;
         max-width: 2em;
+        transition: transform 0.2s ease, filter 0.2s ease;
         
         :global([data-color-scheme="dark"]) & {
             filter: invert(1);
@@ -190,10 +210,17 @@ $menu-open-width: 10em;
 
     &:hover {
       .itemText {
-        color: #000;
+        color: var(--text-color);
 
         &::after {
           width: calc(100% + 0.4em);
+          opacity: 1;
+        }
+      }
+      
+      .itemIcon {
+        img {
+          transform: scale(1.05);
         }
       }
     }
@@ -222,17 +249,39 @@ $menu-open-width: 10em;
     width: 2.2em;
     height: 2em;
     pointer-events: none;
-    background-color: rgba(variables.$accent-color, 0.2);
-    border-left: 2px variables.$accent-color solid;
+
+    @include mixins.tablet {
+      background: linear-gradient(
+          135deg,
+          color-mix(in srgb, var(--accent-color), transparent 75%) 0%,
+          color-mix(in srgb, var(--accent-color), transparent 90%) 100%
+      );
+      border: 1px solid color-mix(in srgb, var(--accent-color), transparent 75%);
+      border-left: 2px var(--accent-color) solid;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px color-mix(in srgb, var(--accent-color), transparent 85%);
+
+      :global([data-color-scheme="dark"]) & {
+          background: linear-gradient(
+              135deg,
+              color-mix(in srgb, var(--accent-color), transparent 80%) 0%,
+              color-mix(in srgb, var(--accent-color), transparent 95%) 100%
+          );
+          border: 1px solid color-mix(in srgb, var(--accent-color), transparent 85%);
+          border-left: 2px var(--accent-color) solid;
+          box-shadow: 0 4px 12px color-mix(in srgb, var(--accent-color), transparent 90%);
+      }
+    }
 
     @include mixins.mobile {
       top: 0;
       left: 0;
       width: 10px;
       pointer-events: none;
-      background-color: var(--color-accent);
+      background: var(--color-accent);
       border: 0;
       border-radius: 0;
+      box-shadow: none;
     }
   }
 }
