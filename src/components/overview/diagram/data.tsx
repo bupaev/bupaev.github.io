@@ -53,11 +53,11 @@ export const AREAS: AreaData[] = [
             },
             {
                 name: "Cultivating Excellent DX",
-                description: "Code is still not just for LLM; it's for the humans who maintain it. Readable code and clear docs accelerate delivery today, and the next developer doesn't have to hate you six months later.",
+                description: "Code is still not just for LLMs; it's for the humans who maintain it. Readable code and clear docs accelerate delivery today, and the next developer doesn't have to hate you six months later.",
             },
             {
                 name: "Owning the Full Lifecycle",
-                description: "I don't just “close tickets”. I can and actually prefer to own the whole loop—from the first architectural brainstorm and vision design to testing and the final production launch. Seeing the big picture is how you build products.",
+                description: "I don't just \"close tickets\". I can and actually prefer to own the whole loop—from the first architectural brainstorm and vision design to testing and the final production launch. Seeing the big picture is how you build products.",
             },
         ],
     },
