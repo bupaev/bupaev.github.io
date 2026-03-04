@@ -78,7 +78,7 @@ export const AREAS: AreaData[] = [
             },
             {
                 name: "Building Frictionless Workflows",
-                description: "Chaos doesn’t scale. I build automated, documented workflows to remove friction and spread knowledge. This solves the 'bus factor' — no single person becomes a bottleneck, and new hires can onboard without losing a week.",
+                description: "Chaos doesn't scale. I build automated, documented workflows to remove friction and spread knowledge. This solves the 'bus factor' — no single person becomes a bottleneck, and new hires can onboard without losing a week.",
             },
             {
                 name: "Applying Behavioral Psychology",
@@ -86,7 +86,7 @@ export const AREAS: AreaData[] = [
             },
             {
                 name: "Leading with Constructive Honesty",
-                description: "Trust and transparency build the best professional relationships. I’m straightforward about technical debt and risks, ensuring everyone has the full picture to make informed calls. Honesty saves time and money.",
+                description: "Trust and transparency build the best professional relationships. I'm straightforward about technical debt and risks, ensuring everyone has the full picture to make informed calls. Honesty saves time and money.",
             },
         ],
     },
@@ -140,7 +140,7 @@ export const AREAS: AreaData[] = [
             },
             {
                 name: "Validating AI Outputs",
-                description: "I don’t blindly trust model outputs. I do my best to review AI-generated code to ensure it is secure, maintainable, and fits our specific architecture and logical patterns. The human eye is the final safety layer.",
+                description: "I don't blindly trust model outputs. I do my best to review AI-generated code to ensure it is secure, maintainable, and fits our specific architecture and logical patterns. The human eye is the final safety layer.",
             },
             {
                 name: "Amplifying Engineering Impact",
