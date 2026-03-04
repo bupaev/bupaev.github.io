@@ -73,8 +73,9 @@
             color-mix(in srgb, var(--area-color), transparent 50%) 100%
         );
         border-radius: 4px;
+        box-shadow: 0 0 6px -1px var(--area-color);
         transform: scaleY(1) skew(-15deg);
-        transition: height 250ms ease, width 250ms ease, left 250ms ease;
+        transition: height 250ms ease, width 250ms ease, left 250ms ease, box-shadow 250ms ease;
     }
 
     &:hover {
