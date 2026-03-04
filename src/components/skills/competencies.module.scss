@@ -56,11 +56,11 @@
         }
 
         [data-color-scheme="light"] & {
-            @include mixins.sheen-effect(#fff, 0.05, 90deg);
+            @include mixins.sheen-effect(#fff, 0.45, 90deg);
         }
 
         [data-color-scheme="dark"] & {
-            @include mixins.sheen-effect(gold, 0.1, 90deg);
+            @include mixins.sheen-effect(gold, 0.5, 90deg);
         }
     }
 

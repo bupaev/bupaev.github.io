@@ -180,11 +180,11 @@
   }
 
   [data-color-scheme="light"] & {
-    @include mixins.sheen-effect(green, -0.25, 90deg);
+    @include mixins.sheen-effect(green, 0.15, 90deg);
   }
 
   [data-color-scheme="dark"] & {
-    @include mixins.sheen-effect(green, 0.05, 90deg);
+    @include mixins.sheen-effect(green, 0.45, 90deg);
   }
 
   &::before {
@@ -234,11 +234,11 @@
   }
 
   [data-color-scheme="light"] & {
-    @include mixins.sheen-effect(red, -0.3, 90deg);
+    @include mixins.sheen-effect(red, 0.1, 90deg);
   }
 
   [data-color-scheme="dark"] & {
-    @include mixins.sheen-effect(red, 0, 90deg);
+    @include mixins.sheen-effect(red, 0.15, 90deg);
   }
 
   &::before {

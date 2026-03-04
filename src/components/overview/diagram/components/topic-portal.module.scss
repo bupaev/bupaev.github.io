@@ -97,7 +97,11 @@
     background: var(--popup-bg, rgb(255 250 248 / 98%));
     animation: blob-main-morph 4s linear infinite alternate;
 
-    @include mixins.sheen-effect(#fff, 0, 105deg, ".popupVisible:hover &");
+    @include mixins.sheen-effect(#fff, 0.4, 105deg, ".popupVisible:hover &");
+
+    :global([data-color-scheme="dark"]) .popupVisible:hover &::after {
+        opacity: 0.15;
+    }
 }
 
 // Content wrapper inside the blob

@@ -75,7 +75,7 @@
     transition: all 200ms ease-out;
 
     [data-color-scheme="light"] & {
-      @include mixins.sheen-effect(#fff, 0.05, 90deg);
+      @include mixins.sheen-effect(#fff, 0.45, 90deg);
     }
 
     [data-color-scheme="dark"] & {
@@ -87,7 +87,7 @@
       border-color: color-mix(in srgb, var(--accent-color), transparent 85%);
       box-shadow: 0 4px 16px color-mix(in srgb, var(--accent-color), transparent 90%);
       
-      @include mixins.sheen-effect(#fff, 0.3, 90deg);
+      @include mixins.sheen-effect(#fff, 0.75, 90deg);
 
       &:hover {
         color: #000;

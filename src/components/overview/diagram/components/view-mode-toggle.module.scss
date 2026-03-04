@@ -19,11 +19,11 @@
     transition: box-shadow var(--transition-duration);
 
     :global([data-color-scheme="light"]) & {
-        @include mixins.sheen-effect(#fff, 0.5, 105deg);
+        @include mixins.sheen-effect(#fff, 0.9, 105deg);
     }
 
     :global([data-color-scheme="dark"]) & {
-        @include mixins.sheen-effect(gold, 0.1, 105deg);
+        @include mixins.sheen-effect(gold, 0.5, 105deg);
     }
 
     @include mixins.mobile {
