@@ -251,6 +251,7 @@ $menu-open-width: 10em;
     pointer-events: none;
 
     @include mixins.tablet {
+      z-index: 10;
       background: linear-gradient(
           135deg,
           color-mix(in srgb, var(--accent-color), transparent 75%) 0%,
