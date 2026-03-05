@@ -8,14 +8,14 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
-    margin: 0 0 2rem;
+    margin: 0 0 3rem;
 
     .competencyCard {
         position: relative;
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
-        padding: 1.75rem 1.5rem 1.5rem;
+        padding: 4rem 1.5rem 1.5rem;
         transition: transform 0.25s ease, box-shadow 0.25s ease;
 
         &::before {
@@ -70,21 +70,32 @@
 }
 
 .cardIcon {
-    position: relative;
-    font-family: var(--font-accent);
-    font-size: 1.5rem;
-    line-height: 1;
-    color: var(--secondary-color);
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    z-index: 0;
+    width: auto;
+    max-width: 80%;
+    height: 80%;
+    aspect-ratio: 1.2;
+    pointer-events: none;
+    user-select: none;
+    background-color: var(--accent-color);
+    opacity: 0.3;
+    mask-image: var(--icon-url);
+    mask-repeat: no-repeat;
+    mask-position: center right;
+    mask-size: contain;
     transition: transform 0.3s ease;
 
     [data-color-scheme="dark"] & {
-        color: var(--accent-color);
+        opacity: 0.1;
     }
 }
 
 .cardTitle {
     position: relative;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
     font-family: var(--font-accent);
     font-size: 1.85rem;
     font-weight: var(--font-weight-semibold);
