@@ -3,10 +3,14 @@ export function Education() {
     <div className="education container">
       <h2 className="title">Education</h2>
       <div className="content">
-        <h3>Endless professional self-development</h3>
+        <h3>Continuous Learning</h3>
         <p>
-          Udemy, Coursera, Skillbox, JavaScript.Ninja, Refactoring.Guru and
-          countless articles, books and Youtube videos
+          I actively build my own information space to stay current. By curating
+          social feeds into a stream of AI, software engineering, and industry
+          news, I turn daily consumption into an ongoing learning loop.
+          Supplemented by resources like Udemy, Coursera and Refactoring.Guru,
+          this immersive environment ensures I remain in context as new
+          technologies emerge.
         </p>
         <h3>
           Doctor of Philosophy (Ph.D. Candidate), Computer science

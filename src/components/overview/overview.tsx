@@ -35,7 +35,7 @@ export function Overview() {
         </div>
         <div className={styles.graphicsWrapper}>
           <p className="content">
-            Hover over the diagram below to explore my key professional areas and guiding principles. 
+            Hover over the diagram to explore my key professional areas and guiding principles. 
             <span className={styles.hint}>
               Too complex for a small screen? Switch to text view using the top-right toggle.
             </span>
