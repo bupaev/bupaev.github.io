@@ -1,5 +1,6 @@
 ---
-trigger: always_on
+trigger: model_decision
+description: When you work on React, NextJS, Astro and any other web frameworks using React tech stack
 ---
 
 # Javascript coding rules
@@ -71,4 +72,3 @@ trigger: always_on
 
 - Use @JSDoc format with well-defined description of business logic and non-obvious code
 - Don't add redundant comments to self-explanatory code
-
