@@ -24,7 +24,7 @@
 
 .diagram {
     position: relative;
-    width: 108%;
+    width: calc(112% - 2rem);
     aspect-ratio: 1.58;
     container-type: inline-size;
     overflow: clip;
@@ -43,6 +43,10 @@
 
     @include mixins.until(variables.$breakpoint-lg) {
         transform: translateX(-5%);
+    }
+
+    @include mixins.mobile {
+        width: calc(118% - 2rem);
     }
 }
 

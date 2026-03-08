@@ -1,2 +1,2 @@
 export { Overview } from "./overview";
-export { Diagram } from "./diagram/diagram";
+export { Diagram, type ViewMode } from "./diagram/diagram";

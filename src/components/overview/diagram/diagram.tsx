@@ -8,7 +8,11 @@ import { ViewModeToggle } from "./components/view-mode-toggle";
 import { TextView } from "./components/text-view";
 import styles from "./diagram.module.scss";
 
-type ViewMode = "graphic" | "text";
+export type ViewMode = "graphic" | "text";
+
+type DiagramProps = {
+    onViewModeChange?: (mode: ViewMode) => void;
+};
 
 /** Tracks which topic is expanded: area ID and topic index */
 type ExpandedTopic = {
@@ -23,7 +27,7 @@ type ExpandedTopic = {
  * Headings and topics are positioned outside the SVG to prevent blur from the filter.
  * Blur filter stdDeviation is animated via JS to sync with scroll-driven CSS animations.
  */
-export function Diagram() {
+export function Diagram({ onViewModeChange }: DiagramProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const blurRef = useRef<SVGFEGaussianBlurElement>(null);
     const isAnimationCompleteRef = useRef(false);
@@ -37,12 +41,14 @@ export function Diagram() {
         setIsFadingOut(true);
 
         setTimeout(() => {
-            setViewMode(prev => prev === "graphic" ? "text" : "graphic");
+            const nextMode = viewMode === "graphic" ? "text" : "graphic";
+            setViewMode(nextMode);
+            onViewModeChange?.(nextMode);
             setExpandedTopic(null);
             deactivateArea();
             setIsFadingOut(false);
         }, 150); // Matches CSS transition duration
-    }, [deactivateArea]);
+    }, [viewMode, onViewModeChange, deactivateArea]);
     const isGraphic = viewMode === "graphic";
     const { triggerBlur, isAnimationComplete } = useBlurAnimation(containerRef, blurRef, isGraphic);
 

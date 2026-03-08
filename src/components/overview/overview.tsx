@@ -1,8 +1,15 @@
 "use client";
-import { Diagram } from "./index";
+import { useState, useCallback } from "react";
+import { Diagram, type ViewMode } from "./index";
 import styles from "./overview.module.scss";
 
 export function Overview() {
+  const [isGraphicMode, setIsGraphicMode] = useState(true);
+
+  const handleViewModeChange = useCallback((mode: ViewMode) => {
+    setIsGraphicMode(mode === "graphic");
+  }, []);
+
   return (
     <div className={`${styles.overview} container`}>
       <h2 className="title">My Professional Core</h2>
@@ -33,14 +40,14 @@ export function Overview() {
             </li>
           </ul>
         </div>
-        <div className={styles.graphicsWrapper}>
+        <div className={`${styles.graphicsWrapper} ${isGraphicMode ? styles.graphicMode : ""}`}>
           <p className="content">
-            Hover over the diagram to explore my key professional areas and guiding principles. 
+            Hover over the diagram to explore my key professional areas and guiding principles.
             <span className={styles.hint}>
               Too complex for a small screen? Switch to text view using the top-right toggle.
             </span>
           </p>
-          <Diagram />
+          <Diagram onViewModeChange={handleViewModeChange} />
         </div>
       </div>
     </div>

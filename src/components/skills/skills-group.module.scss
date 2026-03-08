@@ -4,7 +4,7 @@
   width: 100%;
   min-width: 100%;
 
-  @include mixins.desktop {
+  @include mixins.tablet {
     width: 49%;
     min-width: 49%;
   }
@@ -59,6 +59,7 @@
 
     @media (max-width: 767px) { // Applying equivalent to mobile
       padding: 0.3rem;
+      margin-bottom: 0.5rem;
       border-radius: 4px;
       transition: color 250ms;
 

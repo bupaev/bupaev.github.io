@@ -9,7 +9,7 @@
     align-content: start;
     align-items: start;
     width: calc(100% - 8px);
-    min-height: 610px;
+    // min-height: 610px;
     padding: 1rem 0;
 
     @include mixins.mobile {
