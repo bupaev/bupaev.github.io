@@ -10,8 +10,12 @@
 
     @include mixins.until(variables.$breakpoint-xl) {
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 0;
     }
+
+    @include mixins.mobile {
+                margin-bottom: 0;
+            }
   }
 
   .textWrapper {
