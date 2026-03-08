@@ -17,7 +17,7 @@ export function Skills() {
               key={skillGroup.title}
               title={skillGroup.title}
               items={skillGroup.items}
-              className="mb-3 p-3"
+              className={styles.skillsGroup}
             />
           ))}
         </div>
