@@ -11,6 +11,14 @@ import styles from "./vertical-menu.module.scss";
  */
 const TOUCH_SCREEN_BREAKPOINT = 768;
 
+/**
+ * Dimensions for mobile circular menu tick marks
+ */
+const TICK_MARK_LENGTH = 6;
+const TICK_MARK_WIDTH = 1;
+const TICK_MARK_OUTER_RADIUS = 32;
+const TICK_MARK_INNER_RADIUS = TICK_MARK_OUTER_RADIUS - TICK_MARK_LENGTH;
+
 export function VerticalMenu() {
   const menuRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
@@ -45,9 +53,17 @@ export function VerticalMenu() {
       return MENU_ITEMS.map((item) => {
         const el = document.getElementById(item.id);
         if (!el) return 0;
-        return prop === "offsetTop"
-          ? el.getBoundingClientRect().top + window.scrollY
-          : (el[prop] as number);
+        
+        if (prop === "offsetTop") {
+          return Math.max(el.getBoundingClientRect().top + window.scrollY, 0);
+        }
+
+        let val = el[prop] as number;
+        // Fallback for empty anchor divs (like the decoupled hero-area) to get the actual section height
+        if (prop === "clientHeight" && val === 0 && el.nextElementSibling) {
+          val = el.nextElementSibling.clientHeight;
+        }
+        return val;
       });
     },
     []
@@ -101,7 +117,7 @@ export function VerticalMenu() {
 
     // Update state for mobile progress circle ALWAYS (decoupled from desktop layout)
     const idx = contentSectionsOffsetArray.findIndex(
-      (offset) => windowTopScrollY + window.innerHeight / 3 < offset
+      (offset) => windowTopScrollY + window.innerHeight / 2 < offset
     );
     setActiveIndex(
       idx === -1 ? contentSectionsOffsetArray.length - 1 : Math.max(idx - 1, 0)
@@ -110,12 +126,12 @@ export function VerticalMenu() {
     // Direct DOM manipulation guarantees 60fps fluid stroke updates without triggering React layout loops
     const progress = Math.min(Math.max(windowTopScrollY / maxScroll, 0), 1);
     if (progressCircleRef.current) {
-      progressCircleRef.current.style.strokeDashoffset = `${131.95 - progress * 131.95}`;
+      progressCircleRef.current.style.strokeDashoffset = `${194.78 - progress * 194.78}`;
     }
 
     // Desktop marker operations (Requires desktop to be visible)
     if (scaleCoefficients.length === 0 || menuItemHeight === 0) {
-      return;
+      return;  
     }
 
     const newMarkerOffset = getRescaledOffset(
@@ -176,7 +192,7 @@ export function VerticalMenu() {
       // Set initial active activeIndex 
       const windowTopScrollY = window.scrollY;
       const idx = offsets.findIndex(
-        (offset) => windowTopScrollY + window.innerHeight / 3 < offset
+        (offset) => windowTopScrollY + window.innerHeight / 2 < offset
       );
       setActiveIndex(idx === -1 ? offsets.length - 1 : Math.max(idx - 1, 0));
     };
@@ -338,21 +354,21 @@ export function VerticalMenu() {
       {/* Mobile Circular Menu */}
       <div className={styles.mobileMenu} aria-hidden="true">
         <svg
-          width="44"
-          height="44"
-          viewBox="0 0 44 44"
+          width="64"
+          height="64"
+          viewBox="0 0 64 64"
           className={styles.mobileMenuProgress}
         >
           {/* Foreground progress circle */}
           <circle
-            cx="22"
-            cy="22"
-            r="21"
+            cx="32"
+            cy="32"
+            r="31"
             className={styles.progressCircle}
             ref={progressCircleRef}
             style={{
-              strokeDasharray: 131.95,
-              strokeDashoffset: 131.95, // Default zero-progress
+              strokeDasharray: 194.78,
+              strokeDashoffset: 194.78, // Default zero-progress
             }}
           />
 
@@ -361,10 +377,10 @@ export function VerticalMenu() {
             const ratio = Math.min(offset / docScrollHeight, 1);
             const angle = ratio * 360; // 0deg corresponds to top because of CSS rotation
             const rad = (angle * Math.PI) / 180;
-            const x1 = 22 + 23 * Math.cos(rad); // ticks crossing the 21px radius stroke slightly
-            const y1 = 22 + 23 * Math.sin(rad);
-            const x2 = 22 + 18 * Math.cos(rad);
-            const y2 = 22 + 18 * Math.sin(rad);
+            const x1 = 32 + TICK_MARK_OUTER_RADIUS * Math.cos(rad);
+            const y1 = 32 + TICK_MARK_OUTER_RADIUS * Math.sin(rad);
+            const x2 = 32 + TICK_MARK_INNER_RADIUS * Math.cos(rad);
+            const y2 = 32 + TICK_MARK_INNER_RADIUS * Math.sin(rad);
             return (
               <line
                 key={i}
@@ -373,24 +389,25 @@ export function VerticalMenu() {
                 x2={x2}
                 y2={y2}
                 className={styles.tick}
+                strokeWidth={TICK_MARK_WIDTH}
               />
             );
           })}
         </svg>
         
         {/* Active Icon in the center */}
-        <div className={styles.mobileMenuIcon} data-active-index={activeIndex}>
-          {MENU_ITEMS[activeIndex]?.icon && (
+        <div className={styles.mobileMenuIcon} aria-hidden="true">
+          {MENU_ITEMS.map((item, index) => (
             <img
-              src={MENU_ITEMS[activeIndex].icon}
-              alt={MENU_ITEMS[activeIndex].title}
-              width={32}
-              height={32}
+              key={item.id}
+              src={item.icon}
+              alt=""
               draggable={false}
-              aria-hidden="true"
-              id="mobile-menu-active-icon-img"
+              className={`${styles.iconImage} ${
+                index === activeIndex ? styles.activeIcon : ""
+              }`}
             />
-          )}
+          ))}
         </div>
       </div>
     </nav>
