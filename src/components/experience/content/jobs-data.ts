@@ -92,7 +92,7 @@ export const jobs: Job[] = [
         id: "epam",
     },
     {
-        position: "Relocation ✈️",
+        position: "New Chapter",
         skills: "",
         startDate: "2025-09",
         endDate: new Date().toISOString(),
