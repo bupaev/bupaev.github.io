@@ -112,7 +112,6 @@ export function VerticalMenu() {
     if (contentSectionsOffsetArray.length === 0) return;
 
     const windowTopScrollY = window.scrollY;
-    const windowBottomScrollY = windowTopScrollY + window.innerHeight;
     const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
 
     // Update state for mobile progress circle ALWAYS (decoupled from desktop layout)
@@ -134,23 +133,21 @@ export function VerticalMenu() {
       return;  
     }
 
+    // Clamp scroll values to prevent overscroll stretching/shrinking or going out of bounds
+    const clampedTopScrollY = Math.max(0, Math.min(windowTopScrollY, maxScroll));
+    const clampedBottomScrollY = Math.min(clampedTopScrollY + window.innerHeight, document.documentElement.scrollHeight);
+
     const newMarkerOffset = getRescaledOffset(
-      windowTopScrollY,
+      clampedTopScrollY,
       contentSectionsOffsetArray,
       scaleCoefficients,
       menuItemHeight
     );
     setMarkerOffset(newMarkerOffset);
 
-    // When user reaches end of the page, make visible area marker equal to menu item size
-    if (windowBottomScrollY >= document.documentElement.scrollHeight) {
-      setMarkerHeight(menuItemHeight);
-      return;
-    }
-
     setMarkerHeight(
       getRescaledOffset(
-        windowBottomScrollY,
+        clampedBottomScrollY,
         contentSectionsOffsetArray,
         scaleCoefficients,
         menuItemHeight
@@ -298,6 +295,12 @@ export function VerticalMenu() {
     };
   }, [updateStickyState]);
 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev);
+  };
+
   const onMenuItemClick = (targetIndex: number) => {
     if (contentSectionsOffsetArray[targetIndex] !== undefined) {
       window.scrollTo({
@@ -305,6 +308,7 @@ export function VerticalMenu() {
         left: 0,
         behavior: "smooth",
       });
+      setIsMobileMenuOpen(false);
     }
   };
 
@@ -316,17 +320,17 @@ export function VerticalMenu() {
       aria-label="Page navigation"
       style={{ opacity: mounted ? 1 : undefined }}
     >
-      {/* Desktop Menu Wrapper */}
-      <div className={styles.desktopMenuWrapper}>
-        <div
-          className={styles.visibleAreaMarker}
-          style={{
-            transform: `translateY(${markerOffset}px)`,
-            height: `${markerHeight}px`,
-          }}
-          aria-hidden="true"
-        />
-        <div ref={menuRef}>
+      {/* Desktop Menu Wrapper (Reused as left-side sliding menu on mobile) */}
+      <div className={`${styles.desktopMenuWrapper} ${isMobileMenuOpen ? styles.mobileOpen : ""}`}>
+        <div ref={menuRef} style={{ position: "relative" }}>
+          <div
+            className={styles.visibleAreaMarker}
+            style={{
+              transform: `translateY(${markerOffset}px)`,
+              height: `${markerHeight}px`,
+            }}
+            aria-hidden="true"
+          />
           {MENU_ITEMS.map((item, index) => (
             <button
               key={item.id}
@@ -351,13 +355,18 @@ export function VerticalMenu() {
         </div>
       </div>
 
-      {/* Mobile Circular Menu */}
-      <div className={styles.mobileMenu} aria-hidden="true">
+      {/* Mobile Circular Menu (Button) */}
+      <button 
+        className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ""}`} 
+        onClick={toggleMobileMenu}
+        aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+      >
         <svg
           width="64"
           height="64"
           viewBox="0 0 64 64"
           className={styles.mobileMenuProgress}
+          aria-hidden="true"
         >
           {/* Foreground progress circle */}
           <circle
@@ -369,6 +378,8 @@ export function VerticalMenu() {
             style={{
               strokeDasharray: 194.78,
               strokeDashoffset: 194.78, // Default zero-progress
+              opacity: isMobileMenuOpen ? 0 : 1, // Hide progress circle when menu is open
+              transition: "opacity 0.3s ease-in-out",
             }}
           />
 
@@ -390,6 +401,10 @@ export function VerticalMenu() {
                 y2={y2}
                 className={styles.tick}
                 strokeWidth={TICK_MARK_WIDTH}
+                style={{
+                  opacity: isMobileMenuOpen ? 0 : 1,
+                  transition: "opacity 0.3s ease-in-out",
+                }}
               />
             );
           })}
@@ -404,12 +419,19 @@ export function VerticalMenu() {
               alt=""
               draggable={false}
               className={`${styles.iconImage} ${
-                index === activeIndex ? styles.activeIcon : ""
+                !isMobileMenuOpen && index === activeIndex ? styles.activeIcon : ""
               }`}
             />
           ))}
+          <svg 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            className={`${styles.closeIcon} ${isMobileMenuOpen ? styles.activeIcon : ""}`}
+          >
+              <path d="M5 5L19 19M5 19L19 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </div>
-      </div>
+      </button>
     </nav>
 
   );

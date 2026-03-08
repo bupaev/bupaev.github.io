@@ -1,7 +1,7 @@
 @use "@/styles/mixins";
 @use "@/styles/variables";
 
-$menu-open-width: 10em;
+$menu-open-width: 9em;
 
 @mixin menu-transition {
   @for $i from 1 through 6 {
@@ -47,7 +47,29 @@ $menu-open-width: 10em;
 
   .desktopMenuWrapper {
     @include mixins.mobile {
-      display: none;
+      position: fixed;
+      top: 50%;
+      left: 0;
+      padding: 40px 0 0 4px;
+      background: color-mix(in srgb, var(--background-color), transparent 50%);
+      border: 1px solid color-mix(in srgb, var(--text-color), transparent 85%);
+      border-left: none;
+      border-radius: 0 16px 16px 0;
+      backdrop-filter: blur(6px);
+      transform: translateY(-50%) translateX(-100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      &.mobileOpen {
+        transform: translateY(-50%) translateX(0);
+
+        .item {
+          width: $menu-open-width;
+
+          .itemText {
+            opacity: 1;
+          }
+        }
+      }
     }
   }
 
@@ -56,9 +78,13 @@ $menu-open-width: 10em;
     display: none;
     width: 64px;
     height: 64px;
+    padding: 0;
+    cursor: pointer;
     background: color-mix(in srgb, var(--background-color), transparent 50%);
+    border: 1px solid color-mix(in srgb, var(--text-color), transparent 85%);
     border-radius: 50%;
     backdrop-filter: blur(6px);
+    -webkit-tap-highlight-color: transparent;
 
     @include mixins.mobile {
       display: flex;
@@ -118,6 +144,23 @@ $menu-open-width: 10em;
           filter: invert(1);
         }
 
+        &.activeIcon {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+
+      .closeIcon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        visibility: hidden;
+        width: 32px;
+        height: 32px;
+        opacity: 0;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        
         &.activeIcon {
           visibility: visible;
           opacity: 1;
@@ -257,31 +300,43 @@ $menu-open-width: 10em;
     position: absolute;
     top: -5px;
     left: -0.1em;
+    z-index: 10;
     width: 2.2em;
     height: 2em;
     pointer-events: none;
+    background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--accent-color), transparent 75%) 0%,
+        color-mix(in srgb, var(--accent-color), transparent 90%) 100%
+    );
+    border: 1px solid color-mix(in srgb, var(--accent-color), transparent 75%);
+    border-left: 2px var(--accent-color) solid;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--accent-color), transparent 85%);
 
-    @include mixins.tablet {
-      z-index: 10;
-      background: linear-gradient(
-          135deg,
-          color-mix(in srgb, var(--accent-color), transparent 75%) 0%,
-          color-mix(in srgb, var(--accent-color), transparent 90%) 100%
-      );
-      border: 1px solid color-mix(in srgb, var(--accent-color), transparent 75%);
+    :global([data-color-scheme="dark"]) & {
+        background: linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--accent-color), transparent 80%) 0%,
+            color-mix(in srgb, var(--accent-color), transparent 95%) 100%
+        );
+        border: 1px solid color-mix(in srgb, var(--accent-color), transparent 85%);
+        border-left: 2px var(--accent-color) solid;
+        box-shadow: 0 4px 12px color-mix(in srgb, var(--accent-color), transparent 90%);
+    }
+
+    @include mixins.mobile {
+      background: none;
+      border: none;
       border-left: 2px var(--accent-color) solid;
-      border-radius: 4px;
-      box-shadow: 0 4px 12px color-mix(in srgb, var(--accent-color), transparent 85%);
+      border-radius: 0;
+      box-shadow: none;
 
       :global([data-color-scheme="dark"]) & {
-          background: linear-gradient(
-              135deg,
-              color-mix(in srgb, var(--accent-color), transparent 80%) 0%,
-              color-mix(in srgb, var(--accent-color), transparent 95%) 100%
-          );
-          border: 1px solid color-mix(in srgb, var(--accent-color), transparent 85%);
-          border-left: 2px var(--accent-color) solid;
-          box-shadow: 0 4px 12px color-mix(in srgb, var(--accent-color), transparent 90%);
+        background: none;
+        border: none;
+        border-left: 2px var(--accent-color) solid;
+        box-shadow: none;
       }
     }
   }

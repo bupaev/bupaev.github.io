@@ -73,8 +73,7 @@ describe('VerticalMenu', () => {
 
         it('renders menu items as accessible buttons', async () => {
             await renderAndInitialize();
-
-            const buttons = screen.getAllByRole('button');
+            const buttons = screen.getAllByRole('button', { name: /Navigate to/i });
             expect(buttons).toHaveLength(6);
 
             // Check ARIA labels for accessibility
