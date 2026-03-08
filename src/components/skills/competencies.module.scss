@@ -10,6 +10,10 @@
     gap: 1.5rem;
     margin: 0 0 3rem;
 
+    @include mixins.tablet-only {
+        padding: 0 1rem;
+    }
+
     @include mixins.mobile {
         grid-template-columns: 1fr;
         gap: 1rem;
