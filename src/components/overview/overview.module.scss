@@ -25,10 +25,6 @@
     a {
       @include mixins.multiline-text-hover-effect;
     }
-
-    &:global(.content) {
-      margin-bottom: 0 !important;
-    }
   }
 
   .graphicMode {

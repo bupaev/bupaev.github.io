@@ -24,7 +24,7 @@ describe('Overview', () => {
     it('renders strategic identity list items', () => {
         render(<Overview />);
         expect(screen.getByText('Product-Oriented:', { exact: false })).toBeInTheDocument();
-        expect(screen.getByText('Reasonable:', { exact: false })).toBeInTheDocument();
+        expect(screen.getByText('Big-Picture Thinker:', { exact: false })).toBeInTheDocument();
         expect(screen.getByText('Perfectionist:', { exact: false })).toBeInTheDocument();
     });
 });
