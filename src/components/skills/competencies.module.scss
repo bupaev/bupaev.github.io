@@ -110,6 +110,10 @@
     font-family: var(--font-accent);
     font-size: 1.85rem;
     font-weight: var(--font-weight-semibold);
+
+    @include mixins.mobile {
+                font-size: 1.6rem;
+            }
 }
 
 .cardDescription {
