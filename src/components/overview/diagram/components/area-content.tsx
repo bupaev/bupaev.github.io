@@ -158,7 +158,7 @@ export function AreaContent({ areas, scaleId, expandedTopic, containerRef, diagr
     return (
         <>
             <div
-                className={styles.areaContent}
+                className={`${styles.areaContent} ${expandedTopic ? styles.hasExpanded : ""}`}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={() => setMousePos({ x: MOUSE_OFF_SCREEN_COORD, y: MOUSE_OFF_SCREEN_COORD })}
                 style={
@@ -203,8 +203,8 @@ export function AreaContent({ areas, scaleId, expandedTopic, containerRef, diagr
                                     const dist = Math.sqrt(Math.pow(mousePos.x - kx, 2) + Math.pow(mousePos.y - ky, 2));
 
                                     let scale = TOPIC_MIN_SCALE;
-                                    // Only apply scaling on large screens
-                                    if (isLargeScreen && dist < MOUSE_PROXIMITY_THRESHOLD) {
+                                    // Only apply scaling on large screens and when no topic is expanded
+                                    if (isLargeScreen && !expandedTopic && dist < MOUSE_PROXIMITY_THRESHOLD) {
                                         scale = TOPIC_MIN_SCALE + (TOPIC_MAX_SCALE - TOPIC_MIN_SCALE) * (1 - dist / MOUSE_PROXIMITY_THRESHOLD);
                                     }
 
