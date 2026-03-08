@@ -156,7 +156,7 @@
           color-mix(in srgb, var(--color-secondary-light), transparent 30%) 100%
         );
         border-color: color-mix(in srgb, var(--color-secondary-light), transparent 25%);
-        box-shadow: 0 8px 24px color-mix(in srgb, var(--color-secondary-light), transparent 40%);
+        box-shadow: 0 4px 12px color-mix(in srgb, var(--color-secondary-light), transparent 40%);
       }
 
       [data-color-scheme="dark"] & {
