@@ -33,8 +33,8 @@ $menu-open-width: 9em;
   @include mixins.mobile {
     position: fixed !important;
     top: auto !important;
-    bottom: 20px !important;
-    left: 20px !important;
+    bottom: 16px !important;
+    left: 16px !important;
     z-index: 50;
     width: 64px;
     height: 64px;
@@ -50,7 +50,7 @@ $menu-open-width: 9em;
       position: fixed;
       top: 50%;
       left: 0;
-      padding: 40px 0 0 4px;
+      padding: 40px 0 2px 4px;
       background: color-mix(in srgb, var(--background-color), transparent 50%);
       border: 1px solid color-mix(in srgb, var(--text-color), transparent 85%);
       border-left: none;
@@ -299,7 +299,7 @@ $menu-open-width: 9em;
   .visibleAreaMarker {
     position: absolute;
     top: -5px;
-    left: -0.1em;
+    left: -2px;
     z-index: 10;
     width: 2.2em;
     height: 2em;
@@ -326,16 +326,15 @@ $menu-open-width: 9em;
     }
 
     @include mixins.mobile {
-      background: none;
+      left: -4px;
+      width: 3px;
+      background: var(--accent-color);
       border: none;
-      border-left: 2px var(--accent-color) solid;
-      border-radius: 0;
       box-shadow: none;
 
       :global([data-color-scheme="dark"]) & {
-        background: none;
+        background: var(--accent-color);
         border: none;
-        border-left: 2px var(--accent-color) solid;
         box-shadow: none;
       }
     }
