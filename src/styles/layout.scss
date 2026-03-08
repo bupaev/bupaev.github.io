@@ -111,20 +111,20 @@
         }
 
         &#fit-check::after {
-            background-image: url("/icons/fit-check-detailed.svg");
+            background-image: url("../assets/images/fit-check-detailed.svg");
         }
 
         &#skills::after {
-            background-image: url("/icons/pen-and-wrench-detailed.svg");
+            background-image: url("../assets/images/pen-and-wrench-detailed.svg");
         }
 
         &#experience::after {
-            background-image: url("/icons/mountain-with-flag-detailed.svg");
+            background-image: url("../assets/images/mountain-with-flag-detailed.svg");
         }
 
         &#education::after {
             height: 100%;
-            background-image: url("/icons/academic-cap-detailed.svg");
+            background-image: url("../assets/images/academic-cap-detailed.svg");
 
             @include mixins.fullhd {
                 background-position-x: 92%;
