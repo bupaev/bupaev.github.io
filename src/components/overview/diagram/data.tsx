@@ -139,8 +139,8 @@ export const AREAS: AreaData[] = [
                 description: "AI is a seismic shift that is fundamentally reshaping our industry. While I remain a pragmatic enthusiast rather than a blind fanatic, I understand that being AI-fluent is now critical for both business and personal success.",
             },
             {
-                name: "Validating AI Outputs",
-                description: "I don't blindly trust model outputs. I do my best to review AI-generated code to ensure it is secure, maintainable, and fits our specific architecture and logical patterns. The human eye is the final safety layer.",
+                name: "Enforcing HITL Validation",
+                description: "Quality cannot be delegated to LLMs. I maintain a Human-in-the-Loop (HITL) protocol, validating AI code for security and architectural fit. This ensures velocity never accelerates technical debt accumulation.",
             },
             {
                 name: "Amplifying Engineering Impact",
