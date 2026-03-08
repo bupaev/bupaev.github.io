@@ -14,10 +14,6 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-
-  @include mixins.mobile {
-    overflow: hidden;
-  }
 }
 
 .tableHeader {
@@ -158,7 +154,7 @@
   @include mixins.touch {
     --skew-angle: -7deg;
 
-    margin-left: 24px;
+    margin-left: 20px;
     font-size: var(--font-body-small);
     line-height: 1.4;
 
@@ -195,7 +191,7 @@
     );
     border: 1px solid rgb(var(--fit-rgb) / 20%);
     border-right-color: transparent; // Avoid double borders on desktop
-    border-radius: var(--border-radius-md) 0 0 var(--border-radius-md);
+    border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
     box-shadow: inset 0 1px 4px rgb(var(--fit-rgb) / 10%), 0 4px 16px rgb(var(--fit-rgb) / 4%);
 
     [data-color-scheme="dark"] & {
@@ -249,7 +245,7 @@
     );
     border: 1px solid rgb(var(--no-fit-rgb) / 12%);
     border-left-color: transparent; // Avoid double borders on desktop
-    border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+    border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
     box-shadow: inset 0 1px 4px rgb(var(--no-fit-rgb) / 10%), 0 4px 16px rgb(var(--no-fit-rgb) / 4%);
 
     [data-color-scheme="dark"] & {
