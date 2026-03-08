@@ -3,19 +3,25 @@ import { render, screen, fireEvent, cleanup, act } from '@testing-library/react'
 import { VerticalMenu } from './vertical-menu';
 
 describe('VerticalMenu', () => {
+    // Mock ResizeObserver
+    global.ResizeObserver = class {
+        observe = vi.fn();
+        unobserve = vi.fn();
+        disconnect = vi.fn();
+    } as unknown as typeof ResizeObserver;
+
 
     beforeEach(() => {
         vi.useFakeTimers();
 
-        // Mock getElementById to return our mock sections
         vi.spyOn(document, 'getElementById').mockImplementation((id: string) => {
-            const sectionMap: Record<string, { clientHeight: number; offsetTop: number }> = {
-                'hero-area': { clientHeight: 500, offsetTop: 0 },
-                'overview': { clientHeight: 600, offsetTop: 500 },
-                'skills': { clientHeight: 700, offsetTop: 1100 },
-                'experience': { clientHeight: 400, offsetTop: 1800 },
-                'fit-check': { clientHeight: 500, offsetTop: 2200 },
-                'education': { clientHeight: 500, offsetTop: 2700 },
+            const sectionMap: Record<string, { clientHeight: number; offsetTop: number; getBoundingClientRect: () => Partial<DOMRect> }> = {
+                'hero-area': { clientHeight: 500, offsetTop: 0, getBoundingClientRect: () => ({ top: 0 }) },
+                'overview': { clientHeight: 600, offsetTop: 500, getBoundingClientRect: () => ({ top: 500 }) },
+                'skills': { clientHeight: 700, offsetTop: 1100, getBoundingClientRect: () => ({ top: 1100 }) },
+                'experience': { clientHeight: 400, offsetTop: 1800, getBoundingClientRect: () => ({ top: 1800 }) },
+                'fit-check': { clientHeight: 500, offsetTop: 2200, getBoundingClientRect: () => ({ top: 2200 }) },
+                'education': { clientHeight: 500, offsetTop: 2700, getBoundingClientRect: () => ({ top: 2700 }) },
             };
             return sectionMap[id] as unknown as HTMLElement | null;
         });

@@ -22,6 +22,12 @@ export function VerticalMenu() {
   const [scaleCoefficients, setScaleCoefficients] = useState<number[]>([]);
   const [markerOffset, setMarkerOffset] = useState(0);
   const [markerHeight, setMarkerHeight] = useState(0);
+  
+  // Mobile circular menu state
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [docScrollHeight, setDocScrollHeight] = useState(1);
+  const progressCircleRef = useRef<SVGCircleElement>(null);
+
   // Use ref for hero height to avoid re-renders during scroll/resize measurements
   const heroHeightRef = useRef<number | undefined>(undefined);
 
@@ -35,10 +41,13 @@ export function VerticalMenu() {
    * Uses section IDs from menu config instead of class name queries.
    */
   const getSectionsProp = useCallback(
-    (propName: "clientHeight" | "offsetTop"): number[] => {
+    (prop: "clientHeight" | "offsetTop") => {
       return MENU_ITEMS.map((item) => {
-        const section = document.getElementById(item.id);
-        return section ? section[propName] : 0;
+        const el = document.getElementById(item.id);
+        if (!el) return 0;
+        return prop === "offsetTop"
+          ? el.getBoundingClientRect().top + window.scrollY
+          : (el[prop] as number);
       });
     },
     []
@@ -70,28 +79,44 @@ export function VerticalMenu() {
       });
 
       const selectedMenuItem =
-        sectionIndex === -1 ? offsets.length : Math.max(sectionIndex - 1, 0);
+        sectionIndex === -1 ? Math.max(offsets.length - 1, 0) : Math.max(sectionIndex - 1, 0);
+
+      const sectionOffset = offsets[selectedMenuItem] || 0;
+      const coeff = coefficients[selectedMenuItem] || 0;
 
       return (
         selectedMenuItem * itemHeight +
-        (windowScroll - offsets[selectedMenuItem]) *
-        coefficients[selectedMenuItem]
+        (windowScroll - sectionOffset) * coeff
       );
     },
     []
   );
 
   const setAreaMarkerPosition = useCallback(() => {
-    if (
-      contentSectionsOffsetArray.length === 0 ||
-      scaleCoefficients.length === 0 ||
-      menuItemHeight === 0
-    ) {
-      return;
-    }
+    if (contentSectionsOffsetArray.length === 0) return;
 
     const windowTopScrollY = window.scrollY;
     const windowBottomScrollY = windowTopScrollY + window.innerHeight;
+    const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+
+    // Update state for mobile progress circle ALWAYS (decoupled from desktop layout)
+    const idx = contentSectionsOffsetArray.findIndex(
+      (offset) => windowTopScrollY + window.innerHeight / 3 < offset
+    );
+    setActiveIndex(
+      idx === -1 ? contentSectionsOffsetArray.length - 1 : Math.max(idx - 1, 0)
+    );
+    
+    // Direct DOM manipulation guarantees 60fps fluid stroke updates without triggering React layout loops
+    const progress = Math.min(Math.max(windowTopScrollY / maxScroll, 0), 1);
+    if (progressCircleRef.current) {
+      progressCircleRef.current.style.strokeDashoffset = `${131.95 - progress * 131.95}`;
+    }
+
+    // Desktop marker operations (Requires desktop to be visible)
+    if (scaleCoefficients.length === 0 || menuItemHeight === 0) {
+      return;
+    }
 
     const newMarkerOffset = getRescaledOffset(
       windowTopScrollY,
@@ -102,7 +127,7 @@ export function VerticalMenu() {
     setMarkerOffset(newMarkerOffset);
 
     // When user reaches end of the page, make visible area marker equal to menu item size
-    if (windowBottomScrollY >= document.body.clientHeight) {
+    if (windowBottomScrollY >= document.documentElement.scrollHeight) {
       setMarkerHeight(menuItemHeight);
       return;
     }
@@ -143,12 +168,43 @@ export function VerticalMenu() {
         return itemHeight / sectionHeight;
       });
       setScaleCoefficients(coeffs);
+
+      // Initialize max scroll height to un-clamp ticks early
+      const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+      setDocScrollHeight(maxScroll);
+
+      // Set initial active activeIndex 
+      const windowTopScrollY = window.scrollY;
+      const idx = offsets.findIndex(
+        (offset) => windowTopScrollY + window.innerHeight / 3 < offset
+      );
+      setActiveIndex(idx === -1 ? offsets.length - 1 : Math.max(idx - 1, 0));
     };
 
     // Small delay to ensure DOM is ready
     const timer = setTimeout(initMenu, 100);
 
-    return () => clearTimeout(timer);
+    // Watch for actual physical height expansions (e.g. lazy-loaded content, toggled elements)
+    const resizeObserver = new ResizeObserver(() => {
+      initMenu();
+    });
+    resizeObserver.observe(document.body);
+
+    // Watch for orientation width changes (ignoring mobile address bar height collapse)
+    let lastWidth = window.innerWidth;
+    const handleResize = () => {
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        initMenu();
+      }
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      clearTimeout(timer);
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", handleResize);
+    };
   }, [getSectionsProp]);
 
   // Handle scroll for marker position updates
@@ -244,36 +300,98 @@ export function VerticalMenu() {
       aria-label="Page navigation"
       style={{ opacity: mounted ? 1 : undefined }}
     >
-      <div
-        className={styles.visibleAreaMarker}
-        style={{
-          transform: `translateY(${markerOffset}px)`,
-          height: `${markerHeight}px`,
-        }}
-        aria-hidden="true"
-      />
-      <div ref={menuRef}>
-        {MENU_ITEMS.map((item, index) => (
-          <button
-            key={item.id}
-            type="button"
-            className={styles.item}
-            onClick={() => onMenuItemClick(index)}
-            aria-label={`Navigate to ${item.title} section`}
-          >
-            <span className={styles.itemIcon}>
-              <img
-                src={item.icon}
-                alt=""
-                width={32}
-                height={32}
-                draggable={false}
-                aria-hidden="true"
+      {/* Desktop Menu Wrapper */}
+      <div className={styles.desktopMenuWrapper}>
+        <div
+          className={styles.visibleAreaMarker}
+          style={{
+            transform: `translateY(${markerOffset}px)`,
+            height: `${markerHeight}px`,
+          }}
+          aria-hidden="true"
+        />
+        <div ref={menuRef}>
+          {MENU_ITEMS.map((item, index) => (
+            <button
+              key={item.id}
+              type="button"
+              className={styles.item}
+              onClick={() => onMenuItemClick(index)}
+              aria-label={`Navigate to ${item.title} section`}
+            >
+              <span className={styles.itemIcon}>
+                <img
+                  src={item.icon}
+                  alt=""
+                  width={32}
+                  height={32}
+                  draggable={false}
+                  aria-hidden="true"
+                />
+              </span>
+              <span className={styles.itemText}>{item.title}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile Circular Menu */}
+      <div className={styles.mobileMenu} aria-hidden="true">
+        <svg
+          width="44"
+          height="44"
+          viewBox="0 0 44 44"
+          className={styles.mobileMenuProgress}
+        >
+          {/* Foreground progress circle */}
+          <circle
+            cx="22"
+            cy="22"
+            r="21"
+            className={styles.progressCircle}
+            ref={progressCircleRef}
+            style={{
+              strokeDasharray: 131.95,
+              strokeDashoffset: 131.95, // Default zero-progress
+            }}
+          />
+
+          {/* Tick marks for sections */}
+          {contentSectionsOffsetArray.map((offset, i) => {
+            const ratio = Math.min(offset / docScrollHeight, 1);
+            const angle = ratio * 360; // 0deg corresponds to top because of CSS rotation
+            const rad = (angle * Math.PI) / 180;
+            const x1 = 22 + 23 * Math.cos(rad); // ticks crossing the 21px radius stroke slightly
+            const y1 = 22 + 23 * Math.sin(rad);
+            const x2 = 22 + 18 * Math.cos(rad);
+            const y2 = 22 + 18 * Math.sin(rad);
+            return (
+              <line
+                key={i}
+                x1={x1}
+                y1={y1}
+                x2={x2}
+                y2={y2}
+                className={styles.tick}
               />
-            </span>
-            <span className={styles.itemText}>{item.title}</span>
-          </button>
-        ))}
+            );
+          })}
+        </svg>
+        
+        {/* Active Icon in the center */}
+        <div className={styles.mobileMenuIcon} data-active-index={activeIndex}>
+          {MENU_ITEMS[activeIndex]?.icon && (
+            <img
+              src={MENU_ITEMS[activeIndex].icon}
+              alt={MENU_ITEMS[activeIndex].title}
+              width={32}
+              height={32}
+              draggable={false}
+              aria-hidden="true"
+              id="mobile-menu-active-icon-img"
+            />
+          )}
+        </div>
       </div>
     </nav>
 
