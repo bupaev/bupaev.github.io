@@ -1,91 +1,5 @@
 @use "../../styles/mixins";
 
-// ─── Keyframes ──────────────────────────────────────────────
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg) scale(1);
-    animation-timing-function: ease-in;
-  }
-
-  25% {
-    transform: rotate(180deg) scale(1.2);
-    animation-timing-function: ease-out;
-  }
-
-  50% {
-    transform: rotate(360deg) scale(1);
-    animation-timing-function: linear;
-  }
-
-  100% {
-    transform: rotate(360deg) scale(1);
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    animation-timing-function: ease-in;
-  }
-
-  25% {
-    transform: scale(1.1);
-    animation-timing-function: ease-out;
-  }
-
-  50% {
-    transform: scale(1);
-    animation-timing-function: linear;
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes moon-pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.7;
-  }
-}
-
-@keyframes twinkle {
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.3;
-  }
-}
-
-@keyframes icon-settle {
-  0% {
-    transform: scale(1);
-  }
-
-  40% {
-    transform: scale(1.12);
-  }
-
-  70% {
-    transform: scale(0.95);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-// ─── Main Toggle Container ─────────────────────────────────
-
 // @TODO: Rework styles to make it more robust
 // Now it's extremely fragile. E.g. depends on width of labels
 .darkModeToggle {
@@ -241,11 +155,11 @@
         0 0 20px -3px rgb(255 255 255 / 22%);
 
       .iconDark {
-        animation: pulse 4s infinite ease-in-out;
+        animation: dark-pulse 4s infinite ease-in-out;
       }
 
       .moonBody {
-        animation: moon-pulse 4s infinite ease-in-out;
+        animation: moon-flickering 4s infinite ease-in-out;
       }
 
       .star1 {
@@ -275,5 +189,82 @@
         width 400ms,
         opacity 250ms;
     }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+    animation-timing-function: ease-in;
+  }
+
+  25% {
+    transform: rotate(180deg) scale(1.2);
+    animation-timing-function: ease-out;
+  }
+
+  50% {
+    transform: rotate(360deg) scale(1);
+    animation-timing-function: linear;
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes dark-pulse {
+  0% {
+    transform: scale(1);
+    animation-timing-function: ease-in;
+  }
+
+  50% {
+    transform: scale(1.05);
+    animation-timing-function: linear;
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes moon-flickering {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes icon-settle {
+  0% {
+    transform: scale(1);
+  }
+
+  40% {
+    transform: scale(1.12);
+  }
+
+  70% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(1);
   }
 }
