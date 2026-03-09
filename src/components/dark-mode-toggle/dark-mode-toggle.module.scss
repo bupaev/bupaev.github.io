@@ -101,7 +101,7 @@
     .iconLight {
       animation: spin 4s infinite linear;
     }
-    
+
     &.darkModeEnabled {
       .moonBody {
         animation: moon-pulse 4s infinite ease-in-out;
@@ -119,6 +119,10 @@
         animation: twinkle 5s infinite ease-in-out 2s;
       }
     }
+  }
+
+  .iconDark {
+    display: none;
   }
 
   &.darkModeEnabled {
