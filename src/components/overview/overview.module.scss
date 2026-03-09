@@ -33,7 +33,7 @@
 
   .graphicsWrapper {
     flex: 0 0 auto;
-    width: 950px;
+    width: 860px;
 
     & > p {
       text-align: center;
@@ -44,7 +44,7 @@
     }
 
     @include mixins.until(variables.$breakpoint-2xl) {
-      width: 850px;
+      width: 750px;
     }
 
     @include mixins.until(variables.$breakpoint-xl) {

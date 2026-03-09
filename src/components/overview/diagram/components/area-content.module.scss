@@ -54,13 +54,12 @@
 }
 
 .areaHeading {
-    // Relative to wrapper
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-accent);
-    font-size: calc(0.5rem + 4cqw); 
+    font-size: calc(0.5rem + 3.5cqw); 
     font-weight: 600;
     line-height: 1.2;
     color: var(--text-color, #1a1a1a);
