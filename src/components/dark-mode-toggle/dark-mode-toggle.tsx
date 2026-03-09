@@ -68,16 +68,32 @@ export function DarkModeToggle() {
   }
 
   return (
-    <div>
-      <div className={toggleClasses} onClick={() => setDarkMode(!isDark)}>
-        <div className={styles.slider}>
-          <span className={styles.labelDark}>Dark</span>
-          <div className={styles.handler}>
-            <SunIcon className={styles.iconLight} width={30} height={30} />
-            <MoonIcon className={styles.iconDark} width={30} height={30} />
-          </div>
-          <span className={styles.labelLight}>Light</span>
+    <div
+      className={toggleClasses}
+      onClick={() => setDarkMode(!isDark)}
+      role="button"
+      tabIndex={0}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setDarkMode(!isDark);
+        }
+      }}
+    >
+      {/* Icon viewport with vertical sliding track */}
+      {/* Moon above Sun: Light→Dark slides down (sunset), Dark→Light slides up (sunrise) */}
+      <div className={styles.handler}>
+        <div className={styles.iconTrack}>
+          <MoonIcon className={styles.iconDark} />
+          <SunIcon className={styles.iconLight} />
         </div>
+      </div>
+
+      {/* Cross-fading labels */}
+      <div className={styles.labelWrap}>
+        <span className={styles.labelLight}>Light</span>
+        <span className={styles.labelDark}>Dark</span>
       </div>
     </div>
   );
