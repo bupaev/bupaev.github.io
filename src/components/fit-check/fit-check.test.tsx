@@ -31,22 +31,22 @@ describe('FitCheck', () => {
     it('renders "Fit" labels for all criteria', () => {
         render(<FitCheck />);
         const fitLabels = screen.getAllByText(/GREAT FIT if/i);
-        expect(fitLabels).toHaveLength(6); // 5 cards + 1 header
+        expect(fitLabels).toHaveLength(7); // 6 cards + 1 header
     });
 
     it('renders "No Fit" labels for all criteria', () => {
         render(<FitCheck />);
         const noFitLabels = screen.getAllByText(/NOT A FIT if/i);
-        expect(noFitLabels).toHaveLength(6); // 5 cards + 1 header
+        expect(noFitLabels).toHaveLength(7); // 6 cards + 1 header
     });
 
     it('renders fit and no-fit card text for Dedication to Success', () => {
         render(<FitCheck />);
         expect(
-            screen.getByText(/genuinely interested in your product's success/),
+            screen.getByText(/prioritize product success/),
         ).toBeInTheDocument();
         expect(
-            screen.getByText(/indifferent to the success of the product/),
+            screen.getByText(/pretty indifferent to product success/),
         ).toBeInTheDocument();
     });
 });
