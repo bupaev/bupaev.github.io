@@ -151,7 +151,7 @@
     transform: skew(var(--skew-angle));
   }
 
-  @include mixins.touch {
+  @include mixins.mobile {
     --skew-angle: -7deg;
 
     margin-left: 20px;
@@ -190,8 +190,8 @@
       rgb(var(--fit-rgb) / 8%) 100%
     );
     border: 1px solid rgb(var(--fit-rgb) / 20%);
-    border-right-color: transparent; // Avoid double borders on desktop
-    border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+    border-right-width: 0; // Avoid double borders on desktop
+    border-radius: var(--border-radius-md) 0 0 var(--border-radius-md);
     box-shadow: inset 0 1px 4px rgb(var(--fit-rgb) / 10%), 0 4px 16px rgb(var(--fit-rgb) / 4%);
 
     [data-color-scheme="dark"] & {
@@ -201,18 +201,19 @@
         rgb(var(--fit-rgb) / 4%) 100%
       );
       border-color: rgb(var(--fit-rgb) / 20%);
-      border-right-color: transparent;
+      border-right-width: 0;
       box-shadow: inset 0 1px 4px rgb(var(--fit-rgb) / 20%), 0 4px 16px rgb(var(--fit-rgb) / 10%);
     }
 
     @include mixins.mobile {
       border-right-color: rgb(var(--fit-rgb) / 15%);
-      border-bottom-color: transparent;
+      border-bottom-width: 0;
+      border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
       transform-origin: bottom;
 
       [data-color-scheme="dark"] & {
         border-right-color: rgb(var(--fit-rgb) / 20%);
-        border-bottom-color: transparent;
+        border-bottom-width: 0;
       }
     }
   }
@@ -244,8 +245,8 @@
       rgb(var(--no-fit-rgb) / 1%) 100%
     );
     border: 1px solid rgb(var(--no-fit-rgb) / 12%);
-    border-left-color: transparent; // Avoid double borders on desktop
-    border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
+    border-left-width: 0; // Avoid double borders on desktop
+    border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
     box-shadow: inset 0 1px 4px rgb(var(--no-fit-rgb) / 10%), 0 4px 16px rgb(var(--no-fit-rgb) / 4%);
 
     [data-color-scheme="dark"] & {
@@ -255,19 +256,20 @@
         rgb(var(--no-fit-rgb) / 3%) 100%
       );
       border-color: rgb(var(--no-fit-rgb) / 18%);
-      border-left-color: transparent;
+      border-left-width: 0;
       box-shadow: inset 0 1px 4px rgb(var(--no-fit-rgb) / 20%), 0 4px 16px rgb(var(--no-fit-rgb) / 8%);
     }
 
     @include mixins.mobile {
       --skew-angle: 5deg;
 
-      border-top-color: transparent;
+      border-top-width: 0;
       border-left-color: rgb(var(--no-fit-rgb) / 12%);
+      border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
       transform-origin: top;
 
       [data-color-scheme="dark"] & {
-        border-top-color: transparent;
+        border-top-width: 0;
         border-left-color: rgb(var(--no-fit-rgb) / 18%);
       }
     }
