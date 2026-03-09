@@ -75,9 +75,7 @@
         filter 300ms ease;
 
     .hasExpanded & {
-        pointer-events: none;
-        opacity: 0.4;
-        filter: blur(4px);
+        filter: blur(3px);
     }
 
     .active & {
@@ -151,7 +149,7 @@
     .hasExpanded &:not(.topicActive) {
         pointer-events: none;
         opacity: 0.3;
-        filter: blur(4px);
+        filter: blur(2px);
         transform: translate(-50%, -50%) scale(1) !important;
     }
 }
