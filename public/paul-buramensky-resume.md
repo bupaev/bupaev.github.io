@@ -19,31 +19,32 @@ Player-coach, I drive team execution and evaluate decisions through complete con
 | Category | Technologies |
 |---|---|
 | **Languages** | JavaScript (ES6+), TypeScript, HTML5, CSS3/SCSS |
-| **Frameworks** | React, Vue.js, Next.js, Astro, Nuxt.js, Redux, Vuex, Tailwind CSS, AngularJS |
-| **Testing & Quality** | Vitest, Jest, React Testing Library, Playwright, ESLint, Prettier |
+| **Frontend Frameworks** | React, Vue.js, Next.js, Astro, Nuxt.js |
+| **Backend & APIs** | Node.js, Express, REST API Design, GraphQL, FHIR API, MongoDB, MySQL |
+| **Testing & Quality** | Vitest, Jest, React Testing Library, Playwright, ESLint, Stylelint |
+| **Build Tools** | Vite, Webpack |
+| **DevOps & Cloud** | Docker, AWS, GitHub Actions, GitLab CI, CI/CD Pipelines |
 | **Design & UX** | Figma, UX Design, WCAG Accessibility, Design Systems, Responsive Design |
 | **AI & Tooling** | AI Pair Programming, Prompt Engineering, Claude Code, Gemini, AI Agent Integration |
-| **Infrastructure** | Git, GitHub Actions, GitLab CI, Vite, Webpack, Docker, AWS, CI/CD Pipelines |
-| **Backend & APIs** | REST API Design, GraphQL, Node.js, Express, FHIR API, MongoDB, MySQL |
-| **Methodology** | Agile Scrum/Kanban, Technical Leadership, Code Review, Mentoring, Documentation |
+| **Practices & Leadership**| Technical Strategy, System Architecture, Engineering Standards, Player-Coach Leadership, Agile Delivery |
 
 ---
 
 ## PROFESSIONAL EXPERIENCE
 
 ### Lead Front-End Engineer | EPAM Systems | 2021 – 2025
-*Global software engineering company (50K+ employees) — Ireland's largest health insurer (1.2M+ members)*
+*Global software engineering company (50K+ employees) — Project for large health insurer (1.2M+ members)*
 
-- Led a 3-person front-end team within a 19-person cross-functional squad (FE, BE, UX, QA, BA) delivering the client's public-facing web platform serving 400K+ monthly visitors
+- Led a 4-person engineering team within a 12-person cross-functional squad delivering the client's public-facing web platform serving 400K+ monthly visitors
+- Executed a strategic architectural rewrite of the legacy front-end system, modernizing the tech stack and reducing the codebase by 40% while improving maintainability and performance
+- Optimized performance of content-heavy pages, making them load over twice as fast with Largest Contentful Paint (LCP) reduced from 3.2s to 1.5s
 - Initiated and led a WCAG 2.2 AA accessibility initiative: conducted research, drove cross-team discussions with the design team, classified and resolved 100+ accessibility issues, and reworked 30+ UI components to full compliance
-- Executed a strategic architectural rewrite of the legacy front-end system, modernizing the stack to React/TypeScript and reducing the codebase by 40% while improving maintainability and performance
-- Optimized page performance, reducing Largest Contentful Paint (LCP) from 3.2s to 1.5s on content-heavy pages — a 53% improvement in Core Web Vitals
-- Partnered with the design team to elevate the overall UI quality of customer-facing interfaces, resulting in measurably improved perceived brand image and user satisfaction validated through targeted UX interviews
-- Provided hands-on technical guidance to other product teams, sharing front-end expertise and accessibility knowledge across the organization
+- Partnered with the design team to elevate UI quality and refine the design system, directly boosting brand perception and user satisfaction in UX interviews
 - Translated complex business requirements into precise technical specifications, bridging the gap between product stakeholders and the engineering team
 - Established rigorous code review protocols, automated linting pipelines, and performance budgets, reducing technical debt accumulation and improving release confidence
-- Rebuilt client trust through disciplined execution, stepping into business analysis and QA roles when needed to unblock stalled delivery
+- Rebuilt client trust through high-quality delivery and disciplined execution, stepping into business analysis and QA roles when needed to unblock stalled delivery
 - Mentored engineers and fostered a transparent engineering culture through comprehensive documentation and active knowledge-sharing
+- Provided hands-on technical guidance to other product teams, sharing front-end expertise and accessibility knowledge across the organization
 
 ### Lead Front-End Developer | Holmusk | 2018 – 2021
 *Health technology and data science company — Electronic Health Record (EHR) platform*
@@ -51,7 +52,6 @@ Player-coach, I drive team execution and evaluate decisions through complete con
 - Led a front-end team of 3–5 engineers within a 12-person cross-functional squad, driving end-to-end delivery across 6 time zones (UTC−8 to UTC+8)
 - Engineered a complex electronic health record application using Vue.js, Vuex, and a RESTful FHIR API, managing highly structured healthcare data workflows
 - Proactively evaluated design complexity and surfaced architectural risks before development, reducing costly mid-sprint pivots
-- Achieved high system reliability through rigorous unit, integration, and performance testing with Jest and Vue Test Utils
 - Transformed mid-fidelity wireframes into polished, production-ready interfaces, preserving design intent while optimizing for performance
 - Defined and enforced strict code quality standards across the frontend team through hands-on leadership and code review
 
@@ -72,7 +72,7 @@ Player-coach, I drive team execution and evaluate decisions through complete con
 - Leveraged advanced Web APIs (Web Workers, IndexedDB, WebRTC, Canvas, SVG) to deliver seamless real-time audio processing at scale
 
 ### Front-End Developer | DXC Luxoft | 2012 – 2014
-*Global digital strategy and software engineering firm (13K+ employees)*
+*Global digital strategy and software engineering firm (13K+ employees) - Various projects*
 
 - Developed resilient, adaptive interfaces for enterprise clients including major banking and retail brands, handling high-traffic loads
 - Built complex client-side data validation and calculation engines (banking loan wizards) with optimized performance for large user bases
