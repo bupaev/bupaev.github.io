@@ -7,7 +7,10 @@ Berlin, Germany · EU Citizen · +49 1556 5551632 · mail@paulbu.com · [paulbu.
 
 ## PROFESSIONAL SUMMARY
 
-Front-end engineer with 15+ years of experience, fluent in both design and code — with a clear understanding of the business behind both. I specialize in React/TypeScript ecosystems, design-system architecture, and accessibility. Most recently, I led a legacy front-end rewrite that reduced the codebase by 40%, improved LCP by 53%, and drove a WCAG 2.2 AA initiative resolving 100+ issues across 30+ components. I work as a player-coach — bridging product, design, and engineering, taking ownership from first idea to production, and setting a quality bar that no AI agent can set on its own.
+Front-end engineer with 15+ years of experience, fluent in both design and code, with a clear understanding of the business behind both, I translate this perspective into premium, user-centric products, driven by deep UX expertise and strict attention to detail.
+Framework-agnostic, most experienced with React and Vue, I rely on strong web fundamentals and modern AI tooling.
+Product-oriented, caring deeply about the final result, I take personal ownership from first idea to production, applying the human judgment that AI lacks.
+Player-coach, I drive team execution and evaluate decisions through complete context: business, technical, and human.
 
 ---
 
@@ -15,8 +18,8 @@ Front-end engineer with 15+ years of experience, fluent in both design and code 
 
 | Category | Technologies |
 |---|---|
-| **Languages** | JavaScript (ES6+), TypeScript, HTML5, CSS3/SCSS, Tailwind CSS |
-| **Frameworks** | React, Vue.js, Next.js, Astro, Nuxt.js, Redux, Vuex, AngularJS |
+| **Languages** | JavaScript (ES6+), TypeScript, HTML5, CSS3/SCSS |
+| **Frameworks** | React, Vue.js, Next.js, Astro, Nuxt.js, Redux, Vuex, Tailwind CSS, AngularJS |
 | **Testing & Quality** | Vitest, Jest, React Testing Library, Playwright, ESLint, Prettier |
 | **Design & UX** | Figma, UX Design, WCAG Accessibility, Design Systems, Responsive Design |
 | **AI & Tooling** | AI Pair Programming, Prompt Engineering, Claude Code, Gemini, AI Agent Integration |
@@ -29,11 +32,11 @@ Front-end engineer with 15+ years of experience, fluent in both design and code 
 ## PROFESSIONAL EXPERIENCE
 
 ### Lead Front-End Engineer | EPAM Systems | 2021 – 2025
-*Global software engineering company (50K+ employees) — Enterprise insurance client (Vhi, Ireland's largest health insurer, 1.2M+ members)*
+*Global software engineering company (50K+ employees) — Ireland's largest health insurer (1.2M+ members)*
 
-- Led a 3-person front-end team within a 19-person cross-functional squad (FE, BE, UX, QA, BA) delivering Vhi's public-facing web platform serving 400K+ monthly visitors
+- Led a 3-person front-end team within a 19-person cross-functional squad (FE, BE, UX, QA, BA) delivering the client's public-facing web platform serving 400K+ monthly visitors
 - Initiated and led a WCAG 2.2 AA accessibility initiative: conducted research, drove cross-team discussions with the design team, classified and resolved 100+ accessibility issues, and reworked 30+ UI components to full compliance
-- Executed a strategic architectural rewrite of the VHI legacy front-end system, modernizing the stack to React/TypeScript and reducing the codebase by 40% while improving maintainability and performance
+- Executed a strategic architectural rewrite of the legacy front-end system, modernizing the stack to React/TypeScript and reducing the codebase by 40% while improving maintainability and performance
 - Optimized page performance, reducing Largest Contentful Paint (LCP) from 3.2s to 1.5s on content-heavy pages — a 53% improvement in Core Web Vitals
 - Partnered with the design team to elevate the overall UI quality of customer-facing interfaces, resulting in measurably improved perceived brand image and user satisfaction validated through targeted UX interviews
 - Provided hands-on technical guidance to other product teams, sharing front-end expertise and accessibility knowledge across the organization
