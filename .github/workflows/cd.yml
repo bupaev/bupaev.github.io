@@ -55,9 +55,8 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: "dist/"
           server-dir: "/"
-          dangerous-clean-slate: true
           exclude: |
-            cdntx/**
-            external/**
-            projects/**
+            **/cdntx/**
+            **/external/**
+            **/projects/**
 
