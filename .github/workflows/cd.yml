@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout 🛎
-        uses: actions/checkout@master
+        uses: actions/checkout@v4
 
       - name: Setup node env 🏗
         uses: actions/setup-node@v4
@@ -41,20 +41,23 @@ jobs:
       - name: Build 🚀
         run: npm run build
 
-      - name: Deploy to GitGub pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+          publish_dir: ./dist
 
       - name: Deploy to my web-server
-        uses: kevinpainchaud/simple-ftp-deploy-action@v1.2.1
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          ftp_host: ${{ secrets.FTP_SERVER }}
-          ftp_username: ${{ secrets.FTP_USERNAME }}
-          ftp_password: ${{ secrets.FTP_PASSWORD }}
-          local_source_dir: "out"
-          dist_target_dir: "/"
-          delete: "true"
-          exclude: "'^cdntx/' '^external/' '^projects/'"
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: "dist/"
+          server-dir: "/"
+          dangerous-clean-slate: true
+          exclude: |
+            cdntx/**
+            external/**
+            projects/**
 
