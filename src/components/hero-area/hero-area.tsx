@@ -78,14 +78,16 @@ export function HeroArea(props: HeroAreaProps) {
                 <div className="mb-[6px]">
                   or just 
                 </div>
-                <a href="/Paul Buramensky Resume.pdf" target="_blank" rel="noopener noreferrer">
-                  <span className="icon-text">
-                    <span className={`icon ${styles.icon}`}>
-                      <DownloadIcon />
+                <span>
+                  <a href="/Paul Buramensky Resume.pdf" target="_blank" rel="noopener noreferrer">
+                    <span className="icon-text">
+                      <span className={`icon ${styles.icon}`}>
+                        <DownloadIcon />
+                      </span>
+                      <span>Get my Résumé</span>
                     </span>
-                    <span>Download my CV</span>
-                  </span>
-                </a>
+                  </a>
+                </span>
               </div>
           </div>
           <div className={styles.mediaWrapper}>
