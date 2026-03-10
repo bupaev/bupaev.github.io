@@ -28,7 +28,10 @@
   }
 
   .graphicMode {
-    overflow: hidden;
+    // Must be `clip`, not `hidden`: `overflow: hidden` creates a scroll container,
+    // which hijacks the CSS view-timeline used by the diagram entrance animations,
+    // causing them to evaluate at 100% instantly and skip the scroll-driven transition.
+    overflow: clip;
   }
 
   .graphicsWrapper {
