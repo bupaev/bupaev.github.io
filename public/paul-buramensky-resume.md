@@ -8,25 +8,22 @@ Berlin, Germany · EU Citizen · +49 1556 5551632 · mail@paulbu.com · [paulbu.
 ## PROFESSIONAL SUMMARY
 
 Front-end engineer with 15+ years of experience, fluent in both design and code, with a clear understanding of the business behind both, I translate this perspective into premium, user-centric products, driven by deep UX expertise and strict attention to detail.
-Framework-agnostic, most experienced with React and Vue, I rely on strong web fundamentals and modern AI tooling.
-Product-oriented, caring deeply about the final result, I take personal ownership from first idea to production, applying the human judgment that AI lacks.
-Player-coach, I drive team execution and evaluate decisions through complete context: business, technical, and human.
+**Framework-agnostic**, most experienced with React and Vue, I rely on strong web fundamentals and modern AI tooling.
+**Product-oriented**, caring deeply about the final result, I take personal ownership from first idea to production, applying the human judgment that AI lacks.
+**Player-coach**, I drive team execution and evaluate decisions through complete context: business, technical, and human.
 
 ---
 
-## TECHNICAL SKILLS
+## SKILLS & EXPERTISE
 
-| Category | Technologies |
-|---|---|
-| **Languages** | JavaScript (ES6+), TypeScript, HTML5, CSS3/SCSS |
-| **Frontend Frameworks** | React, Vue.js, Next.js, Astro, Nuxt.js |
-| **Backend & APIs** | Node.js, Express, REST API Design, GraphQL, FHIR API, MongoDB, MySQL |
-| **Testing & Quality** | Vitest, Jest, React Testing Library, Playwright, ESLint, Stylelint |
-| **Build Tools** | Vite, Webpack |
-| **DevOps & Cloud** | Docker, AWS, GitHub Actions, GitLab CI, CI/CD Pipelines |
-| **Design & UX** | Figma, UX Design, WCAG Accessibility, Design Systems, Responsive Design |
-| **AI & Tooling** | AI Pair Programming, Prompt Engineering, Claude Code, Gemini, AI Agent Integration |
-| **Practices & Leadership**| Technical Strategy, System Architecture, Engineering Standards, Player-Coach Leadership, Agile Delivery |
+- **Languages:** JavaScript (ES6+), TypeScript, HTML5, CSS3/SCSS
+- **Frontend Frameworks:** React, Vue.js, Next.js, Astro, Nuxt.js
+- **Backend & APIs:** Node.js, Express, REST API Design, GraphQL, FHIR API, MongoDB, MySQL
+- **Testing & Quality:** Vitest, Jest, React Testing Library, Playwright, ESLint, Stylelint
+- **Design & UX:** Figma, UX Design, WCAG Accessibility, Design Systems, Responsive Design
+- **DevOps & Cloud:** Docker, AWS, GitHub Actions, GitLab CI, CI/CD Pipelines
+- **AI & Tooling:** AI Pair Programming, Prompt Engineering, Claude Code, Gemini, AI Agents
+- **Practices & Leadership:** Technical Strategy, System Architecture, Engineering Standards, Player-Coach Leadership, Agile Delivery
 
 ---
 
