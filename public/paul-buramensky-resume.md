@@ -29,7 +29,7 @@ Front-end engineer with 15+ years of experience, fluent in both design and code,
 
 ## PROFESSIONAL EXPERIENCE
 
-### Lead Front-End Engineer | EPAM Systems | 2021 – 2025
+### Lead Front-End Engineer | EPAM Systems | 12.2021 – 09.2025
 *Global software engineering company (50K+ employees) — Project for large health insurer (1.2M+ members)*
 
 - Led a 4-person engineering team within a 12-person cross-functional squad delivering the client's public-facing web platform serving 400K+ monthly visitors
@@ -43,7 +43,7 @@ Front-end engineer with 15+ years of experience, fluent in both design and code,
 - Mentored engineers and fostered a transparent engineering culture through comprehensive documentation and active knowledge-sharing
 - Provided hands-on technical guidance to other product teams, sharing front-end expertise and accessibility knowledge across the organization
 
-### Lead Front-End Developer | Holmusk | 2018 – 2021
+### Lead Front-End Developer | Holmusk | 07.2018 – 05.2021
 *Health technology and data science company — Electronic Health Record (EHR) platform*
 
 - Led a front-end team of 3–5 engineers within a 12-person cross-functional squad, driving end-to-end delivery across 6 time zones (UTC−8 to UTC+8)
@@ -52,7 +52,7 @@ Front-end engineer with 15+ years of experience, fluent in both design and code,
 - Transformed mid-fidelity wireframes into polished, production-ready interfaces, preserving design intent while optimizing for performance
 - Defined and enforced strict code quality standards across the frontend team through hands-on leadership and code review
 
-### Lead UI/Front-End Developer | Codenetix | 2016 – 2018
+### Lead UI/Front-End Developer | Codenetix | 11.2016 – 07.2018
 *Software agency specializing in complex custom solutions*
 
 - Led a 4-person front-end team within a 16-person engineering organization, establishing foundational architecture, tooling, and coding standards from scratch as an early-stage hire
@@ -61,14 +61,14 @@ Front-end engineer with 15+ years of experience, fluent in both design and code,
 - Partnered with stakeholders on requirements gathering, user story definition, and technical roadmap planning
 - Stepped into product design and rapid prototyping roles to validate UI/UX concepts early in the development cycle
 
-### Front-End Developer | BandLab | 2014 – 2016
+### Front-End Developer | BandLab | 09.2014 – 10.2016
 *Social music creation platform — Browser-based digital audio workstation*
 
 - Engineered a browser-based multitrack digital audio workstation using AngularJS and the Web Audio API, replicating desktop-grade audio production capabilities
 - Solved non-trivial DSP challenges: multitrack mixing, real-time audio effects, latency compensation, and pitch detection via Fourier analysis and autocorrelation
 - Leveraged advanced Web APIs (Web Workers, IndexedDB, WebRTC, Canvas, SVG) to deliver seamless real-time audio processing at scale
 
-### Front-End Developer | DXC Luxoft | 2012 – 2014
+### Front-End Developer | DXC Luxoft | 07.2012 – 09.2014
 *Global digital strategy and software engineering firm (13K+ employees) - Various projects*
 
 - Developed resilient, adaptive interfaces for enterprise clients including major banking and retail brands, handling high-traffic loads
@@ -76,8 +76,8 @@ Front-end engineer with 15+ years of experience, fluent in both design and code,
 - Guided a team of frontend developers, steering technical execution and code quality standards
 
 ### Earlier Career
-- Web Developer at Mir IT (2011–2012) — Full-stack development with LAMP stack, C#, and MS SQL
-- Teaching Assistant, AI Systems & Control Theory at Omsk State Technical University (2009–2014)
+- Web Developer at Mir IT (06.2011 – 07.2012) — Full-stack development with LAMP stack, C#, and MS SQL
+- Teaching Assistant, AI Systems & Control Theory at Omsk State Technical University (09.2009 – 09.2014)
 - Freelance Software Developer, 3D Modeller & Photographer (2008–2011)
 
 ---
