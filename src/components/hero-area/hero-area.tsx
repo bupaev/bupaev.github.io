@@ -66,7 +66,7 @@ export function HeroArea(props: HeroAreaProps) {
                   </a>
                 </span>
                 <span>
-                  <a href="https://www.linkedin.com/in/pavel-buramensky/" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.linkedin.com/in/paul-buramensky/" target="_blank" rel="noopener noreferrer">
                     <span className="icon-text">
                       <span className={`icon ${styles.icon}`}>
                         <LinkedinIcon />
