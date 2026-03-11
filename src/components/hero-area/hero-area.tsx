@@ -79,7 +79,7 @@ export function HeroArea(props: HeroAreaProps) {
                   or just 
                 </div>
                 <span>
-                  <a href="/Paul Buramensky Resume.pdf" target="_blank" rel="noopener noreferrer">
+                  <a href="/paul-buramensky-resume.pdf" download="Paul Buramensky Resume.pdf">
                     <span className="icon-text">
                       <span className={`icon ${styles.icon}`}>
                         <DownloadIcon />
