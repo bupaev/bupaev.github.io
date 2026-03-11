@@ -60,12 +60,27 @@ export function JobElement({ job, style, isShort }: JobElementProps) {
         e.currentTarget.style.setProperty("--y", `${y}%`);
     }, []);
 
+    const handleMouseEnter = useCallback(() => {
+        if (!job.id) return;
+        const elements = document.querySelectorAll(`[data-job-id="${job.id}"]`);
+        elements.forEach((el) => el.classList.add("is-hovered"));
+    }, [job.id]);
+
+    const handleMouseLeave = useCallback(() => {
+        if (!job.id) return;
+        const elements = document.querySelectorAll(`[data-job-id="${job.id}"]`);
+        elements.forEach((el) => el.classList.remove("is-hovered"));
+    }, [job.id]);
+
     return (
         <div
             style={style}
             className={classNames}
+            data-job-id={job.id}
             onClick={() => goToJob(job.id)}
             onMouseMove={handleMouseMove}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
             title={job.skills}
         >
             <div className={styles.jobText}>

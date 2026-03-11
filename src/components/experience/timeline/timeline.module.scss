@@ -89,7 +89,7 @@
       
       @include mixins.sheen-effect(#fff, 0.75, 90deg);
 
-      &:hover {
+      &:hover, &:global(.is-hovered) {
         color: #000;
         background: linear-gradient(
           135deg,
@@ -100,7 +100,7 @@
       }
     }
 
-    &:hover {
+    &:hover, &:global(.is-hovered) {
       z-index: 3 !important;
       color: #000;
       background: linear-gradient(
@@ -149,7 +149,7 @@
       border-color: color-mix(in srgb, var(--color-secondary-light), transparent 70%);
       box-shadow: 0 4px 16px color-mix(in srgb, var(--color-secondary-light), transparent 85%);
 
-      &:hover {
+      &:hover, &:global(.is-hovered) {
         background: linear-gradient(
           135deg,
           color-mix(in srgb, var(--color-secondary-light), transparent 15%) 0%,
@@ -168,7 +168,7 @@
         border-color: color-mix(in srgb, var(--color-secondary-light), transparent 85%);
         box-shadow: 0 4px 16px color-mix(in srgb, var(--color-secondary-light), transparent 90%);
 
-        &:hover {
+        &:hover, &:global(.is-hovered) {
           background: linear-gradient(
             135deg,
             color-mix(in srgb, var(--color-secondary-light), transparent 5%) 0%,

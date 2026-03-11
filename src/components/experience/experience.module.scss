@@ -60,10 +60,5 @@
   a:active,
   a:focus {
     color: #000;
-    
-    // Explicitly enforce the SVG color as well if one is present
-    svg {
-      fill: #000;
-    }
   }
 }
