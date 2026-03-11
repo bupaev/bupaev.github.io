@@ -2,6 +2,9 @@
 
 .experience {
   h3 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
     line-height: 1.3;
   }
 
@@ -35,18 +38,32 @@
   }
 }
 
-:global(.job-title) {
-  @include mixins.mobile {
-    display: block;
-  }
-}
-
-:global(.interval) {
-  white-space: nowrap;
-}
-
 :global(.job-title),
 :global(.company),
 :global(.interval) {
   padding-right: 0.35em;
+  white-space: nowrap;
+}
+
+:global(.job-title) {
+  @include mixins.small-mobile {
+    white-space: normal;
+  }
+}
+
+:global(.company) {
+  @include mixins.small-mobile {
+    white-space: normal;
+  }
+
+  a:hover,
+  a:active,
+  a:focus {
+    color: #000;
+    
+    // Explicitly enforce the SVG color as well if one is present
+    svg {
+      fill: #000;
+    }
+  }
 }
