@@ -1,0 +1,19 @@
+# Paul Buramensky
+
+> Lead Front-End Engineer with 15+ years of experience based in Berlin, Germany.
+> UX-driven, AI-fluent, framework-agnostic. Most experienced with React and Vue.
+> This is Paul's personal website and online CV.
+
+Paul is a Lead Front-End Engineer who translates deep UX expertise and business understanding
+into outstanding, user-centric products. He is framework-agnostic (React, Vue, Next.js, Astro),
+product-oriented, and operates as a player-coach driving team execution.
+
+## Key Pages
+- [Online CV](https://paulbu.com/cv/): Interactive CV with experience, skills, and education
+- [Full Resume (Markdown)](https://paulbu.com/paul-buramensky-resume.md): Complete resume in plain Markdown, suitable for LLM consumption
+- [Resume (PDF)](https://paulbu.com/paul-buramensky-resume.pdf): Downloadable resume in PDF format
+
+## Contact
+- Email: mail@paulbu.com
+- LinkedIn: https://www.linkedin.com/in/paul-buramensky
+- Website: https://paulbu.com

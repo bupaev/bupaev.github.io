@@ -35,6 +35,53 @@ const {
     <meta property="og:image:height" content="504" />
     <meta property="og:locale" content="en" />
 
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Paul Buramensky",
+        "jobTitle": "Lead Front-End Engineer",
+        "url": "https://paulbu.com",
+        "email": "mail@paulbu.com",
+        "telephone": "+49 1556 5551632",
+        "image": "https://paulbu.com/pics/portrait-1-og.jpg",
+        "description": "Lead Front-End Engineer with 15+ years of experience. UX-driven, AI-fluent, framework-agnostic.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Berlin",
+          "addressCountry": "DE"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/paul-buramensky"
+        ],
+        "knowsAbout": [
+          "JavaScript", "TypeScript", "React", "Vue.js", "Next.js", "Astro",
+          "Nuxt.js", "HTML5", "CSS3", "SCSS", "Node.js", "Express", "GraphQL",
+          "REST API Design", "Docker", "AWS", "UX Design", "Accessibility",
+          "Design Systems", "AI Pair Programming", "Prompt Engineering"
+        ],
+        "knowsLanguage": [
+          { "@type": "Language", "name": "English", "alternateName": "en" },
+          { "@type": "Language", "name": "Russian", "alternateName": "ru" },
+          { "@type": "Language", "name": "German", "alternateName": "de" }
+        ],
+        "alumniOf": [
+          {
+            "@type": "EducationalOrganization",
+            "name": "Omsk State Technical University"
+          }
+        ],
+        "hasOccupation": {
+          "@type": "Occupation",
+          "name": "Lead Front-End Engineer",
+          "occupationalCategory": "15-1254",
+          "skills": "JavaScript, TypeScript, React, Vue.js, UX Design, Accessibility, Team Leadership"
+        }
+      }
+    })} />
+
     <!-- Google Analytics (via Partytown web worker) -->
     <script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-HHHHHSLPX3"></script>
     <script type="text/partytown">

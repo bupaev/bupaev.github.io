@@ -5,6 +5,8 @@ import partytown from "@astrojs/partytown";
 import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
     // Use "static" output for purely static site generation (like Next.js output: "export")
@@ -12,17 +14,20 @@ export default defineConfig({
         chromeDevtoolsWorkspace: true,
     },
     output: "static",
+    site: "https://paulbu.com",
 
-    integrations: [
-        react(),
-        partytown({
-            config: {
-                forward: ["dataLayer.push"],
-                lib: "/partytown/",
-            },
-        }),
-        mdx()
-    ],
+    integrations: [react(), partytown({
+        config: {
+            forward: ["dataLayer.push"],
+            lib: "/partytown/",
+        },
+    }), mdx(), sitemap({
+        customPages: [
+            'https://paulbu.com/paul-buramensky-resume.md',
+            'https://paulbu.com/paul-buramensky-resume.pdf',
+            'https://paulbu.com/llms.txt'
+        ]
+    })],
 
     vite: {
         plugins: [tailwindcss()],
