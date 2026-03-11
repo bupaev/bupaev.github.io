@@ -15,7 +15,7 @@ export function Education() {
           this immersive environment ensures I remain in context as new
           technologies emerge.
         </p>
-        <h3>Doctor of Philosophy (Ph.D. Candidate), Computer science</h3>
+        <h3>Ph.D. Studies in Computer Science (incomplete)</h3>
         <p>Omsk State Technical University, 2013 - 2015.</p>
         
         <h3>Master of Science, Computer science</h3>
