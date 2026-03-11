@@ -19,34 +19,32 @@ export function Overview() {
             I am a&nbsp;<strong>Front-end Engineer</strong> with 15+ years of experience. I speak design and code — and I understand the business behind both.
           </p>
           <p>
-            Three qualities shape how I work and how I collaborate with teams:
+            These three qualities define how I work and become more decisive in the AI era:
           </p>
           <ul className={styles.identityList}>
             <li>
-              <strong>Product-Oriented:</strong> I care about outcomes,
-              not just output. I stay close to the product from first
-              idea to production — and I work best with people who do
-              the same.
+              <strong>Product-Oriented:</strong> I take personal ownership
+              of what I build, from first idea to production.
+              And I put too much effort into my work not to care how it turns out.
             </li>
             <li>
-              <strong>Big-Picture Thinker:</strong> I try to make
-              decisions through full context: business, technical, human.
-              That means listening first — because we all have{" "}
-              <a href="https://pubmed.ncbi.nlm.nih.gov/22663351/" target="_blank">blind spots</a>.
+              <strong>Big-Picture Thinker:</strong> I make decisions
+              through full context: business, technical, human. Not gut
+              feeling — even smart people fall into{" "}
+              <a href="https://pubmed.ncbi.nlm.nih.gov/22663351/" target="_blank">cognitive traps</a>.
             </li>
             <li>
-              <strong>Pragmatic Perfectionist:</strong> I hold my work to a high
-              standard and keep raising it. Good enough ships — but
-              I want to learn from every release what "better" looks
-              like next time.
+              <strong>Perfectionist:</strong> I care deeply about the
+              quality of my craft. If it ships with my name on it,
+              the bar has to be high.
             </li>
           </ul>
           <p>
-            In the AI era these qualities matter more, not less.
-            AI is a powerful tool I use daily, but the work still
-            needs someone who owns the outcome, weighs the trade-offs,
-            and knows when the bar has been met. That's the part
-            I enjoy most.
+            They matter because they're exactly what AI agents
+            lack. Agents can generate code, but they can't own outcomes.
+            They can process data, but they can't grasp the full context
+            of a business. They can follow instructions, but they can't
+            set the bar for quality. That's what I bring to the table.
           </p>
         </div>
         <div className={`${styles.graphicsWrapper} ${isGraphicMode ? styles.graphicMode : ""}`}>
