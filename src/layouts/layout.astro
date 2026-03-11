@@ -1,6 +1,7 @@
 ---
 import "../styles/main.scss";
 import "../styles/tailwind.css";
+import ogImage from "../assets/images/paul-buramensky-og.avif";
 
 interface Props {
   title?: string;
@@ -8,9 +9,11 @@ interface Props {
 }
 
 const {
-  title = "Hi! I'm Paul Buramensky and that's my page",
-  description = "I'm front-end developer who cares about user experience and tries to make the world a better place",
+  title = "Hi! I'm Paul Buramensky",
+  description = "I'm Lead Front-End Engineer with 15+ years of experience. UX-driven, AI-fluent, framework-agnostic.",
 } = Astro.props;
+
+const ogImageUrl = new URL(ogImage.src, Astro.site).toString();
 ---
 
 <!doctype html>
@@ -26,13 +29,13 @@ const {
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="My personal page" />
+    <meta property="og:site_name" content="My web CV" />
     <meta property="og:url" content="https://paulbu.com" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="https://paulbu.com/pics/portrait-1-og.jpg" />
-    <meta property="og:image:width" content="968" />
-    <meta property="og:image:height" content="504" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content={String(ogImage.width)} />
+    <meta property="og:image:height" content={String(ogImage.height)} />
     <meta property="og:locale" content="en" />
 
     <!-- JSON-LD Structured Data -->
@@ -46,7 +49,7 @@ const {
         "url": "https://paulbu.com",
         "email": "mail@paulbu.com",
         "telephone": "+49 1556 5551632",
-        "image": "https://paulbu.com/pics/portrait-1-og.jpg",
+        "image": ogImageUrl,
         "description": "Lead Front-End Engineer with 15+ years of experience. UX-driven, AI-fluent, framework-agnostic.",
         "address": {
           "@type": "PostalAddress",
