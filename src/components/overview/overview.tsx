@@ -24,28 +24,26 @@ export function Overview() {
           </p>
           <ul className={styles.identityList}>
             <li>
-              <strong>Product Ownership:</strong> I build products,
-              not features. Responsible for the result and staying
-              with it from first idea to production.
+              <strong>Product Ownership:</strong> I build products, not features.
+              Taking full responsibility for the final result, 
+              guiding it from the first idea through to production.
             </li>
             <li>
-              <strong>Critical Thinking:</strong> Biased decisions
-              are expensive. So every decision needs the full context:
-              business, technical, human, and a second check before
-              committing.
+              <strong>Critical Thinking:</strong> Key decisions need the full context:
+              business, technical, human. Backed by unbiased reasoning and a second check
+              before acting.
             </li>
             <li>
-              <strong>Pragmatic Perfectionism:</strong> The right details
-              deserve real attention. The rest should be solid and
-              get out of the way. Good work feels deliberate and
-              properly finished.
+              <strong>Pragmatic Perfectionism:</strong> While my instinct
+              is to perfect everything, experience has taught me to choose
+              where quality counts and let the rest be good enough.
             </li>
           </ul>
           <p>
-            AI tools accelerate execution, and I use them daily.
-            But they do not replace the judgment to weigh trade-offs
-            or the ownership to decide what "done" looks like.
-            That responsibility stays with the engineer.
+            These principles matter even more as AI becomes<br/>
+            an essential part of our routine. It changes how we work but doesn't 
+            replace <i>ownership</i>, <i>initiative</i>, and <i>judgment</i>.<br/>
+            That stays with engineers.
           </p>
         </div>
         <div className={`${styles.graphicsWrapper} ${isGraphicMode ? styles.graphicMode : ""}`}>
