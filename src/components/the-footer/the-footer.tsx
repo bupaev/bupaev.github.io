@@ -3,7 +3,7 @@ import styles from "./the-footer.module.scss";
 
 export function TheFooter() {
   return (
-    <footer className={`footer text-xl leading-tight ${styles.footer}`}>
+    <footer className={`footer ${styles.footer}`}>
       <GoToTop />
       <div className={styles.text}>
         <span>

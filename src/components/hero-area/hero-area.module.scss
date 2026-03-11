@@ -115,6 +115,7 @@
     z-index: 1;
     flex: 1 1 0;
     align-self: center;
+    padding-top: 2rem;
     font-style: italic;
     font-weight: 600;
     text-align: right;
@@ -186,6 +187,7 @@
   }
 
   .contacts {
+    padding-top: 1.5rem;
     font-size: var(--size-4);
     font-style: italic;
     font-weight: 600;
@@ -220,6 +222,10 @@
     @include mixins.tablet-only {
       width: 135px;
       height: 450px;
+    }
+
+    @include mixins.mobile {
+      display: none;
     }
   }
 

@@ -5,6 +5,8 @@
   display: flex;
   width: 10em;
   height: 0.7em;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
   overflow: hidden;
   background-color: color-mix(in srgb, var(--background-color), transparent 50%);
   border: 1px solid color-mix(in srgb, var(--contrasty-color), transparent 95%);

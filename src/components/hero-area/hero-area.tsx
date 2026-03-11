@@ -33,15 +33,15 @@ export function HeroArea(props: HeroAreaProps) {
   return (
     <div className={`${styles.heroArea}`}>
       <div className={`container ${styles.heroBody}`}>
-          <div className={`${styles.textWrapper} pt-8`}>
-              <div className={`${styles.textShapeLimiter} max-md:hidden`} />
+          <div className={styles.textWrapper}>
+              <div className={styles.textShapeLimiter} />
               <h1 className={styles.heroHeading}>
                 Hi! I&apos;m Paul Buramensky
               </h1>
               <h2 className={styles.heroSubheading}>
                 Lead front-end engineer<br /> with strong UX expertise<br /> and AI-enthusiast
               </h2>
-              <div className={`${styles.contacts} pt-6`}>
+              <div className={styles.contacts}>
                 <div className={'mb-2'}>
                   contact me via
                 </div>

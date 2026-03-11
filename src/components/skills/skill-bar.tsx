@@ -18,7 +18,7 @@ export function SkillBar({ title, level }: SkillBarProps) {
 
   return (
     <div
-      className={`${styles.skillBar} mb-4 mt-1`}
+      className={styles.skillBar}
       role="meter"
       aria-label={`${title} skill level`}
       aria-valuemin={1}

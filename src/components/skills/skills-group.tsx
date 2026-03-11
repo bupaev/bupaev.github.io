@@ -40,7 +40,7 @@ export function SkillsGroup({ title, info, items, className = "" }: SkillsGroupP
         <div className={styles.toggleIcon} aria-hidden="true" />
       </div>
       
-      {info && <div className={`${styles.groupInfo} mb-2`}>{info}</div>}
+      {info && <div className={styles.groupInfo}>{info}</div>}
       
       <div className={styles.collapsedContent}>
         <div className={styles.collapsedContentInner}>
