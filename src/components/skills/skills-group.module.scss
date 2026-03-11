@@ -103,7 +103,7 @@
   }
 
   .toggleIcon {
-    @include mixins.toggle-icon;
+    @include mixins.toggle-icon(1.5rem);
 
     opacity: 0.7;
     transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out, opacity 0.2s ease-out;

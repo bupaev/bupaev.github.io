@@ -205,13 +205,13 @@ $gap: 32px;
   }
 }
 
-@mixin toggle-icon() {
+@mixin toggle-icon($size: 2rem) {
   position: relative;
   display: inline-block;
-  width: 2rem;
-  height: 2rem;
+  width: $size;
+  height: $size;
   color: currentcolor;
-  transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
+  transition: transform 0.2s ease-out;
 
   &::before,
   &::after {

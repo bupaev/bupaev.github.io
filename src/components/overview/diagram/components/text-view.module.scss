@@ -100,11 +100,9 @@
 }
 
 .toggleIcon {
-    @include mixins.toggle-icon;
+    @include mixins.toggle-icon(1.25em);
 
     flex-shrink: 0;
-    width: 1.25em;
-    height: 1.25em;
     margin-left: 0.5rem;
     opacity: 0.7;
     transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out, opacity 0.2s ease-out;
