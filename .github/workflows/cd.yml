@@ -60,7 +60,6 @@ jobs:
           server-dir: "/"
           log-level: verbose
           exclude: |
-            **/~partytown/**
             **/cdntx/**
             **/external/**
             **/projects/**
