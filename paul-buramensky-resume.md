@@ -8,8 +8,7 @@ Berlin, Germany | EU Citizen
 
 ## **SUMMARY**
 
-Lead Front-End Engineer with 15+ years of experience, fluent in both design and code, with a clear understanding of the business behind both, I translate this perspective into outstanding, user-centric products, driven by deep UX expertise and strict attention to detail.  
-**Framework-agnostic**, most experienced with React and Vue, I rely on strong web fundamentals and modern AI tooling. **Product-oriented**, caring deeply about the final result, I take personal ownership from the first idea to production, applying the human judgment that AI lacks. As a **player-coach,** I drive team execution and evaluate decisions through complete context: business, technical, and human.
+Lead Front-End Engineer with 15+ years of experience bridging design, code, and business strategy. Grounded in strong web fundamentals, I am a **framework-agnostic player-coach** who translates deep UX expertise into polished, user-centric products. I take full ownership from the first idea to production. I use AI extensively, but rely on critical human judgment to drive team execution and evaluate key decisions through complete business, technical, and human context. *Full interactive profile at [https://paulbu.com/cv](https://paulbu.com/cv)*
 
 ## **SKILLS & EXPERTISE**
 
@@ -40,11 +39,9 @@ Lead Front-End Engineer with 15+ years of experience, fluent in both design and 
 
 * Established rigorous code review protocols, automated linting pipelines, and performance budgets, reducing technical debt accumulation and improving release confidence
 
-* Stepping into business analysis and QA roles when necessary to ensure proper quality and unblock delivery
+* Stepped beyond the front-end development to help with business analysis and QA, clearing roadblocks so the team could keep shipping smoothly
 
-* Mentored engineers and promoted knowledge-sharing and transparency through documentation.
-
-* Shared my expertise in front-end, design systems, and accessibility across other product teams.
+* Mentored engineers and built an open, collaborative culture by sharing front-end, design system, and accessibility best practices across multiple product teams.
 
 ### **Lead Front-End Developer** | Holmusk | 07.2018 – 05.2021
 
@@ -58,7 +55,7 @@ Lead Front-End Engineer with 15+ years of experience, fluent in both design and 
 
 * Analyzed the product design complexity, planned the workload, communicated the risks
 
-* Set and enforced strict code quality standards by leading by example, rigorous code review and linting
+* Set and enforced strict code quality standards by leading by example, rigorous code review and automated quality gates
 
 ### **Lead UI/Front-End Developer** | Codenetix | 11.2016 – 07.2018
 
@@ -104,13 +101,15 @@ Lead Front-End Engineer with 15+ years of experience, fluent in both design and 
 
 ## **EDUCATION**
 
-**Ph.D. Studies, Computer Science (incomplete)** | Omsk State Technical University, 2013 – 2015   
-**M.Sc., Computer Science** (GPA 4.9/5.0) | Omsk State Technical University, 2009 – 2011   
+**Ph.D. Studies, Computer Science (incomplete)** | Omsk State Technical University, 2013 – 2015 
+
+**M.Sc., Computer Science** (GPA 4.9/5.0) | Omsk State Technical University, 2009 – 2011 
+
 **B.Sc., Computer Science** (GPA 4.6/5.0) | Omsk State Technical University, 2005 – 2009
 
 ## **LANGUAGES**
 
-* English (Fluent)  
+* English (C1)  
 * Russian (Native)  
-* German (Basic)
+* German (A2)
 
