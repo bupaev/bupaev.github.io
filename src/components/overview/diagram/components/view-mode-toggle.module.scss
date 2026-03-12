@@ -11,10 +11,10 @@
     height: 40px;
     padding: 0 16px 0 8px;
     overflow: hidden;
-    color: var(--text-color);
+    color: var(--color-text);
     cursor: pointer;
     background-color: transparent;
-    border: 2px solid var(--accent-color);
+    border: 2px solid var(--color-accent);
     border-radius: 9999px;
     transition: box-shadow var(--transition-duration);
 
@@ -41,8 +41,8 @@
         content: "";
         background: linear-gradient(
             135deg,
-            color-mix(in srgb, var(--accent-color), transparent 45%) 0%,
-            color-mix(in srgb, var(--accent-color), transparent 70%) 100%
+            color-mix(in srgb, var(--color-accent), transparent 45%) 0%,
+            color-mix(in srgb, var(--color-accent), transparent 70%) 100%
         );
         border-radius: 4px;
         transform: translateX(-10%) translateY(105%) skewX(-15deg);
@@ -51,14 +51,14 @@
         :global([data-color-scheme="dark"]) & {
             background: linear-gradient(
                 135deg,
-                color-mix(in srgb, var(--accent-color), transparent 45%) 0%,
-                color-mix(in srgb, var(--accent-color), transparent 70%) 100%
+                color-mix(in srgb, var(--color-accent), transparent 45%) 0%,
+                color-mix(in srgb, var(--color-accent), transparent 70%) 100%
             );
         }
     }
 
     &:hover {
-        box-shadow: 0 0 8px -2px var(--accent-color);
+        box-shadow: 0 0 8px -2px var(--color-accent);
 
         &::before {
             transform: translateX(-10%) translateY(-10%) skewX(-15deg);
@@ -125,5 +125,5 @@
 .icon {
     width: 100%;
     height: 100%;
-    color: var(--text-color);
+    color: var(--color-text);
 }

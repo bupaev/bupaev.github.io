@@ -6,7 +6,7 @@ export const MoonIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     <style >
       {`
         .moon-icon-st0 {
-          fill: var(--accent-color);
+          fill: var(--color-accent);
         }
       `}
     </style>

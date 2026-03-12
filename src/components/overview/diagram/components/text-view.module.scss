@@ -51,7 +51,7 @@
     padding: 0.3rem;
     font-family: inherit;
     font-size: inherit;
-    color: var(--text-color);
+    color: var(--color-text);
     text-align: left;
     cursor: pointer;
     background: none;
@@ -132,7 +132,7 @@
             font-family: var(--font-main);
             font-size: 0.95rem;
             line-height: var(--leading-body);
-            color: var(--text-color);
+            color: var(--color-text);
         }
     }
 

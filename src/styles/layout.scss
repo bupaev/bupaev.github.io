@@ -12,8 +12,8 @@
 
     .cv-page {
         position: relative;
-        color: var(--text-color);
-        background-color: var(--background-color);
+        color: var(--color-text);
+        background-color: var(--color-background);
         transition:
             background-color 0.3s ease,
             color 0.3s ease;
@@ -36,7 +36,7 @@
         position: relative;
         z-index: 2;
         padding: 3rem 3rem 3rem 5rem;
-        background-color: var(--background-color);
+        background-color: var(--color-background);
 
         @include mixins.tablet-only {
             padding: 3rem 1rem 3rem 4rem;

@@ -4,7 +4,7 @@
   margin-bottom: 3rem;
   font-size: var(--text-body);
   line-height: 1.5;
-  color: var(--text-color);
+  color: var(--color-text);
 }
 
 .tableContainer {
@@ -37,14 +37,14 @@
   font-family: var(--font-accent);
   font-size: 1.5em;
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--color-text);
 
   &.fit {
-    --text-color: color-mix(in srgb, rgb(var(--fit-rgb)), black 30%);
+    --color-text: color-mix(in srgb, rgb(var(--fit-rgb)), black 30%);
   }
 
   &.noFit {
-    --text-color: color-mix(in srgb, rgb(var(--no-fit-rgb)), black 5%);
+    --color-text: color-mix(in srgb, rgb(var(--no-fit-rgb)), black 5%);
   }
 }
 
@@ -52,7 +52,7 @@
   display: inline-flex;
   width: 1em;
   height: 1em;
-  color: var(--text-color);
+  color: var(--color-text);
 }
 
 .icon {
@@ -119,7 +119,7 @@
   font-size: 1.5em;
   font-weight: 600;
   line-height: 1.4;
-  color: var(--text-color);
+  color: var(--color-text);
 }
 
 .dataCell {
@@ -170,9 +170,9 @@
 
 .fitCell {
   .mobileLabel {
-    --text-color: color-mix(in srgb, rgb(var(--fit-rgb)), black 30%);
+    --color-text: color-mix(in srgb, rgb(var(--fit-rgb)), black 30%);
 
-    color: var(--text-color);
+    color: var(--color-text);
   }
 
   [data-color-scheme="light"] & {
@@ -225,9 +225,9 @@
 
 .noFitCell {
   .mobileLabel {
-    --text-color: color-mix(in srgb, rgb(var(--no-fit-rgb)), black 5%);
+    --color-text: color-mix(in srgb, rgb(var(--no-fit-rgb)), black 5%);
 
-    color: var(--text-color);
+    color: var(--color-text);
   }
 
   [data-color-scheme="light"] & {
@@ -300,5 +300,5 @@
   margin: 0;
   font-size: 1rem;
   line-height: 1.4;
-  color: var(--text-color);
+  color: var(--color-text);
 }

@@ -156,7 +156,8 @@ $gap: 32px;
   width: 0.4em;
   height: 0.4em;
   border: 1px solid #{$color};
-  transform: rotate(45deg);
+  border-radius: 2px;
+  transform: skewX(-15deg);
 }
 
 @mixin triangle($color: #000) {

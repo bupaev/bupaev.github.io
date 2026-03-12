@@ -64,13 +64,13 @@
     cursor: pointer;
     background: linear-gradient(
       135deg,
-      color-mix(in srgb, var(--accent-color), transparent 45%) 0%,
-      color-mix(in srgb, var(--accent-color), transparent 75%) 100%
+      color-mix(in srgb, var(--color-accent), transparent 45%) 0%,
+      color-mix(in srgb, var(--color-accent), transparent 75%) 100%
     );
-    border: 1px solid color-mix(in srgb, var(--accent-color), transparent 70%);
+    border: 1px solid color-mix(in srgb, var(--color-accent), transparent 70%);
     border-bottom: none;
     border-radius: $border-radius $border-radius 0 0;
-    box-shadow: 0 4px 16px color-mix(in srgb, var(--accent-color), transparent 85%);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--color-accent), transparent 85%);
     transform: translateX(-50%);
     transition: all 200ms ease-out;
 
@@ -81,11 +81,11 @@
     [data-color-scheme="dark"] & {
       background: linear-gradient(
         135deg,
-        color-mix(in srgb, var(--accent-color), transparent 75%) 0%,
-        color-mix(in srgb, var(--accent-color), transparent 90%) 100%
+        color-mix(in srgb, var(--color-accent), transparent 75%) 0%,
+        color-mix(in srgb, var(--color-accent), transparent 90%) 100%
       );
-      border-color: color-mix(in srgb, var(--accent-color), transparent 85%);
-      box-shadow: 0 4px 16px color-mix(in srgb, var(--accent-color), transparent 90%);
+      border-color: color-mix(in srgb, var(--color-accent), transparent 85%);
+      box-shadow: 0 4px 16px color-mix(in srgb, var(--color-accent), transparent 90%);
       
       @include mixins.sheen-effect(#fff, 0.75, 90deg);
 
@@ -93,10 +93,10 @@
         color: #000;
         background: linear-gradient(
           135deg,
-          color-mix(in srgb, var(--accent-color), transparent 5%) 0%,
-          color-mix(in srgb, var(--accent-color), transparent 15%) 100%
+          color-mix(in srgb, var(--color-accent), transparent 5%) 0%,
+          color-mix(in srgb, var(--color-accent), transparent 15%) 100%
         );
-        border-color: color-mix(in srgb, var(--accent-color), transparent 25%);
+        border-color: color-mix(in srgb, var(--color-accent), transparent 25%);
       }
     }
 
@@ -105,11 +105,11 @@
       color: #000;
       background: linear-gradient(
         135deg,
-        color-mix(in srgb, var(--accent-color), transparent 5%) 0%,
-        color-mix(in srgb, var(--accent-color), transparent 15%) 100%
+        color-mix(in srgb, var(--color-accent), transparent 5%) 0%,
+        color-mix(in srgb, var(--color-accent), transparent 15%) 100%
       );
-      border-color: color-mix(in srgb, var(--accent-color), transparent 25%);
-      // box-shadow: 0 8px 24px color-mix(in srgb, var(--accent-color), transparent 40%);
+      border-color: color-mix(in srgb, var(--color-accent), transparent 25%);
+      // box-shadow: 0 8px 24px color-mix(in srgb, var(--color-accent), transparent 40%);
       border-radius: $border-radius;
       transform: translateX(-50%) scale(1.1, 1.15);
 
@@ -219,7 +219,7 @@
       padding-top: 2px;
       font-size: 14px;
       text-align: center;
-      border-top: 1px solid var(--text-color);
+      border-top: 1px solid var(--color-text);
 
       &::after {
         top: 0;
@@ -227,11 +227,11 @@
         font-size: 10px;
         content: "";
 
-        @include mixins.triangle(var(--text-color));
+        @include mixins.triangle(var(--color-text));
       }
 
       &:last-child::before {
-        @include mixins.arrow(var(--text-color), 1px);
+        @include mixins.arrow(var(--color-text), 1px);
 
         top: -4px;
         right: 1px;
@@ -248,13 +248,13 @@
     margin-left: min(1vw, 14px);
 
     &::before {
-      @include mixins.rhombus(var(--accent-color));
+      @include mixins.rhombus(var(--color-accent));
 
       top: -2px;
       left: 2px;
       font-size: 16px;
       content: "";
-      background-color: var(--accent-color);
+      background-color: var(--color-accent);
     }
 
     &::after {
@@ -263,7 +263,7 @@
       left: 2px;
       font-size: 0.7em;
       font-weight: 700;
-      color: var(--accent-color);
+      color: var(--color-accent);
       content: "NOW";
       transform: rotate(-75deg);
     }

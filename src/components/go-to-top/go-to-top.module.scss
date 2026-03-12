@@ -14,7 +14,7 @@
   user-select: none;
 
   .arrow {
-    @include mixins.arrow(var(--contrasty-color), 2px);
+    @include mixins.arrow(var(--color-contrasty), 2px);
 
     position: relative;
     top: auto;
@@ -29,7 +29,7 @@
     width: 27px;
     height: 70px;
     content: "";
-    background-color: var(--accent-color);
+    background-color: var(--color-accent);
     clip-path: polygon(50% 0, 100% 15%, 100% 100%, 50% 85%, 0 100%, 0 15%);
     transition: bottom 250ms;
   }
@@ -46,7 +46,7 @@
 
   &:active {
     .arrow {
-      border-color: var(--contrasty-color);
+      border-color: var(--color-contrasty);
       transition: border-color 100ms;
     }
 

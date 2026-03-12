@@ -41,12 +41,12 @@
             content: "";
             background: linear-gradient(
                 135deg,
-                color-mix(in srgb, var(--accent-color), transparent 60%) 0%,
-                color-mix(in srgb, var(--accent-color), transparent 85%) 100%
+                color-mix(in srgb, var(--color-accent), transparent 60%) 0%,
+                color-mix(in srgb, var(--color-accent), transparent 85%) 100%
             );
-            border: 1px solid color-mix(in srgb, var(--accent-color), transparent 70%);
+            border: 1px solid color-mix(in srgb, var(--color-accent), transparent 70%);
             border-radius: var(--border-radius-md);
-            box-shadow: 0 8px 32px color-mix(in srgb, var(--accent-color), transparent 85%);
+            box-shadow: 0 8px 32px color-mix(in srgb, var(--color-accent), transparent 85%);
             backdrop-filter: blur(8px) saturate(120%);
             transform: skew(var(--skew-angle));
             transition: all 0.3s ease;
@@ -54,11 +54,11 @@
             [data-color-scheme="dark"] & {
                 background: linear-gradient(
                     135deg,
-                    color-mix(in srgb, var(--accent-color), transparent 75%) 0%,
-                    color-mix(in srgb, var(--accent-color), transparent 90%) 100%
+                    color-mix(in srgb, var(--color-accent), transparent 75%) 0%,
+                    color-mix(in srgb, var(--color-accent), transparent 90%) 100%
                 );
-                border: 1px solid color-mix(in srgb, var(--accent-color), transparent 85%);
-                box-shadow: 0 8px 32px color-mix(in srgb, var(--accent-color), transparent 90%);
+                border: 1px solid color-mix(in srgb, var(--color-accent), transparent 85%);
+                box-shadow: 0 8px 32px color-mix(in srgb, var(--color-accent), transparent 90%);
             }
         }
 
@@ -95,7 +95,7 @@
     aspect-ratio: 1.2;
     pointer-events: none;
     user-select: none;
-    background-color: var(--accent-color);
+    background-color: var(--color-accent);
     opacity: 0.3;
     mask-image: var(--icon-url);
     mask-repeat: no-repeat;

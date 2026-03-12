@@ -10,7 +10,7 @@
         font-size: var(--text-heading-h2);
         font-weight: var(--font-weight-semibold);
         line-height: var(--leading-heading);
-        color: var(--text-color);
+        color: var(--color-text);
     }
 
     // Prose styling for rich text content
@@ -26,7 +26,7 @@
         h6 {
             font-weight: var(--font-weight-semibold);
             line-height: var(--leading-heading);
-            color: var(--text-color);
+            color: var(--color-text);
         }
 
         h1 {
@@ -99,7 +99,7 @@
                 }
 
                 &::before {
-                    @include mixins.rhombus(var(--text-color));
+                    @include mixins.rhombus(var(--color-text));
 
                     position: relative;
                     top: -2px;

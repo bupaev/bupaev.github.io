@@ -62,7 +62,7 @@
     font-size: calc(0.5rem + 3.5cqw); 
     font-weight: 600;
     line-height: 1.2;
-    color: var(--text-color, #1a1a1a);
+    color: var(--color-text, #1a1a1a);
     text-align: center;
     white-space: nowrap;
     pointer-events: auto;
@@ -166,7 +166,7 @@
     font-size: clamp(1rem, 2.7cqw, 1.8rem);
     font-weight: 700;
     line-height: 1.3;
-    color: var(--text-color, #1a1a1a);
+    color: var(--color-text, #1a1a1a);
     transition: font-size 300ms ease;
 
     @include mixins.small-mobile {
@@ -197,7 +197,7 @@
 
     // In dark mode, use the text color (white/bright) for the glow to match the text
     :global([data-color-scheme="dark"]) &::after {
-        --shadow-color: var(--text-color);
+        --shadow-color: var(--color-text);
     }
 
     .topic:hover &::after {

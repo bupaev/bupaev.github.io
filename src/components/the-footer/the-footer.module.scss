@@ -10,15 +10,15 @@
   font-family: var(--font-accent);
   font-size: 1.25rem;
   line-height: 1.25;
-  background-color: var(--background-color);
+  background-color: var(--color-background);
   background-image: repeating-linear-gradient(105deg,
-      var(--contrasty-transparent-color) 0,
-      var(--contrasty-transparent-color) 10px,
+      var(--color-contrasty-transparent) 0,
+      var(--color-contrasty-transparent) 10px,
       transparent 10px,
       transparent 13px);
 
   a {
-    color: var(--text-color);
+    color: var(--color-text);
 
     @include mixins.multiline-text-hover-effect;
   }

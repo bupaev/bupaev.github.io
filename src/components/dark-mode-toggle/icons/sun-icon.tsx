@@ -6,7 +6,7 @@ export const SunIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
       {`
         .st0 {
           fill: none;
-          stroke: var(--accent-color);
+          stroke: var(--color-accent);
           stroke-width: 8;
           stroke-linecap: round;
           stroke-miterlimit: 4;

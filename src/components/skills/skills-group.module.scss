@@ -73,11 +73,11 @@
         content: "";
         background: linear-gradient(
           135deg,
-          color-mix(in srgb, var(--accent-color), transparent 25%) 0%,
-          color-mix(in srgb, var(--accent-color), transparent 50%) 100%
+          color-mix(in srgb, var(--color-accent), transparent 25%) 0%,
+          color-mix(in srgb, var(--color-accent), transparent 50%) 100%
         );
         border-radius: 4px;
-        box-shadow: 0 0 6px -1px var(--accent-color);
+        box-shadow: 0 0 6px -1px var(--color-accent);
         transform: scaleY(1) skew(-15deg);
         transition: height 250ms ease, width 250ms ease, left 250ms ease, box-shadow 250ms ease;
       }
