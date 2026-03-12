@@ -27,16 +27,6 @@
     will-change: background-color;
   }
 
-  @keyframes moving-gradient {
-    0% {
-      background-position: 0 0;
-    }
-
-    100% {
-      background-position: 200% 0;
-    }
-  }
-
   &::after {
     position: absolute;
     inset: 0;
@@ -57,24 +47,27 @@
     animation: transition-to-dark calc(var(--dark-light-transition) * 1.2) ease-in;
   }
 
-  @keyframes transition-to-light {
-    0% {
-      opacity: 0;
+  a {
+    position: relative;
+
+    @include mixins.text-hover-effect;
+
+    &::after {
+      width: 100%;
     }
 
-    100% {
-      opacity: 1;
+    &:hover {
+      &::after {
+        width: calc(100% + 0.4em);
+      }
     }
   }
 
-  @keyframes transition-to-dark {
-    0% {
-      opacity: 0;
-    }
-
-    100% {
-      opacity: 1;
-    }
+  .icon svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--color-text) !important;
+    transform: skew(-15deg);
   }
 }
 
@@ -133,29 +126,6 @@
     padding-right: calc(10px + 10 * ((100vw - 360px) / 100));
     text-align: right;
   }
-}
-
-a {
-  position: relative;
-
-  @include mixins.text-hover-effect;
-
-  &::after {
-    width: 100%;
-  }
-
-  &:hover {
-    &::after {
-      width: calc(100% + 0.4em);
-    }
-  }
-}
-
-.icon svg {
-  width: 100%;
-  height: 100%;
-  fill: var(--color-text) !important;
-  transform: skew(-15deg);
 }
 
 .heroHeading {
@@ -341,5 +311,35 @@ a {
     .darkImage {
       opacity: 1;
     }
+  }
+}
+
+@keyframes moving-gradient {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes transition-to-light {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes transition-to-dark {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
