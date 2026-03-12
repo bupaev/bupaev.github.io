@@ -163,7 +163,7 @@
     }
 
     &::after {
-      left: -20px;
+      left: -20px !important; // override sheen-effect props
     }
   }
 }
@@ -220,6 +220,11 @@
 
   &::after {
     border-radius: var(--border-radius-md) 0 0 var(--border-radius-md);
+
+    @include mixins.mobile {
+      border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+      transform-origin: bottom;
+    }
   }
 }
 
@@ -261,8 +266,6 @@
     }
 
     @include mixins.mobile {
-      --skew-angle: 5deg;
-
       border-top-width: 0;
       border-left-color: rgb(var(--no-fit-rgb) / 12%);
       border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
@@ -277,6 +280,15 @@
 
   &::after {
     border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+
+    @include mixins.mobile {
+      border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
+      transform-origin: top;
+    }
+  }
+
+  @include mixins.mobile {
+    --skew-angle: 5deg;
   }
 }
 
