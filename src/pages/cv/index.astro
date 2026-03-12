@@ -13,7 +13,7 @@ import { TheFooter } from "../../components/the-footer/the-footer";
 
 <Layout title="Paul Buramensky">
   <div class="cv-page">
-    <DarkModeToggle client:load />
+    <DarkModeToggle client:idle />
 
     <!-- VerticalMenu handles hero height measurement internally as a React island. -->
     <VerticalMenu client:load />
@@ -24,7 +24,7 @@ import { TheFooter } from "../../components/the-footer/the-footer";
     </section>
 
     <section id="overview" class="section anchor-for-navigation is-primary">
-      <Overview client:visible />
+      <Overview client:idle />
     </section>
 
     <section
@@ -52,6 +52,6 @@ import { TheFooter } from "../../components/the-footer/the-footer";
       <Education />
     </section>
 
-    <TheFooter client:load />
+    <TheFooter client:idle />
   </div>
 </Layout>

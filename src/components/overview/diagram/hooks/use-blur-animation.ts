@@ -108,8 +108,13 @@ export function useBlurAnimation(
             }
         };
 
+        let scrollRaf: number | null = null;
         const handleScroll = () => {
-            updateBlur();
+            if (scrollRaf !== null) return;
+            scrollRaf = requestAnimationFrame(() => {
+                scrollRaf = null;
+                updateBlur();
+            });
         };
 
         const observer = new IntersectionObserver(
@@ -130,6 +135,7 @@ export function useBlurAnimation(
         return () => {
             observer.disconnect();
             window.removeEventListener("scroll", handleScroll);
+            if (scrollRaf !== null) cancelAnimationFrame(scrollRaf);
             if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
         };
     }, [containerRef, blurRef, isActive]);

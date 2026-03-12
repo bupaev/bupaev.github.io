@@ -15,7 +15,7 @@ $menu-open-width: 9em;
   position: fixed;
   left: max(6px, calc((100vw - 2000px) / 2));
   z-index: 3;
-  font-family: "Dosis", sans-serif;
+  font-family: var(--font-accent);
   font-size: 20px;
   user-select: none;
 
