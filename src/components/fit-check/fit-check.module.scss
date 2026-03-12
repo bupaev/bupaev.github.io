@@ -63,7 +63,7 @@
   @extend %icon;
 
   background-color: currentcolor;
-  mask-image: url("./icons/fit-mask.svg");
+  mask-image: url("./icons/fit-mask.svg?url");
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: contain;
@@ -74,7 +74,7 @@
 
   width: 1.5em;
   background-color: currentcolor;
-  mask-image: url("./icons/not-fit-mask.svg");
+  mask-image: url("./icons/not-fit-mask.svg?url");
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: contain;
