@@ -28,6 +28,12 @@ RewriteRule ^ http://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 # RewriteCond %{REQUEST_URI} !dist/
 # RewriteRule (.*) /dist/ [L]
 
+### MIME Types ###
+<IfModule mod_mime.c>
+    AddType image/avif .avif
+    AddType image/webp .webp
+</IfModule>
+
 ### Cache static assets ###
 <IfModule mod_expires.c>
     ExpiresActive On
