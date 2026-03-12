@@ -1,4 +1,4 @@
-import{j as e}from"./jsx-runtime.D_zvdyIk.js";import{r as n}from"./index.WFquGv8Z.js";import{s as c}from"./index.502f2e5c.BjiWgRN8.js";const k=s=>e.jsxs("svg",{viewBox:"0 0 127 127",...s,children:[e.jsx("style",{children:`
+import{j as e}from"./jsx-runtime.D_zvdyIk.js";import{r as n}from"./index.WFquGv8Z.js";import{s as c}from"./index.502f2e5c.CJKrK_7E.js";const k=s=>e.jsxs("svg",{viewBox:"0 0 127 127",...s,children:[e.jsx("style",{children:`
         .st0 {
           fill: none;
           stroke: var(--color-accent);
