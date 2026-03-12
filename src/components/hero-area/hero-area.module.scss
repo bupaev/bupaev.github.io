@@ -42,8 +42,8 @@
     inset: 0;
     content: "";
     background: repeating-linear-gradient(105deg,
-        var(--background-color) 0,
-        var(--background-color) 3px,
+        var(--color-background) 0,
+        var(--color-background) 3px,
         transparent 4px,
         transparent 13px);
   }
@@ -76,259 +76,270 @@
       opacity: 1;
     }
   }
+}
 
-  .heroBody {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
-    align-items: stretch;
-    align-self: stretch;
+.heroBody {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: stretch;
+  align-self: stretch;
 
-    @include mixins.tablet {
-      padding-right: 0;
-      padding-left: 10px;
-    }
-
-    @include mixins.mobile {
-      min-height: 600px;
-      padding: 80px 0 60px;
-    }
+  @include mixins.tablet {
+    padding-right: 0;
+    padding-left: 10px;
   }
 
-  .mediaWrapper {
-    position: relative;
-    display: block;
-    flex: 1 1 0;
-    height: 100%;
+  @include mixins.mobile {
+    min-height: 600px;
+    padding: 80px 0 60px;
+  }
+}
 
-    @include mixins.mobile {
-      position: absolute;
-      top: clamp(-100px, calc(60vw - 300px), 0px);
-      left: clamp(-30px, calc(25vw - 100px), 0px);
-    }
+.mediaWrapper {
+  position: relative;
+  display: block;
+  flex: 1 1 0;
+  height: 100%;
+
+  @include mixins.mobile {
+    position: absolute;
+    top: clamp(-100px, calc(60vw - 300px), 0px);
+    left: clamp(-30px, calc(25vw - 100px), 0px);
+  }
+}
+
+.textWrapper {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 0;
+  align-self: center;
+  padding-top: 2rem;
+  font-style: italic;
+  font-weight: 600;
+  text-align: right;
+
+  // text column gradually increases width, which shifts the image column progressively to the right
+  @media screen and (max-width: variables.$breakpoint-3xl) and (min-width: variables.$breakpoint-md) {
+    flex-grow: calc(1 + (1500px - 100vw) / 700px);
+    transform: translateX(clamp(0px, calc(25px * (960px - 100vw) / 100px), 36px));
   }
 
-  .textWrapper {
-    position: relative;
-    z-index: 1;
-    flex: 1 1 0;
-    align-self: center;
-    padding-top: 2rem;
-    font-style: italic;
-    font-weight: 600;
-    text-align: right;
-
-    // text column gradually increases width, which shifts the image column progressively to the right
-    @media screen and (max-width: variables.$breakpoint-3xl) and (min-width: variables.$breakpoint-md) {
-      flex-grow: calc(1 + (1500px - 100vw) / 700px);
-      transform: translateX(clamp(0px, calc(25px * (960px - 100vw) / 100px), 36px));
-    }
-
-    @include mixins.mobile {
-      flex: none;
-      width: 100%;
-      padding-right: calc(10px + 10 * ((100vw - 360px) / 100));
-      text-align: right;
-    }
-  }
-
-  a {
-    position: relative;
-
-    @include mixins.text-hover-effect;
-
-    &::after {
-      width: 100%;
-    }
-
-    &:hover {
-      &::after {
-        width: calc(100% + 0.4em);
-      }
-    }
-  }
-
-  .icon svg {
+  @include mixins.mobile {
+    flex: none;
     width: 100%;
-    height: 100%;
-    fill: var(--text-color) !important;
-    transform: skew(-15deg);
-  }
-
-  .heroHeading {
-    font-size: 3rem;
-    line-height: 1.1;
+    padding-right: calc(10px + 10 * ((100vw - 360px) / 100));
     text-align: right;
+  }
+}
 
-    @include mixins.mobile {
-      @include mixins.text-contour(var(--background-color), 0.02em);
+a {
+  position: relative;
 
-      padding-left: 25%;
-    }
+  @include mixins.text-hover-effect;
+
+  &::after {
+    width: 100%;
   }
 
-  .heroSubheading {
-    padding-top: 1rem;
-    padding-bottom: 1.2rem;
-    font-size: 2.25rem;
-    line-height: 1.25;
-
-    @include mixins.mobile {
-      @include mixins.text-contour(var(--background-color), 0.02em);
-
-      padding-left: 15%;
-
-      br {
-        display: none;
-      }
+  &:hover {
+    &::after {
+      width: calc(100% + 0.4em);
     }
   }
+}
 
-  .contacts {
-    padding-top: 1.5rem;
-    font-size: var(--size-4);
-    font-style: italic;
-    font-weight: 600;
+.icon svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--color-text) !important;
+  transform: skew(-15deg);
+}
 
-    &>span {
+.heroHeading {
+  font-size: 3rem;
+  line-height: 1.1;
+  text-align: right;
+
+  @include mixins.mobile {
+    @include mixins.text-contour(var(--color-background), 0.02em);
+
+    padding-left: 20%;
+  }
+}
+
+.separator {
+  position: relative;
+  display: inline-block;
+  width: 0.22em;
+  height: 0.22em;
+  margin-right: 0.25em;
+  margin-bottom: 0.18em;
+  margin-left: 0.35em;
+  vertical-align: baseline;
+  background-color: currentcolor;
+  border-radius: 0.05em;
+  opacity: 0.95;
+  transform: skewX(-15deg);
+}
+
+.heroSubheading {
+  padding-top: 1rem;
+  padding-bottom: 1.2rem;
+  font-size: 2rem;
+  line-height: 1.25;
+
+  @include mixins.mobile {
+    @include mixins.text-contour(var(--color-background), 0.02em);
+
+    padding-left: 8px;
+  }
+}
+
+.contacts {
+  padding-top: 0.8rem;
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 600;
+
+  &>span {
+    display: inline-block;
+    padding-bottom: 0.3em;
+    margin-left: 1em;
+
+    @include mixins.mobile {
+      margin-left: 0.5em;
+    }
+
+    a {
       display: inline-block;
-      padding-bottom: 0.3em;
-      margin-left: 1em;
-
-      @include mixins.mobile {
-        margin-left: 0.5em;
-      }
-
-      a {
-        display: inline-block;
-        height: 1.3em;
-      }
+      height: 1.3em;
     }
   }
+}
 
-  .contactLabel {
-    margin-bottom: 10px;
+.contactLabel {
+  margin-bottom: 10px;
+}
+
+.textShapeLimiter {
+  float: right;
+  width: 120px;
+  height: 400px;
+  pointer-events: none;
+  shape-outside: polygon(100% 0%, 100% 100%, 0 100%);
+
+  @include mixins.tablet-only {
+    width: 135px;
+    height: 450px;
   }
 
-  .textShapeLimiter {
-    float: right;
-    width: 120px;
-    height: 400px;
-    pointer-events: none;
-    shape-outside: polygon(100% 0%, 100% 100%, 0 100%);
+  @include mixins.mobile {
+    display: none;
+  }
+}
 
-    @include mixins.tablet-only {
-      width: 135px;
-      height: 450px;
-    }
+.parallelogramImageContainer {
+  position: absolute;
+  top: 0;
+  left: min(-15vh, -100px);
+  height: 100%;
+  aspect-ratio: 1.5;
+  margin: 0;
+  overflow: hidden;
+  background: repeating-linear-gradient(105deg,
+      var(--color-accent) 0,
+      var(--color-accent) 3px,
+      transparent 4px,
+      transparent 13px);
+  mask-image: url("./images/parallelogram-mask.svg");
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
 
-    @include mixins.mobile {
-      display: none;
-    }
+  @include mixins.mobile {
+    left: 0;
+    aspect-ratio: 0.268;
+    mask-image: url("./images/parallelogram-mobile-mask.svg");
   }
 
-  .parallelogramImageContainer {
+  &::after {
     position: absolute;
     top: 0;
-    left: min(-15vh, -100px);
+    left: 0;
+    width: 100%;
     height: 100%;
-    aspect-ratio: 1.5;
-    margin: 0;
-    overflow: hidden;
-    background: repeating-linear-gradient(105deg,
-        var(--accent-color) 0,
-        var(--accent-color) 3px,
-        transparent 4px,
-        transparent 13px);
-    mask-image: url("./images/parallelogram-mask.svg");
-    mask-repeat: no-repeat;
-    mask-size: 100% 100%;
+    pointer-events: none;
+    content: "";
+    background-color: rgba(#fff, 0.05);
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    left: min(0px, calc((20vw - 480px) * 1vh / 1vw));
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 
     @include mixins.mobile {
       left: 0;
-      aspect-ratio: 0.268;
-      mask-image: url("./images/parallelogram-mobile-mask.svg");
     }
 
-    &::after {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      content: "";
-      background-color: rgba(#fff, 0.05);
-    }
-
-    img {
-      position: absolute;
-      top: 0;
-      left: min(0px, calc((20vw - 480px) * 1vh / 1vw));
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-
-      @include mixins.mobile {
-        left: 0;
-      }
-
-      &.placeholderImage {
-        opacity: 1;
-        filter: blur(20px);
-        transition: opacity 0.6s ease-out;
-
-        &.hidden {
-          opacity: 0;
-        }
-      }
-
-      &.realImage {
-        opacity: 0;
-        transition: opacity 0.6s ease-out;
-
-        &.revealed {
-          opacity: 1;
-        }
-      }
-    }
-
-    // Container styles for the controlled images to ensure they overlap
-    .lightImage,
-    .darkImage {
-      position: absolute;
-      inset: 0;
-      will-change: opacity;
-    }
-
-    // Default: Light mode active
-    .lightImage {
-      z-index: 1;
+    &.placeholderImage {
       opacity: 1;
-      // When going to Light mode (active): Become opaque instantly so we are ready behind the fading-out dark image
-      transition: opacity 0s;
+      filter: blur(20px);
+      transition: opacity 0.6s ease-out;
+
+      &.hidden {
+        opacity: 0;
+      }
+    }
+
+    &.realImage {
+      opacity: 0;
+      transition: opacity 0.6s ease-out;
+
+      &.revealed {
+        opacity: 1;
+      }
+    }
+  }
+
+  // Container styles for the controlled images to ensure they overlap
+  .lightImage,
+  .darkImage {
+    position: absolute;
+    inset: 0;
+    will-change: opacity;
+  }
+
+  // Default: Light mode active
+  .lightImage {
+    z-index: 1;
+    opacity: 1;
+    // When going to Light mode (active): Become opaque instantly so we are ready behind the fading-out dark image
+    transition: opacity 0s;
+  }
+
+  .darkImage {
+    z-index: 2;
+    opacity: 0;
+    // Always fade smoothly
+    transition: opacity 300ms ease-in-out;
+  }
+
+  // Dark mode overrides
+  :global([data-color-scheme="dark"]) & {
+    .lightImage {
+      opacity: 0;
+      // When going to Dark mode (inactive): Stay opaque until the dark image (on top) has fully faded in
+      transition: opacity 0s linear 300ms;
     }
 
     .darkImage {
-      z-index: 2;
-      opacity: 0;
-      // Always fade smoothly
-      transition: opacity 300ms ease-in-out;
-    }
-
-    // Dark mode overrides
-    :global([data-color-scheme="dark"]) & {
-      .lightImage {
-        opacity: 0;
-        // When going to Dark mode (inactive): Stay opaque until the dark image (on top) has fully faded in
-        transition: opacity 0s linear 300ms;
-      }
-
-      .darkImage {
-        opacity: 1;
-      }
+      opacity: 1;
     }
   }
 }

@@ -39,7 +39,10 @@ export function HeroArea(props: HeroAreaProps) {
                 Hi! I&apos;m Paul Buramensky
               </h1>
               <h2 className={styles.heroSubheading}>
-                Lead front-end engineer<br /> with strong UX expertise<br /> and AI-enthusiast
+                <span style={{ fontSize: '1.05em' }}>Lead front-end engineer</span><br />
+                <span className={styles.separator} />UX-driven  
+                <span className={styles.separator} />AI-fluent<br />
+                <span className={styles.separator} />product-obsessed
               </h2>
               <div className={styles.contacts}>
                 <div className={'mb-2'}>
@@ -75,7 +78,7 @@ export function HeroArea(props: HeroAreaProps) {
                     </span>
                   </a>
                 </span>
-                <div className="mb-[6px]">
+                <div className="mb-1.5">
                   or just 
                 </div>
                 <span>
