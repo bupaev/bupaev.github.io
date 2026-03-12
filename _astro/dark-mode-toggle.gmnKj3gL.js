@@ -1,14 +1,14 @@
-import{j as e}from"./jsx-runtime.D_zvdyIk.js";import{r as n}from"./index.WFquGv8Z.js";import{s as c}from"./index.502f2e5c.DYEnDfX3.js";const k=s=>e.jsxs("svg",{viewBox:"0 0 127 127",...s,children:[e.jsx("style",{children:`
+import{j as e}from"./jsx-runtime.D_zvdyIk.js";import{r as n}from"./index.WFquGv8Z.js";import{s as c}from"./index.502f2e5c.BjiWgRN8.js";const k=s=>e.jsxs("svg",{viewBox:"0 0 127 127",...s,children:[e.jsx("style",{children:`
         .st0 {
           fill: none;
-          stroke: var(--accent-color);
+          stroke: var(--color-accent);
           stroke-width: 8;
           stroke-linecap: round;
           stroke-miterlimit: 4;
         }
       `}),e.jsx("line",{className:"st0",x1:"20",y1:"101.2",x2:"29.3",y2:"92.2"}),e.jsx("line",{className:"st0",x1:"92.5",y1:"33.2",x2:"101.8",y2:"24.2"}),e.jsx("line",{className:"st0",x1:"63.5",y1:"20.7",x2:"63.5",y2:"8.2"}),e.jsx("line",{className:"st0",x1:"63.5",y1:"118",x2:"63.5",y2:"105.6"}),e.jsx("line",{className:"st0",x1:"105.3",y1:"63",x2:"119",y2:"63.1"}),e.jsx("line",{className:"st0",x1:"7.4",y1:"63",x2:"21",y2:"63.1"}),e.jsx("line",{className:"st0",x1:"23",y1:"23.8",x2:"32.2",y2:"33.7"}),e.jsx("line",{className:"st0",x1:"93.1",y1:"93.2",x2:"102.3",y2:"103.1"}),e.jsx("circle",{className:"st0",cx:"63",cy:"63",r:"29.5"})]}),f=s=>e.jsxs("svg",{viewBox:"0 0 512 512",...s,children:[e.jsx("style",{children:`
         .moon-icon-st0 {
-          fill: var(--accent-color);
+          fill: var(--color-accent);
         }
       `}),e.jsx("path",{className:`moon-icon-st0 ${c.moonBody}`,d:`M279,493.5c-138.3,0-250.8-108.4-250.8-241.6C28.1,143.7,103.6,48,211.7,19c1.1-0.3,2.3-0.5,3.5-0.5c3.6,0,7.1,1.4,9.7,4
       c2.6,2.5,4.1,5.9,4.1,9.6c0,3.7-1.4,7.3-4,9.9c-39.8,40.1-61.7,92.6-61.7,147.7c0,118.1,100.2,214.2,223.4,214.2
