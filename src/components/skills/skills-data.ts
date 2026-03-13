@@ -316,7 +316,7 @@ export const SKILLS_DATA: SkillGroup[] = [
       },
       {
         title: "German",
-        info: "Just enough to survive for several days in a German language-only environment 😅 (A2)",
+        info: "Enough for basic communication (A2)",
         level: "basic",
       },
     ],

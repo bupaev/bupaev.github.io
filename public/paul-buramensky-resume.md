@@ -12,14 +12,14 @@ Lead Front-End Engineer with 15+ years of experience bridging design, code, and 
 
 ## **SKILLS & EXPERTISE**
 
-**Languages:** JavaScript, TypeScript, HTML5, CSS3/SCSS  
-**Frontend Frameworks:** React, Vue.js, Next.js, Astro, Nuxt.js  
-**Backend & APIs:** Node.js, Express, REST API Design, GraphQL, FHIR API, MongoDB, MySQL  
-**Testing & Quality:** Vitest, Jest, React Testing Library, Playwright, Cypress, ESLint, Stylelint  
-**Design & UX:** Figma, UX Design, WCAG Accessibility, Design Systems, Responsive Design  
-**DevOps & Cloud:** Docker, AWS, GitHub Actions, GitLab CI, CI/CD Pipelines  
-**AI & Tooling:** AI Pair Programming, Prompt Engineering, Claude Code, Gemini, AI Agents  
-**Practices & Leadership:** System Architecture, Player-Coach Leadership, Agile Delivery
+**Core Languages:** JavaScript, TypeScript, HTML5, CSS3/SCSS, Tailwind CSS
+**Frontend Frameworks:** React, Vue.js, Next.js, Astro, Nuxt.js
+**UI & Design:** UX Design & Prototyping, Figma, Design Systems, WCAG 2.2, CSS Animation, SVG
+**APIs & Integration:** REST API Design & Architecture, GraphQL, FHIR API
+**Testing & Quality:** Vitest, Jest, React Testing Library, Playwright, Performance Optimization
+**Architecture:** System Design, SPA/SSR/SSG, CI/CD (GitHub Actions, GitLab CI)
+**AI-Augmented Development:** AI Pair Programming, Prompt Engineering, Claude, Codex, Gemini
+**Leadership:** Player-Coach, Agile (Scrum/Kanban), Code Review, Cross-Team Mentoring
 
 ## **PROFESSIONAL EXPERIENCE**
 
