@@ -12,14 +12,14 @@ Lead Front-End Engineer with 15+ years of experience bridging design, code, and 
 
 ## **SKILLS & EXPERTISE**
 
-**Core Languages:** JavaScript, TypeScript, HTML5, CSS3/SCSS, Tailwind CSS
-**Frontend Frameworks:** React, Vue.js, Next.js, Astro, Nuxt.js
-**UI & Design:** UX Design & Prototyping, Figma, Design Systems, WCAG 2.2, CSS Animation, SVG
-**APIs & Integration:** REST API Design & Architecture, GraphQL, FHIR API
-**Testing & Quality:** Vitest, Jest, React Testing Library, Playwright, Performance Optimization
-**Architecture:** System Design, SPA/SSR/SSG, CI/CD (GitHub Actions, GitLab CI)
-**AI-Augmented Development:** AI Pair Programming, Prompt Engineering, Claude, Codex, Gemini
-**Leadership:** Player-Coach, Agile (Scrum/Kanban), Code Review, Cross-Team Mentoring
+**Core Languages:** JavaScript, TypeScript, HTML5, CSS3/SCSS  
+**Frameworks and libraries:** React, Vue.js, Next.js, Astro, Nuxt.js, Tailwind CSS, BEM  
+**UI & Design:** UX Design & Prototyping, Figma, Design Systems, WCAG 2.2, CSS Animation, SVG  
+**APIs & Integration:** REST API Design & Architecture, GraphQL, FHIR API  
+**Quality:** Vitest, Jest, React Testing Library, Playwright, Performance Optimization, Linting  
+**Architecture/Infra:** System Design, SPA/SSR/SSG, CI/CD (GitHub Actions, GitLab CI, Jenkins)  
+**AI-augmented Development:** AI Pair Programming, Prompt Engineering, Claude, Antigravity, Copilot  
+**Team & Process:** Technical Leadership, Agile (Scrum/Kanban), Mentoring, Code Review, Interviewing
 
 ## **PROFESSIONAL EXPERIENCE**
 
@@ -27,9 +27,9 @@ Lead Front-End Engineer with 15+ years of experience bridging design, code, and 
 
 *Global software engineering company (50K+ employees) – Project for large health insurer*
 
-* Led a 4-person engineering squad within a 12-person cross-functional team delivering the client's public-facing web platform serving 400K+ monthly visitors
+* Led a 4-person engineering squad within a 12-person cross-functional team delivering the client's public-facing web platform serving 400K+ monthly visitors 
 
-* Executed a strategic architectural rewrite of the legacy front-end system, modernizing the tech stack and reducing the codebase by 40% while improving maintainability and performance
+* Executed a strategic architectural rewrite of the legacy front-end system, modernizing to embedded SPA TypeScript components, reducing the codebase by 40% while improving maintainability and performance
 
 * Optimized performance of content-heavy pages, making them load over twice as fast with Largest Contentful Paint (LCP) reduced from 3.2s to 1.5s
 
@@ -37,11 +37,13 @@ Lead Front-End Engineer with 15+ years of experience bridging design, code, and 
 
 * Cooperated with the design team to elevate UI quality and refine design system, directly boosting brand perception and user satisfaction in UX interviews
 
-* Established rigorous code review protocols, automated linting pipelines, and performance budgets, reducing technical debt accumulation and improving release confidence
+* Established rigorous code review protocols, automated linting pipelines, and unit testing with Jest and React Testing Library, reducing technical debt and improving release confidence
 
 * Stepped beyond the front-end development to help with business analysis and QA, clearing roadblocks so the team could keep shipping smoothly
 
-* Mentored engineers and built an open, collaborative culture by sharing front-end, design system, and accessibility best practices across multiple product teams.
+* Mentored engineers and built an open, collaborative culture by sharing front-end, design system, and accessibility best practices across multiple product teams
+
+* Used AI pair programming (Claude Code, GitHub Copilot) to boost development speed and code quality
 
 ### **Lead Front-End Developer** | Holmusk | 07.2018 – 05.2021
 
@@ -49,13 +51,13 @@ Lead Front-End Engineer with 15+ years of experience bridging design, code, and 
 
 * Led a front-end team of 3–5 engineers within a 12-person squad, driving delivery across 5 different time zones
 
-* Engineered a complex electronic health record application with Vue.js and a RESTful FHIR API, handling highly structured healthcare data workflows and mastering the sophisticated FHIR-based data organization.
+* Engineered a complex SPA-based EHR (electronic health record) application with Vue.js, TypeScript, and a RESTful FHIR API, handling intricate healthcare data workflows
 
 * Transformed mid-fidelity wireframes from BA into polished, production UI with minimal design team support
 
 * Analyzed the product design complexity, planned the workload, communicated the risks
 
-* Set and enforced strict code quality standards by leading by example, rigorous code review and automated quality gates
+* Enforced code quality standards via code review, Jest/Vue Test Utils coverage, and automated quality gates
 
 ### **Lead UI/Front-End Developer** | Codenetix | 11.2016 – 07.2018
 
@@ -63,7 +65,7 @@ Lead Front-End Engineer with 15+ years of experience bridging design, code, and 
 
 * Led a 4-person front-end team within a digital transformation agency, establishing foundational architecture, tooling, and coding standards from scratch as an early-stage hire.
 
-* Architected and delivered multiple client applications from concept to production using React, Redux, and Gatsby
+* Architected and delivered multiple client applications from concept to production: mostly React SPA, but also SSG with Gatsby, SSR with Next.js.
 
 * Created interactive multimedia content and complex animations using HTML5 Canvas and modern CSS techniques
 
@@ -75,7 +77,7 @@ Lead Front-End Engineer with 15+ years of experience bridging design, code, and 
 
 *Social music creation platform – Browser-based digital audio workstation*
 
-* Engineered a browser-based multitrack digital audio workstation using AngularJS and the Web Audio API, replicating desktop-grade audio production capabilities
+* Engineered a browser-based SPA multitrack digital audio workstation using AngularJS and the Web Audio API, replicating desktop-grade audio production capabilities
 
 * Solved non-trivial DSP challenges: multitrack mixing, real-time audio effects, latency compensation, and pitch detection via Fourier analysis and autocorrelation
 
@@ -103,9 +105,9 @@ Lead Front-End Engineer with 15+ years of experience bridging design, code, and 
 
 **Ph.D. Studies, Computer Science (incomplete)** | Omsk State Technical University, 2013 – 2015 
 
-**M.Sc., Computer Science** (GPA 4.9/5.0) | Omsk State Technical University, 2009 – 2011 
+**Master's Degree in Computer Science** (GPA 4.9/5.0) | Omsk State Technical University, 2009 – 2011 
 
-**B.Sc., Computer Science** (GPA 4.6/5.0) | Omsk State Technical University, 2005 – 2009
+**Bachelor's Degree in Computer Science** (GPA 4.6/5.0) | Omsk State Technical University, 2005 – 2009
 
 ## **LANGUAGES**
 
