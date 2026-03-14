@@ -97,10 +97,27 @@ export function HeroImages({
   });
   const [lightImageLoaded, setLightImageLoaded] = useState(false);
   const [darkImageLoaded, setDarkImageLoaded] = useState(false);
+  const [canLoadInactive, setCanLoadInactive] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     
+    // Defer loading of inactive theme image until idle
+    const handleIdle = () => {
+      if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(() => setCanLoadInactive(true), { timeout: 2000 });
+      } else {
+        // Fallback for browsers without requestIdleCallback
+        setTimeout(() => setCanLoadInactive(true), 1000);
+      }
+    };
+
+    if (document.readyState === "complete") {
+      handleIdle();
+    } else {
+      window.addEventListener("load", handleIdle, { once: true });
+    }
+
     const checkTheme = () => {
       const theme = document.documentElement.getAttribute("data-color-scheme");
       setIsDark(theme === "dark");
@@ -121,11 +138,17 @@ export function HeroImages({
       attributeFilter: ["data-color-scheme"],
     });
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("load", handleIdle);
+    };
   }, []);
 
-  const lightPriority = !isDark || darkImageLoaded;
-  const darkPriority = isDark || lightImageLoaded;
+  // Priority logic:
+  // 1. If it's the active theme, load it immediately (priority = true)
+  // 2. If it's the inactive theme, only load it IF the active image is loaded AND we are in idle state (canLoadInactive)
+  const lightPriority = !isDark || (darkImageLoaded && canLoadInactive);
+  const darkPriority = isDark || (lightImageLoaded && canLoadInactive);
 
   return (
     <div className={styles.parallelogramImageContainer}>
