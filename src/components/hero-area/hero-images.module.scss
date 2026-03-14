@@ -1,0 +1,131 @@
+@use "@/styles/mixins";
+@use "@/styles/variables";
+
+.parallelogramImageContainer {
+  position: absolute;
+  top: 0;
+  left: min(-15vh, -100px);
+  height: 100%;
+  aspect-ratio: 1.5;
+  margin: 0;
+  overflow: hidden;
+ background-color: var(--color-background);
+  mask-image: url("./images/parallelogram-mask.svg");
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+
+  @include mixins.mobile {
+    left: 0;
+    aspect-ratio: 0.268;
+    mask-image: url("./images/parallelogram-mobile-mask.svg");
+  }
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    content: "";
+    background-color: rgba(#fff, 0.05);
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    left: min(0px, calc((20vw - 480px) * 1vh / 1vw));
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    @include mixins.mobile {
+      left: 0;
+    }
+
+    &.placeholderImage {
+      opacity: 1;
+      filter: blur(15px);
+      // Delay fade-out until real image is fully opaque (0.6s)
+      transition: opacity 0.6s ease-out 0.6s;
+
+      &.hidden {
+        opacity: 0;
+      }
+    }
+
+    &.realImage {
+      opacity: 0;
+      transition: opacity 0.6s ease-out;
+
+      &.revealed {
+        opacity: 1;
+      }
+    }
+  }
+
+  // Hydration/SSR theme visibility
+  // If ssrOnly is present, we rely strictly on the html[data-color-scheme] for display
+  
+  // These rules ONLY apply before hydration (when .ssrOnly is present)
+  &:has(.ssrOnly) {
+    // DEFAULT: Light theme (Safe fallback if script hasn't run yet)
+    .darkImage {
+      display: none;
+    }
+
+    // EXPLICIT: Dark theme
+    :global(html[data-color-scheme="dark"]) & {
+      .lightImage {
+        display: none;
+      }
+      .darkImage {
+        display: block;
+      }
+    }
+  }
+
+  // Base styles for both hydrated and SSR images
+  .lightImage,
+  .darkImage {
+    position: absolute;
+    inset: 0;
+    will-change: opacity;
+  }
+
+  // Once hydrated, we switch to opacity-based transitions
+  &:not(:has(.ssrOnly)) {
+    .lightImage,
+    .darkImage {
+      display: block; // Restore display for cross-fade transitions
+    }
+
+    // Default: Light mode active
+    .lightImage {
+      z-index: 1;
+      opacity: 1;
+      // When going to Light mode (active): Become opaque instantly so we are ready behind the fading-out dark image
+      transition: opacity 0s;
+    }
+
+    .darkImage {
+      z-index: 2;
+      opacity: 0;
+      // Always fade smoothly
+      transition: opacity 300ms ease-in-out;
+    }
+
+    // Dark mode active overrides
+    :global(html[data-color-scheme="dark"]) & {
+      .lightImage {
+        opacity: 0;
+        // When going to Dark mode (inactive): Stay opaque until the dark image (on top) has fully faded in
+        transition: opacity 0s linear 300ms;
+      }
+
+      .darkImage {
+        opacity: 1;
+      }
+    }
+  }
+}

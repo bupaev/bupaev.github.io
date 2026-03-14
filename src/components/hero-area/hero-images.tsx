@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import styles from "./hero-area.module.scss";
+import styles from "./hero-images.module.scss";
 
 export interface ImageProps {
   src: string;
@@ -89,7 +89,12 @@ export function HeroImages({
   darkMobileImage
 }: HeroImagesProps) {
   const [mounted, setMounted] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== "undefined") {
+      return document.documentElement.getAttribute("data-color-scheme") === "dark";
+    }
+    return false;
+  });
   const [lightImageLoaded, setLightImageLoaded] = useState(false);
   const [darkImageLoaded, setDarkImageLoaded] = useState(false);
 
@@ -125,50 +130,20 @@ export function HeroImages({
   return (
     <div className={styles.parallelogramImageContainer}>
       {!mounted ? (
-        /* SSR / No-JS Fallback */
+        /* SSR / No-JS Fallback: Render both, let CSS decide visibility */
         <>
-        {darkDesktopImage && darkMobileImage ? (
-           <picture>
-             {/* Dark Mode Sources */}
-             <source 
-               media="(prefers-color-scheme: dark) and (max-width: 768px)" 
-               srcSet={darkMobileImage.src} 
-             />
-             <source 
-               media="(prefers-color-scheme: dark)" 
-               srcSet={darkDesktopImage.src} 
-             />
-             
-             {/* Light Mode Sources (Default) */}
-             <source 
-                media="(max-width: 768px)" 
-                srcSet={mobileImage.src} 
-             />
-             <img
-               src={desktopImage.src}
-               alt="Paul Buramensky portrait"
-               className={styles.realImage + ' ' + styles.revealed}
-               loading="eager"
-               fetchPriority="high"
-               decoding="sync"
-             />
-           </picture>
-        ) : (
-          <picture>
-            <source
-              media="(max-width: 768px)"
-              srcSet={mobileImage.src}
+          <ControlledImage 
+            desktop={desktopImage} 
+            mobile={mobileImage} 
+            className={`${styles.lightImage} ${styles.ssrOnly}`}
+          />
+          {darkDesktopImage && darkMobileImage && (
+            <ControlledImage 
+              desktop={darkDesktopImage} 
+              mobile={darkMobileImage} 
+              className={`${styles.darkImage} ${styles.ssrOnly}`}
             />
-            <img
-              src={desktopImage.src}
-              alt="Paul Buramensky portrait"
-              className={styles.realImage + ' ' + styles.revealed}
-              loading="eager"
-              fetchPriority="high"
-              decoding="sync"
-            />
-          </picture>
-        )}
+          )}
         </>
       ) : (
         /* Hydrated: Controlled Images */

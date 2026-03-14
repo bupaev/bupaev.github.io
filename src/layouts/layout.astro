@@ -100,6 +100,28 @@ const ogImageUrl = new URL(ogImage.src, Astro.site).toString();
       gtag('js', new Date());
       gtag('config', 'G-HHHHHSLPX3');
     </script>
+
+    <script is:inline>
+      // Restore theme from cookie to prevent flashing
+      // This script is inlined in the head to execute synchronously before any paint
+      (function() {
+        const getCookie = (name) => {
+          const matches = document.cookie.match(
+            new RegExp(
+              "(?:^|; )" + name.replace(/([.$?*|{}()[\]\\/+^])/g, "\\$1") + "=([^;]*)",
+            ),
+          );
+          return matches ? matches[1] : undefined;
+        };
+
+        const theme = getCookie("color-scheme");
+        if (theme) {
+          document.documentElement.setAttribute("data-color-scheme", theme);
+        } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          document.documentElement.setAttribute("data-color-scheme", "dark");
+        }
+      })();
+    </script>
   </head>
   <body>
     <slot />
@@ -107,22 +129,5 @@ const ogImageUrl = new URL(ogImage.src, Astro.site).toString();
 </html>
 
 <script>
-  // Restore theme from cookie to prevent flashing
-  const getCookie = (name: string) => {
-    const matches = document.cookie.match(
-      new RegExp(
-        "(?:^|; )" + name.replace(/([.$?*|{}()[\]\\/+^])/g, "\\$1") + "=([^;]*)",
-      ),
-    );
-    return matches ? matches[1] : undefined;
-  };
-
-  const theme = getCookie("color-scheme");
-  if (theme) {
-    document.documentElement.setAttribute("data-color-scheme", theme);
-  } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    document.documentElement.setAttribute("data-color-scheme", "dark");
-  }
-
   import("../scripts/console-greeting");
 </script>
