@@ -10,7 +10,8 @@ product-oriented, and operates as a player-coach driving team execution.
 
 ## Key Pages
 - [Online CV](https://paulbu.com/cv/): Interactive CV with experience, skills, and education
-- [Full Resume (Markdown)](https://paulbu.com/paul-buramensky-resume.md): Complete resume in plain Markdown, suitable for LLM consumption
+- [CV (Markdown)](https://paulbu.com/cv.md): Full markdown version of the interactive CV page, optimized for LLMs
+- [Resume (Markdown)](https://paulbu.com/paul-buramensky-resume.md): Complete resume in plain Markdown, suitable for LLM consumption
 - [Resume (PDF)](https://paulbu.com/paul-buramensky-resume.pdf): Downloadable resume in PDF format
 
 ## Contact

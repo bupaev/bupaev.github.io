@@ -43,35 +43,27 @@ Lead Front-End Engineer with 15+ years of experience bridging design, code, and 
 
 * Mentored engineers and built an open, collaborative culture by sharing front-end, design system, and accessibility best practices across multiple product teams
 
-* Used AI pair programming (Claude Code, GitHub Copilot) to boost development speed and code quality
+* Leveraged AI pair programming (Claude Code, GitHub Copilot) to boost development speed and code quality
 
 ### **Lead Front-End Developer** | Holmusk | 07.2018 – 05.2021
 
 *Health technology and data science company – Electronic Health Record (EHR) platform*
 
-* Led a front-end team of 3–5 engineers within a 12-person squad, driving delivery across 5 different time zones
-
-* Engineered a complex SPA-based EHR (electronic health record) application with Vue.js, TypeScript, and a RESTful FHIR API, handling intricate healthcare data workflows
-
-* Transformed mid-fidelity wireframes from BA into polished, production UI with minimal design team support
-
-* Analyzed the product design complexity, planned the workload, communicated the risks
-
-* Enforced code quality standards via code review, Jest/Vue Test Utils coverage, and automated quality gates
+- Led a front-end team of 3–5 engineers within a 12-person squad, driving delivery across 5 different time zones
+- Engineered a complex SPA-based EHR (electronic health record) application with Vue.js, TypeScript, and a RESTful FHIR API, handling intricate healthcare data workflows
+- Transformed mid-fidelity wireframes from BA into polished, production UI with minimal design team support
+- Analyzed the product design complexity, planned the workload, communicated the risks
+- Enforced code quality standards via code review, Jest/Vue Test Utils coverage, and automated quality gates
 
 ### **Lead UI/Front-End Developer** | Codenetix | 11.2016 – 07.2018
 
 *Software agency specializing in complex custom solutions*
 
-* Led a 4-person front-end team within a digital transformation agency, establishing foundational architecture, tooling, and coding standards from scratch as an early-stage hire.
-
-* Architected and delivered multiple client applications from concept to production: mostly React SPA, but also SSG with Gatsby, SSR with Next.js.
-
-* Created interactive multimedia content and complex animations using HTML5 Canvas and modern CSS techniques
-
-* Partnered with stakeholders on requirements gathering, user story definition, and technical roadmap planning
-
-* Stepped into product design and rapid prototyping roles to validate UI/UX concepts early in the development cycle
+- Led a 4-person front-end team within a digital transformation agency, establishing foundational architecture, tooling, and coding standards from scratch as an early-stage hire.
+- Architected and delivered multiple client applications from concept to production: mostly React SPA, but also SSG with Gatsby, SSR with Next.js.
+- Created interactive multimedia content and complex animations using HTML5 Canvas and modern CSS techniques
+- Partnered with stakeholders on requirements gathering, user story definition, and technical roadmap planning
+- Stepped into product design and rapid prototyping roles to validate UI/UX concepts early in the development cycle
 
 ### **Front-End Developer** | BandLab | 09.2014 – 10.2016
 
