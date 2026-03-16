@@ -1,7 +1,7 @@
 ---
 import "../styles/main.scss";
 import "../styles/tailwind.css";
-import ogImage from "../assets/images/paul-buramensky-og.avif";
+import ogImage from "../assets/images/paul-buramensky-og.jpg";
 
 import nunitoLatin400 from "../assets/fonts/Nunito-400-latin11.woff2?url";
 import nunitoLatin700 from "../assets/fonts/Nunito-700-latin16.woff2?url";
@@ -18,6 +18,7 @@ const {
 } = Astro.props;
 
 const ogImageUrl = new URL(ogImage.src, Astro.site).toString();
+const canonicalUrl = Astro.url.href;
 ---
 
 <!doctype html>
@@ -25,6 +26,7 @@ const ogImageUrl = new URL(ogImage.src, Astro.site).toString();
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="preload" href={nunitoLatin400} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={nunitoLatin700} as="font" type="font/woff2" crossorigin />
@@ -37,13 +39,20 @@ const ogImageUrl = new URL(ogImage.src, Astro.site).toString();
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="My web CV" />
-    <meta property="og:url" content="https://paulbu.com" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content={String(ogImage.width)} />
     <meta property="og:image:height" content={String(ogImage.height)} />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:locale" content="en" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
