@@ -28,30 +28,30 @@ These principles matter even more as AI becomes an essential part of our routine
 ### Professional Areas
 
 #### Software Engineering
-- Prioritizing Web Fundamentals
-- Applying Objective Engineering
-- Enforcing Quality Standards
-- Cultivating Excellent DX
-- Owning the Full Lifecycle
+- **Prioritizing Web Fundamentals**: Over my career, I've watched frameworks come and go. Starting with Backbone and AngularJS and eventually moving to React and Vue taught me an important lesson: syntax is transient, but fundamentals—HTML, CSS, and JS—are forever.
+- **Applying Objective Engineering**: I've seen how cognitive biases ruin businesses. To me, engineering means making data-driven, objective decisions. We all make mistakes, including me, so I'm always ready to pivot when the data proves me wrong.
+- **Enforcing Quality Standards**: I've spent enough time in legacy minefields to know how quickly projects rot without discipline. I prioritize long-term health through strict standards and security, preventing the slow decay that often accelerates when AI enters the mix.
+- **Cultivating Excellent DX**: Code is still not just for LLMs; it's for the humans who maintain it. Readable code and clear docs accelerate delivery today, and the next developer doesn't have to hate you six months later.
+- **Owning the Full Lifecycle**: I don't just "close tickets". I can and actually prefer to own the whole loop—from the first architectural brainstorm and vision design to testing and the final production launch. Seeing the big picture is how you build products.
 
 #### Leadership
-- Fostering Horizontal Culture
-- Building Frictionless Workflows
-- Applying Behavioral Psychology
-- Leading with Constructive Honesty
+- **Fostering Horizontal Culture**: I'm not a big fan of strict hierarchies. In my experience, teams do their work best in a flat culture where developers, designers, and stakeholders talk directly. The best ideas must win on merit, regardless of titles.
+- **Building Frictionless Workflows**: Chaos doesn't scale. I build automated, documented workflows to remove friction and spread knowledge. This solves the 'bus factor' — no single person becomes a bottleneck, and new hires can onboard without losing a week.
+- **Applying Behavioral Psychology**: Leadership is fundamentally about people. I apply my knowledge of behavioral psychology to better understand team dynamics, build genuine empathy, and resolve conflicts before they turn into technical debt.
+- **Leading with Constructive Honesty**: Trust and transparency build the best professional relationships. I'm straightforward about technical debt and risks, ensuring everyone has the full picture to make informed calls. Honesty saves time and money.
 
 #### UI/UX Design
-- Practicing Pragmatic Perfectionism
-- Crafting Visual Aesthetics
-- Designing Human-Centric Spaces
-- Bridging Design and Engineering
-- Balancing Accessibility
+- **Practicing Pragmatic Perfectionism**: I call myself a "reasonable perfectionist" — and that tension is real. I care deeply about polish, but I've shipped enough products to know when chasing perfect becomes the enemy of good. The triage is the actual skill.
+- **Crafting Visual Aesthetics**: My eye for detail is forged by a passion for photography, years of collaborating with talented designers, and deconstructing hundreds of designs. This mix of visual literacy and technical grit helps me to create clean and attractive UI.
+- **Designing Human-Centric Spaces**: Whether it's a user navigating a complex interface, a junior developer reading my code, or a manager reviewing my documentation, my goal is always to create a space that feels intuitive, comfortable, and human-centric.
+- **Bridging Design and Engineering**: I speak both languages. I help designers build design systems that hold together technically, not just visually, avoiding the handoff failure where beautiful Figma mockups become janky implementations.
+- **Balancing Accessibility**: I view accessibility as a mark of a professional product. I advocate for inclusive design based on context, meeting the standards that actually matter for the users. Professionalism is about balance.
 
 #### AI Expertise
-- Embracing the AI Revolution
-- Enforcing HITL Validation
-- Amplifying Engineering Impact
-- Filtering the Hype
+- **Embracing the AI Revolution**: AI is a seismic shift that is fundamentally reshaping our industry. While I remain a pragmatic enthusiast rather than a blind fanatic, I understand that being AI-fluent is now critical for both business and personal success.
+- **Enforcing HITL Validation**: Quality cannot be delegated to LLMs. I maintain a Human-in-the-Loop (HITL) protocol, validating AI code for security and architectural fit. This ensures velocity never accelerates technical debt accumulation.
+- **Amplifying Engineering Impact**: The real win isn't that AI writes code faster. It's that offloading routine execution frees up mental bandwidth for the work that actually matters — system design, product strategy, the decisions LLMs genuinely can't make.
+- **Filtering the Hype**: Because the tech landscape is moving so fast, continuous learning is non-negotiable. I actively sift through the daily noise to separate genuine breakthroughs from fleeting trends, ensuring I only adopt tools that deliver real, practical value.
 
 ---
 
