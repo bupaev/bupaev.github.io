@@ -1,5 +1,6 @@
 import type { RefObject } from "react";
 import type { AreaData, AreaId } from "../data";
+import { isSvgPerformanceLimited } from "../utils/browser";
 import styles from "./areas-geometry.module.scss";
 
 /** Maps area id to its CSS fill class */
@@ -65,7 +66,7 @@ export function AreasGeometry({ areas, scaleId, sortId, blurRef, onMouseEnter, o
                             transformBox: "view-box",
                             transformOrigin: `${area.cx}px ${area.cy}px`,
                             transform: getTransform(area.id, area.cx, area.cy, area.scaleX, area.scaleY, scaleId),
-                            transition: "transform 500ms ease",
+                            transition: isSvgPerformanceLimited ? "none" : "transform 500ms ease",
                             pointerEvents: "none",
                         }}
                     >

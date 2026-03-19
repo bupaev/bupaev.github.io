@@ -35,7 +35,9 @@
     .section {
         position: relative;
         z-index: 2;
+        contain-intrinsic-size: auto 1000px;
         padding: 3rem 3rem 3rem 5rem;
+        content-visibility: auto;
         background-color: var(--color-background);
 
         @include mixins.tablet-only {

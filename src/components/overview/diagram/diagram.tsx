@@ -6,6 +6,7 @@ import { AreasGeometry } from "./components/areas-geometry";
 import { AreaContent } from "./components/area-content";
 import { ViewModeToggle } from "./components/view-mode-toggle";
 import { TextView } from "./components/text-view";
+import { isSvgPerformanceLimited } from "./utils/browser";
 import styles from "./diagram.module.scss";
 
 export type ViewMode = "graphic" | "text";
@@ -34,6 +35,13 @@ export function Diagram({ onViewModeChange }: DiagramProps) {
     const [expandedTopic, setExpandedTopic] = useState<ExpandedTopic>(null);
     const [viewMode, setViewMode] = useState<ViewMode>("graphic");
     const [isFadingOut, setIsFadingOut] = useState(false);
+
+    useEffect(() => {
+        if (isSvgPerformanceLimited) {
+            setViewMode("text");
+            onViewModeChange?.("text");
+        }
+    }, [onViewModeChange]);
 
     const { sortId, scaleId, handleMouseEnter, handleMouseLeave, lockArea, unlockArea, deactivateArea, cancelLeave } = useActiveArea();
 
