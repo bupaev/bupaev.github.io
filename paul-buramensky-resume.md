@@ -27,23 +27,15 @@ Lead Front-End Engineer with 15+ years of experience bridging design, code, and 
 
 *Global software engineering company (50K+ employees) – Project for large health insurer*
 
-* Led a 4-person engineering squad within a 12-person cross-functional team delivering the client's public-facing web platform serving 400K+ monthly visitors 
-
-* Executed a strategic architectural rewrite of the legacy front-end system, modernizing to embedded SPA TypeScript components, reducing the codebase by 40% while improving maintainability and performance
-
-* Optimized performance of content-heavy pages, making them load over twice as fast with Largest Contentful Paint (LCP) reduced from 3.2s to 1.5s
-
-* Initiated and led a WCAG 2.2 AA accessibility overhaul: Drove cross-team design discussions, conducted research, resolved 100+ accessibility issues, and reworked 30+ UI components to full compliance
-
-* Cooperated with the design team to elevate UI quality and refine design system, directly boosting brand perception and user satisfaction in UX interviews
-
-* Established rigorous code review protocols, automated linting pipelines, and unit testing with Jest and React Testing Library, reducing technical debt and improving release confidence
-
-* Stepped beyond the front-end development to help with business analysis and QA, clearing roadblocks so the team could keep shipping smoothly
-
-* Mentored engineers and built an open, collaborative culture by sharing front-end, design system, and accessibility best practices across multiple product teams
-
-* Leveraged AI pair programming (Claude Code, GitHub Copilot) to boost development speed and code quality
+- Led a 4-person engineering squad within a 12-person cross-functional team delivering the client's public-facing web platform serving 400K+ monthly visitors 
+- Executed a strategic architectural rewrite of the legacy front-end system, modernizing to embedded SPA TypeScript components, reducing the codebase by 40% while improving maintainability and performance
+- Optimized performance of content-heavy pages, making them load over twice as fast with Largest Contentful Paint (LCP) reduced from 3.2s to 1.5s
+- Initiated and led a WCAG 2.2 AA accessibility overhaul: Drove cross-team design discussions, conducted research, resolved 100+ accessibility issues, and reworked 30+ UI components to full compliance
+- Cooperated with the design team to elevate UI quality and refine design system, directly boosting brand perception and user satisfaction in UX interviews
+- Established rigorous code review protocols, automated linting pipelines, and unit testing with Jest and React Testing Library, reducing technical debt and improving release confidence
+- Stepped beyond the front-end development to help with business analysis and QA, clearing roadblocks so the team could keep shipping smoothly
+- Mentored engineers and built an open, collaborative culture by sharing front-end, design system, and accessibility best practices across multiple product teams
+- Leveraged AI pair programming (Claude Code, GitHub Copilot) to boost development speed and code quality
 
 ### **Lead Front-End Developer** | Holmusk | 07.2018 – 05.2021
 
@@ -63,7 +55,9 @@ Lead Front-End Engineer with 15+ years of experience bridging design, code, and 
 - Architected and delivered multiple client applications from concept to production: mostly React SPA, but also SSG with Gatsby, SSR with Next.js.
 - Created interactive multimedia content and complex animations using HTML5 Canvas and modern CSS techniques
 - Partnered with stakeholders on requirements gathering, user story definition, and technical roadmap planning
-- Stepped into product design and rapid prototyping roles to validate UI/UX concepts early in the development cycle
+- Stepped into product design and rapid prototyping roles to validate UI/UX concepts early in the development
+- Delivered polished UI/UX design and fully functional websites with minimal design support
+- Overhauled the UX of complex and cumbersome dashboards, from redesign to implementation
 
 ### **Front-End Developer** | BandLab | 09.2014 – 10.2016
 
