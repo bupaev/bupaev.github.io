@@ -63,21 +63,17 @@ Lead Front-End Engineer with 15+ years of experience bridging design, code, and 
 
 *Social music creation platform – Browser-based digital audio workstation*
 
-* Engineered a browser-based SPA multitrack digital audio workstation using AngularJS and the Web Audio API, replicating desktop-grade audio production capabilities
-
-* Solved non-trivial DSP challenges: multitrack mixing, real-time audio effects, latency compensation, and pitch detection via Fourier analysis and autocorrelation
-
-* Leveraged advanced Web APIs (Web Workers, IndexedDB, WebRTC, Canvas, SVG) to deliver seamless real-time audio processing at scale
+- Engineered a browser-based SPA multitrack digital audio workstation using AngularJS and the Web Audio API, replicating desktop-grade audio production capabilities
+- Solved non-trivial DSP challenges: multitrack mixing, real-time audio effects, latency compensation, and pitch detection via Fourier analysis and autocorrelation
+- Leveraged advanced Web APIs (Web Workers, IndexedDB, WebRTC, Canvas, SVG) to deliver seamless real-time audio processing at scale
 
 ### **Front-End Developer** | DXC Luxoft | 07.2012 – 09.2014
 
 *Global digital strategy and software engineering firm (13K+ employees) – Various projects*
 
-* Developed resilient, adaptive interfaces for enterprise clients including major banking and retail brands, handling high-traffic loads
-
-* Built complex client-side data validation and calculation engines (banking loan wizards) with optimized performance for large user bases
-
-* Guided a team of frontend developers, steering technical execution and code quality standards
+- Developed resilient, adaptive interfaces for enterprise clients including major banking and retail brands, handling high-traffic loads
+- Built complex client-side data validation and calculation engines (banking loan wizards) with optimized performance for large user bases
+- Guided a team of frontend developers, steering technical execution and code quality standards
 
 ### **Earlier Career**
 
@@ -100,4 +96,3 @@ Lead Front-End Engineer with 15+ years of experience bridging design, code, and 
 * English (C1)  
 * Russian (Native)  
 * German (A2)
-
