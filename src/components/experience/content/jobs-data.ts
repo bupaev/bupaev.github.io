@@ -35,7 +35,7 @@ export const jobs: Job[] = [
         id: "omstu",
     },
     {
-        position: "Web developer",
+        position: "Web dev",
         company: "Mir IT",
         skills: "C#, .NET, PHP, HTML, CSS, JS",
         startDate: "2011-06",
