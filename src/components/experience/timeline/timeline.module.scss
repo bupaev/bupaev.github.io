@@ -12,6 +12,7 @@
     position: sticky;
     top: 0;
     z-index: 10;
+    padding-top: 1em;
     background-color: color-mix(in srgb, var(--color-background), transparent 5%);
     backdrop-filter: blur(6px);
   }
@@ -110,6 +111,21 @@
       }
     }
 
+    &:global(.is-active) {
+      background: linear-gradient(135deg,
+          color-mix(in srgb, var(--color-accent), transparent 25%) 0%,
+          color-mix(in srgb, var(--color-accent), transparent 55%) 100%);
+      border-color: color-mix(in srgb, var(--color-accent), transparent 25%);
+
+      .jobText {
+        mask-image: none;
+      }
+
+      .jobDuration {
+        display: block;
+      }
+    }
+
     &:hover,
     &:global(.is-hovered) {
       z-index: 4 !important;
@@ -131,21 +147,6 @@
       &.isShort {
         width: 100px !important;
       }
-
-      .jobText {
-        mask-image: none;
-      }
-
-      .jobDuration {
-        display: block;
-      }
-    }
-
-    &:global(.is-active) {
-      background: linear-gradient(135deg,
-          color-mix(in srgb, var(--color-accent), transparent 25%) 0%,
-          color-mix(in srgb, var(--color-accent), transparent 55%) 100%);
-      border-color: color-mix(in srgb, var(--color-accent), transparent 25%);
 
       .jobText {
         mask-image: none;
