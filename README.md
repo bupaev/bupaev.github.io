@@ -3,7 +3,7 @@
 [![Build](https://github.com/bupaev/bupaev.github.io/actions/workflows/ci.yml/badge.svg)](https://github.com/bupaev/bupaev.github.io/actions/workflows/ci.yml)
 [![Deploy](https://github.com/bupaev/bupaev.github.io/actions/workflows/cd.yml/badge.svg)](https://github.com/bupaev/bupaev.github.io/actions/workflows/cd.yml)
 
-My personal site — a playful take on the classic CV format. Instead of a plain document, it experiments with interactive visualizations, SVG effects, and unconventional layouts to represent who I am and what I've been up to professionally. The code leans toward "make it look infomrative and interesting" rather than production-grade polish, so expect rough edges — both in the codebase and in rendering outside of Chrome. The latest iteration is AI-assisted, built in collaboration with Claude and Gemini, which has been a great way to push the boundaries of what I'd normally attempt solo.
+My personal site — a playful take on the classic CV format. Instead of a plain document, it experiments with interactive visualizations, SVG effects, and unconventional layouts to represent who I am and what I've been up to professionally. The code leans toward "make it look informative and interesting" rather than production-grade polish, so expect rough edges — both in the codebase and in rendering outside of Chrome. The latest iteration is AI-assisted, built in collaboration with Claude and Gemini, which has been a great way to push the boundaries of what I'd normally attempt solo.
 
 **Live:** [paulbu.com](https://paulbu.com/)
 
@@ -77,26 +77,6 @@ npm run preview
 ## Commit Convention
 
 This project follows [Conventional Commits](https://www.conventionalcommits.org/) with atomic commit principles.
-
-### Message Format
-
-```
-type(scope): subject
-
-- Body point 1
-- Body point 2
-- Body point 3
-```
-
-- **Subject:** imperative mood, lowercase, no period, max 50 characters
-- **Body:** bullet list, up to 3 points explaining *what* and *why* (not how)
-- One logical change per commit — if more than 3 body points are needed, split the commit
-
-### Types
-
-`feat` · `fix` · `refactor` · `perf` · `style` · `docs` · `test` · `build` · `ci` · `chore` · `content`
-
-Pre-commit hooks enforce linting and run related unit tests via lint-staged.
 
 ## License
 
