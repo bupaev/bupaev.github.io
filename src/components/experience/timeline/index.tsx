@@ -85,6 +85,58 @@ export function Timeline() {
         return () => window.removeEventListener("resize", updateTimeline);
     }, [updateTimeline]);
 
+    // Observe job content section headings (<h3>) to highlight the corresponding
+    // timeline jobs. Using <h3> instead of the full section avoids activating
+    // too many jobs simultaneously when long sections overlap in the viewport.
+    useLayoutEffect(() => {
+        const experienceEl = document.getElementById("experience");
+        if (!experienceEl || typeof experienceEl.querySelector !== "function") return;
+
+        // Compute the sticky timeline height to offset the observer's root margin,
+        // so titles hidden behind the sticky timeline don't count as visible.
+        const timelineHeight = timelineRef.current?.offsetHeight ?? 0;
+
+        const jobIds = jobs.filter((job) => job.id).map((job) => job.id!);
+        const headings = jobIds
+            .map((id) => {
+                const section = experienceEl.querySelector(`#${id}`);
+                return section?.querySelector("h3") ?? null;
+            })
+            .filter(Boolean) as Element[];
+
+        if (headings.length === 0) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    // Walk up from h3 to its parent section to get the job ID.
+                    // Use 'section[id]' to skip auto-generated heading IDs from MDX.
+                    const section = entry.target.closest("section[id]");
+                    if (!section) return;
+                    const sectionId = section.id;
+                    const jobElements = document.querySelectorAll(
+                        `[data-job-id="${sectionId}"]`
+                    );
+                    jobElements.forEach((el) => {
+                        if (entry.isIntersecting) {
+                            el.classList.add("is-active");
+                        } else {
+                            el.classList.remove("is-active");
+                        }
+                    });
+                });
+            },
+            {
+                threshold: 0,
+                rootMargin: `-${timelineHeight}px 0px -200px 0px`,
+            }
+        );
+
+        headings.forEach((heading) => observer.observe(heading));
+
+        return () => observer.disconnect();
+    }, [jobRows]);
+
     // Calculate position of specific date on timeline in %
     const getDatePosition = (isoStringDate: string, rowRange: RowRange): number => {
         const startYearTimeInMs = new Date(rowRange.startYear, 0, 1).getTime();

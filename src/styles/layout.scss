@@ -53,6 +53,15 @@
         padding-bottom: 100px;
     }
 
+    // Disable content-visibility containment on widescreen to allow
+    // position: sticky on the Timeline component inside
+    .experience-section {
+        @include mixins.widescreen {
+            contain-intrinsic-size: unset;
+            content-visibility: visible;
+        }
+    }
+
     .hero-area-section {
         position: sticky;
         top: 0;
