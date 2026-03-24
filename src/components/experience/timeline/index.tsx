@@ -122,6 +122,15 @@ export function Timeline() {
         let lastActiveSet = new Set<string>();
 
         const update = () => {
+            if (timelineRef.current) {
+                const rect = timelineRef.current.getBoundingClientRect();
+                if (rect.top <= 1) {
+                    timelineRef.current.classList.add("is-sticky");
+                } else {
+                    timelineRef.current.classList.remove("is-sticky");
+                }
+            }
+
             const timelineHeight = timelineRef.current?.offsetHeight ?? 0;
             const bottomCutoff = window.innerHeight - 200;
             // 30% of the visible zone between the sticky timeline and the bottom cutoff
@@ -181,6 +190,7 @@ export function Timeline() {
                 cancelAnimationFrame(rafId);
                 for (const id of lastActiveSet) deactivate(id);
                 lastActiveSet = new Set();
+                timelineRef.current?.classList.remove("is-sticky");
             }
         };
         mq.addEventListener("change", handleMqChange);
