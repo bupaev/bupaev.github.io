@@ -45,7 +45,7 @@ export function HeroArea(props: HeroAreaProps) {
                 <span className={styles.separator} />product-obsessed
               </h2>
               <div className={styles.contacts}>
-                <div className={'mb-2'}>
+                <div style={{ marginBottom: "0.5rem" }}>
                   contact me via
                 </div>
                 <span>
@@ -78,7 +78,7 @@ export function HeroArea(props: HeroAreaProps) {
                     </span>
                   </a>
                 </span>
-                <div className="mb-1.5">
+                <div style={{ marginBottom: "0.375rem" }}>
                   or just 
                 </div>
                 <span>

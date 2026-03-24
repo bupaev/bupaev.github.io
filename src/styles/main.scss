@@ -1,10 +1,9 @@
-// ============================================
-// Main Styles - Orchestrator
-// ============================================
-// This file imports all SCSS modules in the correct order.
-// Each module has a single, focused responsibility.
+@use "layers";
 
-// 1. Design Tokens (CSS Custom Properties)
+// 1. Reset
+@use "reset";
+
+// 2. Design Tokens (CSS Custom Properties)
 @use "tokens";
 
 // 2. Base Element Styles

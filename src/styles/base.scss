@@ -1,19 +1,18 @@
-// ============================================
-// Base Element Styles
-// ============================================
-body {
-    font-family: var(--font-main);
-    color: var(--color-text);
-    background-color: var(--color-background);
-    transition: background-color var(--dark-light-transition), color var(--dark-light-transition);
-    will-change: background-color, color;
+@layer base {
+    body {
+        font-family: var(--font-main);
+        color: var(--color-text);
+        background-color: var(--color-background);
+        transition: background-color var(--dark-light-transition), color var(--dark-light-transition);
+        will-change: background-color, color;
 
-    // Match Bulma's font smoothing (makes fonts appear thinner/cleaner)
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
+        // Match Bulma's font smoothing (makes fonts appear thinner/cleaner)
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
 
-a,
-strong {
-    color: var(--color-text);
+    a,
+    strong {
+        color: var(--color-text);
+    }
 }
