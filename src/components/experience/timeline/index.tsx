@@ -77,64 +77,119 @@ export function Timeline() {
         setJobRows(getJobRows(newRanges));
     }, [getRowIntervals, getJobRows]);
 
-    // useLayoutEffect runs synchronously after DOM mutations but before paint.
-    // This is the correct place to read refs and update state based on measurements.
     useLayoutEffect(() => {
         updateTimeline();
         window.addEventListener("resize", updateTimeline);
         return () => window.removeEventListener("resize", updateTimeline);
     }, [updateTimeline]);
 
-    // Observe job content section headings (<h3>) to highlight the corresponding
-    // timeline jobs. Using <h3> instead of the full section avoids activating
-    // too many jobs simultaneously when long sections overlap in the viewport.
+    // Highlight the active job on the timeline based on scroll position.
+    // Active highlighting is widescreen-only (≥1216px) because the sticky
+    // timeline that drives this feature doesn't exist on smaller screens.
+    // Uses rAF scroll listener — IO can't reliably distinguish multiple simultaneously-visible sections.
     useLayoutEffect(() => {
+        const mq = window.matchMedia("(min-width: 1216px)");
+        if (!mq.matches) return;
+
         const experienceEl = document.getElementById("experience");
         if (!experienceEl || typeof experienceEl.querySelector !== "function") return;
 
-        // Compute the sticky timeline height to offset the observer's root margin,
-        // so titles hidden behind the sticky timeline don't count as visible.
-        const timelineHeight = timelineRef.current?.offsetHeight ?? 0;
-
         const jobIds = jobs.filter((job) => job.id).map((job) => job.id!);
-        const headings = jobIds
+
+        type Target = { h3: Element; section: Element; sectionId: string };
+        const targets: Target[] = jobIds
             .map((id) => {
                 const section = experienceEl.querySelector(`#${id}`);
-                return section?.querySelector("h3") ?? null;
+                const h3 = section?.querySelector("h3") ?? null;
+                return h3 && section ? { h3, section, sectionId: id } : null;
             })
-            .filter(Boolean) as Element[];
+            .filter(Boolean) as Target[];
 
-        if (headings.length === 0) return;
+        if (targets.length === 0) return;
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    // Walk up from h3 to its parent section to get the job ID.
-                    // Use 'section[id]' to skip auto-generated heading IDs from MDX.
-                    const section = entry.target.closest("section[id]");
-                    if (!section) return;
-                    const sectionId = section.id;
-                    const jobElements = document.querySelectorAll(
-                        `[data-job-id="${sectionId}"]`
-                    );
-                    jobElements.forEach((el) => {
-                        if (entry.isIntersecting) {
-                            el.classList.add("is-active");
-                        } else {
-                            el.classList.remove("is-active");
-                        }
-                    });
-                });
-            },
-            {
-                threshold: 0,
-                rootMargin: `-${timelineHeight}px 0px -200px 0px`,
+        const activate = (sectionId: string) => {
+            document
+                .querySelectorAll(`[data-job-id="${sectionId}"]`)
+                .forEach((el) => el.classList.add("is-active"));
+        };
+        const deactivate = (sectionId: string) => {
+            document
+                .querySelectorAll(`[data-job-id="${sectionId}"]`)
+                .forEach((el) => el.classList.remove("is-active"));
+        };
+
+        let rafId = 0;
+        let lastActiveSet = new Set<string>();
+
+        const update = () => {
+            const timelineHeight = timelineRef.current?.offsetHeight ?? 0;
+            const bottomCutoff = window.innerHeight - 200;
+            // 30% of the visible zone between the sticky timeline and the bottom cutoff
+            const threshold = (window.innerHeight - timelineHeight - 200) * 0.3;
+
+            const nextActiveSet = new Set<string>();
+
+            for (const { section, sectionId } of targets) {
+                const rect = section.getBoundingClientRect();
+                // Clamp section rect to the active zone
+                const visibleTop = Math.max(rect.top, timelineHeight);
+                const visibleBottom = Math.min(rect.bottom, bottomCutoff);
+                const visibleHeight = visibleBottom - visibleTop;
+
+                if (threshold > 0 && visibleHeight >= threshold) {
+                    nextActiveSet.add(sectionId);
+                }
             }
-        );
 
-        headings.forEach((heading) => observer.observe(heading));
+            // Fallback: nothing qualifies → activate the section whose h3
+            // most recently scrolled past the top boundary (gap between sections)
+            if (nextActiveSet.size === 0) {
+                let bestTop = -Infinity;
+                let fallbackId: string | null = null;
+                for (const { h3, sectionId } of targets) {
+                    const top = h3.getBoundingClientRect().top;
+                    if (top < timelineHeight && top > bestTop) {
+                        bestTop = top;
+                        fallbackId = sectionId;
+                    }
+                }
+                if (fallbackId) nextActiveSet.add(fallbackId);
+            }
 
-        return () => observer.disconnect();
+            // Diff old ↔ new sets for minimal DOM writes
+            for (const id of nextActiveSet) {
+                if (!lastActiveSet.has(id)) activate(id);
+            }
+            for (const id of lastActiveSet) {
+                if (!nextActiveSet.has(id)) deactivate(id);
+            }
+            lastActiveSet = nextActiveSet;
+        };
+
+        const onScroll = () => {
+            cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(update);
+        };
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        update(); // Run once immediately for initial state
+
+        // Clean up when viewport drops below widescreen
+        const handleMqChange = (e: MediaQueryListEvent) => {
+            if (!e.matches) {
+                window.removeEventListener("scroll", onScroll);
+                cancelAnimationFrame(rafId);
+                for (const id of lastActiveSet) deactivate(id);
+                lastActiveSet = new Set();
+            }
+        };
+        mq.addEventListener("change", handleMqChange);
+
+        return () => {
+            window.removeEventListener("scroll", onScroll);
+            cancelAnimationFrame(rafId);
+            mq.removeEventListener("change", handleMqChange);
+        };
     }, [jobRows]);
 
     // Calculate position of specific date on timeline in %

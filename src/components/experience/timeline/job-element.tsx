@@ -35,8 +35,12 @@ const goToJob = (id?: string) => {
     const jobEl = document.getElementById(id);
 
     if (experienceEl && jobEl) {
+        const timelineEl = experienceEl.querySelector?.<HTMLElement>("[class*='timeline']") ?? null;
+        const isWidescreen = window.matchMedia("(min-width: 1216px)").matches;
+        const timelineHeight = isWidescreen ? (timelineEl?.offsetHeight ?? 0) : 0;
+
         window.scrollTo({
-            top: experienceEl.offsetTop + jobEl.offsetTop,
+            top: experienceEl.offsetTop + jobEl.offsetTop - timelineHeight,
             left: 0,
             behavior: "smooth",
         });
