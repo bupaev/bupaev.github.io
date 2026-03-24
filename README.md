@@ -14,7 +14,7 @@ My personal site — a playful take on the classic CV format. Instead of a plain
 | Framework | [Astro 5](https://astro.build/) — static output, MDX support |
 | UI | [React 19](https://react.dev/) — functional components, hooks |
 | Language | [TypeScript 5](https://www.typescriptlang.org/) — strict mode |
-| Styling | [Tailwind CSS 4](https://tailwindcss.com/), SCSS Modules, design tokens |
+| Styling | [Vanilla SCSS](https://sass-lang.com/) with [CSS Layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer), SCSS Modules, design tokens |
 | Testing | [Vitest](https://vitest.dev/) (unit), [Playwright](https://playwright.dev/) (E2E) |
 | Quality | [ESLint 9](https://eslint.org/), [Stylelint 17](https://stylelint.io/), Husky + lint-staged |
 
@@ -33,6 +33,8 @@ src/
 │   ├── hero-area/      # Landing hero
 │   └── ...             # Dark-mode toggle, vertical menu, footer
 ├── styles/             # Global design system
+│   ├── layers.scss     # CSS Layer precedence definition
+│   ├── reset.scss      # CSS baseline (layered)
 │   ├── tokens.scss     # Color & spacing variables
 │   ├── mixins.scss     # Media queries, visual effects
 │   └── typography.scss # Type scale
