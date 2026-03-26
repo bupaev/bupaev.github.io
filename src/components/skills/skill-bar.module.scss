@@ -4,27 +4,16 @@
 .skillBar {
   display: flex;
   width: 10em;
-  height: 0.7em;
-  margin-top: 0.25rem;
+  height: 1px;
+  margin-top: 0;
   margin-bottom: 1rem;
   overflow: hidden;
-  background-color: color-mix(in srgb, var(--color-background), transparent 50%);
-  border: 1px solid color-mix(in srgb, var(--color-contrasty), transparent 95%);
-  border-radius: 99px;
-  box-shadow: inset 0 1px 4px color-mix(in srgb, var(--color-contrasty), transparent 98%);
-  transform: skew(-15deg);
-
-  [data-color-scheme="dark"] & {
-    background-color: color-mix(in srgb, var(--color-background), transparent 50%);
-    border: 1px solid color-mix(in srgb, var(--color-contrasty), transparent 90%);
-    box-shadow: inset 0 1px 4px color-mix(in srgb, var(--color-contrasty), transparent 95%);
-  }
+  background-color: color-mix(in srgb, var(--color-contrasty), transparent 96%);
 
   .segment {
     width: 33.333%;
     height: 100%;
-    border-right: 1px solid color-mix(in srgb, var(--color-contrasty), transparent 92%);
-    transition: background 0.3s ease;
+    border-right: 2px solid var(--color-background);
 
     &:last-child {
       border-right: none;
