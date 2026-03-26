@@ -15,7 +15,15 @@
   }
 
   .skillItem {
+    position: relative;
+    z-index: 0;
+    width: max-content;
+    min-width: 10em;
+    max-width: 100%;
+    padding-bottom: 0.3em;
+    margin-bottom: 0.5em;
     line-height: 1em;
+    isolation: isolate;
   }
 
   .groupTitle {
@@ -26,6 +34,9 @@
   }
 
   .itemTitle {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
     padding-right: 0.2em;
     line-height: 1.4em;
   }
