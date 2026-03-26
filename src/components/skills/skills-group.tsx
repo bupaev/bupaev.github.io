@@ -42,20 +42,20 @@ export function SkillsGroup({ title, info, items, className = "" }: SkillsGroupP
       
       {info && <div className={styles.groupInfo}>{info}</div>}
       
-      <div className={styles.collapsedContent}>
-        <div className={styles.collapsedContentInner}>
+      <div className={styles.contentContainer}>
+        <div className={styles.collapsedContent}>
           <p className={styles.skillsList}>{skillNames}</p>
         </div>
-      </div>
 
-      <div className={styles.expandedContent}>
-        <div className={styles.expandedContentInner}>
-          {items.map((item) => (
-            <div key={item.title} className={styles.skillItem}>
-              <span className={styles.itemTitle}>{item.title}</span>
-              <SkillBar title={item.title} level={item.level} />
-            </div>
-          ))}
+        <div className={styles.expandedContent}>
+          <div className={styles.listWrapper}>
+            {items.map((item) => (
+              <div key={item.title} className={styles.skillItem}>
+                <span className={styles.itemTitle}>{item.title}</span>
+                <SkillBar title={item.title} level={item.level} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

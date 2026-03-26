@@ -59,7 +59,7 @@
 
     @media (max-width: 767px) { // Applying equivalent to mobile
       padding: 0.3rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
       border-radius: 4px;
       transition: color 250ms;
 
@@ -107,7 +107,7 @@
     @include mixins.toggle-icon(1.5rem);
 
     opacity: 0.7;
-    transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out, opacity 0.2s ease-out;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
 
     @include mixins.tablet {
       display: none;
@@ -119,78 +119,83 @@
       @include mixins.toggle-icon-expanded;
     }
 
-    .collapsedContent {
-      grid-template-rows: 0fr;
+    .contentContainer {
+      .collapsedContent {
+        grid-template-rows: 1fr; // Keep 1fr to maintain minimum height
 
-      .collapsedContentInner {
-        visibility: hidden;
-        opacity: 0;
+        .skillsList {
+          visibility: hidden;
+          opacity: 0;
+        }
+      }
+
+      .expandedContent {
+        grid-template-rows: 1fr;
+
+      .listWrapper {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .contentContainer {
+    display: grid;
+    grid-template-areas: "content";
+
+    .collapsedContent {
+      display: grid;
+      grid-area: content;
+      grid-template-rows: 1fr; // Always keep 1fr to maintain minimum height
+
+      @include mixins.mobile {
+        padding-left: 0.3rem;
+      }
+
+      .skillsList {
+        visibility: visible;
+        min-height: 0;
+        margin: 0;
+        overflow: hidden;
+        line-height: 1.4;
+        opacity: 1;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+
+      @include mixins.tablet {
+        display: none !important;
       }
     }
 
     .expandedContent {
-      grid-template-rows: 1fr;
+      display: grid;
+      grid-area: content;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-      .expandedContentInner {
-        visibility: visible;
-        opacity: 1;
+      .listWrapper {
+        visibility: hidden;
+        min-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+
+      @include mixins.tablet {
+        display: block !important;
+
+        .listWrapper {
+          visibility: visible;
+          padding-top: 0;
+          overflow: visible;
+          opacity: 1;
+        }
+      }
+
+      @include mixins.mobile {
+        padding-left: 0.3rem;
       }
     }
-  }
-
-  .collapsedContent {
-    display: grid;
-    grid-template-rows: 1fr;
-    transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-    @include mixins.mobile {
-                padding-left: 0.3rem;
-            }
-
-    .collapsedContentInner {
-      visibility: visible;
-      min-height: 0;
-      overflow: hidden;
-      opacity: 1;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-
-    .skillsList {
-      margin: 0;
-      line-height: 1.5;
-    }
-
-    @include mixins.tablet {
-      display: none !important;
-    }
-  }
-
-  .expandedContent {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-    .expandedContentInner {
-      visibility: hidden;
-      min-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-
-    @include mixins.tablet {
-      display: block !important;
-
-      .expandedContentInner {
-        visibility: visible;
-        padding-top: 0;
-        overflow: visible;
-        opacity: 1;
-      }
-    }
-
-    @include mixins.mobile {
-                padding-left: 0.3rem;
-            }
   }
 }
