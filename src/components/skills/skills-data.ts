@@ -79,11 +79,15 @@ export const SKILLS_DATA: SkillGroup[] = [
     title: "UX/UI Design & Tools",
     items: [
       {
-        title: "UX Design & Usability",
+        title: "UX Design & Prototyping",
         level: "expert",
       },
       {
-        title: "Web accessibility (WCAG, a11y)",
+        title: "Design Systems",
+        level: "advanced",
+      },
+      {
+        title: "Web accessibility (WCAG 2.2, a11y)",
         info: "Strict accessibility compliance, semantic markup",
         level: "advanced",
       },
@@ -92,20 +96,16 @@ export const SKILLS_DATA: SkillGroup[] = [
         level: "expert",
       },
       {
-        title: "Lightroom",
+        title: "Lightroom / Photoshop",
         level: "expert",
-      },
-      {
-        title: "Photoshop",
-        level: "advanced",
-      },
+      }
     ],
   },
   {
     title: "Backend & Server Communication",
     items: [
       {
-        title: "REST API Design & Integration",
+        title: "REST API Design & Architecture",
         info: "Architecting scalable endpoints and consuming services via Axios/Fetch",
         level: "expert",
       },
@@ -114,19 +114,17 @@ export const SKILLS_DATA: SkillGroup[] = [
         level: "advanced",
       },
       {
-        title: "Node.js",
-        info: "Backend services, custom scripts, and tooling",
-        level: "basic",
-      },
-      {
-        title: "Express / NestJS",
-        info: "Building REST APIs and server applications",
+        title: "Node.js, Express",
         level: "basic",
       },
       {
         title: "Databases (MySQL, MS SQL, MongoDB)",
         info: "",
         level: "basic",
+      },
+      {
+        title: "FHIR API",
+        level: "advanced",
       },
     ],
   },
@@ -135,7 +133,7 @@ export const SKILLS_DATA: SkillGroup[] = [
     items: [
       {
         title: "Linting, Formatting, Style guides",
-        info: "Establishing rigorous code review processes and automated linting (ESLint, Prettier, Airbnb styles)",
+        info: "Automated linting, formatting, and shared conventions (ESLint, Prettier, Airbnb styles)",
         level: "expert",
       },
       {
@@ -145,6 +143,11 @@ export const SKILLS_DATA: SkillGroup[] = [
       {
         title: "Documentation (JSDoc, Swagger)",
         info: "",
+        level: "expert",
+      },
+      {
+        title: "Code Review",
+        info: "Establishing rigorous review protocols, quality gates, and engineering culture across multiple teams",
         level: "expert",
       },
       {
@@ -159,7 +162,11 @@ export const SKILLS_DATA: SkillGroup[] = [
     items: [
       {
         title: "System Design and Analysis",
-        level: "advanced",
+        level: "expert",
+      },
+      {
+        title: "SPA / SSR / SSG",
+        level: "expert",
       },
       {
         title: "Solution Architecture",
@@ -171,7 +178,7 @@ export const SKILLS_DATA: SkillGroup[] = [
       },
       {
         title: "Application Modernization",
-        level: "advanced",
+        level: "expert",
       },
     ],
   },
@@ -183,28 +190,22 @@ export const SKILLS_DATA: SkillGroup[] = [
         level: "expert",
       },
       {
-        title: "Claude Code, Gemini",
+        title: "AI Pair Programming",
+        level: "expert",
+      },
+      {
+        title: "Claude Code, Gemini, OpenAI Codex",
         info: "AI Pair Programming, codebase analysis, and architecture exploration",
         level: "expert",
+      },
+      {
+        title: "AI Agents Design and Integration",
+        level: "basic",
       },
       {
         title: "Antigravity",
         info: "AI Agent for automated coding and workflow acceleration",
         level: "expert",
-      },
-      {
-        title: "NotebookLM",
-        info: "Contextual understanding and documentation synthesis",
-        level: "expert",
-      },
-      {
-        title: "NanoClaw, ClaudeClaw",
-        info: "AI Agent for automated coding and workflow acceleration",
-        level: "basic",
-      },
-      {
-        title: "AI Agents Design and Integration",
-        level: "basic",
       },
     ],
   },
@@ -220,20 +221,16 @@ export const SKILLS_DATA: SkillGroup[] = [
         level: "expert",
       },
       {
-        title: "CI/CD (GitHub Actions, Gitlab CI, Azure, AWS)",
+        title: "CI/CD (GitHub Actions, Gitlab CI, Jenkins)",
         level: "advanced",
-      },
-      {
-        title: "Cloud Platforms (AWS)",
-        level: "basic",
-      },
-      {
-        title: "Docker",
-        level: "basic",
       },
       {
         title: "Enterprise CMS (Adobe Experience Manager)",
         level: "advanced",
+      },
+      {
+        title: "Docker",
+        level: "basic",
       },
     ],
   },
@@ -242,27 +239,23 @@ export const SKILLS_DATA: SkillGroup[] = [
     items: [
       {
         title: "Technical Leadership",
-        level: "advanced",
+        level: "expert",
       },
       {
         title: "Ownership & Critical Thinking",
+        level: "expert",
+      },
+      {
+        title: "Team mentoring",
+        level: "expert",
+      },
+      {
+        title: "Technical Interviewing",
         level: "advanced",
       },
       {
         title: "Agile SCRUM/KANBAN",
-        level: "expert",
-      },
-      {
-        title: "AI Pair Programming",
-        level: "expert",
-      },
-      {
-        title: "JIRA / Confluence",
         level: "advanced",
-      },
-      {
-        title: "Code review & Team mentoring",
-        level: "expert",
       },
     ],
   },
@@ -290,12 +283,7 @@ export const SKILLS_DATA: SkillGroup[] = [
         level: "expert",
       },
       {
-        title: "D3.js",
-        info: "Data visualization and 3D graphics",
-        level: "basic",
-      },
-      {
-        title: "Three.js",
+        title: "D3.js, Three.js",
         info: "Data visualization and 3D graphics",
         level: "basic",
       },
