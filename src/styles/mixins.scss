@@ -266,29 +266,57 @@ $gap: 32px;
   }
 }
 @keyframes scroll-fade {
-  0% {
+    0% {
     opacity: 1;
     filter: blur(0);
+    transform: scale(1);
   }
 
   15% {
     opacity: 1;
     filter: blur(0);
+    transform: scale(1);
   }
 
   60% {
     opacity: 0.2;
-    filter: blur(10px);
+    filter: blur(3px);
+    transform: scale(1.05);
   }
 
   90% {
     opacity: 0;
-    filter: blur(40px);
+    filter: blur(5px);
+    transform: scale(1.1);
   }
 
   100% {
     opacity: 0;
-    filter: blur(40px);
+    filter: blur(5px);
+    transform: scale(1.1);
+  }
+}
+
+// Simplified animation for low-performance devices (no blur)
+@keyframes scroll-fade-simple {
+  0% {
+    opacity: 1;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  60% {
+    opacity: 0.2;
+  }
+
+  90% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
   }
 }
 
@@ -297,6 +325,12 @@ $gap: 32px;
     animation: scroll-fade linear both;
     animation-timeline: scroll(root);
     animation-range: $range;
-    will-change: opacity, filter;
+    will-change: opacity, transform;
+
+    // Fall back to simpler animation on low-perf devices
+    :global([data-low-perf]) & {
+      animation-name: scroll-fade-simple;
+      will-change: opacity;
+    }
   }
 }
