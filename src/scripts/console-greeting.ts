@@ -17,3 +17,5 @@ console.log(
   GREETING_STYLE,
   BODY_STYLE,
 );
+
+export {};

@@ -6,7 +6,6 @@ import { AreasGeometry } from "./components/areas-geometry";
 import { AreaContent } from "./components/area-content";
 import { ViewModeToggle } from "./components/view-mode-toggle";
 import { TextView } from "./components/text-view";
-import { isSvgPerformanceLimited } from "./utils/browser";
 import styles from "./diagram.module.scss";
 
 export type ViewMode = "graphic" | "text";
@@ -37,6 +36,7 @@ export function Diagram({ onViewModeChange }: DiagramProps) {
     const [isFadingOut, setIsFadingOut] = useState(false);
 
     useEffect(() => {
+        const isSvgPerformanceLimited = typeof document !== "undefined" && document.documentElement.hasAttribute("data-low-perf");
         if (isSvgPerformanceLimited) {
             setViewMode("text");
             onViewModeChange?.("text");

@@ -1,6 +1,5 @@
 import type { RefObject } from "react";
 import type { AreaData, AreaId } from "../data";
-import { isSvgPerformanceLimited } from "../utils/browser";
 import styles from "./areas-geometry.module.scss";
 
 /** Maps area id to its CSS fill class */
@@ -34,6 +33,7 @@ export function AreasGeometry({ areas, scaleId, sortId, blurRef, onMouseEnter, o
     const otherAreas = areas.filter((p) => p.id !== sortId);
     const activeArea = areas.find((p) => p.id === sortId);
     const renderOrder = activeArea ? [...otherAreas, activeArea] : areas;
+    const isSvgPerformanceLimited = typeof document !== "undefined" && document.documentElement.hasAttribute("data-low-perf");
 
     return (
         <svg
