@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef, type RefObject } from "react";
-import { useStripeGeometry, getStripeIndexFromPoint } from "./use-stripe-geometry";
+import { useStripeGeometry } from "./use-stripe-geometry";
 import styles from "./interactive-stripes.module.scss";
 
 /** Duration of the idle flash visibility in ms */
@@ -9,9 +9,9 @@ const FLASH_DURATION_MS = 200;
 /** Interval between random idle flashes in ms */
 const IDLE_INTERVAL_MS = 1000;
 /** Number of neighboring stripes to animate during splash */
-const SPLASH_WAVE_RADIUS = 5;
+const SPLASH_WAVE_RADIUS = 30;
 /** Delay between each wave step during splash in ms */
-const SPLASH_WAVE_STEP_DELAY_MS = 60;
+const SPLASH_WAVE_STEP_DELAY_MS = 48;
 
 type InteractiveStripesProps = {
   containerRef: RefObject<HTMLElement | null>;
@@ -66,31 +66,7 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
     return () => clearInterval(interval);
   }, [count]);
 
-  // Touch splash handler
-  useEffect(() => {
-    const svg = svgRef.current;
-    if (!svg || count === 0) return;
-
-    const handleTouch = (e: TouchEvent) => {
-      const touch = e.touches[0];
-      if (!touch) return;
-
-      const rect = svg.getBoundingClientRect();
-      const stripeIndex = getStripeIndexFromPoint(
-        touch.clientX,
-        touch.clientY,
-        rect,
-        positions,
-      );
-
-      if (stripeIndex === null) return;
-
-      triggerSplash(stripeIndex);
-    };
-
-    svg.addEventListener("touchstart", handleTouch, { passive: true });
-    return () => svg.removeEventListener("touchstart", handleTouch);
-  }, [count, positions]);
+  // Removed legacy window tracker in favor of synthetic React events below.
 
   /**
    * Triggers a splash effect: the center stripe flashes,
@@ -117,7 +93,7 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
     const classes = [styles.stripe];
     if (splashIndices.has(index)) {
       const offset = splashIndices.get(index)!;
-      classes.push(offset === 0 ? styles.splash : styles.splashWave);
+      classes.push(offset === 0 ? styles.splash : styles["splash-wave"]);
     } else if (flashIndex === index) {
       classes.push(styles.flash);
     }
@@ -125,14 +101,21 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
   };
 
   /**
-   * Returns inline CSS variables for splash wave timing.
+   * Returns inline CSS variables for splash wave timing and physical energy decay.
    */
   const getStripeStyle = (index: number): React.CSSProperties | undefined => {
     if (splashIndices.has(index)) {
       const offset = splashIndices.get(index)!;
+
+      // Organic wave attenuation using a Cosine curve (smooth ease-in-out decay)
+      // 100% intensity at center, fading down smoothly to 0% at the outer radius
+      const normalized = offset / SPLASH_WAVE_RADIUS;
+      const intensity = (Math.cos(normalized * Math.PI) + 1) / 2;
+
       return {
         "--wave-delay": `${offset * SPLASH_WAVE_STEP_DELAY_MS}ms`,
         "--wave-duration": "600ms",
+        "--wave-intensity": `${intensity * 100}%`,
       } as React.CSSProperties;
     }
     return undefined;
@@ -162,6 +145,7 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
               fill="var(--color-background)"
               className={getStripeClassName(index)}
               style={getStripeStyle(index)}
+              onPointerDown={() => triggerSplash(index)}
             />
           ))}
         </g>

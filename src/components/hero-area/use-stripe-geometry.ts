@@ -102,36 +102,3 @@ export function useStripeGeometry(
   return geometry;
 }
 
-/**
- * Converts a mouse/touch point to a stripe index.
- * Projects the point onto the perpendicular axis of the 105° lines.
- */
-export function getStripeIndexFromPoint(
-  clientX: number,
-  clientY: number,
-  containerRect: DOMRect,
-  positions: number[],
-): number | null {
-  if (positions.length === 0) return null;
-
-  // Coordinates relative to the container
-  const x = clientX - containerRect.left;
-  const y = clientY - containerRect.top;
-
-  // Project (x, y) onto the axis perpendicular to the stripe direction.
-  // The stripes run at 105° from horizontal → the perpendicular axis is at 15° from horizontal.
-  // The perpendicular direction unit vector: (sin(105°), -cos(105°)) = (sin(105°), cos(75°))
-  const sinAngle = Math.sin(ANGLE_RAD);
-  const cosAngle = Math.cos(ANGLE_RAD);
-  const projectedPosition = x * sinAngle - y * cosAngle;
-
-  // Find the closest stripe whose center contains this projected position
-  for (let i = 0; i < positions.length; i++) {
-    const stripeCenter = positions[i] + STRIPE_WIDTH / 2;
-    if (Math.abs(projectedPosition - stripeCenter) <= STRIPE_WIDTH / 2) {
-      return i;
-    }
-  }
-
-  return null;
-}
