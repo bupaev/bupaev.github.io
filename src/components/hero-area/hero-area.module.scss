@@ -18,22 +18,29 @@
     position: absolute;
     inset: -100% -50%;
     content: "";
-    background: var(--wave-gradient);
+    // background: var(--wave-gradient);
+    background-color: rgb(0 91 188 / 10%);
     background-size: 50% 100%;
     transform: rotate(15deg);
-    animation: moving-gradient 15s linear infinite;
+    // animation: moving-gradient 15s linear infinite;
     will-change: background-color;
   }
 
   &::after {
     position: absolute;
     inset: 0;
+    z-index: 0;
     content: "";
     background: repeating-linear-gradient(105deg,
         var(--color-background) 0,
         var(--color-background) 3px,
         transparent 4px,
         transparent 13px);
+  }
+
+  // Once the interactive SVG stripes mount, hide the CSS fallback gradient
+  &[data-stripes-ready]::after {
+    display: none;
   }
 
   // This transition through 0 opacity is needed because browser can't animate colors in linear gradient above
@@ -77,6 +84,7 @@
   flex-wrap: wrap;
   align-items: stretch;
   align-self: stretch;
+  pointer-events: none; // Let hovers pass through to SVG stripes below
 
   @include mixins.tablet {
     padding-right: 0;
@@ -94,6 +102,7 @@
   display: block;
   flex: 1 1 0;
   height: 100%;
+  pointer-events: none; // Pass through to stripes
 
   @include mixins.mobile {
     position: absolute;
@@ -111,6 +120,11 @@
   font-style: italic;
   font-weight: 600;
   text-align: right;
+  pointer-events: none;
+
+  a {
+    pointer-events: auto;
+  }
 
   // text column gradually increases width, which shifts the image column progressively to the right
   @media screen and (max-width: variables.$breakpoint-3xl) and (min-width: variables.$breakpoint-md) {
@@ -209,15 +223,15 @@
   }
 }
 
-@keyframes moving-gradient {
-  0% {
-    background-position: 0 0;
-  }
+// @keyframes moving-gradient {
+//   0% {
+//     background-position: 0 0;
+//   }
 
-  100% {
-    background-position: 200% 0;
-  }
-}
+//   100% {
+//     background-position: 200% 0;
+//   }
+// }
 
 @keyframes transition-to-light {
   0% {

@@ -1,7 +1,9 @@
 "use client";
 
+import { useRef } from "react";
 import styles from "./hero-area.module.scss";
 import { HeroImages, type HeroImagesProps } from "./hero-images";
+import { InteractiveStripes } from "./interactive-stripes";
 
 // Re-export props for consumers (like the Astro component)
 export type HeroAreaProps = HeroImagesProps;
@@ -30,72 +32,75 @@ const DownloadIcon = () => (
 );
 
 export function HeroArea(props: HeroAreaProps) {
+  const heroAreaRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className={`${styles.heroArea}`}>
+    <div ref={heroAreaRef} className={`${styles.heroArea}`}>
+      <InteractiveStripes containerRef={heroAreaRef} />
       <div className={`container ${styles.heroBody}`}>
-          <div className={styles.textWrapper}>
-              <div className={styles.textShapeLimiter} />
-              <h1 className={styles.heroHeading}>
-                Hi! I&apos;m Paul Buramensky
-              </h1>
-              <h2 className={styles.heroSubheading}>
-                <span style={{ fontSize: '1.05em' }}>Lead front-end engineer</span><br />
-                <span className={styles.separator} />UX-driven  
-                <span className={styles.separator} />AI-fluent<br />
-                <span className={styles.separator} />product-obsessed
-              </h2>
-              <div className={styles.contacts}>
-                <div style={{ marginBottom: "0.5rem" }}>
-                  contact me via
-                </div>
-                <span>
-                  <a href="mailto:mail@paulbu.com">
-                    <span className="icon-text">
-                      <span className={`icon ${styles.icon}`}>
-                        <MailIcon />
-                      </span>
-                      <span>Email</span>
-                    </span>
-                  </a>
+        <div className={styles.textWrapper}>
+          <div className={styles.textShapeLimiter} />
+          <h1 className={styles.heroHeading}>
+            Hi! I&apos;m Paul Buramensky
+          </h1>
+          <h2 className={styles.heroSubheading}>
+            <span style={{ fontSize: '1.05em' }}>Lead front-end engineer</span><br />
+            <span className={styles.separator} />UX-driven
+            <span className={styles.separator} />AI-fluent<br />
+            <span className={styles.separator} />product-obsessed
+          </h2>
+          <div className={styles.contacts}>
+            <div style={{ marginBottom: "0.5rem" }}>
+              contact me via
+            </div>
+            <span>
+              <a href="mailto:mail@paulbu.com">
+                <span className="icon-text">
+                  <span className={`icon ${styles.icon}`}>
+                    <MailIcon />
+                  </span>
+                  <span>Email</span>
                 </span>
-                <span>
-                  <a href="https://t.me/bupaev" target="_blank" rel="noopener noreferrer">
-                    <span className="icon-text">
-                      <span className={`icon ${styles.icon}`} style={{ transform: "skew(0)" }}>
-                        <TelegramIcon />
-                      </span>
-                      <span>Telegram</span>
-                    </span>
-                  </a>
+              </a>
+            </span>
+            <span>
+              <a href="https://t.me/bupaev" target="_blank" rel="noopener noreferrer">
+                <span className="icon-text">
+                  <span className={`icon ${styles.icon}`} style={{ transform: "skew(0)" }}>
+                    <TelegramIcon />
+                  </span>
+                  <span>Telegram</span>
                 </span>
-                <span>
-                  <a href="https://www.linkedin.com/in/paul-buramensky/" target="_blank" rel="noopener noreferrer">
-                    <span className="icon-text">
-                      <span className={`icon ${styles.icon}`}>
-                        <LinkedinIcon />
-                      </span>
-                      <span>LinkedIn</span>
-                    </span>
-                  </a>
+              </a>
+            </span>
+            <span>
+              <a href="https://www.linkedin.com/in/paul-buramensky/" target="_blank" rel="noopener noreferrer">
+                <span className="icon-text">
+                  <span className={`icon ${styles.icon}`}>
+                    <LinkedinIcon />
+                  </span>
+                  <span>LinkedIn</span>
                 </span>
-                <div style={{ marginBottom: "0.375rem" }}>
-                  or just 
-                </div>
-                <span>
-                  <a href="/paul-buramensky-resume.pdf" download="Paul Buramensky Resume.pdf">
-                    <span className="icon-text">
-                      <span className={`icon ${styles.icon}`}>
-                        <DownloadIcon />
-                      </span>
-                      <span>Get my Résumé</span>
-                    </span>
-                  </a>
+              </a>
+            </span>
+            <div style={{ marginBottom: "0.375rem" }}>
+              or just
+            </div>
+            <span>
+              <a href="/paul-buramensky-resume.pdf" download="Paul Buramensky Resume.pdf">
+                <span className="icon-text">
+                  <span className={`icon ${styles.icon}`}>
+                    <DownloadIcon />
+                  </span>
+                  <span>Get my Résumé</span>
                 </span>
-              </div>
+              </a>
+            </span>
           </div>
-          <div className={styles.mediaWrapper}>
-            <HeroImages {...props} />
-          </div>
+        </div>
+        <div className={styles.mediaWrapper}>
+          <HeroImages {...props} />
+        </div>
       </div>
     </div>
   );

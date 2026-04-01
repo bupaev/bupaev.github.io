@@ -1,0 +1,68 @@
+@use "@/styles/mixins";
+
+.stripesSvg {
+  position: absolute;
+  top: 0;
+  left: -10%;
+  z-index: 0; // Behind .heroBody (z-index: 1) so stripes sit behind the image
+  width: 70%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none; // SVG doesn't block clicks on content behind it
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+}
+
+.stripe {
+  pointer-events: all; // Individual stripes ARE interactive
+  cursor: default;
+  transition: none; // No transitions — instant snap
+
+  &:hover {
+    animation: cursor-blink 500ms step-end infinite;
+  }
+}
+
+// Idle flash: instant snap to yellow, then off
+.flash {
+  fill: var(--color-accent) !important;
+}
+
+// Touch splash: radiate outward from touch point
+.splash {
+  fill: var(--color-accent) !important;
+  animation: splash-fade 600ms ease-out forwards;
+}
+
+// Wave spread for neighboring stripes during splash
+.splash-wave {
+  opacity: 0.7;
+  fill: var(--color-accent) !important;
+  animation: splash-fade var(--wave-duration, 600ms) ease-out var(--wave-delay, 0ms) forwards;
+}
+
+@keyframes cursor-blink {
+  0% {
+    fill: var(--color-accent);
+  }
+
+  100% {
+    fill: var(--color-accent);
+  }
+
+  50% {
+    fill: var(--color-background);
+  }
+}
+
+@keyframes splash-fade {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
