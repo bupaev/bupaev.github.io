@@ -9,15 +9,15 @@
   aspect-ratio: 1.5;
   margin: 0;
   overflow: hidden;
- background-color: var(--color-background);
-  mask-image: url("./images/parallelogram-mask.svg");
+  background-color: var(--color-background);
+  mask-image: url("./masks/parallelogram-mask.svg");
   mask-repeat: no-repeat;
   mask-size: 100% 100%;
 
   @include mixins.mobile {
     left: 0;
     aspect-ratio: 0.268;
-    mask-image: url("./images/parallelogram-mobile-mask.svg");
+    mask-image: url("./masks/parallelogram-mobile-mask.svg");
   }
 
   &::after {
@@ -66,9 +66,10 @@
 
   // Hydration/SSR theme visibility
   // If ssrOnly is present, we rely strictly on the html[data-color-scheme] for display
-  
+
   // These rules ONLY apply before hydration (when .ssrOnly is present)
   &:has(.ssrOnly) {
+
     // DEFAULT: Light theme (Safe fallback if script hasn't run yet)
     .darkImage {
       display: none;

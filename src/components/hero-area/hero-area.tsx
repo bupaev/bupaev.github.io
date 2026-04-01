@@ -2,8 +2,8 @@
 
 import { useRef } from "react";
 import styles from "./hero-area.module.scss";
-import { HeroImages, type HeroImagesProps } from "./hero-images";
-import { InteractiveStripes } from "./interactive-stripes";
+import { HeroImages, type HeroImagesProps } from "./hero-images/hero-images";
+import { InteractiveStripes } from "./interactive-stripes/interactive-stripes";
 
 // Re-export props for consumers (like the Astro component)
 export type HeroAreaProps = HeroImagesProps;
