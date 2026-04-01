@@ -5,7 +5,7 @@ import { useStripeGeometry } from "./use-stripe-geometry";
 import styles from "./interactive-stripes.module.scss";
 
 /** Interval between random idle wave splashes in ms */
-const IDLE_INTERVAL_MS = 3000;
+const IDLE_INTERVAL_MS = 4500;
 /** Number of neighboring stripes to animate during idle splash */
 const IDLE_WAVE_RADIUS = 30;
 /** Max fill intensity percentage for idle splash peaks */
@@ -24,6 +24,7 @@ type SplashOffset = {
   offset: number;
   radius: number;
   intensity: number;
+  splashId: number;
 };
 
 type InteractiveStripesProps = {
@@ -90,11 +91,12 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
     radius = SPLASH_WAVE_RADIUS,
     peakIntensity = SPLASH_WAVE_PEAK_INTENSITY_PERCENT
   ) => {
+    const splashId = Date.now() + Math.random();
     const newSplash = new Map<number, SplashOffset>();
     for (let offset = -radius; offset <= radius; offset++) {
       const idx = centerIndex + offset;
       if (idx >= 0 && idx < count) {
-        newSplash.set(idx, { offset: Math.abs(offset), radius, intensity: peakIntensity });
+        newSplash.set(idx, { offset: Math.abs(offset), radius, intensity: peakIntensity, splashId });
       }
     }
 
@@ -162,9 +164,11 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
     >
       {isReady && (
         <g transform={`rotate(15, ${centerX}, ${centerY})`}>
-          {positions.map((pos, index) => (
+          {positions.map((pos, index) => {
+            const splashOffset = splashIndices.get(index);
+            return (
             <rect
-              key={index}
+              key={`${index}-${splashOffset?.splashId || 0}`}
               x={pos}
               y={-overflow}
               width={10}
@@ -184,7 +188,8 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
                 }
               }}
             />
-          ))}
+            );
+          })}
         </g>
       )}
     </svg>
