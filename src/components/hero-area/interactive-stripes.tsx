@@ -12,6 +12,8 @@ const IDLE_INTERVAL_MS = 1000;
 const SPLASH_WAVE_RADIUS = 30;
 /** Delay between each wave step during splash in ms */
 const SPLASH_WAVE_STEP_DELAY_MS = 48;
+/** Max fill intensity percentage for moving splash wave peaks */
+const SPLASH_WAVE_PEAK_INTENSITY_PERCENT = 80;
 
 type InteractiveStripesProps = {
   containerRef: RefObject<HTMLElement | null>;
@@ -91,12 +93,16 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
    */
   const getStripeClassName = (index: number): string => {
     const classes = [styles.stripe];
+    
     if (splashIndices.has(index)) {
+      // 1. Splash wave takes absolute priority
       const offset = splashIndices.get(index)!;
       classes.push(offset === 0 ? styles.splash : styles["splash-wave"]);
     } else if (flashIndex === index) {
+      // 2. Fallback idle background flashing
       classes.push(styles.flash);
     }
+    
     return classes.join(" ");
   };
 
@@ -104,20 +110,22 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
    * Returns inline CSS variables for splash wave timing and physical energy decay.
    */
   const getStripeStyle = (index: number): React.CSSProperties | undefined => {
+    // Priority 1: Splash animation timing and decay
     if (splashIndices.has(index)) {
       const offset = splashIndices.get(index)!;
 
       // Organic wave attenuation using a Cosine curve (smooth ease-in-out decay)
-      // 100% intensity at center, fading down smoothly to 0% at the outer radius
+      // Peak intensity at center, fading down smoothly to 0% at the outer radius
       const normalized = offset / SPLASH_WAVE_RADIUS;
       const intensity = (Math.cos(normalized * Math.PI) + 1) / 2;
 
       return {
         "--wave-delay": `${offset * SPLASH_WAVE_STEP_DELAY_MS}ms`,
         "--wave-duration": "600ms",
-        "--wave-intensity": `${intensity * 100}%`,
+        "--wave-intensity": `${intensity * SPLASH_WAVE_PEAK_INTENSITY_PERCENT}%`,
       } as React.CSSProperties;
-    }
+    } 
+    
     return undefined;
   };
 
@@ -132,6 +140,7 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
       viewBox={isReady ? `0 0 ${containerWidth} ${containerHeight}` : undefined}
       preserveAspectRatio="none"
       aria-hidden="true"
+      style={{ "--hovered-index": "-999" } as React.CSSProperties}
     >
       {isReady && (
         <g transform={`rotate(15, ${centerX}, ${centerY})`}>
@@ -144,8 +153,18 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
               height={stripeLength}
               fill="var(--color-background)"
               className={getStripeClassName(index)}
-              style={getStripeStyle(index)}
+              style={
+                {
+                  "--index": index,
+                  ...getStripeStyle(index),
+                } as React.CSSProperties
+              }
               onPointerDown={() => triggerSplash(index)}
+              onPointerEnter={() => {
+                if (svgRef.current) {
+                  svgRef.current.style.setProperty("--hovered-index", String(index));
+                }
+              }}
             />
           ))}
         </g>

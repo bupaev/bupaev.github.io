@@ -1,5 +1,11 @@
 @use "@/styles/mixins";
 
+@property --interactive-stripe-opacity {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
 .stripesSvg {
   position: absolute;
   top: 0;
@@ -10,6 +16,14 @@
   overflow: hidden;
   pointer-events: none; // SVG doesn't block clicks on content behind it
 
+  --interactive-stripe-opacity: 0;
+
+  transition: --interactive-stripe-opacity 500ms ease;
+
+  &:hover {
+    --interactive-stripe-opacity: 1;
+  }
+
   @include mixins.mobile {
     width: 100%;
   }
@@ -18,20 +32,27 @@
 .stripe {
   pointer-events: all; // Individual stripes ARE interactive
   cursor: default;
+  fill: color-mix(in srgb, var(--color-stripe-wave) var(--hover-intensity), var(--color-background));
+  // Make sure fill is defined last natively, wait, defined below...
   // Expand hit area to overlap the 3px gaps and prevent hover state flickering
   stroke: transparent;
   stroke-width: 4px;
-  transition: none; // No transitions — instant snap
+  transition: none; // Default lines snap instantly initially
 
-  &:hover:not(.splash, .splash-wave) {
-    animation: cursor-blink 500ms step-end infinite;
-  }
+  // Compute distance from the currently hovered rect (defaults to -999 if the mouse is outside)
+  --dist: max(calc(var(--index) - var(--hovered-index, -999)), calc(var(--hovered-index, -999) - var(--index)));
+  // Limit radius of effect specific number of stripes
+  --normalized: min(1, calc(var(--dist) / 30));
+  // Cosine easing for static color wave on hover
+  --hover-intensity-calc: calc((cos(calc(var(--normalized) * 3.1416rad)) + 1) / 2);
+  // Peak static hover intensity is 20% * SVG hover opacity (fades 0-1)
+  --hover-intensity: calc(var(--hover-intensity-calc) * 15% * var(--interactive-stripe-opacity));
 }
 
 // Idle flash: instant snap to yellow, then off
 // Only visible if the overall SVG is NOT being hovered
 .stripesSvg:not(:hover) .flash {
-  fill: var(--color-accent) !important;
+  fill: var(--color-stripe-wave) !important;
 }
 
 // Touch splash: radiate outward from touch point
@@ -44,23 +65,9 @@
   animation: splash-fade var(--wave-duration, 600ms) ease-out var(--wave-delay, 0ms) forwards;
 }
 
-@keyframes cursor-blink {
-  0% {
-    fill: var(--color-accent);
-  }
-
-  100% {
-    fill: var(--color-accent);
-  }
-
-  50% {
-    fill: var(--color-background);
-  }
-}
-
 @keyframes splash-fade {
   0% {
-    fill: color-mix(in srgb, var(--color-accent) var(--wave-intensity, 100%), var(--color-background));
+    fill: color-mix(in srgb, var(--color-stripe-wave) var(--wave-intensity, 100%), var(--color-background));
   }
 
   100% {
