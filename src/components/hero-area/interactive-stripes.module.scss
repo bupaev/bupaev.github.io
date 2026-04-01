@@ -20,7 +20,7 @@
 
   transition: --interactive-stripe-opacity 500ms ease;
 
-  &:hover {
+  &:hover:not(.isSplashing) {
     --interactive-stripe-opacity: 1;
   }
 
@@ -33,44 +33,69 @@
   pointer-events: all; // Individual stripes ARE interactive
   cursor: default;
   fill: color-mix(in srgb, var(--color-stripe-wave) var(--hover-intensity), var(--color-background));
-  // Make sure fill is defined last natively, wait, defined below...
   // Expand hit area to overlap the 3px gaps and prevent hover state flickering
   stroke: transparent;
   stroke-width: 4px;
   transition: none; // Default lines snap instantly initially
 
+  // STATIC WAVE ON HOVER
   // Compute distance from the currently hovered rect (defaults to -999 if the mouse is outside)
   --dist: max(calc(var(--index) - var(--hovered-index, -999)), calc(var(--hovered-index, -999) - var(--index)));
   // Limit radius of effect specific number of stripes
-  --normalized: min(1, calc(var(--dist) / 30));
-  // Cosine easing for static color wave on hover
+  --normalized: min(1, calc(var(--dist) / 10));
   --hover-intensity-calc: calc((cos(calc(var(--normalized) * 3.1416rad)) + 1) / 2);
   // Peak static hover intensity is 20% * SVG hover opacity (fades 0-1)
   --hover-intensity: calc(var(--hover-intensity-calc) * 15% * var(--interactive-stripe-opacity));
 }
 
-// Idle flash: instant snap to yellow, then off
-// Only visible if the overall SVG is NOT being hovered
-.stripesSvg:not(:hover) .flash {
-  fill: var(--color-stripe-wave) !important;
-}
-
 // Touch splash: radiate outward from touch point
 .splash {
-  animation: splash-fade 600ms ease-out forwards;
+  animation: splash-fade 1500ms linear forwards;
 }
 
 // Wave spread for neighboring stripes during splash
 .splash-wave {
-  animation: splash-fade var(--wave-duration, 600ms) ease-out var(--wave-delay, 0ms) forwards;
+  animation: splash-fade var(--wave-duration, 1500ms) linear var(--wave-delay, 0ms) forwards;
 }
 
+// Physical Drop Damped Traveling Wave Approximation
+// Mathematically mimics |e^(-2.5t) * cos(3 * PI * t)|
 @keyframes splash-fade {
+
+  // Peak 1: Initial Impact (100% amplitude)
   0% {
     fill: color-mix(in srgb, var(--color-stripe-wave) var(--wave-intensity, 100%), var(--color-background));
+    animation-timing-function: ease-in; // Accelerate towards surface
   }
 
+  // Trough 1: Surface
+  17% {
+    fill: var(--color-background);
+    animation-timing-function: ease-out; // Decelerate upward against gravity/tension
+  }
+
+  // Peak 2: Rebound (43% amplitude)
+  33% {
+    fill: color-mix(in srgb, var(--color-stripe-wave) calc(var(--wave-intensity, 100%) * 0.43), var(--color-background));
+    animation-timing-function: ease-in; // Accelerate towards surface
+  }
+
+  // Trough 2: Surface
+  50% {
+    fill: var(--color-background);
+    animation-timing-function: ease-out; // Decelerate upward
+  }
+
+  // Peak 3: Second Rebound (18% amplitude)
+  67% {
+    fill: color-mix(in srgb, var(--color-stripe-wave) calc(var(--wave-intensity, 100%) * 0.18), var(--color-background));
+    animation-timing-function: ease-in; // Accelerate towards surface
+  }
+
+  // Rest: Surface fully settled
+  83%,
   100% {
     fill: var(--color-background);
+    animation-timing-function: ease-out;
   }
 }
