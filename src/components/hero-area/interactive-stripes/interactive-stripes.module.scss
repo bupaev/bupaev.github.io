@@ -7,6 +7,16 @@
 }
 
 .stripesSvg {
+  --color-stripe-wave: var(--color-secondary-light);
+  --stripe-color: hsl(214deg 30% 98%);
+  --interactive-stripe-opacity: 0;
+  --hover-opacity: 7%;
+
+  :global([data-color-scheme="dark"]) & {
+    --stripe-color: hsl(214deg 30% 10%);
+    --hover-opacity: 10%;
+  }
+
   position: absolute;
   top: 0;
   left: -10%;
@@ -15,9 +25,6 @@
   height: 100%;
   overflow: hidden;
   pointer-events: none; // SVG doesn't block clicks on content behind it
-
-  --interactive-stripe-opacity: 0;
-
   transition: --interactive-stripe-opacity 500ms ease;
 
   &:hover:not(.isSplashing) {
@@ -32,7 +39,7 @@
 .stripe {
   pointer-events: all; // Individual stripes ARE interactive
   cursor: default;
-  fill: color-mix(in srgb, var(--color-stripe-wave) var(--hover-intensity), var(--color-background));
+  fill: color-mix(in srgb, var(--color-stripe-wave) var(--hover-intensity), var(--stripe-color));
   // Expand hit area to overlap the 3px gaps and prevent hover state flickering
   stroke: transparent;
   stroke-width: 4px;
@@ -42,10 +49,10 @@
   // Compute distance from the currently hovered rect (defaults to -999 if the mouse is outside)
   --dist: max(calc(var(--index) - var(--hovered-index, -999)), calc(var(--hovered-index, -999) - var(--index)));
   // Limit radius of effect specific number of stripes
-  --normalized: min(1, calc(var(--dist) / 10));
+  --normalized: min(1, calc(var(--dist) / 30));
   --hover-intensity-calc: calc((cos(calc(var(--normalized) * 3.1416rad)) + 1) / 2);
   // Peak static hover intensity is 20% * SVG hover opacity (fades 0-1)
-  --hover-intensity: calc(var(--hover-intensity-calc) * 15% * var(--interactive-stripe-opacity));
+  --hover-intensity: calc(var(--hover-intensity-calc) * var(--hover-opacity) * var(--interactive-stripe-opacity));
 }
 
 // Touch splash: radiate outward from touch point
@@ -64,38 +71,38 @@
 
   // Peak 1: Initial Impact (100% amplitude)
   0% {
-    fill: color-mix(in srgb, var(--color-stripe-wave) var(--wave-intensity, 100%), var(--color-background));
+    fill: color-mix(in srgb, var(--color-stripe-wave) var(--wave-intensity, 100%), var(--stripe-color));
     animation-timing-function: ease-in; // Accelerate towards surface
   }
 
   // Trough 1: Surface
   17% {
-    fill: var(--color-background);
+    fill: var(--stripe-color);
     animation-timing-function: ease-out; // Decelerate upward against gravity/tension
   }
 
   // Peak 2: Rebound (43% amplitude)
   33% {
-    fill: color-mix(in srgb, var(--color-stripe-wave) calc(var(--wave-intensity, 100%) * 0.43), var(--color-background));
+    fill: color-mix(in srgb, var(--color-stripe-wave) calc(var(--wave-intensity, 100%) * 0.43), var(--stripe-color));
     animation-timing-function: ease-in; // Accelerate towards surface
   }
 
   // Trough 2: Surface
   50% {
-    fill: var(--color-background);
+    fill: var(--stripe-color);
     animation-timing-function: ease-out; // Decelerate upward
   }
 
   // Peak 3: Second Rebound (18% amplitude)
   67% {
-    fill: color-mix(in srgb, var(--color-stripe-wave) calc(var(--wave-intensity, 100%) * 0.18), var(--color-background));
+    fill: color-mix(in srgb, var(--color-stripe-wave) calc(var(--wave-intensity, 100%) * 0.18), var(--stripe-color));
     animation-timing-function: ease-in; // Accelerate towards surface
   }
 
   // Rest: Surface fully settled
   83%,
   100% {
-    fill: var(--color-background);
+    fill: var(--stripe-color);
     animation-timing-function: ease-out;
   }
 }

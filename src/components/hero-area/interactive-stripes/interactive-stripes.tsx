@@ -167,27 +167,27 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
           {positions.map((pos, index) => {
             const splashOffset = splashIndices.get(index);
             return (
-            <rect
-              key={`${index}-${splashOffset?.splashId || 0}`}
-              x={pos}
-              y={-overflow}
-              width={10}
-              height={stripeLength}
-              fill="var(--color-background)"
-              className={getStripeClassName(index)}
-              style={
-                {
-                  "--index": index,
-                  ...getStripeStyle(index),
-                } as React.CSSProperties
-              }
-              onPointerDown={() => triggerSplash(index)}
-              onPointerEnter={() => {
-                if (svgRef.current) {
-                  svgRef.current.style.setProperty("--hovered-index", String(index));
+              <rect
+                key={`${index}-${splashOffset?.splashId || 0}`}
+                x={pos}
+                y={-overflow}
+                width={10}
+                height={stripeLength}
+                fill="var(--color-background)"
+                className={getStripeClassName(index)}
+                style={
+                  {
+                    "--index": index,
+                    ...getStripeStyle(index),
+                  } as React.CSSProperties
                 }
-              }}
-            />
+                onPointerDown={() => triggerSplash(index)}
+                onPointerEnter={() => {
+                  if (svgRef.current) {
+                    svgRef.current.style.setProperty("--hovered-index", String(index));
+                  }
+                }}
+              />
             );
           })}
         </g>

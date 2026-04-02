@@ -28,8 +28,6 @@
     --color-background: #fff;
     --color-contrasty: #000;
     --color-contrasty-transparent: rgb(0 0 0 / 3%);
-    --color-stripe-wave: var(--color-secondary);
-    --wave-gradient: linear-gradient(90deg, rgb(0 91 188 / 10%) 0%, rgb(255 214 3 / 5%) 40%, rgb(0 91 188 / 10%) 100%);
     --dark-light-transition: 500ms;
 
     // Diagram Colors (HSL Components)
@@ -56,6 +54,7 @@
     --popup-s-scale: 1; // Keep saturation
     --glow-l-delta: 0%; // Glow same lightness as polygon base
     --glow-opacity: 0.4;
+    
     // Glass sheen tokens
     --border-radius-md: 12px;
 }
@@ -65,8 +64,6 @@
     --color-background: #121e2b;
     --color-contrasty: #fff;
     --color-contrasty-transparent: rgb(255 255 255 / 3%);
-    --color-stripe-wave: var(--color-accent);
-    --wave-gradient: linear-gradient(90deg, rgb(0 91 188 / 30%) 0%, rgb(255 214 3 / 20%) 40%, rgb(0 91 188 / 30%) 100%);
 
     // Diagram Colors (Dark Mode Overrides)
     // Darker base colors for polygons
