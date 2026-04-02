@@ -57,7 +57,7 @@
 
 // Touch splash: radiate outward from touch point
 .splash {
-  animation: splash-fade 1500ms linear forwards;
+  animation: splash-fade 2000ms linear forwards;
 }
 
 // Wave spread for neighboring stripes during splash
@@ -66,11 +66,18 @@
 }
 
 // Physical Drop Damped Traveling Wave Approximation
-// Mathematically mimics |e^(-2.5t) * cos(3 * PI * t)|
+// Impact flash (0→4%) + damped oscillation mimicking |e^(-2.5t) * cos(3 * PI * t)|
 @keyframes splash-fade {
 
-  // Peak 1: Initial Impact (100% amplitude)
+  // Impact Flash: bright spike at moment of contact (2.5× wave intensity, capped at 100%)
+  // Held flat via steps(1, end) — snaps to wave peak at 8%
   0% {
+    fill: color-mix(in srgb, var(--color-stripe-wave) min(100%, var(--wave-intensity, 100%) * 2.5), var(--stripe-color));
+    animation-timing-function: steps(1, end);
+  }
+
+  // Peak 1: Settle to sustained wave amplitude
+  8% {
     fill: color-mix(in srgb, var(--color-stripe-wave) var(--wave-intensity, 100%), var(--stripe-color));
     animation-timing-function: ease-in; // Accelerate towards surface
   }
