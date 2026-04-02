@@ -10,11 +10,11 @@
   --color-stripe-wave: var(--color-secondary-light);
   --stripe-color: hsl(214deg 30% 98%);
   --interactive-stripe-opacity: 0;
-  --hover-opacity: 7%;
+  --hover-opacity: 5%;
 
   :global([data-color-scheme="dark"]) & {
     --stripe-color: hsl(214deg 30% 10%);
-    --hover-opacity: 10%;
+    --hover-opacity: 3%;
   }
 
   position: absolute;
@@ -49,65 +49,105 @@
   // Compute distance from the currently hovered rect (defaults to -999 if the mouse is outside)
   --dist: max(calc(var(--index) - var(--hovered-index, -999)), calc(var(--hovered-index, -999) - var(--index)));
   // Limit radius of effect specific number of stripes
-  --normalized: min(1, calc(var(--dist) / 30));
+  --normalized: min(1, calc(var(--dist) / 2));
   --hover-intensity-calc: calc((cos(calc(var(--normalized) * 3.1416rad)) + 1) / 2);
   // Peak static hover intensity is 20% * SVG hover opacity (fades 0-1)
   --hover-intensity: calc(var(--hover-intensity-calc) * var(--hover-opacity) * var(--interactive-stripe-opacity));
 }
 
-// Touch splash: radiate outward from touch point
+// Touch splash: center stripe with impact flash
 .splash {
-  animation: splash-fade 2000ms linear forwards;
+  animation: splash-impact 2000ms linear forwards;
 }
 
-// Wave spread for neighboring stripes during splash
+// Wave spread for neighboring stripes (no impact flash)
 .splash-wave {
-  animation: splash-fade var(--wave-duration, 1500ms) linear var(--wave-delay, 0ms) forwards;
+  animation: splash-wave var(--wave-duration, 1500ms) linear var(--wave-delay, 0ms) forwards;
 }
 
-// Physical Drop Damped Traveling Wave Approximation
-// Impact flash (0→4%) + damped oscillation mimicking |e^(-2.5t) * cos(3 * PI * t)|
-@keyframes splash-fade {
+// Damped wave shared keyframe pattern (used by both animations)
+// Mathematically mimics |e^(-2.5t) * cos(3 * PI * t)|
+@keyframes splash-wave {
 
-  // Impact Flash: bright spike at moment of contact (2.5× wave intensity, capped at 100%)
-  // Held flat via steps(1, end) — snaps to wave peak at 8%
+  // Peak 1: Initial amplitude
   0% {
-    fill: color-mix(in srgb, var(--color-stripe-wave) min(100%, var(--wave-intensity, 100%) * 2.5), var(--stripe-color));
-    animation-timing-function: steps(1, end);
-  }
-
-  // Peak 1: Settle to sustained wave amplitude
-  8% {
     fill: color-mix(in srgb, var(--color-stripe-wave) var(--wave-intensity, 100%), var(--stripe-color));
-    animation-timing-function: ease-in; // Accelerate towards surface
+    animation-timing-function: ease-in;
   }
 
   // Trough 1: Surface
   17% {
     fill: var(--stripe-color);
-    animation-timing-function: ease-out; // Decelerate upward against gravity/tension
+    animation-timing-function: ease-out;
   }
 
   // Peak 2: Rebound (43% amplitude)
   33% {
     fill: color-mix(in srgb, var(--color-stripe-wave) calc(var(--wave-intensity, 100%) * 0.43), var(--stripe-color));
-    animation-timing-function: ease-in; // Accelerate towards surface
+    animation-timing-function: ease-in;
   }
 
   // Trough 2: Surface
   50% {
     fill: var(--stripe-color);
-    animation-timing-function: ease-out; // Decelerate upward
+    animation-timing-function: ease-out;
   }
 
   // Peak 3: Second Rebound (18% amplitude)
   67% {
     fill: color-mix(in srgb, var(--color-stripe-wave) calc(var(--wave-intensity, 100%) * 0.18), var(--stripe-color));
-    animation-timing-function: ease-in; // Accelerate towards surface
+    animation-timing-function: ease-in;
   }
 
   // Rest: Surface fully settled
   83%,
+  100% {
+    fill: var(--stripe-color);
+    animation-timing-function: ease-out;
+  }
+}
+
+// Center stripe: bright impact flash (0→8%) then same damped wave pattern
+@keyframes splash-impact {
+
+  // Impact Flash: bright spike at moment of contact (2.5× wave intensity, capped at 100%)
+  0% {
+    fill: color-mix(in srgb, var(--color-stripe-wave) min(100%, var(--wave-intensity, 100%) * 2.5), var(--stripe-color));
+    animation-timing-function: steps(1, end);
+  }
+
+  // Settle to sustained wave amplitude
+  8% {
+    fill: color-mix(in srgb, var(--color-stripe-wave) var(--wave-intensity, 100%), var(--stripe-color));
+    animation-timing-function: ease-in;
+  }
+
+  // Trough 1
+  24% {
+    fill: var(--stripe-color);
+    animation-timing-function: ease-out;
+  }
+
+  // Peak 2: Rebound (43%)
+  39% {
+    fill: color-mix(in srgb, var(--color-stripe-wave) calc(var(--wave-intensity, 100%) * 0.43), var(--stripe-color));
+    animation-timing-function: ease-in;
+  }
+
+  // Trough 2
+  54% {
+    fill: var(--stripe-color);
+    animation-timing-function: ease-out;
+  }
+
+  // Peak 3: Second Rebound (18%)
+  69% {
+    fill: color-mix(in srgb, var(--color-stripe-wave) calc(var(--wave-intensity, 100%) * 0.18), var(--stripe-color));
+    animation-timing-function: ease-in;
+  }
+
+  // Rest
+  84%,
   100% {
     fill: var(--stripe-color);
     animation-timing-function: ease-out;

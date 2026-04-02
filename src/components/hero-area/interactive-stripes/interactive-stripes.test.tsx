@@ -16,7 +16,7 @@ vi.mock('./use-stripe-geometry', () => ({
     }),
 }));
 
-const IDLE_INTERVAL_MS = 4500;
+const IDLE_INTERVAL_MS = 5000;
 const SPLASH_WAVE_ANIMATION_DURATION_MS = 1500;
 const SPLASH_WAVE_STEP_DELAY_MS = 64; // Value currently configured for manual wave
 const MANUAL_RADIUS = 50;
@@ -41,7 +41,7 @@ describe('InteractiveStripes (Drop Ripple Physics)', () => {
     });
 
     it('renders the SVG container and stripe `<rect>` elements', () => {
-        let container: HTMLElement;
+        let container: HTMLElement = document.createElement('div');
         act(() => {
             const result = render(<InteractiveStripes containerRef={mockRef} />);
             container = result.container;
@@ -59,7 +59,7 @@ describe('InteractiveStripes (Drop Ripple Physics)', () => {
     });
 
     it('updates SVG `--hovered-index` custom property on mouse pointer enter', () => {
-        let container: HTMLElement;
+        let container: HTMLElement = document.createElement('div');
         act(() => {
             const result = render(<InteractiveStripes containerRef={mockRef} />);
             container = result.container;

@@ -4,21 +4,22 @@ import { useEffect, useState, useRef, type RefObject } from "react";
 import { useStripeGeometry } from "./use-stripe-geometry";
 import styles from "./interactive-stripes.module.scss";
 
+/** Delay between each wave step during splash in ms */
+const SPLASH_WAVE_STEP_DELAY_MS = 64;
+/** Total duration of the physical drop bounce animation */
+const SPLASH_WAVE_ANIMATION_DURATION_MS = 1500;
+
 /** Interval between random idle wave splashes in ms */
-const IDLE_INTERVAL_MS = 4500;
+const IDLE_INTERVAL_MS = 5000;
 /** Number of neighboring stripes to animate during idle splash */
 const IDLE_WAVE_RADIUS = 30;
 /** Max fill intensity percentage for idle splash peaks */
-const IDLE_WAVE_PEAK_INTENSITY_PERCENT = 30;
+const IDLE_WAVE_PEAK_INTENSITY_PERCENT = 25;
 
 /** Number of neighboring stripes to animate during manual click splash */
 const SPLASH_WAVE_RADIUS = 50;
-/** Delay between each wave step during splash in ms */
-const SPLASH_WAVE_STEP_DELAY_MS = 64;
 /** Max fill intensity percentage for moving splash wave peaks */
-const SPLASH_WAVE_PEAK_INTENSITY_PERCENT = 50;
-/** Total duration of the physical drop bounce animation */
-const SPLASH_WAVE_ANIMATION_DURATION_MS = 1500;
+const SPLASH_WAVE_PEAK_INTENSITY_PERCENT = 35;
 
 type SplashOffset = {
   offset: number;
@@ -69,12 +70,12 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
     if (count === 0) return;
 
     idleIntervalRef.current = setInterval(() => {
-      if (svgRef.current?.matches(":hover")) return;
+      if (svgRef.current?.matches(":hover") || count === 0) return;
 
-      // Use average of 3 random numbers for a bell-curve distribution centered around 0.5
-      // This increases the probability of idle splashes happening near the middle.
-      const gaussianRandom = (Math.random() + Math.random() + Math.random()) / 3;
-      const randomIndex = Math.floor(gaussianRandom * count);
+      // Pick a random index in the middle 70% (skipping 15% from each edge)
+      const g = (Math.random() + Math.random() + Math.random()) / 3;
+      const randomIndex = Math.floor(count * (0.15 + g * 0.7));
+
       triggerSplash(randomIndex, IDLE_WAVE_RADIUS, IDLE_WAVE_PEAK_INTENSITY_PERCENT);
     }, IDLE_INTERVAL_MS);
   };
