@@ -45,6 +45,7 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
   const geometry = useStripeGeometry(svgRef);
   const [splashIndices, setSplashIndices] = useState<Map<number, SplashOffset>>(new Map());
   const splashTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const idleIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const { count, positions, containerWidth, containerHeight, stripeLength, overflow } = geometry;
 
@@ -62,13 +63,13 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
     };
   }, [containerRef, count, containerWidth]);
 
-  // Idle splash: pick a random stripe every few seconds
-  useEffect(() => {
+  const resetIdleTimer = () => {
+    if (idleIntervalRef.current) clearInterval(idleIntervalRef.current);
+    idleIntervalRef.current = null;
     if (count === 0) return;
 
-    const interval = setInterval(() => {
-      // Don't trigger idle splash if the user is currently hovering the SVG
-      if (svgRef.current && svgRef.current.matches(":hover")) return;
+    idleIntervalRef.current = setInterval(() => {
+      if (svgRef.current?.matches(":hover")) return;
 
       // Use average of 3 random numbers for a bell-curve distribution centered around 0.5
       // This increases the probability of idle splashes happening near the middle.
@@ -76,11 +77,15 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
       const randomIndex = Math.floor(gaussianRandom * count);
       triggerSplash(randomIndex, IDLE_WAVE_RADIUS, IDLE_WAVE_PEAK_INTENSITY_PERCENT);
     }, IDLE_INTERVAL_MS);
+  };
 
-    return () => clearInterval(interval);
+  // Idle splash: pick a random stripe every few seconds, reset on mouse leave
+  useEffect(() => {
+    resetIdleTimer();
+    return () => {
+      if (idleIntervalRef.current) clearInterval(idleIntervalRef.current);
+    };
   }, [count]);
-
-  // Removed legacy window tracker in favor of synthetic React events below.
 
   /**
    * Triggers a splash effect: the center stripe flashes,
@@ -160,6 +165,7 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
       viewBox={isReady ? `0 0 ${containerWidth} ${containerHeight}` : undefined}
       preserveAspectRatio="none"
       aria-hidden="true"
+      onMouseLeave={() => resetIdleTimer()}
       style={{ "--hovered-index": "-999" } as React.CSSProperties}
     >
       {isReady && (
