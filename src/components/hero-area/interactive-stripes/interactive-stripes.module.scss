@@ -21,7 +21,7 @@
   top: 0;
   left: -10%;
   z-index: 0; // Behind .heroBody (z-index: 1) so stripes sit behind the image
-  width: 70%;
+  width: max(70%, 1000px);
   height: 100%;
   overflow: hidden;
   pointer-events: none; // SVG doesn't block clicks on content behind it
@@ -32,6 +32,7 @@
   }
 
   @include mixins.mobile {
+    left: 0;
     width: 100%;
   }
 }
