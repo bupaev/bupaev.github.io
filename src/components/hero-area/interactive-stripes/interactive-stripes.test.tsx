@@ -16,7 +16,8 @@ vi.mock("./use-stripe-geometry", () => ({
   }),
 }));
 
-const IDLE_INTERVAL_MS = 5000;
+const IDLE_FIRST_DELAY_MS = 1000;
+const IDLE_INTERVAL_MS = 10000;
 const SPLASH_WAVE_ANIMATION_DURATION_MS = 1500;
 const SPLASH_WAVE_STEP_DELAY_MS = 64;
 const MANUAL_RADIUS = 50;
@@ -191,22 +192,22 @@ describe("InteractiveStripes (Drop Ripple Physics)", () => {
     expect(svg.hasAttribute("data-hovering")).toBe(false);
   });
 
-  it("triggers the idle physical splash automatically after IDLE_INTERVAL_MS", () => {
+  it("triggers the first idle splash after IDLE_FIRST_DELAY_MS at 40% position", () => {
     const { svg } = renderStripes();
 
     act(() => {
-      vi.advanceTimersByTime(IDLE_INTERVAL_MS);
+      vi.advanceTimersByTime(IDLE_FIRST_DELAY_MS);
     });
 
     expect(svg.hasAttribute("data-splashing")).toBe(true);
-    expect(svg.style.getPropertyValue("--splash-center-index")).toBe("50");
+    expect(svg.style.getPropertyValue("--splash-center-index")).toBe("40");
   });
 
   it("allows a manual click to interrupt an idle wave safely and take over priority", () => {
     const { svg, stripes } = renderStripes();
 
     act(() => {
-      vi.advanceTimersByTime(IDLE_INTERVAL_MS);
+      vi.advanceTimersByTime(IDLE_FIRST_DELAY_MS);
     });
 
     act(() => {
@@ -219,6 +220,11 @@ describe("InteractiveStripes (Drop Ripple Physics)", () => {
 
   it("removes the splashing class exactly after animation concludes", () => {
     const { svg, stripes } = renderStripes();
+
+    // Drain the first idle splash so it doesn't interfere with timing below
+    act(() => {
+      vi.advanceTimersByTime(IDLE_FIRST_DELAY_MS);
+    });
 
     act(() => {
       fireEvent.pointerDown(stripes[50]);

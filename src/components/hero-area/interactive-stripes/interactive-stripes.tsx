@@ -10,8 +10,10 @@ const SPLASH_WAVE_STEP_DELAY_MS = 64;
 /** Total duration of the physical drop bounce animation */
 const SPLASH_WAVE_ANIMATION_DURATION_MS = 1500;
 
-/** Interval between random idle wave splashes in ms */
-const IDLE_INTERVAL_MS = 5000;
+/** Delay before the first idle splash after page load in ms */
+const IDLE_FIRST_DELAY_MS = 1000;
+/** Interval between subsequent idle wave splashes in ms */
+const IDLE_INTERVAL_MS = 10000;
 /** Number of neighboring stripes to animate during idle splash */
 const IDLE_WAVE_RADIUS = 30;
 /** Max fill intensity percentage for idle splash peaks */
@@ -122,6 +124,7 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
   const geometry = useStripeGeometry(svgRef);
   const splashTimerRef = useRef<NodeJS.Timeout | null>(null);
   const idleIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const firstIdleFiredRef = useRef(false);
   const proxyHoveringRef = useRef(false);
   const draggingRef = useRef(false);
   const lastDragIndexRef = useRef<number | null>(null);
@@ -209,19 +212,30 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
    * ambient animation does not compete visually with user-driven interaction.
    */
   function resetIdleTimer() {
-    if (idleIntervalRef.current) clearInterval(idleIntervalRef.current);
+    if (idleIntervalRef.current) clearTimeout(idleIntervalRef.current);
     idleIntervalRef.current = null;
     if (count === 0) return;
 
-    idleIntervalRef.current = setInterval(() => {
+    const fireIdleSplash = () => {
       if (svgRef.current?.hasAttribute("data-hovering") || count === 0) return;
 
-      // Pick a random index in the middle 70% (skipping 15% from each edge)
-      const g = (Math.random() + Math.random() + Math.random()) / 3;
-      const randomIndex = Math.floor(count * (0.15 + g * 0.7));
-
+      const randomIndex = Math.floor(count * (0.05 + Math.random() * 0.7));
       triggerSplash(randomIndex, IDLE_WAVE_RADIUS, IDLE_WAVE_PEAK_INTENSITY_PERCENT);
-    }, IDLE_INTERVAL_MS);
+    };
+
+    const delay = firstIdleFiredRef.current ? IDLE_INTERVAL_MS : IDLE_FIRST_DELAY_MS;
+
+    idleIntervalRef.current = setTimeout(() => {
+      if (!firstIdleFiredRef.current) {
+        if (!(svgRef.current?.hasAttribute("data-hovering")) && count > 0) {
+          triggerSplash(Math.floor(count * 0.4), IDLE_WAVE_RADIUS, IDLE_WAVE_PEAK_INTENSITY_PERCENT);
+        }
+        firstIdleFiredRef.current = true;
+      } else {
+        fireIdleSplash();
+      }
+      idleIntervalRef.current = setInterval(fireIdleSplash, IDLE_INTERVAL_MS);
+    }, delay);
   }
 
   resetIdleTimerRef.current = resetIdleTimer;
@@ -230,7 +244,7 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
   useEffect(() => {
     resetIdleTimer();
     return () => {
-      if (idleIntervalRef.current) clearInterval(idleIntervalRef.current);
+      if (idleIntervalRef.current) clearTimeout(idleIntervalRef.current);
       if (splashTimerRef.current) clearTimeout(splashTimerRef.current);
     };
   }, [count]);
