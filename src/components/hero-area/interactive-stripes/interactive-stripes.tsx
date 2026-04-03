@@ -25,21 +25,9 @@ const HOVER_CLEAR_INDEX = -999;
 const PROXY_TEXT_SELECTOR = "[data-stripe-proxy-text]";
 const STRIPE_INDEX_ATTRIBUTE = "data-stripe-index";
 
-type SplashOffset = {
-  centerIndex: number;
-  radius: number;
-  intensity: number;
-};
-
 type InteractiveStripesProps = {
   containerRef: RefObject<HTMLElement | null>;
 };
-
-function getTargetElement(target: EventTarget | null): Element | null {
-  if (target instanceof Element) return target;
-  if (target instanceof Node) return target.parentElement;
-  return null;
-}
 
 /**
  * Keeps the CSS-driven hover state in one place so native rect hover and
@@ -61,17 +49,6 @@ function syncHoveredStripe(svg: SVGSVGElement | null, index: number | null): boo
   }
 
   return wasHovering;
-}
-
-function getHoveredStripeIndex(svg: SVGSVGElement | null): number | null {
-  if (!svg?.hasAttribute("data-hovering")) return null;
-
-  const rawIndex = svg.style.getPropertyValue("--hovered-index");
-  const hoveredIndex = Number(rawIndex);
-
-  return Number.isInteger(hoveredIndex) && hoveredIndex !== HOVER_CLEAR_INDEX
-    ? hoveredIndex
-    : null;
 }
 
 /**
@@ -115,31 +92,20 @@ function getStripeIndexFromViewportPoint(
   svg: SVGSVGElement | null,
   occludingElement?: Element | null,
 ): number | null {
-  const occludingElements = occludingElement
-    ? [occludingElement, ...Array.from(occludingElement.querySelectorAll("*"))]
-    : [];
-  const pointerEventsBackup = occludingElements
-    .filter((element): element is HTMLElement | SVGElement =>
-      element instanceof HTMLElement || element instanceof SVGElement)
-    .map((element) => ({
-      element,
-      pointerEvents: element.style.pointerEvents,
-    }));
-
-  for (const { element } of pointerEventsBackup) {
-    element.style.pointerEvents = "none";
-  }
+  // pointer-events is inherited, so disabling on the parent also hides children
+  // from elementsFromPoint without needing to touch every descendant.
+  const el = occludingElement instanceof HTMLElement || occludingElement instanceof SVGElement
+    ? occludingElement : null;
+  const prev = el?.style.pointerEvents;
+  if (el) el.style.pointerEvents = "none";
 
   try {
-    const pointElements = typeof document.elementsFromPoint === "function"
+    const hits = typeof document.elementsFromPoint === "function"
       ? document.elementsFromPoint(clientX, clientY)
       : [];
-
-    return getStripeIndexFromPointElements(pointElements, svg);
+    return getStripeIndexFromPointElements(hits, svg);
   } finally {
-    for (const { element, pointerEvents } of pointerEventsBackup) {
-      element.style.pointerEvents = pointerEvents;
-    }
+    if (el) el.style.pointerEvents = prev ?? "";
   }
 }
 
@@ -211,12 +177,6 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
     const previousCenterStripe = svg.querySelector("[data-splash-center]");
     const centerStripe = svg.querySelector<SVGRectElement>(`rect[${STRIPE_INDEX_ATTRIBUTE}="${centerIndex}"]`);
 
-    const splash: SplashOffset = {
-      centerIndex,
-      radius,
-      intensity: peakIntensity,
-    };
-
     // Clear any existing active timer to prevent premature wave cutoffs
     if (splashTimerRef.current) clearTimeout(splashTimerRef.current);
 
@@ -226,9 +186,9 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
     void svg.getBoundingClientRect();
 
     centerStripe?.setAttribute("data-splash-center", "");
-    svg.style.setProperty("--splash-center-index", String(splash.centerIndex));
-    svg.style.setProperty("--splash-radius", String(splash.radius));
-    svg.style.setProperty("--splash-peak-intensity", `${splash.intensity}%`);
+    svg.style.setProperty("--splash-center-index", String(centerIndex));
+    svg.style.setProperty("--splash-radius", String(radius));
+    svg.style.setProperty("--splash-peak-intensity", `${peakIntensity}%`);
     svg.setAttribute("data-splashing", "");
 
     splashTimerRef.current = setTimeout(() => {
@@ -283,15 +243,11 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
     const container = containerRef.current;
     if (!container) return;
 
-    const resolveStripeIndex = (
+    const resolveProxyStripeIndex = (
       target: Element,
       clientX: number,
       clientY: number,
     ): number | null => {
-      if (isStripeRectTarget(target)) {
-        return getStripeIndexFromPointElements([target], svgRef.current);
-      }
-
       const proxyTextTarget = target.closest(PROXY_TEXT_SELECTOR);
       if (!proxyTextTarget) return null;
 
@@ -304,18 +260,16 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
     };
 
     const handlePointerMove = (event: PointerEvent) => {
-      const target = getTargetElement(event.target);
-      if (!target) return;
+      if (!(event.target instanceof Element)) return;
 
-      if (target.closest(PROXY_TEXT_SELECTOR)) {
+      if (event.target.closest(PROXY_TEXT_SELECTOR)) {
         proxyHoveringRef.current = true;
-        const hoveredIndex = resolveStripeIndex(target, event.clientX, event.clientY);
-
+        const hoveredIndex = resolveProxyStripeIndex(event.target, event.clientX, event.clientY);
         syncHoveredStripe(svgRef.current, hoveredIndex);
         return;
       }
 
-      if (isStripeRectTarget(target)) {
+      if (isStripeRectTarget(event.target)) {
         proxyHoveringRef.current = false;
         return;
       }
@@ -323,35 +277,26 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
       clearHoveredStripe(true);
     };
 
-    const activateSplash = (target: Element, clientX: number, clientY: number) => {
-      const stripeIndex = getHoveredStripeIndex(svgRef.current)
-        ?? resolveStripeIndex(target, clientX, clientY);
+    const handleClick = (event: MouseEvent) => {
+      if (!(event.target instanceof Element)) return;
+      if (!event.target.closest(PROXY_TEXT_SELECTOR)) return;
+
+      const stripeIndex = resolveProxyStripeIndex(event.target, event.clientX, event.clientY);
       if (stripeIndex === null) return;
 
-      proxyHoveringRef.current = true;
-      syncHoveredStripe(svgRef.current, stripeIndex);
       triggerSplash(stripeIndex);
-    };
-
-    const handleProxyClick = (event: MouseEvent) => {
-      const target = getTargetElement(event.target);
-      if (!target) return;
-      if (!container.contains(target)) return;
-      if (!target.closest(PROXY_TEXT_SELECTOR)) return;
-
-      activateSplash(target, event.clientX, event.clientY);
     };
 
     const handlePointerLeave = () => clearHoveredStripe(true);
 
     container.addEventListener("pointermove", handlePointerMove);
     container.addEventListener("pointerleave", handlePointerLeave);
-    document.addEventListener("click", handleProxyClick, true);
+    container.addEventListener("click", handleClick);
 
     return () => {
       container.removeEventListener("pointermove", handlePointerMove);
       container.removeEventListener("pointerleave", handlePointerLeave);
-      document.removeEventListener("click", handleProxyClick, true);
+      container.removeEventListener("click", handleClick);
       clearHoveredStripe();
     };
   }, [containerRef]);

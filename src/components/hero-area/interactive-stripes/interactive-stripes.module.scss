@@ -27,7 +27,7 @@
   pointer-events: none; // SVG doesn't block clicks on content behind it
   transition: --interactive-stripe-opacity 500ms ease;
 
-  &[data-hovering]:not(.isSplashing) {
+  &[data-hovering] {
     --interactive-stripe-opacity: 1;
   }
 
@@ -54,16 +54,6 @@
   --hover-intensity-calc: calc((cos(calc(var(--normalized) * 3.1416rad)) + 1) / 2);
   // Peak static hover intensity is 20% * SVG hover opacity (fades 0-1)
   --hover-intensity: calc(var(--hover-intensity-calc) * var(--hover-opacity) * var(--interactive-stripe-opacity));
-}
-
-// Touch splash: center stripe with impact flash
-.splash {
-  animation: splash-impact 2000ms linear forwards;
-}
-
-// Wave spread for neighboring stripes (no impact flash)
-.splash-wave {
-  animation: splash-wave var(--wave-duration, 1500ms) linear var(--wave-delay, 0ms) forwards;
 }
 
 .stripesSvg[data-splashing] .stripe {

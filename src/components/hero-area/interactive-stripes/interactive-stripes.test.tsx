@@ -84,13 +84,14 @@ describe("InteractiveStripes (Drop Ripple Physics)", () => {
 
   const mockNestedPassThroughHitTest = (
     proxyText: HTMLElement,
-    occludingChild: HTMLElement,
+    _occludingChild: HTMLElement,
     stripe: SVGRectElement,
   ) => {
+    // pointer-events is inherited, so only the parent needs disabling
     elementsFromPointMock.mockImplementation(() =>
-      proxyText.style.pointerEvents === "none" && occludingChild.style.pointerEvents === "none"
+      proxyText.style.pointerEvents === "none"
         ? [stripe]
-        : [occludingChild]);
+        : [_occludingChild]);
   };
 
   it("renders the SVG container and stripe rect elements", () => {
