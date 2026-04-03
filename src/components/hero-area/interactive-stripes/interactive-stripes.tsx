@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, type RefObject } from "react";
 import { useStripeGeometry } from "./use-stripe-geometry";
+import { playRippleSound } from "./stripe-sound";
 import styles from "./interactive-stripes.module.scss";
 
 /** Delay between each wave step during splash in ms */
@@ -122,6 +123,8 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
   const splashTimerRef = useRef<NodeJS.Timeout | null>(null);
   const idleIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const proxyHoveringRef = useRef(false);
+  const draggingRef = useRef(false);
+  const lastDragIndexRef = useRef<number | null>(null);
   const resetIdleTimerRef = useRef<() => void>(() => { });
 
   const { count, positions, containerWidth, containerHeight, stripeLength, overflow } = geometry;
@@ -266,6 +269,10 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
         proxyHoveringRef.current = true;
         const hoveredIndex = resolveProxyStripeIndex(event.target, event.clientX, event.clientY);
         syncHoveredStripe(svgRef.current, hoveredIndex);
+        if (draggingRef.current && hoveredIndex !== null && lastDragIndexRef.current !== hoveredIndex) {
+          lastDragIndexRef.current = hoveredIndex;
+          playRippleSound(hoveredIndex, count);
+        }
         return;
       }
 
@@ -285,18 +292,37 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
       if (stripeIndex === null) return;
 
       triggerSplash(stripeIndex);
+      playRippleSound(stripeIndex, count);
+    };
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!(event.target instanceof Element)) return;
+      if (!event.target.closest(PROXY_TEXT_SELECTOR)) return;
+
+      const stripeIndex = resolveProxyStripeIndex(event.target, event.clientX, event.clientY);
+      draggingRef.current = true;
+      lastDragIndexRef.current = stripeIndex;
+    };
+
+    const handlePointerUp = () => {
+      draggingRef.current = false;
+      lastDragIndexRef.current = null;
     };
 
     const handlePointerLeave = () => clearHoveredStripe(true);
 
     container.addEventListener("pointermove", handlePointerMove);
+    container.addEventListener("pointerdown", handlePointerDown);
     container.addEventListener("pointerleave", handlePointerLeave);
     container.addEventListener("click", handleClick);
+    document.addEventListener("pointerup", handlePointerUp);
 
     return () => {
       container.removeEventListener("pointermove", handlePointerMove);
+      container.removeEventListener("pointerdown", handlePointerDown);
       container.removeEventListener("pointerleave", handlePointerLeave);
       container.removeEventListener("click", handleClick);
+      document.removeEventListener("pointerup", handlePointerUp);
       clearHoveredStripe();
     };
   }, [containerRef]);
@@ -310,7 +336,15 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
       viewBox={isReady ? `0 0 ${containerWidth} ${containerHeight}` : undefined}
       preserveAspectRatio="none"
       aria-hidden="true"
-      onPointerLeave={() => clearHoveredStripe(true)}
+      onPointerUp={() => {
+        draggingRef.current = false;
+        lastDragIndexRef.current = null;
+      }}
+      onPointerLeave={() => {
+        draggingRef.current = false;
+        lastDragIndexRef.current = null;
+        clearHoveredStripe(true);
+      }}
       style={
         {
           "--hovered-index": String(HOVER_CLEAR_INDEX),
@@ -346,11 +380,18 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
                 // case where selectable text sits above the SVG and occludes it.
                 onPointerDown={() => {
                   proxyHoveringRef.current = false;
+                  draggingRef.current = true;
+                  lastDragIndexRef.current = index;
                   triggerSplash(index);
+                  playRippleSound(index, count);
                 }}
                 onPointerEnter={() => {
                   proxyHoveringRef.current = false;
                   syncHoveredStripe(svgRef.current, index);
+                  if (draggingRef.current && lastDragIndexRef.current !== index) {
+                    lastDragIndexRef.current = index;
+                    playRippleSound(index, count);
+                  }
                 }}
               />
             );
