@@ -48,7 +48,7 @@ jobs:
           publish_dir: ./dist
 
       - name: Deploy to my web-server
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
