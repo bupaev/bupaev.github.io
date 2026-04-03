@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type RefObject } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 import { useStripeGeometry } from "./use-stripe-geometry";
 import styles from "./interactive-stripes.module.scss";
 
@@ -26,15 +26,20 @@ const PROXY_TEXT_SELECTOR = "[data-stripe-proxy-text]";
 const STRIPE_INDEX_ATTRIBUTE = "data-stripe-index";
 
 type SplashOffset = {
-  offset: number;
+  centerIndex: number;
   radius: number;
   intensity: number;
-  splashId: number;
 };
 
 type InteractiveStripesProps = {
   containerRef: RefObject<HTMLElement | null>;
 };
+
+function getTargetElement(target: EventTarget | null): Element | null {
+  if (target instanceof Element) return target;
+  if (target instanceof Node) return target.parentElement;
+  return null;
+}
 
 /**
  * Keeps the CSS-driven hover state in one place so native rect hover and
@@ -56,6 +61,17 @@ function syncHoveredStripe(svg: SVGSVGElement | null, index: number | null): boo
   }
 
   return wasHovering;
+}
+
+function getHoveredStripeIndex(svg: SVGSVGElement | null): number | null {
+  if (!svg?.hasAttribute("data-hovering")) return null;
+
+  const rawIndex = svg.style.getPropertyValue("--hovered-index");
+  const hoveredIndex = Number(rawIndex);
+
+  return Number.isInteger(hoveredIndex) && hoveredIndex !== HOVER_CLEAR_INDEX
+    ? hoveredIndex
+    : null;
 }
 
 /**
@@ -99,41 +115,48 @@ function getStripeIndexFromViewportPoint(
   svg: SVGSVGElement | null,
   occludingElement?: Element | null,
 ): number | null {
-  let previousPointerEventsValue: string | null = null;
-
-  if (occludingElement instanceof HTMLElement || occludingElement instanceof SVGElement) {
-    previousPointerEventsValue = occludingElement.style.pointerEvents;
-    occludingElement.style.pointerEvents = "none";
-  }
-
-  const pointElements = typeof document.elementsFromPoint === "function"
-    ? document.elementsFromPoint(clientX, clientY)
+  const occludingElements = occludingElement
+    ? [occludingElement, ...Array.from(occludingElement.querySelectorAll("*"))]
     : [];
+  const pointerEventsBackup = occludingElements
+    .filter((element): element is HTMLElement | SVGElement =>
+      element instanceof HTMLElement || element instanceof SVGElement)
+    .map((element) => ({
+      element,
+      pointerEvents: element.style.pointerEvents,
+    }));
 
-  if (occludingElement instanceof HTMLElement || occludingElement instanceof SVGElement) {
-    occludingElement.style.pointerEvents = previousPointerEventsValue ?? "";
+  for (const { element } of pointerEventsBackup) {
+    element.style.pointerEvents = "none";
   }
 
-  return getStripeIndexFromPointElements(pointElements, svg);
+  try {
+    const pointElements = typeof document.elementsFromPoint === "function"
+      ? document.elementsFromPoint(clientX, clientY)
+      : [];
+
+    return getStripeIndexFromPointElements(pointElements, svg);
+  } finally {
+    for (const { element, pointerEvents } of pointerEventsBackup) {
+      element.style.pointerEvents = pointerEvents;
+    }
+  }
 }
 
 /**
  * SVG overlay that renders interactive diagonal stripes over the hero area.
  * The SVG itself is the positioned container (no wrapper div).
- * CSS handles the hover blinking effect.
  *
- * - Idle: random stripe flashes yellow once per second (instant snap)
- * - Hover: hovered stripe blinks at 2Hz like a CRT cursor (pure CSS)
- * - Touch: splash effect radiating from touch point
+ * Hover and splash visuals are both driven by SVG-level CSS variables so the
+ * browser can animate the stripe field without React keeping per-stripe state.
  */
 export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const geometry = useStripeGeometry(svgRef);
-  const [splashIndices, setSplashIndices] = useState<Map<number, SplashOffset>>(new Map());
   const splashTimerRef = useRef<NodeJS.Timeout | null>(null);
   const idleIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const proxyHoveringRef = useRef(false);
-  const resetIdleTimerRef = useRef<() => void>(() => {});
+  const resetIdleTimerRef = useRef<() => void>(() => { });
 
   const { count, positions, containerWidth, containerHeight, stripeLength, overflow } = geometry;
   const centerX = containerWidth / 2;
@@ -174,34 +197,44 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
   }, [containerRef, count, containerWidth]);
 
   /**
-   * Materializes the splash wave into per-stripe animation state.
-   *
-   * The state stores distance from the impact point rather than precomputed CSS
-   * values so rendering can derive timing and intensity consistently for both
-   * manual and idle splashes.
+   * Starts a splash wave by updating the same SVG-level CSS variables that the
+   * stripe styles read from. Restarting the `data-splashing` attribute forces
+   * the CSS animation to replay without remounting the rect elements.
    */
   function triggerSplash(
     centerIndex: number,
     radius = SPLASH_WAVE_RADIUS,
     peakIntensity = SPLASH_WAVE_PEAK_INTENSITY_PERCENT,
   ): void {
-    const splashId = Date.now() + Math.random();
-    const newSplash = new Map<number, SplashOffset>();
+    const svg = svgRef.current;
+    if (!svg) return;
+    const previousCenterStripe = svg.querySelector("[data-splash-center]");
+    const centerStripe = svg.querySelector<SVGRectElement>(`rect[${STRIPE_INDEX_ATTRIBUTE}="${centerIndex}"]`);
 
-    for (let offset = -radius; offset <= radius; offset++) {
-      const idx = centerIndex + offset;
-      if (idx >= 0 && idx < count) {
-        newSplash.set(idx, { offset: Math.abs(offset), radius, intensity: peakIntensity, splashId });
-      }
-    }
-
-    setSplashIndices(newSplash);
+    const splash: SplashOffset = {
+      centerIndex,
+      radius,
+      intensity: peakIntensity,
+    };
 
     // Clear any existing active timer to prevent premature wave cutoffs
     if (splashTimerRef.current) clearTimeout(splashTimerRef.current);
 
+    svg.removeAttribute("data-splashing");
+    previousCenterStripe?.removeAttribute("data-splash-center");
+    svg.style.setProperty("--splash-center-index", String(HOVER_CLEAR_INDEX));
+    void svg.getBoundingClientRect();
+
+    centerStripe?.setAttribute("data-splash-center", "");
+    svg.style.setProperty("--splash-center-index", String(splash.centerIndex));
+    svg.style.setProperty("--splash-radius", String(splash.radius));
+    svg.style.setProperty("--splash-peak-intensity", `${splash.intensity}%`);
+    svg.setAttribute("data-splashing", "");
+
     splashTimerRef.current = setTimeout(() => {
-      setSplashIndices(new Map());
+      svg.removeAttribute("data-splashing");
+      centerStripe?.removeAttribute("data-splash-center");
+      svg.style.setProperty("--splash-center-index", String(HOVER_CLEAR_INDEX));
       splashTimerRef.current = null;
     }, SPLASH_WAVE_ANIMATION_DURATION_MS + radius * SPLASH_WAVE_STEP_DELAY_MS);
   }
@@ -235,6 +268,7 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
     resetIdleTimer();
     return () => {
       if (idleIntervalRef.current) clearInterval(idleIntervalRef.current);
+      if (splashTimerRef.current) clearTimeout(splashTimerRef.current);
     };
   }, [count]);
 
@@ -249,19 +283,33 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
     const container = containerRef.current;
     if (!container) return;
 
-    const handlePointerMove = (event: PointerEvent) => {
-      const target = event.target;
-      if (!(target instanceof Element)) return;
+    const resolveStripeIndex = (
+      target: Element,
+      clientX: number,
+      clientY: number,
+    ): number | null => {
+      if (isStripeRectTarget(target)) {
+        return getStripeIndexFromPointElements([target], svgRef.current);
+      }
 
       const proxyTextTarget = target.closest(PROXY_TEXT_SELECTOR);
-      if (proxyTextTarget) {
+      if (!proxyTextTarget) return null;
+
+      return getStripeIndexFromViewportPoint(
+        clientX,
+        clientY,
+        svgRef.current,
+        proxyTextTarget,
+      );
+    };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      const target = getTargetElement(event.target);
+      if (!target) return;
+
+      if (target.closest(PROXY_TEXT_SELECTOR)) {
         proxyHoveringRef.current = true;
-        const hoveredIndex = getStripeIndexFromViewportPoint(
-          event.clientX,
-          event.clientY,
-          svgRef.current,
-          proxyTextTarget,
-        );
+        const hoveredIndex = resolveStripeIndex(target, event.clientX, event.clientY);
 
         syncHoveredStripe(svgRef.current, hoveredIndex);
         return;
@@ -275,19 +323,9 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
       clearHoveredStripe(true);
     };
 
-    const handlePointerDown = (event: PointerEvent) => {
-      const target = event.target;
-      if (!(target instanceof Element)) return;
-
-      const proxyTextTarget = target.closest(PROXY_TEXT_SELECTOR);
-      if (!proxyTextTarget) return;
-
-      const stripeIndex = getStripeIndexFromViewportPoint(
-        event.clientX,
-        event.clientY,
-        svgRef.current,
-        proxyTextTarget,
-      );
+    const activateSplash = (target: Element, clientX: number, clientY: number) => {
+      const stripeIndex = getHoveredStripeIndex(svgRef.current)
+        ?? resolveStripeIndex(target, clientX, clientY);
       if (stripeIndex === null) return;
 
       proxyHoveringRef.current = true;
@@ -295,89 +333,66 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
       triggerSplash(stripeIndex);
     };
 
+    const handleProxyClick = (event: MouseEvent) => {
+      const target = getTargetElement(event.target);
+      if (!target) return;
+      if (!container.contains(target)) return;
+      if (!target.closest(PROXY_TEXT_SELECTOR)) return;
+
+      activateSplash(target, event.clientX, event.clientY);
+    };
+
     const handlePointerLeave = () => clearHoveredStripe(true);
 
     container.addEventListener("pointermove", handlePointerMove);
-    container.addEventListener("pointerdown", handlePointerDown);
     container.addEventListener("pointerleave", handlePointerLeave);
+    document.addEventListener("click", handleProxyClick, true);
 
     return () => {
       container.removeEventListener("pointermove", handlePointerMove);
-      container.removeEventListener("pointerdown", handlePointerDown);
       container.removeEventListener("pointerleave", handlePointerLeave);
+      document.removeEventListener("click", handleProxyClick, true);
       clearHoveredStripe();
     };
   }, [containerRef]);
-
-  /**
-   * Returns the CSS class name(s) for a stripe based on its current state.
-   */
-  const getStripeClassName = (index: number): string => {
-    const classes = [styles.stripe];
-
-    if (splashIndices.has(index)) {
-      // 1. Splash wave takes absolute priority
-      const { offset } = splashIndices.get(index)!;
-      classes.push(offset === 0 ? styles.splash : styles["splash-wave"]);
-    }
-
-    return classes.join(" ");
-  };
-
-  /**
-   * Returns inline CSS variables for splash wave timing and physical energy decay.
-   */
-  const getStripeStyle = (index: number): React.CSSProperties | undefined => {
-    // Priority 1: Splash animation timing and decay
-    if (splashIndices.has(index)) {
-      const { offset, radius, intensity: peakIntensity } = splashIndices.get(index)!;
-
-      // Cosine attenuation keeps the wave strongest at the center while fading
-      // smoothly to zero at the edge of the splash radius.
-      const normalized = offset / radius;
-      const intensity = (Math.cos(normalized * Math.PI) + 1) / 2;
-
-      return {
-        "--wave-delay": `${offset * SPLASH_WAVE_STEP_DELAY_MS}ms`,
-        "--wave-duration": `${SPLASH_WAVE_ANIMATION_DURATION_MS}ms`,
-        "--wave-intensity": `${intensity * peakIntensity}%`,
-      } as React.CSSProperties;
-    }
-
-    return undefined;
-  };
 
   const isReady = count > 0 && containerWidth > 0;
 
   return (
     <svg
       ref={svgRef}
-      className={`${styles.stripesSvg} ${splashIndices.size > 0 ? styles.isSplashing : ""}`}
+      className={styles.stripesSvg}
       viewBox={isReady ? `0 0 ${containerWidth} ${containerHeight}` : undefined}
       preserveAspectRatio="none"
       aria-hidden="true"
       onPointerLeave={() => clearHoveredStripe(true)}
-      style={{ "--hovered-index": String(HOVER_CLEAR_INDEX) } as React.CSSProperties}
+      style={
+        {
+          "--hovered-index": String(HOVER_CLEAR_INDEX),
+          "--splash-center-index": String(HOVER_CLEAR_INDEX),
+          "--splash-radius": String(SPLASH_WAVE_RADIUS),
+          "--splash-peak-intensity": `${SPLASH_WAVE_PEAK_INTENSITY_PERCENT}%`,
+        } as React.CSSProperties
+      }
     >
       {isReady && (
         <g transform={`rotate(15, ${centerX}, ${centerY})`}>
           {positions.map((pos, index) => {
-            const splashOffset = splashIndices.get(index);
-
             return (
               <rect
-                key={`${index}-${splashOffset?.splashId || 0}`}
+                key={index}
                 data-stripe-index={index}
                 x={pos}
                 y={-overflow}
                 width={10}
                 height={stripeLength}
                 fill="var(--color-background)"
-                className={getStripeClassName(index)}
+                className={styles.stripe}
                 style={
                   {
                     "--index": index,
-                    ...getStripeStyle(index),
+                    "--wave-duration": `${SPLASH_WAVE_ANIMATION_DURATION_MS}ms`,
+                    "--wave-step-delay": `${SPLASH_WAVE_STEP_DELAY_MS}ms`,
                   } as React.CSSProperties
                 }
                 // Prefer native rect hit-testing for real stripes.

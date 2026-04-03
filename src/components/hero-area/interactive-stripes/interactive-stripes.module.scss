@@ -66,6 +66,23 @@
   animation: splash-wave var(--wave-duration, 1500ms) linear var(--wave-delay, 0ms) forwards;
 }
 
+.stripesSvg[data-splashing] .stripe {
+  --splash-dist: max(
+    calc(var(--index) - var(--splash-center-index, -999)),
+    calc(var(--splash-center-index, -999) - var(--index))
+  );
+  --splash-normalized: min(1, calc(var(--splash-dist) / var(--splash-radius, 1)));
+  --splash-intensity-calc: calc((cos(calc(var(--splash-normalized) * 3.1416rad)) + 1) / 2);
+  --wave-delay: calc(var(--splash-dist) * var(--wave-step-delay, 64ms));
+  --wave-intensity: calc(var(--splash-intensity-calc) * var(--splash-peak-intensity, 35%));
+
+  animation: splash-wave var(--wave-duration, 1500ms) linear var(--wave-delay, 0ms) forwards;
+}
+
+.stripesSvg[data-splashing] .stripe[data-splash-center] {
+  animation: splash-impact 2000ms linear forwards;
+}
+
 // Damped wave shared keyframe pattern (used by both animations)
 // Mathematically mimics |e^(-2.5t) * cos(3 * PI * t)|
 @keyframes splash-wave {

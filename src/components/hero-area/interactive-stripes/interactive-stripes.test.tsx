@@ -23,10 +23,6 @@ const MANUAL_RADIUS = 50;
 
 const elementsFromPointMock = vi.fn<(x: number, y: number) => Element[]>();
 
-function getClassNames(element: Element | null): string {
-  return element?.getAttribute("class") ?? "";
-}
-
 describe("InteractiveStripes (Drop Ripple Physics)", () => {
   let mockRef: React.RefObject<HTMLDivElement | null>;
   let originalElementsFromPoint: typeof document.elementsFromPoint;
@@ -74,7 +70,7 @@ describe("InteractiveStripes (Drop Ripple Physics)", () => {
     };
   };
 
-  const createProxyText = (tagName: "h1" | "h2" = "h1") => {
+  const createProxyText = (tagName: keyof HTMLElementTagNameMap = "div") => {
     const proxyText = document.createElement(tagName);
     proxyText.setAttribute("data-stripe-proxy-text", "");
     mockRef.current?.appendChild(proxyText);
@@ -86,10 +82,21 @@ describe("InteractiveStripes (Drop Ripple Physics)", () => {
       proxyText.style.pointerEvents === "none" ? [stripe] : [proxyText]);
   };
 
+  const mockNestedPassThroughHitTest = (
+    proxyText: HTMLElement,
+    occludingChild: HTMLElement,
+    stripe: SVGRectElement,
+  ) => {
+    elementsFromPointMock.mockImplementation(() =>
+      proxyText.style.pointerEvents === "none" && occludingChild.style.pointerEvents === "none"
+        ? [stripe]
+        : [occludingChild]);
+  };
+
   it("renders the SVG container and stripe rect elements", () => {
     const { svg, stripes } = renderStripes();
 
-    expect(getClassNames(svg)).not.toMatch(/isSplashing/);
+    expect(svg.hasAttribute("data-splashing")).toBe(false);
     expect(stripes).toHaveLength(100);
   });
 
@@ -135,18 +142,32 @@ describe("InteractiveStripes (Drop Ripple Physics)", () => {
     expect(svg.hasAttribute("data-hovering")).toBe(false);
   });
 
-  it("triggers a splash when pointerdown starts on proxy text", () => {
-    const { container, svg, stripes } = renderStripes();
-    const proxyText = createProxyText("h2");
+  it("triggers a splash when clicking proxy text", () => {
+    const { svg, stripes } = renderStripes();
+    const proxyText = createProxyText();
 
     mockPassThroughHitTest(proxyText, stripes[22]);
-    fireEvent.pointerDown(proxyText, { clientX: 200, clientY: 260 });
+    fireEvent.click(proxyText, { clientX: 200, clientY: 260 });
 
-    const updatedStripes = Array.from(container.querySelectorAll("rect")) as SVGRectElement[];
-
-    expect(getClassNames(svg)).toMatch(/isSplashing/);
-    expect(getClassNames(updatedStripes[22])).toMatch(/splash/);
+    expect(svg.hasAttribute("data-splashing")).toBe(true);
+    expect(svg.style.getPropertyValue("--splash-center-index")).toBe("22");
+    expect(stripes[22].hasAttribute("data-splash-center")).toBe(true);
     expect(proxyText.style.pointerEvents).toBe("");
+  });
+
+  it("triggers a splash when clicking nested proxy text content", () => {
+    const { svg, stripes } = renderStripes();
+    const proxyText = createProxyText();
+    const nestedSpan = document.createElement("span");
+
+    proxyText.appendChild(nestedSpan);
+    mockNestedPassThroughHitTest(proxyText, nestedSpan, stripes[37]);
+    fireEvent.click(nestedSpan, { clientX: 210, clientY: 240 });
+
+    expect(svg.hasAttribute("data-splashing")).toBe(true);
+    expect(svg.style.getPropertyValue("--splash-center-index")).toBe("37");
+    expect(proxyText.style.pointerEvents).toBe("");
+    expect(nestedSpan.style.pointerEvents).toBe("");
   });
 
   it("suppresses idle splash during proxy hover and clears hover on leave", () => {
@@ -160,7 +181,7 @@ describe("InteractiveStripes (Drop Ripple Physics)", () => {
       vi.advanceTimersByTime(IDLE_INTERVAL_MS);
     });
 
-    expect(getClassNames(svg)).not.toMatch(/isSplashing/);
+    expect(svg.hasAttribute("data-splashing")).toBe(false);
     expect(svg.style.getPropertyValue("--hovered-index")).toBe("35");
 
     fireEvent.pointerLeave(mockRef.current!);
@@ -170,43 +191,29 @@ describe("InteractiveStripes (Drop Ripple Physics)", () => {
   });
 
   it("triggers the idle physical splash automatically after IDLE_INTERVAL_MS", () => {
-    const { container, svg } = renderStripes();
+    const { svg } = renderStripes();
 
     act(() => {
       vi.advanceTimersByTime(IDLE_INTERVAL_MS);
     });
 
-    const stripes = Array.from(container.querySelectorAll("rect")) as SVGRectElement[];
-    const splashCenterIndex = stripes.findIndex((stripe) => {
-      const classNames = getClassNames(stripe);
-      return /splash/.test(classNames) && !/splash-wave/.test(classNames);
-    });
-
-    expect(getClassNames(svg)).toMatch(/isSplashing/);
-    expect(splashCenterIndex).toBeGreaterThanOrEqual(0);
-    expect(getClassNames(stripes[splashCenterIndex])).toMatch(/splash/);
-    expect(getClassNames(stripes[splashCenterIndex + 15])).toMatch(/splash-wave/);
-    expect(getClassNames(stripes[splashCenterIndex + 35])).not.toMatch(/splash-wave/);
+    expect(svg.hasAttribute("data-splashing")).toBe(true);
+    expect(svg.style.getPropertyValue("--splash-center-index")).toBe("50");
   });
 
   it("allows a manual click to interrupt an idle wave safely and take over priority", () => {
-    const { container } = renderStripes();
+    const { svg, stripes } = renderStripes();
 
     act(() => {
       vi.advanceTimersByTime(IDLE_INTERVAL_MS);
     });
-
-    const stripes = Array.from(container.querySelectorAll("rect")) as SVGRectElement[];
 
     act(() => {
       fireEvent.pointerDown(stripes[10]);
     });
 
-    const newStripes = Array.from(container.querySelectorAll("rect")) as SVGRectElement[];
-
-    expect(getClassNames(newStripes[10])).toMatch(/splash/);
-    expect(getClassNames(newStripes[50])).not.toMatch(/splash$/);
-    expect(getClassNames(newStripes[50])).toMatch(/splash-wave/);
+    expect(svg.hasAttribute("data-splashing")).toBe(true);
+    expect(svg.style.getPropertyValue("--splash-center-index")).toBe("10");
   });
 
   it("removes the splashing class exactly after animation concludes", () => {
@@ -216,7 +223,7 @@ describe("InteractiveStripes (Drop Ripple Physics)", () => {
       fireEvent.pointerDown(stripes[50]);
     });
 
-    expect(getClassNames(svg)).toMatch(/isSplashing/);
+    expect(svg.hasAttribute("data-splashing")).toBe(true);
 
     const totalDuration = SPLASH_WAVE_ANIMATION_DURATION_MS + (MANUAL_RADIUS * SPLASH_WAVE_STEP_DELAY_MS);
 
@@ -224,12 +231,13 @@ describe("InteractiveStripes (Drop Ripple Physics)", () => {
       vi.advanceTimersByTime(totalDuration - 1);
     });
 
-    expect(getClassNames(svg)).toMatch(/isSplashing/);
+    expect(svg.hasAttribute("data-splashing")).toBe(true);
 
     act(() => {
       vi.advanceTimersByTime(1);
     });
 
-    expect(getClassNames(svg)).not.toMatch(/isSplashing/);
+    expect(svg.hasAttribute("data-splashing")).toBe(false);
+    expect(stripes[50].hasAttribute("data-splash-center")).toBe(false);
   });
 });
