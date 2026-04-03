@@ -27,7 +27,7 @@
   pointer-events: none; // SVG doesn't block clicks on content behind it
   transition: --interactive-stripe-opacity 500ms ease;
 
-  &:hover:not(.isSplashing) {
+  &[data-hovering]:not(.isSplashing) {
     --interactive-stripe-opacity: 1;
   }
 

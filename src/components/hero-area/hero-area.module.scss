@@ -141,6 +141,8 @@
   font-size: 3rem;
   line-height: 1.1;
   text-align: right;
+  pointer-events: auto;
+  user-select: text;
 
   @include mixins.mobile {
     @include mixins.text-contour(var(--color-background), 0.02em);
@@ -169,6 +171,8 @@
   padding-bottom: 1.2rem;
   font-size: 2rem;
   line-height: 1.25;
+  pointer-events: auto;
+  user-select: text;
 
   @include mixins.mobile {
     @include mixins.text-contour(var(--color-background), 0.02em);

@@ -4,7 +4,7 @@ import { useEffect, useState, type RefObject } from "react";
 const STRIPE_WIDTH = 10;
 const SEPARATOR_WIDTH = 3;
 const STRIPE_PERIOD = STRIPE_WIDTH + SEPARATOR_WIDTH; // 13px
-/** The gradient angle in degrees (105° = 15° from vertical) */
+/** The gradient angle in degrees (105deg = 15deg from vertical) */
 const ANGLE_DEG = 105;
 const ANGLE_RAD = (ANGLE_DEG * Math.PI) / 180;
 
@@ -101,4 +101,3 @@ export function useStripeGeometry(
 
   return geometry;
 }
-
