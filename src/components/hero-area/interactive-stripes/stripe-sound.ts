@@ -20,14 +20,14 @@ const TOTAL_NOTES = PENTATONIC.length * OCTAVE_SPAN;
 /** Sound envelope */
 const ATTACK_S = 0.01;
 const DECAY_S = 3.5;
-const HARMONIC_GAIN = 0.06;
-const FUNDAMENTAL_GAIN = 0.09;
+const HARMONIC_GAIN = 0.006;
+const FUNDAMENTAL_GAIN = 0.009;
 
 let audioContext: AudioContext | null = null;
 let masterBus: DynamicsCompressorNode | null = null;
 
-async function getMasterBus(): Promise<{ ctx: AudioContext; bus: DynamicsCompressorNode } | null> {
-  if (typeof AudioContext === "undefined") return null;
+function ensureAudioContext(): boolean {
+  if (typeof AudioContext === "undefined") return false;
 
   if (!audioContext) {
     audioContext = new AudioContext();
@@ -40,9 +40,9 @@ async function getMasterBus(): Promise<{ ctx: AudioContext; bus: DynamicsCompres
     masterBus.connect(audioContext.destination);
   }
   if (audioContext.state === "suspended") {
-    await audioContext.resume();
+    void audioContext.resume();
   }
-  return { ctx: audioContext, bus: masterBus! };
+  return true;
 }
 
 /**
@@ -93,16 +93,26 @@ function createTone(
  *
  * Call this on user-initiated splashes only (not idle animations).
  */
-export async function playRippleSound(stripeIndex: number, totalStripes: number): Promise<void> {
-  const master = await getMasterBus();
-  if (!master) return;
+export function playRippleSound(stripeIndex: number, totalStripes: number): void {
+  if (!ensureAudioContext() || !audioContext || !masterBus) return;
 
-  const { ctx, bus } = master;
-  const freq = indexToFrequency(stripeIndex, totalStripes);
-  const now = ctx.currentTime;
+  const ctx = audioContext;
+  const bus = masterBus;
 
-  // Fundamental tone
-  createTone(ctx, bus, freq, FUNDAMENTAL_GAIN, now);
-  // Soft octave harmonic for brightness
-  createTone(ctx, bus, freq * 2, HARMONIC_GAIN, now);
+  const schedule = () => {
+    const freq = indexToFrequency(stripeIndex, totalStripes);
+    const now = ctx.currentTime;
+    createTone(ctx, bus, freq, FUNDAMENTAL_GAIN, now);
+    createTone(ctx, bus, freq * 2, HARMONIC_GAIN, now);
+  };
+
+  // When the context is already running, play immediately. On the very first
+  // user gesture the context is still resuming — defer scheduling so the tone
+  // starts at the real currentTime instead of time 0 (which would be in the
+  // past by the time audio output begins, cutting the attack).
+  if (ctx.state === "running") {
+    schedule();
+  } else {
+    void ctx.resume().then(schedule);
+  }
 }
