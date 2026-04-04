@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type RefObject } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import { useStripeGeometry } from "./use-stripe-geometry";
 import { playRippleSound } from "./stripe-sound";
 import styles from "./interactive-stripes.module.scss";
@@ -123,12 +123,14 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const geometry = useStripeGeometry(svgRef);
   const splashTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const idleIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isScrolledPast, setIsScrolledPast] = useState(false);
+  const [idleResetToken, setIdleResetToken] = useState(0);
+
   const firstIdleFiredRef = useRef(false);
   const proxyHoveringRef = useRef(false);
   const draggingRef = useRef(false);
   const lastDragIndexRef = useRef<number | null>(null);
-  const resetIdleTimerRef = useRef<() => void>(() => { });
 
   const { count, positions, containerWidth, containerHeight, stripeLength, overflow } = geometry;
   const centerX = containerWidth / 2;
@@ -145,7 +147,7 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
     proxyHoveringRef.current = false;
     const wasHovering = syncHoveredStripe(svgRef.current, null);
     if (resetIdle && wasHovering) {
-      resetIdleTimerRef.current();
+      setIdleResetToken(t => t + 1);
     }
   };
 
@@ -205,49 +207,86 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
     }, SPLASH_WAVE_ANIMATION_DURATION_MS + radius * SPLASH_WAVE_STEP_DELAY_MS);
   }
 
-  /**
-   * Restarts the idle wave scheduler.
-   *
-   * The interval is paused implicitly while any hover state is active so the
-   * ambient animation does not compete visually with user-driven interaction.
-   */
-  function resetIdleTimer() {
-    if (idleIntervalRef.current) clearTimeout(idleIntervalRef.current);
-    idleIntervalRef.current = null;
-    if (count === 0) return;
+  // Single effect to manage the idle splash cycle.
+  // Responds to visibility, scroll position, stripe count, and explicit manual resets.
+  useEffect(() => {
+    if (!isVisible || isScrolledPast || count === 0) {
+      return;
+    }
 
-    const fireIdleSplash = () => {
-      if (svgRef.current?.hasAttribute("data-hovering") || count === 0) return;
+    let timer: ReturnType<typeof setTimeout>;
 
-      const randomIndex = Math.floor(count * (0.05 + Math.random() * 0.7));
-      triggerSplash(randomIndex, IDLE_WAVE_RADIUS, IDLE_WAVE_PEAK_INTENSITY_PERCENT);
+    const scheduleNext = (delay: number) => {
+      timer = setTimeout(() => {
+        const isActuallyHovering = svgRef.current?.hasAttribute("data-hovering");
+        if (isVisible && !isScrolledPast && !isActuallyHovering && count > 0) {
+          if (!firstIdleFiredRef.current) {
+            triggerSplash(Math.floor(count * 0.4), IDLE_WAVE_RADIUS, IDLE_WAVE_PEAK_INTENSITY_PERCENT);
+            firstIdleFiredRef.current = true;
+          } else {
+            const randomIndex = Math.floor(count * (0.05 + Math.random() * 0.7));
+            triggerSplash(randomIndex, IDLE_WAVE_RADIUS, IDLE_WAVE_PEAK_INTENSITY_PERCENT);
+          }
+        }
+        scheduleNext(IDLE_INTERVAL_MS);
+      }, delay);
     };
 
-    const delay = firstIdleFiredRef.current ? IDLE_INTERVAL_MS : IDLE_FIRST_DELAY_MS;
+    scheduleNext(firstIdleFiredRef.current ? IDLE_INTERVAL_MS : IDLE_FIRST_DELAY_MS);
 
-    idleIntervalRef.current = setTimeout(() => {
-      if (!firstIdleFiredRef.current) {
-        if (!(svgRef.current?.hasAttribute("data-hovering")) && count > 0) {
-          triggerSplash(Math.floor(count * 0.4), IDLE_WAVE_RADIUS, IDLE_WAVE_PEAK_INTENSITY_PERCENT);
-        }
-        firstIdleFiredRef.current = true;
-      } else {
-        fireIdleSplash();
-      }
-      idleIntervalRef.current = setInterval(fireIdleSplash, IDLE_INTERVAL_MS);
-    }, delay);
-  }
-
-  resetIdleTimerRef.current = resetIdleTimer;
-
-  // Idle splash: pick a random stripe every few seconds, reset on mouse leave
-  useEffect(() => {
-    resetIdleTimer();
     return () => {
-      if (idleIntervalRef.current) clearTimeout(idleIntervalRef.current);
+      if (timer) clearTimeout(timer);
       if (splashTimerRef.current) clearTimeout(splashTimerRef.current);
     };
-  }, [count]);
+  }, [isVisible, isScrolledPast, count, idleResetToken]);
+
+  /**
+   * Visibility Gating Strategy:
+   *
+   * We use dual signals to determine if idle splashes should be active:
+   * 1. IntersectionObserver: Highly efficient, off-thread detection for when the
+   *    component is off-screen, the tab is hidden, or the window is occluded.
+   * 2. window.scrollY: Necessary because this component resides in a 'sticky' 
+   *    container. IntersectionObserver remains 'true' while the container is 
+   *    pinned at top:0, so explicit scroll height comparison is required to 
+   *    detect when the user has logically 'passed' the hero area.
+   */
+
+  // Pause idle splashes when the component scrolls out of view.
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsVisible(entry.isIntersecting);
+    });
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [containerRef]);
+
+  // Handle sticky positioning: pause splashes when scrolled past the hero area.
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const threshold = geometry.containerHeight || 800;
+          setIsScrolledPast(window.scrollY > threshold);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Initial check
+    const threshold = geometry.containerHeight || 800;
+    setIsScrolledPast(window.scrollY > threshold);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [geometry.containerHeight]);
 
   /**
    * Bridges pointer interaction from selectable text back to the stripe layer.

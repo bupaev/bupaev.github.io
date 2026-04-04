@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, fireEvent, act } from "@testing-library/react";
+import { render, fireEvent, act, type RenderResult } from "@testing-library/react";
 import React from "react";
 import { InteractiveStripes } from "./interactive-stripes";
 
@@ -23,6 +23,22 @@ const SPLASH_WAVE_STEP_DELAY_MS = 64;
 const MANUAL_RADIUS = 50;
 
 const elementsFromPointMock = vi.fn<(x: number, y: number) => Element[]>();
+
+let lastObserverCallback: IntersectionObserverCallback | null = null;
+
+// IntersectionObserver is not available in JSDOM environment used by Vitest.
+class IntersectionObserverMock {
+  constructor(public callback: IntersectionObserverCallback) {
+    lastObserverCallback = callback;
+  }
+  observe = vi.fn();
+  disconnect = vi.fn();
+  unobserve = vi.fn();
+}
+vi.stubGlobal("IntersectionObserver", IntersectionObserverMock);
+
+// requestAnimationFrame is needed for the optimized scroll listener
+vi.stubGlobal("requestAnimationFrame", (cb: FrameRequestCallback) => cb(Date.now()));
 
 describe("InteractiveStripes (Drop Ripple Physics)", () => {
   let mockRef: React.RefObject<HTMLDivElement | null>;
@@ -58,7 +74,21 @@ describe("InteractiveStripes (Drop Ripple Physics)", () => {
   });
 
   const renderStripes = () => {
-    const result = render(<InteractiveStripes containerRef={mockRef} />);
+    let result: RenderResult = {} as RenderResult;
+    act(() => {
+      result = render(<InteractiveStripes containerRef={mockRef} />);
+    });
+
+    // Manually trigger visible state
+    if (lastObserverCallback) {
+      act(() => {
+        lastObserverCallback!(
+          [{ isIntersecting: true } as IntersectionObserverEntry],
+          {} as IntersectionObserver
+        );
+      });
+    }
+
     const svg = result.container.querySelector("svg");
     const stripes = Array.from(result.container.querySelectorAll("rect"));
 
