@@ -202,17 +202,32 @@ describe("InteractiveStripes (Drop Ripple Physics)", () => {
     expect(nestedSpan.style.pointerEvents).toBe("");
   });
 
-  it("suppresses idle splash during proxy hover and clears hover on leave", () => {
+  it("suppresses subsequent idle splashes during proxy hover", () => {
     const { svg, stripes } = renderStripes();
     const proxyText = createProxyText("h1");
 
+    // Let the first splash fire
+    act(() => {
+      vi.advanceTimersByTime(IDLE_FIRST_DELAY_MS);
+    });
+    expect(svg.hasAttribute("data-splashing")).toBe(true);
+
+    // Wait for the first splash to finish (duration is approx 3.5s)
+    act(() => {
+      vi.advanceTimersByTime(5000);
+    });
+    expect(svg.hasAttribute("data-splashing")).toBe(false);
+
+    // Now hover and wait for the NEXT splash (due at 1000 + 10000 = 11000ms)
+    // We are currently at 6000ms.
     mockPassThroughHitTest(proxyText, stripes[35]);
     fireEvent.pointerMove(proxyText, { clientX: 50, clientY: 80 });
 
     act(() => {
-      vi.advanceTimersByTime(IDLE_INTERVAL_MS);
+      vi.advanceTimersByTime(IDLE_INTERVAL_MS); // Advance past 11000ms
     });
 
+    // Should NOT splash while hovering
     expect(svg.hasAttribute("data-splashing")).toBe(false);
     expect(svg.style.getPropertyValue("--hovered-index")).toBe("35");
 
@@ -220,6 +235,23 @@ describe("InteractiveStripes (Drop Ripple Physics)", () => {
 
     expect(svg.style.getPropertyValue("--hovered-index")).toBe("-999");
     expect(svg.hasAttribute("data-hovering")).toBe(false);
+  });
+
+  it("triggers the first idle splash even if hovering", () => {
+    const { svg, stripes } = renderStripes();
+    const proxyText = createProxyText("h1");
+
+    mockPassThroughHitTest(proxyText, stripes[35]);
+    fireEvent.pointerMove(proxyText, { clientX: 50, clientY: 80 });
+
+    expect(svg.hasAttribute("data-hovering")).toBe(true);
+
+    act(() => {
+      vi.advanceTimersByTime(IDLE_FIRST_DELAY_MS);
+    });
+
+    expect(svg.hasAttribute("data-splashing")).toBe(true);
+    expect(svg.style.getPropertyValue("--splash-center-index")).toBe("40");
   });
 
   it("triggers the first idle splash after IDLE_FIRST_DELAY_MS at 40% position", () => {

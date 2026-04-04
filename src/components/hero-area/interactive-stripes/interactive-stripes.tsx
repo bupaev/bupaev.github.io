@@ -210,7 +210,8 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
   // Single effect to manage the idle splash cycle.
   // Responds to visibility, scroll position, stripe count, and explicit manual resets.
   useEffect(() => {
-    if (!isVisible || isScrolledPast || count === 0) {
+    // Stop early if no stripes exist or if subsequent idle splashes are invisible.
+    if (count === 0 || (firstIdleFiredRef.current && (!isVisible || isScrolledPast))) {
       return;
     }
 
@@ -218,16 +219,20 @@ export function InteractiveStripes({ containerRef }: InteractiveStripesProps) {
 
     const scheduleNext = (delay: number) => {
       timer = setTimeout(() => {
-        const isActuallyHovering = svgRef.current?.hasAttribute("data-hovering");
-        if (isVisible && !isScrolledPast && !isActuallyHovering && count > 0) {
-          if (!firstIdleFiredRef.current) {
-            triggerSplash(Math.floor(count * 0.4), IDLE_WAVE_RADIUS, IDLE_WAVE_PEAK_INTENSITY_PERCENT);
-            firstIdleFiredRef.current = true;
-          } else {
-            const randomIndex = Math.floor(count * (0.05 + Math.random() * 0.7));
-            triggerSplash(randomIndex, IDLE_WAVE_RADIUS, IDLE_WAVE_PEAK_INTENSITY_PERCENT);
-          }
+        const isFirst = !firstIdleFiredRef.current;
+        const isHovering = svgRef.current?.hasAttribute("data-hovering");
+        const canTriggerSubsequent = isVisible && !isScrolledPast && !isHovering;
+
+        // The first splash triggers unconditionally
+        if (isFirst || canTriggerSubsequent) {
+          const index = isFirst
+            ? Math.floor(count * 0.4)
+            : Math.floor(count * (0.05 + Math.random() * 0.7));
+
+          triggerSplash(index, IDLE_WAVE_RADIUS, IDLE_WAVE_PEAK_INTENSITY_PERCENT);
+          firstIdleFiredRef.current = true;
         }
+
         scheduleNext(IDLE_INTERVAL_MS);
       }, delay);
     };
