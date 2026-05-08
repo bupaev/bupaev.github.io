@@ -54,7 +54,7 @@ Lead and Senior Front-End Engineer with 15 years of experience bridging design, 
 - Evaluated design complexity, mapped technical feasibility, and proactively surfaced architectural and UX risks before execution
 - Enforced quality standards through code review, Jest/Vue Test Utils coverage, and automated quality gates
 
-### **Lead UI/Front-End Developer (Tech Lead)** | Codenetix | 11.2016 – 07.2018
+### **Lead UI/Front-End Developer** | Codenetix | 11.2016 – 07.2018
 
 *Software agency specializing in complex custom solutions*
 
