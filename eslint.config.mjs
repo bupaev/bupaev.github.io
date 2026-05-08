@@ -7,6 +7,7 @@ const eslintConfig = defineConfig([
         "dist/**",
         ".astro/**",
         "node_modules/**",
+        "resume-export/**",
     ]),
     {
         files: ["**/*.{ts,tsx}"],

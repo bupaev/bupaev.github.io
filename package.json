@@ -17,7 +17,10 @@
     "test:e2e:ui": "playwright test --config=e2e/playwright.config.ts --ui",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "resume:docx": "node resume-export/md-to-docx.js",
+    "resume:pdf": "node resume-export/md-to-pdf.js",
+    "resume:build": "npm run resume:docx && npm run resume:pdf"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -33,6 +36,8 @@
     "@astrojs/react": "^4.2.0",
     "@astrojs/sitemap": "^3.7.1",
     "astro": "^5.2.5",
+    "docx": "^9.6.1",
+    "pdfkit": "^0.18.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "sass": "^1.97.1",
