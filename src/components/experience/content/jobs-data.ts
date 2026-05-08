@@ -17,7 +17,7 @@ export type Job = {
 
 export const jobs: Job[] = [
     {
-        position: "Software developer",
+        position: "Software developer, 3D modeller, Photographer",
         company: "Freelance",
         skills: "C#, .NET, HTML, CSS, jQuery",
         startDate: "2008-08",
@@ -26,7 +26,7 @@ export const jobs: Job[] = [
         zIndex: 1,
     },
     {
-        position: "Teaching Assistant (AI systems and control theory)",
+        position: "Teaching Assistant",
         company: "Omsk State Technical University",
         skills: "Conducting courses and exams on AI Systems and Control theory",
         startDate: "2009-09",
@@ -35,7 +35,7 @@ export const jobs: Job[] = [
         id: "omstu",
     },
     {
-        position: "Web dev",
+        position: "Web developer",
         company: "Mir IT",
         skills: "C#, .NET, PHP, HTML, CSS, JS",
         startDate: "2011-06",
@@ -61,7 +61,7 @@ export const jobs: Job[] = [
         id: "bandlab",
     },
     {
-        position: "Lead UI/Front-end developer",
+        position: "Lead UI/Front-End Developer (Tech Lead)",
         company: "Codenetix",
         skills: "ES6, React, Gatsby, UX/UI-design",
         startDate: "2016-11",
@@ -69,7 +69,7 @@ export const jobs: Job[] = [
         id: "codenetix",
     },
     {
-        position: "Lead Front-end developer",
+        position: "Front-End Tech Lead",
         company: "Holmusk",
         skills: "VueJS, Vuetify, TypeScript, UX-design",
         startDate: "2018-07",
@@ -84,7 +84,7 @@ export const jobs: Job[] = [
         isBreak: true,
     },
     {
-        position: "Lead Front-end engineer",
+        position: "Lead Front-End Engineer",
         company: "EPAM",
         skills: "AI Pair Programming, React, SASS, TS, JS, Leading Teams, AEM, UX",
         startDate: "2021-12",
@@ -92,10 +92,11 @@ export const jobs: Job[] = [
         id: "epam",
     },
     {
-        position: "New Chapter",
-        skills: "",
+        position: "AI Product Engineer",
+        company: "Independent",
+        skills: "Agentic Engineering, AI Pair Programming, Astro, Next.js, React 19, TS",
         startDate: "2025-09",
         endDate: new Date().toISOString(),
-        isBreak: true,
+        id: "independent",
     },
 ];

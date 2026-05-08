@@ -16,7 +16,7 @@ Lead and Senior Front-End Engineer with 15 years of experience bridging design, 
 **APIs & Integration:** REST API Design & Architecture, GraphQL, FHIR API  
 **Architecture/Infra:** System Design, SPA/SSR/SSG, Micro-Frontend Architecture, CI/CD, Docker  
 **AI & Tooling:** Agentic Engineering, AI Pair Programming (Claude Code, Codex, Antigravity)  
-**Team & Process:** Cross-functional Collaboration, Code Review, Technical Documentation, Agile (Scrum/Kanban), Mentorship
+**Team & Process:** Cross-functional Collaboration, Code Review, Documentation, Agile, Mentorship
 
 ## **PROFESSIONAL EXPERIENCE**
 
@@ -44,7 +44,7 @@ Lead and Senior Front-End Engineer with 15 years of experience bridging design, 
 - Leveraged AI pair programming (Claude Code) to accelerate delivery and tackle cross-functional challenges in Java backend and Elasticsearch.
 - Mentored engineers and strengthened collaboration by sharing front-end, design system, and accessibility best practices across multiple product teams
 
-### **Senior Front-End Developer (Tech Lead)** | Holmusk | 07.2018 – 05.2021
+### **Front-End Tech Lead** | Holmusk | 07.2018 – 05.2021
 
 *Health technology and data science company – Electronic Health Record platform*
 
@@ -54,7 +54,7 @@ Lead and Senior Front-End Engineer with 15 years of experience bridging design, 
 - Evaluated design complexity, mapped technical feasibility, and proactively surfaced architectural and UX risks before execution
 - Enforced quality standards through code review, Jest/Vue Test Utils coverage, and automated quality gates
 
-### **Senior UI/Front-End Developer (Tech Lead)** | Codenetix | 11.2016 – 07.2018
+### **Lead UI/Front-End Developer (Tech Lead)** | Codenetix | 11.2016 – 07.2018
 
 *Software agency specializing in complex custom solutions*
 
@@ -80,14 +80,14 @@ Lead and Senior Front-End Engineer with 15 years of experience bridging design, 
 - Built complex client-side data validation and calculation engines with optimized performance for high-traffic enterprise user bases
 - Developed resilient, adaptive interfaces for major banking and retail brands
 
-### **Teaching Assistant: AI Systems** | Omsk State Technical University | 09.2009 – 09.2014
+### **Teaching Assistant** | Omsk State Technical University | 09.2009 – 09.2014
 
 - Created and instructed courses on Decision Support Systems and Artificial Intelligence, covering neural networks, fuzzy logic, genetic algorithms, and control theory
 - This academic grounding provides a fundamental understanding of the AI landscape, informing how I evaluate and apply AI tools in modern development: separating substance from hype
 
 ### Earlier Career
 
-**Developer** at Mir IT (06.2011 – 07.2012) – Full-stack development with LAMP stack, C#, MS SQL
+**Web Developer** at Mir IT (06.2011 – 07.2012) – Full-stack development with LAMP stack, C#, MS SQL
 
 **Freelance Software Developer**, 3D Modeller & Photographer (2008–2011)
 
