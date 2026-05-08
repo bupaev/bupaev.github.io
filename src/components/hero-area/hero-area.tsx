@@ -44,7 +44,7 @@ export function HeroArea(props: HeroAreaProps) {
             Hi! I&apos;m Paul Buramensky
           </h1>
           <h2 className={styles.heroSubheading} data-stripe-proxy-text>
-            <span style={{ fontSize: '1.05em' }}>Lead front-end engineer</span><br />
+            <span style={{ fontSize: '1.05em' }}>Front-end product engineer</span><br />
             <span className={styles.separator} />UX-driven
             <span className={styles.separator} />AI-fluent<br />
             <span className={styles.separator} />product-obsessed
